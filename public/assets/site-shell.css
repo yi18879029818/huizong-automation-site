@@ -660,3 +660,164 @@ body[data-page-key="home"] .page-content > section:first-child > .container.mx-a
     letter-spacing:.13em;
   }
 }
+
+.hsa-modal-open{
+  overflow:hidden;
+}
+
+.hsa-expert-modal{
+  position:fixed;
+  inset:0;
+  z-index:140;
+  display:none;
+}
+
+.hsa-expert-modal.is-open{
+  display:block;
+}
+
+.hsa-expert-modal__backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(2,9,22,.72);
+  backdrop-filter:blur(10px);
+}
+
+.hsa-expert-modal__panel{
+  position:relative;
+  width:min(560px,calc(100vw - 32px));
+  margin:44px auto;
+  padding:28px 28px 24px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:22px;
+  background:#1f2329;
+  box-shadow:0 32px 72px rgba(0,0,0,.42);
+  color:#fff;
+}
+
+.hsa-expert-modal__close{
+  position:absolute;
+  top:18px;
+  right:18px;
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-radius:999px;
+  background:transparent;
+  color:#8898b1;
+  cursor:pointer;
+}
+
+.hsa-expert-modal__close:hover{
+  background:rgba(255,255,255,.06);
+  color:#fff;
+}
+
+.hsa-expert-modal__header{
+  margin-bottom:20px;
+  padding-bottom:18px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.hsa-expert-modal__header h3{
+  margin:0 0 8px;
+  font:800 2rem/1 Manrope,sans-serif;
+  color:#fff;
+}
+
+.hsa-expert-modal__header p{
+  margin:0;
+  color:#8192ad;
+  font-size:1.02rem;
+}
+
+.hsa-expert-modal__form{
+  display:grid;
+  gap:16px;
+}
+
+.hsa-expert-modal__grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+.hsa-expert-modal__field{
+  display:grid;
+  gap:8px;
+}
+
+.hsa-expert-modal__field span{
+  color:#94a3b8;
+  font:800 .86rem/1.2 Inter,sans-serif;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+}
+
+.hsa-expert-modal__field span em{
+  color:#ff8d3a;
+  font-style:normal;
+}
+
+.hsa-expert-modal__field input,
+.hsa-expert-modal__field textarea{
+  width:100%;
+  min-height:52px;
+  padding:0 16px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:10px;
+  background:#15191f;
+  color:#fff;
+  font:500 1rem/1.4 Inter,sans-serif;
+  resize:vertical;
+}
+
+.hsa-expert-modal__field textarea{
+  min-height:124px;
+  padding:14px 16px;
+}
+
+.hsa-expert-modal__field input::placeholder,
+.hsa-expert-modal__field textarea::placeholder{
+  color:#64748b;
+}
+
+.hsa-expert-modal__field input:focus,
+.hsa-expert-modal__field textarea:focus{
+  outline:none;
+  border-color:#ff8d3a;
+  box-shadow:0 0 0 2px rgba(255,141,58,.16);
+}
+
+.hsa-expert-modal__submit{
+  min-height:54px;
+  margin-top:6px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(135deg,#ffb37a,#ff7c2e);
+  color:#3f1d00;
+  font:800 1rem/1 Inter,sans-serif;
+  cursor:pointer;
+}
+
+.hsa-expert-modal__submit:hover{
+  filter:brightness(1.03);
+}
+
+@media (max-width:760px){
+  .hsa-expert-modal__panel{
+    width:min(560px,calc(100vw - 20px));
+    margin:18px auto;
+    padding:22px 18px 18px;
+  }
+
+  .hsa-expert-modal__grid{
+    grid-template-columns:1fr;
+  }
+
+  .hsa-expert-modal__header h3{
+    font-size:1.7rem;
+  }
+}

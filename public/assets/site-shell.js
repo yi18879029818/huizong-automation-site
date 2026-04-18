@@ -27,6 +27,108 @@
     }, 2600);
   }
 
+  function ensureExpertModal() {
+    var modal = document.querySelector('.hsa-expert-modal');
+    if (modal) {
+      return modal;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'hsa-expert-modal';
+    modal.setAttribute('aria-hidden', 'true');
+    modal.innerHTML =
+      '<div class="hsa-expert-modal__backdrop" data-hsa-close-modal></div>' +
+      '<div class="hsa-expert-modal__panel" role="dialog" aria-modal="true" aria-labelledby="hsa-expert-modal-title">' +
+        '<button class="hsa-expert-modal__close" type="button" aria-label="Close dialog" data-hsa-close-modal>' +
+          '<span class="material-symbols-outlined">close</span>' +
+        '</button>' +
+        '<div class="hsa-expert-modal__header">' +
+          '<h3 id="hsa-expert-modal-title">Get in Touch</h3>' +
+          '<p>Our team will respond within 24 hours</p>' +
+        '</div>' +
+        '<form class="hsa-expert-modal__form">' +
+          '<div class="hsa-expert-modal__grid">' +
+            '<label class="hsa-expert-modal__field">' +
+              '<span>Full Name <em>*</em></span>' +
+              '<input type="text" name="fullName" placeholder="John Smith" required />' +
+            '</label>' +
+            '<label class="hsa-expert-modal__field">' +
+              '<span>Company <em>*</em></span>' +
+              '<input type="text" name="company" placeholder="Acme Logistics" required />' +
+            '</label>' +
+          '</div>' +
+          '<label class="hsa-expert-modal__field">' +
+            '<span>Email <em>*</em></span>' +
+            '<input type="email" name="email" placeholder="john@company.com" required />' +
+          '</label>' +
+          '<label class="hsa-expert-modal__field">' +
+            '<span>Phone / WhatsApp</span>' +
+            '<input type="text" name="phone" placeholder="+86 135 1081 6743" />' +
+          '</label>' +
+          '<label class="hsa-expert-modal__field">' +
+            '<span>Message</span>' +
+            '<textarea name="message" rows="5" placeholder="Tell us about your warehouse automation needs..."></textarea>' +
+          '</label>' +
+          '<button class="hsa-expert-modal__submit" type="submit">Send Message</button>' +
+        '</form>' +
+      '</div>';
+
+    document.body.appendChild(modal);
+    return modal;
+  }
+
+  function setExpertModal(open) {
+    var modal = ensureExpertModal();
+    var panel = modal.querySelector('.hsa-expert-modal__panel');
+    var firstInput = modal.querySelector('input, textarea');
+
+    if (open) {
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('hsa-modal-open');
+      window.setTimeout(function () {
+        if (firstInput) {
+          firstInput.focus();
+        }
+      }, 60);
+      return;
+    }
+
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('hsa-modal-open');
+    if (panel) {
+      panel.scrollTop = 0;
+    }
+  }
+
+  function bindExpertModal() {
+    var modal = ensureExpertModal();
+
+    document.querySelectorAll('.hsa-cta').forEach(function (cta) {
+      if (cta.dataset.hsaModalBound) {
+        return;
+      }
+      cta.dataset.hsaModalBound = '1';
+      cta.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        setExpertModal(true);
+      });
+    });
+
+    modal.addEventListener('click', function (ev) {
+      if (ev.target.closest('[data-hsa-close-modal]')) {
+        setExpertModal(false);
+      }
+    });
+
+    document.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape' && modal.classList.contains('is-open')) {
+        setExpertModal(false);
+      }
+    });
+  }
+
   function bindForms() {
     document.querySelectorAll('form').forEach(function (form) {
       form.addEventListener('submit', function (ev) {
@@ -306,6 +408,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     enhanceFooters();
+    bindExpertModal();
     bindDesktopMenus();
     bindMobile();
     bindForms();
