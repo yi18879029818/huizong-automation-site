@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Picking | Huizong Intelligent Automation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#a04100",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "surface-container-low": "#f2f4f6",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-highest": "#e0e3e5",
+                        "primary-fixed": "#d6e3ff",
+                        "on-background": "#191c1e",
+                        "secondary-fixed-dim": "#ffb693",
+                        "inverse-primary": "#aac7ff",
+                        "on-secondary-container": "#572000",
+                        "surface-tint": "#3f5f92",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "secondary-container": "#fe6b00",
+                        "outline-variant": "#c4c6d0",
+                        "primary-fixed-dim": "#aac7ff",
+                        "primary": "#001736",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#e5e2e1",
+                        "on-surface-variant": "#43474f",
+                        "on-secondary-fixed": "#351000",
+                        "tertiary-container": "#2c2c2c",
+                        "on-tertiary-container": "#959393",
+                        "surface-bright": "#f8f9fb",
+                        "inverse-surface": "#2d3133",
+                        "on-primary-fixed-variant": "#264779",
+                        "background": "#f8f9fb",
+                        "error": "#ba1a1a",
+                        "tertiary": "#181818",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-container": "#002b5c",
+                        "outline": "#747780",
+                        "on-primary-container": "#7594cb",
+                        "on-surface": "#191c1e",
+                        "secondary-fixed": "#ffdbcc",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed-variant": "#7a3000",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#eceef0",
+                        "surface": "#f8f9fb",
+                        "error-container": "#ffdad6",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-primary-fixed": "#001b3e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; }
+        .glass-panel {
+            background: rgba(248, 249, 251, 0.7);
+            backdrop-filter: blur(16px);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<link rel="stylesheet" href="../assets/site-shell.css" />
+<script>window.__SITE_ROUTES__={"home": "../index.html", "products": "../products/index.html", "products-agv-forklift": "../products/agv-forklift.html", "products-lifting-agv": "../products/lifting-agv.html", "products-storage-agv": "../products/storage-agv.html", "products-agv-roller": "../products/agv-roller.html", "products-composite-mobile-robot": "../products/composite-mobile-robot.html", "solutions": "index.html", "solutions-asrs": "asrs.html", "solutions-material-handling": "material-handling.html", "solutions-picking": "picking.html", "solutions-software": "software.html", "case-studies": "../case-studies/index.html", "case-studies-asrs": "../case-studies/asrs.html", "case-studies-material-handling": "../case-studies/material-handling.html", "case-studies-picking": "../case-studies/picking.html", "case-studies-project-warehouse-upgrade": "../case-studies/projects/automated-warehouse-upgrade.html", "about": "../about/index.html", "contact": "../contact/index.html"};</script>
+<script defer src="../assets/site-shell.js"></script>
+</head>
+<body class="bg-surface text-on-surface antialiased" data-page-key="solutions-picking">
+<header class="hsa-header">
+  <div class="hsa-header-inner">
+    <a class="hsa-brand" href="../index.html"><span class="hsa-brand-mark">H</span><span class="hsa-brand-copy"><strong>Huizong Intelligent Automation</strong><em>Global Warehouse Automation Systems</em></span></a>
+    <nav class="hsa-top-nav">
+      <a class="hsa-top-link" href="../index.html">Home</a>
+      <details class="hsa-top-group"><summary>Products</summary><div class="hsa-dropdown"><a class="hsa-dropdown-link" href="../products/index.html">Products Overview</a><a class="hsa-dropdown-link" href="../products/agv-forklift.html">AGV Forklift</a><a class="hsa-dropdown-link" href="../products/lifting-agv.html">Lifting AGV</a><a class="hsa-dropdown-link" href="../products/storage-agv.html">Storage AGV</a><a class="hsa-dropdown-link" href="../products/agv-roller.html">AGV Roller</a><a class="hsa-dropdown-link" href="../products/composite-mobile-robot.html">Composite Mobile Robot</a></div></details>
+      <details class="hsa-top-group hsa-top-active"><summary>Solutions</summary><div class="hsa-dropdown"><a class="hsa-dropdown-link" href="index.html">Solutions Overview</a><a class="hsa-dropdown-link" href="asrs.html">ASRS</a><a class="hsa-dropdown-link" href="material-handling.html">Material Handling</a><a class="hsa-dropdown-link" href="picking.html">Picking</a><a class="hsa-dropdown-link" href="software.html">Software</a></div></details>
+      <details class="hsa-top-group"><summary>Case Studies</summary><div class="hsa-dropdown"><a class="hsa-dropdown-link" href="../case-studies/index.html">All Projects</a><a class="hsa-dropdown-link" href="../case-studies/asrs.html">ASRS</a><a class="hsa-dropdown-link" href="../case-studies/material-handling.html">Material Handling</a><a class="hsa-dropdown-link" href="../case-studies/picking.html">Picking</a></div></details>
+      <a class="hsa-top-link" href="../about/index.html">About</a>
+      <a class="hsa-top-link" href="../contact/index.html">Contact</a>
+    </nav>
+    <a class="hsa-cta" href="../contact/index.html">Speak With An Expert</a>
+    <button class="hsa-mobile-toggle" type="button" aria-expanded="false" aria-controls="hsa-mobile-menu">Menu</button>
+  </div>
+  <div class="hsa-mobile-menu" id="hsa-mobile-menu">
+    <a href="../index.html">Home</a>
+    <details><summary>Products</summary><a href="../products/index.html">Products Overview</a><a href="../products/agv-forklift.html">AGV Forklift</a><a href="../products/lifting-agv.html">Lifting AGV</a><a href="../products/storage-agv.html">Storage AGV</a><a href="../products/agv-roller.html">AGV Roller</a><a href="../products/composite-mobile-robot.html">Composite Mobile Robot</a></details>
+    <details><summary>Solutions</summary><a href="index.html">Solutions Overview</a><a href="asrs.html">ASRS</a><a href="material-handling.html">Material Handling</a><a href="picking.html">Picking</a><a href="software.html">Software</a></details>
+    <details><summary>Case Studies</summary><a href="../case-studies/index.html">All Projects</a><a href="../case-studies/asrs.html">ASRS</a><a href="../case-studies/material-handling.html">Material Handling</a><a href="../case-studies/picking.html">Picking</a><a href="../case-studies/projects/automated-warehouse-upgrade.html">Project Detail</a></details>
+    <a href="../about/index.html">About</a>
+    <a href="../contact/index.html">Contact</a>
+  </div>
+</header>
+<div class="hsa-secondary"><div class="hsa-secondary-inner"><div class="hsa-breadcrumb"><a href="../index.html">Home</a><span class="hsa-crumb-sep">/</span><a href="index.html">Solutions</a><span class="hsa-crumb-sep">/</span><span class="hsa-crumb-current">Picking</span></div><div class="hsa-subnav"><a class="hsa-sub-link" href="index.html">Solutions Overview</a><a class="hsa-sub-link" href="asrs.html">ASRS</a><a class="hsa-sub-link" href="material-handling.html">Material Handling</a><a class="hsa-sub-link hsa-sub-active" href="picking.html">Picking</a><a class="hsa-sub-link" href="software.html">Software</a></div></div></div>
+
+<div class="page-content">
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-[870px] flex items-center overflow-hidden bg-primary-container">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40" data-alt="Modern high-tech warehouse interior with robotic picking arms and futuristic ergonomic workstations under cool blue professional lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeyvh4vHFGsb-iwx90hsOOgCouE1POoGDfd6t6KHSFKwoUR0wHEa1noS2yrBmPp_hfJl_cdSD_OJ3JP1ealJ_MM65762RPwDocbjGD6U6vwlkKLwTktDWKprtBMwaNjofHW0HNxl-MrGkNH0kWWZQqPTCKrdVppJiE7-HeI1y7XaIkMPMmKfJ0RbAyzmo7p6-L83E7KXJdjJylTM4MbvS4RGKkzydUHbSYHvcrFgYbltgrE6SQ8DrERl93zIPKUKmLs3DNqkJczlIh"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary to-transparent opacity-90"></div>
+</div>
+<div class="relative z-10 max-w-screen-2xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7">
+<span class="inline-block px-4 py-1.5 mb-6 bg-secondary text-on-secondary text-xs font-bold uppercase tracking-[0.2em] rounded-full">
+                        Industrial Intelligence
+                    </span>
+<h1 class="text-5xl lg:text-7xl font-extrabold text-white leading-tight tracking-tighter mb-8">
+                        Picking &amp; Fulfillment <br/><span class="text-on-primary-container">Solutions</span>
+</h1>
+<p class="text-xl text-primary-fixed leading-relaxed mb-10 max-w-2xl font-light">
+                        Advanced goods-to-person strategies for high-velocity order fulfillment and zero-error accuracy. Engineered for the next generation of global logistics.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-secondary text-on-secondary px-10 py-4 rounded-lg font-bold text-lg shadow-xl shadow-secondary/20 hover:brightness-110 active:scale-95 transition-all">
+                            Speak With An Expert
+                        </button>
+<button class="border border-outline-variant/30 text-white backdrop-blur-md px-10 py-4 rounded-lg font-bold text-lg hover:bg-white/10 transition-all">
+                            View Tech Specs
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Solution Overview Section -->
+<section class="py-24 px-8 max-w-screen-2xl mx-auto bg-surface">
+<div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+<div class="space-y-8">
+<h2 class="text-4xl font-bold text-primary tracking-tight">The Future of <br/>Goods-to-Person (GTP)</h2>
+<p class="text-lg text-on-surface-variant leading-relaxed font-body">
+                            Our picking solutions eliminate the most time-consuming aspect of manual warehousing: walking. By bringing items directly to ergonomic picking stations, we reduce cycle times by up to 60%.
+                        </p>
+<p class="text-lg text-on-surface-variant leading-relaxed font-body">
+                            Leveraging intelligent wave control and real-time task batching, our system ensures that high-velocity orders are prioritized without sacrificing the efficiency of complex, high-SKU inventory flows.
+                        </p>
+<div class="flex gap-12 pt-4">
+<div class="border-l-4 border-secondary pl-6">
+<div class="text-3xl font-black text-primary">99.9%</div>
+<div class="text-sm font-bold text-outline uppercase tracking-widest mt-1">Order Accuracy</div>
+</div>
+<div class="border-l-4 border-secondary pl-6">
+<div class="text-3xl font-black text-primary">4x</div>
+<div class="text-sm font-bold text-outline uppercase tracking-widest mt-1">Pick Velocity</div>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-video rounded-xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="Close-up of a high-precision robotic picker arm handling a small electronics component in a clean industrial facility" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCQBQ5o6_Wy3_pSvTBi-k6TLJWf7WuBrzdqb8IGc8-yHUOVH1stuA8Mt-5jHGEqQxJ7io-jj-BKghnO-feWPMxYX8vNOE05kkxEUu_h6uMzhHYRZuh6tPGbJc3Lr8jSWGQDRRapEmlN0xcVTTIgIzkaAK0V105-HCeEBULPHAQm-179JN2G-McvlstGwhnX7GUBD8yH1mw5GO-pKMnAJcwLaUf6NW5E34q9-wTQeG8DpH_ISu9-EWD_ZXfw26snHFaOWJld2tCKAxn"/>
+</div>
+<div class="absolute -bottom-10 -left-10 bg-surface-container-lowest p-8 rounded-xl shadow-xl max-w-xs border border-outline-variant/10">
+<h4 class="text-secondary font-bold mb-2">Adaptive Wave Control</h4>
+<p class="text-sm text-on-surface-variant leading-snug">Intelligent software dynamically re-routes high-priority tasks to the next available station.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Application Scenarios (Asymmetric Card Layout) -->
+<section class="py-24 px-8 max-w-screen-2xl mx-auto bg-surface-container-low">
+<div>
+<div class="mb-16">
+<h2 class="text-4xl font-bold text-primary mb-4 tracking-tight">Application Scenarios</h2>
+<div class="w-24 h-1.5 bg-secondary"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- E-commerce Fulfillment -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm hover:shadow-xl transition-all duration-500">
+<div class="absolute inset-0 w-full h-full overflow-hidden">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 opacity-20 group-hover:opacity-100" data-alt="A busy e-commerce distribution center with conveyor belts and organized shelves under bright industrial lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdeOD3LOhqVsnUjAaabGWC-VP3OLNyh_VWWv15CdOWn7t5BYMU-OH3AzDMVVhr9n4Mo0YQgkHlVcGTnAC8i2SqhaRFlg5qWqJEKpQQIL7cBm6qt_bOpCWPyMGmZsmrmdb9HjCyJauEMXFDsCVzCbSOBilFTOd0ZFp9syha2Co0JmmkZrzuOM2InviQLy3_fyA7ZMYaMYvsIUiowuY2x65jCW3I_k89RdHOlAI4ouWfcwDPX99ImlJ2TDOyiH3ORG1zFnNtSapXwSoM"/>
+</div>
+<div class="relative p-12 h-full flex flex-col justify-end min-h-[400px] bg-gradient-to-t from-white via-white/80 to-transparent">
+<h3 class="text-3xl font-bold text-primary mb-4">E-commerce Fulfillment</h3>
+<p class="text-on-surface-variant max-w-lg mb-6">High-velocity picking engineered for the volatility of B2C demand. Scales instantly during peak seasons with zero-latency synchronization.</p>
+<span class="text-secondary font-bold flex items-center gap-2 group-hover:gap-4 transition-all">Explore Scenario <span class="material-symbols-outlined">arrow_forward</span></span>
+</div>
+</div>
+<!-- Electronics Logistics -->
+<div class="md:col-span-4 group bg-primary p-12 rounded-xl text-white flex flex-col justify-between">
+<div class="material-symbols-outlined text-secondary text-5xl">memory</div>
+<div>
+<h3 class="text-2xl font-bold mb-4">Electronics Logistics</h3>
+<p class="text-primary-fixed/70 text-sm leading-relaxed">Small parts handling with extreme precision. ESD-safe environments and ultra-fine grip robotics ensure fragile components are secured.</p>
+</div>
+</div>
+<!-- High-SKU Picking -->
+<div class="md:col-span-5 group bg-surface-container-highest p-12 rounded-xl flex flex-col justify-between border border-outline-variant/20">
+<div>
+<span class="material-symbols-outlined text-primary text-5xl mb-6">grid_view</span>
+<h3 class="text-2xl font-bold text-primary mb-4">High-SKU Management</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Managed diversity in complex inventory environments. Our AI predicts slotting needs based on historical order frequency.</p>
+</div>
+</div>
+<!-- Retail Distribution -->
+<div class="md:col-span-7 group relative overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="flex flex-col md:flex-row h-full">
+<div class="p-12 md:w-1/2 flex flex-col justify-center">
+<h3 class="text-2xl font-bold text-primary mb-4">Retail Distribution</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-6">Scalable replenishment for physical stores. Optimized for case-to-piece workflows and store-ready sequencing.</p>
+<button class="w-fit border-b-2 border-secondary pb-1 text-sm font-bold text-primary">View Case Study</button>
+</div>
+<div class="md:w-1/2 h-64 md:h-auto">
+<img class="w-full h-full object-cover" data-alt="Logistics center with pallets of retail goods being prepared for shipment in a clean, organized space" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHWkuRvPWjY6Q_vSl-ByBUELOTkkIHldA0RM8VihV3K4CuR4oEcOwoAvVwSsDYXJ9-KVIw4N2VpdE4cJuTyf4jWP-tn2qRBEiGaXVDKdpCslasoMrXneJ0SD4wUnmhVfWt8mN4duhnJfOw8lbTIwsG9xIa5M6Z-TWeaxEWdM0FQK-fiZ7HXyU4lPEcnqoTwBfGgABHHHaI9diOudtSHelQcHRqUCsTZPzWDAZ7NtZHOqc9LUMhd5oHWw0SkJEkYCZSDJlcxWXiCgf6"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Business Value (Metric/Feature Cards) -->
+<section class="py-24 px-8 max-w-screen-2xl mx-auto bg-surface">
+<div>
+<div class="text-center max-w-3xl mx-auto mb-20">
+<h2 class="text-4xl font-extrabold text-primary mb-6">Quantifiable Precision</h2>
+<p class="text-on-surface-variant">We don't just move boxes. We engineer metrics that impact your bottom line directly through technological superioriy.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Pick Rate -->
+<div class="p-8 rounded-xl bg-surface border-b-4 border-secondary shadow-sm hover:shadow-lg transition-shadow">
+<div class="text-primary-container mb-6 opacity-30"><span class="text-6xl font-black">01</span></div>
+<h4 class="text-xl font-bold text-primary mb-3">Pick Rate</h4>
+<p class="text-on-surface-variant text-sm">Accelerate throughput with optimized ergonomic workflows and minimal travel time.</p>
+</div>
+<!-- Order Accuracy -->
+<div class="p-8 rounded-xl bg-surface border-b-4 border-secondary shadow-sm hover:shadow-lg transition-shadow">
+<div class="text-primary-container mb-6 opacity-30"><span class="text-6xl font-black">02</span></div>
+<h4 class="text-xl font-bold text-primary mb-3">Order Accuracy</h4>
+<p class="text-on-surface-variant text-sm">Zero-error fulfillment through integrated digital verification and weight scales.</p>
+</div>
+<!-- Replenishment Sync -->
+<div class="p-8 rounded-xl bg-surface border-b-4 border-secondary shadow-sm hover:shadow-lg transition-shadow">
+<div class="text-primary-container mb-6 opacity-30"><span class="text-6xl font-black">03</span></div>
+<h4 class="text-xl font-bold text-primary mb-3">Replenishment</h4>
+<p class="text-on-surface-variant text-sm">Real-time inventory alignment ensuring picking stations never face a stock-out.</p>
+</div>
+<!-- Station Utilization -->
+<div class="p-8 rounded-xl bg-surface border-b-4 border-secondary shadow-sm hover:shadow-lg transition-shadow">
+<div class="text-primary-container mb-6 opacity-30"><span class="text-6xl font-black">04</span></div>
+<h4 class="text-xl font-bold text-primary mb-3">Utilization</h4>
+<p class="text-on-surface-variant text-sm">Maximum efficiency of labor and hardware through intelligent load balancing.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Ecosystem Integration -->
+<section class="py-24 px-8 max-w-screen-2xl mx-auto relative overflow-hidden">
+<div class="absolute inset-0 bg-primary-container -z-10"></div>
+<div class="px-6 md:px-8 lg:px-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
+<div class="lg:col-span-5 text-white">
+<h2 class="text-4xl font-bold mb-8 tracking-tight">The Software Core: <br/>Wave-Managed Intelligence</h2>
+<p class="text-primary-fixed/80 leading-relaxed mb-8">
+                            Hardware is only as good as the brain behind it. Our picking solutions are natively integrated with our proprietary WMS/WCS stack.
+                        </p>
+<ul class="space-y-4">
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+<div>
+<span class="font-bold block">Dynamic Task Batching</span>
+<p class="text-sm opacity-70">Algorithms group picks by store or delivery route in real-time.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+<div>
+<span class="font-bold block">Predictive Maintenance</span>
+<p class="text-sm opacity-70">Station health monitored by AI to prevent unscheduled downtime.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="lg:col-span-7">
+<div class="grid grid-cols-2 gap-4 p-4 glass-panel rounded-2xl">
+<div class="bg-primary p-8 rounded-xl flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-secondary text-4xl mb-4">terminal</span>
+<span class="text-white font-bold text-lg">WMS Native</span>
+</div>
+<div class="bg-primary/50 p-8 rounded-xl flex flex-col items-center justify-center text-center border border-white/10">
+<span class="material-symbols-outlined text-secondary text-4xl mb-4">settings_input_component</span>
+<span class="text-white font-bold text-lg">ERP Sync</span>
+</div>
+<div class="bg-primary/50 p-8 rounded-xl flex flex-col items-center justify-center text-center border border-white/10">
+<span class="material-symbols-outlined text-secondary text-4xl mb-4">hub</span>
+<span class="text-white font-bold text-lg">WCS Orchestration</span>
+</div>
+<div class="bg-primary p-8 rounded-xl flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-secondary text-4xl mb-4">insights</span>
+<span class="text-white font-bold text-lg">Data Flow</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-32 px-8 max-w-screen-2xl mx-auto bg-surface">
+<div class="max-w-4xl mx-auto text-center">
+<div class="inline-block px-6 py-2 bg-surface-container-high rounded-full text-secondary font-bold text-sm tracking-widest uppercase mb-8">
+                    Ready to Scale?
+                </div>
+<h2 class="text-5xl lg:text-6xl font-black text-primary mb-8 tracking-tighter">Let’s Engineer Your <br/>Next fulfillment Breakthrough</h2>
+<p class="text-xl text-on-surface-variant mb-12 max-w-2xl mx-auto">
+                    Consult with our systems architects to design a custom picking solution that matches your unique operational velocity.
+                </p>
+<div class="flex flex-col sm:flex-row justify-center gap-6">
+<button class="bg-secondary text-on-secondary px-12 py-5 rounded-lg font-bold text-xl hover:brightness-110 shadow-lg shadow-secondary/20 transition-all">
+                        Schedule a Consultation
+                    </button>
+<button class="bg-primary text-on-primary px-12 py-5 rounded-lg font-bold text-xl hover:bg-primary/90 transition-all">
+                        Download Whitepaper
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+</div>
+
+<footer class="hsa-footer">
+  <div class="hsa-footer-inner">
+    <div><div class="hsa-footer-brand">Huizong Intelligent Automation</div><p class="hsa-footer-copy">Integrated warehouse automation, robotics, software orchestration, and project delivery for global B2B intralogistics operations.</p></div>
+    <div><h4>Products</h4><div class="hsa-footer-links"><a href="../products/index.html">Products Overview</a><a href="../products/agv-forklift.html">AGV Forklift</a><a href="../products/lifting-agv.html">Lifting AGV</a><a href="../products/storage-agv.html">Storage AGV</a><a href="../products/agv-roller.html">AGV Roller</a><a href="../products/composite-mobile-robot.html">Composite Mobile Robot</a></div></div>
+    <div><h4>Solutions</h4><div class="hsa-footer-links"><a href="index.html">Solutions Overview</a><a href="asrs.html">ASRS</a><a href="material-handling.html">Material Handling</a><a href="picking.html">Picking</a><a href="software.html">Software</a></div></div>
+    <div><h4>Case Studies</h4><div class="hsa-footer-links"><a href="../case-studies/index.html">All Projects</a><a href="../case-studies/asrs.html">ASRS</a><a href="../case-studies/material-handling.html">Material Handling</a><a href="../case-studies/picking.html">Picking</a><a href="../case-studies/projects/automated-warehouse-upgrade.html">Project Detail</a></div></div>
+  </div>
+  <div class="hsa-footer-bottom"><span>Copyright 2026 Huizong Intelligent Automation</span><span>Local deployment build for browser preview</span></div>
+</footer>
+</body></html>

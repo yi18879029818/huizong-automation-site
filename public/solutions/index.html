@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Solutions | Huizong Intelligent Automation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface": "#f8f9fb",
+            "on-tertiary-fixed": "#1c1b1b",
+            "outline-variant": "#c4c6d0",
+            "on-surface-variant": "#43474f",
+            "on-tertiary-fixed-variant": "#474746",
+            "on-secondary-fixed": "#351000",
+            "on-primary-fixed-variant": "#264779",
+            "error-container": "#ffdad6",
+            "background": "#f8f9fb",
+            "error": "#ba1a1a",
+            "surface-dim": "#d8dadc",
+            "surface-container-highest": "#e0e3e5",
+            "secondary-container": "#a04100",
+            "on-background": "#191c1e",
+            "surface-container": "#eceef0",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed": "#001b3e",
+            "on-primary": "#ffffff",
+            "inverse-on-surface": "#eff1f3",
+            "tertiary-container": "#2c2c2c",
+            "surface-bright": "#f8f9fb",
+            "tertiary-fixed": "#e5e2e1",
+            "primary": "#001736",
+            "on-tertiary-container": "#959393",
+            "secondary-fixed": "#ffdbcc",
+            "surface-container-high": "#e6e8ea",
+            "surface-tint": "#3f5f92",
+            "secondary-fixed-dim": "#ffb693",
+            "inverse-surface": "#2d3133",
+            "primary-container": "#002b5c",
+            "outline": "#747780",
+            "surface-container-lowest": "#ffffff",
+            "secondary": "#a04100",
+            "on-error": "#ffffff",
+            "tertiary-fixed-dim": "#c8c6c5",
+            "primary-fixed": "#d6e3ff",
+            "on-error-container": "#93000a",
+            "on-secondary-container": "#ffffff",
+            "surface-container-low": "#f2f4f6",
+            "on-surface": "#191c1e",
+            "on-secondary-fixed-variant": "#7a3000",
+            "inverse-primary": "#aac7ff",
+            "on-secondary": "#ffffff",
+            "on-primary-container": "#7594cb",
+            "tertiary": "#181818",
+            "primary-fixed-dim": "#aac7ff",
+            "surface-variant": "#e0e3e5"
+          },
+          "borderRadius": {
+            "DEFAULT": "0px",
+            "lg": "0px",
+            "xl": "0px",
+            "full": "0px"
+          },
+          "fontFamily": {
+            "headline": ["Manrope"],
+            "body": ["Inter"],
+            "label": ["Inter"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body { font-family: 'Inter', sans-serif; }
+    h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+    .glass-nav {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  </style>
+<link rel="stylesheet" href="../assets/site-shell.css" />
+<script>window.__SITE_ROUTES__={"home": "../index.html", "products": "../products/index.html", "products-agv-forklift": "../products/agv-forklift.html", "products-lifting-agv": "../products/lifting-agv.html", "products-storage-agv": "../products/storage-agv.html", "products-agv-roller": "../products/agv-roller.html", "products-composite-mobile-robot": "../products/composite-mobile-robot.html", "solutions": "index.html", "solutions-asrs": "asrs.html", "solutions-material-handling": "material-handling.html", "solutions-picking": "picking.html", "solutions-software": "software.html", "case-studies": "../case-studies/index.html", "case-studies-asrs": "../case-studies/asrs.html", "case-studies-material-handling": "../case-studies/material-handling.html", "case-studies-picking": "../case-studies/picking.html", "case-studies-project-warehouse-upgrade": "../case-studies/projects/automated-warehouse-upgrade.html", "about": "../about/index.html", "contact": "../contact/index.html"};</script>
+<script defer src="../assets/site-shell.js"></script>
+</head>
+<body class="bg-surface text-on-background selection:bg-secondary/30" data-page-key="solutions">
+<header class="hsa-header">
+  <div class="hsa-header-inner">
+    <a class="hsa-brand" href="../index.html"><span class="hsa-brand-mark">H</span><span class="hsa-brand-copy"><strong>Huizong Intelligent Automation</strong><em>Global Warehouse Automation Systems</em></span></a>
+    <nav class="hsa-top-nav">
+      <a class="hsa-top-link" href="../index.html">Home</a>
+      <details class="hsa-top-group"><summary>Products</summary><div class="hsa-dropdown"><a class="hsa-dropdown-link" href="../products/index.html">Products Overview</a><a class="hsa-dropdown-link" href="../products/agv-forklift.html">AGV Forklift</a><a class="hsa-dropdown-link" href="../products/lifting-agv.html">Lifting AGV</a><a class="hsa-dropdown-link" href="../products/storage-agv.html">Storage AGV</a><a class="hsa-dropdown-link" href="../products/agv-roller.html">AGV Roller</a><a class="hsa-dropdown-link" href="../products/composite-mobile-robot.html">Composite Mobile Robot</a></div></details>
+      <details class="hsa-top-group hsa-top-active"><summary>Solutions</summary><div class="hsa-dropdown"><a class="hsa-dropdown-link" href="index.html">Solutions Overview</a><a class="hsa-dropdown-link" href="asrs.html">ASRS</a><a class="hsa-dropdown-link" href="material-handling.html">Material Handling</a><a class="hsa-dropdown-link" href="picking.html">Picking</a><a class="hsa-dropdown-link" href="software.html">Software</a></div></details>
+      <details class="hsa-top-group"><summary>Case Studies</summary><div class="hsa-dropdown"><a class="hsa-dropdown-link" href="../case-studies/index.html">All Projects</a><a class="hsa-dropdown-link" href="../case-studies/asrs.html">ASRS</a><a class="hsa-dropdown-link" href="../case-studies/material-handling.html">Material Handling</a><a class="hsa-dropdown-link" href="../case-studies/picking.html">Picking</a></div></details>
+      <a class="hsa-top-link" href="../about/index.html">About</a>
+      <a class="hsa-top-link" href="../contact/index.html">Contact</a>
+    </nav>
+    <a class="hsa-cta" href="../contact/index.html">Speak With An Expert</a>
+    <button class="hsa-mobile-toggle" type="button" aria-expanded="false" aria-controls="hsa-mobile-menu">Menu</button>
+  </div>
+  <div class="hsa-mobile-menu" id="hsa-mobile-menu">
+    <a href="../index.html">Home</a>
+    <details><summary>Products</summary><a href="../products/index.html">Products Overview</a><a href="../products/agv-forklift.html">AGV Forklift</a><a href="../products/lifting-agv.html">Lifting AGV</a><a href="../products/storage-agv.html">Storage AGV</a><a href="../products/agv-roller.html">AGV Roller</a><a href="../products/composite-mobile-robot.html">Composite Mobile Robot</a></details>
+    <details><summary>Solutions</summary><a href="index.html">Solutions Overview</a><a href="asrs.html">ASRS</a><a href="material-handling.html">Material Handling</a><a href="picking.html">Picking</a><a href="software.html">Software</a></details>
+    <details><summary>Case Studies</summary><a href="../case-studies/index.html">All Projects</a><a href="../case-studies/asrs.html">ASRS</a><a href="../case-studies/material-handling.html">Material Handling</a><a href="../case-studies/picking.html">Picking</a><a href="../case-studies/projects/automated-warehouse-upgrade.html">Project Detail</a></details>
+    <a href="../about/index.html">About</a>
+    <a href="../contact/index.html">Contact</a>
+  </div>
+</header>
+<div class="hsa-secondary"><div class="hsa-secondary-inner"><div class="hsa-breadcrumb"><a href="../index.html">Home</a><span class="hsa-crumb-sep">/</span><a href="index.html">Solutions</a><span class="hsa-crumb-sep">/</span><span class="hsa-crumb-current">Solutions Overview</span></div><div class="hsa-subnav"><a class="hsa-sub-link hsa-sub-active" href="index.html">Solutions Overview</a><a class="hsa-sub-link" href="asrs.html">ASRS</a><a class="hsa-sub-link" href="material-handling.html">Material Handling</a><a class="hsa-sub-link" href="picking.html">Picking</a><a class="hsa-sub-link" href="software.html">Software</a></div></div></div>
+
+<div class="page-content">
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-[600px] flex items-center overflow-hidden bg-primary">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-30 mix-blend-soft-light scale-105" data-alt="dramatic wide angle shot of a highly automated futuristic warehouse with blue industrial lighting and robotic arms moving along tracks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfujFnEmwYtviRkzf7npRhGnksP1WeNEAHg5ttqRcI1VyZfdnGr3kSTvj1_WTJPDLckYdK76sNEyQlRiq-OZ4iiyPpE4NDOlas1RDhxDPy6KT_gc1s6J4gjDWehm7G05nVABrh0e63T6KmOziLVGDB0HX9FiXfSr_KK4wWy-JFPtSCQnxJjEgBwQdFjOPRxhTSekgyBQgiPuamWVZcgLwuTBusuTsiXcJ8agv3e-xaZkuGmJsXNRoPu4GZzx3y-y-SJnqecimEKpif"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/60 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-screen-2xl mx-auto px-8 w-full">
+<div class="max-w-3xl">
+<span class="inline-block text-secondary text-xs font-bold uppercase tracking-[0.3em] mb-4">Engineering Excellence</span>
+<h1 class="text-5xl md:text-7xl font-extrabold text-white leading-[1.05] tracking-tighter mb-6">
+          Warehouse and Logistics Automation Solutions
+        </h1>
+<p class="text-xl text-on-primary-container leading-relaxed mb-10 max-w-2xl font-light opacity-90">
+          Engineering smarter material flow, unmatched efficiency, and absolute control across your global operations.
+        </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-secondary text-white px-8 py-4 rounded-none font-bold text-sm uppercase tracking-widest flex items-center gap-2 hover:bg-secondary-container transition-all">
+            Speak With An Expert
+            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<button class="border border-white/30 text-white px-8 py-4 rounded-none font-bold text-sm uppercase tracking-widest hover:bg-white/10 transition-colors">
+            View Systems
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Solutions Categories: Bento Grid Style -->
+<section class="py-24 px-8 max-w-screen-2xl mx-auto">
+<div class="mb-16">
+<h2 class="text-xs font-bold text-secondary uppercase tracking-[0.3em] mb-3">Core Competencies</h2>
+<h3 class="text-4xl md:text-5xl font-extrabold text-primary tracking-tighter">Our Precision Ecosystem</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- ASRS Card -->
+<div class="md:col-span-7 group relative bg-surface-container-low rounded-none overflow-hidden border border-outline-variant/10 hover:border-secondary/20 transition-all duration-300">
+<div class="p-10 flex flex-col h-full z-10 relative">
+<div class="mb-auto">
+<div class="w-12 h-12 bg-secondary/5 flex items-center justify-center rounded-none mb-8 group-hover:bg-secondary/10 transition-colors">
+<span class="material-symbols-outlined text-2xl text-secondary">inventory_2</span>
+</div>
+<h4 class="text-3xl font-extrabold text-primary mb-4 tracking-tight">ASRS</h4>
+<p class="text-on-surface-variant text-base leading-relaxed mb-8 max-w-md">
+              High-density storage systems that maximize volumetric efficiency and throughput. Designed for zero-error retrieval in climate-controlled environments.
+            </p>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-high text-primary text-[10px] font-bold rounded-none uppercase tracking-wider">Volume Optimization</span>
+<span class="px-3 py-1 bg-surface-container-high text-primary text-[10px] font-bold rounded-none uppercase tracking-wider">High Throughput</span>
+<span class="px-3 py-1 bg-surface-container-high text-primary text-[10px] font-bold rounded-none uppercase tracking-wider">Precision Retrieval</span>
+</div>
+</div>
+<div class="absolute top-0 right-0 w-2/5 h-full opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
+<img class="w-full h-full object-cover" data-alt="technical blueprint overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzXrtbkjqH7aRzBMQtLiIPlYZpP5XwVtlAv8xR_TlPMihn97CzuZy0O03otmRhlOA_pFxb9SgirTOcvxQiRTW9P5kpqRwBTBUNDOYdZVPygAP-3gBHzP2yNAvGsmsAVrQie68cAHSNWK2iOq552mQca9POTkgRdv3ndUFQRr17WMLxSYXZMpgmkgIilgBde7NSZ864IXlOCoH39l21mbYUlCbrodYCQI5wvhS5ky8_0Y0fJYI1HVYraAprhOkO-75X4aedi_D4NXy0"/>
+</div>
+</div>
+<!-- Software Card -->
+<div class="md:col-span-5 bg-primary text-white rounded-none overflow-hidden p-10 flex flex-col justify-between border border-primary relative group">
+<div class="z-10">
+<div class="w-12 h-12 bg-white/5 flex items-center justify-center rounded-none mb-8 group-hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-2xl text-secondary">analytics</span>
+</div>
+<h4 class="text-3xl font-extrabold mb-4 tracking-tight">Software</h4>
+<p class="text-on-primary-container text-base leading-relaxed mb-8 opacity-80">
+            The digital core of your warehouse—WMS and WCS platforms for real-time visibility and control.
+          </p>
+</div>
+<ul class="space-y-4 z-10">
+<li class="flex items-center gap-3 text-[10px] font-bold tracking-widest border-b border-white/10 pb-4 uppercase">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+            Data-Driven Insights
+          </li>
+<li class="flex items-center gap-3 text-[10px] font-bold tracking-widest border-b border-white/10 pb-4 uppercase">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+            Real-Time Visibility
+          </li>
+<li class="flex items-center gap-3 text-[10px] font-bold tracking-widest pb-2 uppercase">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+            Seamless Integration
+          </li>
+</ul>
+</div>
+<!-- Material Handling Card -->
+<div class="md:col-span-5 bg-white border border-outline-variant/20 rounded-none p-10 shadow-sm hover:border-secondary/30 transition-colors group">
+<div class="w-12 h-12 bg-secondary/5 flex items-center justify-center rounded-none mb-8 group-hover:bg-secondary/10 transition-colors">
+<span class="material-symbols-outlined text-2xl text-secondary" data-weight="fill">precision_manufacturing</span>
+</div>
+<h4 class="text-3xl font-extrabold text-primary mb-4 tracking-tight">Material Handling</h4>
+<p class="text-on-surface-variant text-base leading-relaxed mb-10">
+          Intelligent transport and conveyor systems for seamless facility-wide logistics. Engineered for silent operation and minimal maintenance.
+        </p>
+<div class="space-y-1">
+<div class="flex justify-between items-center py-4 border-b border-surface-container hover:bg-surface-container-low transition-colors px-2 rounded-none cursor-default">
+<span class="text-[10px] font-bold text-primary tracking-widest uppercase">Reliable Flow</span>
+<span class="material-symbols-outlined text-secondary text-sm">trending_up</span>
+</div>
+<div class="flex justify-between items-center py-4 border-b border-surface-container hover:bg-surface-container-low transition-colors px-2 rounded-none cursor-default">
+<span class="text-[10px] font-bold text-primary tracking-widest uppercase">Intelligent Routing</span>
+<span class="material-symbols-outlined text-secondary text-sm">router</span>
+</div>
+<div class="flex justify-between items-center py-4 hover:bg-surface-container-low transition-colors px-2 rounded-none cursor-default">
+<span class="text-[10px] font-bold text-primary tracking-widest uppercase">System Synergy</span>
+<span class="material-symbols-outlined text-secondary text-sm">hub</span>
+</div>
+</div>
+</div>
+<!-- Picking Card -->
+<div class="md:col-span-7 bg-surface-container-low rounded-none overflow-hidden group border border-outline-variant/10">
+<div class="flex flex-col md:flex-row h-full">
+<div class="p-10 flex-1">
+<div class="w-12 h-12 bg-secondary/5 flex items-center justify-center rounded-none mb-8 group-hover:bg-secondary/10 transition-colors">
+<span class="material-symbols-outlined text-2xl text-secondary">robot_2</span>
+</div>
+<h4 class="text-3xl font-extrabold text-primary mb-4 tracking-tight">Picking</h4>
+<p class="text-on-surface-variant text-base leading-relaxed mb-10">
+              Advanced fulfillment solutions ranging from goods-to-person to robotic picking. Scale your throughput without increasing your footprint.
+            </p>
+<div class="flex gap-8">
+<div>
+<p class="text-3xl font-black text-primary tracking-tighter">99.9%</p>
+<p class="text-[10px] font-bold text-secondary uppercase tracking-[0.2em]">Accuracy</p>
+</div>
+<div class="w-[1px] bg-outline-variant/30"></div>
+<div>
+<p class="text-3xl font-black text-primary tracking-tighter">3x</p>
+<p class="text-[10px] font-bold text-secondary uppercase tracking-[0.2em]">Fulfillment</p>
+</div>
+</div>
+</div>
+<div class="w-full md:w-2/5 bg-primary relative overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover grayscale brightness-50 opacity-40 group-hover:scale-105 group-hover:opacity-50 transition-all duration-700" data-alt="robotic pick and place component" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdUnh8dxxKahx04foaBZhubiX9XVAddItfj8vNmtxaIqM0qHkfxIA9urrJSP4Wqzj2Jc_CKuAUP2ZQ1Go495KEgElXx2np3dbyVFXDgnbqU7j79iXF8JUwVZw61dHGuHSv2g9WMlR-F1sGyci2workXzX80Bd7s6F4gKtH4nngsXdGrt7DEKpz_GnnzRYFJivAfCVfVdorWEYlWaB2qYEPXaMHNXw_uhgHiNSp9LBIpO4_olcB4_BN26pzefAHKpH9bIKsP0zxU54H"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- From Assessment to Go Live: 6-Step Process -->
+<section class="bg-surface py-24 border-y border-outline-variant/10">
+<div class="max-w-screen-2xl mx-auto px-8">
+<div class="grid grid-cols-1 lg:grid-cols-2 items-end mb-20 gap-12">
+<div>
+<h2 class="text-xs font-bold text-secondary uppercase tracking-[0.3em] mb-3">The Delivery Pipeline</h2>
+<h3 class="text-4xl md:text-5xl font-extrabold text-primary tracking-tighter">From Assessment to Go Live</h3>
+</div>
+<p class="text-on-surface-variant text-base leading-relaxed opacity-80 max-w-xl">
+          Our systematic approach ensures that every solution is optimized for your specific facility constraints and ROI goals.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-20">
+<!-- Step 1 -->
+<div class="relative group">
+<div class="text-6xl font-black text-outline-variant/20 mb-6 group-hover:text-secondary/10 transition-colors">01</div>
+<h5 class="text-base font-bold text-primary mb-4 uppercase tracking-widest border-l-2 border-secondary pl-4">Site Assessment</h5>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+            In-depth analysis of your current material flow, architectural constraints, and future growth projections.
+          </p>
+</div>
+<!-- Step 2 -->
+<div class="relative group">
+<div class="text-6xl font-black text-outline-variant/20 mb-6 group-hover:text-secondary/10 transition-colors">02</div>
+<h5 class="text-base font-bold text-primary mb-4 uppercase tracking-widest border-l-2 border-secondary pl-4">Solution Development</h5>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+            Our engineers design a bespoke automation map using our proprietary modular component library.
+          </p>
+</div>
+<!-- Step 3 -->
+<div class="relative group">
+<div class="text-6xl font-black text-outline-variant/20 mb-6 group-hover:text-secondary/10 transition-colors">03</div>
+<h5 class="text-base font-bold text-primary mb-4 uppercase tracking-widest border-l-2 border-secondary pl-4">ROI Analysis</h5>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+            Precise financial modeling to calculate payback periods, throughput gains, and operational savings.
+          </p>
+</div>
+<!-- Step 4 -->
+<div class="relative group">
+<div class="text-6xl font-black text-outline-variant/20 mb-6 group-hover:text-secondary/10 transition-colors">04</div>
+<h5 class="text-base font-bold text-primary mb-4 uppercase tracking-widest border-l-2 border-secondary pl-4">Engineering &amp; Build</h5>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+            Hardware fabrication and software configuration executed at our state-of-the-art manufacturing hubs.
+          </p>
+</div>
+<!-- Step 5 -->
+<div class="relative group">
+<div class="text-6xl font-black text-outline-variant/20 mb-6 group-hover:text-secondary/10 transition-colors">05</div>
+<h5 class="text-base font-bold text-primary mb-4 uppercase tracking-widest border-l-2 border-secondary pl-4">Installation</h5>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+            Seamless physical integration on-site with minimal disruption to your ongoing operations.
+          </p>
+</div>
+<!-- Step 6 -->
+<div class="relative group">
+<div class="text-6xl font-black text-outline-variant/20 mb-6 group-hover:text-secondary/10 transition-colors">06</div>
+<h5 class="text-base font-bold text-primary mb-4 uppercase tracking-widest border-l-2 border-secondary pl-4">Ongoing Support</h5>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+            24/7 technical assistance, predictive maintenance, and software updates to keep you ahead.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Case Studies Preview -->
+<section class="py-24 px-8 max-w-screen-2xl mx-auto">
+<div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
+<h3 class="text-4xl font-extrabold text-primary tracking-tighter">Global Success Stories</h3>
+<a class="text-secondary text-xs font-black uppercase tracking-[0.2em] flex items-center gap-3 group border-b border-transparent hover:border-secondary transition-all py-1" href="#">
+        All Case Studies 
+        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">east</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="group cursor-pointer">
+<div class="relative h-[480px] rounded-none overflow-hidden mb-8 border border-outline-variant/20 shadow-sm">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" data-alt="modern tech office building" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGM3NGDRrnpUdB1XW-vvKNUSg0P3nfUFK6aoOrjkmZxpE-ilzZH1fCrDJyLc93V5V3wYMPiCkllLKzMD2xbIdR9pB6ng6dP3VIXo5e9Gc5w5SDigFu_v4bRlh5-SOKA_pbfp7QmwR1JibwUqDLS1NE6o9ura_cQNIx92h6TwVtQfnzrWOFumkn27HRMZdju5PdE_df_gHn2_zMOOnaNi9nsHlltSukglj6o8v4ssMC2MZHEkQEMxO9pwX1v8hbxWSUadrEVzk1ITT3"/>
+<div class="absolute top-6 left-6">
+<span class="px-4 py-2 bg-primary text-white text-[10px] font-bold rounded-none uppercase tracking-widest shadow-lg">E-Commerce</span>
+</div>
+<div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-500"></div>
+</div>
+<h4 class="text-2xl font-extrabold text-primary mb-4 tracking-tight group-hover:text-secondary transition-colors uppercase">Next-Gen Fulfillment Hub in Berlin</h4>
+<p class="text-on-surface-variant leading-relaxed text-base">How a major retailer achieved 40% more storage density using our custom ASRS modules.</p>
+</div>
+<div class="group cursor-pointer">
+<div class="relative h-[480px] rounded-none overflow-hidden mb-8 border border-outline-variant/20 shadow-sm">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" data-alt="automated logistics trucks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMqFieC7lD79o-98ljVO3R7cpwBa0SY29wUAxBkAo2KGVdaqtAUySrz1u0q41hudFIH7kCuuQFhC_t17gTDl8w1qHj_fB57tyAB9aiz1bP9X8nSYpk6rv-j9Vpxw-bkV24uFSCbuC3izu-EyGtL2mkhSRh8we7_5SbgKUlv5Eyi0ivbxHmJ29ej7QiVsBkeNeCRy_SC5AaFuKTZGPfCOnZyHxWJozJwJLVwVoDA2O33oKG9P9Phuj4n1kWebf1HK1b3Sguw_zrKeOq"/>
+<div class="absolute top-6 left-6">
+<span class="px-4 py-2 bg-primary text-white text-[10px] font-bold rounded-none uppercase tracking-widest shadow-lg">Automotive</span>
+</div>
+<div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-500"></div>
+</div>
+<h4 class="text-2xl font-extrabold text-primary mb-4 tracking-tight group-hover:text-secondary transition-colors uppercase">Precision Parts Handling for EV Giant</h4>
+<p class="text-on-surface-variant leading-relaxed text-base">Synchronizing material flow across 2 million square feet with intelligent conveyor routing.</p>
+</div>
+</div>
+</section>
+<!-- Lead Capture / Contact Section -->
+<section class="py-24 bg-primary text-white overflow-hidden relative border-t border-white/5">
+<div class="absolute top-0 right-0 w-1/3 h-full bg-secondary/5 skew-x-[-15deg] translate-x-1/2"></div>
+<div class="max-w-screen-2xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center relative z-10">
+<div>
+<h3 class="text-4xl md:text-6xl font-extrabold leading-[1.1] mb-8 tracking-tighter uppercase">Consult an Automation Architect</h3>
+<p class="text-xl text-on-primary-container mb-12 font-light leading-relaxed opacity-90">
+          Ready to optimize your facility? Complete the technical inquiry form, and our engineering team will provide a preliminary site assessment roadmap within 48 hours.
+        </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+<div class="flex items-start gap-4 p-8 bg-white/5 rounded-none border border-white/10">
+<span class="material-symbols-outlined text-secondary text-2xl">support_agent</span>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-secondary mb-2">Technical Sales</p>
+<p class="text-sm font-semibold tracking-tight">solutions@kineticprecision.com</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-8 bg-white/5 rounded-none border border-white/10">
+<span class="material-symbols-outlined text-secondary text-2xl">location_on</span>
+<div>
+<p class="text-[10px] font-bold uppercase tracking-widest text-secondary mb-2">Global HQ</p>
+<p class="text-sm font-semibold tracking-tight leading-snug">1200 Innovation Way,<br/>Tech Park North</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white p-12 rounded-none shadow-2xl">
+<form class="space-y-8">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="relative">
+<label class="block text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-3">Full Name</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 px-4 text-primary text-sm font-medium rounded-none" placeholder="John Doe" type="text"/>
+</div>
+<div class="relative">
+<label class="block text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-3">Phone</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 px-4 text-primary text-sm font-medium rounded-none" placeholder="+1 (555) 000-0000" type="tel"/>
+</div>
+</div>
+<div>
+<label class="block text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-3">Business Email</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 px-4 text-primary text-sm font-medium rounded-none" placeholder="john.doe@company.com" type="email"/>
+</div>
+<div>
+<label class="block text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-3">Project Brief</label>
+<textarea class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 px-4 text-primary text-sm font-medium rounded-none" placeholder="Describe your automation goals..." rows="4"></textarea>
+</div>
+<div class="flex items-center gap-3">
+<input class="w-4 h-4 rounded-none border-outline-variant text-secondary focus:ring-secondary cursor-pointer" id="newsletter" type="checkbox"/>
+<label class="text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider cursor-pointer select-none" for="newsletter">Subscribe to monthly Logistics Insights</label>
+</div>
+<button class="w-full bg-secondary text-white py-5 rounded-none font-black text-sm uppercase tracking-[0.2em] hover:bg-secondary-container transition-all flex items-center justify-center gap-3" type="submit">
+            Request Consultation
+            <span class="material-symbols-outlined text-sm">send</span>
+</button>
+</form>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+</div>
+
+<footer class="hsa-footer">
+  <div class="hsa-footer-inner">
+    <div><div class="hsa-footer-brand">Huizong Intelligent Automation</div><p class="hsa-footer-copy">Integrated warehouse automation, robotics, software orchestration, and project delivery for global B2B intralogistics operations.</p></div>
+    <div><h4>Products</h4><div class="hsa-footer-links"><a href="../products/index.html">Products Overview</a><a href="../products/agv-forklift.html">AGV Forklift</a><a href="../products/lifting-agv.html">Lifting AGV</a><a href="../products/storage-agv.html">Storage AGV</a><a href="../products/agv-roller.html">AGV Roller</a><a href="../products/composite-mobile-robot.html">Composite Mobile Robot</a></div></div>
+    <div><h4>Solutions</h4><div class="hsa-footer-links"><a href="index.html">Solutions Overview</a><a href="asrs.html">ASRS</a><a href="material-handling.html">Material Handling</a><a href="picking.html">Picking</a><a href="software.html">Software</a></div></div>
+    <div><h4>Case Studies</h4><div class="hsa-footer-links"><a href="../case-studies/index.html">All Projects</a><a href="../case-studies/asrs.html">ASRS</a><a href="../case-studies/material-handling.html">Material Handling</a><a href="../case-studies/picking.html">Picking</a><a href="../case-studies/projects/automated-warehouse-upgrade.html">Project Detail</a></div></div>
+  </div>
+  <div class="hsa-footer-bottom"><span>Copyright 2026 Huizong Intelligent Automation</span><span>Local deployment build for browser preview</span></div>
+</footer>
+</body></html>

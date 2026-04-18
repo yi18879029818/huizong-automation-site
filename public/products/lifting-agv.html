@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lifting AGV | Huizong Intelligent Automation</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container": "#eceef0",
+                        "on-secondary-fixed-variant": "#7a3000",
+                        "on-tertiary-fixed-variant": "#474746",
+                        "primary-fixed": "#d6e3ff",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "secondary": "#a04100",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#3f5f92",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-fixed-dim": "#aac7ff",
+                        "on-secondary-fixed": "#351000",
+                        "primary": "#001736",
+                        "tertiary-fixed": "#e5e2e1",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed": "#001b3e",
+                        "secondary-fixed-dim": "#ffb693",
+                        "on-surface-variant": "#43474f",
+                        "on-primary-fixed-variant": "#264779",
+                        "secondary-fixed": "#ffdbcc",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#2c2c2c",
+                        "inverse-surface": "#2d3133",
+                        "surface-container-low": "#f2f4f6",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#7594cb",
+                        "background": "#f8f9fb",
+                        "on-background": "#191c1e",
+                        "inverse-primary": "#aac7ff",
+                        "on-surface": "#191c1e",
+                        "tertiary": "#181818",
+                        "surface-dim": "#d8dadc",
+                        "on-tertiary-container": "#959393",
+                        "on-secondary-container": "#572000",
+                        "surface-bright": "#f8f9fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface": "#f8f9fb",
+                        "secondary-container": "#fe6b00",
+                        "outline": "#747780",
+                        "surface-container-highest": "#e0e3e5",
+                        "primary-container": "#002b5c",
+                        "surface-variant": "#e0e3e5",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#c8c6c5",
+                        "outline-variant": "#c4c6d0",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+    </style>
+<link rel="stylesheet" href="../assets/site-shell.css" />
+<script>window.__SITE_ROUTES__={"home": "../index.html", "products": "index.html", "products-agv-forklift": "agv-forklift.html", "products-lifting-agv": "lifting-agv.html", "products-storage-agv": "storage-agv.html", "products-agv-roller": "agv-roller.html", "products-composite-mobile-robot": "composite-mobile-robot.html", "solutions": "../solutions/index.html", "solutions-asrs": "../solutions/asrs.html", "solutions-material-handling": "../solutions/material-handling.html", "solutions-picking": "../solutions/picking.html", "solutions-software": "../solutions/software.html", "case-studies": "../case-studies/index.html", "case-studies-asrs": "../case-studies/asrs.html", "case-studies-material-handling": "../case-studies/material-handling.html", "case-studies-picking": "../case-studies/picking.html", "case-studies-project-warehouse-upgrade": "../case-studies/projects/automated-warehouse-upgrade.html", "about": "../about/index.html", "contact": "../contact/index.html"};</script>
+<script defer src="../assets/site-shell.js"></script>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-secondary-fixed selection:text-on-secondary-fixed" data-page-key="products-lifting-agv">
+<header class="hsa-header">
+  <div class="hsa-header-inner">
+    <a class="hsa-brand" href="../index.html"><span class="hsa-brand-mark">H</span><span class="hsa-brand-copy"><strong>Huizong Intelligent Automation</strong><em>Global Warehouse Automation Systems</em></span></a>
+    <nav class="hsa-top-nav">
+      <a class="hsa-top-link" href="../index.html">Home</a>
+      <details class="hsa-top-group hsa-top-active"><summary>Products</summary><div class="hsa-dropdown"><a class="hsa-dropdown-link" href="index.html">Products Overview</a><a class="hsa-dropdown-link" href="agv-forklift.html">AGV Forklift</a><a class="hsa-dropdown-link" href="lifting-agv.html">Lifting AGV</a><a class="hsa-dropdown-link" href="storage-agv.html">Storage AGV</a><a class="hsa-dropdown-link" href="agv-roller.html">AGV Roller</a><a class="hsa-dropdown-link" href="composite-mobile-robot.html">Composite Mobile Robot</a></div></details>
+      <details class="hsa-top-group"><summary>Solutions</summary><div class="hsa-dropdown"><a class="hsa-dropdown-link" href="../solutions/index.html">Solutions Overview</a><a class="hsa-dropdown-link" href="../solutions/asrs.html">ASRS</a><a class="hsa-dropdown-link" href="../solutions/material-handling.html">Material Handling</a><a class="hsa-dropdown-link" href="../solutions/picking.html">Picking</a><a class="hsa-dropdown-link" href="../solutions/software.html">Software</a></div></details>
+      <details class="hsa-top-group"><summary>Case Studies</summary><div class="hsa-dropdown"><a class="hsa-dropdown-link" href="../case-studies/index.html">All Projects</a><a class="hsa-dropdown-link" href="../case-studies/asrs.html">ASRS</a><a class="hsa-dropdown-link" href="../case-studies/material-handling.html">Material Handling</a><a class="hsa-dropdown-link" href="../case-studies/picking.html">Picking</a></div></details>
+      <a class="hsa-top-link" href="../about/index.html">About</a>
+      <a class="hsa-top-link" href="../contact/index.html">Contact</a>
+    </nav>
+    <a class="hsa-cta" href="../contact/index.html">Speak With An Expert</a>
+    <button class="hsa-mobile-toggle" type="button" aria-expanded="false" aria-controls="hsa-mobile-menu">Menu</button>
+  </div>
+  <div class="hsa-mobile-menu" id="hsa-mobile-menu">
+    <a href="../index.html">Home</a>
+    <details><summary>Products</summary><a href="index.html">Products Overview</a><a href="agv-forklift.html">AGV Forklift</a><a href="lifting-agv.html">Lifting AGV</a><a href="storage-agv.html">Storage AGV</a><a href="agv-roller.html">AGV Roller</a><a href="composite-mobile-robot.html">Composite Mobile Robot</a></details>
+    <details><summary>Solutions</summary><a href="../solutions/index.html">Solutions Overview</a><a href="../solutions/asrs.html">ASRS</a><a href="../solutions/material-handling.html">Material Handling</a><a href="../solutions/picking.html">Picking</a><a href="../solutions/software.html">Software</a></details>
+    <details><summary>Case Studies</summary><a href="../case-studies/index.html">All Projects</a><a href="../case-studies/asrs.html">ASRS</a><a href="../case-studies/material-handling.html">Material Handling</a><a href="../case-studies/picking.html">Picking</a><a href="../case-studies/projects/automated-warehouse-upgrade.html">Project Detail</a></details>
+    <a href="../about/index.html">About</a>
+    <a href="../contact/index.html">Contact</a>
+  </div>
+</header>
+<div class="hsa-secondary"><div class="hsa-secondary-inner"><div class="hsa-breadcrumb"><a href="../index.html">Home</a><span class="hsa-crumb-sep">/</span><a href="index.html">Products</a><span class="hsa-crumb-sep">/</span><span class="hsa-crumb-current">Lifting AGV</span></div><div class="hsa-subnav"><a class="hsa-sub-link" href="index.html">Products Overview</a><a class="hsa-sub-link" href="agv-forklift.html">AGV Forklift</a><a class="hsa-sub-link hsa-sub-active" href="lifting-agv.html">Lifting AGV</a><a class="hsa-sub-link" href="storage-agv.html">Storage AGV</a><a class="hsa-sub-link" href="agv-roller.html">AGV Roller</a><a class="hsa-sub-link" href="composite-mobile-robot.html">Composite Mobile Robot</a></div></div></div>
+
+<div class="page-content">
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-[870px] flex items-center overflow-hidden bg-primary-container">
+<div class="absolute inset-0 opacity-40">
+<img class="w-full h-full object-cover" data-alt="Close-up of a high-tech industrial lifting AGV robot moving through a modern, brightly lit smart warehouse with orange accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlS56zjskWg97-Qtj755XE3xARQj2LpBCmKnBOh_hbrjwItOvu9loDGqgQtK0izm2j1_9-VBm1KJ8_KDsOx8T-0wkiV2iKX7jw6I3EE7QIi0SOopTh4_TbHLbcMMKCOFVzNgHIbjw5HE5BZH7fewQPNX7mebAu5XSUl5bhlfiWxS4oBXfaStHL1ipgVPwqNrw16yzOyhfXIm2fVHU2h7gimnNjK5BWBI1O573o9T8FMaLWNt5EdftZwjHr2jeC8z7fyzT0FuOXzx5h"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary-container via-primary-container/80 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-screen-2xl mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-12">
+<div class="flex flex-col justify-center">
+<span class="font-label text-secondary font-bold tracking-[0.2em] uppercase text-xs mb-4">Industrial Logistics Systems</span>
+<h1 class="font-headline text-6xl md:text-7xl font-extrabold text-white leading-[1.1] tracking-tighter mb-6">
+                        Lifting AGV
+                    </h1>
+<p class="text-on-primary-container text-xl md:text-2xl max-w-xl font-light leading-relaxed mb-10">
+                        Precision internal transport for workstation supply and supermarket replenishment. Engineered for high-throughput environments.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-gradient-to-b from-secondary to-on-secondary-fixed-variant text-white px-8 py-4 rounded-md font-bold tracking-tight shadow-lg hover:brightness-110 transition-all flex items-center gap-2">
+                            Explore Specifications <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+<button class="border border-outline-variant/30 text-white px-8 py-4 rounded-md font-bold hover:bg-white/5 transition-all">
+                            View Case Studies
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Introduction -->
+<section class="py-24 px-8 max-w-screen-2xl mx-auto bg-surface">
+<div class="px-4 md:px-6 lg:px-8">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+<div class="md:col-span-5">
+<h2 class="font-headline text-4xl font-bold tracking-tight text-primary mb-8">Adaptive Internal Mobility</h2>
+<p class="text-on-surface-variant text-lg leading-relaxed mb-6">
+                            The Lift-top AGV is the cornerstone of flexible internal movement. Designed to autonomously slide beneath carts and specialized racks, it employs a heavy-duty vertical lift mechanism to mobilize goods without manual intervention.
+                        </p>
+<p class="text-on-surface-variant text-lg leading-relaxed">
+                            By decoupling the transport unit from the load carrier, Kinetic Precision enables a lean logistics flow that adapts in real-time to production shifts and inventory demands.
+                        </p>
+</div>
+<div class="md:col-span-7">
+<div class="bg-surface-container-low p-8 rounded-xl relative overflow-hidden">
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm border border-outline-variant/10">
+<div class="text-secondary font-bold text-3xl mb-1">1,500kg</div>
+<div class="text-on-surface-variant text-xs uppercase tracking-widest font-semibold">Max Payload</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm border border-outline-variant/10">
+<div class="text-secondary font-bold text-3xl mb-1">1.8m/s</div>
+<div class="text-on-surface-variant text-xs uppercase tracking-widest font-semibold">Travel Speed</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm border border-outline-variant/10">
+<div class="text-secondary font-bold text-3xl mb-1">±5mm</div>
+<div class="text-on-surface-variant text-xs uppercase tracking-widest font-semibold">Stop Accuracy</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-lg shadow-sm border border-outline-variant/10">
+<div class="text-secondary font-bold text-3xl mb-1">24/7</div>
+<div class="text-on-surface-variant text-xs uppercase tracking-widest font-semibold">Auto-Charging</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Application Scenarios: Bento Grid -->
+<section class="py-24 px-8 max-w-screen-2xl mx-auto bg-surface-container-low">
+<div class="px-4 md:px-6 lg:px-8">
+<div class="mb-16">
+<span class="text-secondary font-bold tracking-[0.2em] text-xs uppercase block mb-4">Deployment Dynamics</span>
+<h2 class="font-headline text-4xl font-extrabold text-primary tracking-tight">Application Scenarios</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-auto md:h-[700px]">
+<!-- Scenario 1 -->
+<div class="md:col-span-2 bg-surface-container-lowest rounded-xl p-8 flex flex-col justify-between relative overflow-hidden group border border-outline-variant/20 shadow-sm">
+<div class="relative z-10">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6" data-icon="precision_manufacturing">precision_manufacturing</span>
+<h3 class="text-2xl font-bold text-primary mb-3">Workstation Supply</h3>
+<p class="text-on-surface-variant max-w-md">Seamless delivery of raw materials and sub-assemblies directly to production lines with precise timing and positioning.</p>
+</div>
+<div class="absolute top-0 right-0 w-1/2 h-full hidden lg:block opacity-10 group-hover:opacity-20 transition-opacity">
+<img class="w-full h-full object-cover" data-alt="Automated AGV approaching a clean assembly line workstation in a high-tech electronics factory." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3qRrRj4ZoRIJuEVvpmxpUs_fpdXE1v63ecJt3M_uEIPlnPZgulUdLho66MLCS5S8YnuxuJpH3JcdckXx58YgM9UCqdZ7zLN5HTUMGOqme7EtGGseq7d20b7yCBUkMVoD3E8dJir8BmYKNxjLMkeDWaaKYBNFJQ0f6IvBftZ7_LRc56aq-JT2jgceDrg_FxuA8DqKH_lAv7P6Zv6UPfPZc78hBl7JuKREyKt2oAMdTp8aoFY8mPFmBom0KmEEHQkJCL3vMd9l8NWxX"/>
+</div>
+</div>
+<!-- Scenario 2 -->
+<div class="bg-primary text-white rounded-xl p-8 flex flex-col justify-between border border-primary-container shadow-sm">
+<div>
+<span class="material-symbols-outlined text-secondary-fixed text-4xl mb-6" data-icon="local_mall">local_mall</span>
+<h3 class="text-2xl font-bold mb-3">Supermarket Replenishment</h3>
+<p class="text-on-primary-container">Automated flow from bulk storage to staging zones, ensuring pick-faces are always stocked for rapid fulfillment.</p>
+</div>
+</div>
+<!-- Scenario 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-8 flex flex-col justify-between border border-outline-variant/20 shadow-sm">
+<div>
+<span class="material-symbols-outlined text-secondary text-4xl mb-6" data-icon="shopping_cart">shopping_cart</span>
+<h3 class="text-2xl font-bold text-primary mb-3">Cart Transfer</h3>
+<p class="text-on-surface-variant">Standardized handling of manual carts and trolleys, bridging the gap between human operators and automated zones.</p>
+</div>
+</div>
+<!-- Scenario 4 -->
+<div class="md:col-span-2 bg-surface-container-high rounded-xl p-8 flex flex-col justify-between relative overflow-hidden border border-outline-variant/10 shadow-sm">
+<div class="relative z-10">
+<span class="material-symbols-outlined text-secondary text-4xl mb-6" data-icon="route">route</span>
+<h3 class="text-2xl font-bold text-primary mb-3">Flexible Routes</h3>
+<p class="text-on-surface-variant max-w-lg">Dynamic pathfinding that bypasses obstacles and reconfigures instantly when warehouse layouts change.</p>
+</div>
+<div class="absolute bottom-[-20%] right-[-10%] w-2/3 h-1/2 opacity-20 rotate-[-15deg]">
+<span class="material-symbols-outlined text-[300px] text-primary" data-icon="map">map</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Product Advantages -->
+<section class="py-24 px-8 max-w-screen-2xl mx-auto bg-surface">
+<div class="px-4 md:px-6 lg:px-8">
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-12">
+<div class="lg:col-span-1">
+<h2 class="font-headline text-4xl font-bold text-primary tracking-tight mb-6">Engineered Advantages</h2>
+<p class="text-on-surface-variant">Precision is not an option; it is our standard. Our Lifting AGVs provide the competitive edge required for modern logistics.</p>
+</div>
+<div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="flex flex-col gap-4">
+<div class="w-12 h-1 border-t-4 border-secondary mb-4"></div>
+<h4 class="text-xl font-bold text-primary">Shared Aisle Use</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Advanced LiDAR and sensory arrays allow for safe, collaborative movement alongside human workers and manual forklifts.</p>
+</div>
+<div class="flex flex-col gap-4">
+<div class="w-12 h-1 border-t-4 border-secondary mb-4"></div>
+<h4 class="text-xl font-bold text-primary">Route Flexibility</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">No physical floor markers or magnetic tape required. SLAM-based navigation enables instant route modification via software.</p>
+</div>
+<div class="flex flex-col gap-4">
+<div class="w-12 h-1 border-t-4 border-secondary mb-4"></div>
+<h4 class="text-xl font-bold text-primary">Station Response Speed</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Proprietary dispatching logic ensures the nearest available AGV is tasked, reducing latency and idle time by up to 35%.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- System Integration -->
+<section class="py-24 px-8 max-w-screen-2xl mx-auto bg-primary text-white overflow-hidden relative">
+<div class="relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+<div class="order-2 lg:order-1 p-4 md:p-6">
+<div class="relative h-[400px] w-full max-w-[640px] mx-auto bg-primary-container rounded-xl flex items-center justify-center p-12 md:p-14 border border-on-primary-fixed-variant/20">
+<div class="grid grid-cols-3 gap-6 w-full text-center">
+<div class="bg-surface/5 p-4 rounded-lg border border-white/10 backdrop-blur-md">
+<div class="text-secondary font-bold text-lg mb-1">WMS</div>
+<div class="text-[10px] uppercase tracking-tighter opacity-60">Warehouse Management</div>
+</div>
+<div class="bg-secondary/20 p-4 rounded-lg border border-secondary/30 scale-110 shadow-xl shadow-secondary/10">
+<div class="text-white font-bold text-lg mb-1">Fleet</div>
+<div class="text-[10px] uppercase tracking-tighter opacity-80">Control Hub</div>
+</div>
+<div class="bg-surface/5 p-4 rounded-lg border border-white/10 backdrop-blur-md">
+<div class="text-secondary font-bold text-lg mb-1">WCS</div>
+<div class="text-[10px] uppercase tracking-tighter opacity-60">Control System</div>
+</div>
+</div>
+<!-- Pulse Lines Decoration -->
+<div class="absolute inset-0 flex items-center justify-center opacity-20">
+<div class="w-64 h-64 border border-secondary rounded-full animate-pulse"></div>
+<div class="absolute w-96 h-96 border border-secondary/50 rounded-full animate-pulse"></div>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2">
+<span class="text-secondary-fixed-dim font-bold tracking-[0.2em] text-xs uppercase mb-4 block">Ecosystem Synergy</span>
+<h2 class="font-headline text-4xl font-extrabold tracking-tight mb-8">Seamless Integration Framework</h2>
+<p class="text-on-primary-container text-lg leading-relaxed mb-8">
+                            Kinetic Precision AGVs are not isolated machines; they are nodes in an intelligent network. Our API-first approach ensures effortless connection to your existing WMS and WCS.
+                        </p>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Centralized fleet coordination via Kinetic Dispatch Manager™</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Real-time status monitoring and predictive maintenance alerts</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span>Scalable infrastructure—add 1 or 100 AGVs without system rework</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="py-32 px-8 max-w-screen-2xl mx-auto bg-surface text-center">
+<div class="max-w-4xl mx-auto">
+<h2 class="font-headline text-5xl font-black text-primary tracking-tighter mb-6 uppercase">Ready to Transform Your Throughput?</h2>
+<p class="text-on-surface-variant text-xl mb-12">
+                    Consult with our senior logistics engineers to design a custom Lifting AGV workflow tailored to your facility.
+                </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+<button class="w-full sm:w-auto bg-secondary text-white px-10 py-5 rounded-md font-extrabold text-lg shadow-xl hover:translate-y-[-2px] transition-all">
+                        Schedule an Expert Consultation
+                    </button>
+<button class="w-full sm:w-auto text-primary font-bold px-10 py-5 hover:bg-surface-container-low rounded-md transition-all">
+                        Download Technical Data Sheet
+                    </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+</div>
+
+<footer class="hsa-footer">
+  <div class="hsa-footer-inner">
+    <div><div class="hsa-footer-brand">Huizong Intelligent Automation</div><p class="hsa-footer-copy">Integrated warehouse automation, robotics, software orchestration, and project delivery for global B2B intralogistics operations.</p></div>
+    <div><h4>Products</h4><div class="hsa-footer-links"><a href="index.html">Products Overview</a><a href="agv-forklift.html">AGV Forklift</a><a href="lifting-agv.html">Lifting AGV</a><a href="storage-agv.html">Storage AGV</a><a href="agv-roller.html">AGV Roller</a><a href="composite-mobile-robot.html">Composite Mobile Robot</a></div></div>
+    <div><h4>Solutions</h4><div class="hsa-footer-links"><a href="../solutions/index.html">Solutions Overview</a><a href="../solutions/asrs.html">ASRS</a><a href="../solutions/material-handling.html">Material Handling</a><a href="../solutions/picking.html">Picking</a><a href="../solutions/software.html">Software</a></div></div>
+    <div><h4>Case Studies</h4><div class="hsa-footer-links"><a href="../case-studies/index.html">All Projects</a><a href="../case-studies/asrs.html">ASRS</a><a href="../case-studies/material-handling.html">Material Handling</a><a href="../case-studies/picking.html">Picking</a><a href="../case-studies/projects/automated-warehouse-upgrade.html">Project Detail</a></div></div>
+  </div>
+  <div class="hsa-footer-bottom"><span>Copyright 2026 Huizong Intelligent Automation</span><span>Local deployment build for browser preview</span></div>
+</footer>
+</body></html>
