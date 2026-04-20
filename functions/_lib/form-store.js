@@ -161,6 +161,17 @@ export async function getRecentSubmissions(db, limit = 50) {
   await ensureFormStore(db);
 
   const safeLimit = Math.max(1, Math.min(Number(limit) || 20, 100));
+  return getSubmissionRows(db, safeLimit);
+}
+
+export async function getSubmissionExport(db, limit = 1000) {
+  await ensureFormStore(db);
+
+  const safeLimit = Math.max(1, Math.min(Number(limit) || 500, 1000));
+  return getSubmissionRows(db, safeLimit);
+}
+
+async function getSubmissionRows(db, safeLimit) {
   const rows = await db.prepare(
     `SELECT
       id,

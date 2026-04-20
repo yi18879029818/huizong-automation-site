@@ -45,7 +45,10 @@ The repository now includes a lightweight admin panel at `/admin/`.
 
 If you prefer a standalone local viewer instead of the hosted `/admin/` page, open:
 
-- `local-admin.html`
+- `admin.html`
+
+This standalone file can now be double-clicked directly and does not require a login form.
+It reads from the deployed public admin export endpoint.
 
 Features in the first version:
 
@@ -66,6 +69,7 @@ The admin APIs now return CORS headers so a local HTML file can read:
 
 - `GET /api/admin/stats`
 - `GET /api/admin/submissions?limit=30`
+- `GET /api/public-admin/submissions?limit=1000`
 
 ## D1 setup
 
@@ -118,10 +122,10 @@ If you only open `public/index.html` directly in the browser, the `/api/contact`
 
 For the standalone admin viewer:
 
-1. Deploy the latest repo so the admin APIs include the new CORS headers.
-2. Open `local-admin.html` directly in your browser.
-3. Enter your site URL, `ADMIN_USERNAME`, and `ADMIN_PASSWORD`.
-4. Click `Connect Dashboard`.
+1. Deploy the latest repo so the public admin export endpoint is live.
+2. Open `admin.html` directly in your browser.
+3. The page will automatically read from `https://huizong-automation-site.pages.dev`.
+4. Click `Refresh` whenever you want the newest data.
 
 ## Cloudflare Pages deployment
 
@@ -138,6 +142,11 @@ Additional production setup:
 1. Add the `FORM_DB` D1 binding in Pages settings.
 2. Add `ADMIN_USERNAME` and `ADMIN_PASSWORD` in Pages variables/secrets.
 3. Redeploy the site after changing bindings, environment variables, or admin API code.
+
+Note:
+
+- `GET /api/public-admin/submissions` is intentionally open so the standalone `admin.html` can work without login.
+- That means anyone who knows this endpoint can read the exported submission list.
 
 ## Vercel notes
 
