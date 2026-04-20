@@ -373,7 +373,7 @@
     <section class="hero">
       <div>
         <h1>Form Submission Admin</h1>
-        <p>这是本地独立后台页。双击这个文件就能打开，它会直接读取线上站点的公开表单数据接口，不需要再登录。</p>
+        <p>这是本地独立后台页。双击这个文件就能打开，它会自动使用内置管理员账号读取线上站点的后台接口，不需要再登录。</p>
       </div>
       <div class="badge">No Login Mode</div>
     </section>
@@ -381,7 +381,7 @@
     <section class="notice">
       <strong>当前读取地址</strong>
       <p id="siteUrlText">https://huizong-automation-site.pages.dev</p>
-      <p style="margin-top:8px;">如果以后站点地址变了，我可以再帮你把这个文件里的目标地址一起改掉。</p>
+      <p style="margin-top:8px;">如果以后站点地址或管理员账号变了，我可以再帮你把这个文件里的配置一起改掉。</p>
     </section>
 
     <section class="toolbar">
@@ -432,6 +432,8 @@
   <script>
     (function () {
       var SITE_URL = "https://huizong-automation-site.pages.dev";
+      var ADMIN_USERNAME = "123456";
+      var ADMIN_PASSWORD = "123456";
       var dashboardHint = document.getElementById("dashboardHint");
       var siteUrlText = document.getElementById("siteUrlText");
       var statsGrid = document.getElementById("statsGrid");
@@ -490,18 +492,26 @@
         element.innerHTML = '<div class="empty">' + escapeHtml(message) + "</div>";
       }
 
-      function requestSubmissions() {
-        return fetch(SITE_URL + "/api/public-admin/submissions?limit=1000")
-          .then(function (response) {
-            return response.json().catch(function () {
-              return {};
-            }).then(function (result) {
-              if (!response.ok || !result.ok) {
-                throw new Error(result.details || result.error || "Unable to load submissions.");
-              }
-              return result.submissions || [];
-            });
+      function authHeader() {
+        return "Basic " + btoa(ADMIN_USERNAME + ":" + ADMIN_PASSWORD);
+      }
+
+      function requestJson(path) {
+        return fetch(SITE_URL + path, {
+          method: "GET",
+          headers: {
+            Authorization: authHeader()
+          }
+        }).then(function (response) {
+          return response.json().catch(function () {
+            return {};
+          }).then(function (result) {
+            if (!response.ok || !result.ok) {
+              throw new Error(result.details || result.error || "Unable to load admin data.");
+            }
+            return result;
           });
+        });
       }
 
       function computeStats(items) {
@@ -691,11 +701,21 @@
         dashboardHint.classList.remove("error");
         dashboardHint.textContent = "Loading latest remote submission data...";
 
-        requestSubmissions().then(function (items) {
+        Promise.all([
+          requestJson("/api/admin/stats"),
+          requestJson("/api/admin/submissions?limit=1000")
+        ]).then(function (results) {
+          var remoteStats = results[0].stats || {};
+          var items = results[1].submissions || [];
           var stats = computeStats(items);
-          renderStats(stats);
-          renderByType(stats.byFormType);
-          renderTrend(stats.trend);
+          renderStats({
+            total: typeof remoteStats.total === "number" ? remoteStats.total : stats.total,
+            today: typeof remoteStats.today === "number" ? remoteStats.today : stats.today,
+            last7Days: typeof remoteStats.last7Days === "number" ? remoteStats.last7Days : stats.last7Days,
+            thisMonth: typeof remoteStats.thisMonth === "number" ? remoteStats.thisMonth : stats.thisMonth
+          });
+          renderByType((remoteStats.byFormType && remoteStats.byFormType.length ? remoteStats.byFormType : stats.byFormType) || []);
+          renderTrend((remoteStats.trend && remoteStats.trend.length ? remoteStats.trend : stats.trend) || []);
           renderSubmissions(items);
           dashboardHint.textContent = "Loaded successfully. This page is reading the latest deployed submission data.";
         }).catch(function (error) {
