@@ -371,6 +371,32 @@
     return modal;
   }
 
+  function ensureSalesModal() {
+    var modal = document.querySelector(".hsa-sales-modal");
+
+    if (modal) {
+      return modal;
+    }
+
+    modal = document.createElement("div");
+    modal.className = "hsa-sales-modal";
+    modal.setAttribute("aria-hidden", "true");
+    modal.innerHTML =
+      '<div class="hsa-sales-modal__backdrop" data-hsa-close-sales-modal></div>' +
+      '<div class="hsa-sales-modal__panel" role="dialog" aria-modal="true" aria-labelledby="hsa-sales-modal-title">' +
+        '<button class="hsa-sales-modal__close" type="button" aria-label="Close dialog" data-hsa-close-sales-modal>' +
+          '<span class="material-symbols-outlined">close</span>' +
+        "</button>" +
+        '<div class="hsa-sales-modal__body">' +
+          '<img class="hsa-sales-modal__qr" src="' + route("home").replace(/index\.html$/, "") + 'assets/images/sales-qr-placeholder.svg" alt="Sales QR code" />' +
+          '<h3 id="hsa-sales-modal-title" class="hsa-sales-modal__title">sales</h3>' +
+        "</div>" +
+      "</div>";
+
+    document.body.appendChild(modal);
+    return modal;
+  }
+
   function setExpertModal(open) {
     var modal = ensureExpertModal();
     var panel = modal.querySelector(".hsa-expert-modal__panel");
@@ -397,6 +423,21 @@
     }
   }
 
+  function setSalesModal(open) {
+    var modal = ensureSalesModal();
+
+    if (open) {
+      modal.classList.add("is-open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("hsa-modal-open");
+      return;
+    }
+
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("hsa-modal-open");
+  }
+
   function bindExpertModal() {
     var modal = ensureExpertModal();
 
@@ -420,6 +461,28 @@
     document.addEventListener("keydown", function (ev) {
       if (ev.key === "Escape" && modal.classList.contains("is-open")) {
         setExpertModal(false);
+      }
+    });
+  }
+
+  function bindSalesModal() {
+    var modal = ensureSalesModal();
+
+    document.addEventListener("click", function (ev) {
+      if (ev.target.closest("[data-hsa-open-sales-modal]")) {
+        ev.preventDefault();
+        setSalesModal(true);
+        return;
+      }
+
+      if (ev.target.closest("[data-hsa-close-sales-modal]")) {
+        setSalesModal(false);
+      }
+    });
+
+    document.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape" && modal.classList.contains("is-open")) {
+        setSalesModal(false);
       }
     });
   }
@@ -655,18 +718,21 @@
         contact = document.createElement("div");
         contact.className = "hsa-footer-contact";
         contact.innerHTML =
-          '<a class="hsa-footer-contact-link" href="mailto:contact@huizong-automation.com" aria-label="Email">' +
+          '<a class="hsa-footer-contact-link" href="mailto:sales@robotlyne.com" aria-label="Email">' +
             '<span class="material-symbols-outlined">mail</span>' +
           "</a>" +
-          '<a class="hsa-footer-contact-link" href="tel:+8613510816743" aria-label="Phone">' +
+          '<a class="hsa-footer-contact-link" href="https://wa.me/8613510816743?text=Hello%20there!" aria-label="WhatsApp" target="_blank" rel="noreferrer">' +
+            '<span class="material-symbols-outlined">call</span>' +
+          "</a>" +
+          '<a class="hsa-footer-contact-link" href="tel:8613510816743" aria-label="Phone">' +
             '<span class="material-symbols-outlined">call</span>' +
           "</a>" +
           '<a class="hsa-footer-contact-link" href="' + route("contact") + '" aria-label="Consultation">' +
             '<span class="material-symbols-outlined">forum</span>' +
           "</a>" +
-          '<a class="hsa-footer-contact-link" href="' + route("contact") + '" aria-label="Support">' +
+          '<button class="hsa-footer-contact-link hsa-footer-contact-trigger" type="button" aria-label="Sales QR" data-hsa-open-sales-modal>' +
             '<span class="material-symbols-outlined">support_agent</span>' +
-          "</a>";
+          "</button>";
         introCol.appendChild(contact);
       }
 
@@ -708,6 +774,7 @@
   document.addEventListener("DOMContentLoaded", function () {
     enhanceFooters();
     bindExpertModal();
+    bindSalesModal();
     bindDesktopMenus();
     bindMobile();
     bindForms();
