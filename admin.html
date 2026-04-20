@@ -8,34 +8,110 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    :root{--bg:#0f131a;--panel:#171c24;--panel2:#1d2430;--line:#2a3342;--text:#e9eef7;--muted:#96a6bf;--accent:#ff7a21;--green:#35c46b;--blue:#41a5ff;--yellow:#ffb74d}
-    *{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Inter,sans-serif;background:var(--bg);color:var(--text)}
-    button,input{font:inherit}a{color:inherit;text-decoration:none}
+    :root{
+      --bg:#0f131a;
+      --panel:#171c24;
+      --panel-soft:#1d2430;
+      --line:#2a3342;
+      --text:#e9eef7;
+      --muted:#96a6bf;
+      --accent:#ff7a21;
+      --green:#35c46b;
+      --blue:#41a5ff;
+      --yellow:#ffb74d;
+      --danger:#ffaea6;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;font-family:Inter,sans-serif;background:var(--bg);color:var(--text)}
+    button,input{font:inherit}
+    a{color:inherit;text-decoration:none}
     .topbar{display:flex;justify-content:space-between;gap:20px;align-items:center;padding:16px 24px;background:#1a1f27;border-bottom:1px solid rgba(255,255,255,.06)}
-    .brand strong{display:block;font:800 1.55rem/1 Manrope,sans-serif;color:var(--accent)}.brand span{display:block;margin-top:4px;color:#7f8da6}
+    .brand strong{display:block;font:800 1.55rem/1 Manrope,sans-serif;color:var(--accent)}
+    .brand span{display:block;margin-top:4px;color:#7f8da6}
     .nav{display:flex;gap:8px;padding:0 24px;background:#151920;border-bottom:1px solid rgba(255,255,255,.06);overflow:auto}
     .nav button{min-height:48px;padding:0 14px;border:0;border-bottom:2px solid transparent;background:none;color:#95a2b9;font-weight:700;cursor:pointer;white-space:nowrap}
     .nav button.active{color:var(--accent);border-bottom-color:var(--accent)}
-    .page{padding:16px 24px 28px}.section{display:none}.section.active{display:block}
-    .toolbar,.filters,.filters2,.cards{display:grid;gap:12px}.toolbar{grid-template-columns:1fr auto;align-items:center;margin-bottom:16px}
-    .toolbar h2{margin:0;font:800 1.45rem/1.1 Manrope,sans-serif}.hint{color:var(--muted);line-height:1.6}
-    .actions{display:flex;gap:10px;flex-wrap:wrap}.btn{min-height:40px;padding:0 14px;border-radius:10px;border:1px solid #334155;background:#131923;color:var(--text);cursor:pointer;font-weight:700}
+    .page{padding:16px 24px 28px}
+    .section{display:none}
+    .section.active{display:block}
+    .toolbar,.filters,.filters2,.cards{display:grid;gap:12px}
+    .toolbar{grid-template-columns:1fr auto;align-items:center;margin-bottom:16px}
+    .toolbar h2{margin:0;font:800 1.45rem/1.1 Manrope,sans-serif}
+    .hint{color:var(--muted);line-height:1.6}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    .btn{min-height:40px;padding:0 14px;border-radius:10px;border:1px solid #334155;background:#131923;color:var(--text);cursor:pointer;font-weight:700}
     .btn.primary{border-color:transparent;background:linear-gradient(135deg,#ffa15a,var(--accent));color:#2f1602}
-    .search,.date{height:42px;padding:0 14px;border-radius:10px;border:1px solid #344156;background:#1b212b;color:var(--text)}.search{width:100%}
+    .search,.date{height:42px;padding:0 14px;border-radius:10px;border:1px solid #344156;background:#1b212b;color:var(--text)}
+    .search{width:100%}
     .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-    .cards{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:16px}.card{padding:16px 18px}.card strong{display:block;font:800 1.9rem/1 Manrope,sans-serif;color:var(--accent)}.card span{display:block;margin-top:6px;color:var(--muted);font-size:.86rem}
-    .subgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}.block{padding:18px}.block h3{margin:0 0 12px;font:800 1.02rem/1.2 Manrope,sans-serif}
-    .bar{display:grid;gap:8px;margin-bottom:12px}.barhead{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.88rem}.track{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#ffb074,var(--accent))}
-    .tablewrap{overflow:auto}table{width:100%;min-width:1120px;border-collapse:collapse}th,td{padding:14px 12px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left;vertical-align:top}th{background:rgba(255,255,255,.02);color:#8190a8;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}td{font-size:.92rem;color:#dbe6f6}td small{display:block;margin-top:4px;color:#71829d;line-height:1.5}
-    .tagrow{display:flex;gap:6px;flex-wrap:wrap}.tag{display:inline-flex;padding:4px 8px;border-radius:7px;font-size:.76rem;font-weight:700}.t-green{background:rgba(53,196,107,.14);color:#6ce393}.t-blue{background:rgba(65,165,255,.14);color:#7ec7ff}.t-yellow{background:rgba(255,183,77,.16);color:#ffc870}.t-orange{background:rgba(255,122,33,.18);color:#ffb07a}
-    .empty{padding:20px;color:var(--muted)}.error{color:#ffaea6}.link{color:#54b2ff;font-weight:600}
-    .filters{grid-template-columns:1fr auto auto}.filters2{grid-template-columns:auto auto auto;justify-content:start;margin:12px 0 16px}
-    .modal{position:fixed;inset:0;display:none;justify-content:flex-end;background:rgba(6,9,14,.6)}.modal.open{display:flex}.sheet{width:min(760px,100%);height:100%;background:#121820;border-left:1px solid var(--line);overflow:auto}
-    .sheethead,.sheetbody{padding:22px}.sheethead{position:sticky;top:0;background:rgba(18,24,32,.96);border-bottom:1px solid rgba(255,255,255,.06)}.sheettop{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
-    .sheettitle{margin:0;font:800 1.35rem/1.1 Manrope,sans-serif}.sheetsub{margin-top:8px;color:var(--muted);line-height:1.6}.close{min-height:36px;padding:0 12px;border-radius:8px;border:1px solid #344054;background:transparent;color:var(--text);cursor:pointer}
-    .detailgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:16px}.detail{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel2)}.detail strong{display:block;margin-bottom:8px;color:#b8c8df;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase}
-    .timeline{display:grid;gap:12px}.item{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel2)}.itemhead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px}
-    @media (max-width:1100px){.cards,.subgrid,.detailgrid{grid-template-columns:1fr 1fr}}@media (max-width:760px){.topbar,.page{padding-left:14px;padding-right:14px}.toolbar,.filters,.filters2,.cards,.subgrid,.detailgrid{grid-template-columns:1fr}}
+    .cards{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:16px}
+    .card{padding:16px 18px}
+    .card strong{display:block;font:800 1.9rem/1 Manrope,sans-serif;color:var(--accent)}
+    .card span{display:block;margin-top:6px;color:var(--muted);font-size:.86rem}
+    .subgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+    .block{padding:18px}
+    .block h3{margin:0 0 12px;font:800 1.02rem/1.2 Manrope,sans-serif}
+    .bar{display:grid;gap:8px;margin-bottom:12px}
+    .barhead{display:flex;justify-content:space-between;gap:12px;color:var(--muted);font-size:.88rem}
+    .track{height:10px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
+    .fill{height:100%;background:linear-gradient(90deg,#ffb074,var(--accent))}
+    .tablewrap{overflow:auto}
+    table{width:100%;min-width:1120px;border-collapse:collapse}
+    th,td{padding:14px 12px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left;vertical-align:top}
+    th{background:rgba(255,255,255,.02);color:#8190a8;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase}
+    td{font-size:.92rem;color:#dbe6f6}
+    td small{display:block;margin-top:4px;color:#71829d;line-height:1.5}
+    .tagrow{display:flex;gap:6px;flex-wrap:wrap}
+    .tag{display:inline-flex;padding:4px 8px;border-radius:7px;font-size:.76rem;font-weight:700}
+    .t-green{background:rgba(53,196,107,.14);color:#6ce393}
+    .t-blue{background:rgba(65,165,255,.14);color:#7ec7ff}
+    .t-yellow{background:rgba(255,183,77,.16);color:#ffc870}
+    .t-orange{background:rgba(255,122,33,.18);color:#ffb07a}
+    .empty{padding:20px;color:var(--muted)}
+    .error{color:var(--danger)}
+    .link{color:#54b2ff;font-weight:600}
+    .filters{grid-template-columns:1fr auto auto}
+    .filters2{grid-template-columns:auto auto auto;justify-content:start;margin:12px 0 16px}
+    .journey-row{cursor:pointer;transition:background .18s ease}
+    .journey-row:hover{background:rgba(255,255,255,.025)}
+    .journey-open{color:#54b2ff;font-weight:700;cursor:pointer}
+    .journey-open:hover{text-decoration:underline}
+    .modal{position:fixed;inset:0;display:none;align-items:flex-start;justify-content:center;padding:44px 20px;background:rgba(6,9,14,.74);backdrop-filter:blur(2px);z-index:50}
+    .modal.open{display:flex}
+    .sheet{width:min(980px,100%);max-height:min(84vh,860px);background:#1a1f27;border:1px solid #3a4658;border-radius:16px;overflow:auto;box-shadow:0 28px 80px rgba(0,0,0,.45)}
+    .sheethead,.sheetbody{padding:22px 24px}
+    .sheethead{border-bottom:1px solid rgba(255,255,255,.08)}
+    .sheettop{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+    .sheettitle{margin:0;font:800 1.35rem/1.1 Manrope,sans-serif;color:var(--accent)}
+    .sheetsub{margin-top:8px;color:var(--muted);line-height:1.6}
+    .close{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0;border-radius:10px;border:1px solid #344054;background:transparent;color:#8ea2c4;cursor:pointer;font-size:1.6rem;line-height:1}
+    .close:hover{border-color:#4f6485;color:#dbe6f6}
+    .detailgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:18px}
+    .detail{padding:10px 0;background:transparent}
+    .detail strong{display:block;margin-bottom:10px;color:#7f93b3;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase}
+    .detail span{display:block;font-size:1.02rem;font-weight:600;color:#f4f8ff}
+    .tablepanel{padding:0;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02);overflow:hidden}
+    .tablepanel + .tablepanel{margin-top:16px}
+    .tablepanel h3{margin:0;padding:18px 20px 12px;font:800 .98rem/1.2 Manrope,sans-serif;color:#94a8c7;letter-spacing:.08em;text-transform:uppercase}
+    .miniwrap{overflow:auto}
+    .mini-table{width:100%;min-width:760px;border-collapse:collapse}
+    .mini-table th,.mini-table td{padding:14px 20px;border-bottom:1px solid rgba(255,255,255,.06);text-align:left;vertical-align:top}
+    .mini-table th{background:transparent;color:#7f93b3;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+    .mini-table td{font-size:.92rem;color:#dbe6f6}
+    .mini-table tr:last-child td{border-bottom:0}
+    .mini-link{display:inline-block;color:#f4f8ff;font-weight:700}
+    .mini-link:hover{color:#7ec7ff}
+    .metric-tag{display:inline-flex;min-width:34px;justify-content:center;padding:4px 8px;border-radius:7px;background:rgba(65,165,255,.12);color:#9ed1ff;font-size:.76rem;font-weight:700}
+    @media (max-width:1100px){
+      .cards,.subgrid,.detailgrid{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:760px){
+      .topbar,.page{padding-left:14px;padding-right:14px}
+      .toolbar,.filters,.filters2,.cards,.subgrid,.detailgrid{grid-template-columns:1fr}
+      .modal{padding:16px}
+      .sheethead,.sheetbody{padding:18px}
+      .mini-table{min-width:620px}
+    }
   </style>
 </head>
 <body>
@@ -45,24 +121,50 @@
   </header>
 
   <nav class="nav">
-    <button class="active" data-tab="submissions">📄 询盘记录</button>
-    <button data-tab="journeys">👁 访客旅程</button>
-    <button data-tab="redirects">↪ 重定向</button>
-    <button data-tab="robots">🤖 robots.txt</button>
+    <button class="active" data-tab="submissions">询盘记录</button>
+    <button data-tab="journeys">访客旅程</button>
+    <button data-tab="redirects">重定向</button>
+    <button data-tab="robots">robots.txt</button>
   </nav>
 
   <main class="page">
     <section class="section active" id="submissionsSection">
       <div class="toolbar">
-        <div><h2>询盘记录</h2><div class="hint" id="submissionsHint">正在读取最新询盘数据。</div></div>
-        <div class="actions"><button class="btn primary" id="refreshSubmissionsButton" type="button">刷新</button><button class="btn" id="openWebsiteButton" type="button">打开官网</button></div>
+        <div>
+          <h2>询盘记录</h2>
+          <div class="hint" id="submissionsHint">正在读取最新的表单提交记录。</div>
+        </div>
+        <div class="actions">
+          <button class="btn primary" id="refreshSubmissionsButton" type="button">刷新</button>
+          <button class="btn" id="openWebsiteButton" type="button">打开官网</button>
+        </div>
       </div>
       <div class="cards" id="submissionCards"></div>
       <div class="subgrid">
-        <article class="panel block"><h3>按表单类型</h3><div id="submissionTypeBars"></div></article>
-        <article class="panel block"><h3>最近 14 天提交趋势</h3><div id="submissionTrendBars"></div></article>
+        <article class="panel block">
+          <h3>按表单类型</h3>
+          <div id="submissionTypeBars"></div>
+        </article>
+        <article class="panel block">
+          <h3>最近 14 天趋势</h3>
+          <div id="submissionTrendBars"></div>
+        </article>
       </div>
-      <article class="panel"><div class="tablewrap"><table><thead><tr><th>提交时间</th><th>来源</th><th>联系人</th><th>字段内容</th></tr></thead><tbody id="submissionsBody"></tbody></table></div></article>
+      <article class="panel">
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>提交时间</th>
+                <th>来源</th>
+                <th>联系人</th>
+                <th>字段内容</th>
+              </tr>
+            </thead>
+            <tbody id="submissionsBody"></tbody>
+          </table>
+        </div>
+      </article>
     </section>
 
     <section class="section" id="journeysSection">
@@ -77,21 +179,60 @@
         <button class="btn" id="applyJourneyFilterButton" type="button">筛选</button>
       </div>
       <div class="cards" id="journeyCards"></div>
-      <div class="hint" id="journeyHint" style="margin-bottom:12px;">这里会按访客会话展示进入站点后的旅程信息，每一条都可以点进去看详情。</div>
-      <article class="panel"><div class="tablewrap"><table><thead><tr><th>First Seen</th><th>IP</th><th>Country</th><th>Landing Page</th><th>Source / Medium</th><th>Device</th><th>Pageviews</th><th>Duration</th><th>Conversions</th><th>Open</th></tr></thead><tbody id="journeysBody"></tbody></table></div></article>
+      <div class="hint" id="journeyHint" style="margin-bottom:12px;">这里会按访客会话显示进入站点后的旅程信息，每一条都可以点击进去查看详情。</div>
+      <article class="panel">
+        <div class="tablewrap">
+          <table>
+            <thead>
+              <tr>
+                <th>First Seen</th>
+                <th>IP</th>
+                <th>Country</th>
+                <th>Landing Page</th>
+                <th>Source / Medium</th>
+                <th>Device</th>
+                <th>Pageviews</th>
+                <th>Duration</th>
+                <th>Conversions</th>
+                <th>Open</th>
+              </tr>
+            </thead>
+            <tbody id="journeysBody"></tbody>
+          </table>
+        </div>
+      </article>
     </section>
 
-    <section class="section" id="redirectsSection"><article class="panel"><div class="empty">这里已预留重定向管理入口。你后续要做规则表和开关时，我可以继续往这里接。</div></article></section>
-    <section class="section" id="robotsSection"><article class="panel"><div class="empty">这里已预留 robots.txt 管理入口。你后续要可视化编辑器时，我可以继续补。</div></article></section>
+    <section class="section" id="redirectsSection">
+      <article class="panel"><div class="empty">这里预留为重定向管理入口。后续如果你要把重定向规则做成可编辑表单，我可以继续接着做。</div></article>
+    </section>
+
+    <section class="section" id="robotsSection">
+      <article class="panel"><div class="empty">这里预留为 robots.txt 管理入口。后续如果你要做可视化编辑器，我可以继续往这里补。</div></article>
+    </section>
   </main>
 
   <div class="modal" id="journeyModal">
     <div class="sheet">
-      <div class="sheethead"><div class="sheettop"><div><h3 class="sheettitle" id="journeyModalTitle">访客旅程详情</h3><div class="sheetsub" id="journeyModalSubtitle">点击列表右侧的 View Journey 后，这里会显示当前访客的浏览轨迹和转化动作。</div></div><button class="close" id="closeJourneyModalButton" type="button">关闭</button></div></div>
+      <div class="sheethead">
+        <div class="sheettop">
+          <div>
+            <h3 class="sheettitle" id="journeyModalTitle">Visitor Journey</h3>
+            <div class="sheetsub" id="journeyModalSubtitle">点击列表里的任意项目或 View Journey 后，这里会显示当前访客的浏览轨迹和转化动作。</div>
+          </div>
+          <button class="close" id="closeJourneyModalButton" type="button" aria-label="Close">×</button>
+        </div>
+      </div>
       <div class="sheetbody">
         <div class="detailgrid" id="journeyDetailGrid"></div>
-        <article class="panel block" style="margin-bottom:16px;"><h3>页面时间线</h3><div class="timeline" id="journeyTimeline"></div></article>
-        <article class="panel block"><h3>转化动作</h3><div class="timeline" id="journeyConversions"></div></article>
+        <article class="tablepanel" style="margin-bottom:16px;">
+          <h3>Page Sequence</h3>
+          <div class="miniwrap" id="journeyTimeline"></div>
+        </article>
+        <article class="tablepanel">
+          <h3>Conversions In This Journey</h3>
+          <div class="miniwrap" id="journeyConversions"></div>
+        </article>
       </div>
     </div>
   </div>
@@ -122,41 +263,125 @@
         timeline: document.getElementById("journeyTimeline"),
         conversions: document.getElementById("journeyConversions")
       };
+
       els.siteMeta.textContent = SITE_URL;
 
-      function authHeader() { return "Basic " + btoa(ADMIN_USERNAME + ":" + ADMIN_PASSWORD); }
-      function esc(v) { return String(v || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
-      function dt(v) { var d = new Date(v); return Number.isNaN(d.getTime()) ? (v || "-") : d.toLocaleString("zh-CN",{year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",second:"2-digit"}); }
-      function day(v) { var d = new Date(v); return Number.isNaN(d.getTime()) ? (v || "-") : d.toLocaleDateString("zh-CN",{month:"2-digit",day:"2-digit"}); }
+      function authHeader() {
+        return "Basic " + btoa(ADMIN_USERNAME + ":" + ADMIN_PASSWORD);
+      }
+
+      function esc(value) {
+        return String(value || "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      function dt(value) {
+        var d = new Date(value);
+        return Number.isNaN(d.getTime())
+          ? (value || "-")
+          : d.toLocaleString("zh-CN", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit"
+            });
+      }
+
+      function day(value) {
+        var d = new Date(value);
+        return Number.isNaN(d.getTime())
+          ? (value || "-")
+          : d.toLocaleDateString("zh-CN", { month: "2-digit", day: "2-digit" });
+      }
+
       function req(path) {
-        return fetch(SITE_URL + path, { method: "GET", headers: { Authorization: authHeader() } })
-          .then(function (r) { return r.json().catch(function(){ return {}; }).then(function (j) { if (!r.ok || !j.ok) { throw new Error(j.details || j.error || "Unable to load admin data."); } return j; }); });
+        return fetch(SITE_URL + path, {
+          method: "GET",
+          headers: { Authorization: authHeader() }
+        }).then(function (response) {
+          return response.json().catch(function () { return {}; }).then(function (json) {
+            if (!response.ok || !json.ok) {
+              throw new Error(json.details || json.error || "Unable to load admin data.");
+            }
+            return json;
+          });
+        });
       }
+
       function cards(target, items) {
-        target.innerHTML = items.map(function (x) { return '<article class="panel card"><strong>' + esc(x.value) + '</strong><span>' + esc(x.label) + '</span></article>'; }).join("");
-      }
-      function emptyRow(msg, cols) { return '<tr><td colspan="' + cols + '" class="empty">' + esc(msg) + '</td></tr>'; }
-      function tag(label, tone) { return '<span class="tag ' + tone + '">' + esc(label) + '</span>'; }
-      function device(d) { return d === "mobile" ? "📱 Mobile" : d === "tablet" ? "Tablet" : "🖥 Desktop"; }
-      function barBlock(target, items, labelKey, valueKey, valueText) {
-        var max = 1;
-        if (!items.length) { target.innerHTML = '<div class="empty">暂无数据</div>'; return; }
-        items.forEach(function (x) { max = Math.max(max, Number(x[valueKey] || 0)); });
-        target.innerHTML = items.map(function (x) {
-          var value = Number(x[valueKey] || 0);
-          var width = Math.max(8, Math.round((value / max) * 100));
-          return '<div class="bar"><div class="barhead"><span>' + esc(x[labelKey]) + '</span><strong>' + esc(valueText ? valueText(x) : value) + '</strong></div><div class="track"><div class="fill" style="width:' + width + '%"></div></div></div>';
+        target.innerHTML = items.map(function (item) {
+          return '<article class="panel card"><strong>' + esc(item.value) + '</strong><span>' + esc(item.label) + '</span></article>';
         }).join("");
       }
+
+      function emptyRow(message, cols) {
+        return '<tr><td colspan="' + cols + '" class="empty">' + esc(message) + '</td></tr>';
+      }
+
+      function tag(label, tone) {
+        return '<span class="tag ' + tone + '">' + esc(label) + '</span>';
+      }
+
+      function device(type) {
+        if (type === "mobile") return "Mobile";
+        if (type === "tablet") return "Tablet";
+        return "Desktop";
+      }
+
+      function barBlock(target, items, labelKey, valueKey, valueText) {
+        var max = 1;
+        if (!items.length) {
+          target.innerHTML = '<div class="empty">暂无数据</div>';
+          return;
+        }
+        items.forEach(function (item) {
+          max = Math.max(max, Number(item[valueKey] || 0));
+        });
+        target.innerHTML = items.map(function (item) {
+          var value = Number(item[valueKey] || 0);
+          var width = Math.max(8, Math.round((value / max) * 100));
+          return '<div class="bar"><div class="barhead"><span>' + esc(item[labelKey]) + '</span><strong>' + esc(valueText ? valueText(item) : value) + '</strong></div><div class="track"><div class="fill" style="width:' + width + '%"></div></div></div>';
+        }).join("");
+      }
+
       function renderFields(payload) {
         var fields = payload && Array.isArray(payload.fields) ? payload.fields.slice(0, 5) : [];
-        if (!fields.length) { return '<div class="empty">No field details available.</div>'; }
-        return fields.map(function (f) { return '<div class="item"><strong>' + esc(f.label) + '</strong><br />' + esc(f.value || "Not provided") + '</div>'; }).join("");
+        if (!fields.length) {
+          return '<div class="empty">No field details available.</div>';
+        }
+        return fields.map(function (field) {
+          return '<div class="empty" style="padding:0 0 12px;"><strong style="display:block;margin-bottom:4px;">' + esc(field.label) + '</strong>' + esc(field.value || "Not provided") + '</div>';
+        }).join("");
       }
+
+      function conversionRow(items) {
+        if (!items || !items.length) {
+          return tag("—", "t-blue");
+        }
+        return items.map(function (item) {
+          var tone = item === "WeChat"
+            ? "t-yellow"
+            : item === "电话"
+            ? "t-blue"
+            : item === "WhatsApp"
+            ? "t-green"
+            : "t-orange";
+          return tag(item, tone);
+        }).join("");
+      }
+
       function renderSubmissions(data) {
-        var stats = data.stats || {}, items = data.submissions || [];
+        var stats = data.stats || {};
+        var items = data.submissions || [];
+
         els.submissionsHint.className = "hint";
-        els.submissionsHint.textContent = "当前显示数据库里最新的询盘记录。";
+        els.submissionsHint.textContent = "当前显示数据库里最新的表单提交记录。";
         cards(els.submissionCards, [
           { value: stats.total || 0, label: "总提交数" },
           { value: stats.today || 0, label: "今日提交" },
@@ -164,96 +389,192 @@
           { value: stats.thisMonth || 0, label: "本月提交" }
         ]);
         barBlock(els.submissionTypeBars, stats.byFormType || [], "formType", "total");
-        barBlock(els.submissionTrendBars, stats.trend || [], "day", "total", function (x) { return day(x.day) + " · " + x.total; });
-        els.submissionsBody.innerHTML = !items.length ? emptyRow("暂无表单提交记录", 4) : items.map(function (x) {
-          return '<tr><td>' + esc(dt(x.createdAt)) + '<small>ID: ' + esc(x.id) + '</small></td><td>' + tag(x.formType || "general", "t-orange") + '<small>' + esc(x.formLabel || "") + '</small><small>' + esc(x.pageTitle || x.pageUrl || "") + '</small></td><td>' + esc(x.submitterName || x.submitterEmail || "Unknown") + '<small>' + esc(x.submitterEmail || "No email") + '</small><small>' + esc(x.submitterPhone || x.submitterCompany || "") + '</small></td><td>' + renderFields(x.payload) + '</td></tr>';
-        }).join("");
+        barBlock(els.submissionTrendBars, stats.trend || [], "day", "total", function (item) {
+          return day(item.day) + " · " + item.total;
+        });
+        els.submissionsBody.innerHTML = !items.length
+          ? emptyRow("暂无表单提交记录", 4)
+          : items.map(function (item) {
+              return '<tr><td>' + esc(dt(item.createdAt)) + '<small>ID: ' + esc(item.id) + '</small></td><td>' + tag(item.formType || "general", "t-orange") + '<small>' + esc(item.formLabel || "") + '</small><small>' + esc(item.pageTitle || item.pageUrl || "") + '</small></td><td>' + esc(item.submitterName || item.submitterEmail || "Unknown") + '<small>' + esc(item.submitterEmail || "No email") + '</small><small>' + esc(item.submitterPhone || item.submitterCompany || "") + '</small></td><td>' + renderFields(item.payload) + '</td></tr>';
+            }).join("");
       }
-      function conversionRow(items) {
-        if (!items || !items.length) { return tag("—", "t-blue"); }
-        return items.map(function (x) {
-          var tone = x === "WeChat" ? "t-yellow" : x === "电话" ? "t-blue" : x === "WhatsApp" ? "t-green" : "t-orange";
-          return tag(x, tone);
-        }).join("");
-      }
+
       function renderJourneys(data) {
         state.journeys = data.journeys || [];
         els.journeyHint.className = "hint";
-        els.journeyHint.textContent = "这里的每一条访客会话都可以点 View Journey 查看详情。";
+        els.journeyHint.textContent = "这里的每一条访客会话都可以点击任意主要信息或 View Journey 查看详情。";
         cards(els.journeyCards, [
           { value: data.summary ? data.summary.uniqueVisitors : 0, label: "独立访客" },
           { value: data.summary ? data.summary.totalPageviews : 0, label: "总页面浏览" }
         ]);
-        els.journeysBody.innerHTML = !state.journeys.length ? emptyRow("暂无访客旅程数据。部署后需要有新访客访问页面，这里才会开始出现记录。", 10) : state.journeys.map(function (x) {
-          return '<tr><td>' + esc(dt(x.firstSeenAt)) + '</td><td>' + esc(x.ip) + '</td><td>' + esc(x.country) + '</td><td><a class="link" href="' + esc(x.landingPageUrl || (SITE_URL + x.landingPagePath)) + '" target="_blank" rel="noreferrer">' + esc(x.landingPageTitle) + '</a><small>' + esc(x.landingPagePath) + '</small></td><td>' + esc(x.source + " / " + x.medium) + '</td><td>' + esc(device(x.device)) + '</td><td><strong>' + esc(x.pageviews) + '</strong></td><td>' + esc(x.durationLabel) + '</td><td><div class="tagrow">' + conversionRow(x.conversions) + '</div></td><td><button class="btn" type="button" data-open="' + esc(x.id) + '">View Journey</button></td></tr>';
-        }).join("");
+        els.journeysBody.innerHTML = !state.journeys.length
+          ? emptyRow("暂无访客旅程数据。部署后需要有新访客访问页面，这里才会开始出现记录。", 10)
+          : state.journeys.map(function (item) {
+              return '<tr class="journey-row" data-open="' + esc(item.id) + '"><td><span class="journey-open" data-open="' + esc(item.id) + '">' + esc(dt(item.firstSeenAt)) + '</span></td><td><span class="journey-open" data-open="' + esc(item.id) + '">' + esc(item.ip) + '</span></td><td><span class="journey-open" data-open="' + esc(item.id) + '">' + esc(item.country) + '</span></td><td><span class="journey-open" data-open="' + esc(item.id) + '">' + esc(item.landingPageTitle) + '</span><small>' + esc(item.landingPagePath) + '</small></td><td><span class="journey-open" data-open="' + esc(item.id) + '">' + esc(item.source + " / " + item.medium) + '</span></td><td><span class="journey-open" data-open="' + esc(item.id) + '">' + esc(device(item.device)) + '</span></td><td><strong class="journey-open" data-open="' + esc(item.id) + '">' + esc(item.pageviews) + '</strong></td><td><span class="journey-open" data-open="' + esc(item.id) + '">' + esc(item.durationLabel) + '</span></td><td><div class="tagrow">' + conversionRow(item.conversions) + '</div></td><td><button class="btn" type="button" data-open="' + esc(item.id) + '">View Journey</button></td></tr>';
+            }).join("");
       }
+
       function renderDetail(data) {
-        var s = data.session;
-        els.modalTitle.textContent = s.landingPageTitle || "访客旅程详情";
-        els.modalSubtitle.textContent = "Session ID: " + s.id + " · Visitor ID: " + s.visitorId;
+        var session = data.session || {};
+        var pageviews = data.pageviews || [];
+        var conversions = data.conversions || [];
+
+        els.modalTitle.textContent = "Visitor Journey";
+        els.modalSubtitle.textContent = "Session ID: " + (session.id || "-") + " · Visitor ID: " + (session.visitorId || "-");
         els.detailGrid.innerHTML = [
-          ["First Seen", dt(s.firstSeenAt)], ["Last Seen", dt(s.lastSeenAt)], ["IP / Country", s.ip + " / " + s.country], ["Source / Medium", s.source + " / " + s.medium],
-          ["Device", s.device], ["Pageviews / Duration", s.pageviews + " / " + s.durationLabel], ["Landing Page", s.landingPageTitle + " (" + s.landingPagePath + ")"], ["Referrer", s.referrer || "Direct"]
-        ].map(function (x) { return '<div class="detail"><strong>' + esc(x[0]) + '</strong>' + esc(x[1]) + '</div>'; }).join("");
-        els.timeline.innerHTML = data.pageviews && data.pageviews.length ? data.pageviews.map(function (x) {
-          return '<div class="item"><div class="itemhead"><strong>' + esc(x.pageTitle) + '</strong><span>' + esc(dt(x.startedAt)) + ' · ' + esc(x.durationLabel) + '</span></div><div><a class="link" href="' + esc(x.pageUrl || (SITE_URL + x.pagePath)) + '" target="_blank" rel="noreferrer">' + esc(x.pagePath) + '</a></div><small>' + esc(x.source + " / " + x.medium) + (x.referrer ? " · Referrer: " + esc(x.referrer) : "") + '</small></div>';
-        }).join("") : '<div class="empty">暂无页面轨迹。</div>';
-        els.conversions.innerHTML = data.conversions && data.conversions.length ? data.conversions.map(function (x) {
-          var meta = Object.keys(x.metadata || {}).map(function (k) { return k + ": " + x.metadata[k]; }).join(" · ");
-          return '<div class="item"><div class="itemhead"><strong>' + esc(x.label) + '</strong><span>' + esc(dt(x.createdAt)) + '</span></div><div>' + esc(x.pageTitle) + '<small>' + esc(x.pagePath) + '</small></div>' + (meta ? '<small>' + esc(meta) + '</small>' : '') + '</div>';
-        }).join("") : '<div class="empty">当前会话还没有记录到转化动作。</div>';
+          ["First Seen", dt(session.firstSeenAt)],
+          ["IP Address", session.ip || "-"],
+          ["Country", session.country || "-"],
+          ["Pageviews", String(session.pageviews || 0)],
+          ["Total Duration", session.durationLabel || "-"],
+          ["Source / Medium", (session.source || "-") + " / " + (session.medium || "-")],
+          ["Device", device(session.device)],
+          ["Landing Page", session.landingPageTitle || session.landingPagePath || "-"]
+        ].map(function (pair) {
+          return '<div class="detail"><strong>' + esc(pair[0]) + '</strong><span>' + esc(pair[1]) + '</span></div>';
+        }).join("");
+
+        els.timeline.innerHTML = pageviews.length
+          ? '<table class="mini-table"><thead><tr><th>Start</th><th>End</th><th>Duration</th><th>Page</th></tr></thead><tbody>' + pageviews.map(function (item) {
+              return '<tr><td>' + esc(dt(item.startedAt)) + '</td><td>' + esc(item.endedAt ? dt(item.endedAt) : "—") + '</td><td><span class="metric-tag">' + esc(item.durationLabel || "—") + '</span></td><td><a class="mini-link" href="' + esc(item.pageUrl || (SITE_URL + item.pagePath)) + '" target="_blank" rel="noreferrer">' + esc(item.pageTitle || item.pagePath || "Untitled Page") + '</a><small>' + esc(item.pageUrl || (SITE_URL + item.pagePath)) + '</small></td></tr>';
+            }).join("") + '</tbody></table>'
+          : '<div class="empty">暂无页面轨迹。</div>';
+
+        els.conversions.innerHTML = conversions.length
+          ? '<table class="mini-table"><thead><tr><th>Time</th><th>Type</th><th>Label</th><th>Name / Company</th><th>Email</th></tr></thead><tbody>' + conversions.map(function (item) {
+              var meta = item.metadata || {};
+              return '<tr><td>' + esc(dt(item.createdAt)) + '</td><td>' + esc(item.label || "—") + '</td><td>' + esc(item.pageTitle || item.pagePath || "—") + '</td><td>' + esc([meta.name, meta.company].filter(Boolean).join(" / ") || "—") + '</td><td>' + esc(meta.email || "—") + '</td></tr>';
+            }).join("") + '</tbody></table>'
+          : '<div class="empty">本次会话暂无转化记录。</div>';
+
         els.modal.classList.add("open");
       }
+
       function loadSubmissions() {
         els.submissionsHint.className = "hint";
         els.submissionsHint.textContent = "正在同步最新询盘记录...";
-        Promise.all([req("/api/admin/stats"), req("/api/admin/submissions?limit=1000")]).then(function (res) { renderSubmissions({ stats: res[0].stats || {}, submissions: res[1].submissions || [] }); }).catch(function (e) {
-          els.submissionsHint.className = "hint error"; els.submissionsHint.textContent = e.message || "无法读取询盘记录。";
-          els.submissionCards.innerHTML = ""; els.submissionTypeBars.innerHTML = '<div class="empty">无法读取表单类型数据。</div>'; els.submissionTrendBars.innerHTML = '<div class="empty">无法读取趋势数据。</div>'; els.submissionsBody.innerHTML = emptyRow("无法读取询盘记录。", 4);
+        Promise.all([
+          req("/api/admin/stats"),
+          req("/api/admin/submissions?limit=1000")
+        ]).then(function (results) {
+          renderSubmissions({
+            stats: results[0].stats || {},
+            submissions: results[1].submissions || []
+          });
+        }).catch(function (error) {
+          els.submissionsHint.className = "hint error";
+          els.submissionsHint.textContent = error.message || "无法读取询盘记录。";
+          els.submissionCards.innerHTML = "";
+          els.submissionTypeBars.innerHTML = '<div class="empty">无法读取表单类型数据。</div>';
+          els.submissionTrendBars.innerHTML = '<div class="empty">无法读取趋势数据。</div>';
+          els.submissionsBody.innerHTML = emptyRow("无法读取询盘记录。", 4);
         });
       }
+
       function journeyPath() {
-        var p = new URLSearchParams();
-        if (state.filters.search) { p.set("search", state.filters.search); }
-        if (state.filters.startDate) { p.set("startDate", state.filters.startDate); }
-        if (state.filters.endDate) { p.set("endDate", state.filters.endDate); }
-        return "/api/admin/journeys" + (p.toString() ? "?" + p.toString() : "");
+        var params = new URLSearchParams();
+        if (state.filters.search) params.set("search", state.filters.search);
+        if (state.filters.startDate) params.set("startDate", state.filters.startDate);
+        if (state.filters.endDate) params.set("endDate", state.filters.endDate);
+        return "/api/admin/journeys" + (params.toString() ? "?" + params.toString() : "");
       }
+
       function loadJourneys() {
         els.journeyHint.className = "hint";
         els.journeyHint.textContent = "正在读取访客旅程数据...";
-        req(journeyPath()).then(function (res) { renderJourneys(res.data || { summary: { uniqueVisitors: 0, totalPageviews: 0 }, journeys: [] }); }).catch(function (e) {
-          els.journeyHint.className = "hint error"; els.journeyHint.textContent = e.message || "无法读取访客旅程。"; els.journeyCards.innerHTML = ""; els.journeysBody.innerHTML = emptyRow("无法读取访客旅程。", 10);
+        req(journeyPath()).then(function (result) {
+          renderJourneys(result.data || {
+            summary: { uniqueVisitors: 0, totalPageviews: 0 },
+            journeys: []
+          });
+        }).catch(function (error) {
+          els.journeyHint.className = "hint error";
+          els.journeyHint.textContent = error.message || "无法读取访客旅程。";
+          els.journeyCards.innerHTML = "";
+          els.journeysBody.innerHTML = emptyRow("无法读取访客旅程。", 10);
         });
       }
+
       function exportCsv() {
         var rows = [["first_seen","ip","country","landing_page_title","landing_page_path","source","medium","device","pageviews","duration","conversions"]];
-        state.journeys.forEach(function (x) { rows.push([x.firstSeenAt,x.ip,x.country,x.landingPageTitle,x.landingPagePath,x.source,x.medium,x.device,x.pageviews,x.durationLabel,(x.conversions || []).join("|")]); });
-        var csv = rows.map(function (r) { return r.map(function (c) { return '"' + String(c || "").replace(/"/g,'""') + '"'; }).join(","); }).join("\n");
-        var blob = new Blob([csv], { type: "text/csv;charset=utf-8" }); var url = URL.createObjectURL(blob); var a = document.createElement("a");
-        a.href = url; a.download = "visitor-journeys.csv"; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+        state.journeys.forEach(function (item) {
+          rows.push([
+            item.firstSeenAt,
+            item.ip,
+            item.country,
+            item.landingPageTitle,
+            item.landingPagePath,
+            item.source,
+            item.medium,
+            item.device,
+            item.pageviews,
+            item.durationLabel,
+            (item.conversions || []).join("|")
+          ]);
+        });
+        var csv = rows.map(function (row) {
+          return row.map(function (cell) {
+            return '"' + String(cell || "").replace(/"/g, '""') + '"';
+          }).join(",");
+        }).join("\n");
+        var blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = "visitor-journeys.csv";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
       }
-      document.querySelectorAll("[data-tab]").forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          document.querySelectorAll("[data-tab]").forEach(function (x) { x.classList.remove("active"); });
-          document.querySelectorAll(".section").forEach(function (x) { x.classList.remove("active"); });
-          btn.classList.add("active");
-          document.getElementById(btn.getAttribute("data-tab") + "Section").classList.add("active");
+
+      function openJourneyDetail(sessionId) {
+        req("/api/admin/journey?id=" + encodeURIComponent(sessionId)).then(function (result) {
+          renderDetail(result.detail);
+        }).catch(function (error) {
+          els.journeyHint.className = "hint error";
+          els.journeyHint.textContent = error.message || "无法打开访客详情。";
+        });
+      }
+
+      document.querySelectorAll("[data-tab]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          document.querySelectorAll("[data-tab]").forEach(function (item) { item.classList.remove("active"); });
+          document.querySelectorAll(".section").forEach(function (item) { item.classList.remove("active"); });
+          button.classList.add("active");
+          document.getElementById(button.getAttribute("data-tab") + "Section").classList.add("active");
         });
       });
+
       document.getElementById("refreshSubmissionsButton").addEventListener("click", loadSubmissions);
       document.getElementById("refreshJourneysButton").addEventListener("click", loadJourneys);
-      document.getElementById("applyJourneyFilterButton").addEventListener("click", function () { state.filters.search = (els.search.value || "").trim(); state.filters.startDate = els.startDate.value || ""; state.filters.endDate = els.endDate.value || ""; loadJourneys(); });
-      document.getElementById("exportJourneysButton").addEventListener("click", exportCsv);
-      document.getElementById("openWebsiteButton").addEventListener("click", function () { window.open(SITE_URL, "_blank"); });
-      document.getElementById("closeJourneyModalButton").addEventListener("click", function () { els.modal.classList.remove("open"); });
-      els.modal.addEventListener("click", function (e) { if (e.target === els.modal) { els.modal.classList.remove("open"); } });
-      els.journeysBody.addEventListener("click", function (e) {
-        var btn = e.target.closest("[data-open]"); if (!btn) { return; }
-        req("/api/admin/journey?id=" + encodeURIComponent(btn.getAttribute("data-open"))).then(function (res) { renderDetail(res.detail); }).catch(function (err) { els.journeyHint.className = "hint error"; els.journeyHint.textContent = err.message || "无法打开访客详情。"; });
+      document.getElementById("applyJourneyFilterButton").addEventListener("click", function () {
+        state.filters.search = (els.search.value || "").trim();
+        state.filters.startDate = els.startDate.value || "";
+        state.filters.endDate = els.endDate.value || "";
+        loadJourneys();
       });
-      loadSubmissions(); loadJourneys();
+      document.getElementById("exportJourneysButton").addEventListener("click", exportCsv);
+      document.getElementById("openWebsiteButton").addEventListener("click", function () {
+        window.open(SITE_URL, "_blank");
+      });
+      document.getElementById("closeJourneyModalButton").addEventListener("click", function () {
+        els.modal.classList.remove("open");
+      });
+      els.modal.addEventListener("click", function (event) {
+        if (event.target === els.modal) {
+          els.modal.classList.remove("open");
+        }
+      });
+      els.journeysBody.addEventListener("click", function (event) {
+        var trigger = event.target.closest("[data-open]");
+        if (!trigger) return;
+        event.preventDefault();
+        openJourneyDetail(trigger.getAttribute("data-open"));
+      });
+
+      loadSubmissions();
+      loadJourneys();
     }());
   </script>
 </body>
