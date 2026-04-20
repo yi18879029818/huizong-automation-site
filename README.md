@@ -47,8 +47,13 @@ If you prefer a standalone local viewer instead of the hosted `/admin/` page, op
 
 - `admin.html`
 
-This standalone file can now be double-clicked directly and does not require a login form.
-It reads from the deployed public admin export endpoint.
+This standalone file can now be double-clicked directly and does not require a visible login form.
+It now includes:
+
+- form submission records
+- visitor journey tracking
+- per-journey detail view
+- CSV export for visitor journeys
 
 Features in the first version:
 
@@ -62,6 +67,8 @@ The admin APIs are:
 
 - `GET /api/admin/stats`
 - `GET /api/admin/submissions?limit=30`
+- `GET /api/admin/journeys`
+- `GET /api/admin/journey?id=<session_id>`
 
 Both endpoints require HTTP Basic authentication using the configured admin credentials.
 
@@ -70,6 +77,29 @@ The admin APIs now return CORS headers so a local HTML file can read:
 - `GET /api/admin/stats`
 - `GET /api/admin/submissions?limit=30`
 - `GET /api/public-admin/submissions?limit=1000`
+
+## Visitor journey tracking
+
+The website now records visitor journey data to D1 through these runtime endpoints:
+
+- `POST /api/track/visit`
+- `POST /api/track/pageview-complete`
+- `POST /api/track/conversion`
+
+Tracked information includes:
+
+- visitor/session identifiers
+- landing page
+- source and medium
+- country and IP from Cloudflare headers
+- device type
+- pageviews
+- page duration
+- conversion clicks such as `WeChat`, `WhatsApp`, `电话`, `邮箱`, and `表单`
+
+Visitor journey schema reference:
+
+- `database/visitor_tracking.sql`
 
 ## D1 setup
 
@@ -122,9 +152,9 @@ If you only open `public/index.html` directly in the browser, the `/api/contact`
 
 For the standalone admin viewer:
 
-1. Deploy the latest repo so the public admin export endpoint is live.
+1. Deploy the latest repo so the admin APIs and visitor tracking APIs are live.
 2. Open `admin.html` directly in your browser.
-3. The page will automatically read from `https://huizong-automation-site.pages.dev`.
+3. The page will automatically read from `https://huizong-automation-site.pages.dev` using the credentials embedded in the file.
 4. Click `Refresh` whenever you want the newest data.
 
 ## Cloudflare Pages deployment
@@ -147,6 +177,7 @@ Note:
 
 - `GET /api/public-admin/submissions` is intentionally open so the standalone `admin.html` can work without login.
 - That means anyone who knows this endpoint can read the exported submission list.
+- Visitor journey tracking only starts collecting data after the tracking-enabled code is deployed. Old sessions cannot be backfilled automatically.
 
 ## Vercel notes
 

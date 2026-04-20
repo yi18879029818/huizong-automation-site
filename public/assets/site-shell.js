@@ -27,6 +27,191 @@
     }, 2600);
   }
 
+  var trackingState = {
+    initialized: false,
+    visitorId: "",
+    sessionId: "",
+    pageviewId: "",
+    pageStartedAt: 0,
+    finalized: false
+  };
+
+  function randomId() {
+    var bytes = new Uint8Array(12);
+    var i;
+
+    if (window.crypto && window.crypto.getRandomValues) {
+      window.crypto.getRandomValues(bytes);
+    } else {
+      for (i = 0; i < bytes.length; i += 1) {
+        bytes[i] = Math.floor(Math.random() * 256);
+      }
+    }
+
+    return Array.prototype.map.call(bytes, function (byte) {
+      return byte.toString(16).padStart(2, "0");
+    }).join("");
+  }
+
+  function safeStorageGet(storage, key) {
+    try {
+      return storage.getItem(key) || "";
+    } catch (error) {
+      return "";
+    }
+  }
+
+  function safeStorageSet(storage, key, value) {
+    try {
+      storage.setItem(key, value);
+    } catch (error) {
+      return;
+    }
+  }
+
+  function getTrackingIds() {
+    var visitorId = safeStorageGet(window.localStorage, "hsa-visitor-id");
+    var sessionId = safeStorageGet(window.sessionStorage, "hsa-session-id");
+
+    if (!visitorId) {
+      visitorId = randomId();
+      safeStorageSet(window.localStorage, "hsa-visitor-id", visitorId);
+    }
+
+    if (!sessionId) {
+      sessionId = randomId();
+      safeStorageSet(window.sessionStorage, "hsa-session-id", sessionId);
+    }
+
+    return {
+      visitorId: visitorId,
+      sessionId: sessionId
+    };
+  }
+
+  function getTrackingPageMeta() {
+    return {
+      pageTitle: document.title || "",
+      pagePath: window.location.pathname || "/",
+      pageUrl: window.location.href || "",
+      referrer: document.referrer || "",
+      utmSource: new URL(window.location.href).searchParams.get("utm_source") || "",
+      utmMedium: new URL(window.location.href).searchParams.get("utm_medium") || ""
+    };
+  }
+
+  function postJson(url, payload, keepalive) {
+    return fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload || {}),
+      keepalive: Boolean(keepalive)
+    }).then(function (response) {
+      return response.json().catch(function () {
+        return {};
+      }).then(function (result) {
+        if (!response.ok || !result.ok) {
+          throw new Error(result.details || result.error || "Tracking request failed.");
+        }
+        return result;
+      });
+    });
+  }
+
+  function trackConversion(label, metadata) {
+    if (!trackingState.visitorId || !trackingState.sessionId) {
+      return;
+    }
+
+    postJson("/api/track/conversion", {
+      visitorId: trackingState.visitorId,
+      sessionId: trackingState.sessionId,
+      label: label,
+      pageTitle: document.title || "",
+      pagePath: window.location.pathname || "/",
+      pageUrl: window.location.href || "",
+      createdAt: new Date().toISOString(),
+      metadata: metadata || {}
+    }, true).catch(function () {});
+  }
+
+  function finalizeTrackedPageview() {
+    var durationSeconds;
+    var payload;
+    var body;
+
+    if (trackingState.finalized || !trackingState.pageviewId) {
+      return;
+    }
+
+    trackingState.finalized = true;
+    durationSeconds = Math.max(
+      1,
+      Math.round((Date.now() - trackingState.pageStartedAt) / 1000)
+    );
+    payload = {
+      visitorId: trackingState.visitorId,
+      sessionId: trackingState.sessionId,
+      pageviewId: trackingState.pageviewId,
+      endedAt: new Date().toISOString(),
+      durationSeconds: durationSeconds
+    };
+    body = JSON.stringify(payload);
+
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon(
+        "/api/track/pageview-complete",
+        new Blob([body], { type: "application/json" })
+      );
+      return;
+    }
+
+    fetch("/api/track/pageview-complete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: body,
+      keepalive: true
+    }).catch(function () {});
+  }
+
+  function initVisitorTracking() {
+    var ids;
+    var payload;
+
+    if (trackingState.initialized) {
+      return;
+    }
+
+    trackingState.initialized = true;
+    ids = getTrackingIds();
+    trackingState.visitorId = ids.visitorId;
+    trackingState.sessionId = ids.sessionId;
+    trackingState.pageStartedAt = Date.now();
+    payload = getTrackingPageMeta();
+    payload.visitorId = trackingState.visitorId;
+    payload.sessionId = trackingState.sessionId;
+    payload.startedAt = new Date(trackingState.pageStartedAt).toISOString();
+    payload.userAgent = navigator.userAgent || "";
+
+    postJson("/api/track/visit", payload)
+      .then(function (result) {
+        trackingState.pageviewId = result && result.visit ? result.visit.pageviewId : "";
+      })
+      .catch(function () {});
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.visibilityState === "hidden") {
+        finalizeTrackedPageview();
+      }
+    });
+
+    window.addEventListener("pagehide", finalizeTrackedPageview);
+  }
+
   function trimValue(value) {
     return (typeof value === "string" ? value : "").replace(/\s+/g, " ").trim();
   }
@@ -288,6 +473,11 @@
             }
 
             form.reset();
+            trackConversion("表单", {
+              formType: payload.formType,
+              formLabel: payload.formLabel,
+              submissionId: result.id || ""
+            });
             setFormStatus(
               form,
               form.dataset.successMessage || "Thanks, your form has been sent successfully.",
@@ -491,6 +681,39 @@
     document.querySelectorAll("form").forEach(function (form) {
       if (form.classList.contains("hsa-expert-modal__form") || form.hasAttribute("data-hsa-form")) {
         bindManagedForm(form);
+      }
+    });
+  }
+
+  function bindJourneyConversions() {
+    document.addEventListener("click", function (ev) {
+      var link = ev.target.closest("a[href], button[data-hsa-open-sales-modal]");
+      var href = "";
+      var label = "";
+
+      if (!link) {
+        return;
+      }
+
+      if (link.hasAttribute("data-hsa-open-sales-modal")) {
+        label = "WeChat";
+      } else {
+        href = link.getAttribute("href") || "";
+
+        if (href.indexOf("https://wa.me/") === 0) {
+          label = "WhatsApp";
+        } else if (href.indexOf("mailto:") === 0) {
+          label = "邮箱";
+        } else if (href.indexOf("tel:") === 0) {
+          label = "电话";
+        }
+      }
+
+      if (label) {
+        trackConversion(label, {
+          href: href || "",
+          text: trimValue(link.textContent || "")
+        });
       }
     });
   }
@@ -793,12 +1016,14 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
+    initVisitorTracking();
     enhanceFooters();
     bindExpertModal();
     bindSalesModal();
     bindDesktopMenus();
     bindMobile();
     bindForms();
+    bindJourneyConversions();
     bindTextTargets();
     bindOverviewCards();
   });
