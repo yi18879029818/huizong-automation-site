@@ -806,6 +806,31 @@ body[data-page-key="home"] .page-content > section:first-child > .container.mx-a
   filter:brightness(1.03);
 }
 
+.hsa-expert-modal__submit:disabled{
+  cursor:progress;
+  opacity:.78;
+  filter:none;
+}
+
+.hsa-expert-modal__status{
+  min-height:1.4em;
+  margin:0;
+  font:700 .92rem/1.4 Inter,sans-serif;
+  color:#94a3b8;
+}
+
+.hsa-expert-modal__status.is-pending{
+  color:#cbd5e1;
+}
+
+.hsa-expert-modal__status.is-success{
+  color:#7ce7a7;
+}
+
+.hsa-expert-modal__status.is-error{
+  color:#ffb37a;
+}
+
 @media (max-width:760px){
   .hsa-expert-modal__panel{
     width:min(560px,calc(100vw - 20px));

@@ -27,6 +27,129 @@
     }, 2600);
   }
 
+  function trimValue(value) {
+    return (typeof value === 'string' ? value : '').replace(/\s+/g, ' ').trim();
+  }
+
+  function isValidEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  function setContactStatus(form, message, tone) {
+    var status = form ? form.querySelector('.hsa-expert-modal__status') : null;
+    if (!status) {
+      return;
+    }
+
+    status.textContent = message || '';
+    status.className = 'hsa-expert-modal__status' + (tone ? ' is-' + tone : '');
+  }
+
+  function getContactPayload(form) {
+    var data = new FormData(form);
+    return {
+      fullName: trimValue(data.get('fullName')),
+      company: trimValue(data.get('company')),
+      email: trimValue(data.get('email')),
+      phone: trimValue(data.get('phone')),
+      message: trimValue(data.get('message'))
+    };
+  }
+
+  function validateContactPayload(payload) {
+    var limits = {
+      fullName: 120,
+      company: 160,
+      email: 254,
+      phone: 40,
+      message: 4000
+    };
+    var key;
+
+    if (!payload.fullName || !payload.company || !payload.email || !payload.message) {
+      return '请完整填写姓名、公司、邮箱和需求描述。';
+    }
+
+    if (!isValidEmail(payload.email)) {
+      return '请输入有效的邮箱地址。';
+    }
+
+    for (key in limits) {
+      if (payload[key] && payload[key].length > limits[key]) {
+        return '输入内容过长，请精简后重试。';
+      }
+    }
+
+    return '';
+  }
+
+  function bindContactForm(form) {
+    if (!form || form.dataset.hsaContactBound) {
+      return;
+    }
+
+    form.dataset.hsaContactBound = '1';
+    form.setAttribute('novalidate', 'novalidate');
+
+    form.addEventListener('submit', function (ev) {
+      var submitButton = form.querySelector('.hsa-expert-modal__submit');
+      var payload;
+      var validationMessage;
+
+      ev.preventDefault();
+      payload = getContactPayload(form);
+      validationMessage = validateContactPayload(payload);
+
+      if (validationMessage) {
+        setContactStatus(form, validationMessage, 'error');
+        return;
+      }
+
+      setContactStatus(form, '发送中...', 'pending');
+
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.dataset.originalLabel = submitButton.textContent;
+        submitButton.textContent = 'Sending...';
+      }
+
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+        .then(function (response) {
+          return response.json().catch(function () {
+            return {};
+          }).then(function (result) {
+            if (!response.ok || !result.ok) {
+              throw new Error(result.error || '发送失败，请稍后重试');
+            }
+
+            form.reset();
+            setContactStatus(form, '发送成功', 'success');
+            showToast('发送成功');
+            window.setTimeout(function () {
+              setExpertModal(false);
+              setContactStatus(form, '', '');
+            }, 1200);
+          });
+        })
+        .catch(function () {
+          setContactStatus(form, '发送失败，请稍后重试', 'error');
+          showToast('发送失败，请稍后重试');
+        })
+        .finally(function () {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = submitButton.dataset.originalLabel || 'Send Message';
+          }
+        });
+    });
+  }
+
   function ensureExpertModal() {
     var modal = document.querySelector('.hsa-expert-modal');
     if (modal) {
@@ -46,29 +169,30 @@
           '<h3 id="hsa-expert-modal-title">Get in Touch</h3>' +
           '<p>Our team will respond within 24 hours</p>' +
         '</div>' +
-        '<form class="hsa-expert-modal__form">' +
+        '<form class="hsa-expert-modal__form" novalidate>' +
           '<div class="hsa-expert-modal__grid">' +
             '<label class="hsa-expert-modal__field">' +
               '<span>Full Name <em>*</em></span>' +
-              '<input type="text" name="fullName" placeholder="John Smith" required />' +
+              '<input type="text" name="fullName" placeholder="John Smith" maxlength="120" required />' +
             '</label>' +
             '<label class="hsa-expert-modal__field">' +
               '<span>Company <em>*</em></span>' +
-              '<input type="text" name="company" placeholder="Acme Logistics" required />' +
+              '<input type="text" name="company" placeholder="Acme Logistics" maxlength="160" required />' +
             '</label>' +
           '</div>' +
           '<label class="hsa-expert-modal__field">' +
             '<span>Email <em>*</em></span>' +
-            '<input type="email" name="email" placeholder="john@company.com" required />' +
+            '<input type="email" name="email" placeholder="john@company.com" maxlength="254" required />' +
           '</label>' +
           '<label class="hsa-expert-modal__field">' +
             '<span>Phone / WhatsApp</span>' +
-            '<input type="text" name="phone" placeholder="+86 135 1081 6743" />' +
+            '<input type="text" name="phone" placeholder="+86 135 1081 6743" maxlength="40" />' +
           '</label>' +
           '<label class="hsa-expert-modal__field">' +
-            '<span>Message</span>' +
-            '<textarea name="message" rows="5" placeholder="Tell us about your warehouse automation needs..."></textarea>' +
+            '<span>Message <em>*</em></span>' +
+            '<textarea name="message" rows="5" maxlength="4000" placeholder="Tell us about your warehouse automation needs..." required></textarea>' +
           '</label>' +
+          '<p class="hsa-expert-modal__status" aria-live="polite"></p>' +
           '<button class="hsa-expert-modal__submit" type="submit">Send Message</button>' +
         '</form>' +
       '</div>';
@@ -86,6 +210,7 @@
       modal.classList.add('is-open');
       modal.setAttribute('aria-hidden', 'false');
       document.body.classList.add('hsa-modal-open');
+      setContactStatus(modal.querySelector('.hsa-expert-modal__form'), '', '');
       window.setTimeout(function () {
         if (firstInput) {
           firstInput.focus();
@@ -131,6 +256,11 @@
 
   function bindForms() {
     document.querySelectorAll('form').forEach(function (form) {
+      if (form.classList.contains('hsa-expert-modal__form')) {
+        bindContactForm(form);
+        return;
+      }
+
       form.addEventListener('submit', function (ev) {
         ev.preventDefault();
         showToast('Local preview mode: form interaction works, but data is not submitted to a server.');

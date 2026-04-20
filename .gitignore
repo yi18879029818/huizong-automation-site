@@ -4,3 +4,6 @@
 *.max
 *.mb
 *.ma
+.env
+.dev.vars
+.wrangler
