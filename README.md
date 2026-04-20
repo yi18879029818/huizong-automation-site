@@ -47,7 +47,7 @@ cp .dev.vars.example .dev.vars
 Required variables:
 
 - `RESEND_API_KEY` - your Resend API key
-- `CONTACT_TO_EMAIL` - destination inbox, currently `1790383898@qq.com`
+- `CONTACT_TO_EMAIL` - destination inbox, currently `kingman.chang@gmail.com`
 - `CONTACT_FROM_EMAIL` - a verified sender on your Resend account, for example `website@your-domain.com`
 
 For hosted environments, set the same values in Cloudflare Pages project variables or Vercel environment variables.
