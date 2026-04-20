@@ -764,9 +764,27 @@
         '<div class="hsa-social">' +
           "<h4>Follow Us</h4>" +
           '<div class="hsa-social-links">' +
-            '<a class="hsa-social-link" href="https://www.facebook.com/people/Robotlyne/61585733840584/" aria-label="Facebook" target="_blank" rel="noreferrer">FB</a>' +
-            '<a class="hsa-social-link" href="https://www.linkedin.com/company/huizongzhineng/" aria-label="LinkedIn" target="_blank" rel="noreferrer">IN</a>' +
-            '<a class="hsa-social-link" href="https://www.youtube.com/@Robotlyne" aria-label="YouTube" target="_blank" rel="noreferrer">YT</a>' +
+            '<a class="hsa-social-link" href="https://www.facebook.com/people/Robotlyne/61585733840584/" aria-label="Facebook" target="_blank" rel="noreferrer">' +
+              '<span class="hsa-social-icon" aria-hidden="true">' +
+                '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' +
+                  '<path d="M13.37 20.5v-7.53h2.54l.38-2.94h-2.92V8.15c0-.85.23-1.43 1.45-1.43H16V4.09c-.56-.06-1.12-.09-1.68-.09-2.5 0-4.2 1.53-4.2 4.33v1.7H7.5v2.94h2.62v7.53h3.25Z" fill="currentColor"/>' +
+                "</svg>" +
+              "</span>" +
+            "</a>" +
+            '<a class="hsa-social-link" href="https://www.linkedin.com/company/huizongzhineng/" aria-label="LinkedIn" target="_blank" rel="noreferrer">' +
+              '<span class="hsa-social-icon" aria-hidden="true">' +
+                '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' +
+                  '<path d="M6.43 8.56a1.86 1.86 0 1 1 0-3.72 1.86 1.86 0 0 1 0 3.72Zm-1.6 11.1h3.19V9.83H4.83v9.83ZM10.4 9.83h3.06v1.34h.04c.43-.8 1.47-1.65 3.02-1.65 3.23 0 3.82 2.13 3.82 4.9v5.24h-3.18V15c0-1.1-.02-2.53-1.54-2.53-1.54 0-1.78 1.2-1.78 2.44v4.75H10.4V9.83Z" fill="currentColor"/>' +
+                "</svg>" +
+              "</span>" +
+            "</a>" +
+            '<a class="hsa-social-link" href="https://www.youtube.com/@Robotlyne" aria-label="YouTube" target="_blank" rel="noreferrer">' +
+              '<span class="hsa-social-icon" aria-hidden="true">' +
+                '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' +
+                  '<path d="M19.62 7.24a2.48 2.48 0 0 0-1.74-1.75C16.34 5 12 5 12 5s-4.34 0-5.88.49A2.48 2.48 0 0 0 4.38 7.24 25.7 25.7 0 0 0 4 12a25.7 25.7 0 0 0 .38 4.76 2.48 2.48 0 0 0 1.74 1.75C7.66 19 12 19 12 19s4.34 0 5.88-.49a2.48 2.48 0 0 0 1.74-1.75A25.7 25.7 0 0 0 20 12a25.7 25.7 0 0 0-.38-4.76ZM10.5 15.5v-7l6 3.5-6 3.5Z" fill="currentColor"/>' +
+                "</svg>" +
+              "</span>' +
+            "</a>" +
           "</div>" +
         "</div>";
 
