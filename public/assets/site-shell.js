@@ -695,9 +695,9 @@
         '<div class="hsa-social">' +
           "<h4>Follow Us</h4>" +
           '<div class="hsa-social-links">' +
-            '<a class="hsa-social-link" href="#" aria-label="Facebook">FB</a>' +
-            '<a class="hsa-social-link" href="#" aria-label="LinkedIn">IN</a>' +
-            '<a class="hsa-social-link" href="#" aria-label="YouTube">YT</a>' +
+            '<a class="hsa-social-link" href="https://www.facebook.com/people/Robotlyne/61585733840584/" aria-label="Facebook" target="_blank" rel="noreferrer">FB</a>' +
+            '<a class="hsa-social-link" href="https://www.linkedin.com/company/huizongzhineng/" aria-label="LinkedIn" target="_blank" rel="noreferrer">IN</a>' +
+            '<a class="hsa-social-link" href="https://www.youtube.com/@Robotlyne" aria-label="YouTube" target="_blank" rel="noreferrer">YT</a>' +
           "</div>" +
         "</div>";
 
