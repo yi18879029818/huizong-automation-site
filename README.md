@@ -8,6 +8,8 @@ This repository contains the Cloudflare Pages publish build for the Huizong Inte
 - Shared site behavior in `public/assets/site-shell.js`
 - Cloudflare Pages Functions backend under `functions/`
 - Email delivery through the Resend HTTP API
+- Submission storage through Cloudflare D1
+- Admin dashboard at `/admin/`
 
 ## Contact form implementation
 
@@ -35,6 +37,36 @@ Backend behavior:
 - Rejects missing required fields
 - Rejects overlong input
 - Sends mail through Resend to the configured inbox
+- Stores successful submissions in D1 when the `FORM_DB` binding is configured
+
+## Admin dashboard
+
+The repository now includes a lightweight admin panel at `/admin/`.
+
+Features in the first version:
+
+- Admin login with `ADMIN_USERNAME` and `ADMIN_PASSWORD`
+- Overview cards for total submissions, today, last 7 days, and this month
+- Breakdown by form type
+- Recent 14-day submission trend
+- Latest submission list with submitted field values
+
+The admin APIs are:
+
+- `GET /api/admin/stats`
+- `GET /api/admin/submissions?limit=30`
+
+Both endpoints require HTTP Basic authentication using the configured admin credentials.
+
+## D1 setup
+
+Create a Cloudflare D1 database and bind it to this Pages project as `FORM_DB`.
+
+Suggested schema file:
+
+- `database/form_submissions.sql`
+
+You can also let the Functions create the table automatically on first use, but keeping the SQL file in the repo makes the storage model explicit.
 
 ## Environment variables
 
@@ -49,6 +81,12 @@ Required variables:
 - `RESEND_API_KEY` - your Resend API key
 - `CONTACT_TO_EMAIL` - destination inbox, currently `kingman.chang@gmail.com`
 - `CONTACT_FROM_EMAIL` - a verified sender on your Resend account, for example `website@your-domain.com`
+- `ADMIN_USERNAME` - admin login username for `/admin/`
+- `ADMIN_PASSWORD` - admin login password for `/admin/`
+
+Required binding:
+
+- `FORM_DB` - Cloudflare D1 binding used to persist successful form submissions
 
 For hosted environments, set the same values in Cloudflare Pages project variables or Vercel environment variables.
 
@@ -78,6 +116,12 @@ This project is intended to deploy from GitHub to Cloudflare Pages.
 - Root directory: leave empty
 
 The `functions/` directory is detected automatically by Cloudflare Pages.
+
+Additional production setup:
+
+1. Add the `FORM_DB` D1 binding in Pages settings.
+2. Add `ADMIN_USERNAME` and `ADMIN_PASSWORD` in Pages variables/secrets.
+3. Redeploy the site after changing bindings or environment variables.
 
 ## Vercel notes
 

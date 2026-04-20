@@ -1,3 +1,5 @@
+import { storeSubmission } from "../_lib/form-store.js";
+
 const MAX_FIELDS = 24;
 const FIELD_NAME_LIMIT = 80;
 const FIELD_LABEL_LIMIT = 120;
@@ -277,6 +279,12 @@ export async function onRequestPost(context) {
   if (!response.ok) {
     console.error("Resend send failed", result);
     return json({ ok: false, error: "Email delivery failed." }, 502);
+  }
+
+  try {
+    await storeSubmission(context.env.FORM_DB, payload, result.id || "");
+  } catch (error) {
+    console.error("Submission storage failed", error);
   }
 
   return json({ ok: true, id: result.id || null });
