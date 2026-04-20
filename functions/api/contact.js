@@ -230,12 +230,15 @@ export async function onRequestPost(context) {
   const resendApiKey = context.env.RESEND_API_KEY;
   const toEmail = context.env.CONTACT_TO_EMAIL;
   const fromEmail = context.env.CONTACT_FROM_EMAIL;
+  const formDb = context.env.FORM_DB;
   let body;
   let payload;
   let validationError;
   let response;
   let result;
   let replyTo;
+  let stored = false;
+  let storageWarning = "";
 
   if (!resendApiKey || !toEmail || !fromEmail) {
     return json({ ok: false, error: "Email service is not configured." }, 500);
@@ -282,10 +285,25 @@ export async function onRequestPost(context) {
   }
 
   try {
-    await storeSubmission(context.env.FORM_DB, payload, result.id || "");
+    stored = await storeSubmission(formDb, payload, result.id || "");
+
+    if (!stored) {
+      storageWarning = "FORM_DB binding is unavailable, so this submission was emailed but not stored.";
+      console.error("Submission storage skipped", {
+        hasFormDb: Boolean(formDb),
+        formType: payload.formType,
+        pageTitle: payload.pageTitle
+      });
+    }
   } catch (error) {
     console.error("Submission storage failed", error);
+    storageWarning = error && error.message ? error.message : String(error);
   }
 
-  return json({ ok: true, id: result.id || null });
+  return json({
+    ok: true,
+    id: result.id || null,
+    stored,
+    storageWarning: storageWarning || null
+  });
 }
