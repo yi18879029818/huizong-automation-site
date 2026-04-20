@@ -792,10 +792,10 @@
 
         loadDashboard().then(function () {
           setFeedback("Admin session started.", "success");
-        }).catch(function () {
+        }).catch(function (error) {
           setStoredToken("");
           showLogin();
-          setFeedback("Unable to open the dashboard. Check your credentials.", "error");
+          setFeedback(error && error.message ? error.message : "Unable to open the dashboard.", "error");
         });
       });
 

@@ -23,6 +23,13 @@ export async function onRequestGet(context) {
     return json({ ok: true, stats });
   } catch (error) {
     console.error("Admin stats query failed", error);
-    return json({ ok: false, error: "Unable to load stats." }, 500);
+    return json(
+      {
+        ok: false,
+        error: "Unable to load stats.",
+        details: error && error.message ? error.message : String(error)
+      },
+      500
+    );
   }
 }

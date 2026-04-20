@@ -25,6 +25,13 @@ export async function onRequestGet(context) {
     return json({ ok: true, submissions });
   } catch (error) {
     console.error("Admin submissions query failed", error);
-    return json({ ok: false, error: "Unable to load submissions." }, 500);
+    return json(
+      {
+        ok: false,
+        error: "Unable to load submissions.",
+        details: error && error.message ? error.message : String(error)
+      },
+      500
+    );
   }
 }
