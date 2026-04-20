@@ -727,9 +727,6 @@
           '<a class="hsa-footer-contact-link" href="tel:8613510816743" aria-label="Phone">' +
             '<span class="material-symbols-outlined">call</span>' +
           "</a>" +
-          '<a class="hsa-footer-contact-link" href="' + route("contact") + '" aria-label="Consultation">' +
-            '<span class="material-symbols-outlined">forum</span>' +
-          "</a>" +
           '<button class="hsa-footer-contact-link hsa-footer-contact-trigger" type="button" aria-label="Sales QR" data-hsa-open-sales-modal>' +
             '<span class="material-symbols-outlined">support_agent</span>' +
           "</button>";
