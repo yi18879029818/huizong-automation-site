@@ -409,7 +409,7 @@ body[data-page-key="home"] .page-content > section:first-child > .container.mx-a
   display:grid;
   place-items:center;
   color:#ff8d3a;
-  background:#fff;
+  background:transparent;
 }
 
 .hsa-social-link:hover{
