@@ -575,7 +575,7 @@
             return {};
           }).then(function (result) {
             if (!response.ok || !result.ok) {
-              throw new Error(result.error || "Unable to load admin data.");
+              throw new Error(result.details || result.error || "Unable to load admin data.");
             }
             return result;
           });

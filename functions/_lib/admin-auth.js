@@ -10,6 +10,18 @@ function json(body, status = 200, extraHeaders) {
   });
 }
 
+function buildCorsHeaders() {
+  return {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, OPTIONS",
+    "Access-Control-Allow-Headers": "authorization, content-type"
+  };
+}
+
+function mergeHeaders(extraHeaders) {
+  return Object.assign({}, buildCorsHeaders(), extraHeaders || {});
+}
+
 function parseBasicAuth(header) {
   if (!header || !header.startsWith("Basic ")) {
     return null;
@@ -46,7 +58,8 @@ export function requireAdminAuth(request, env) {
           ok: false,
           error: "Admin credentials are not configured."
         },
-        500
+        500,
+        mergeHeaders()
       )
     };
   }
@@ -60,9 +73,9 @@ export function requireAdminAuth(request, env) {
           error: "Unauthorized."
         },
         401,
-        {
+        mergeHeaders({
           "WWW-Authenticate": 'Basic realm="Huizong Admin"'
-        }
+        })
       )
     };
   }
@@ -70,6 +83,17 @@ export function requireAdminAuth(request, env) {
   return {
     ok: true
   };
+}
+
+export function createAdminOptionsResponse() {
+  return new Response(null, {
+    status: 204,
+    headers: mergeHeaders()
+  });
+}
+
+export function adminCorsHeaders(extraHeaders) {
+  return mergeHeaders(extraHeaders);
 }
 
 export { json };

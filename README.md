@@ -43,6 +43,10 @@ Backend behavior:
 
 The repository now includes a lightweight admin panel at `/admin/`.
 
+If you prefer a standalone local viewer instead of the hosted `/admin/` page, open:
+
+- `local-admin.html`
+
 Features in the first version:
 
 - Admin login with `ADMIN_USERNAME` and `ADMIN_PASSWORD`
@@ -57,6 +61,11 @@ The admin APIs are:
 - `GET /api/admin/submissions?limit=30`
 
 Both endpoints require HTTP Basic authentication using the configured admin credentials.
+
+The admin APIs now return CORS headers so a local HTML file can read:
+
+- `GET /api/admin/stats`
+- `GET /api/admin/submissions?limit=30`
 
 ## D1 setup
 
@@ -107,6 +116,13 @@ npx wrangler pages dev public
 
 If you only open `public/index.html` directly in the browser, the `/api/contact` endpoint will not exist.
 
+For the standalone admin viewer:
+
+1. Deploy the latest repo so the admin APIs include the new CORS headers.
+2. Open `local-admin.html` directly in your browser.
+3. Enter your site URL, `ADMIN_USERNAME`, and `ADMIN_PASSWORD`.
+4. Click `Connect Dashboard`.
+
 ## Cloudflare Pages deployment
 
 This project is intended to deploy from GitHub to Cloudflare Pages.
@@ -121,7 +137,7 @@ Additional production setup:
 
 1. Add the `FORM_DB` D1 binding in Pages settings.
 2. Add `ADMIN_USERNAME` and `ADMIN_PASSWORD` in Pages variables/secrets.
-3. Redeploy the site after changing bindings or environment variables.
+3. Redeploy the site after changing bindings, environment variables, or admin API code.
 
 ## Vercel notes
 
