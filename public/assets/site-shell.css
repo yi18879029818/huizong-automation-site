@@ -259,6 +259,25 @@ body[data-page-key="home"] .page-content > section:first-child > .container.mx-a
   box-shadow:0 18px 44px rgba(0,0,0,.14);
 }
 
+.hsa-form-status{
+  min-height:1.4em;
+  margin:12px 0 0;
+  color:#607089;
+  font:700 .9rem/1.4 Inter,sans-serif;
+}
+
+.hsa-form-status.is-pending{
+  color:#41516c;
+}
+
+.hsa-form-status.is-success{
+  color:#18865b;
+}
+
+.hsa-form-status.is-error{
+  color:#c2410c;
+}
+
 .hsa-news-label{
   color:#dbe4f0;
   font:700 .78rem/1 Inter,sans-serif;
@@ -338,6 +357,28 @@ body[data-page-key="home"] .page-content > section:first-child > .container.mx-a
   font:800 .95rem/1 Inter,sans-serif;
   cursor:pointer;
   box-shadow:0 18px 30px rgba(254,107,0,.24);
+}
+
+.hsa-news-submit:disabled{
+  cursor:progress;
+  opacity:.78;
+}
+
+.hsa-news-form + .hsa-form-status{
+  margin-top:2px;
+  color:#dbe4f0;
+}
+
+.hsa-news-form + .hsa-form-status.is-pending{
+  color:#dbe4f0;
+}
+
+.hsa-news-form + .hsa-form-status.is-success{
+  color:#7ce7a7;
+}
+
+.hsa-news-form + .hsa-form-status.is-error{
+  color:#ffb37a;
 }
 
 .hsa-social{

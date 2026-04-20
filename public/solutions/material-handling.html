@@ -326,18 +326,18 @@
 <h2 class="font-headline text-4xl font-bold text-primary mb-4 tracking-tight">Consult with an Automation Architect</h2>
 <p class="text-on-surface-variant">Let's engineer a solution specific to your facility's constraints and throughput requirements.</p>
 </div>
-<form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<form class="grid grid-cols-1 md:grid-cols-2 gap-6" data-hsa-form data-form-type="consultation" data-form-label="Material Handling Consultation Form" data-success-message="Thanks, your material handling inquiry has been emailed to our team.">
 <div class="space-y-1">
 <label class="text-xs font-bold uppercase tracking-widest text-outline">Full Name</label>
-<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-secondary text-primary transition-all px-0 py-3" placeholder="John Doe" type="text"/>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-secondary text-primary transition-all px-0 py-3" name="fullName" placeholder="John Doe" type="text" required/>
 </div>
 <div class="space-y-1">
 <label class="text-xs font-bold uppercase tracking-widest text-outline">Corporate Email</label>
-<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-secondary text-primary transition-all px-0 py-3" placeholder="john@enterprise.com" type="email"/>
+<input class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-secondary text-primary transition-all px-0 py-3" name="email" placeholder="john@enterprise.com" type="email" required/>
 </div>
 <div class="space-y-1">
 <label class="text-xs font-bold uppercase tracking-widest text-outline">Project Scale</label>
-<select class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-secondary text-primary transition-all px-0 py-3">
+<select class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-secondary text-primary transition-all px-0 py-3" name="projectScale" required>
 <option>Pilot Deployment</option>
 <option>Facility Upgrade</option>
 <option>Greenfield Warehouse</option>
@@ -346,7 +346,7 @@
 </div>
 <div class="space-y-1">
 <label class="text-xs font-bold uppercase tracking-widest text-outline">Primary Goal</label>
-<select class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-secondary text-primary transition-all px-0 py-3">
+<select class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-secondary text-primary transition-all px-0 py-3" name="primaryGoal" required>
 <option>Throughput Maximization</option>
 <option>Labor Shortage Mitigation</option>
 <option>Operational Cost Reduction</option>
@@ -355,7 +355,7 @@
 </div>
 <div class="md:col-span-2 space-y-1 mt-4">
 <label class="text-xs font-bold uppercase tracking-widest text-outline">Project Details</label>
-<textarea class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-secondary text-primary transition-all px-0 py-3 resize-none" placeholder="Briefly describe your current material handling challenges..." rows="4"></textarea>
+<textarea class="w-full bg-transparent border-0 border-b border-outline-variant focus:ring-0 focus:border-secondary text-primary transition-all px-0 py-3 resize-none" name="message" placeholder="Briefly describe your current material handling challenges..." rows="4" required></textarea>
 </div>
 <div class="md:col-span-2 mt-8">
 <button class="w-full bg-secondary text-white py-4 rounded font-bold uppercase tracking-widest hover:bg-secondary-container transition-all flex items-center justify-center gap-2" type="submit">

@@ -1,22 +1,32 @@
-const FIELD_LIMITS = {
-  fullName: 120,
-  company: 160,
-  email: 254,
-  phone: 40,
-  message: 4000
-};
+const MAX_FIELDS = 24;
+const FIELD_NAME_LIMIT = 80;
+const FIELD_LABEL_LIMIT = 120;
+const FIELD_VALUE_LIMIT = 4000;
+const META_VALUE_LIMIT = 240;
 
 function json(body, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
     headers: {
-      'content-type': 'application/json; charset=UTF-8'
+      "content-type": "application/json; charset=UTF-8"
     }
   });
 }
 
-function trimValue(value) {
-  return (typeof value === 'string' ? value : '').replace(/\s+/g, ' ').trim();
+function trimSingleLine(value, limit = META_VALUE_LIMIT) {
+  return (typeof value === "string" ? value : "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, limit);
+}
+
+function trimMultiLine(value, limit = FIELD_VALUE_LIMIT) {
+  return (typeof value === "string" ? value : "")
+    .replace(/\r\n?/g, "\n")
+    .replace(/[ \t]+\n/g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim()
+    .slice(0, limit);
 }
 
 function isValidEmail(value) {
@@ -25,73 +35,193 @@ function isValidEmail(value) {
 
 function escapeHtml(value) {
   return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
-function getPayload(raw) {
+function fallbackFields(raw) {
+  return [
+    {
+      name: "fullName",
+      label: "Full Name",
+      value: trimSingleLine(raw && raw.fullName),
+      required: true,
+      type: "text"
+    },
+    {
+      name: "company",
+      label: "Company",
+      value: trimSingleLine(raw && raw.company),
+      required: false,
+      type: "text"
+    },
+    {
+      name: "email",
+      label: "Email",
+      value: trimSingleLine(raw && raw.email, 254),
+      required: true,
+      type: "email"
+    },
+    {
+      name: "phone",
+      label: "Phone / WhatsApp",
+      value: trimSingleLine(raw && raw.phone, 80),
+      required: false,
+      type: "tel"
+    },
+    {
+      name: "message",
+      label: "Message",
+      value: trimMultiLine(raw && raw.message),
+      required: true,
+      type: "textarea"
+    }
+  ];
+}
+
+function normalizeField(field) {
+  const type = trimSingleLine(field && field.type, 40).toLowerCase() || "text";
+  const name = trimSingleLine(field && field.name, FIELD_NAME_LIMIT) || "field";
+  const label =
+    trimSingleLine(field && field.label, FIELD_LABEL_LIMIT) ||
+    name.replace(/[-_]+/g, " ");
+  const value = type === "textarea"
+    ? trimMultiLine(field && field.value)
+    : trimSingleLine(field && field.value, FIELD_VALUE_LIMIT);
+
   return {
-    fullName: trimValue(raw && raw.fullName),
-    company: trimValue(raw && raw.company),
-    email: trimValue(raw && raw.email),
-    phone: trimValue(raw && raw.phone),
-    message: trimValue(raw && raw.message)
+    name,
+    label,
+    value,
+    required: Boolean(field && field.required),
+    type
+  };
+}
+
+function parsePayload(raw) {
+  const fields = Array.isArray(raw && raw.fields)
+    ? raw.fields.map(normalizeField)
+    : fallbackFields(raw);
+
+  return {
+    formType: trimSingleLine(raw && raw.formType, 60) || "general",
+    formLabel: trimSingleLine(raw && raw.formLabel, 120) || "Website Form",
+    pageTitle: trimSingleLine(raw && raw.pageTitle, 160) || "Unknown Page",
+    pageUrl: trimSingleLine(raw && raw.pageUrl, 400),
+    pagePath: trimSingleLine(raw && raw.pagePath, 240),
+    submittedAt: trimSingleLine(raw && raw.submittedAt, 80),
+    fields
   };
 }
 
 function validatePayload(payload) {
-  if (!payload.fullName || !payload.company || !payload.email || !payload.message) {
-    return 'Missing required fields.';
+  let emailField;
+
+  if (!payload.fields.length) {
+    return "This form does not contain any fields.";
   }
 
-  if (!isValidEmail(payload.email)) {
-    return 'Invalid email address.';
+  if (payload.fields.length > MAX_FIELDS) {
+    return "Too many fields were submitted.";
   }
 
-  for (const key of Object.keys(FIELD_LIMITS)) {
-    if (payload[key] && payload[key].length > FIELD_LIMITS[key]) {
-      return `${key} is too long.`;
+  for (const field of payload.fields) {
+    if (field.required && !field.value) {
+      return `Missing required field: ${field.label}.`;
+    }
+
+    if (field.value && field.value.length > FIELD_VALUE_LIMIT) {
+      return `${field.label} is too long.`;
     }
   }
 
-  return '';
+  emailField = payload.fields.find(
+    (field) => field.type === "email" || field.name.toLowerCase() === "email"
+  );
+
+  if (!emailField || !isValidEmail(emailField.value)) {
+    return "Invalid email address.";
+  }
+
+  return "";
+}
+
+function formatFieldRows(fields) {
+  return fields
+    .map((field) => {
+      return `
+        <tr>
+          <td style="padding:10px 12px;border:1px solid #e5e7eb;background:#f8fafc;font-weight:700;vertical-align:top;width:220px;">
+            ${escapeHtml(field.label)}
+          </td>
+          <td style="padding:10px 12px;border:1px solid #e5e7eb;white-space:pre-wrap;vertical-align:top;">
+            ${escapeHtml(field.value || "Not provided")}
+          </td>
+        </tr>
+      `.trim();
+    })
+    .join("");
+}
+
+function formatFieldText(fields) {
+  return fields
+    .map((field) => `${field.label}: ${field.value || "Not provided"}`)
+    .join("\n");
 }
 
 function getEmailHtml(payload) {
-  const phoneLine = payload.phone
-    ? `<p><strong>Phone / WhatsApp:</strong> ${escapeHtml(payload.phone)}</p>`
-    : '<p><strong>Phone / WhatsApp:</strong> Not provided</p>';
+  const meta = [
+    ["Form", payload.formLabel],
+    ["Page", payload.pageTitle],
+    ["URL", payload.pageUrl || payload.pagePath || "Not provided"],
+    ["Submitted At", payload.submittedAt || new Date().toISOString()]
+  ];
 
   return `
     <div style="font-family:Arial,Helvetica,sans-serif;color:#111827;line-height:1.6">
-      <h2 style="margin:0 0 16px;font-size:22px;">New website inquiry</h2>
-      <p><strong>Full name:</strong> ${escapeHtml(payload.fullName)}</p>
-      <p><strong>Company:</strong> ${escapeHtml(payload.company)}</p>
-      <p><strong>Email:</strong> ${escapeHtml(payload.email)}</p>
-      ${phoneLine}
-      <div style="margin-top:20px;padding:16px;border-radius:12px;background:#f3f4f6;">
-        <strong>Message</strong>
-        <p style="margin:12px 0 0;white-space:pre-wrap;">${escapeHtml(payload.message)}</p>
+      <h2 style="margin:0 0 18px;font-size:24px;">New website form submission</h2>
+      <div style="margin:0 0 20px;padding:16px;border-radius:14px;background:#f3f4f6;">
+        ${meta
+          .map(
+            ([label, value]) =>
+              `<p style="margin:0 0 8px;"><strong>${escapeHtml(label)}:</strong> ${escapeHtml(value)}</p>`
+          )
+          .join("")}
       </div>
+      <table style="width:100%;border-collapse:collapse;border-spacing:0;">
+        ${formatFieldRows(payload.fields)}
+      </table>
     </div>
   `.trim();
 }
 
 function getEmailText(payload) {
   return [
-    'New website inquiry',
-    '',
-    `Full name: ${payload.fullName}`,
-    `Company: ${payload.company}`,
-    `Email: ${payload.email}`,
-    `Phone / WhatsApp: ${payload.phone || 'Not provided'}`,
-    '',
-    'Message:',
-    payload.message
-  ].join('\n');
+    "New website form submission",
+    "",
+    `Form: ${payload.formLabel}`,
+    `Page: ${payload.pageTitle}`,
+    `URL: ${payload.pageUrl || payload.pagePath || "Not provided"}`,
+    `Submitted At: ${payload.submittedAt || new Date().toISOString()}`,
+    "",
+    formatFieldText(payload.fields)
+  ].join("\n");
+}
+
+function getEmailSubject(payload) {
+  const nameField = payload.fields.find((field) => field.name === "fullName");
+  const emailField = payload.fields.find(
+    (field) => field.type === "email" || field.name.toLowerCase() === "email"
+  );
+  const identity =
+    (nameField && nameField.value) ||
+    (emailField && emailField.value) ||
+    "New submission";
+
+  return `[Huizong Website] ${payload.formLabel} - ${identity}`;
 }
 
 export async function onRequestPost(context) {
@@ -103,35 +233,40 @@ export async function onRequestPost(context) {
   let validationError;
   let response;
   let result;
+  let replyTo;
 
   if (!resendApiKey || !toEmail || !fromEmail) {
-    return json({ ok: false, error: 'Email service is not configured.' }, 500);
+    return json({ ok: false, error: "Email service is not configured." }, 500);
   }
 
   try {
     body = await context.request.json();
   } catch (error) {
-    return json({ ok: false, error: 'Invalid request payload.' }, 400);
+    return json({ ok: false, error: "Invalid request payload." }, 400);
   }
 
-  payload = getPayload(body);
+  payload = parsePayload(body);
   validationError = validatePayload(payload);
 
   if (validationError) {
     return json({ ok: false, error: validationError }, 400);
   }
 
-  response = await fetch('https://api.resend.com/emails', {
-    method: 'POST',
+  replyTo = payload.fields.find(
+    (field) => field.type === "email" || field.name.toLowerCase() === "email"
+  );
+
+  response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
     headers: {
       Authorization: `Bearer ${resendApiKey}`,
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       from: fromEmail,
       to: [toEmail],
-      reply_to: payload.email,
-      subject: `[Huizong Website] ${payload.fullName} from ${payload.company}`,
+      reply_to: replyTo ? replyTo.value : undefined,
+      subject: getEmailSubject(payload),
       html: getEmailHtml(payload),
       text: getEmailText(payload)
     })
@@ -140,8 +275,8 @@ export async function onRequestPost(context) {
   result = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    console.error('Resend send failed', result);
-    return json({ ok: false, error: 'Email delivery failed.' }, 502);
+    console.error("Resend send failed", result);
+    return json({ ok: false, error: "Email delivery failed." }, 502);
   }
 
   return json({ ok: true, id: result.id || null });

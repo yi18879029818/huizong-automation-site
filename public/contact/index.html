@@ -195,28 +195,28 @@
 <h2 class="font-headline text-3xl font-black text-primary mb-3 uppercase tracking-tight">Project Briefing</h2>
 <p class="text-on-surface-variant font-medium max-w-lg">Submit your project parameters for a professional ROI assessment and preliminary engineering scope.</p>
 </div>
-<form class="space-y-8">
+<form class="space-y-8" data-hsa-form data-form-type="consultation" data-form-label="Contact Page Project Briefing" data-success-message="Thanks, your project briefing has been emailed to our team.">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 <div class="space-y-2">
 <label class="text-[10px] font-black uppercase tracking-[0.15em] text-outline">Full Name</label>
-<input class="w-full bg-surface-container-lowest border-2 border-outline-variant/40 focus:border-secondary focus:ring-0 transition-all py-3 px-4 font-bold placeholder:text-outline-variant/40 placeholder:font-normal" placeholder="ENTER NAME" type="text"/>
+<input class="w-full bg-surface-container-lowest border-2 border-outline-variant/40 focus:border-secondary focus:ring-0 transition-all py-3 px-4 font-bold placeholder:text-outline-variant/40 placeholder:font-normal" name="fullName" placeholder="ENTER NAME" type="text" required/>
 </div>
 <div class="space-y-2">
 <label class="text-[10px] font-black uppercase tracking-[0.15em] text-outline">Email Address</label>
-<input class="w-full bg-surface-container-lowest border-2 border-outline-variant/40 focus:border-secondary focus:ring-0 transition-all py-3 px-4 font-bold placeholder:text-outline-variant/40 placeholder:font-normal" placeholder="WORK@COMPANY.COM" type="email"/>
+<input class="w-full bg-surface-container-lowest border-2 border-outline-variant/40 focus:border-secondary focus:ring-0 transition-all py-3 px-4 font-bold placeholder:text-outline-variant/40 placeholder:font-normal" name="email" placeholder="WORK@COMPANY.COM" type="email" required/>
 </div>
 </div>
 <div class="space-y-2">
 <label class="text-[10px] font-black uppercase tracking-[0.15em] text-outline">Phone Contact</label>
-<input class="w-full bg-surface-container-lowest border-2 border-outline-variant/40 focus:border-secondary focus:ring-0 transition-all py-3 px-4 font-bold placeholder:text-outline-variant/40 placeholder:font-normal" placeholder="+1 (000) 000-0000" type="tel"/>
+<input class="w-full bg-surface-container-lowest border-2 border-outline-variant/40 focus:border-secondary focus:ring-0 transition-all py-3 px-4 font-bold placeholder:text-outline-variant/40 placeholder:font-normal" name="phone" placeholder="+1 (000) 000-0000" type="tel"/>
 </div>
 <div class="space-y-2">
 <label class="text-[10px] font-black uppercase tracking-[0.15em] text-outline">Scope Details</label>
-<textarea class="w-full bg-surface-container-lowest border-2 border-outline-variant/40 focus:border-secondary focus:ring-0 transition-all py-3 px-4 font-bold placeholder:text-outline-variant/40 placeholder:font-normal resize-none" placeholder="DESCRIBE YOUR AUTOMATION NEEDS..." rows="4"></textarea>
+<textarea class="w-full bg-surface-container-lowest border-2 border-outline-variant/40 focus:border-secondary focus:ring-0 transition-all py-3 px-4 font-bold placeholder:text-outline-variant/40 placeholder:font-normal resize-none" name="message" placeholder="DESCRIBE YOUR AUTOMATION NEEDS..." rows="4" required></textarea>
 </div>
 <div class="flex items-start gap-4 pt-4">
 <div class="flex items-center h-5">
-<input class="w-5 h-5 text-secondary border-outline-variant rounded-none focus:ring-secondary" type="checkbox"/>
+<input class="w-5 h-5 text-secondary border-outline-variant rounded-none focus:ring-secondary" name="marketingConsent" type="checkbox" value="Yes"/>
 </div>
 <div class="text-[11px] font-bold text-on-surface-variant leading-tight">
 <label class="uppercase tracking-wide">I agree to receive Kinetic Precision project insights and updates. Preferences can be managed at any time.</label>

@@ -356,25 +356,25 @@
 </ul>
 </div>
 <div class="lg:w-3/5 bg-white p-12 md:p-20 border-l border-outline-variant">
-<form class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
+<form class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12" data-hsa-form data-form-type="consultation" data-form-label="Homepage Consultation Form" data-success-message="Thanks, your consultation request has been emailed to our team.">
 <div class="relative group">
-<input class="peer w-full border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary transition-all py-4 px-0 text-secondary font-bold placeholder-transparent" id="name" placeholder="Name" type="text"/>
+<input class="peer w-full border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary transition-all py-4 px-0 text-secondary font-bold placeholder-transparent" id="name" name="fullName" placeholder="Name" type="text" required/>
 <label class="absolute left-0 -top-4 text-primary text-[10px] font-black uppercase tracking-widest transition-all peer-placeholder-shown:text-[12px] peer-placeholder-shown:text-outline peer-placeholder-shown:top-4 peer-focus:-top-4 peer-focus:text-primary peer-focus:text-[10px]" for="name">Full Name</label>
 </div>
 <div class="relative group">
-<input class="peer w-full border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary transition-all py-4 px-0 text-secondary font-bold placeholder-transparent" id="email" placeholder="Email" type="email"/>
+<input class="peer w-full border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary transition-all py-4 px-0 text-secondary font-bold placeholder-transparent" id="email" name="email" placeholder="Email" type="email" required/>
 <label class="absolute left-0 -top-4 text-primary text-[10px] font-black uppercase tracking-widest transition-all peer-placeholder-shown:text-[12px] peer-placeholder-shown:text-outline peer-placeholder-shown:top-4 peer-focus:-top-4 peer-focus:text-primary peer-focus:text-[10px]" for="email">Work Email</label>
 </div>
 <div class="relative group">
-<input class="peer w-full border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary transition-all py-4 px-0 text-secondary font-bold placeholder-transparent" id="phone" placeholder="Phone" type="tel"/>
+<input class="peer w-full border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary transition-all py-4 px-0 text-secondary font-bold placeholder-transparent" id="phone" name="phone" placeholder="Phone" type="tel"/>
 <label class="absolute left-0 -top-4 text-primary text-[10px] font-black uppercase tracking-widest transition-all peer-placeholder-shown:text-[12px] peer-placeholder-shown:text-outline peer-placeholder-shown:top-4 peer-focus:-top-4 peer-focus:text-primary peer-focus:text-[10px]" for="phone">Phone Number</label>
 </div>
 <div class="relative group">
-<input class="peer w-full border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary transition-all py-4 px-0 text-secondary font-bold placeholder-transparent" id="org" placeholder="Organization" type="text"/>
+<input class="peer w-full border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary transition-all py-4 px-0 text-secondary font-bold placeholder-transparent" id="org" name="company" placeholder="Organization" type="text" required/>
 <label class="absolute left-0 -top-4 text-primary text-[10px] font-black uppercase tracking-widest transition-all peer-placeholder-shown:text-[12px] peer-placeholder-shown:text-outline peer-placeholder-shown:top-4 peer-focus:-top-4 peer-focus:text-primary peer-focus:text-[10px]" for="org">Organization</label>
 </div>
 <div class="md:col-span-2 relative group">
-<textarea class="peer w-full border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary transition-all py-4 px-0 text-secondary font-bold placeholder-transparent min-h-[120px] resize-none" id="message" placeholder="Message"></textarea>
+<textarea class="peer w-full border-0 border-b-2 border-outline-variant focus:ring-0 focus:border-primary transition-all py-4 px-0 text-secondary font-bold placeholder-transparent min-h-[120px] resize-none" id="message" name="message" placeholder="Message" required></textarea>
 <label class="absolute left-0 -top-4 text-primary text-[10px] font-black uppercase tracking-widest transition-all peer-placeholder-shown:text-[12px] peer-placeholder-shown:text-outline peer-placeholder-shown:top-4 peer-focus:-top-4 peer-focus:text-primary peer-focus:text-[10px]" for="message">Project Requirements</label>
 </div>
 <div class="md:col-span-2">

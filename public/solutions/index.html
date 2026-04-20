@@ -381,27 +381,27 @@
 </div>
 </div>
 <div class="bg-white p-12 rounded-none shadow-2xl">
-<form class="space-y-8">
+<form class="space-y-8" data-hsa-form data-form-type="consultation" data-form-label="Solutions Page Consultation Form" data-success-message="Thanks, your consultation request has been emailed to our team.">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 <div class="relative">
 <label class="block text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-3">Full Name</label>
-<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 px-4 text-primary text-sm font-medium rounded-none" placeholder="John Doe" type="text"/>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 px-4 text-primary text-sm font-medium rounded-none" name="fullName" placeholder="John Doe" type="text" required/>
 </div>
 <div class="relative">
 <label class="block text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-3">Phone</label>
-<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 px-4 text-primary text-sm font-medium rounded-none" placeholder="+1 (555) 000-0000" type="tel"/>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 px-4 text-primary text-sm font-medium rounded-none" name="phone" placeholder="+1 (555) 000-0000" type="tel"/>
 </div>
 </div>
 <div>
 <label class="block text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-3">Business Email</label>
-<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 px-4 text-primary text-sm font-medium rounded-none" placeholder="john.doe@company.com" type="email"/>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 px-4 text-primary text-sm font-medium rounded-none" name="email" placeholder="john.doe@company.com" type="email" required/>
 </div>
 <div>
 <label class="block text-[10px] font-black text-primary uppercase tracking-[0.2em] mb-3">Project Brief</label>
-<textarea class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 px-4 text-primary text-sm font-medium rounded-none" placeholder="Describe your automation goals..." rows="4"></textarea>
+<textarea class="w-full bg-surface-container-low border-0 border-b-2 border-outline-variant focus:border-secondary focus:ring-0 transition-all py-3 px-4 text-primary text-sm font-medium rounded-none" name="message" placeholder="Describe your automation goals..." rows="4" required></textarea>
 </div>
 <div class="flex items-center gap-3">
-<input class="w-4 h-4 rounded-none border-outline-variant text-secondary focus:ring-secondary cursor-pointer" id="newsletter" type="checkbox"/>
+<input class="w-4 h-4 rounded-none border-outline-variant text-secondary focus:ring-secondary cursor-pointer" id="newsletter" name="newsletterConsent" type="checkbox" value="Yes"/>
 <label class="text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider cursor-pointer select-none" for="newsletter">Subscribe to monthly Logistics Insights</label>
 </div>
 <button class="w-full bg-secondary text-white py-5 rounded-none font-black text-sm uppercase tracking-[0.2em] hover:bg-secondary-container transition-all flex items-center justify-center gap-3" type="submit">
