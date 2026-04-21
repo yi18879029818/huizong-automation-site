@@ -100,7 +100,23 @@
       function normalizePath(path,allowAbsolute){var value=String(path||"").trim();if(!value)return"";if(allowAbsolute&&/^https?:\/\//i.test(value))return value;return value.charAt(0)==="/"?value:"/"+value.replace(/^\/+/,"")}
       function storageGet(key){try{return window.localStorage.getItem(key)}catch(e){return null}}function storageSet(key,val){try{window.localStorage.setItem(key,val)}catch(e){}}
       function loadRedirects(){var raw=storageGet(REDIRECT_STORAGE_KEY);if(!raw){state.redirects=DEFAULT_REDIRECTS.slice();storageSet(REDIRECT_STORAGE_KEY,JSON.stringify(state.redirects));return}try{var parsed=JSON.parse(raw);state.redirects=Array.isArray(parsed)&&parsed.length?parsed:DEFAULT_REDIRECTS.slice()}catch(e){state.redirects=DEFAULT_REDIRECTS.slice()}storageSet(REDIRECT_STORAGE_KEY,JSON.stringify(state.redirects))}
-      function redirectFileContent(){var lines=state.redirects.filter(function(x){return x.status==="enabled"}).map(function(x){return x.from+" "+x.to+" 301"});return lines.length?lines.join("\n"):"# 暂无启用的 301 重定向规则"}
+      function redirectSourceVariants(path){
+        var value=normalizePath(path,false);
+        if(!value||value==="/")return ["/"];
+        var clean=value.replace(/\/+$/,"");
+        if(!clean)clean="/";
+        return clean==="/" ? ["/"] : [clean, clean+"/"];
+      }
+      function redirectFileContent(){
+        var lines=[];
+        state.redirects.filter(function(x){return x.status==="enabled"}).forEach(function(x){
+          redirectSourceVariants(x.from).forEach(function(source){
+            lines.push(source+" "+x.to+" 301");
+          });
+        });
+        lines=lines.filter(function(line,index){return lines.indexOf(line)===index});
+        return lines.length?lines.join("\n"):"# 暂无启用的 301 重定向规则";
+      }
       function renderRedirects(){els.redirectHint.className="hint";els.redirectHint.textContent="这里维护 Cloudflare Pages 可用的 `_redirects` 规则，只导出已启用的 301 规则。";els.redirectsBody.innerHTML=!state.redirects.length?emptyRow("暂无重定向规则。",6):state.redirects.map(function(x){return'<tr><td><strong>'+esc(x.from)+'</strong></td><td><strong>'+esc(x.to)+'</strong><small>301 Permanent Redirect</small></td><td>'+esc(x.note||"—")+'</td><td>'+(x.status==="enabled"?tag("启用","t-green"):tag("停用","t-orange"))+'</td><td>'+esc(dt(x.createdAt))+'</td><td><div class="actions"><button class="btn" type="button" data-edit-redirect="'+esc(x.id)+'">编辑</button><button class="btn danger" type="button" data-delete-redirect="'+esc(x.id)+'">删除</button></div></td></tr>'}).join("");els.redirectPreview.textContent=redirectFileContent()}
       function resetRedirectForm(){state.redirectEditingId=null;els.redirectFormTitle.textContent="新增 301 重定向";els.redirectFromInput.value="";els.redirectToInput.value="";els.redirectStatusInput.value="enabled";els.redirectCodeInput.value="301";els.redirectNoteInput.value=""}
       function openRedirectForm(item){els.redirectFormPanel.style.display="block";if(!item){resetRedirectForm();return}state.redirectEditingId=item.id;els.redirectFormTitle.textContent="编辑 301 重定向";els.redirectFromInput.value=item.from||"";els.redirectToInput.value=item.to||"";els.redirectStatusInput.value=item.status||"enabled";els.redirectCodeInput.value="301";els.redirectNoteInput.value=item.note||""}
