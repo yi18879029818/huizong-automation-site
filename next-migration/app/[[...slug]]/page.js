@@ -1,5 +1,9 @@
 import { notFound } from "next/navigation";
+import { LegacyBodyAttributes } from "@/components/legacy-body-attributes";
+import { LegacyPageAssets } from "@/components/legacy-page-assets";
+import { StructuredData } from "@/components/structured-data";
 import { StructuredDetailPage, StructuredOverviewPage } from "@/components/structured-site";
+import { getLegacyPage, getStaticLegacyRoutes } from "@/lib/legacy-site";
 import { getAllStructuredRoutes, getStructuredPage } from "@/lib/structured-content";
 import { COMPANY } from "@/lib/site-config";
 
@@ -18,6 +22,16 @@ export function generateStaticParams() {
       params.push({ slug });
     }
   }
+
+  for (const route of getStaticLegacyRoutes()) {
+    const key = route.slug.join("/");
+
+    if (!routeKeys.has(key)) {
+      routeKeys.add(key);
+      params.push(route);
+    }
+  }
+
   return params;
 }
 
@@ -53,9 +67,16 @@ function buildStructuredMetadata(page) {
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const structuredPage = getStructuredPage(resolvedParams.slug || []);
+  const legacyPage = getLegacyPage(resolvedParams.slug || []);
 
   if (structuredPage) {
     return buildStructuredMetadata(structuredPage);
+  }
+
+  if (legacyPage) {
+    return {
+      title: legacyPage.title
+    };
   }
 
   return {};
@@ -64,6 +85,21 @@ export async function generateMetadata({ params }) {
 export default async function StructuredPage({ params }) {
   const resolvedParams = await params;
   const structuredPage = getStructuredPage(resolvedParams.slug || []);
+  const legacyPage = getLegacyPage(resolvedParams.slug || []);
+
+  if (legacyPage) {
+    return (
+      <>
+        {structuredPage ? <StructuredData page={structuredPage} /> : null}
+        <LegacyPageAssets page={legacyPage} />
+        <LegacyBodyAttributes
+          bodyClassName={legacyPage.bodyClassName}
+          bodyDataset={legacyPage.bodyDataset}
+        />
+        <div dangerouslySetInnerHTML={{ __html: legacyPage.bodyHtml }} suppressHydrationWarning />
+      </>
+    );
+  }
 
   if (structuredPage) {
     if (

@@ -3,9 +3,9 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "predev": "node ./scripts/sync-legacy-public.mjs",
+    "predev": "node ./scripts/sync-legacy-public.mjs && node ./scripts/generate-legacy-manifest.mjs",
     "dev": "next dev",
-    "prebuild": "node ./scripts/sync-legacy-public.mjs",
+    "prebuild": "node ./scripts/sync-legacy-public.mjs && node ./scripts/generate-legacy-manifest.mjs",
     "build": "next build",
     "start": "next start",
     "preview": "opennextjs-cloudflare build && wrangler dev",
