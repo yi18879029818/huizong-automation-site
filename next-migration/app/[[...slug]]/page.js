@@ -1,8 +1,5 @@
 import { notFound } from "next/navigation";
-import { LegacyBodyAttributes } from "@/components/legacy-body-attributes";
-import { LegacyPageAssets } from "@/components/legacy-page-assets";
 import { StructuredDetailPage, StructuredOverviewPage } from "@/components/structured-site";
-import { getLegacyPage, getStaticLegacyRoutes } from "@/lib/legacy-site";
 import { getAllStructuredRoutes, getStructuredPage } from "@/lib/structured-content";
 import { COMPANY } from "@/lib/site-config";
 
@@ -21,16 +18,6 @@ export function generateStaticParams() {
       params.push({ slug });
     }
   }
-
-  for (const route of getStaticLegacyRoutes()) {
-    const key = route.slug.join("/");
-
-    if (!routeKeys.has(key)) {
-      routeKeys.add(key);
-      params.push(route);
-    }
-  }
-
   return params;
 }
 
@@ -71,18 +58,10 @@ export async function generateMetadata({ params }) {
     return buildStructuredMetadata(structuredPage);
   }
 
-  const page = getLegacyPage(resolvedParams.slug || []);
-
-  if (!page) {
-    return {};
-  }
-
-  return {
-    title: page.title
-  };
+  return {};
 }
 
-export default async function LegacyPage({ params }) {
+export default async function StructuredPage({ params }) {
   const resolvedParams = await params;
   const structuredPage = getStructuredPage(resolvedParams.slug || []);
 
@@ -99,20 +78,5 @@ export default async function LegacyPage({ params }) {
     return <StructuredDetailPage page={structuredPage} />;
   }
 
-  const page = getLegacyPage(resolvedParams.slug || []);
-
-  if (!page) {
-    notFound();
-  }
-
-  return (
-    <>
-      <LegacyPageAssets page={page} />
-      <LegacyBodyAttributes
-        bodyClassName={page.bodyClassName}
-        bodyDataset={page.bodyDataset}
-      />
-      <div dangerouslySetInnerHTML={{ __html: page.bodyHtml }} suppressHydrationWarning />
-    </>
-  );
+  notFound();
 }

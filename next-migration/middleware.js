@@ -10,7 +10,25 @@ function markdownRewriteUrl(request) {
   return url;
 }
 
-export function middleware(request) {
+async function markdownProxyResponse(request) {
+  const url = markdownRewriteUrl(request);
+  const upstream = await fetch(url, {
+    method: "GET",
+    headers: request.headers
+  });
+
+  const headers = new Headers(upstream.headers);
+  headers.set("x-ai-view", "markdown");
+  headers.set("Cache-Control", "public, max-age=0, s-maxage=600");
+
+  return new Response(upstream.body, {
+    status: upstream.status,
+    statusText: upstream.statusText,
+    headers
+  });
+}
+
+export async function middleware(request) {
   if (
     shouldServeMarkdownView({
       pathname: request.nextUrl.pathname,
@@ -19,11 +37,7 @@ export function middleware(request) {
       method: request.method
     })
   ) {
-    return NextResponse.rewrite(markdownRewriteUrl(request), {
-      headers: {
-        "x-ai-view": "markdown"
-      }
-    });
+    return markdownProxyResponse(request);
   }
 
   return NextResponse.next();
