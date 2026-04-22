@@ -7,3 +7,8 @@
 .env
 .dev.vars
 .wrangler
+next-migration/node_modules/
+next-migration/.next/
+next-migration/out/
+next-migration/.vercel/
+next-migration/*.tsbuildinfo
