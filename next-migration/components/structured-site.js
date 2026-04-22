@@ -9,18 +9,18 @@ function Breadcrumbs({ items = [] }) {
   }
 
   return (
-    <div className="shell-breadcrumbs">
+    <div className="hsa-breadcrumb">
       {items.map((item, index) => {
         const isLast = index === items.length - 1;
 
         return (
           <span className="shell-breadcrumb-item" key={item.href}>
             {isLast ? (
-              <span className="is-current">{item.label}</span>
+              <span className="hsa-crumb-current">{item.label}</span>
             ) : (
               <Link href={item.href}>{item.label}</Link>
             )}
-            {!isLast ? <span>/</span> : null}
+            {!isLast ? <span className="hsa-crumb-sep">/</span> : null}
           </span>
         );
       })}
@@ -30,32 +30,32 @@ function Breadcrumbs({ items = [] }) {
 
 function Header({ currentSection }) {
   return (
-    <header className="shell-header">
-      <div className="shell-header-inner">
-        <Link className="shell-brand" href="/">
-          <span className="shell-brand-mark">H</span>
-          <span className="shell-brand-copy">
+    <header className="hsa-header">
+      <div className="hsa-header-inner">
+        <Link className="hsa-brand" href="/">
+          <span className="hsa-brand-mark">H</span>
+          <span className="hsa-brand-copy">
             <strong>Huizong Intelligent Automation</strong>
-            <span>Global Warehouse Automation Systems</span>
+            <em>Global Warehouse Automation Systems</em>
           </span>
         </Link>
-        <nav aria-label="Main Navigation" className="shell-nav">
+        <nav aria-label="Main Navigation" className="hsa-top-nav">
           <Link
-            className={`shell-nav-link${currentSection === "home" ? " is-active" : ""}`}
+            className={`hsa-top-link${currentSection === "home" ? " hsa-top-active" : ""}`}
             href="/"
           >
             Home
           </Link>
           {NAV_SECTIONS.map((section) => (
             <details
-              className="shell-nav-group"
+              className={`hsa-top-group${currentSection === section.key ? " hsa-top-active" : ""}`}
               key={section.key}
               open={currentSection === section.key}
             >
-              <summary className="shell-nav-summary">{section.label}</summary>
-              <div className="shell-nav-menu">
+              <summary>{section.label}</summary>
+              <div className="hsa-dropdown">
                 {section.items.map((item) => (
-                  <Link href={item.href} key={item.href}>
+                  <Link className="hsa-dropdown-link" href={item.href} key={item.href}>
                     {item.label}
                   </Link>
                 ))}
@@ -63,19 +63,19 @@ function Header({ currentSection }) {
             </details>
           ))}
           <Link
-            className={`shell-nav-link${currentSection === "about" ? " is-active" : ""}`}
+            className={`hsa-top-link${currentSection === "about" ? " hsa-top-active" : ""}`}
             href="/about"
           >
             About
           </Link>
           <Link
-            className={`shell-nav-link${currentSection === "contact" ? " is-active" : ""}`}
+            className={`hsa-top-link${currentSection === "contact" ? " hsa-top-active" : ""}`}
             href="/contact"
           >
             Contact
           </Link>
         </nav>
-        <Link className="shell-cta" href="/contact">
+        <Link className="hsa-cta" href="/contact">
           Speak With An Expert
         </Link>
       </div>
@@ -85,11 +85,11 @@ function Header({ currentSection }) {
 
 function Footer() {
   return (
-    <footer className="shell-footer">
-      <div className="shell-footer-inner">
+    <footer className="hsa-footer">
+      <div className="hsa-footer-inner">
         <div>
-          <h4>Huizong Intelligent Automation</h4>
-          <p>
+          <div className="hsa-footer-brand">Huizong Intelligent Automation</div>
+          <p className="hsa-footer-copy">
             Integrated warehouse automation, robotics, software orchestration, and project
             delivery for global B2B intralogistics operations.
           </p>
@@ -97,7 +97,7 @@ function Footer() {
         {NAV_SECTIONS.map((section) => (
           <div key={section.key}>
             <h4>{section.label}</h4>
-            <div className="shell-footer-links">
+            <div className="hsa-footer-links">
               {section.items.map((item) => (
                 <Link href={item.href} key={item.href}>
                   {item.label}
@@ -107,7 +107,7 @@ function Footer() {
           </div>
         ))}
       </div>
-      <div className="shell-footer-bottom">
+      <div className="hsa-footer-bottom">
         <span>Copyright 2026 Huizong Intelligent Automation</span>
         <span>Next.js content layer with MDX, schema, and agent-ready metadata</span>
       </div>
@@ -115,9 +115,9 @@ function Footer() {
   );
 }
 
-function Hero({ kicker, title, summary, metrics = [], image }) {
+function Hero({ kicker, title, summary, metrics = [], image, detail = false }) {
   return (
-    <section className="hero-panel">
+    <section className={`hero-panel${detail ? " is-detail" : ""}`}>
       <div className="hero-grid">
         <div className="hero-copy">
           <span className="eyebrow">{kicker}</span>
@@ -125,10 +125,10 @@ function Hero({ kicker, title, summary, metrics = [], image }) {
           <p>{summary}</p>
           <div className="hero-actions">
             <Link className="hero-button" href="/contact">
-              Speak With An Expert
+              {detail ? "View Specifications" : "Speak With An Expert"}
             </Link>
             <Link className="secondary-button" href="/solutions">
-              Explore Systems
+              {detail ? "Explore Systems" : "Explore Systems"}
             </Link>
           </div>
         </div>
@@ -192,10 +192,10 @@ function Subnav({ currentHref, items = [] }) {
   }
 
   return (
-    <div className="shell-subnav">
+    <div className="hsa-subnav">
       {items.map((item) => (
         <Link
-          className={item.href === currentHref ? "is-active" : ""}
+          className={`hsa-sub-link${item.href === currentHref ? " hsa-sub-active" : ""}`}
           href={item.href}
           key={item.href}
         >
@@ -212,8 +212,8 @@ function SecondaryBar({ page }) {
   }
 
   return (
-    <div className="shell-secondary">
-      <div className="shell-secondary-inner">
+    <div className="hsa-secondary">
+      <div className="hsa-secondary-inner">
         <Breadcrumbs items={page.breadcrumbs} />
         <Subnav currentHref={page.currentHref} items={page.subnav} />
       </div>
@@ -268,7 +268,7 @@ function getCardHref({ card, page }) {
 
 export function StructuredOverviewPage({ page }) {
   return (
-    <div className="content-shell">
+    <div className={`content-shell shell-kind-${page.kind}`}>
       <StructuredData page={page} />
       <Header currentSection={page.section} />
       <SecondaryBar page={page} />
@@ -352,12 +352,13 @@ export function StructuredDetailPage({ page }) {
   const item = page.data;
 
   return (
-    <div className="content-shell">
+    <div className={`content-shell shell-kind-${page.kind}`}>
       <StructuredData page={page} />
       <Header currentSection={page.section} />
       <SecondaryBar page={page} />
       <main className="shell-main">
         <Hero
+          detail
           image={item.image}
           kicker={item.kicker}
           metrics={item.metrics}
