@@ -3,11 +3,14 @@
   "private": true,
   "version": "0.1.0",
   "scripts": {
-    "predev": "powershell -ExecutionPolicy Bypass -File ./scripts/sync-legacy-public.ps1",
+    "predev": "node ./scripts/sync-legacy-public.mjs",
     "dev": "next dev",
-    "prebuild": "powershell -ExecutionPolicy Bypass -File ./scripts/sync-legacy-public.ps1",
+    "prebuild": "node ./scripts/sync-legacy-public.mjs",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "preview": "opennextjs-cloudflare build && wrangler dev",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
@@ -17,5 +20,9 @@
     "next": "14.2.35",
     "react": "18.3.1",
     "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@opennextjs/cloudflare": "^1.12.0",
+    "wrangler": "^4.38.0"
   }
 }

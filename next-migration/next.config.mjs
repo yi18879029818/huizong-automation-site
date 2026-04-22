@@ -1,4 +1,9 @@
 import createMDX from "@next/mdx";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+
+if (process.env.NODE_ENV === "development") {
+  await initOpenNextCloudflareForDev();
+}
 
 const withMDX = createMDX({
   extension: /\.mdx?$/

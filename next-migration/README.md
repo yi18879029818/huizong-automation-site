@@ -53,7 +53,40 @@ The migration layer now also provides:
 npm install
 npm run dev
 npm run build
+npm run preview
 ```
+
+## Cloudflare Workers deployment
+
+This Next.js app is now prepared for the Cloudflare Workers + OpenNext deployment path.
+
+Key files:
+
+- `wrangler.jsonc`
+- `open-next.config.ts`
+- `app/api/contact/route.js`
+- `lib/contact-service.js`
+
+Deployment flow:
+
+```bash
+npm run deploy
+```
+
+Before deploying:
+
+1. Update the `database_id` in `wrangler.jsonc` for the `FORM_DB` D1 binding.
+2. Add the following secrets and variables in Cloudflare:
+   - `RESEND_API_KEY`
+   - `CONTACT_TO_EMAIL`
+   - `CONTACT_FROM_EMAIL`
+3. For local preview, copy `.dev.vars.example` to `.dev.vars`.
+
+Notes:
+
+- `npm run dev` still uses the regular Next.js dev server.
+- `npm run preview` builds the OpenNext worker and runs it with Wrangler.
+- The contact form no longer depends on the legacy `functions/api/contact.js` endpoint when this app is deployed on Workers.
 
 ## Why this is low risk
 

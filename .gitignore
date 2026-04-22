@@ -9,6 +9,9 @@
 .wrangler
 next-migration/node_modules/
 next-migration/.next/
+next-migration/public/
+next-migration/.open-next/
+next-migration/.wrangler/
 next-migration/out/
 next-migration/.vercel/
 next-migration/*.tsbuildinfo

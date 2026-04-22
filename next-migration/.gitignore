@@ -1,5 +1,8 @@
 .next/
 node_modules/
+public/
 out/
 .vercel/
+.open-next/
+.wrangler/
 *.tsbuildinfo
