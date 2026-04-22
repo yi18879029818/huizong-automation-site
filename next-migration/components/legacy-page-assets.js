@@ -1,8 +1,18 @@
-import Script from "next/script";
-
 export function LegacyPageAssets({ page }) {
   return (
     <>
+      {page.links?.map((link, index) => (
+        <link
+          key={`legacy-link-${index}`}
+          rel={link.rel}
+          href={link.href}
+          as={link.as}
+          type={link.type}
+          media={link.media}
+          crossOrigin={link.crossOrigin}
+          referrerPolicy={link.referrerPolicy}
+        />
+      ))}
       {page.inlineStyles.map((styleContent, index) => (
         <style
           key={`legacy-style-${index}`}
@@ -14,21 +24,19 @@ export function LegacyPageAssets({ page }) {
 
         if (script.src) {
           return (
-            <Script
+            <script
               key={id}
               id={id}
               src={script.src}
-              strategy={script.strategy}
               type={script.type}
             />
           );
         }
 
         return (
-          <Script
+          <script
             key={id}
             id={id}
-            strategy={script.strategy}
             type={script.type}
             dangerouslySetInnerHTML={{ __html: script.code }}
           />

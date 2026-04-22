@@ -82,6 +82,23 @@ function resolveLocalUrl(rawValue, relativeFilePath) {
   return pathname;
 }
 
+function normalizeAssetUrl(rawValue, relativeFilePath) {
+  if (
+    !rawValue ||
+    rawValue.startsWith("http://") ||
+    rawValue.startsWith("https://") ||
+    rawValue.startsWith("mailto:") ||
+    rawValue.startsWith("tel:") ||
+    rawValue.startsWith("#") ||
+    rawValue.startsWith("data:") ||
+    rawValue.startsWith("//")
+  ) {
+    return rawValue;
+  }
+
+  return resolveLocalUrl(rawValue, relativeFilePath);
+}
+
 function rewriteLegacyFragmentUrls(fragmentHtml, relativeFilePath) {
   const $ = load(fragmentHtml, null, false);
   const supportedAttributes = ["href", "src", "action", "poster"];
@@ -103,11 +120,40 @@ function rewriteLegacyFragmentUrls(fragmentHtml, relativeFilePath) {
         return;
       }
 
-      $(element).attr(attributeName, resolveLocalUrl(currentValue, relativeFilePath));
+      $(element).attr(attributeName, normalizeAssetUrl(currentValue, relativeFilePath));
     });
   }
 
   return $.html();
+}
+
+function extractRenderableHeadHtml(headHtml, relativeFilePath) {
+  const $ = load(headHtml, null, false);
+  const fragments = [];
+
+  $("link, style, script").each((_, element) => {
+    const tagName = element.tagName?.toLowerCase();
+
+    if (tagName === "link") {
+      const href = $(element).attr("href");
+
+      if (href) {
+        $(element).attr("href", normalizeAssetUrl(href, relativeFilePath));
+      }
+    }
+
+    if (tagName === "script") {
+      const src = $(element).attr("src");
+
+      if (src) {
+        $(element).attr("src", normalizeAssetUrl(src, relativeFilePath));
+      }
+    }
+
+    fragments.push($.html(element));
+  });
+
+  return fragments.join("");
 }
 
 function getStrategyForScript(script) {
@@ -133,7 +179,7 @@ function parseScripts(headHtml, relativeFilePath) {
   for (const match of headHtml.matchAll(scriptPattern)) {
     const [, attributeSource, code] = match;
     const attributes = parseAttributes(attributeSource);
-    const src = attributes.src ? resolveLocalUrl(attributes.src, relativeFilePath) : null;
+    const src = attributes.src ? normalizeAssetUrl(attributes.src, relativeFilePath) : null;
 
     scripts.push({
       id: attributes.id || null,
@@ -149,6 +195,32 @@ function parseScripts(headHtml, relativeFilePath) {
   }
 
   return scripts;
+}
+
+function parseLinks(headHtml, relativeFilePath) {
+  const links = [];
+  const linkPattern = /<link([^>]*)>/gi;
+
+  for (const match of headHtml.matchAll(linkPattern)) {
+    const [, attributeSource] = match;
+    const attributes = parseAttributes(attributeSource);
+
+    if (!attributes.href) {
+      continue;
+    }
+
+    links.push({
+      rel: attributes.rel || undefined,
+      href: normalizeAssetUrl(attributes.href, relativeFilePath),
+      as: attributes.as || undefined,
+      type: attributes.type || undefined,
+      media: attributes.media || undefined,
+      crossOrigin: attributes.crossorigin || attributes.crossOrigin || undefined,
+      referrerPolicy: attributes.referrerpolicy || attributes.referrerPolicy || undefined
+    });
+  }
+
+  return links;
 }
 
 function parseLegacyPage(absolutePath) {
@@ -179,6 +251,8 @@ function parseLegacyPage(absolutePath) {
     bodyDataset: {
       pageKey: bodyAttributes["data-page-key"] || ""
     },
+    headHtml: extractRenderableHeadHtml(headHtml, relativeFilePath),
+    links: parseLinks(headHtml, relativeFilePath),
     inlineStyles,
     scripts: parseScripts(headHtml, relativeFilePath),
     bodyHtml: rewriteLegacyFragmentUrls(bodyMatch[2], relativeFilePath)

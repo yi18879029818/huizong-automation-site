@@ -1,6 +1,5 @@
 import { notFound } from "next/navigation";
 import { LegacyBodyAttributes } from "@/components/legacy-body-attributes";
-import { LegacyPageAssets } from "@/components/legacy-page-assets";
 import { StructuredData } from "@/components/structured-data";
 import { StructuredDetailPage, StructuredOverviewPage } from "@/components/structured-site";
 import { getLegacyPage, getStaticLegacyRoutes } from "@/lib/legacy-site";
@@ -91,12 +90,14 @@ export default async function StructuredPage({ params }) {
     return (
       <>
         {structuredPage ? <StructuredData page={structuredPage} /> : null}
-        <LegacyPageAssets page={legacyPage} />
         <LegacyBodyAttributes
           bodyClassName={legacyPage.bodyClassName}
           bodyDataset={legacyPage.bodyDataset}
         />
-        <div dangerouslySetInnerHTML={{ __html: legacyPage.bodyHtml }} suppressHydrationWarning />
+        <div
+          dangerouslySetInnerHTML={{ __html: `${legacyPage.headHtml || ""}${legacyPage.bodyHtml}` }}
+          suppressHydrationWarning
+        />
       </>
     );
   }
