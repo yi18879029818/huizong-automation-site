@@ -375,6 +375,9 @@ function ProductOverviewBody({ page }) {
 
 function ProductDetailBody({ page }) {
   const slug = getSlug(page);
+  if (slug === "agv-forklift") {
+    return <AgvForkliftBody />;
+  }
   if (slug === "lifting-agv") {
     return <LiftingAgvBody page={page} />;
   }
@@ -655,6 +658,316 @@ function ProductDetailBody({ page }) {
               </h4>
               <p className="text-on-primary-container text-lg font-body max-w-2xl opacity-80">
                 Our engineering team will assess your current infrastructure and provide a detailed integration roadmap for a seamless transition.
+              </p>
+            </div>
+            <Link
+              className="bg-secondary text-white px-10 py-5 rounded-sm font-bold text-xs tracking-[0.2em] uppercase hover:bg-secondary-container transition-all whitespace-nowrap shadow-xl"
+              href="/contact"
+            >
+              Talk to an Architect
+            </Link>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function AgvForkliftBody() {
+  return (
+    <main>
+      <section className="relative min-h-[720px] flex items-center overflow-hidden kinetic-gradient">
+        <div className="absolute inset-0 opacity-20 mix-blend-overlay">
+          <img
+            alt="Warehouse environment"
+            className="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDztEsOiohIzS3uZT5jZv_eW-vOJH0jI11qAX2nx8lFrTiYIhuljsB0j3VOzEl6w2ILYs3td4-2Dh0s38HPd_3-oO-Zg30C25w7VyqfkPr9br9f1Nnp0RaSC6Eb8JX1rt2aY1V_BFDJekWqtqruUlguA-5m3azKSFu26a0D61ziK_7pY619knYl-V7FKL1Z0HzKvd1Dn4tkboyKAl0egzcRgJ9_TP1Ajp5U8_cynS-v-ScVpL8GbgahHSQov2PgoPZdPV51OIivRi7e"
+          />
+        </div>
+        <div className="relative max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
+          <div className="space-y-8 py-20">
+            <div className="flex items-center gap-3">
+              <span className="w-8 h-px bg-secondary" />
+              <span className="text-secondary text-[10px] font-black uppercase tracking-[0.4em]">
+                Industrial Robotics
+              </span>
+            </div>
+            <h1 className="text-6xl md:text-8xl font-extrabold text-white leading-[0.95] tracking-tighter uppercase italic">
+              AGV
+              <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary-container">
+                Forklift
+              </span>
+            </h1>
+            <p className="text-on-primary-container/80 text-lg md:text-xl max-w-xl leading-relaxed font-body">
+              The backbone of autonomous pallet movement and high-rack storage. Engineered for
+              zero-tolerance logistics and seamless facility integration.
+            </p>
+            <div className="flex flex-wrap gap-4 pt-4">
+              <Link
+                className="bg-secondary text-white px-10 py-4 rounded-sm font-bold text-xs tracking-[0.2em] uppercase hover:bg-secondary-container transition-all"
+                href="/contact"
+              >
+                View Specifications
+              </Link>
+              <button className="border border-white/20 text-white px-10 py-4 rounded-sm font-bold text-xs tracking-[0.2em] uppercase hover:bg-white/10 transition-all">
+                Download Brochure
+              </button>
+            </div>
+          </div>
+          <div className="relative hidden lg:block">
+            <div className="absolute -inset-20 bg-secondary/10 blur-[150px] rounded-full" />
+            <img
+              alt="AGV Forklift unit"
+              className="relative z-10 w-full drop-shadow-[0_35px_35px_rgba(0,0,0,0.6)]"
+              src="/products/chacheAGV1.png"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 px-6 md:px-12 max-w-[1440px] mx-auto">
+        <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+            <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-secondary mb-3">
+              Precision Engineering
+            </h2>
+            <h3 className="text-5xl md:text-6xl font-black text-primary tracking-tighter uppercase leading-none italic">
+              Performance
+              <br />
+              Redefined.
+            </h3>
+          </div>
+          <p className="text-on-surface-variant max-w-md text-lg">
+            Every component is stress-tested for 24/7 reliability in demanding high-throughput
+            environments.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <div className="md:col-span-8 bg-white p-10 md:p-14 border border-outline-variant/30 flex flex-col justify-between group overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/5 -mr-16 -mt-16 rounded-full group-hover:scale-150 transition-transform duration-700" />
+            <div>
+              <div className="w-12 h-12 bg-primary flex items-center justify-center mb-8">
+                <span className="material-symbols-outlined text-white">navigation</span>
+              </div>
+              <h4 className="text-3xl font-black text-primary mb-6 uppercase tracking-tight">
+                Autonomous SLAM Navigation
+              </h4>
+              <p className="text-on-surface-variant text-lg max-w-2xl mb-12 font-body leading-relaxed">
+                Equipped with high-fidelity LiDAR and SLAM algorithms, the AGV Forklift maps its
+                environment in real-time, navigating complex warehouse floors with millimeter
+                precision without reflectors.
+              </p>
+            </div>
+            <div className="grid grid-cols-3 gap-8 pt-10 border-t border-outline-variant/30">
+              {[
+                ["+/- 5mm", "Stop Accuracy"],
+                ["360 deg", "Obstacle Detection"],
+                ["L5", "Autonomy Level"]
+              ].map(([value, label]) => (
+                <div key={label}>
+                  <div className="text-3xl font-black text-primary tracking-tighter">{value}</div>
+                  <div className="text-[10px] font-black uppercase tracking-widest text-outline mt-1">
+                    {label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="md:col-span-4 bg-primary p-12 text-white flex flex-col justify-center relative overflow-hidden">
+            <div className="absolute bottom-0 right-0 opacity-10">
+              <span className="material-symbols-outlined text-[10rem]">bolt</span>
+            </div>
+            <div className="w-12 h-12 bg-secondary flex items-center justify-center mb-8">
+              <span className="material-symbols-outlined text-white">battery_charging_full</span>
+            </div>
+            <h4 className="text-2xl font-black mb-4 uppercase tracking-tight">
+              24/7 Operational Availability
+            </h4>
+            <p className="text-on-primary-container text-sm leading-relaxed font-body">
+              Automated opportunity charging ensures your fleet never stops. The system intelligently
+              routes low-battery units during natural demand lulls.
+            </p>
+          </div>
+
+          <div className="md:col-span-4 bg-surface-container-low p-12 border border-outline-variant/30 flex flex-col justify-center">
+            <div className="w-12 h-12 bg-primary/10 flex items-center justify-center mb-8">
+              <span className="material-symbols-outlined text-primary">precision_manufacturing</span>
+            </div>
+            <h4 className="text-2xl font-black text-primary mb-4 uppercase tracking-tight">
+              Heavy-Load Capacity
+            </h4>
+            <p className="text-on-surface-variant text-sm leading-relaxed font-body">
+              Designed for the heaviest industrial pallets. Capacity up to 2,500kg with variable
+              lift heights up to 10 meters for high-rack integration.
+            </p>
+          </div>
+
+          <div className="md:col-span-8 overflow-hidden relative group h-96">
+            <img
+              alt="Forklift sensor detail"
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVGHLQyPWswkMy-WbK_JVcGyrHGLxBjQHB6BaQgaH5AO6apmCESe8-F4IztySJ_YXtdQjqaM9UtkmWha_-9pLHdAbJJMODpLI4DHKLtgbXJPw6U1CtffR0dVzpxDWQ1og5H4ng8D8nsjLDBpH7z-ev2nnRJpzOnq299vPA2fSp3XdW_2FkcVI4f_HQICK6lpXM8Ywu0d4LpluwrKWyfx7v1EW1Xw7Rxorok-yNdXCsPYi86oOiPdny4QW2DN3pkTUgjFUWjTHf4jnC"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent p-12 flex flex-col justify-end">
+              <h4 className="text-2xl font-black text-white mb-3 uppercase tracking-tight">
+                Multi-Sensor Fusion
+              </h4>
+              <p className="text-on-primary-container/80 max-w-md text-sm font-body leading-relaxed italic">
+                Integrated safety systems combining ultrasonic, 3D cameras, and pressure-sensitive
+                bumpers for zero-incident operation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-primary py-32 border-y border-white/10">
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12">
+          <div className="flex flex-col lg:flex-row gap-20">
+            <div className="lg:w-1/3">
+              <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-secondary mb-4">
+                Versatile Deployment
+              </h2>
+              <h3 className="text-5xl font-black text-white tracking-tighter mb-10 leading-none uppercase italic">
+                Designed for
+                <br />
+                every flow.
+              </h3>
+              <p className="text-on-primary-container text-lg mb-12 font-body leading-relaxed">
+                From the receiving dock to the final dispatch line, our AGV Forklifts adapt to your
+                specific workflow requirements.
+              </p>
+              <div className="space-y-3">
+                {["Pallet Transport", "Rack Interface", "Dock Transfer"].map((item, index) => (
+                  <div
+                    className={`flex items-center gap-4 p-5 bg-white/5 border-l-4 transition-all ${
+                      index === 0
+                        ? "border-secondary"
+                        : "border-transparent hover:border-white/20 cursor-pointer"
+                    }`}
+                    key={item}
+                  >
+                    <span
+                      className={`material-symbols-outlined ${
+                        index === 0 ? "text-secondary" : "text-white/30"
+                      }`}
+                    >
+                      check_circle
+                    </span>
+                    <span
+                      className={`font-bold text-xs tracking-widest uppercase ${
+                        index === 0 ? "text-white" : "text-white/50"
+                      }`}
+                    >
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="lg:w-2/3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {[
+                  [
+                    "Pallet Transport",
+                    "High-speed point-to-point movement across large facilities, replacing manual tuggers for repetitive long-haul tasks.",
+                    "https://lh3.googleusercontent.com/aida-public/AB6AXuCYFcOkg43a4CILwgiFZ4fupjXTw8wkNj0bSGVp5-fLb4OaIVeIgnuMuR_l6GMWc5u5AyW6hqZaVjz9v35NWeQ0HZY6GGeT3rUa9-74l1Pn2RYdmm4WQyphqYZwZ3qG0GjZq5waCI7nNxyZyvvtJnvcMFGeVPqLPwf6LdW6ahPdLSoYhJrk76OvITC1GocD0bl6iRvfN0MGnCl8xBxNQu8FEsynzMOVhnGj1qB0x0qgiljWmRXY9zFVc5gpKvl8PuV_jW8gX4MgbnEH"
+                  ],
+                  [
+                    "Rack Interface",
+                    "Precision vertical lifting for placing and retrieving pallets from high-density racking systems up to 10m.",
+                    "https://lh3.googleusercontent.com/aida-public/AB6AXuCXVsMNRb6zsAKC01BgIlJzISS8gwYMnu07p0d46DN1n_GSvsoHtZHlZuwQA_8nm_qHRCyoiW8m8Nx8tlV19McZ8u3hyGHM2fSql3pWtiGGdo5Y0lqk38hLjENgaIMPffYcj59xoSNsBMuQpL4jQt-hK4-igEomEKcoDXMsvc-uNr5_hV1gF7haHC6hIjTKhPTLv8ZzfK46S9sPJBlTiF1eHP9zVenpziQsGY5ImCtzmk8LCiZ2M3wj7W7PZAIMPeyPKQp6W0PYzlUl"
+                  ],
+                  [
+                    "Dock Transfer",
+                    "Seamlessly moving loads from trailer unloading zones to staging areas or automated storage systems.",
+                    "https://lh3.googleusercontent.com/aida-public/AB6AXuDm-2anC4fgMzLdYXzmYB4jDZ575l2fRfFA2ZVGNJoRbRDM15dz0twtuS6eTSJfmxDGxNbSKl_Mx1Kcy6jb7_dOY5zckz0aH-0ZdW0PipiCLd681Ml6Daqv_T6-t-0Z8KsA0PLGA4_2h4YMyf1Pygs7el8fu4U1tZeZky5FmF2vXDK5nkm2k3BjqLv25D5rELB6Bml8e_L3c3X_DNE5neVpc_geVVD-5x6JzQBv67pGMQpE9Lln_0NlFkFUnlIvWEDiPwlh4IZI5-ab"
+                  ],
+                  [
+                    "Line Feeding",
+                    "Just-in-time delivery of components to manufacturing lines, ensuring zero downtime in production cycles.",
+                    "https://lh3.googleusercontent.com/aida-public/AB6AXuCKPJPEd_sRXT9-cq133VMLTvKi-kGu-uQHF379phGEeUajG850SCHi5wIdO3hVN465t1rPGu_Akq4UYVeyvx9sq8wz052SxRH2F04v3HVi30PHkJux-p96fxOeEi6FC05Y3iuobaAGr7BCfY0lb7XnbGnN3x99kFkyoprExWKpZwy4djRzOvnoF-DP9C0snCLNHZovoLCN5ZbAqo1EYMwqelyeBlnqk2UZuSMy1n6KwERFqCXrTkSkbQ_CALa22Ztqx82Ym_WPyIDK"
+                  ]
+                ].map(([title, copy, image]) => (
+                  <div className="space-y-6 group" key={title}>
+                    <div className="aspect-video overflow-hidden">
+                      <img
+                        alt={title}
+                        className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                        src={image}
+                      />
+                    </div>
+                    <h4 className="text-xl font-black text-white uppercase tracking-tight italic">{title}</h4>
+                    <p className="text-on-primary-container text-sm font-body leading-relaxed">{copy}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-32 bg-white text-primary overflow-hidden relative">
+        <div className="absolute -right-64 top-0 w-full h-full opacity-[0.03] pointer-events-none">
+          <span className="material-symbols-outlined text-[60rem]">hub</span>
+        </div>
+        <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative">
+          <div className="max-w-3xl mb-20">
+            <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-secondary mb-4">
+              Software Ecosystem
+            </h2>
+            <h3 className="text-5xl md:text-6xl font-black tracking-tighter mb-8 uppercase italic leading-none">
+              Intelligent
+              <br />
+              Integration.
+            </h3>
+            <p className="text-on-surface-variant text-xl leading-relaxed font-body">
+              Our AGVs are fully integrated components of your digital supply chain, communicating
+              in real-time with existing WMS/WCS systems for perfect synchronization.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-outline-variant/30">
+            {[
+              [
+                "settings_input_component",
+                "WMS/WCS Bridge",
+                "Direct API integration with SAP, Oracle, and Manhattan Associates. Zero-latency mission assignment and tracking."
+              ],
+              [
+                "monitor_heart",
+                "Fleet Control",
+                "Centralized traffic management prevents congestion and optimizes route selection across the entire autonomous fleet."
+              ],
+              [
+                "analytics",
+                "Predictive Analytics",
+                "Cloud-based telemetry monitors component health, predicting maintenance needs before they impact uptime."
+              ]
+            ].map(([icon, title, copy], index, list) => (
+              <div
+                className={`p-12 hover:bg-surface-container-low transition-colors group ${
+                  index < list.length - 1 ? "border-r border-b md:border-b-0 border-outline-variant/30" : ""
+                }`}
+                key={title}
+              >
+                <div className="w-12 h-12 bg-primary flex items-center justify-center mb-8 group-hover:bg-secondary transition-colors">
+                  <span className="material-symbols-outlined text-white">{icon}</span>
+                </div>
+                <h4 className="text-xl font-black mb-4 uppercase tracking-tight">{title}</h4>
+                <p className="text-on-surface-variant text-sm font-body leading-relaxed">{copy}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-20 p-10 md:p-16 bg-primary text-white flex flex-col md:flex-row items-center gap-12 group">
+            <div className="flex-1">
+              <h4 className="text-3xl font-black mb-4 uppercase tracking-tight italic">
+                Request a System Compatibility Audit
+              </h4>
+              <p className="text-on-primary-container text-lg font-body max-w-2xl opacity-80">
+                Our engineering team will assess your current infrastructure and provide a detailed
+                integration roadmap for a seamless transition.
               </p>
             </div>
             <Link

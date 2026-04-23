@@ -992,3 +992,50 @@ body[data-page-key="home"] .page-content > section:first-child > .container.mx-a
     font-size:1.7rem;
   }
 }
+
+.content-shell:not([data-page-key="home"]) .page-content>section:first-child,
+.content-shell:not([data-page-key="home"]) .page-content>main:first-child>section:first-child{
+  min-height:600px!important;
+  height:600px!important;
+}
+
+.content-shell[data-page-key="home"] .page-content > section:first-child > .container.mx-auto,
+.content-shell[data-page-key="home"] .page-content > section:first-child > .container.mx-auto.hsa-home-hero-container{
+  width:min(var(--hsa-standard-shell-width),calc(100% - var(--hsa-standard-shell-gutter)))!important;
+  max-width:min(var(--hsa-standard-shell-width),calc(100% - var(--hsa-standard-shell-gutter)))!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  box-sizing:border-box;
+}
+
+.content-shell[data-page-key="home"] .page-content > section:first-child > .container.mx-auto{
+  padding-left:0!important;
+  padding-right:0!important;
+}
+
+.content-shell[data-page-key="home"] .page-content > section:first-child > .container.mx-auto.hsa-home-hero-container{
+  padding:56px 0 48px!important;
+}
+
+@media (max-width:760px){
+  .content-shell:not([data-page-key="home"]) .page-content>section:first-child,
+  .content-shell:not([data-page-key="home"]) .page-content>main:first-child>section:first-child{
+    min-height:520px!important;
+    height:520px!important;
+  }
+
+  .content-shell[data-page-key="home"] .page-content > section:first-child > .container.mx-auto,
+  .content-shell[data-page-key="home"] .page-content > section:first-child > .container.mx-auto.hsa-home-hero-container{
+    width:min(var(--hsa-standard-shell-width),calc(100% - var(--hsa-standard-shell-mobile-gutter)))!important;
+    max-width:min(var(--hsa-standard-shell-width),calc(100% - var(--hsa-standard-shell-mobile-gutter)))!important;
+  }
+
+  .content-shell[data-page-key="home"] .page-content > section:first-child > .container.mx-auto{
+    padding-left:0!important;
+    padding-right:0!important;
+  }
+
+  .content-shell[data-page-key="home"] .page-content > section:first-child > .container.mx-auto.hsa-home-hero-container{
+    padding:34px 0 30px!important;
+  }
+}
