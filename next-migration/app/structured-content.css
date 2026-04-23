@@ -890,6 +890,25 @@ a {
   border-radius: 2px;
 }
 
+.hsa-top-group {
+  position: relative;
+}
+
+.hsa-top-group > .hsa-top-link {
+  position: relative;
+  z-index: 2;
+}
+
+.hsa-top-group:hover > .hsa-dropdown,
+.hsa-top-group:focus-within > .hsa-dropdown {
+  display: grid;
+}
+
+.hsa-top-group.hsa-top-active > .hsa-top-link {
+  background: rgba(24, 75, 155, 0.08);
+  color: #102a56;
+}
+
 @media (max-width: 960px) {
   .hero-grid {
     grid-template-columns: 1fr;

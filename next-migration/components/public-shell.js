@@ -9,11 +9,10 @@ function DesktopNavigation({ currentSection }) {
         Home
       </Link>
       {NAV_SECTIONS.map((section) => (
-        <details
-          className={`hsa-top-group${currentSection === section.key ? " hsa-top-active" : ""}`}
-          key={section.key}
-        >
-          <summary>{section.label}</summary>
+        <div className={`hsa-top-group${currentSection === section.key ? " hsa-top-active" : ""}`} key={section.key}>
+          <Link className="hsa-top-link" href={section.href}>
+            {section.label}
+          </Link>
           <div className="hsa-dropdown">
             {section.items.map((item) => (
               <Link className="hsa-dropdown-link" href={item.href} key={item.href}>
@@ -21,7 +20,7 @@ function DesktopNavigation({ currentSection }) {
               </Link>
             ))}
           </div>
-        </details>
+        </div>
       ))}
       <Link className={`hsa-top-link${currentSection === "about" ? " hsa-top-active" : ""}`} href="/about">
         About
