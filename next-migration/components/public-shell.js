@@ -254,13 +254,25 @@ function Footer() {
   );
 }
 
-export function StructuredLegacyPage({ legacyContentHtml, page }) {
+export function PublicPageChrome({ children, page }) {
   return (
     <div className="content-shell">
       <StructuredData page={page} />
       <Header currentSection={page.section} />
-      <div className="page-content" dangerouslySetInnerHTML={{ __html: legacyContentHtml }} suppressHydrationWarning />
+      {children}
       <Footer />
     </div>
+  );
+}
+
+export function StructuredLegacyPage({ legacyContentHtml, page }) {
+  return (
+    <PublicPageChrome page={page}>
+      <div
+        className="page-content"
+        dangerouslySetInnerHTML={{ __html: legacyContentHtml }}
+        suppressHydrationWarning
+      />
+    </PublicPageChrome>
   );
 }

@@ -1,0 +1,14 @@
+
+ ⛅️ wrangler 4.38.0 (update available 4.84.1)
+─────────────────────────────────────────────
+Successfully created tail, expires at 2026-04-22T13:22:50Z
+Connected to huizong-automation-site-next, waiting for logs...
+GET https://huizong-automation-site-next.carlisezuckerwar960.workers.dev/products/storage-agv - Ok @ 2026/4/23 09:55:16
+GET https://huizong-automation-site-next.carlisezuckerwar960.workers.dev/products/agv-roller - Ok @ 2026/4/23 09:55:16
+GET https://huizong-automation-site-next.carlisezuckerwar960.workers.dev/products/composite-mobile-robot - Ok @ 2026/4/23 09:55:17
+GET https://huizong-automation-site-next.carlisezuckerwar960.workers.dev/case-studies/asrs - Canceled @ 2026/4/23 09:53:36
+  (warn) waitUntil() tasks did not complete within the allowed time after invocation end and have been cancelled. See: https://developers.cloudflare.com/workers/runtime-apis/context/#waituntil
+GET https://huizong-automation-site-next.carlisezuckerwar960.workers.dev/ - Canceled @ 2026/4/23 09:57:24
+  (warn) waitUntil() tasks did not complete within the allowed time after invocation end and have been cancelled. See: https://developers.cloudflare.com/workers/runtime-apis/context/#waituntil
+GET https://huizong-automation-site-next.carlisezuckerwar960.workers.dev/ - Canceled @ 2026/4/23 09:58:20
+  (warn) waitUntil() tasks did not complete within the allowed time after invocation end and have been cancelled. See: https://developers.cloudflare.com/workers/runtime-apis/context/#waituntil

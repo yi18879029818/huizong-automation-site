@@ -1,5 +1,9 @@
 import { notFound } from "next/navigation";
 import { LegacyBodyAttributes } from "@/components/legacy-body-attributes";
+import {
+  StructuredCatalogDetailPage,
+  StructuredCatalogOverviewPage
+} from "@/components/structured-catalog-pages";
 import { StructuredLegacyPage } from "@/components/public-shell";
 import { StructuredData } from "@/components/structured-data";
 import { StructuredDetailPage, StructuredOverviewPage } from "@/components/structured-site";
@@ -64,6 +68,14 @@ function buildStructuredMetadata(page) {
   };
 }
 
+function shouldRenderPureStructuredPage(page) {
+  return (
+    page.section === "products" ||
+    page.section === "solutions" ||
+    page.section === "case-studies"
+  );
+}
+
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const structuredPage = getStructuredPage(resolvedParams.slug || []);
@@ -90,7 +102,29 @@ export default async function StructuredPage({ params }) {
   if (structuredPage) {
     return (
       <>
-        {legacyPage ? (
+        {shouldRenderPureStructuredPage(structuredPage) ? (
+          <>
+            {legacyPage ? (
+              <>
+                <LegacyBodyAttributes
+                  bodyClassName={legacyPage.bodyClassName}
+                  bodyDataset={legacyPage.bodyDataset}
+                />
+                <div
+                  dangerouslySetInnerHTML={{ __html: legacyPage.headHtml || "" }}
+                  suppressHydrationWarning
+                />
+              </>
+            ) : null}
+            {structuredPage.kind === "product-overview" ||
+            structuredPage.kind === "solution-overview" ||
+            structuredPage.kind === "case-overview" ? (
+              <StructuredCatalogOverviewPage page={structuredPage} />
+            ) : (
+              <StructuredCatalogDetailPage page={structuredPage} />
+            )}
+          </>
+        ) : legacyPage ? (
           <>
             <LegacyBodyAttributes
               bodyClassName={legacyPage.bodyClassName}
