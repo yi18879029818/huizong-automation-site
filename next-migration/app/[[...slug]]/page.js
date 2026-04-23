@@ -1,43 +1,20 @@
 import { notFound } from "next/navigation";
-import { LegacyBodyAttributes } from "@/components/legacy-body-attributes";
 import {
   StructuredCatalogDetailPage,
   StructuredCatalogOverviewPage
 } from "@/components/structured-catalog-pages";
 import { StructuredStaticPage } from "@/components/structured-static-pages";
-import { StructuredLegacyPage } from "@/components/public-shell";
 import { StructuredData } from "@/components/structured-data";
 import { StructuredDetailPage, StructuredOverviewPage } from "@/components/structured-site";
-import { getLegacyPage, getStaticLegacyRoutes } from "@/lib/legacy-site";
 import { getAllStructuredRoutes, getStructuredPage } from "@/lib/structured-content";
 import { COMPANY } from "@/lib/site-config";
 
 export const dynamicParams = true;
 
 export function generateStaticParams() {
-  const routeKeys = new Set();
-  const params = [];
-
-  for (const route of getAllStructuredRoutes()) {
-    const slug = route === "/" ? [] : route.slice(1).split("/");
-    const key = slug.join("/");
-
-    if (!routeKeys.has(key)) {
-      routeKeys.add(key);
-      params.push({ slug });
-    }
-  }
-
-  for (const route of getStaticLegacyRoutes()) {
-    const key = route.slug.join("/");
-
-    if (!routeKeys.has(key)) {
-      routeKeys.add(key);
-      params.push(route);
-    }
-  }
-
-  return params;
+  return getAllStructuredRoutes().map((route) => ({
+    slug: route === "/" ? [] : route.slice(1).split("/")
+  }));
 }
 
 function buildStructuredMetadata(page) {
@@ -99,16 +76,9 @@ function renderPureStructuredPage(page) {
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
   const structuredPage = getStructuredPage(resolvedParams.slug || []);
-  const legacyPage = getLegacyPage(resolvedParams.slug || []);
 
   if (structuredPage) {
     return buildStructuredMetadata(structuredPage);
-  }
-
-  if (legacyPage) {
-    return {
-      title: legacyPage.title
-    };
   }
 
   return {};
@@ -117,42 +87,12 @@ export async function generateMetadata({ params }) {
 export default async function StructuredPage({ params }) {
   const resolvedParams = await params;
   const structuredPage = getStructuredPage(resolvedParams.slug || []);
-  const legacyPage = getLegacyPage(resolvedParams.slug || []);
 
   if (structuredPage) {
     return (
       <>
         {shouldRenderPureStructuredPage(structuredPage) ? (
-          <>
-            {legacyPage ? (
-              <>
-                <LegacyBodyAttributes
-                  bodyClassName={legacyPage.bodyClassName}
-                  bodyDataset={legacyPage.bodyDataset}
-                />
-                <div
-                  dangerouslySetInnerHTML={{ __html: legacyPage.headHtml || "" }}
-                  suppressHydrationWarning
-                />
-              </>
-            ) : null}
-            {renderPureStructuredPage(structuredPage)}
-          </>
-        ) : legacyPage ? (
-          <>
-            <LegacyBodyAttributes
-              bodyClassName={legacyPage.bodyClassName}
-              bodyDataset={legacyPage.bodyDataset}
-            />
-            <div
-              dangerouslySetInnerHTML={{ __html: legacyPage.headHtml || "" }}
-              suppressHydrationWarning
-            />
-            <StructuredLegacyPage
-              legacyContentHtml={legacyPage.contentHtml || legacyPage.bodyHtml}
-              page={structuredPage}
-            />
-          </>
+          renderPureStructuredPage(structuredPage)
         ) : (
           <>
             <StructuredData page={structuredPage} />
@@ -166,21 +106,6 @@ export default async function StructuredPage({ params }) {
             )}
           </>
         )}
-      </>
-    );
-  }
-
-  if (legacyPage) {
-    return (
-      <>
-        <LegacyBodyAttributes
-          bodyClassName={legacyPage.bodyClassName}
-          bodyDataset={legacyPage.bodyDataset}
-        />
-        <div
-          dangerouslySetInnerHTML={{ __html: `${legacyPage.headHtml || ""}${legacyPage.bodyHtml}` }}
-          suppressHydrationWarning
-        />
       </>
     );
   }

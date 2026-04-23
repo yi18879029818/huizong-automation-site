@@ -1,9 +1,8 @@
-import Link from "next/link";
 import { StructuredData } from "@/components/structured-data";
 import { NAV_SECTIONS } from "@/lib/navigation";
 
 function NavLink(props) {
-  return <Link prefetch={false} {...props} />;
+  return <a {...props} />;
 }
 
 function DesktopNavigation({ currentSection }) {
@@ -259,24 +258,14 @@ function Footer() {
 }
 
 export function PublicPageChrome({ children, page }) {
+  const theme = page.kind === "home-page" ? "home" : "standard";
+
   return (
-    <div className="content-shell">
+    <div className="content-shell" data-hsa-theme={theme}>
       <StructuredData page={page} />
       <Header currentSection={page.section} />
       {children}
       <Footer />
     </div>
-  );
-}
-
-export function StructuredLegacyPage({ legacyContentHtml, page }) {
-  return (
-    <PublicPageChrome page={page}>
-      <div
-        className="page-content"
-        dangerouslySetInnerHTML={{ __html: legacyContentHtml }}
-        suppressHydrationWarning
-      />
-    </PublicPageChrome>
   );
 }

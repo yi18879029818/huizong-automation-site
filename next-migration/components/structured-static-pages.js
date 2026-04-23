@@ -3,14 +3,6 @@ import { PublicPageChrome } from "@/components/public-shell";
 function HomeBody() {
   return (
     <>
-      <div className="hsa-secondary">
-        <div className="hsa-secondary-inner">
-          <div className="hsa-breadcrumb">
-            <span className="hsa-crumb-current">Home</span>
-          </div>
-        </div>
-      </div>
-
       <div className="page-content">
         <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-secondary">
           <div className="absolute inset-0 z-0 overflow-hidden">
@@ -431,16 +423,6 @@ function HomeBody() {
 function AboutBody() {
   return (
     <>
-      <div className="hsa-secondary">
-        <div className="hsa-secondary-inner">
-          <div className="hsa-breadcrumb">
-            <a href="/">Home</a>
-            <span className="hsa-crumb-sep">/</span>
-            <span className="hsa-crumb-current">About</span>
-          </div>
-        </div>
-      </div>
-
       <div className="page-content">
         <main>
           <section className="relative h-[80vh] flex items-center overflow-hidden bg-primary">
@@ -700,16 +682,6 @@ function AboutBody() {
 function ContactBody() {
   return (
     <>
-      <div className="hsa-secondary">
-        <div className="hsa-secondary-inner">
-          <div className="hsa-breadcrumb">
-            <a href="/">Home</a>
-            <span className="hsa-crumb-sep">/</span>
-            <span className="hsa-crumb-current">Contact</span>
-          </div>
-        </div>
-      </div>
-
       <div className="page-content">
         <main>
           <section className="relative min-h-[480px] flex items-center overflow-hidden">
