@@ -4,6 +4,7 @@ import {
   StructuredCatalogDetailPage,
   StructuredCatalogOverviewPage
 } from "@/components/structured-catalog-pages";
+import { StructuredStaticPage } from "@/components/structured-static-pages";
 import { StructuredLegacyPage } from "@/components/public-shell";
 import { StructuredData } from "@/components/structured-data";
 import { StructuredDetailPage, StructuredOverviewPage } from "@/components/structured-site";
@@ -70,10 +71,29 @@ function buildStructuredMetadata(page) {
 
 function shouldRenderPureStructuredPage(page) {
   return (
+    page.kind === "home-page" ||
+    page.kind === "about-page" ||
+    page.kind === "contact-page" ||
     page.section === "products" ||
     page.section === "solutions" ||
     page.section === "case-studies"
   );
+}
+
+function renderPureStructuredPage(page) {
+  if (page.kind === "home-page" || page.kind === "about-page" || page.kind === "contact-page") {
+    return <StructuredStaticPage page={page} />;
+  }
+
+  if (
+    page.kind === "product-overview" ||
+    page.kind === "solution-overview" ||
+    page.kind === "case-overview"
+  ) {
+    return <StructuredCatalogOverviewPage page={page} />;
+  }
+
+  return <StructuredCatalogDetailPage page={page} />;
 }
 
 export async function generateMetadata({ params }) {
@@ -116,13 +136,7 @@ export default async function StructuredPage({ params }) {
                 />
               </>
             ) : null}
-            {structuredPage.kind === "product-overview" ||
-            structuredPage.kind === "solution-overview" ||
-            structuredPage.kind === "case-overview" ? (
-              <StructuredCatalogOverviewPage page={structuredPage} />
-            ) : (
-              <StructuredCatalogDetailPage page={structuredPage} />
-            )}
+            {renderPureStructuredPage(structuredPage)}
           </>
         ) : legacyPage ? (
           <>

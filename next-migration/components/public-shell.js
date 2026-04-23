@@ -2,35 +2,39 @@ import Link from "next/link";
 import { StructuredData } from "@/components/structured-data";
 import { NAV_SECTIONS } from "@/lib/navigation";
 
+function NavLink(props) {
+  return <Link prefetch={false} {...props} />;
+}
+
 function DesktopNavigation({ currentSection }) {
   return (
     <nav aria-label="Main Navigation" className="hsa-top-nav">
-      <Link className={`hsa-top-link${currentSection === "home" ? " hsa-top-active" : ""}`} href="/">
+      <NavLink className={`hsa-top-link${currentSection === "home" ? " hsa-top-active" : ""}`} href="/">
         Home
-      </Link>
+      </NavLink>
       {NAV_SECTIONS.map((section) => (
         <div className={`hsa-top-group${currentSection === section.key ? " hsa-top-active" : ""}`} key={section.key}>
-          <Link className="hsa-top-link" href={section.href}>
+          <NavLink className="hsa-top-link" href={section.href}>
             {section.label}
-          </Link>
+          </NavLink>
           <div className="hsa-dropdown">
             {section.items.map((item) => (
-              <Link className="hsa-dropdown-link" href={item.href} key={item.href}>
+              <NavLink className="hsa-dropdown-link" href={item.href} key={item.href}>
                 {item.label}
-              </Link>
+              </NavLink>
             ))}
           </div>
         </div>
       ))}
-      <Link className={`hsa-top-link${currentSection === "about" ? " hsa-top-active" : ""}`} href="/about">
+      <NavLink className={`hsa-top-link${currentSection === "about" ? " hsa-top-active" : ""}`} href="/about">
         About
-      </Link>
-      <Link
+      </NavLink>
+      <NavLink
         className={`hsa-top-link${currentSection === "contact" ? " hsa-top-active" : ""}`}
         href="/contact"
       >
         Contact
-      </Link>
+      </NavLink>
     </nav>
   );
 }
@@ -38,19 +42,19 @@ function DesktopNavigation({ currentSection }) {
 function MobileNavigation() {
   return (
     <div className="hsa-mobile-menu" id="hsa-mobile-menu">
-      <Link href="/">Home</Link>
+      <NavLink href="/">Home</NavLink>
       {NAV_SECTIONS.map((section) => (
         <details key={section.key}>
           <summary>{section.label}</summary>
           {section.items.map((item) => (
-            <Link href={item.href} key={item.href}>
+            <NavLink href={item.href} key={item.href}>
               {item.label}
-            </Link>
+            </NavLink>
           ))}
         </details>
       ))}
-      <Link href="/about">About</Link>
-      <Link href="/contact">Contact</Link>
+      <NavLink href="/about">About</NavLink>
+      <NavLink href="/contact">Contact</NavLink>
     </div>
   );
 }
@@ -59,17 +63,17 @@ function Header({ currentSection }) {
   return (
     <header className="hsa-header">
       <div className="hsa-header-inner">
-        <Link className="hsa-brand" href="/">
+        <NavLink className="hsa-brand" href="/">
           <span className="hsa-brand-mark">H</span>
           <span className="hsa-brand-copy">
             <strong>Huizong Intelligent Automation</strong>
             <em>Global Warehouse Automation Systems</em>
           </span>
-        </Link>
+        </NavLink>
         <DesktopNavigation currentSection={currentSection} />
-        <Link className="hsa-cta" href="/contact">
+        <NavLink className="hsa-cta" href="/contact">
           Speak With An Expert
-        </Link>
+        </NavLink>
         <button
           aria-controls="hsa-mobile-menu"
           aria-expanded="false"
@@ -237,9 +241,9 @@ function Footer() {
             <h4>{section.label}</h4>
             <div className="hsa-footer-links">
               {section.items.map((item) => (
-                <Link href={item.href} key={item.href}>
+                <NavLink href={item.href} key={item.href}>
                   {item.label}
-                </Link>
+                </NavLink>
               ))}
             </div>
           </div>
