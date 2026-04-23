@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { LegacyBodyAttributes } from "@/components/legacy-body-attributes";
+import { StructuredLegacyPage } from "@/components/public-shell";
 import { StructuredData } from "@/components/structured-data";
 import { StructuredDetailPage, StructuredOverviewPage } from "@/components/structured-site";
 import { getLegacyPage, getStaticLegacyRoutes } from "@/lib/legacy-site";
@@ -86,10 +87,44 @@ export default async function StructuredPage({ params }) {
   const structuredPage = getStructuredPage(resolvedParams.slug || []);
   const legacyPage = getLegacyPage(resolvedParams.slug || []);
 
+  if (structuredPage) {
+    return (
+      <>
+        {legacyPage ? (
+          <>
+            <LegacyBodyAttributes
+              bodyClassName={legacyPage.bodyClassName}
+              bodyDataset={legacyPage.bodyDataset}
+            />
+            <div
+              dangerouslySetInnerHTML={{ __html: legacyPage.headHtml || "" }}
+              suppressHydrationWarning
+            />
+            <StructuredLegacyPage
+              legacyContentHtml={legacyPage.contentHtml || legacyPage.bodyHtml}
+              page={structuredPage}
+            />
+          </>
+        ) : (
+          <>
+            <StructuredData page={structuredPage} />
+            {structuredPage.kind === "home-page" ||
+            structuredPage.kind === "product-overview" ||
+            structuredPage.kind === "solution-overview" ||
+            structuredPage.kind === "case-overview" ? (
+              <StructuredOverviewPage page={structuredPage} />
+            ) : (
+              <StructuredDetailPage page={structuredPage} />
+            )}
+          </>
+        )}
+      </>
+    );
+  }
+
   if (legacyPage) {
     return (
       <>
-        {structuredPage ? <StructuredData page={structuredPage} /> : null}
         <LegacyBodyAttributes
           bodyClassName={legacyPage.bodyClassName}
           bodyDataset={legacyPage.bodyDataset}
@@ -100,19 +135,6 @@ export default async function StructuredPage({ params }) {
         />
       </>
     );
-  }
-
-  if (structuredPage) {
-    if (
-      structuredPage.kind === "home-page" ||
-      structuredPage.kind === "product-overview" ||
-      structuredPage.kind === "solution-overview" ||
-      structuredPage.kind === "case-overview"
-    ) {
-      return <StructuredOverviewPage page={structuredPage} />;
-    }
-
-    return <StructuredDetailPage page={structuredPage} />;
   }
 
   notFound();

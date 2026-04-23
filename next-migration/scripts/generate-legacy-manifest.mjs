@@ -223,6 +223,19 @@ function parseLinks(headHtml, relativeFilePath) {
   return links;
 }
 
+function extractPageContentHtml(bodyHtml) {
+  const $ = load(bodyHtml, null, false);
+  const pageContent = $(".page-content").first();
+
+  if (pageContent.length) {
+    return pageContent.html()?.trim() || "";
+  }
+
+  $("header.hsa-header, .hsa-secondary, footer.hsa-footer").remove();
+
+  return $.root().html()?.trim() || "";
+}
+
 function parseLegacyPage(absolutePath) {
   const relativeFilePath = toPosixPath(path.relative(sourceDir, absolutePath));
   const cleanRoutePath = getCleanRoutePath(relativeFilePath);
@@ -242,6 +255,8 @@ function parseLegacyPage(absolutePath) {
     (match) => match[1]
   );
 
+  const rewrittenBodyHtml = rewriteLegacyFragmentUrls(bodyMatch[2], relativeFilePath);
+
   return {
     relativeFilePath,
     cleanRoutePath,
@@ -255,7 +270,8 @@ function parseLegacyPage(absolutePath) {
     links: parseLinks(headHtml, relativeFilePath),
     inlineStyles,
     scripts: parseScripts(headHtml, relativeFilePath),
-    bodyHtml: rewriteLegacyFragmentUrls(bodyMatch[2], relativeFilePath)
+    bodyHtml: rewrittenBodyHtml,
+    contentHtml: extractPageContentHtml(rewrittenBodyHtml)
   };
 }
 
