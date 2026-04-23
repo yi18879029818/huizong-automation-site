@@ -2,31 +2,6 @@ import Link from "next/link";
 import { StructuredData } from "@/components/structured-data";
 import { NAV_SECTIONS } from "@/lib/navigation";
 
-function Breadcrumbs({ items = [] }) {
-  if (!items.length) {
-    return null;
-  }
-
-  return (
-    <div className="hsa-breadcrumb">
-      {items.map((item, index) => {
-        const isLast = index === items.length - 1;
-
-        return (
-          <span className="shell-breadcrumb-item" key={`${item.href}-${item.label}`}>
-            {isLast ? (
-              <span className="hsa-crumb-current">{item.label}</span>
-            ) : (
-              <Link href={item.href}>{item.label}</Link>
-            )}
-            {!isLast ? <span className="hsa-crumb-sep">/</span> : null}
-          </span>
-        );
-      })}
-    </div>
-  );
-}
-
 function DesktopNavigation({ currentSection }) {
   return (
     <nav aria-label="Main Navigation" className="hsa-top-nav">
@@ -107,41 +82,6 @@ function Header({ currentSection }) {
       </div>
       <MobileNavigation />
     </header>
-  );
-}
-
-function Subnav({ currentHref, items = [] }) {
-  if (!items.length) {
-    return null;
-  }
-
-  return (
-    <div className="hsa-subnav">
-      {items.map((item) => (
-        <Link
-          className={`hsa-sub-link${item.href === currentHref ? " hsa-sub-active" : ""}`}
-          href={item.href}
-          key={item.href}
-        >
-          {item.label}
-        </Link>
-      ))}
-    </div>
-  );
-}
-
-function SecondaryBar({ page }) {
-  if ((page.breadcrumbs?.length || 0) <= 1 && !(page.subnav?.length || 0)) {
-    return null;
-  }
-
-  return (
-    <div className="hsa-secondary">
-      <div className="hsa-secondary-inner">
-        <Breadcrumbs items={page.breadcrumbs} />
-        <Subnav currentHref={page.currentHref} items={page.subnav} />
-      </div>
-    </div>
   );
 }
 
@@ -320,7 +260,6 @@ export function StructuredLegacyPage({ legacyContentHtml, page }) {
     <div className="content-shell">
       <StructuredData page={page} />
       <Header currentSection={page.section} />
-      <SecondaryBar page={page} />
       <div className="page-content" dangerouslySetInnerHTML={{ __html: legacyContentHtml }} suppressHydrationWarning />
       <Footer />
     </div>
