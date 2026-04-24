@@ -1,4 +1,4 @@
-export const SITE_URL = "https://huizong-automation-site.pages.dev";
+export const SITE_URL = "https://huizong-automation-site-next.carlisezuckerwar960.workers.dev";
 
 export const COMPANY = {
   name: "Huizong Intelligent Automation",

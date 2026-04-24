@@ -1,22 +1,43 @@
-const AI_USER_AGENT_PATTERNS = [
-  /GPTBot/i,
-  /ChatGPT-User/i,
-  /ClaudeBot/i,
-  /Claude-Web/i,
-  /anthropic-ai/i,
-  /PerplexityBot/i,
-  /Perplexity-User/i,
-  /Google-Extended/i,
-  /GoogleOther/i,
-  /CCBot/i,
-  /Bytespider/i,
-  /Meta-ExternalAgent/i,
-  /Meta-ExternalFetcher/i,
-  /Diffbot/i,
-  /YouBot/i,
-  /cohere-ai/i,
-  /Amazonbot/i,
-  /OAI-SearchBot/i
+const AGENT_PROFILES = [
+  {
+    id: "openai",
+    family: "openai",
+    strategy: "markdown",
+    patterns: [/GPTBot/i, /ChatGPT-User/i, /OAI-SearchBot/i]
+  },
+  {
+    id: "anthropic",
+    family: "anthropic",
+    strategy: "markdown",
+    patterns: [/ClaudeBot/i, /Claude-Web/i, /anthropic-ai/i]
+  },
+  {
+    id: "perplexity",
+    family: "perplexity",
+    strategy: "markdown",
+    patterns: [/PerplexityBot/i, /Perplexity-User/i]
+  },
+  {
+    id: "google-extended",
+    family: "google",
+    strategy: "html-with-index",
+    patterns: [/Google-Extended/i, /GoogleOther/i]
+  },
+  {
+    id: "common-crawler",
+    family: "crawler",
+    strategy: "markdown",
+    patterns: [
+      /CCBot/i,
+      /Bytespider/i,
+      /Meta-ExternalAgent/i,
+      /Meta-ExternalFetcher/i,
+      /Diffbot/i,
+      /YouBot/i,
+      /cohere-ai/i,
+      /Amazonbot/i
+    ]
+  }
 ];
 
 const EXCLUDED_PREFIXES = ["/api", "/_next", "/assets", "/favicon", "/images"];
@@ -73,7 +94,24 @@ export function isStructuredPathname(pathname = "/") {
 }
 
 export function isAiUserAgent(userAgent = "") {
-  return AI_USER_AGENT_PATTERNS.some((pattern) => pattern.test(userAgent));
+  return AGENT_PROFILES.some((profile) =>
+    profile.patterns.some((pattern) => pattern.test(userAgent))
+  );
+}
+
+export function getAgentProfile(userAgent = "") {
+  const matched = AGENT_PROFILES.find((profile) =>
+    profile.patterns.some((pattern) => pattern.test(userAgent))
+  );
+
+  return (
+    matched || {
+      id: "human",
+      family: "human",
+      strategy: "html",
+      patterns: []
+    }
+  );
 }
 
 export function shouldServeMarkdownView({ pathname = "/", searchParams, userAgent = "", method }) {
@@ -89,5 +127,28 @@ export function shouldServeMarkdownView({ pathname = "/", searchParams, userAgen
     return true;
   }
 
-  return isAiUserAgent(userAgent);
+  return getAgentProfile(userAgent).strategy === "markdown";
+}
+
+export function getAgentResponsePolicy({ pathname = "/", searchParams, userAgent = "", method }) {
+  if ((method || "GET").toUpperCase() !== "GET" || !isStructuredPathname(pathname)) {
+    return {
+      profile: getAgentProfile(userAgent),
+      response: "html"
+    };
+  }
+
+  if (searchParams?.get("view") === "markdown") {
+    return {
+      profile: getAgentProfile(userAgent),
+      response: "markdown"
+    };
+  }
+
+  const profile = getAgentProfile(userAgent);
+
+  return {
+    profile,
+    response: profile.strategy === "markdown" ? "markdown" : "html"
+  };
 }

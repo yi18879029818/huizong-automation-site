@@ -280,7 +280,8 @@ function productOfferSchema(page, url) {
   return {
     "@type": "Offer",
     "@id": ids.offer,
-    url: absoluteUrl("/contact"),
+    name: `${page.data.title} custom quotation`,
+    url,
     itemOffered: {
       "@id": ids.entity
     },
@@ -290,7 +291,29 @@ function productOfferSchema(page, url) {
     eligibleRegion: GLOBAL_MARKET,
     category: "B2B warehouse automation procurement",
     businessFunction: GOOD_RELATIONS_SELL,
-    description: `Custom quotation available for ${page.data.title} deployment, integration, commissioning, and lifecycle support.`
+    itemCondition: "https://schema.org/NewCondition",
+    priceSpecification: {
+      "@type": "PriceSpecification",
+      name: "Custom project quotation",
+      description: `Pricing is quoted per ${page.data.title} scope, payload class, lift height, navigation stack, software integration, commissioning, and lifecycle support.`
+    },
+    eligibleCustomerType: {
+      "@type": "BusinessAudience",
+      audienceType: "Warehouse and manufacturing operators"
+    },
+    description: `Custom quotation available for ${page.data.title} deployment, integration, commissioning, and lifecycle support.`,
+    additionalProperty: [
+      {
+        "@type": "PropertyValue",
+        name: "Procurement model",
+        value: "Request for quotation"
+      },
+      {
+        "@type": "PropertyValue",
+        name: "Commercial path",
+        value: absoluteUrl("/contact")
+      }
+    ]
   };
 }
 

@@ -8,9 +8,25 @@ export const metadata = {
   title: "Huizong Intelligent Automation",
   description: "Low-risk Next.js migration shell for the existing Huizong static marketing site.",
   metadataBase: new URL(SITE_URL),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1
+    }
+  },
   openGraph: {
     siteName: COMPANY.name,
     type: "website"
+  },
+  other: {
+    "llms-json": "/llms.json",
+    "llms-index": "/llms.txt",
+    "llms-full": "/llms-full.txt"
   }
 };
 

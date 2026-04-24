@@ -114,8 +114,11 @@ function productDetailMarkdown(page) {
     "\n## Offer",
     "",
     `- Offer type: Custom quotation`,
+    `- Procurement model: Request for quotation`,
     `- Seller: ${COMPANY.name}`,
+    `- Item condition: New equipment`,
     `- Eligible region: Worldwide`,
+    `- Pricing basis: Scope, payload class, lift height, software integration, commissioning, lifecycle support`,
     `- Contact for quote: ${absoluteUrl("/contact")}`
   ]
     .filter(Boolean)

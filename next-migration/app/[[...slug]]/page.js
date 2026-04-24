@@ -28,7 +28,21 @@ function buildStructuredMetadata(page) {
     title: page.title,
     description,
     alternates: {
-      canonical: page.currentHref
+      canonical: page.currentHref,
+      languages: {
+        "x-default": page.currentHref
+      }
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1
+      }
     },
     openGraph: {
       title: page.title,
@@ -42,6 +56,12 @@ function buildStructuredMetadata(page) {
           alt: page.data.title
         }
       ]
+    },
+    other: {
+      "llms-json": "/llms.json",
+      "llms-index": "/llms.txt",
+      "llms-full": "/llms-full.txt",
+      "ai-markdown": `/api/markdown?path=${page.currentHref}`
     }
   };
 }
