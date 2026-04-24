@@ -1,27 +1,46 @@
 "use client";
 
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
+import { usePathname } from "next/navigation";
+
+function toPageKey(pathname) {
+  if (!pathname || pathname === "/") {
+    return "home";
+  }
+
+  return pathname.replace(/^\/+/, "").replace(/\/+/g, "-");
+}
 
 export function BodyPageAttributes({ pageKey, theme }) {
-  useEffect(() => {
+  const pathname = usePathname();
+  const resolvedPageKey = toPageKey(pathname) || pageKey || "home";
+
+  useLayoutEffect(() => {
     const body = document.body;
+    const shell = document.getElementById("hsa-content-shell");
     if (!body) {
       return undefined;
     }
 
     const previousPageKey = body.getAttribute("data-page-key");
     const previousTheme = body.getAttribute("data-hsa-theme");
+    const previousShellPageKey = shell?.getAttribute("data-page-key");
+    const previousShellTheme = shell?.getAttribute("data-hsa-theme");
 
-    if (pageKey) {
-      body.setAttribute("data-page-key", pageKey);
+    if (resolvedPageKey) {
+      body.setAttribute("data-page-key", resolvedPageKey);
+      shell?.setAttribute("data-page-key", resolvedPageKey);
     } else {
       body.removeAttribute("data-page-key");
+      shell?.removeAttribute("data-page-key");
     }
 
     if (theme) {
       body.setAttribute("data-hsa-theme", theme);
+      shell?.setAttribute("data-hsa-theme", theme);
     } else {
       body.removeAttribute("data-hsa-theme");
+      shell?.removeAttribute("data-hsa-theme");
     }
 
     return () => {
@@ -36,8 +55,22 @@ export function BodyPageAttributes({ pageKey, theme }) {
       } else {
         body.removeAttribute("data-hsa-theme");
       }
+
+      if (shell) {
+        if (previousShellPageKey) {
+          shell.setAttribute("data-page-key", previousShellPageKey);
+        } else {
+          shell.removeAttribute("data-page-key");
+        }
+
+        if (previousShellTheme) {
+          shell.setAttribute("data-hsa-theme", previousShellTheme);
+        } else {
+          shell.removeAttribute("data-hsa-theme");
+        }
+      }
     };
-  }, [pageKey, theme]);
+  }, [resolvedPageKey, theme]);
 
   return null;
 }

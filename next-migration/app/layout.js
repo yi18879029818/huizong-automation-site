@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
         <Script src="/assets/site-shell.js" strategy="afterInteractive" />
         <Script src="/assets/home-hero-robot.js" strategy="afterInteractive" type="module" />
       </head>
-      <body>{children}</body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

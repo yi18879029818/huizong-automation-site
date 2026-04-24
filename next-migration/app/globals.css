@@ -13,6 +13,29 @@ body {
   color: #191c1e;
 }
 
+body.antialiased {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 * {
   box-sizing: border-box;
+}
+
+.kinetic-gradient {
+  background: linear-gradient(135deg, #001736 0%, #002b5c 100%);
+}
+
+.glass-panel {
+  background: rgba(248, 249, 251, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.hsa-dark-copy {
+  color: #7594cb;
+}
+
+.hsa-dark-kicker {
+  color: #8ea7d3;
 }

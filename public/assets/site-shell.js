@@ -1015,7 +1015,12 @@
     });
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
+  function initSiteShell() {
+    if (window.__hsaShellInitialized) {
+      return;
+    }
+
+    window.__hsaShellInitialized = true;
     initVisitorTracking();
     enhanceFooters();
     bindExpertModal();
@@ -1026,5 +1031,11 @@
     bindJourneyConversions();
     bindTextTargets();
     bindOverviewCards();
-  });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initSiteShell, { once: true });
+  } else {
+    initSiteShell();
+  }
 }());

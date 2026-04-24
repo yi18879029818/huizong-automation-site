@@ -1277,13 +1277,13 @@ function StorageAgvBody() {
         <div className="absolute inset-0 bg-gradient-to-r from-primary-container via-primary-container/80 to-transparent" />
         <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="max-w-2xl">
-            <span className="inline-block px-3 py-1 bg-secondary/20 text-secondary-fixed-dim rounded-full text-xs font-bold tracking-[0.1em] uppercase mb-6 font-label">
+            <span className="inline-block px-3 py-1 bg-white/10 hsa-dark-kicker rounded-full text-xs font-bold tracking-[0.1em] uppercase mb-6 font-label">
               Precision Logistics
             </span>
             <h1 className="text-white font-headline text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
               Storage AGV
             </h1>
-            <p className="text-primary-fixed font-body text-xl md:text-2xl leading-relaxed mb-10 opacity-90">
+            <p className="hsa-dark-copy font-body text-xl md:text-2xl leading-relaxed mb-10">
               Engineered for high-density buffer zones and automated inventory flow control. Precision in every movement.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -1420,13 +1420,13 @@ function StorageAgvBody() {
           <div className="bg-surface-container-lowest/10 backdrop-blur-xl border border-white/10 rounded-xl p-12 lg:p-20">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div>
-                <span className="font-label text-xs font-bold tracking-widest text-secondary-fixed-dim uppercase block mb-4">
+                <span className="font-label text-xs font-bold tracking-widest hsa-dark-kicker uppercase block mb-4">
                   System Integration
                 </span>
                 <h2 className="font-headline text-4xl md:text-5xl font-extrabold text-white mb-8 leading-tight">
                   The ASRS Synergy
                 </h2>
-                <p className="font-body text-xl text-primary-fixed opacity-90 leading-relaxed mb-8">
+                <p className="font-body text-xl hsa-dark-copy leading-relaxed mb-8">
                   Integration is not an afterthought. The Storage AGV acts as the kinetic extension of your ASRS (Automated Storage and Retrieval Systems). By bridging the gap between static racking and mobile logistics, we create a complete, zero-error high-density storage solution that operates 24/7.
                 </p>
                 <div className="flex items-center space-x-4">
@@ -1742,7 +1742,7 @@ function CompositeMobileRobotBody() {
               Composite <br />
               Mobile Robot
             </h1>
-            <p className="text-xl md:text-2xl text-primary-fixed-dim font-light leading-relaxed mb-10 max-w-2xl">
+            <p className="text-xl md:text-2xl hsa-dark-copy font-light leading-relaxed mb-10 max-w-2xl">
               The pinnacle of mobile manipulation. Integrating advanced robotics with autonomous mobility for complex task execution in high-precision environments.
             </p>
             <div className="flex flex-wrap gap-4">
