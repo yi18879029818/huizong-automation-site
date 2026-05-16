@@ -46,22 +46,35 @@ function getPageKey(page) {
 function DesktopNavigation({ currentSection }) {
   return (
     <nav aria-label="Main Navigation" className="hsa-top-nav">
-      <NavLink className={`hsa-top-link${currentSection === "home" ? " hsa-top-active" : ""}`} href="/">
+      <NavLink
+        className={`hsa-top-link${currentSection === "home" ? " hsa-top-active" : ""}`}
+        href="/"
+      >
         Home
       </NavLink>
       {NAV_SECTIONS.map((section) => (
-        <details className={`hsa-top-group${currentSection === section.key ? " hsa-top-active" : ""}`} key={section.key}>
+        <details
+          className={`hsa-top-group${currentSection === section.key ? " hsa-top-active" : ""}`}
+          key={section.key}
+        >
           <summary>{section.label}</summary>
           <div className="hsa-dropdown">
             {section.items.map((item) => (
-              <NavLink className="hsa-dropdown-link" href={item.href} key={item.href}>
+              <NavLink
+                className="hsa-dropdown-link"
+                href={item.href}
+                key={item.href}
+              >
                 {item.label}
               </NavLink>
             ))}
           </div>
         </details>
       ))}
-      <NavLink className={`hsa-top-link${currentSection === "about" ? " hsa-top-active" : ""}`} href="/about">
+      <NavLink
+        className={`hsa-top-link${currentSection === "about" ? " hsa-top-active" : ""}`}
+        href="/about"
+      >
         About
       </NavLink>
       <NavLink
@@ -99,10 +112,19 @@ function Header({ currentSection }) {
     <header className="hsa-header">
       <div className="hsa-header-inner">
         <NavLink className="hsa-brand" href="/">
-          <span className="hsa-brand-mark">H</span>
+          <span className="hsa-brand-mark">
+            <img
+              alt="coolyne logo"
+              decoding="async"
+              fetchPriority="high"
+              src="/assets/logo/coolyne-header-mark-home.webp"
+              width="156"
+              height="94"
+            />
+          </span>
           <span className="hsa-brand-copy">
-            <strong>Huizong Intelligent Automation</strong>
-            <em>Global Warehouse Automation Systems</em>
+            <strong>coolyne</strong>
+            <em>Warehouse Automation and AGV Systems</em>
           </span>
         </NavLink>
         <DesktopNavigation currentSection={currentSection} />
@@ -128,10 +150,19 @@ function Footer() {
     <footer className="hsa-footer">
       <div className="hsa-footer-inner">
         <div>
-          <div className="hsa-footer-brand">Huizong Intelligent Automation</div>
+          <div className="hsa-footer-brand">
+            <img
+              alt="coolyne logo"
+              className="hsa-footer-brand-logo"
+              decoding="async"
+              src="/assets/logo/coolyne-logo-white.png"
+              width="635"
+              height="460"
+            />
+          </div>
           <p className="hsa-footer-copy">
-            Integrated warehouse automation, robotics, software orchestration, and project delivery for
-            global B2B intralogistics operations.
+            Integrated warehouse automation, robotics, software orchestration,
+            and project delivery for global B2B intralogistics operations.
           </p>
         </div>
         {NAV_SECTIONS.map((section) => (
@@ -148,8 +179,8 @@ function Footer() {
         ))}
       </div>
       <div className="hsa-footer-bottom">
-        <span>Copyright 2026 Huizong Intelligent Automation</span>
-        <span>Local deployment build for browser preview</span>
+        <span>Copyright 2026 coolyne</span>
+        <span>Integrated AGV, ASRS, and warehouse automation systems</span>
       </div>
     </footer>
   );
@@ -160,7 +191,12 @@ export function PublicPageChrome({ children, page }) {
   const pageKey = getPageKey(page);
 
   return (
-    <div className="content-shell" data-hsa-theme={theme} data-page-key={pageKey} id="hsa-content-shell">
+    <div
+      className="content-shell"
+      data-hsa-theme={theme}
+      data-page-key={pageKey}
+      id="hsa-content-shell"
+    >
       <BodyPageAttributes pageKey={pageKey} theme={theme} />
       <StructuredData page={page} />
       <Header currentSection={page.section} />

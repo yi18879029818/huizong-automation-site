@@ -1,0 +1,22 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "main": ".open-next/worker.js",
+  "name": "huizong-automation-site-next",
+  "compatibility_date": "2024-12-30",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS",
+    "html_handling": "none"
+  },
+  "vars": {
+    "GA4_MEASUREMENT_ID": "G-P4MLY74P4X"
+  },
+  "d1_databases": [
+    {
+      "binding": "FORM_DB",
+      "database_name": "huizong-form-submissions",
+      "database_id": "b03a1e30-1e26-4454-b84a-37237cca2ea2"
+    }
+  ]
+}

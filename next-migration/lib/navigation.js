@@ -5,7 +5,8 @@ export const NAV_SECTIONS = [
     href: "/products",
     items: [
       { href: "/products", label: "Products Overview" },
-      { href: "/products/agv-forklift", label: "AGV Forklift" },
+      { href: "/products/agv-forklift", label: "Forklift Stacker AGV" },
+      { href: "/products/ground-handling-forklift-agv", label: "Ground Handling Forklift AGV" },
       { href: "/products/lifting-agv", label: "Lifting AGV" },
       { href: "/products/storage-agv", label: "Storage AGV" },
       { href: "/products/agv-roller", label: "AGV Roller" },
@@ -32,11 +33,7 @@ export const NAV_SECTIONS = [
       { href: "/case-studies", label: "All Projects" },
       { href: "/case-studies/asrs", label: "ASRS" },
       { href: "/case-studies/material-handling", label: "Material Handling" },
-      { href: "/case-studies/picking", label: "Picking" },
-      {
-        href: "/case-studies/projects/automated-warehouse-upgrade",
-        label: "Project Detail"
-      }
+      { href: "/case-studies/picking", label: "Picking" }
     ]
   }
 ];
@@ -47,6 +44,7 @@ export const STRUCTURED_ROUTES = [
   "/contact",
   "/products",
   "/products/agv-forklift",
+  "/products/ground-handling-forklift-agv",
   "/products/lifting-agv",
   "/products/storage-agv",
   "/products/agv-roller",

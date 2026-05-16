@@ -33,10 +33,12 @@ function Header({ currentSection }) {
     <header className="hsa-header">
       <div className="hsa-header-inner">
         <Link className="hsa-brand" href="/">
-          <span className="hsa-brand-mark">H</span>
+          <span className="hsa-brand-mark">
+            <img alt="coolyne logo" src="/assets/logo/coolyne-logo-transparent.png" />
+          </span>
           <span className="hsa-brand-copy">
-            <strong>Huizong Intelligent Automation</strong>
-            <em>Global Warehouse Automation Systems</em>
+            <strong>coolyne</strong>
+            <em>Warehouse Automation and AGV Systems</em>
           </span>
         </Link>
         <nav aria-label="Main Navigation" className="hsa-top-nav">
@@ -88,7 +90,13 @@ function Footer() {
     <footer className="hsa-footer">
       <div className="hsa-footer-inner">
         <div>
-          <div className="hsa-footer-brand">Huizong Intelligent Automation</div>
+          <div className="hsa-footer-brand">
+            <img
+              alt="coolyne logo"
+              className="hsa-footer-brand-logo"
+              src="/assets/logo/coolyne-logo-white.png"
+            />
+          </div>
           <p className="hsa-footer-copy">
             Integrated warehouse automation, robotics, software orchestration, and project
             delivery for global B2B intralogistics operations.
@@ -108,8 +116,8 @@ function Footer() {
         ))}
       </div>
       <div className="hsa-footer-bottom">
-        <span>Copyright 2026 Huizong Intelligent Automation</span>
-        <span>Next.js content layer with MDX, schema, and agent-ready metadata</span>
+        <span>Copyright 2026 coolyne</span>
+        <span>Integrated AGV, ASRS, and warehouse automation systems</span>
       </div>
     </footer>
   );
@@ -139,7 +147,7 @@ function Hero({ kicker, title, summary, metrics = [], image, detail = false }) {
               <div className="metric-panel" key={metric.label}>
                 <span className="metric-label">{metric.label}</span>
                 <strong>{metric.value}</strong>
-                <p>Reusable content metric ready for schema, search, and filtering.</p>
+                <p>Benchmark data used to qualify throughput, safety, or integration scope.</p>
               </div>
             ))}
           </div>
@@ -176,7 +184,7 @@ function ContentSection({ Content }) {
 
   return (
     <Section
-      description="This prose now lives in MDX files, which means editorial updates no longer require touching the page template."
+      description="Supporting guidance, deployment notes, and industry context for the solution set."
       title="Editorial Content"
     >
       <div className="mdx-prose">
@@ -228,7 +236,7 @@ function FaqSection({ faqs = [] }) {
 
   return (
     <Section
-      description="These Q&A blocks are now available for on-page support, schema output, and future search or agent-facing retrieval."
+      description="Common engineering, deployment, and operating questions collected for faster buyer review."
       title="Frequently Asked Questions"
     >
       <div className="faq-list">
@@ -246,7 +254,7 @@ function FaqSection({ faqs = [] }) {
 function ContactSection() {
   return (
     <Section
-      description="This form now runs through the existing contact endpoint while living inside the new structured Next.js content layer."
+      description="Share your site conditions, throughput targets, and project brief with the engineering team."
       title="Project Briefing"
     >
       <ContactForm />
@@ -281,7 +289,7 @@ export function StructuredOverviewPage({ page }) {
         />
         <ContentSection Content={page.data.Content} />
         <Section
-          description="The overview cards are now derived from MDX metadata instead of hard-coded HTML blocks. That keeps the route stable while making content maintenance much safer."
+          description="A structured overview of solution families, project priorities, and the system building blocks most buyers compare first."
           title="Structured Content Cards"
         >
           <div className="card-grid">
@@ -310,7 +318,7 @@ export function StructuredOverviewPage({ page }) {
         </Section>
         {page.data.capabilities ? (
           <Section
-            description="These supporting blocks are now content arrays, so they can move to CMS, translation workflows, or search indexes later without refactoring the layout."
+            description="Core capabilities that define the warehouse performance, software coordination, and operational fit of this category."
             title={page.data.capabilityTitle || "Core Capabilities"}
           >
             <div className="card-grid">
@@ -330,15 +338,15 @@ export function StructuredOverviewPage({ page }) {
         <FaqSection faqs={page.data.faqs} />
         <section className="cta-panel">
           <div className="cta-copy">
-            <h2>Ready for the AI-SEO layer?</h2>
+            <h2>Ready to scope the right automation stack?</h2>
             <p>
-              With MDX now in place, the site can safely add JSON-LD, llms.txt, and future search
-              or retrieval features without reworking each page again.
+              Talk through facility constraints, throughput goals, and integration dependencies with
+              the coolyne engineering team.
             </p>
           </div>
           <div className="cta-actions">
             <Link className="hero-button" href="/contact">
-              Start the Content Model
+              Start Your Project Brief
             </Link>
           </div>
         </section>
@@ -368,7 +376,7 @@ export function StructuredDetailPage({ page }) {
         <ContentSection Content={item.Content} />
         {"features" in item && item.features ? (
           <Section
-            description="Feature groups now come from content files, which makes them much easier to validate, reuse, and later expose through structured APIs."
+            description="The major subsystems and engineering choices that shape operational fit, control architecture, and deployment scope."
             title="Key Building Blocks"
           >
             <div className="card-grid">
@@ -384,7 +392,7 @@ export function StructuredDetailPage({ page }) {
         ) : null}
         {"projects" in item && item.projects ? (
           <Section
-            description="Case-study category pages now render project references from MDX data modules rather than layout-specific markup."
+            description="Representative projects and rollout programs that show how this system is deployed in live facilities."
             title="Featured Programs"
           >
             <div className="card-grid">
@@ -404,7 +412,7 @@ export function StructuredDetailPage({ page }) {
         ) : null}
         {"scenarios" in item && item.scenarios ? (
           <Section
-            description="Scenario lists are now content arrays, ready for filtering, comparison pages, or agent-friendly summaries."
+            description="Operational scenarios where this solution delivers the best fit across flow, handling, and system coordination."
             title="Application Scenarios"
           >
             <div className="card-grid">
@@ -423,7 +431,7 @@ export function StructuredDetailPage({ page }) {
         ) : null}
         {"integrations" in item && item.integrations ? (
           <Section
-            description="This section is where future FastAPI, search, and AI-agent tooling can attach to operational content with much less friction."
+            description="The software, controls, and upstream systems that connect this equipment into a complete warehouse program."
             title="Integration Layer"
           >
             <div className="card-grid">
@@ -442,7 +450,7 @@ export function StructuredDetailPage({ page }) {
         ) : null}
         {"bottlenecks" in item && item.bottlenecks ? (
           <Section
-            description="Project constraints, stack choices, and rollout phases are all now independently structured, which opens the door to better proof storytelling and programmatic indexing."
+            description="The main risk factors, throughput bottlenecks, and operating constraints teams typically need to solve first."
             title="Critical Bottlenecks"
           >
             <div className="card-grid">
@@ -458,7 +466,7 @@ export function StructuredDetailPage({ page }) {
         ) : null}
         {"solutionStack" in item && item.solutionStack ? (
           <Section
-            description="Solution stack arrays can later map directly to product references, software modules, and linked proof points."
+            description="A coordinated ecosystem view of hardware, software, and operational interfaces supporting the delivery plan."
             title="Integrated Ecosystem"
           >
             <div className="card-grid">
@@ -478,7 +486,7 @@ export function StructuredDetailPage({ page }) {
         ) : null}
         {"commissioning" in item && item.commissioning ? (
           <Section
-            description="Commissioning phases now live in a dedicated content list instead of buried page markup."
+            description="Commissioning and go-live phases designed to reduce risk during installation, validation, and production ramp."
             title="Zero-Tolerance Commissioning"
           >
             <div className="card-grid">
@@ -496,15 +504,15 @@ export function StructuredDetailPage({ page }) {
         <FaqSection faqs={item.faqs} />
         <section className="cta-panel">
           <div className="cta-copy">
-            <h2>From content files to structured APIs.</h2>
+            <h2>Need a sharper automation roadmap?</h2>
             <p>
-              These pages now have a clean editorial layer, structured metadata, and reusable
-              content fields that can power JSON-LD, llms.txt, search, and future backend services.
+              We can map system scope, software interfaces, and deployment stages around your
+              facility’s actual handling flow.
             </p>
           </div>
           <div className="cta-actions">
             <Link className="hero-button" href="/contact">
-              Plan the Next Step
+              Talk With Engineering
             </Link>
           </div>
         </section>

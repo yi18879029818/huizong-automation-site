@@ -5,4 +5,6 @@ out/
 .vercel/
 .open-next/
 .wrangler/
+.env.local
+.dev.vars
 *.tsbuildinfo

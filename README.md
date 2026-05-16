@@ -126,6 +126,7 @@ Required variables:
 - `CONTACT_FROM_EMAIL` - a verified sender on your Resend account, for example `website@your-domain.com`
 - `ADMIN_USERNAME` - admin login username for `/admin/`
 - `ADMIN_PASSWORD` - admin login password for `/admin/`
+- `GA4_MEASUREMENT_ID` - optional Google Analytics 4 measurement ID, for example `G-XXXXXXXXXX`
 
 Required binding:
 

@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   function route(key) {
     return (window.__SITE_ROUTES__ || {})[key] || "#";
   }
@@ -9,6 +9,24 @@
 
   function normalize(text) {
     return (text || "").replace(/\s+/g, " ").trim().toLowerCase();
+  }
+
+  function iconHtml(name, className) {
+    var classes = className || "hsa-shell-icon";
+
+    if (name === "close") {
+      return '<svg class="' + classes + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6 18 18"></path><path d="m18 6-12 12"></path></svg>';
+    }
+
+    if (name === "mail") {
+      return '<svg class="' + classes + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2.4"></rect><path d="m4.8 7 7.2 5.7L19.2 7"></path></svg>';
+    }
+
+    if (name === "call") {
+      return '<svg class="' + classes + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.9 4.5h2.4l1.4 4.3-1.8 1.8a13.7 13.7 0 0 0 4.5 4.5l1.8-1.8 4.3 1.4v2.4c0 .8-.6 1.5-1.5 1.5h-.8C10.2 18.6 5.4 13.8 5.4 7V6c0-.8.7-1.5 1.5-1.5Z"></path></svg>';
+    }
+
+    return '<svg class="' + classes + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 13.5V12a4.5 4.5 0 1 1 9 0v1.5"></path><rect x="5.5" y="12.5" width="13" height="7" rx="2.5"></rect><path d="M12 16v.1"></path><path d="M9 9.5a3 3 0 0 1 6 0"></path></svg>';
   }
 
   function showToast(msg) {
@@ -424,6 +442,154 @@
     return "";
   }
 
+  var analyticsState = {
+    configPromise: null,
+    scriptPromise: null,
+    measurementId: "",
+    initialized: false,
+    pageviewBound: false
+  };
+
+  function fetchAnalyticsConfig() {
+    if (analyticsState.configPromise) {
+      return analyticsState.configPromise;
+    }
+
+    analyticsState.configPromise = fetch("/api/analytics-config")
+      .then(function (response) {
+        return response.json().catch(function () {
+          return { ok: false, enabled: false, measurementId: "" };
+        });
+      })
+      .catch(function () {
+        return { ok: false, enabled: false, measurementId: "" };
+      });
+
+    return analyticsState.configPromise;
+  }
+
+  function loadAnalyticsScript(measurementId) {
+    if (window.gtag && analyticsState.measurementId === measurementId) {
+      return Promise.resolve(window.gtag);
+    }
+
+    if (analyticsState.scriptPromise) {
+      return analyticsState.scriptPromise;
+    }
+
+    analyticsState.scriptPromise = new Promise(function (resolve, reject) {
+      var existing = document.querySelector('script[data-ga4-script="true"]');
+      var script = existing || document.createElement("script");
+
+      function onLoad() {
+        resolve(window.gtag || null);
+      }
+
+      function onError(error) {
+        reject(error || new Error("Unable to load Google Analytics."));
+      }
+
+      if (existing) {
+        existing.addEventListener("load", onLoad, { once: true });
+        existing.addEventListener("error", onError, { once: true });
+        return;
+      }
+
+      script.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(measurementId);
+      script.async = true;
+      script.dataset.ga4Script = "true";
+      script.addEventListener("load", onLoad, { once: true });
+      script.addEventListener("error", onError, { once: true });
+      document.head.appendChild(script);
+    });
+
+    return analyticsState.scriptPromise;
+  }
+
+  function trackGaEvent(eventName, params) {
+    if (!analyticsState.measurementId || typeof window.gtag !== "function") {
+      return;
+    }
+
+    window.gtag("event", eventName, params || {});
+  }
+
+  function trackGaPageView() {
+    trackGaEvent("page_view", {
+      page_title: document.title || "",
+      page_location: window.location.href || "",
+      page_path: window.location.pathname || "/"
+    });
+  }
+
+  function bindAnalyticsPageviews() {
+    var originalPushState;
+    var originalReplaceState;
+
+    if (analyticsState.pageviewBound || typeof window === "undefined") {
+      return;
+    }
+
+    analyticsState.pageviewBound = true;
+    originalPushState = window.history && window.history.pushState;
+    originalReplaceState = window.history && window.history.replaceState;
+
+    if (typeof originalPushState === "function") {
+      window.history.pushState = function () {
+        var result = originalPushState.apply(window.history, arguments);
+        window.setTimeout(trackGaPageView, 0);
+        return result;
+      };
+    }
+
+    if (typeof originalReplaceState === "function") {
+      window.history.replaceState = function () {
+        var result = originalReplaceState.apply(window.history, arguments);
+        window.setTimeout(trackGaPageView, 0);
+        return result;
+      };
+    }
+
+    window.addEventListener("popstate", function () {
+      window.setTimeout(trackGaPageView, 0);
+    });
+  }
+
+  function initAnalytics() {
+    fetchAnalyticsConfig()
+      .then(function (config) {
+        var measurementId = trimValue(config && config.measurementId, 64);
+
+        if (!measurementId) {
+          return false;
+        }
+
+        return loadAnalyticsScript(measurementId).then(function () {
+          window.dataLayer = window.dataLayer || [];
+          window.gtag =
+            window.gtag ||
+            function () {
+              window.dataLayer.push(arguments);
+            };
+
+          if (!analyticsState.initialized || analyticsState.measurementId !== measurementId) {
+            window.gtag("js", new Date());
+            window.gtag("config", measurementId, { send_page_view: false });
+            analyticsState.initialized = true;
+          }
+
+          analyticsState.measurementId = measurementId;
+          window.__hsaTrackGaEvent = trackGaEvent;
+          bindAnalyticsPageviews();
+          trackGaPageView();
+          return true;
+        });
+      })
+      .catch(function () {
+        return false;
+      });
+  }
+
   function bindManagedForm(form) {
     if (!form || form.dataset.hsaFormBound) {
       return;
@@ -473,10 +639,15 @@
             }
 
             form.reset();
-            trackConversion("表单", {
+            trackConversion("琛ㄥ崟", {
               formType: payload.formType,
               formLabel: payload.formLabel,
               submissionId: result.id || ""
+            });
+            trackGaEvent("generate_lead", {
+              form_type: payload.formType || "general",
+              form_label: payload.formLabel || "Website Form",
+              page_path: window.location.pathname || "/"
             });
             setFormStatus(
               form,
@@ -484,6 +655,11 @@
               "success"
             );
             showToast(form.dataset.successMessage || "Form sent successfully.");
+            if (form.dataset.successRedirect) {
+              window.setTimeout(function () {
+                window.location.href = form.dataset.successRedirect;
+              }, 120);
+            }
 
             if (form.classList.contains("hsa-expert-modal__form")) {
               window.setTimeout(function () {
@@ -493,10 +669,10 @@
             }
           });
         })
-        .catch(function () {
+        .catch(function (error) {
           setFormStatus(
             form,
-            "Unable to send right now. Please try again in a moment.",
+            error && error.message ? error.message : "Unable to send right now. Please try again in a moment.",
             "error"
           );
           showToast("Unable to send right now. Please try again.");
@@ -523,21 +699,21 @@
       '<div class="hsa-expert-modal__backdrop" data-hsa-close-modal></div>' +
       '<div class="hsa-expert-modal__panel" role="dialog" aria-modal="true" aria-labelledby="hsa-expert-modal-title">' +
         '<button class="hsa-expert-modal__close" type="button" aria-label="Close dialog" data-hsa-close-modal>' +
-          '<span class="material-symbols-outlined">close</span>' +
+          iconHtml("close") +
         "</button>" +
         '<div class="hsa-expert-modal__header">' +
           '<h3 id="hsa-expert-modal-title">Get in Touch</h3>' +
           "<p>Our team will respond within 24 hours</p>" +
         "</div>" +
-        '<form class="hsa-expert-modal__form" data-hsa-form data-form-type="consultation" data-form-label="Expert Modal Inquiry" data-success-message="Thanks, your request has been emailed to our team." novalidate>' +
+        '<form class="hsa-expert-modal__form" data-hsa-form data-form-type="consultation" data-form-label="Expert Modal Inquiry" data-success-message="Thanks, your request has been emailed to our team." data-success-redirect="/thanks/" novalidate>' +
           '<div class="hsa-expert-modal__grid">' +
             '<label class="hsa-expert-modal__field">' +
-              "<span>Full Name <em>*</em></span>" +
-              '<input type="text" name="fullName" placeholder="John Smith" maxlength="120" required />' +
+              "<span>Full Name</span>" +
+              '<input type="text" name="fullName" placeholder="John Smith" maxlength="120" />' +
             "</label>" +
             '<label class="hsa-expert-modal__field">' +
-              "<span>Company <em>*</em></span>" +
-              '<input type="text" name="company" placeholder="Acme Logistics" maxlength="160" required />' +
+              "<span>Company</span>" +
+              '<input type="text" name="company" placeholder="Acme Logistics" maxlength="160" />' +
             "</label>" +
           "</div>" +
           '<label class="hsa-expert-modal__field">' +
@@ -575,7 +751,7 @@
       '<div class="hsa-sales-modal__backdrop" data-hsa-close-sales-modal></div>' +
       '<div class="hsa-sales-modal__panel" role="dialog" aria-modal="true" aria-labelledby="hsa-sales-modal-title">' +
         '<button class="hsa-sales-modal__close" type="button" aria-label="Close dialog" data-hsa-close-sales-modal>' +
-          '<span class="material-symbols-outlined">close</span>' +
+          iconHtml("close") +
         "</button>" +
         '<div class="hsa-sales-modal__body">' +
           '<img class="hsa-sales-modal__qr" src="' + route("home").replace(/index\.html$/, "") + 'assets/images/sales-qr-placeholder.svg" alt="Sales QR code" />' +
@@ -642,6 +818,13 @@
       });
     });
 
+    document.addEventListener("click", function (ev) {
+      if (ev.target.closest("[data-hsa-open-expert-modal]")) {
+        ev.preventDefault();
+        setExpertModal(true);
+      }
+    });
+
     modal.addEventListener("click", function (ev) {
       if (ev.target.closest("[data-hsa-close-modal]")) {
         setExpertModal(false);
@@ -703,14 +886,19 @@
         if (href.indexOf("https://wa.me/") === 0) {
           label = "WhatsApp";
         } else if (href.indexOf("mailto:") === 0) {
-          label = "邮箱";
+          label = "閭";
         } else if (href.indexOf("tel:") === 0) {
-          label = "电话";
+          label = "鐢佃瘽";
         }
       }
 
       if (label) {
         trackConversion(label, {
+          href: href || "",
+          text: trimValue(link.textContent || "")
+        });
+        trackGaEvent("contact_click", {
+          contact_type: label,
           href: href || "",
           text: trimValue(link.textContent || "")
         });
@@ -799,6 +987,203 @@
         }
       });
     });
+  }
+
+  function bindBrandCarousel() {
+    var track = document.querySelector("[data-hsa-brand-carousel-track]");
+    var prev = document.querySelector("[data-hsa-brand-carousel-prev]");
+    var next = document.querySelector("[data-hsa-brand-carousel-next]");
+
+    if (!track || !prev || !next) {
+      return;
+    }
+
+    function getStep() {
+      var firstCard = track.firstElementChild;
+      if (!firstCard) {
+        return 320;
+      }
+
+      return firstCard.getBoundingClientRect().width + 24;
+    }
+
+    prev.addEventListener("click", function () {
+      track.scrollBy({
+        left: -getStep() * 2,
+        behavior: "smooth"
+      });
+    });
+
+    next.addEventListener("click", function () {
+      track.scrollBy({
+        left: getStep() * 2,
+        behavior: "smooth"
+      });
+    });
+  }
+
+  function bindTrustShowcase() {
+    var track = document.querySelector("[data-hsa-trust-showcase]");
+    if (!track) {
+      return;
+    }
+
+    var reducedMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var originalCount = parseInt(track.getAttribute("data-hsa-trust-showcase-count") || "0", 10);
+    var isPointerDown = false;
+    var isPaused = false;
+    var resumeTimer = null;
+    var rafId = null;
+    var pointerStartX = 0;
+    var scrollStartX = 0;
+    var lastTs = 0;
+    var speed = 0.05;
+
+    function getLoopWidth() {
+      var children = track.children;
+      if (!originalCount || children.length < originalCount) {
+        return Math.max(0, track.scrollWidth / 2);
+      }
+
+      var firstCard = children[0];
+      var lastOriginalCard = children[originalCount - 1];
+      if (!firstCard || !lastOriginalCard) {
+        return Math.max(0, track.scrollWidth / 2);
+      }
+
+      return Math.max(
+        0,
+        lastOriginalCard.offsetLeft +
+          lastOriginalCard.getBoundingClientRect().width -
+          firstCard.offsetLeft
+      );
+    }
+
+    function clearResumeTimer() {
+      if (resumeTimer) {
+        window.clearTimeout(resumeTimer);
+        resumeTimer = null;
+      }
+    }
+
+    function pauseAutoScroll() {
+      isPaused = true;
+      clearResumeTimer();
+    }
+
+    function resumeAutoScroll(delay) {
+      clearResumeTimer();
+      resumeTimer = window.setTimeout(function () {
+        isPaused = false;
+      }, typeof delay === "number" ? delay : 1400);
+    }
+
+    function tick(ts) {
+      if (!lastTs) {
+        lastTs = ts;
+      }
+
+      var dt = ts - lastTs;
+      lastTs = ts;
+
+      if (!reducedMotion && !isPaused && !isPointerDown) {
+        var loopWidth = getLoopWidth();
+        if (loopWidth > 12) {
+          track.scrollLeft += dt * speed;
+
+          if (track.scrollLeft >= loopWidth) {
+            track.scrollLeft -= loopWidth;
+          }
+        }
+      }
+
+      rafId = window.requestAnimationFrame(tick);
+    }
+
+    function onPointerMove(event) {
+      if (!isPointerDown) {
+        return;
+      }
+
+      var delta = event.clientX - pointerStartX;
+      track.scrollLeft = scrollStartX - delta;
+    }
+
+    function stopDragging() {
+      if (!isPointerDown) {
+        return;
+      }
+
+      isPointerDown = false;
+      track.classList.remove("is-dragging");
+      if (track.releasePointerCapture && track.__hsaPointerId != null) {
+        try {
+          track.releasePointerCapture(track.__hsaPointerId);
+        } catch (error) {
+        }
+      }
+      track.__hsaPointerId = null;
+      resumeAutoScroll();
+    }
+
+    track.style.cursor = "grab";
+
+    track.addEventListener("pointerdown", function (event) {
+      if (event.pointerType === "mouse" && event.button !== 0) {
+        return;
+      }
+
+      isPointerDown = true;
+      pauseAutoScroll();
+      pointerStartX = event.clientX;
+      scrollStartX = track.scrollLeft;
+      track.__hsaPointerId = event.pointerId;
+      track.classList.add("is-dragging");
+      track.style.cursor = "grabbing";
+      if (track.setPointerCapture) {
+        track.setPointerCapture(event.pointerId);
+      }
+    });
+
+    track.addEventListener("pointermove", onPointerMove);
+    track.addEventListener("pointerup", function () {
+      track.style.cursor = "grab";
+      stopDragging();
+    });
+    track.addEventListener("pointercancel", function () {
+      track.style.cursor = "grab";
+      stopDragging();
+    });
+    track.addEventListener("wheel", function () {
+      pauseAutoScroll();
+      resumeAutoScroll();
+    }, { passive: true });
+
+    rafId = window.requestAnimationFrame(tick);
+
+    window.addEventListener("beforeunload", function () {
+      clearResumeTimer();
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+      }
+    }, { once: true });
+  }
+
+  function runAfterFirstPaint(callback, timeout) {
+    var delay = typeof timeout === "number" ? timeout : 0;
+
+    window.setTimeout(function () {
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(function () {
+          callback();
+        }, { timeout: 1200 });
+        return;
+      }
+
+      window.requestAnimationFrame(function () {
+        callback();
+      });
+    }, delay);
   }
 
   function bindDesktopMenus() {
@@ -940,9 +1325,9 @@
       if (introCol && !introCol.querySelector(".hsa-footer-contact")) {
         contact = document.createElement("div");
         contact.className = "hsa-footer-contact";
-        contact.innerHTML =
-          '<a class="hsa-footer-contact-link" href="mailto:sales@robotlyne.com" aria-label="Email">' +
-            '<span class="material-symbols-outlined">mail</span>' +
+          contact.innerHTML =
+            '<a class="hsa-footer-contact-link" href="mailto:sales@coolyne.com" aria-label="Email">' +
+              iconHtml("mail") +
           "</a>" +
           '<a class="hsa-footer-contact-link" href="https://wa.me/8613510816743?text=Hello%20there!" aria-label="WhatsApp" target="_blank" rel="noreferrer">' +
             '<span class="hsa-footer-contact-icon-svg" aria-hidden="true">' +
@@ -954,10 +1339,10 @@
             "</span>" +
           "</a>" +
           '<a class="hsa-footer-contact-link" href="tel:8613510816743" aria-label="Phone">' +
-            '<span class="material-symbols-outlined">call</span>' +
+            iconHtml("call") +
           "</a>" +
           '<button class="hsa-footer-contact-link hsa-footer-contact-trigger" type="button" aria-label="Sales QR" data-hsa-open-sales-modal>' +
-            '<span class="material-symbols-outlined">support_agent</span>' +
+            iconHtml("support_agent") +
           "</button>";
         introCol.appendChild(contact);
       }
@@ -972,16 +1357,8 @@
           '<input id="hsa-news-email" class="hsa-news-input" type="email" name="email" placeholder="Email" required />' +
           '<label class="hsa-news-check">' +
             '<input type="checkbox" name="consent" value="Yes" checked />' +
-            '<span>Yes, I agree to receive monthly newsletter content from Huizong Intelligent Automation.</span>' +
+            '<span>Yes, I agree to receive monthly newsletter content from coolyne.</span>' +
           "</label>" +
-          '<div class="hsa-news-captcha" aria-hidden="true">' +
-            '<div class="hsa-news-captcha-box"></div>' +
-            '<div class="hsa-news-captcha-copy">' +
-              "<strong>Human verification</strong>" +
-              "<span>Local preview placeholder</span>" +
-            "</div>" +
-            '<div class="hsa-news-captcha-badge">CAPTCHA</div>' +
-          "</div>" +
           '<button class="hsa-news-submit" type="submit">Subscription</button>' +
         "</form>" +
         '<div class="hsa-social">' +
@@ -994,7 +1371,7 @@
                 "</svg>" +
               "</span>" +
             "</a>" +
-            '<a class="hsa-social-link" href="https://www.linkedin.com/company/huizongzhineng/" aria-label="LinkedIn" target="_blank" rel="noreferrer">' +
+            '<a class="hsa-social-link" href="https://www.linkedin.com/" aria-label="LinkedIn" target="_blank" rel="noreferrer">' +
               '<span class="hsa-social-icon" aria-hidden="true">' +
                 '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">' +
                   '<path d="M6.43 8.56a1.86 1.86 0 1 1 0-3.72 1.86 1.86 0 0 1 0 3.72Zm-1.6 11.1h3.19V9.83H4.83v9.83ZM10.4 9.83h3.06v1.34h.04c.43-.8 1.47-1.65 3.02-1.65 3.23 0 3.82 2.13 3.82 4.9v5.24h-3.18V15c0-1.1-.02-2.53-1.54-2.53-1.54 0-1.78 1.2-1.78 2.44v4.75H10.4V9.83Z" fill="currentColor"/>' +
@@ -1015,14 +1392,94 @@
     });
   }
 
+  function initCookieConsent() {
+    var storageKey = "hsa-cookie-consent";
+    var banner;
+    var panel;
+    var acceptBtn;
+    var essentialBtn;
+    var closeBtn;
+    var state = safeStorageGet(window.localStorage, storageKey);
+
+    if (state === "accepted" || state === "essential") {
+      return;
+    }
+
+    if (document.querySelector(".hsa-cookie-banner")) {
+      return;
+    }
+
+    banner = document.createElement("div");
+    banner.className = "hsa-cookie-banner";
+    banner.setAttribute("role", "dialog");
+    banner.setAttribute("aria-live", "polite");
+    banner.setAttribute("aria-label", "Cookie preferences");
+
+    panel = document.createElement("div");
+    panel.className = "hsa-cookie-banner__panel";
+    panel.innerHTML =
+      '<div class="hsa-cookie-banner__inner">' +
+        '<div class="hsa-cookie-banner__content">' +
+          '<div class="hsa-cookie-banner__eyebrow">Privacy Settings</div>' +
+          '<h3 class="hsa-cookie-banner__title">We use cookies to improve your browsing experience.</h3>' +
+          '<p class="hsa-cookie-banner__copy">coolyne uses cookies to keep the site reliable, measure performance, and personalize key interactions.</p>' +
+        "</div>" +
+        '<div class="hsa-cookie-banner__actions">' +
+          '<button class="hsa-cookie-banner__btn hsa-cookie-banner__btn--secondary" type="button" data-hsa-cookie-essential>Only necessary</button>' +
+          '<button class="hsa-cookie-banner__btn hsa-cookie-banner__btn--primary" type="button" data-hsa-cookie-accept>Accept cookies</button>' +
+        "</div>" +
+        '<button class="hsa-cookie-banner__close" type="button" aria-label="Close cookie notice" data-hsa-cookie-close>&times;</button>' +
+      "</div>";
+
+    banner.appendChild(panel);
+    document.body.appendChild(banner);
+
+    acceptBtn = panel.querySelector("[data-hsa-cookie-accept]");
+    essentialBtn = panel.querySelector("[data-hsa-cookie-essential]");
+    closeBtn = panel.querySelector("[data-hsa-cookie-close]");
+
+    function closeBanner(consentValue, msg) {
+      if (consentValue) {
+        safeStorageSet(window.localStorage, storageKey, consentValue);
+      }
+      banner.classList.add("is-closing");
+      window.setTimeout(function () {
+        if (banner && banner.parentNode) {
+          banner.parentNode.removeChild(banner);
+        }
+      }, 180);
+      if (msg) {
+        showToast(msg);
+      }
+    }
+
+    if (acceptBtn) {
+      acceptBtn.addEventListener("click", function () {
+        closeBanner("accepted", "Cookie preferences saved.");
+      });
+    }
+
+    if (essentialBtn) {
+      essentialBtn.addEventListener("click", function () {
+        closeBanner("essential", "Essential cookies only.");
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener("click", function () {
+        closeBanner("essential");
+      });
+    }
+  }
+
   function initSiteShell() {
     if (window.__hsaShellInitialized) {
       return;
     }
 
     window.__hsaShellInitialized = true;
+    initAnalytics();
     initVisitorTracking();
-    enhanceFooters();
     bindExpertModal();
     bindSalesModal();
     bindDesktopMenus();
@@ -1031,6 +1488,10 @@
     bindJourneyConversions();
     bindTextTargets();
     bindOverviewCards();
+    bindBrandCarousel();
+    runAfterFirstPaint(enhanceFooters, 1200);
+    runAfterFirstPaint(bindTrustShowcase, 1600);
+    runAfterFirstPaint(initCookieConsent, 2200);
   }
 
   if (document.readyState === "loading") {

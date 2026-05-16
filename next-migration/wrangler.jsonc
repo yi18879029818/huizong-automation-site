@@ -6,13 +6,27 @@
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
     "directory": ".open-next/assets",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    "html_handling": "none"
   },
+  "vars": {
+    "GA4_MEASUREMENT_ID": "G-P4MLY74P4X"
+  },
+  "routes": [
+    {
+      "pattern": "www.coolyne.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "coolyne.com",
+      "custom_domain": true
+    }
+  ],
   "d1_databases": [
     {
       "binding": "FORM_DB",
       "database_name": "huizong-form-submissions",
-      "database_id": "204af820-98e6-4241-b1b9-2188c26fd70d"
+      "database_id": "b03a1e30-1e26-4454-b84a-37237cca2ea2"
     }
   ]
 }

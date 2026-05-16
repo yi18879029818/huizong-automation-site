@@ -80,6 +80,7 @@ Before deploying:
    - `RESEND_API_KEY`
    - `CONTACT_TO_EMAIL`
    - `CONTACT_FROM_EMAIL`
+   - `OPENAI_API_KEY`
 3. For local preview, copy `.dev.vars.example` to `.dev.vars`.
 
 Notes:
@@ -87,6 +88,29 @@ Notes:
 - `npm run dev` still uses the regular Next.js dev server.
 - `npm run preview` builds the OpenNext worker and runs it with Wrangler.
 - The contact form no longer depends on the legacy `functions/api/contact.js` endpoint when this app is deployed on Workers.
+
+## OpenAI image generation
+
+The app now includes a server-side image generation endpoint:
+
+- `POST /api/image-generate`
+
+It forwards requests to the OpenAI Images API using the `gpt-image-2` model and returns both:
+
+- `imageBase64`
+- `imageDataUrl`
+
+Required environment variable:
+
+- `OPENAI_API_KEY`
+
+Example request:
+
+```bash
+curl -X POST http://localhost:3000/api/image-generate \
+  -H "Content-Type: application/json" \
+  -d "{\"prompt\":\"Minimal industrial logo for coolyne, transparent background\",\"size\":\"1024x1024\",\"background\":\"transparent\",\"outputFormat\":\"png\"}"
+```
 
 ## Why this is low risk
 
@@ -101,3 +125,12 @@ Now that the public-facing content pages are off the legacy HTML layer, the clea
 1. connect structured content to a shared content registry or CMS
 2. expose filtered content summaries through Next.js route handlers or FastAPI
 3. add retrieval, lead routing, and MCP-oriented endpoints on top of the same content model
+
+## Project docs
+
+Project documentation has been organized under:
+
+- `docs/business-planning.md`
+- `docs/technical-project-plan.md`
+- `docs/project-progress.md`
+- `docs/README.md`

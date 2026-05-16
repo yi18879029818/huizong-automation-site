@@ -1,5 +1,3 @@
-@import url("/assets/site-shell.css");
-
 :root {
   --brand-navy: #001736;
   --brand-navy-strong: #002b5c;
@@ -242,7 +240,7 @@ a {
   font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  
   white-space: nowrap;
 }
 
@@ -295,7 +293,7 @@ a {
   font-size: 0.76rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  
 }
 
 .shell-subnav a.is-active {
@@ -354,7 +352,7 @@ a {
   font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.24em;
-  text-transform: uppercase;
+  
 }
 
 .eyebrow::before {
@@ -403,7 +401,6 @@ a {
   font-size: 0.8rem;
   font-weight: 800;
   letter-spacing: 0.1em;
-  text-transform: uppercase;
 }
 
 .hero-button {
@@ -424,14 +421,15 @@ a {
 }
 
 .hero-visual {
-  min-height: 320px;
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  min-height: 340px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   background:
-    radial-gradient(circle at 30% 25%, rgba(254, 107, 0, 0.45), transparent 18%),
-    radial-gradient(circle at 72% 55%, rgba(255, 255, 255, 0.16), transparent 24%),
-    linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    radial-gradient(circle at 30% 25%, rgba(254, 107, 0, 0.32), transparent 18%),
+    radial-gradient(circle at 72% 55%, rgba(255, 255, 255, 0.14), transparent 24%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02));
   overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .hero-visual img {
@@ -456,7 +454,7 @@ a {
 
 .metric-panel {
   grid-column: span 4;
-  background: linear-gradient(180deg, white, #f7f9fc);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), #f5f8fc);
 }
 
 .metric-panel strong {
@@ -476,7 +474,7 @@ a {
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.16em;
-  text-transform: uppercase;
+  
 }
 
 .section-panel {
@@ -582,7 +580,7 @@ a {
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  
 }
 
 .chip-row {
@@ -675,7 +673,7 @@ a {
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
+  
 }
 
 .structured-form input,
@@ -862,8 +860,7 @@ a {
 .hero-copy h1,
 .section-heading h2,
 .cta-copy h2 {
-  text-transform: uppercase;
-  font-style: italic;
+  font-style: normal;
 }
 
 .hero-copy p {
@@ -955,10 +952,6 @@ a {
 .structured-form input,
 .structured-form textarea {
   border-radius: 2px;
-}
-
-.material-symbols-outlined {
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 .kinetic-border {

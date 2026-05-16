@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const INITIAL_FORM = {
   fullName: "",
@@ -10,6 +11,7 @@ const INITIAL_FORM = {
   message: "",
   marketingConsent: false
 };
+const SUCCESS_REDIRECT_PATH = "/thanks/";
 
 function buildPayload(formState) {
   return {
@@ -24,7 +26,7 @@ function buildPayload(formState) {
         name: "fullName",
         label: "Full Name",
         value: formState.fullName.trim(),
-        required: true,
+        required: false,
         type: "text"
       },
       {
@@ -67,6 +69,7 @@ function buildPayload(formState) {
 }
 
 export function ContactForm() {
+  const router = useRouter();
   const [formState, setFormState] = useState(INITIAL_FORM);
   const [status, setStatus] = useState({ type: "", message: "" });
   const [pending, setPending] = useState(false);
@@ -104,10 +107,19 @@ export function ContactForm() {
         type: "success",
         message: "Thanks, your request has been emailed to the team."
       });
+      if (typeof window !== "undefined" && typeof window.__hsaTrackGaEvent === "function") {
+        window.__hsaTrackGaEvent("generate_lead", {
+          form_type: "consultation",
+          form_label: "Structured Contact Inquiry",
+          page_path: window.location.pathname || "/"
+        });
+      }
+      router.push(SUCCESS_REDIRECT_PATH);
     } catch (error) {
       setStatus({
         type: "error",
-        message: "Unable to send right now. Please try again in a moment."
+        message:
+          error && error.message ? error.message : "Unable to send right now. Please try again in a moment."
       });
     } finally {
       setPending(false);
@@ -122,7 +134,6 @@ export function ContactForm() {
           <input
             name="fullName"
             onChange={updateField}
-            required
             type="text"
             value={formState.fullName}
           />

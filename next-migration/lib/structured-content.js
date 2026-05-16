@@ -28,6 +28,12 @@ import ProductAgvForklift, {
   meta as agvForkliftMeta,
   scenarios as agvForkliftScenarios
 } from "@/content/products/agv-forklift.mdx";
+import ProductGroundHandlingForkliftAgv, {
+  features as groundHandlingForkliftAgvFeatures,
+  integrations as groundHandlingForkliftAgvIntegrations,
+  meta as groundHandlingForkliftAgvMeta,
+  scenarios as groundHandlingForkliftAgvScenarios
+} from "@/content/products/ground-handling-forklift-agv.mdx";
 import ProductAgvRoller, {
   features as agvRollerFeatures,
   integrations as agvRollerIntegrations,
@@ -105,8 +111,6 @@ import CaseProjectWarehouseUpgrade, {
 } from "@/content/case-studies/projects/automated-warehouse-upgrade.mdx";
 import { NAV_SECTIONS, STRUCTURED_ROUTES } from "@/lib/navigation";
 
-const COMPANY_SUFFIX = "Huizong Intelligent Automation";
-
 const PRODUCT_MODULES = [
   {
     slug: "agv-forklift",
@@ -115,6 +119,14 @@ const PRODUCT_MODULES = [
     features: agvForkliftFeatures,
     scenarios: agvForkliftScenarios,
     integrations: agvForkliftIntegrations
+  },
+  {
+    slug: "ground-handling-forklift-agv",
+    Content: ProductGroundHandlingForkliftAgv,
+    meta: groundHandlingForkliftAgvMeta,
+    features: groundHandlingForkliftAgvFeatures,
+    scenarios: groundHandlingForkliftAgvScenarios,
+    integrations: groundHandlingForkliftAgvIntegrations
   },
   {
     slug: "lifting-agv",
@@ -250,11 +262,7 @@ function createDetailData(entry) {
 }
 
 function withCompanyTitle(title) {
-  if (title.includes(COMPANY_SUFFIX)) {
-    return title;
-  }
-
-  return `${title} | ${COMPANY_SUFFIX}`;
+  return title;
 }
 
 function createBreadcrumbs(items) {

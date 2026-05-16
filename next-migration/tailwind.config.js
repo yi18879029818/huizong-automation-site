@@ -50,12 +50,30 @@ module.exports = {
         label: ["Inter", "sans-serif"]
       },
       borderRadius: {
-        DEFAULT: "0rem",
-        sm: "0rem",
-        md: "0rem",
-        lg: "0rem",
-        xl: "0rem",
+        DEFAULT: "0.5rem",
+        sm: "0.25rem",
+        md: "0.5rem",
+        lg: "1rem",
+        xl: "1.5rem",
+        "2xl": "2rem",
         full: "9999px"
+      },
+      boxShadow: {
+        "soft": "0 2px 8px rgba(0, 0, 0, 0.06)",
+        "card": "0 4px 16px rgba(0, 0, 0, 0.08)",
+        "elevated": "0 8px 24px rgba(0, 0, 0, 0.1)",
+        "floating": "0 12px 32px rgba(0, 0, 0, 0.12)",
+        "glow": "0 0 20px rgba(254, 107, 0, 0.2)"
+      },
+      transitionProperty: {
+        "transform": "transform",
+        "opacity": "opacity",
+        "all": "all"
+      },
+      transitionDuration: {
+        "quick": "150ms",
+        "normal": "300ms",
+        "slow": "500ms"
       }
     }
   },

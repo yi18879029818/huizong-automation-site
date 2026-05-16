@@ -5,7 +5,7 @@
   "scripts": {
     "predev": "node ./scripts/sync-legacy-public.mjs",
     "dev": "next dev",
-    "prebuild": "node ./scripts/sync-legacy-public.mjs",
+    "prebuild": "node ./scripts/sync-legacy-public.mjs && node ./scripts/minify-legacy-assets.mjs",
     "build": "next build",
     "start": "next start",
     "preview": "opennextjs-cloudflare build && wrangler dev",

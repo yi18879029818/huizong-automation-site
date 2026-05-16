@@ -217,7 +217,7 @@ function getEmailSubject(payload) {
   const identity =
     (nameField && nameField.value) || (emailField && emailField.value) || "New submission";
 
-  return `[Huizong Website] ${payload.formLabel} - ${identity}`;
+  return `[coolyne Website] ${payload.formLabel} - ${identity}`;
 }
 
 export async function handleContactSubmission(request, env) {
@@ -264,10 +264,25 @@ export async function handleContactSubmission(request, env) {
     })
   });
 
-  const result = await response.json().catch(() => ({}));
+  const rawResult = await response.text();
+  let result = {};
+
+  if (rawResult) {
+    try {
+      result = JSON.parse(rawResult);
+    } catch {
+      result = { raw: rawResult };
+    }
+  }
 
   if (!response.ok) {
-    console.error("Resend send failed", result);
+    console.error("Resend send failed", {
+      status: response.status,
+      statusText: response.statusText,
+      fromEmail,
+      toEmail,
+      result
+    });
     return json({ ok: false, error: "Email delivery failed." }, 502);
   }
 

@@ -10,6 +10,7 @@ import { getAllStructuredRoutes, getStructuredPage } from "@/lib/structured-cont
 import { COMPANY } from "@/lib/site-config";
 
 export const dynamicParams = true;
+export const revalidate = 60;
 
 export function generateStaticParams() {
   return getAllStructuredRoutes().map((route) => ({
@@ -21,7 +22,7 @@ function buildStructuredMetadata(page) {
   const description =
     page.data.heroSummary ||
     page.data.summary ||
-    "Huizong Intelligent Automation structured content page.";
+    "Fleet structured content page.";
   const image = page.data.image || "/assets/images/agv-forklift-original.png";
 
   return {
