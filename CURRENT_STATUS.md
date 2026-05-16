@@ -14,17 +14,27 @@
 
 ## 最近更新
 
-### ✅ 已完成 (2026-05-13)
+### ✅ 已完成 (2026-05-14)
 
 | 功能 | 文件 | 状态 |
 |------|------|------|
-| Core Patents 数值修改 | `next-migration/components/structured-static-pages.js` | 已部署 |
+| 全部更改推送到 GitHub | `main` 分支 | 已推送 |
 | Hero 区域动态光效 | `next-migration/app/globals.css` | 已部署 |
 | 圆角系统升级 | `next-migration/tailwind.config.js` | 已部署 |
 | 阴影系统配置 | `next-migration/tailwind.config.js` | 已部署 |
 | 动画效果类 | `next-migration/app/globals.css` | 已部署 |
 | 卡片悬浮效果 | `next-migration/components/structured-static-pages.js` | 已部署 |
 | Footer Logo 缩小 | `public/assets/site-shell.css` | 已部署 |
+| 核心文档创建 | `AGENTS.md`, `ARCHITECTURE_*.md`, `CURRENT_STATUS.md` | 已推送 |
+
+### 📌 GitHub 仓库
+
+| 信息 | 值 |
+|------|-----|
+| **仓库地址** | https://github.com/yi18879029818/huizong-automation-site.git |
+| **主分支** | `main` |
+| **最新提交** | `9ff775b` - feat: sync latest changes including visual upgrades |
+| **协作者** | 可添加朋友 GitHub 账号为 Write 权限 |
 
 ---
 
