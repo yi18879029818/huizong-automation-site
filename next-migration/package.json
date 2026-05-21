@@ -2,6 +2,9 @@
   "name": "huizong-next-migration",
   "private": true,
   "version": "0.1.0",
+  "engines": {
+    "node": ">=18.17 <25"
+  },
   "scripts": {
     "predev": "node ./scripts/sync-legacy-public.mjs",
     "dev": "next dev",
@@ -27,6 +30,7 @@
     "autoprefixer": "^10.5.0",
     "postcss": "^8.5.10",
     "tailwindcss": "^3.4.17",
+    "terser": "^5.44.0",
     "wrangler": "^4.38.0"
   }
 }
