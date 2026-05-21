@@ -229,6 +229,13 @@ Additional production setup:
 5. Add `INTERNAL_AUTOMATION_USERNAME` and `INTERNAL_AUTOMATION_PASSWORD`, or rely on the admin credentials fallback, if you want `/internal/automation` to remain access-controlled in production.
 6. Redeploy the site after changing bindings, environment variables, or admin API code.
 
+Cloudflare Worker Git-integration note:
+
+- `Workers Builds: huizong-automation-site` should not be treated as the primary release signal anymore if it still appears on PRs.
+- This check is tied to the old Cloudflare account that previously hosted the project and is now considered a legacy residual integration.
+- The active Worker deployment path for the current site is `huizong-automation-site-next` under `next-migration/`, together with the explicit deployment flow documented in `DEPLOY_AUTOMATION_CONSOLE.md`.
+- If the legacy `huizong-automation-site` build check is still connected in GitHub or Cloudflare, remove or disable that integration to avoid blocking releases on an obsolete account.
+
 For the internal automation console deployment path on the Next.js Worker layer, use:
 
 - [DEPLOY_AUTOMATION_CONSOLE.md](E:/codex/coolyne.com/huizong-automation-site/DEPLOY_AUTOMATION_CONSOLE.md)

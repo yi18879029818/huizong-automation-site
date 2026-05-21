@@ -198,3 +198,13 @@ npm run deploy   # 正常
 - This confirms the site-side Basic Auth middleware is now working in production and the `/internal/automation` fallback path is no longer blocked by missing credentials.
 - The authenticated health probe now reaches the upstream bridge and returns `525` from the configured Sealos origin, so the remaining blocker has moved downstream from site auth to the `huizong-api` production origin path.
 - Before this branch is committed or pushed, remind the user to provide the correct Sealos `kubeconfig` for the live `huizong-api` deployment so `INTERNAL_API_TOKEN` can be configured on the actual target environment.
+
+## 2026-05-21 Cloudflare Worker Check Clarification
+
+- The PR check `Workers Builds: huizong-automation-site` should no longer be treated as the core release signal for the current site deployment.
+- That check is associated with the older Cloudflare account that previously hosted this project and is now considered a legacy residual integration.
+- The currently active Worker deployment path is `huizong-automation-site-next` from `next-migration/`, together with the explicit deployment scripts and docs already tracked in this repository.
+- Because of that split history, a red `Workers Builds: huizong-automation-site` check can be a legacy-account artifact rather than evidence that the current release path is broken.
+- Follow-up cleanup still recommended:
+  - remove or disable the legacy Cloudflare Git integration for `huizong-automation-site`
+  - keep release decisions focused on the active `huizong-automation-site-next` path, local build validation, and the explicit deployment workflow
