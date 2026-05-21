@@ -10,7 +10,8 @@
     "html_handling": "none"
   },
   "vars": {
-    "GA4_MEASUREMENT_ID": "G-P4MLY74P4X"
+    "GA4_MEASUREMENT_ID": "G-P4MLY74P4X",
+    "HUIZONG_API_BASE_URL": "https://gaxlgfkemprx.usw-1.sealos.app"
   },
   "d1_databases": [
     {
