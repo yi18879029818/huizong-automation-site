@@ -10,6 +10,21 @@ function randomId() {
   return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
 }
 
+function safeParseJson(value) {
+  if (typeof value !== "string" || !value) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(value);
+  } catch (_error) {
+    return {
+      raw: value,
+      parseError: true,
+    };
+  }
+}
+
 export async function ensureAutomationAuditStore(db) {
   if (!db) {
     return false;
@@ -148,14 +163,8 @@ export async function listRecentAutomationAuditEntries(db, limit = 20) {
     success: Boolean(row.success),
     upstreamStatus: row.upstream_status,
     instructionExcerpt: row.instruction_excerpt,
-    requestPayload:
-      typeof row.request_payload_json === "string" && row.request_payload_json
-        ? JSON.parse(row.request_payload_json)
-        : null,
-    responsePayload:
-      typeof row.response_payload_json === "string" && row.response_payload_json
-        ? JSON.parse(row.response_payload_json)
-        : null,
+    requestPayload: safeParseJson(row.request_payload_json),
+    responsePayload: safeParseJson(row.response_payload_json),
     createdAt: row.created_at,
   }));
 }
