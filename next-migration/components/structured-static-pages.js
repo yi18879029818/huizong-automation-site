@@ -1698,7 +1698,7 @@ function ContactBody() {
                       "mail",
                       "bg-primary-container",
                       "Email Correspondence",
-                        "sales@coolyne.com",
+                        "sales@robotlyne.com",
                       "Estimated Response: < 12 Hours",
                     ],
                     [

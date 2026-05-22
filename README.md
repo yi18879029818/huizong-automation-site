@@ -122,7 +122,7 @@ cp .dev.vars.example .dev.vars
 Required variables:
 
 - `RESEND_API_KEY` - your Resend API key
-- `CONTACT_TO_EMAIL` - destination inbox, currently `kingman.chang@gmail.com`
+- `CONTACT_TO_EMAIL` - destination inbox, currently `sales@robotlyne.com`
 - `CONTACT_FROM_EMAIL` - a verified sender on your Resend account, for example `website@your-domain.com`
 - `ADMIN_USERNAME` - admin login username for `/admin/`
 - `ADMIN_PASSWORD` - admin login password for `/admin/`
