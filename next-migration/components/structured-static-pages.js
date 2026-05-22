@@ -1638,7 +1638,7 @@ function AboutBody() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden bg-primary px-6 py-24 md:px-12 lg:px-16 lg:py-28">
+        <section className="relative overflow-hidden bg-primary py-24 lg:py-28">
           <div className="absolute inset-0">
             <img
               alt="Huizong business partners background"
@@ -1649,7 +1649,7 @@ function AboutBody() {
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,23,54,0.88),rgba(0,23,54,0.94))]" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(254,107,0,0.10),transparent_24%),radial-gradient(circle_at_82%_78%,rgba(255,255,255,0.04),transparent_22%)]" />
           </div>
-          <div className="relative mx-auto max-w-[1380px]">
+          <div className="relative mx-auto max-w-[1380px] px-6 md:px-12 lg:px-16">
             <div className="max-w-2xl">
               <span className="text-[11px] font-black uppercase tracking-[0.3em] text-secondary-fixed-dim">
                 Business partners
@@ -1658,33 +1658,33 @@ function AboutBody() {
                 Trusted by operators building serious industrial capacity.
               </h2>
             </div>
-            <div className="relative mt-12 overflow-hidden rounded-[2.1rem] border border-white/10 bg-[rgba(6,29,66,0.36)] px-4 py-6 shadow-[0_20px_52px_rgba(0,0,0,0.18)] backdrop-blur-sm md:px-5">
-              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-[rgba(6,29,66,0.92)]" />
-              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-[rgba(6,29,66,0.92)]" />
-              <div className="about-brand-marquee">
-                <div className="about-brand-marquee-track">
-                  {[0, 1].map((loop) => (
-                    <div
-                      aria-hidden={loop === 1}
-                      className="about-brand-marquee-group"
-                      key={`about-brand-loop-${loop}`}
-                    >
-                      {HOME_PARTNER_BRANDS_SAFE.map((brand) => (
-                        <div
-                          className="flex min-h-[142px] min-w-[252px] items-center justify-center rounded-[1.7rem] border border-outline-variant/16 bg-white px-3 py-4 shadow-[0_16px_40px_rgba(17,40,94,0.08)]"
-                          key={`${brand.name}-${loop}`}
-                        >
-                          <img
-                            alt={brand.name}
-                            className="h-[104px] w-[196px] max-w-full object-contain"
-                            loading="lazy"
-                            src={brand.src}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  ))}
-                </div>
+          </div>
+          <div className="relative mt-12 w-full overflow-hidden rounded-[2.1rem] border-y border-white/10 bg-[rgba(6,29,66,0.36)] py-6 shadow-[0_20px_52px_rgba(0,0,0,0.18)] backdrop-blur-sm">
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-[rgba(6,29,66,0.92)] md:w-12" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-[rgba(6,29,66,0.92)] md:w-12" />
+            <div className="about-brand-marquee">
+              <div className="about-brand-marquee-track">
+                {[0, 1].map((loop) => (
+                  <div
+                    aria-hidden={loop === 1}
+                    className="about-brand-marquee-group"
+                    key={`about-brand-loop-${loop}`}
+                  >
+                    {HOME_PARTNER_BRANDS_SAFE.map((brand) => (
+                      <div
+                        className="flex min-h-[142px] min-w-[252px] items-center justify-center rounded-[1.7rem] border border-outline-variant/16 bg-white px-3 py-4 shadow-[0_16px_40px_rgba(17,40,94,0.08)]"
+                        key={`${brand.name}-${loop}`}
+                      >
+                        <img
+                          alt={brand.name}
+                          className="h-[104px] w-[196px] max-w-full object-contain"
+                          loading="lazy"
+                          src={brand.src}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
