@@ -46,6 +46,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
+        <link rel="stylesheet" href="/assets/site-icons.css" />
+        <link rel="stylesheet" href="/assets/site-shell.css" />
         <link
           rel="preload"
           href="/assets/fonts/inter-latin.woff2"

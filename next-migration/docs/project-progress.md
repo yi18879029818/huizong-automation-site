@@ -139,3 +139,10 @@
 - 是否已上线：
 - 风险备注：
 ```
+
+## 2026-05-22
+
+- 完成事项：将 About 页面重构为更完整的企业展示页，重做首屏双栏版式，补齐里程碑、证书与专利、客户 logo、Message Us 联系表单四大模块，并引入抓取自参考站的 about 页图片素材填充新布局。
+- 涉及文件：`components/structured-static-pages.js`、`content/pages/about.mdx`、`../public/downloads/about/robotlyne/*`
+- 是否已上线：否
+- 风险备注：本次改动主要集中在 About 页组件，需重点验证桌面端与移动端排版，以及表单提交和 `/thanks/` 跳转流程。
