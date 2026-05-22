@@ -26,6 +26,10 @@
       return '<svg class="' + classes + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.9 4.5h2.4l1.4 4.3-1.8 1.8a13.7 13.7 0 0 0 4.5 4.5l1.8-1.8 4.3 1.4v2.4c0 .8-.6 1.5-1.5 1.5h-.8C10.2 18.6 5.4 13.8 5.4 7V6c0-.8.7-1.5 1.5-1.5Z"></path></svg>';
     }
 
+    if (name === "wechat") {
+      return '<svg class="' + classes + '" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M8.12 4.25c-3.45 0-6.24 2.25-6.24 5.03 0 1.58.92 2.99 2.35 3.91L3.38 16l2.93-1.47c.58.13 1.18.2 1.81.2.19 0 .39-.01.58-.03-.05-.28-.08-.56-.08-.86 0-3.24 3.05-5.88 6.82-5.88.21 0 .42.01.63.03-.58-2.16-3.28-3.74-6.13-3.74Z" fill="currentColor"></path><path d="M15.56 8.72c-3.04 0-5.5 1.94-5.5 4.34 0 1.35.78 2.56 2 3.39l-.72 2.33 2.52-1.26c.52.12 1.07.18 1.63.18 3.03 0 5.49-1.94 5.49-4.33 0-2.4-2.46-4.35-5.42-4.35Z" fill="currentColor"></path><circle cx="6.24" cy="9.21" r="0.78" fill="#0d1a34"></circle><circle cx="10.11" cy="9.21" r="0.78" fill="#0d1a34"></circle><circle cx="13.61" cy="12.94" r="0.72" fill="#0d1a34"></circle><circle cx="17.22" cy="12.94" r="0.72" fill="#0d1a34"></circle></svg>';
+    }
+
     return '<svg class="' + classes + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.5 13.5V12a4.5 4.5 0 1 1 9 0v1.5"></path><rect x="5.5" y="12.5" width="13" height="7" rx="2.5"></rect><path d="M12 16v.1"></path><path d="M9 9.5a3 3 0 0 1 6 0"></path></svg>';
   }
 
@@ -754,8 +758,8 @@
           iconHtml("close") +
         "</button>" +
         '<div class="hsa-sales-modal__body">' +
-          '<img class="hsa-sales-modal__qr" src="' + route("home").replace(/index\.html$/, "") + 'assets/images/sales-qr-placeholder.svg" alt="Sales QR code" />' +
-          '<h3 id="hsa-sales-modal-title" class="hsa-sales-modal__title">sales</h3>' +
+        '<img class="hsa-sales-modal__qr" src="' + route("home").replace(/index\.html$/, "") + 'assets/images/wechat-qr.jpg" alt="WeChat QR code" />' +
+        '<h3 id="hsa-sales-modal-title" class="hsa-sales-modal__title">WeChat</h3>' +
         "</div>" +
       "</div>";
 
@@ -1326,7 +1330,7 @@
         contact = document.createElement("div");
         contact.className = "hsa-footer-contact";
           contact.innerHTML =
-            '<a class="hsa-footer-contact-link" href="mailto:sales@coolyne.com" aria-label="Email">' +
+            '<a class="hsa-footer-contact-link" href="mailto:sales@robotlyne.com" aria-label="Email">' +
               iconHtml("mail") +
           "</a>" +
           '<a class="hsa-footer-contact-link" href="https://wa.me/8613510816743?text=Hello%20there!" aria-label="WhatsApp" target="_blank" rel="noreferrer">' +
@@ -1341,8 +1345,8 @@
           '<a class="hsa-footer-contact-link" href="tel:8613510816743" aria-label="Phone">' +
             iconHtml("call") +
           "</a>" +
-          '<button class="hsa-footer-contact-link hsa-footer-contact-trigger" type="button" aria-label="Sales QR" data-hsa-open-sales-modal>' +
-            iconHtml("support_agent") +
+          '<button class="hsa-footer-contact-link hsa-footer-contact-trigger" type="button" aria-label="WeChat QR" data-hsa-open-sales-modal>' +
+            iconHtml("wechat") +
           "</button>";
         introCol.appendChild(contact);
       }

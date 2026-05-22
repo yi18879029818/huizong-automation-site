@@ -6,7 +6,7 @@ export const COMPANY = {
   legalName: "coolyne",
   description:
     "Integrated warehouse automation, robotics, software orchestration, and project delivery for global B2B intralogistics operations.",
-  email: "sales@coolyne.com",
+  email: "sales@robotlyne.com",
   telephone: "+86 13510816743",
   address: {
     streetAddress: "Kinetic Precision Industrial Park",
