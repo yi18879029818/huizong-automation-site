@@ -19,10 +19,16 @@
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^14.2.35",
+    "@portabletext/react": "^6.2.0",
+    "@sanity/client": "^6.29.1",
+    "@sanity/image-url": "^2.1.1",
     "cheerio": "^1.1.2",
     "next": "14.2.35",
+    "next-sanity": "^9.12.3",
     "react": "18.3.1",
-    "react-dom": "18.3.1"
+    "react-dom": "18.3.1",
+    "sanity": "^3.99.0",
+    "styled-components": "^6.4.2"
   },
   "devDependencies": {
     "@alloc/quick-lru": "^5.2.0",

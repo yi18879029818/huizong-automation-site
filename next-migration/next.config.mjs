@@ -17,6 +17,14 @@ const nextConfig = {
   distDir: process.env.NODE_ENV === "development" ? ".next-dev" : ".next",
   reactStrictMode: true,
   output: "standalone",
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io"
+      }
+    ]
+  },
   pageExtensions: ["js", "jsx", "mdx"]
 };
 
