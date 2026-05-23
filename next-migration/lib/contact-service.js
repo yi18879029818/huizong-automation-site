@@ -188,6 +188,10 @@ function getCompanyName(payload) {
   return getFieldValue(payload, "company");
 }
 
+function formatSenderAddress(email, name = "coolyne") {
+  return `${name} <${email}>`;
+}
+
 function getInternalEmailHtml(payload) {
   const meta = [
     ["Form", payload.formLabel],
@@ -363,6 +367,7 @@ export async function handleContactSubmission(request, env) {
   const resendApiKey = env.RESEND_API_KEY;
   const toEmail = env.CONTACT_TO_EMAIL;
   const fromEmail = env.CONTACT_FROM_EMAIL;
+  const customerFromEmail = env.CONTACT_CUSTOMER_FROM_EMAIL || fromEmail;
   const formDb = env.FORM_DB;
   let body;
 
@@ -387,12 +392,16 @@ export async function handleContactSubmission(request, env) {
   const replyTo = customerEmail || undefined;
 
   const internalEmail = await sendResendEmail(resendApiKey, {
-    from: fromEmail,
+    from: formatSenderAddress(fromEmail),
     to: [toEmail],
     reply_to: replyTo,
     subject: getInternalEmailSubject(payload),
     html: getInternalEmailHtml(payload),
-    text: getInternalEmailText(payload)
+    text: getInternalEmailText(payload),
+    tags: [
+      { name: "form_type", value: payload.formType },
+      { name: "delivery", value: "internal" }
+    ]
   });
 
   if (!internalEmail.response.ok) {
@@ -407,12 +416,16 @@ export async function handleContactSubmission(request, env) {
   }
 
   const customerEmailResult = await sendResendEmail(resendApiKey, {
-    from: fromEmail,
+    from: formatSenderAddress(customerFromEmail),
     to: [customerEmail],
     reply_to: toEmail,
     subject: getCustomerEmailSubject(payload),
     html: getCustomerEmailHtml(payload),
-    text: getCustomerEmailText(payload)
+    text: getCustomerEmailText(payload),
+    tags: [
+      { name: "form_type", value: payload.formType },
+      { name: "delivery", value: "customer_confirmation" }
+    ]
   });
 
   if (!customerEmailResult.response.ok) {
