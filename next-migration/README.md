@@ -80,7 +80,7 @@ Before deploying:
    - `RESEND_API_KEY`
    - `CONTACT_TO_EMAIL`
    - `CONTACT_FROM_EMAIL`
-   - `CONTACT_CUSTOMER_FROM_EMAIL`
+   - `CONTACT_CUSTOMER_FROM_EMAIL` (optional; use only if that sender address is verified)
    - `OPENAI_API_KEY`
 3. Initialize the D1 schema:
    - `powershell -ExecutionPolicy Bypass -File .\scripts\init-form-db.ps1`

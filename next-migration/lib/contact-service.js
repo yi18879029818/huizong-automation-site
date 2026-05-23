@@ -367,7 +367,7 @@ export async function handleContactSubmission(request, env) {
   const resendApiKey = env.RESEND_API_KEY;
   const toEmail = env.CONTACT_TO_EMAIL;
   const fromEmail = env.CONTACT_FROM_EMAIL;
-  const customerFromEmail = env.CONTACT_CUSTOMER_FROM_EMAIL || fromEmail;
+  const customerFromEmail = (env.CONTACT_CUSTOMER_FROM_EMAIL || "").trim() || fromEmail;
   const formDb = env.FORM_DB;
   let body;
 
@@ -415,7 +415,7 @@ export async function handleContactSubmission(request, env) {
     return json({ ok: false, error: "Email delivery failed." }, 502);
   }
 
-  const customerEmailResult = await sendResendEmail(resendApiKey, {
+  let customerEmailResult = await sendResendEmail(resendApiKey, {
     from: formatSenderAddress(customerFromEmail),
     to: [customerEmail],
     reply_to: toEmail,
@@ -427,6 +427,30 @@ export async function handleContactSubmission(request, env) {
       { name: "delivery", value: "customer_confirmation" }
     ]
   });
+
+  if (!customerEmailResult.response.ok && customerFromEmail !== fromEmail) {
+    console.warn("Customer email send failed with dedicated sender; retrying with verified sender", {
+      status: customerEmailResult.response.status,
+      statusText: customerEmailResult.response.statusText,
+      customerFromEmail,
+      fallbackFromEmail: fromEmail,
+      customerEmail,
+      result: customerEmailResult.result
+    });
+
+    customerEmailResult = await sendResendEmail(resendApiKey, {
+      from: formatSenderAddress(fromEmail),
+      to: [customerEmail],
+      reply_to: toEmail,
+      subject: getCustomerEmailSubject(payload),
+      html: getCustomerEmailHtml(payload),
+      text: getCustomerEmailText(payload),
+      tags: [
+        { name: "form_type", value: payload.formType },
+        { name: "delivery", value: "customer_confirmation_fallback" }
+      ]
+    });
+  }
 
   if (!customerEmailResult.response.ok) {
     console.error("Customer email send failed", {
