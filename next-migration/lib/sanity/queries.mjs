@@ -23,7 +23,7 @@ export const seoProjection = `{
 
 export const portableTextProjection = `[]{
   ...,
-  _type == "image" => ${imageProjection}
+  _type == "imageWithAlt" => ${imageProjection}
 }`;
 
 export const postListQuery = `*[_type == "post" && defined(slug.current)] | order(publishedAt desc, _createdAt desc) {
