@@ -13,6 +13,14 @@ const withMDX = createMDX({
 const nextConfig = {
   reactStrictMode: true,
   output: "standalone",
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io"
+      }
+    ]
+  },
   pageExtensions: ["js", "jsx", "mdx"]
 };
 
