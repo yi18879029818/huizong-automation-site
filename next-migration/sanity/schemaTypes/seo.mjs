@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const seo = defineType({
   name: "seo",
@@ -15,6 +15,12 @@ export const seo = defineType({
       title: "Description",
       type: "text",
       rows: 3
+    }),
+    defineField({
+      name: "keywords",
+      title: "Keywords",
+      type: "array",
+      of: [defineArrayMember({ type: "string" })]
     }),
     defineField({
       name: "canonicalUrl",

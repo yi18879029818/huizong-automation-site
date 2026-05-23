@@ -139,6 +139,9 @@ Recent iterations that matter for future work:
 - made email and message the only required fields on major website forms
 - replaced multiple page assets and homepage hero interactions
 - fixed homepage 3D dependency so it no longer relies only on remote CDN loading
+- added Sanity schema foundation for home, about, contact, and site settings
+- connected structured page resolution to optional Sanity-backed page data with local fallbacks
+- restored the latest approved About page layout before continuing Stage 2 CMS work
 
 ## 8. Key Risks and Ongoing Attention Areas
 

@@ -25,7 +25,7 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const fallbackPage = getStructuredPage(["case-studies", params.slug]);
+  const fallbackPage = await getStructuredPage(["case-studies", params.slug]);
   if (!fallbackPage) {
     return {};
   }
@@ -84,7 +84,7 @@ export default async function CaseStudyDetailPage({ params }) {
     );
   }
 
-  const fallbackPage = getStructuredPage(["case-studies", params.slug]);
+  const fallbackPage = await getStructuredPage(["case-studies", params.slug]);
   if (!fallbackPage) {
     notFound();
   }

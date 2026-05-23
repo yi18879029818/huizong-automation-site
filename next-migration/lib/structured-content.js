@@ -109,6 +109,11 @@ import CaseProjectWarehouseUpgrade, {
   meta as caseProjectWarehouseUpgradeMeta,
   solutionStack as caseProjectSolutionStack
 } from "@/content/case-studies/projects/automated-warehouse-upgrade.mdx";
+import {
+  getAboutPageData,
+  getContactPageData,
+  getHomePageData
+} from "@/lib/sanity/page-data.mjs";
 import { NAV_SECTIONS, STRUCTURED_ROUTES } from "@/lib/navigation";
 
 const PRODUCT_MODULES = [
@@ -261,6 +266,40 @@ function createDetailData(entry) {
   };
 }
 
+function isPlainObject(value) {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+
+function mergeDefined(base, overrides) {
+  if (!isPlainObject(overrides)) {
+    return base;
+  }
+
+  const result = { ...base };
+
+  for (const [key, value] of Object.entries(overrides)) {
+    if (value === undefined || value === null || value === "") {
+      continue;
+    }
+
+    if (Array.isArray(value)) {
+      if (value.length) {
+        result[key] = value;
+      }
+      continue;
+    }
+
+    if (isPlainObject(value) && isPlainObject(base[key])) {
+      result[key] = mergeDefined(base[key], value);
+      continue;
+    }
+
+    result[key] = value;
+  }
+
+  return result;
+}
+
 function withCompanyTitle(title) {
   return title;
 }
@@ -316,72 +355,90 @@ export function getAllStructuredRoutes() {
   return STRUCTURED_ROUTES;
 }
 
-export function getStructuredPage(slug = []) {
+export async function getStructuredPage(slug = []) {
   const normalized = normalizeStructuredSegments(slug);
   const [section, subsection, third] = normalized;
 
   if (!section) {
-    return buildStaticPage({
-      kind: "home-page",
-      section: "home",
-      sectionLabel: "Home",
-      href: "/",
-      title: withCompanyTitle(homeMeta.title),
-      subnav: [],
-      breadcrumbs: createBreadcrumbs([{ href: "/", label: "Home" }]),
-      data: {
+    const sanityData = await getHomePageData();
+    const data = mergeDefined(
+      {
         ...homeMeta,
         Content: HomePage,
         cards: homeCards,
         capabilities: homeCapabilities,
         faqs: homeFaqs
-      }
+      },
+      sanityData
+    );
+
+    return buildStaticPage({
+      kind: "home-page",
+      section: "home",
+      sectionLabel: "Home",
+      href: "/",
+      title: withCompanyTitle(data.title || homeMeta.title),
+      subnav: [],
+      breadcrumbs: createBreadcrumbs([{ href: "/", label: "Home" }]),
+      data
     });
   }
 
   if (section === "about") {
-    return buildStaticPage({
-      kind: "about-page",
-      section,
-      sectionLabel: "About",
-      href: "/about",
-      title: withCompanyTitle(aboutMeta.title),
-      subnav: [],
-      breadcrumbs: createBreadcrumbs([
-        { href: "/", label: "Home" },
-        { href: "/about", label: "About" }
-      ]),
-      data: {
+    const sanityData = await getAboutPageData();
+    const data = mergeDefined(
+      {
         ...aboutMeta,
         Content: AboutPage,
         features: aboutFeatures,
         scenarios: aboutScenarios,
         integrations: aboutIntegrations,
         faqs: aboutFaqs
-      }
+      },
+      sanityData
+    );
+
+    return buildStaticPage({
+      kind: "about-page",
+      section,
+      sectionLabel: "About",
+      href: "/about",
+      title: withCompanyTitle(data.title || aboutMeta.title),
+      subnav: [],
+      breadcrumbs: createBreadcrumbs([
+        { href: "/", label: "Home" },
+        { href: "/about", label: "About" }
+      ]),
+      data
     });
   }
 
   if (section === "contact") {
-    return buildStaticPage({
-      kind: "contact-page",
-      section,
-      sectionLabel: "Contact",
-      href: "/contact",
-      title: withCompanyTitle(contactMeta.title),
-      subnav: [],
-      breadcrumbs: createBreadcrumbs([
-        { href: "/", label: "Home" },
-        { href: "/contact", label: "Contact" }
-      ]),
-      data: {
+    const sanityData = await getContactPageData();
+    const data = mergeDefined(
+      {
         ...contactMeta,
         Content: ContactPage,
         features: contactFeatures,
         integrations: contactIntegrations,
         faqs: contactFaqs,
         contactForm: contactMeta.contactForm
-      }
+      },
+      sanityData
+    );
+
+    return buildStaticPage({
+      kind: "contact-page",
+      section,
+      sectionLabel: "Contact",
+      href: "/contact",
+      title: withCompanyTitle(data.title || contactMeta.title),
+      subnav: [],
+      breadcrumbs: createBreadcrumbs([
+        { href: "/", label: "Home" },
+        { href: "/contact", label: "Contact" }
+      ]),
+      data
     });
   }
 

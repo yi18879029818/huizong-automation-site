@@ -139,3 +139,11 @@
 - 是否已上线：
 - 风险备注：
 ```
+
+## 2026-05-23
+
+- Completed Stage 2 Sanity integration for the shared home, about, and contact page layer.
+- Added schema types, shared object schemas, page queries, and page-data loaders.
+- Updated structured routing, SEO metadata generation, sitemap/robots output, and llms/markdown helpers to work with the new page data flow.
+- Preserved the latest approved About page layout and restored its dedicated assets before preparing the release commit.
+- Deployment status: pending release commit, push, and Cloudflare deployment verification.

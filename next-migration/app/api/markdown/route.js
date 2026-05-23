@@ -17,7 +17,7 @@ function normalizeSlugFromPath(pathname = "/") {
 
 export async function GET(request) {
   const pathname = request.nextUrl.searchParams.get("path") || "/";
-  const page = getStructuredPage(normalizeSlugFromPath(pathname));
+  const page = await getStructuredPage(normalizeSlugFromPath(pathname));
 
   if (!page) {
     return NextResponse.json({ ok: false, error: "Structured markdown view not found." }, { status: 404 });

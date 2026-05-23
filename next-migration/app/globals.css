@@ -1,5 +1,5 @@
-@import "../public/assets/site-shell.css";
-@import "../public/assets/site-icons.css";
+@import url("/assets/site-shell.css");
+@import url("/assets/site-icons.css");
 
 @tailwind base;
 @tailwind components;

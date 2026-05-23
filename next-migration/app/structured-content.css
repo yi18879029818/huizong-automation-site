@@ -97,9 +97,14 @@ a {
 
 .content-shell {
   min-height: 100vh;
+  overflow-x: clip;
   background:
     radial-gradient(circle at top right, rgba(254, 107, 0, 0.08), transparent 28%),
     linear-gradient(180deg, #ffffff, var(--brand-surface));
+}
+
+.page-content {
+  overflow-x: clip;
 }
 
 .shell-header {
@@ -814,6 +819,7 @@ a {
 
 /* Legacy shell alignment for the migrated Next.js pages */
 .content-shell {
+  overflow-x: clip;
   background: linear-gradient(180deg, #ffffff, var(--brand-surface));
 }
 
@@ -1002,6 +1008,53 @@ a {
   transition: background-color 0.3s ease;
 }
 
+.about-brand-marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.about-brand-marquee-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 0;
+  will-change: transform;
+  animation: about-brand-marquee-scroll 28s linear infinite;
+}
+
+.about-brand-marquee-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 1.5rem;
+  padding-inline: 1.5rem;
+}
+
+.about-brand-marquee-group > * {
+  flex: 0 0 auto;
+}
+
+.about-brand-marquee:hover .about-brand-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes about-brand-marquee-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-brand-marquee-track {
+    animation: none;
+  }
+}
+
 @media (max-width: 960px) {
   .hero-grid {
     grid-template-columns: 1fr;
@@ -1011,5 +1064,10 @@ a {
   .section-panel,
   .cta-panel {
     padding: 36px 24px;
+  }
+
+  .about-brand-marquee-group {
+    gap: 1rem;
+    padding-inline: 1rem;
   }
 }

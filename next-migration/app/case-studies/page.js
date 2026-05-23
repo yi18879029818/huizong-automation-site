@@ -20,7 +20,7 @@ export default async function CaseStudiesPage() {
   const caseStudies = await getCaseStudyList();
 
   if (!caseStudies.length) {
-    const fallbackPage = getStructuredPage(["case-studies"]);
+    const fallbackPage = await getStructuredPage(["case-studies"]);
     return <StructuredCatalogOverviewPage page={fallbackPage} />;
   }
 

@@ -4,23 +4,17 @@ import Script from "next/script";
 import { COMPANY, SITE_URL } from "@/lib/site-config";
 import { SITE_ROUTES } from "@/lib/site-shell-config";
 import ChatWidget from "@/components/ChatWidget";
+import { getSiteSettings } from "@/lib/sanity/page-data.mjs";
 
 const GTM_ID = "GTM-NND97MZW";
 
-export const metadata = {
-  title: {
-    default: COMPANY.name,
-    template: `%s | ${COMPANY.name}`
-  },
-  description: COMPANY.description,
-  metadataBase: new URL(SITE_URL),
-  icons: {
-    icon: [
-      { url: "/assets/images/coolyne-logo.png", type: "image/png" }
-    ],
-    apple: [{ url: "/assets/images/coolyne-logo.png", type: "image/png" }]
-  },
-  robots: {
+export const viewport = {
+  width: "device-width",
+  initialScale: 1
+};
+
+function buildRobotsMetadata() {
+  return {
     index: true,
     follow: true,
     googleBot: {
@@ -30,17 +24,49 @@ export const metadata = {
       "max-snippet": -1,
       "max-video-preview": -1
     }
-  },
-  openGraph: {
-    siteName: COMPANY.name,
-    type: "website"
-  },
-  other: {
-    "llms-json": "/llms.json",
-    "llms-index": "/llms.txt",
-    "llms-full": "/llms-full.txt"
-  }
-};
+  };
+}
+
+export async function generateMetadata() {
+  const settings = await getSiteSettings();
+  const siteTitle = settings?.title || COMPANY.name;
+  const siteDescription = settings?.description || COMPANY.description;
+  const defaultImage = settings?.defaultOgImage?.src || "/assets/images/coolyne-logo.png";
+  const keywords = settings?.seo?.keywords?.length ? settings.seo.keywords : undefined;
+
+  return {
+    title: {
+      default: siteTitle,
+      template: `%s | ${siteTitle}`
+    },
+    description: siteDescription,
+    keywords,
+    metadataBase: new URL(SITE_URL),
+    icons: {
+      icon: [{ url: "/assets/images/coolyne-logo.png", type: "image/png" }],
+      apple: [{ url: "/assets/images/coolyne-logo.png", type: "image/png" }]
+    },
+    robots: buildRobotsMetadata(),
+    openGraph: {
+      title: siteTitle,
+      description: siteDescription,
+      siteName: siteTitle,
+      type: "website",
+      images: [
+        {
+          url: defaultImage,
+          alt: siteTitle
+        }
+      ]
+    },
+    twitter: {
+      card: settings?.seo?.twitterCard || "summary_large_image",
+      title: siteTitle,
+      description: siteDescription,
+      images: [defaultImage]
+    }
+  };
+}
 
 export default function RootLayout({ children }) {
   return (

@@ -19,49 +19,63 @@ export function generateStaticParams() {
 }
 
 function buildStructuredMetadata(page) {
+  const seo = page.data.seo || {};
   const description =
+    seo.description ||
     page.data.heroSummary ||
     page.data.summary ||
     "Fleet structured content page.";
-  const image = page.data.image || "/assets/images/agv-forklift-original.png";
+  const image =
+    seo.ogImage?.src ||
+    page.data.heroBackgroundImage?.src ||
+    page.data.image ||
+    "/assets/images/agv-forklift-original.png";
+  const title = seo.title || page.title;
+  const canonical = seo.canonicalUrl || page.currentHref;
+  const shouldIndex = !seo.noindex;
+  const keywords = Array.isArray(seo.keywords) && seo.keywords.length ? seo.keywords : undefined;
 
   return {
-    title: page.title,
+    title,
     description,
+    keywords,
     alternates: {
-      canonical: page.currentHref,
+      canonical,
       languages: {
-        "x-default": page.currentHref
+        "x-default": canonical
       }
     },
     robots: {
-      index: true,
-      follow: true,
+      index: shouldIndex,
+      follow: shouldIndex,
       googleBot: {
-        index: true,
-        follow: true,
+        index: shouldIndex,
+        follow: shouldIndex,
         "max-image-preview": "large",
         "max-snippet": -1,
         "max-video-preview": -1
       }
     },
     openGraph: {
-      title: page.title,
-      description,
-      url: page.currentHref,
+      title: seo.ogTitle || title,
+      description: seo.ogDescription || description,
+      url: canonical,
       siteName: COMPANY.name,
       type: page.kind === "case-project-detail" ? "article" : "website",
       images: [
         {
           url: image,
-          alt: page.data.title
+          alt: seo.ogImage?.alt || page.data.title
         }
       ]
     },
+    twitter: {
+      card: seo.twitterCard || "summary_large_image",
+      title: seo.ogTitle || title,
+      description: seo.ogDescription || description,
+      images: [image]
+    },
     other: {
-      "llms-json": "/llms.json",
-      "llms-index": "/llms.txt",
-      "llms-full": "/llms-full.txt",
       "ai-markdown": `/api/markdown?path=${page.currentHref}`
     }
   };
@@ -96,7 +110,7 @@ function renderPureStructuredPage(page) {
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
-  const structuredPage = getStructuredPage(resolvedParams.slug || []);
+  const structuredPage = await getStructuredPage(resolvedParams.slug || []);
 
   if (structuredPage) {
     return buildStructuredMetadata(structuredPage);
@@ -107,7 +121,7 @@ export async function generateMetadata({ params }) {
 
 export default async function StructuredPage({ params }) {
   const resolvedParams = await params;
-  const structuredPage = getStructuredPage(resolvedParams.slug || []);
+  const structuredPage = await getStructuredPage(resolvedParams.slug || []);
 
   if (structuredPage) {
     return (
