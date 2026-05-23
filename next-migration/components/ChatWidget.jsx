@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
 const INITIAL_MESSAGE = {
@@ -182,11 +183,16 @@ function MessageBubble({ message, index }) {
 }
 
 export default function ChatWidget() {
+  const pathname = usePathname();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [messages, setMessages] = useState([INITIAL_MESSAGE]);
+
+  if (pathname?.startsWith("/studio")) {
+    return null;
+  }
 
   function appendAssistantMessage(text, extra = {}) {
     setMessages((current) => [...current, createMessage("assistant", text, extra)]);
