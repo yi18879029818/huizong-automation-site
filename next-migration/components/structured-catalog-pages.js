@@ -495,7 +495,7 @@ function sectionIntro(kicker, title, summary) {
         {" "}
         {kicker}{" "}
       </span>{" "}
-      <h1 className="font-headline text-6xl md:text-9xl font-extrabold leading-[0.9] tracking-tighter mb-8 text-kern-tight">
+      <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl xl:text-[6.5rem] font-extrabold leading-[0.92] tracking-tighter mb-8 text-kern-tight">
         {" "}
         {title}{" "}
       </h1>{" "}
@@ -1005,7 +1005,7 @@ function ProductOverviewBody({ page }) {
   return (
     <main>
       {" "}
-      <section className="relative min-h-[700px] flex items-center overflow-hidden bg-primary text-white">
+      <section className="relative min-h-[760px] md:min-h-[700px] flex items-center overflow-hidden bg-primary text-white">
         {" "}
         <div className="absolute inset-0 opacity-40">
           {" "}
@@ -1015,7 +1015,7 @@ function ProductOverviewBody({ page }) {
             src="/downloads/1.png"
           />{" "}
         </div>{" "}
-        <div className="max-w-screen-2xl mx-auto px-8 relative z-10 w-full">
+        <div className="max-w-screen-2xl mx-auto px-8 pt-16 pb-12 md:py-0 relative z-10 w-full">
           {" "}
           <div className="max-w-4xl">
             {" "}
@@ -1024,10 +1024,10 @@ function ProductOverviewBody({ page }) {
               page.data.heroTitle || page.data.title || "Warehouse Automation",
               page.data.summary,
             )}{" "}
-            <div className="flex flex-wrap items-center gap-10">
+            <div className="flex flex-wrap items-center gap-6 md:gap-10">
               {" "}
               <Link
-                className="bg-secondary text-white px-10 py-4 font-bold tracking-[0.2em] text-[10px] shadow-lg hover:bg-white hover:text-primary transition-all"
+                className="bg-secondary text-white px-8 md:px-10 py-4 font-bold tracking-[0.18em] text-[10px] shadow-lg hover:bg-white hover:text-primary transition-all"
                 href="/contact"
               >
                 {" "}
