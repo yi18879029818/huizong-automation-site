@@ -6,11 +6,11 @@
     "node": ">=18.17 <25"
   },
   "scripts": {
-    "predev": "node ./scripts/sync-legacy-public.mjs && npm run sanity:build:static && npm run sanity:manifest",
+    "predev": "node ./scripts/sync-legacy-public.mjs && npm run sanity:build:static && npm run sanity:manifest && node ./scripts/fix-static-studio-paths.mjs",
     "dev": "node ./scripts/dev-with-studio.mjs",
     "dev:site": "next dev",
     "dev:studio": "sanity dev --host localhost --port 3333",
-    "prebuild": "node ./scripts/sync-legacy-public.mjs && npm run sanity:build:static && npm run sanity:manifest && node ./scripts/minify-legacy-assets.mjs",
+    "prebuild": "node ./scripts/sync-legacy-public.mjs && npm run sanity:build:static && npm run sanity:manifest && node ./scripts/fix-static-studio-paths.mjs && node ./scripts/minify-legacy-assets.mjs",
     "build": "next build",
     "start": "next start",
     "preview": "opennextjs-cloudflare build && node ./scripts/finalize-static-studio.mjs && wrangler dev",
