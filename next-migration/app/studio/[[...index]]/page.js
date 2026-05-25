@@ -1,4 +1,6 @@
-import { isSanityConfigured } from "../../../lib/sanity/env.mjs";
+import { NextStudio } from "next-sanity/studio";
+import config from "../../../sanity.config.mjs";
+import { isSanityConfigured, SANITY_STUDIO_ENABLED } from "../../../lib/sanity/env.mjs";
 
 function StudioSetupNotice() {
   return (
@@ -69,5 +71,9 @@ export default function StudioPage() {
     return <StudioSetupNotice />;
   }
 
-  return <StudioDisabledNotice />;
+  if (!SANITY_STUDIO_ENABLED) {
+    return <StudioDisabledNotice />;
+  }
+
+  return <NextStudio config={config} />;
 }

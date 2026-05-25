@@ -5,6 +5,8 @@ out/
 .vercel/
 .open-next/
 .wrangler/
+.sanity/
 .env.local
 .dev.vars
+dev-with-studio*.log
 *.tsbuildinfo
