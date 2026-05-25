@@ -133,6 +133,50 @@ const PRODUCT_DETAIL_VISUALS = {
     ],
     integrationImage: "/downloads/ground-handling-forklift-agv.png",
   },
+  "lifting-agv": {
+    heroImage: "/assets/images/lifting-agv-top-lift.webp",
+    featureImage: "/assets/images/lifting-agv-workstation.webp",
+    scenarioImages: [
+      "/assets/images/lifting-agv-workstation.webp",
+      PRODUCT_CARD_IMAGES["lifting-agv"],
+      PRODUCT_CARD_IMAGES["storage-agv"],
+      PRODUCT_CARD_IMAGES["agv-forklift"],
+    ],
+    integrationImage: "/assets/images/lifting-agv-workstation.webp",
+  },
+  "storage-agv": {
+    heroImage: "/assets/images/storage-agv-hero.webp",
+    featureImage: "/assets/images/storage-agv-release.webp",
+    scenarioImages: [
+      "/assets/images/storage-agv-release.webp",
+      PRODUCT_CARD_IMAGES["storage-agv"],
+      PRODUCT_CARD_IMAGES["agv-roller"],
+      PRODUCT_CARD_IMAGES["agv-forklift"],
+    ],
+    integrationImage: "/assets/images/storage-agv-release.webp",
+  },
+  "agv-roller": {
+    heroImage: "/assets/images/agv-roller-hero.webp",
+    featureImage: "/assets/images/agv-roller-scenario-1.webp",
+    scenarioImages: [
+      "/assets/images/agv-roller-scenario-1.webp",
+      "/assets/images/agv-roller-scenario-2.webp",
+      PRODUCT_CARD_IMAGES["agv-roller"],
+      PRODUCT_CARD_IMAGES["lifting-agv"],
+    ],
+    integrationImage: "/assets/images/agv-roller-ecosystem.webp",
+  },
+  "composite-mobile-robot": {
+    heroImage: "/assets/images/cmr-hero.webp",
+    featureImage: "/assets/images/cmr-feature.webp",
+    scenarioImages: [
+      "/assets/images/cmr-scenario-1.webp",
+      "/assets/images/cmr-point-of-use.webp",
+      PRODUCT_CARD_IMAGES["composite-mobile-robot"],
+      PRODUCT_CARD_IMAGES["agv-roller"],
+    ],
+    integrationImage: "/assets/images/cmr-feature.webp",
+  },
   default: {
     heroImage: "/products/chacheAGV2.png",
     featureImage:
@@ -1123,18 +1167,6 @@ function ProductDetailBody({ page }) {
   if (slug === "ground-handling-forklift-agv") {
     return <GroundHandlingForkliftAgvBody page={page} />;
   }
-  if (slug === "lifting-agv") {
-    return <LiftingAgvBody page={page} />;
-  }
-  if (slug === "storage-agv") {
-    return <StorageAgvBody />;
-  }
-  if (slug === "agv-roller") {
-    return <AgvRollerBody />;
-  }
-  if (slug === "composite-mobile-robot") {
-    return <CompositeMobileRobotBody />;
-  }
   const visuals =
     PRODUCT_DETAIL_VISUALS[slug] || PRODUCT_DETAIL_VISUALS.default;
   const features = page.data.features || [];
@@ -1643,6 +1675,13 @@ function GroundHandlingForkliftAgvBody({ page }) {
   const scenarios = page.data.scenarios || [];
   const integrations = page.data.integrations || [];
   const quickSpecs = getProductSpecs("ground-handling-forklift-agv").quickSpecs || [];
+  const heroTitle =
+    page.data.heroTitle || page.data.title || "Ground Handling Forklift AGV";
+  const heroSummary =
+    page.data.heroSummary ||
+    page.data.summary ||
+    "Laser-guided pallet transfer for horizontal movement, short-distance stacking, and internal logistics dispatch where dense aisles, mixed traffic, and stable floor-level handling all matter.";
+  const heroKicker = page.data.kicker || "Ground Handling Series";
 
   return (
     <main>
@@ -1655,13 +1694,13 @@ function GroundHandlingForkliftAgvBody({ page }) {
         ]}
         imageAlt="Ground Handling Forklift AGV hero"
         imageSrc="/downloads/ground-handling-forklift-agv.png"
-        kicker="Ground Handling Series"
+        kicker={heroKicker}
         quickSpecs={quickSpecs}
-        summary="Laser-guided pallet transfer for horizontal movement, short-distance stacking, and internal logistics dispatch where dense aisles, mixed traffic, and stable floor-level handling all matter."
+        summary={heroSummary}
         ctaWrapperClassName="-mt-[22px] pt-0"
         summaryClassName="md:max-w-2xl"
         titleClassName="text-5xl md:text-7xl"
-        title="Ground Handling Forklift AGV"
+        title={heroTitle}
       />{" "}
       <ProductIntroductionSection slug="ground-handling-forklift-agv" />{" "}
       <ProductTechnicalDataSection slug="ground-handling-forklift-agv" />{" "}

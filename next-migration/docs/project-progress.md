@@ -156,3 +156,7 @@
 - Added the Sanity dashboard bridge script and Studio-specific `frame-ancestors` policy needed for self-hosted Studio registration.
 - Confirmed `next build` succeeds and that the latest About page route remains in the build output.
 - Remaining external dependency: the provided token can write content but does not have `sanity.project/deployStudio` or CORS-management grants, so schema deploy/CORS registration must be completed with a higher-permission Sanity admin token or admin login session.
+- Replaced Stage 3 verification copy with formal business content for the catalog layer and seeded six product detail documents into Sanity.
+- Restored the full six-card products overview from Sanity-backed data so the overview no longer drops to a partial product set.
+- Moved additional product detail pages onto the shared CMS/MDX-driven rendering path instead of leaving them trapped in older static special-case layouts.
+- Added a resilient `sanity manifest extract` fallback so existing Studio static artifacts can be reused when CLI manifest extraction is blocked by Sanity-side CORS/user checks during local build.

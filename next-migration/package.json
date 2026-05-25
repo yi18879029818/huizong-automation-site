@@ -18,7 +18,7 @@
     "cf:build": "opennextjs-cloudflare build && node ./scripts/finalize-static-studio.mjs",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts",
     "sanity:build:static": "sanity build public/studio --yes",
-    "sanity:manifest": "sanity manifest extract --path public/studio/static",
+    "sanity:manifest": "node ./scripts/extract-sanity-manifest.mjs",
     "sanity:schema:deploy": "sanity schema deploy",
     "sanity:seed:stage3": "node ./scripts/seed-stage3-sample-content.mjs"
   },

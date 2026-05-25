@@ -347,7 +347,8 @@ export async function getCatalogOverviewPageData(section) {
 
   const doc = await sanityFetch({
     query: catalogOverviewPageQuery,
-    params: { section }
+    params: { section },
+    preview: true
   });
 
   if (!doc) {
@@ -390,7 +391,8 @@ export async function getCatalogDetailPageData(section, slug) {
 
   const doc = await sanityFetch({
     query: catalogDetailPageQuery,
-    params: { section, slug }
+    params: { section, slug },
+    preview: true
   });
 
   if (!doc) {
