@@ -103,6 +103,7 @@ function applySecurityHeaders(response, pathname = "/") {
       "Content-Security-Policy",
       "frame-ancestors 'self' https://www.sanity.io https://*.sanity.io;"
     );
+    response.headers.set("Cache-Control", "no-store");
   }
 
   return response;
@@ -232,6 +233,12 @@ export async function middleware(request) {
   const canonicalRedirect = canonicalHostRedirect(request);
   if (canonicalRedirect) {
     return applySecurityHeaders(canonicalRedirect, pathname);
+  }
+
+  if (pathname === "/studio" || pathname === "/studio/") {
+    const studioUrl = request.nextUrl.clone();
+    studioUrl.pathname = "/studio/index.html";
+    return applySecurityHeaders(NextResponse.rewrite(studioUrl), pathname);
   }
 
   const internalAutomationResponse = enforceInternalAutomationAccess(request, pathname);

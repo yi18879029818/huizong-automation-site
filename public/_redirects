@@ -1,2 +1,3 @@
-# 暂无启用的 301 重定向规则
-
+# Static studio entry
+/studio /studio/index.html 200
+/studio/ /studio/index.html 200
