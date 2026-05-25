@@ -11,7 +11,12 @@
   },
   "vars": {
     "GA4_MEASUREMENT_ID": "G-P4MLY74P4X",
-    "HUIZONG_API_BASE_URL": "https://gaxlgfkemprx.usw-1.sealos.app"
+    "HUIZONG_API_BASE_URL": "https://gaxlgfkemprx.usw-1.sealos.app",
+    "NEXT_PUBLIC_SANITY_PROJECT_ID": "axzpb83z",
+    "NEXT_PUBLIC_SANITY_DATASET": "production",
+    "SANITY_API_VERSION": "2025-05-23",
+    "SANITY_STUDIO_ENABLED": "true",
+    "SANITY_STUDIO_BASE_PATH": "/studio"
   },
   "d1_databases": [
     {

@@ -6,6 +6,7 @@ out/
 .open-next/
 .wrangler/
 .sanity/
+.sanity-cli-config/
 .env.local
 .dev.vars
 dev-with-studio*.log

@@ -13,6 +13,10 @@ const SECURITY_HEADERS = {
 
 const INTERNAL_AUTOMATION_PATH_PREFIXES = ["/internal/automation", "/api/automation"];
 
+function isStudioPath(pathname = "") {
+  return pathname === "/studio" || pathname.startsWith("/studio/");
+}
+
 function isLocalHost(hostname = "") {
   return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
 }
@@ -85,9 +89,21 @@ async function markdownProxyResponse(request) {
 }
 
 function applySecurityHeaders(response, pathname = "/") {
+  const isStudio = isStudioPath(pathname);
+
   Object.entries(SECURITY_HEADERS).forEach(([key, value]) => {
+    if (isStudio && key === "X-Frame-Options") {
+      return;
+    }
     response.headers.set(key, value);
   });
+
+  if (isStudio) {
+    response.headers.set(
+      "Content-Security-Policy",
+      "frame-ancestors 'self' https://www.sanity.io https://*.sanity.io;"
+    );
+  }
 
   return response;
 }

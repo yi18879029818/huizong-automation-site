@@ -147,3 +147,12 @@
 - Updated structured routing, SEO metadata generation, sitemap/robots output, and llms/markdown helpers to work with the new page data flow.
 - Preserved the latest approved About page layout and restored its dedicated assets before preparing the release commit.
 - Deployment status: pending release commit, push, and Cloudflare deployment verification.
+
+## 2026-05-25
+
+- Fixed the embedded `/studio` route so it no longer throws a React context error and now returns a working local Studio page.
+- Added `sanity.config.js` and `sanity.cli.js` compatibility entry points so Sanity CLI manifest/schema commands can resolve this workspace reliably.
+- Added automatic `sanity manifest extract` generation into `public/studio/static` during dev/build preparation.
+- Added the Sanity dashboard bridge script and Studio-specific `frame-ancestors` policy needed for self-hosted Studio registration.
+- Confirmed `next build` succeeds and that the latest About page route remains in the build output.
+- Remaining external dependency: the provided token can write content but does not have `sanity.project/deployStudio` or CORS-management grants, so schema deploy/CORS registration must be completed with a higher-permission Sanity admin token or admin login session.

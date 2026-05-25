@@ -6,16 +6,18 @@
     "node": ">=18.17 <25"
   },
   "scripts": {
-    "predev": "node ./scripts/sync-legacy-public.mjs",
+    "predev": "node ./scripts/sync-legacy-public.mjs && npm run sanity:manifest",
     "dev": "node ./scripts/dev-with-studio.mjs",
     "dev:site": "next dev",
     "dev:studio": "sanity dev --host localhost --port 3333",
-    "prebuild": "node ./scripts/sync-legacy-public.mjs && node ./scripts/minify-legacy-assets.mjs",
+    "prebuild": "node ./scripts/sync-legacy-public.mjs && npm run sanity:manifest && node ./scripts/minify-legacy-assets.mjs",
     "build": "next build",
     "start": "next start",
     "preview": "opennextjs-cloudflare build && wrangler dev",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts",
+    "sanity:manifest": "sanity manifest extract --path public/studio/static",
+    "sanity:schema:deploy": "sanity schema deploy",
     "sanity:seed:stage3": "node ./scripts/seed-stage3-sample-content.mjs"
   },
   "dependencies": {

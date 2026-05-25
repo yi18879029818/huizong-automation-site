@@ -142,6 +142,8 @@ Recent iterations that matter for future work:
 - added Sanity schema foundation for home, about, contact, and site settings
 - connected structured page resolution to optional Sanity-backed page data with local fallbacks
 - restored the latest approved About page layout before continuing Stage 2 CMS work
+- enabled a self-hosted `/studio` route with local manifest generation for Sanity Studio embedding
+- added dashboard bridge injection and Studio-specific iframe policy so the self-hosted Studio can be registered in Sanity Manage
 
 ## 8. Key Risks and Ongoing Attention Areas
 

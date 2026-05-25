@@ -1,3 +1,7 @@
+import { preloadModule } from "react-dom";
+
+const bridgeScript = "https://core.sanity-cdn.com/bridge.js";
+
 export const metadata = {
   title: "Sanity Studio | coolyne",
   description: "Content management studio for coolyne.",
@@ -13,5 +17,12 @@ export const viewport = {
 };
 
 export default function StudioLayout({ children }) {
-  return children;
+  preloadModule(bridgeScript, { as: "script" });
+
+  return (
+    <>
+      <script src={bridgeScript} async type="module" />
+      {children}
+    </>
+  );
 }
