@@ -111,6 +111,8 @@ import CaseProjectWarehouseUpgrade, {
 } from "@/content/case-studies/projects/automated-warehouse-upgrade.mdx";
 import {
   getAboutPageData,
+  getCatalogDetailPageData,
+  getCatalogOverviewPageData,
   getContactPageData,
   getHomePageData
 } from "@/lib/sanity/page-data.mjs";
@@ -264,6 +266,10 @@ function createDetailData(entry) {
     capabilities: entry.capabilities,
     contactForm: entry.contactForm
   };
+}
+
+function mergeDetailEntry(entry, overrides) {
+  return mergeDefined(createDetailData(entry), overrides);
 }
 
 function isPlainObject(value) {
@@ -446,6 +452,8 @@ export async function getStructuredPage(slug = []) {
     const navigation = navSection(section);
 
     if (!subsection) {
+      const sanityData = await getCatalogOverviewPageData(section);
+
       return buildStaticPage({
         kind: "product-overview",
         section,
@@ -457,32 +465,38 @@ export async function getStructuredPage(slug = []) {
           { href: "/", label: "Home" },
           { href: "/products", label: "Products" }
         ]),
-        data: {
-          ...productOverviewMeta,
-          Content: ProductOverview,
-          cards: PRODUCT_MODULES.map((entry) => createCardFromMeta(entry.slug, entry.meta)),
-          capabilities: productCapabilities,
-          faqs: productFaqs
-        }
+        data: mergeDefined(
+          {
+            ...productOverviewMeta,
+            Content: ProductOverview,
+            cards: PRODUCT_MODULES.map((entry) => createCardFromMeta(entry.slug, entry.meta)),
+            capabilities: productCapabilities,
+            faqs: productFaqs
+          },
+          sanityData
+        )
       });
     }
 
     const entry = PRODUCT_MODULES.find((product) => product.slug === subsection);
 
     if (entry) {
+      const sanityData = await getCatalogDetailPageData(section, entry.slug);
+      const data = mergeDetailEntry(entry, sanityData);
+
       return buildStaticPage({
         kind: "product-detail",
         section,
         sectionLabel: navigation?.label || "Products",
         href: `/products/${entry.slug}`,
-        title: withCompanyTitle(entry.meta.title),
+        title: withCompanyTitle(data.title || entry.meta.title),
         subnav: navigation?.items || [],
         breadcrumbs: createBreadcrumbs([
           { href: "/", label: "Home" },
           { href: "/products", label: "Products" },
-          { href: `/products/${entry.slug}`, label: entry.meta.title }
+          { href: `/products/${entry.slug}`, label: data.title || entry.meta.title }
         ]),
-        data: createDetailData(entry)
+        data
       });
     }
   }
@@ -491,6 +505,8 @@ export async function getStructuredPage(slug = []) {
     const navigation = navSection(section);
 
     if (!subsection) {
+      const sanityData = await getCatalogOverviewPageData(section);
+
       return buildStaticPage({
         kind: "solution-overview",
         section,
@@ -502,32 +518,38 @@ export async function getStructuredPage(slug = []) {
           { href: "/", label: "Home" },
           { href: "/solutions", label: "Solutions" }
         ]),
-        data: {
-          ...solutionOverviewMeta,
-          Content: SolutionOverview,
-          cards: SOLUTION_MODULES.map((entry) => createCardFromMeta(entry.slug, entry.meta)),
-          capabilities: solutionCapabilities,
-          faqs: solutionFaqs
-        }
+        data: mergeDefined(
+          {
+            ...solutionOverviewMeta,
+            Content: SolutionOverview,
+            cards: SOLUTION_MODULES.map((entry) => createCardFromMeta(entry.slug, entry.meta)),
+            capabilities: solutionCapabilities,
+            faqs: solutionFaqs
+          },
+          sanityData
+        )
       });
     }
 
     const entry = SOLUTION_MODULES.find((solution) => solution.slug === subsection);
 
     if (entry) {
+      const sanityData = await getCatalogDetailPageData(section, entry.slug);
+      const data = mergeDetailEntry(entry, sanityData);
+
       return buildStaticPage({
         kind: "solution-detail",
         section,
         sectionLabel: navigation?.label || "Solutions",
         href: `/solutions/${entry.slug}`,
-        title: withCompanyTitle(entry.meta.title),
+        title: withCompanyTitle(data.title || entry.meta.title),
         subnav: navigation?.items || [],
         breadcrumbs: createBreadcrumbs([
           { href: "/", label: "Home" },
           { href: "/solutions", label: "Solutions" },
-          { href: `/solutions/${entry.slug}`, label: entry.meta.title }
+          { href: `/solutions/${entry.slug}`, label: data.title || entry.meta.title }
         ]),
-        data: createDetailData(entry)
+        data
       });
     }
   }
@@ -536,6 +558,8 @@ export async function getStructuredPage(slug = []) {
     const navigation = navSection(section);
 
     if (!subsection) {
+      const sanityData = await getCatalogOverviewPageData(section);
+
       return buildStaticPage({
         kind: "case-overview",
         section,
@@ -547,17 +571,20 @@ export async function getStructuredPage(slug = []) {
           { href: "/", label: "Home" },
           { href: "/case-studies", label: "Case Studies" }
         ]),
-        data: {
-          ...caseOverviewMeta,
-          Content: CaseOverview,
-          cards: [
-            ...CASE_CATEGORY_MODULES.map((entry) => createCardFromMeta(entry.slug, entry.meta)),
-            ...CASE_PROJECT_MODULES.map((entry) =>
-              createCardFromMeta(`projects/${entry.slug}`, entry.meta)
-            )
-          ],
-          faqs: caseOverviewFaqs
-        }
+        data: mergeDefined(
+          {
+            ...caseOverviewMeta,
+            Content: CaseOverview,
+            cards: [
+              ...CASE_CATEGORY_MODULES.map((entry) => createCardFromMeta(entry.slug, entry.meta)),
+              ...CASE_PROJECT_MODULES.map((entry) =>
+                createCardFromMeta(`projects/${entry.slug}`, entry.meta)
+              )
+            ],
+            faqs: caseOverviewFaqs
+          },
+          sanityData
+        )
       });
     }
 
@@ -565,22 +592,26 @@ export async function getStructuredPage(slug = []) {
       const entry = CASE_PROJECT_MODULES.find((project) => project.slug === third);
 
       if (entry) {
+        const detailSlug = `projects/${entry.slug}`;
+        const sanityData = await getCatalogDetailPageData(section, detailSlug);
+        const data = mergeDetailEntry(entry, sanityData);
+
         return buildStaticPage({
           kind: "case-project-detail",
           section,
           sectionLabel: navigation?.label || "Case Studies",
           href: `/case-studies/projects/${entry.slug}`,
-          title: withCompanyTitle(entry.meta.title),
+          title: withCompanyTitle(data.title || entry.meta.title),
           subnav: navigation?.items || [],
           breadcrumbs: createBreadcrumbs([
             { href: "/", label: "Home" },
             { href: "/case-studies", label: "Case Studies" },
             {
               href: `/case-studies/projects/${entry.slug}`,
-              label: entry.meta.title
+              label: data.title || entry.meta.title
             }
           ]),
-          data: createDetailData(entry)
+          data
         });
       }
     }
@@ -588,19 +619,22 @@ export async function getStructuredPage(slug = []) {
     const entry = CASE_CATEGORY_MODULES.find((category) => category.slug === subsection);
 
     if (entry) {
+      const sanityData = await getCatalogDetailPageData(section, entry.slug);
+      const data = mergeDetailEntry(entry, sanityData);
+
       return buildStaticPage({
         kind: "case-category",
         section,
         sectionLabel: navigation?.label || "Case Studies",
         href: `/case-studies/${entry.slug}`,
-        title: withCompanyTitle(entry.meta.title),
+        title: withCompanyTitle(data.title || entry.meta.title),
         subnav: navigation?.items || [],
         breadcrumbs: createBreadcrumbs([
           { href: "/", label: "Home" },
           { href: "/case-studies", label: "Case Studies" },
-          { href: `/case-studies/${entry.slug}`, label: entry.meta.title }
+          { href: `/case-studies/${entry.slug}`, label: data.title || entry.meta.title }
         ]),
-        data: createDetailData(entry)
+        data
       });
     }
   }

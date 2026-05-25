@@ -1,5 +1,7 @@
 import {
   aboutPageQuery,
+  catalogDetailPageQuery,
+  catalogOverviewPageQuery,
   contactPageQuery,
   homePageQuery,
   siteSettingsQuery
@@ -30,6 +32,18 @@ function normalizeLink(link) {
     href: link.href || "/",
     label: link.title || "Learn more"
   };
+}
+
+function deriveSlugFromHref(href = "") {
+  if (!href) {
+    return "";
+  }
+
+  return href
+    .replace(/^\/+/, "")
+    .split("/")
+    .filter(Boolean)
+    .slice(-1)[0] || "";
 }
 
 function normalizeMetric(metric) {
@@ -153,6 +167,17 @@ function normalizeContactMethod(item) {
     title: item.title,
     value: item.value,
     caption: item.caption || ""
+  };
+}
+
+function normalizeDetailListItem(item) {
+  if (!item?.title) {
+    return null;
+  }
+
+  return {
+    title: item.title,
+    description: item.description || ""
   };
 }
 
@@ -310,6 +335,89 @@ export async function getContactPageData() {
     submitLabel: doc.submitLabel || "",
     mapImage: normalizeImageAsset(doc.mapImage),
     mapLabel: doc.mapLabel || "",
+    faqs: normalizeArray(doc.faqs, normalizeFaqItem),
+    seo: normalizeSeo(doc.seo)
+  };
+}
+
+export async function getCatalogOverviewPageData(section) {
+  if (!section) {
+    return null;
+  }
+
+  const doc = await sanityFetch({
+    query: catalogOverviewPageQuery,
+    params: { section }
+  });
+
+  if (!doc) {
+    return null;
+  }
+
+  return {
+    section: doc.section || section,
+    title: doc.title || "",
+    kicker: doc.kicker || doc.hero?.kicker || "",
+    summary: doc.summary || doc.hero?.summary || "",
+    heroTitle: doc.hero?.title || doc.title || "",
+    heroSummary: doc.hero?.summary || doc.summary || "",
+    heroBackgroundImage: normalizeImageAsset(doc.hero?.backgroundImage),
+    heroPrimaryCta: normalizeLink(doc.hero?.primaryCta),
+    heroSecondaryCta: normalizeLink(doc.hero?.secondaryCta),
+    metrics: normalizeArray(doc.metrics, normalizeMetric),
+    cards: Array.isArray(doc.cards)
+      ? doc.cards
+          .map((card) => ({
+            href: card?.href || "",
+            slug: deriveSlugFromHref(card?.href || ""),
+            title: card?.title || "",
+            label: card?.label || "",
+            summary: card?.summary || "",
+            metrics: normalizeArray(card?.metrics, normalizeMetric) || []
+          }))
+          .filter((card) => card.title && card.href)
+      : undefined,
+    capabilities: Array.isArray(doc.capabilities) ? doc.capabilities.filter(Boolean) : undefined,
+    faqs: normalizeArray(doc.faqs, normalizeFaqItem),
+    seo: normalizeSeo(doc.seo)
+  };
+}
+
+export async function getCatalogDetailPageData(section, slug) {
+  if (!section || !slug) {
+    return null;
+  }
+
+  const doc = await sanityFetch({
+    query: catalogDetailPageQuery,
+    params: { section, slug }
+  });
+
+  if (!doc) {
+    return null;
+  }
+
+  return {
+    section: doc.section || section,
+    slug: doc.slug || slug,
+    title: doc.title || "",
+    label: doc.label || "",
+    kicker: doc.kicker || doc.hero?.kicker || "",
+    summary: doc.summary || doc.hero?.summary || "",
+    heroTitle: doc.hero?.title || doc.title || "",
+    heroSummary: doc.hero?.summary || doc.summary || "",
+    heroBackgroundImage: normalizeImageAsset(doc.hero?.backgroundImage),
+    heroPrimaryCta: normalizeLink(doc.hero?.primaryCta),
+    heroSecondaryCta: normalizeLink(doc.hero?.secondaryCta),
+    metrics: normalizeArray(doc.metrics, normalizeMetric),
+    features: normalizeArray(doc.features, normalizeFeatureCard),
+    scenarios: Array.isArray(doc.scenarios) ? doc.scenarios.filter(Boolean) : undefined,
+    integrations: Array.isArray(doc.integrations) ? doc.integrations.filter(Boolean) : undefined,
+    projects: normalizeArray(doc.projects, normalizeDetailListItem),
+    bottlenecks: normalizeArray(doc.bottlenecks, normalizeDetailListItem),
+    solutionStack: Array.isArray(doc.solutionStack) ? doc.solutionStack.filter(Boolean) : undefined,
+    commissioning: Array.isArray(doc.commissioning) ? doc.commissioning.filter(Boolean) : undefined,
+    capabilities: Array.isArray(doc.capabilities) ? doc.capabilities.filter(Boolean) : undefined,
     faqs: normalizeArray(doc.faqs, normalizeFaqItem),
     seo: normalizeSeo(doc.seo)
   };

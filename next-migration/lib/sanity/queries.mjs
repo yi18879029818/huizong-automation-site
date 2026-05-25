@@ -34,6 +34,14 @@ export const metricProjection = `{
   icon
 }`;
 
+export const navCardItemProjection = `{
+  href,
+  title,
+  label,
+  summary,
+  metrics[]${metricProjection}
+}`;
+
 export const faqItemProjection = `{
   question,
   answer
@@ -97,6 +105,11 @@ export const contactMethodProjection = `{
   title,
   value,
   caption
+}`;
+
+export const detailListItemProjection = `{
+  title,
+  description
 }`;
 
 export const portableTextProjection = `[]{
@@ -173,13 +186,7 @@ export const homePageQuery = `*[_type == "homePage"][0]{
   summary,
   hero${heroProjection},
   metrics[]${metricProjection},
-  cards[]{
-    href,
-    title,
-    label,
-    summary,
-    metrics[]${metricProjection}
-  },
+  cards[]${navCardItemProjection},
   capabilities[],
   industryTitle,
   industrySummary,
@@ -235,6 +242,40 @@ export const contactPageQuery = `*[_type == "contactPage"][0]{
   submitLabel,
   mapImage${imageProjection},
   mapLabel,
+  faqs[]${faqItemProjection},
+  seo${seoProjection}
+}`;
+
+export const catalogOverviewPageQuery = `*[_type == "catalogOverviewPage" && section == $section][0]{
+  section,
+  title,
+  kicker,
+  summary,
+  hero${heroProjection},
+  metrics[]${metricProjection},
+  cards[]${navCardItemProjection},
+  capabilities[],
+  faqs[]${faqItemProjection},
+  seo${seoProjection}
+}`;
+
+export const catalogDetailPageQuery = `*[_type == "catalogDetailPage" && section == $section && slug.current == $slug][0]{
+  section,
+  title,
+  "slug": slug.current,
+  label,
+  kicker,
+  summary,
+  hero${heroProjection},
+  metrics[]${metricProjection},
+  features[]${featureCardProjection},
+  scenarios[],
+  integrations[],
+  projects[]${detailListItemProjection},
+  bottlenecks[]${detailListItemProjection},
+  solutionStack[],
+  commissioning[],
+  capabilities[],
   faqs[]${faqItemProjection},
   seo${seoProjection}
 }`;

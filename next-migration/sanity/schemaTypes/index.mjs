@@ -1,4 +1,6 @@
 import { aboutPage } from "./aboutPage.mjs";
+import { catalogDetailPage } from "./catalogDetailPage.mjs";
+import { catalogOverviewPage } from "./catalogOverviewPage.mjs";
 import { caseStudy } from "./caseStudy.mjs";
 import { contactPage } from "./contactPage.mjs";
 import { faq } from "./faq.mjs";
@@ -10,6 +12,7 @@ import { post } from "./post.mjs";
 import { seo } from "./seo.mjs";
 import { certificateItem } from "./objects/certificateItem.mjs";
 import { contactMethod } from "./objects/contactMethod.mjs";
+import { detailListItem } from "./objects/detailListItem.mjs";
 import { faqItem } from "./objects/faqItem.mjs";
 import { featureCard } from "./objects/featureCard.mjs";
 import { heroBlock } from "./objects/heroBlock.mjs";
@@ -34,6 +37,7 @@ export const schemaTypes = [
   certificateItem,
   trustShowcaseItem,
   contactMethod,
+  detailListItem,
   navCardItem,
   post,
   caseStudy,
@@ -41,5 +45,7 @@ export const schemaTypes = [
   siteSettings,
   homePage,
   aboutPage,
-  contactPage
+  contactPage,
+  catalogOverviewPage,
+  catalogDetailPage
 ];
