@@ -977,7 +977,7 @@ function ProductOverviewBody({ page }) {
             {" "}
             {sectionIntro(
               page.data.kicker,
-              "Warehouse Automation",
+              page.data.heroTitle || page.data.title || "Warehouse Automation",
               page.data.summary,
             )}{" "}
             <div className="flex flex-wrap items-center gap-10">
@@ -1118,7 +1118,7 @@ function ProductOverviewBody({ page }) {
 function ProductDetailBody({ page }) {
   const slug = getSlug(page);
   if (slug === "agv-forklift") {
-    return <AgvForkliftBody />;
+    return <AgvForkliftBody page={page} />;
   }
   if (slug === "ground-handling-forklift-agv") {
     return <GroundHandlingForkliftAgvBody page={page} />;
@@ -1359,51 +1359,132 @@ function ProductDetailBody({ page }) {
     </main>
   );
 }
-function AgvForkliftBody() {
+function AgvForkliftBody({ page }) {
   const quickSpecs = getProductSpecs("agv-forklift").quickSpecs || [];
+  const features = page.data.features || [];
+  const scenarios = page.data.scenarios || [];
+  const integrations = page.data.integrations || [];
+  const heroSummary = page.data.heroSummary || page.data.summary;
+  const scenarioList = scenarios.length
+    ? scenarios
+    : ["Pallet Transport", "Rack Interface", "Factory Transport"];
+  const integrationCards = [
+    {
+      icon: "settings_input_component",
+      title: integrations[0] || "WMS/WCS Bridge",
+      copy:
+        features[0]?.description ||
+        "Direct API integration with SAP, Oracle, and Manhattan Associates. Zero-latency mission assignment and tracking.",
+    },
+    {
+      icon: "monitor_heart",
+      title: integrations[1] || "Fleet Control",
+      copy:
+        features[1]?.description ||
+        "Centralized traffic management prevents congestion and optimizes route selection across the entire autonomous fleet.",
+    },
+    {
+      icon: "analytics",
+      title: integrations[2] || "Predictive Analytics",
+      copy:
+        features[2]?.description ||
+        "Cloud-based telemetry monitors component health, predicting maintenance needs before they impact uptime.",
+    },
+  ];
+  const scenarioCards = [
+    {
+      title: scenarioList[0] || "Pallet Transport",
+      copy:
+        features[0]?.description ||
+        "High-speed point-to-point movement across large facilities, replacing manual tuggers for repetitive long-haul tasks.",
+      image:
+        "https://lh3.googleusercontent.com/aida-public/AB6AXuCYFcOkg43a4CILwgiFZ4fupjXTw8wkNj0bSGVp5-fLb4OaIVeIgnuMuR_l6GMWc5u5AyW6hqZaVjz9v35NWeQ0HZY6GGeT3rUa9-74l1Pn2RYdmm4WQyphqYZwZ3qG0GjZq5waCI7nNxyZyvvtJnvcMFGeVPqLPwf6LdW6ahPdLSoYhJrk76OvITC1GocD0bl6iRvfN0MGnCl8xBxNQu8FEsynzMOVhnGj1qB0x0qgiljWmRXY9zFVc5gpKvl8PuV_jW8gX4MgbnEH",
+    },
+    {
+      title: scenarioList[1] || "Rack Interface",
+      copy:
+        features[1]?.description ||
+        "Precision vertical lifting for placing and retrieving pallets from intelligent high-density racking systems up to 2M.",
+      image: "/assets/images/rack-interface-1.avif",
+    },
+    {
+      title: scenarioList[2] || "Factory Transport",
+      copy:
+        features[2]?.description ||
+        "Seamlessly moving loads between production cells, staging areas, and automated storage systems across the factory floor.",
+      image: "/assets/images/factory-transport-1.webp",
+    },
+    {
+      title: scenarioList[3] || "Line Feeding",
+      copy:
+        features[3]?.description ||
+        "Just-in-time delivery of components to manufacturing lines, ensuring zero downtime in production cycles.",
+      image: "/assets/images/line-feeding-1.png",
+    },
+  ];
 
   return (
     <main>
       {" "}
       <ProductHeroSection
         featureTags={[
-          "High-rack pallet handling",
-          "SLAM guidance",
-          "WMS and WCS integration",
+          scenarios[0] || "High-rack pallet handling",
+          integrations[0] || "SLAM guidance",
+          integrations[1] || "WMS and WCS integration",
         ]}
-        imageAlt="Forklift Stacker AGV unit"
+        imageAlt={page.data.title || "Forklift Stacker AGV unit"}
         imageSrc="/products/chacheAGV1.png"
-        kicker="Industrial Robotics"
+        kicker={page.data.kicker || "Industrial Robotics"}
         quickSpecs={quickSpecs}
-        summary="The backbone of autonomous pallet movement and high-rack storage, engineered for stable pallet handling, dense warehouse travel, and reliable integration into live facility operations."
-        title="Forklift Stacker AGV"
+        summary={heroSummary}
+        title={page.data.heroTitle || page.data.title || "Forklift Stacker AGV"}
       />{" "}
       <ProductPerformanceSection
-        capabilities={[
-          "Millimeter-level pallet positioning in shared industrial aisles",
-          "High-rack putaway and retrieval with stable mast control",
-          "Opportunity charging logic for continuous shift coverage",
-          "Safety sensing with LiDAR, ultrasonic, and bumper protection",
-        ]}
+        capabilities={
+          features.slice(0, 4).map((feature) => feature.title).length
+            ? features.slice(0, 4).map((feature) => feature.title)
+            : [
+                "Millimeter-level pallet positioning in shared industrial aisles",
+                "High-rack putaway and retrieval with stable mast control",
+                "Opportunity charging logic for continuous shift coverage",
+                "Safety sensing with LiDAR, ultrasonic, and bumper protection",
+              ]
+        }
         eyebrow="Precision Engineering"
-        featureCopy="Integrated safety systems combine ultrasonic sensing, 3D cameras, and bumper feedback to keep pallet moves stable in mixed traffic conditions."
+        featureCopy={
+          features[3]?.description ||
+          "Integrated safety systems combine ultrasonic sensing, 3D cameras, and bumper feedback to keep pallet moves stable in mixed traffic conditions."
+        }
         featureImage="https://lh3.googleusercontent.com/aida-public/AB6AXuBVGHLQyPWswkMy-WbK_JVcGyrHGLxBjQHB6BaQgaH5AO6apmCESe8-F4IztySJ_YXtdQjqaM9UtkmWha_-9pLHdAbJJMODpLI4DHKLtgbXJPw6U1CtffR0dVzpxDWQ1og5H4ng8D8nsjLDBpH7z-ev2nnRJpzOnq299vPA2fSp3XdW_2FkcVI4f_HQICK6lpXM8Ywu0d4LpluwrKWyfx7v1EW1Xw7Rxorok-yNdXCsPYi86oOiPdny4QW2DN3pkTUgjFUWjTHf4jnC"
         featureImageAlt="Forklift sensor detail"
-        featureTitle="Multi-sensor fusion for live warehouse safety"
-        leadCopy="Equipped with high-fidelity LiDAR and SLAM algorithms, the Forklift Stacker AGV maps its environment in real time and executes pallet travel with the positional accuracy high-throughput sites need."
-        leadTitle="Autonomous navigation tuned for pallet flow."
-        secondaryCards={[
-          {
-            title: "24/7 operational availability",
-            copy: "Automated charging logic routes low-battery vehicles during natural demand lulls so fleet throughput stays stable across the shift.",
-          },
-          {
-            title: "Heavy-load capacity",
-            copy: "Designed for industrial pallets up to 1,400kg with lift performance ready for high-rack and buffer-zone movement.",
-          },
-        ]}
+        featureTitle={features[3]?.title || "Multi-sensor fusion for live warehouse safety"}
+        leadCopy={
+          features[0]?.description ||
+          "Equipped with high-fidelity LiDAR and SLAM algorithms, the Forklift Stacker AGV maps its environment in real time and executes pallet travel with the positional accuracy high-throughput sites need."
+        }
+        leadTitle={features[0]?.title || "Autonomous navigation tuned for pallet flow."}
+        secondaryCards={
+          features.slice(1, 3).length
+            ? features.slice(1, 3).map((feature) => ({
+                title: feature.title,
+                copy: feature.description,
+              }))
+            : [
+                {
+                  title: "24/7 operational availability",
+                  copy: "Automated charging logic routes low-battery vehicles during natural demand lulls so fleet throughput stays stable across the shift.",
+                },
+                {
+                  title: "Heavy-load capacity",
+                  copy: "Designed for industrial pallets up to 1,400kg with lift performance ready for high-rack and buffer-zone movement.",
+                },
+              ]
+        }
         statCards={quickSpecs}
-        summary="A denser view of the engineering snapshot: motion accuracy, safety architecture, energy logic, and the practical handling capabilities buyers usually want to confirm before the technical review."
+        summary={
+          page.data.summary ||
+          "A denser view of the engineering snapshot: motion accuracy, safety architecture, energy logic, and the practical handling capabilities buyers usually want to confirm before the technical review."
+        }
         title="Performance built for real warehouse throughput."
       />{" "}
       <ProductTechnicalDataSection slug="agv-forklift" />{" "}
@@ -1425,17 +1506,12 @@ function AgvForkliftBody() {
               </h3>{" "}
               <p className="text-on-primary-container text-lg mb-12 font-body leading-relaxed">
                 {" "}
-                From internal factory transport routes to the final dispatch
-                line, our AGV Forklifts adapt to your specific workflow
-                requirements.{" "}
+                {heroSummary ||
+                  "From internal factory transport routes to the final dispatch line, our AGV Forklifts adapt to your specific workflow requirements."}{" "}
               </p>{" "}
               <div className="space-y-3">
                 {" "}
-                {[
-                  "Pallet Transport",
-                  "Rack Interface",
-                  "Factory Transport",
-                ].map((item, index) => (
+                {scenarioList.map((item, index) => (
                   <div
                     className={`flex items-center gap-4 p-5 bg-white/5 border-l-4 transition-all ${index === 0 ? "border-secondary" : "border-transparent hover:border-white/20 cursor-pointer"}`}
                     key={item}
@@ -1461,28 +1537,7 @@ function AgvForkliftBody() {
               {" "}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {" "}
-                {[
-                  [
-                    "Pallet Transport",
-                    "High-speed point-to-point movement across large facilities, replacing manual tuggers for repetitive long-haul tasks.",
-                    "https://lh3.googleusercontent.com/aida-public/AB6AXuCYFcOkg43a4CILwgiFZ4fupjXTw8wkNj0bSGVp5-fLb4OaIVeIgnuMuR_l6GMWc5u5AyW6hqZaVjz9v35NWeQ0HZY6GGeT3rUa9-74l1Pn2RYdmm4WQyphqYZwZ3qG0GjZq5waCI7nNxyZyvvtJnvcMFGeVPqLPwf6LdW6ahPdLSoYhJrk76OvITC1GocD0bl6iRvfN0MGnCl8xBxNQu8FEsynzMOVhnGj1qB0x0qgiljWmRXY9zFVc5gpKvl8PuV_jW8gX4MgbnEH",
-                  ],
-                  [
-                    "Rack Interface",
-                    "Precision vertical lifting for placing and retrieving pallets from intelligent high-density racking systems up to 2M.",
-                    "/assets/images/rack-interface-1.avif",
-                  ],
-                  [
-                    "Factory Transport",
-                    "Seamlessly moving loads between production cells, staging areas, and automated storage systems across the factory floor.",
-                    "/assets/images/factory-transport-1.webp",
-                  ],
-                  [
-                    "Line Feeding",
-                    "Just-in-time delivery of components to manufacturing lines, ensuring zero downtime in production cycles.",
-                    "/assets/images/line-feeding-1.png",
-                  ],
-                ].map(([title, copy, image]) => (
+                {scenarioCards.map(({ title, copy, image }) => (
                   <div className="space-y-6 group" key={title}>
                     {" "}
                     <div className="aspect-video overflow-hidden">
@@ -1528,30 +1583,13 @@ function AgvForkliftBody() {
             </h3>{" "}
             <p className="text-on-surface-variant text-xl leading-relaxed font-body">
               {" "}
-              Our AGVs are fully integrated components of your digital supply
-              chain, communicating in real-time with existing WMS/WCS systems
-              for perfect synchronization.{" "}
+              {page.data.summary ||
+                "Our AGVs are fully integrated components of your digital supply chain, communicating in real-time with existing WMS/WCS systems for perfect synchronization."}{" "}
             </p>{" "}
           </div>{" "}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-outline-variant/30">
             {" "}
-            {[
-              [
-                "settings_input_component",
-                "WMS/WCS Bridge",
-                "Direct API integration with SAP, Oracle, and Manhattan Associates. Zero-latency mission assignment and tracking.",
-              ],
-              [
-                "monitor_heart",
-                "Fleet Control",
-                "Centralized traffic management prevents congestion and optimizes route selection across the entire autonomous fleet.",
-              ],
-              [
-                "analytics",
-                "Predictive Analytics",
-                "Cloud-based telemetry monitors component health, predicting maintenance needs before they impact uptime.",
-              ],
-            ].map(([icon, title, copy], index, list) => (
+            {integrationCards.map(({ icon, title, copy }, index, list) => (
               <div
                 className={`p-12 hover:bg-surface-container-low transition-colors group ${index < list.length - 1 ? "border-r border-b md:border-b-0 border-outline-variant/30" : ""}`}
                 key={title}
