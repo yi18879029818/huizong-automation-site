@@ -673,6 +673,11 @@ a {
   align-content: start;
 }
 
+.faq-hero-copy h1 {
+  font-size: clamp(2.5rem, 6.2vw, 4.9rem);
+  line-height: 0.98;
+}
+
 .faq-topic-row {
   display: flex;
   flex-wrap: wrap;
