@@ -1,7 +1,6 @@
 import { COMPANY, SITE_URL } from "@/lib/site-config";
 
 const SCHEMA_CONTEXT = "https://schema.org";
-const GOOD_RELATIONS_SELL = "http://purl.org/goodrelations/v1#Sell";
 const GLOBAL_MARKET = "https://schema.org/Worldwide";
 
 function absoluteUrl(href = "/") {
@@ -270,53 +269,6 @@ function offerCatalogSchema(page, url) {
   };
 }
 
-function productOfferSchema(page, url) {
-  if (page.kind !== "product-detail") {
-    return null;
-  }
-
-  const ids = idsFor(url);
-
-  return {
-    "@type": "Offer",
-    "@id": ids.offer,
-    name: `${page.data.title} custom quotation`,
-    url,
-    itemOffered: {
-      "@id": ids.entity
-    },
-    seller: {
-      "@id": ids.organization
-    },
-    eligibleRegion: GLOBAL_MARKET,
-    category: "B2B warehouse automation procurement",
-    businessFunction: GOOD_RELATIONS_SELL,
-    itemCondition: "https://schema.org/NewCondition",
-    priceSpecification: {
-      "@type": "PriceSpecification",
-      name: "Custom project quotation",
-      description: `Pricing is quoted per ${page.data.title} scope, payload class, lift height, navigation stack, software integration, commissioning, and lifecycle support.`
-    },
-    eligibleCustomerType: {
-      "@type": "BusinessAudience",
-      audienceType: "Warehouse and manufacturing operators"
-    },
-    description: `Custom quotation available for ${page.data.title} deployment, integration, commissioning, and lifecycle support.`,
-    additionalProperty: [
-      {
-        "@type": "PropertyValue",
-        name: "Procurement model",
-        value: "Request for quotation"
-      },
-      {
-        "@type": "PropertyValue",
-        name: "Commercial path",
-        value: absoluteUrl("/contact")
-      }
-    ]
-  };
-}
-
 function detailEntitySchema(page, url) {
   const ids = idsFor(url);
   const description = page.data.heroSummary || page.data.summary || COMPANY.description;
@@ -331,19 +283,13 @@ function detailEntitySchema(page, url) {
       image: page.data.image ? { "@id": ids.image } : undefined,
       category: "Warehouse automation equipment",
       brand: {
-        "@id": ids.organization
+        "@type": "Brand",
+        name: COMPANY.name
       },
       manufacturer: {
         "@id": ids.organization
       },
-      audience: {
-        "@type": "BusinessAudience",
-        audienceType: "Warehouse and manufacturing operators"
-      },
-      additionalProperty: metricProperties(page.data.metrics),
-      offers: {
-        "@id": ids.offer
-      }
+      additionalProperty: metricProperties(page.data.metrics)
     };
   }
 
@@ -542,8 +488,7 @@ function entitySchemas(page, url) {
     contactPageEntity(page, url),
     collectionListSchema(page, url),
     offerCatalogSchema(page, url),
-    detailEntitySchema(page, url),
-    productOfferSchema(page, url)
+    detailEntitySchema(page, url)
   ].filter(Boolean);
 }
 

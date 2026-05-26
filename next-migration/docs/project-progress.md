@@ -160,3 +160,10 @@
 - Restored the full six-card products overview from Sanity-backed data so the overview no longer drops to a partial product set.
 - Moved additional product detail pages onto the shared CMS/MDX-driven rendering path instead of leaving them trapped in older static special-case layouts.
 - Added a resilient `sanity manifest extract` fallback so existing Studio static artifacts can be reused when CLI manifest extraction is blocked by Sanity-side CORS/user checks during local build.
+
+## 2026-05-26
+
+- Removed merchant `Offer` schema generation from product detail pages to stop Google Search Console from treating B2B quote pages as shoppable product rich results.
+- Kept descriptive `Product` schema while dropping `Product.offers` and `BusinessAudience` from product detail JSON-LD output.
+- Updated the crawler-facing `llms` metadata summary so product routes no longer claim `Offer` markup is present.
+- Verified the Next.js production build succeeds before deployment.

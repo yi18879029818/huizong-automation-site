@@ -30,23 +30,13 @@ async function pageEntryForRoute(route) {
     hasJsonLd: true,
     schemas:
       page.kind === "product-detail"
-        ? ["Organization", "WebSite", "WebPage", "Product", "Offer", "BreadcrumbList", "FAQPage"]
+        ? ["Organization", "WebSite", "WebPage", "Product", "BreadcrumbList", "FAQPage"]
         : page.kind === "solution-detail"
           ? ["Organization", "WebSite", "WebPage", "Service", "BreadcrumbList", "FAQPage"]
           : page.kind === "case-project-detail"
             ? ["Organization", "WebSite", "WebPage", "Article", "BreadcrumbList"]
             : ["Organization", "WebSite", "WebPage", "BreadcrumbList"],
-    offer:
-      page.kind === "product-detail"
-        ? {
-            model: "custom-quotation",
-            seller: COMPANY.name,
-            quoteUrl: absoluteUrl("/contact"),
-            eligibleRegion: "Worldwide",
-            businessFunction: "Sell",
-            itemCondition: "NewCondition"
-          }
-        : undefined
+    offer: undefined
   };
 }
 
@@ -82,7 +72,7 @@ export async function getLlmsIndexText() {
     "",
     "## Notes",
     "- JSON-LD is embedded on public pages.",
-    "- Product pages include Product and Offer schema with B2B quotation facts.",
+    "- Product pages keep descriptive Product schema without merchant Offer markup.",
     "- Solution and case-study pages expose structured markdown views for AI crawlers.",
     "- Prefer canonical HTML URLs for citations and markdown URLs for extraction."
   ].join("\n");
