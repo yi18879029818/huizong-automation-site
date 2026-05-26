@@ -78,6 +78,12 @@ function DesktopNavigation({ currentSection }) {
         About
       </NavLink>
       <NavLink
+        className={`hsa-top-link${currentSection === "blog" ? " hsa-top-active" : ""}`}
+        href="/blog"
+      >
+        Blog
+      </NavLink>
+      <NavLink
         className={`hsa-top-link${currentSection === "faq" ? " hsa-top-active" : ""}`}
         href="/faq"
       >
@@ -108,6 +114,7 @@ function MobileNavigation() {
         </details>
       ))}
       <NavLink href="/about">About</NavLink>
+      <NavLink href="/blog">Blog</NavLink>
       <NavLink href="/faq">FAQ</NavLink>
       <NavLink href="/contact">Contact</NavLink>
     </div>

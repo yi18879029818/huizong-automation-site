@@ -34,7 +34,7 @@ export default async function BlogDetailPage({ params }) {
   }
 
   return (
-    <CmsPageShell>
+    <CmsPageShell currentSection="blog">
       <main className="shell-main">
         <section className="hero-panel is-detail">
           <div className="hero-grid">

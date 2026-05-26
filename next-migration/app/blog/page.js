@@ -17,7 +17,7 @@ export default async function BlogIndexPage() {
   const posts = await getPostList();
 
   return (
-    <CmsPageShell>
+    <CmsPageShell currentSection="blog">
       <main className="shell-main">
         <section className="hero-panel is-detail">
           <div className="hero-grid">

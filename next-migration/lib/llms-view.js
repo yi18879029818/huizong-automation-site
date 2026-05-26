@@ -9,7 +9,16 @@ function absoluteUrl(href = "/") {
 function getStructuredRoutes() {
   return Array.from(
     new Set(
-      ["/", "/about", "/contact", ...getAllStructuredRoutes().filter((route) => !["/", "/about", "/contact"].includes(route))]
+      [
+        "/",
+        "/about",
+        "/contact",
+        "/faq",
+        "/blog",
+        ...getAllStructuredRoutes().filter(
+          (route) => !["/", "/about", "/contact", "/faq", "/blog"].includes(route)
+        )
+      ]
     )
   );
 }

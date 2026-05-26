@@ -47,6 +47,12 @@ function Header({ currentSection }) {
             About
           </Link>
           <Link
+            className={`hsa-top-link${currentSection === "blog" ? " hsa-top-active" : ""}`}
+            href="/blog"
+          >
+            Blog
+          </Link>
+          <Link
             className={`hsa-top-link${currentSection === "faq" ? " hsa-top-active" : ""}`}
             href="/faq"
           >
