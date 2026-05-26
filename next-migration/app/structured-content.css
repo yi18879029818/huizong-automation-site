@@ -943,28 +943,31 @@ a {
 }
 
 .blog-index-hero {
-  margin-top: 36px;
-  padding: 52px 48px;
+  margin-top: 18px;
+  padding: 36px 0 22px;
+  border: 0;
+  background: transparent;
 }
 
 .blog-index-simple-head {
   display: grid;
-  gap: 16px;
+  gap: 12px;
+  max-width: 760px;
 }
 
 .blog-index-simple-head h1 {
   margin: 0;
   color: var(--brand-navy);
-  font-size: clamp(2.5rem, 6vw, 4.4rem);
-  line-height: 0.96;
+  font-size: clamp(2.3rem, 5vw, 3.9rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
 }
 
 .blog-index-simple-head p {
   margin: 0;
-  max-width: 50rem;
   color: var(--brand-muted);
-  font-size: 1.02rem;
-  line-height: 1.85;
+  font-size: 0.98rem;
+  line-height: 1.8;
 }
 
 .blog-index-head-actions {
@@ -1113,8 +1116,10 @@ a {
 }
 
 .blog-stream-panel {
-  margin-top: 24px;
-  padding: 44px 48px;
+  margin-top: 0;
+  padding: 18px 0 24px;
+  border: 0;
+  background: transparent;
 }
 
 .blog-featured-media,
@@ -1238,24 +1243,26 @@ a {
 .blog-reference-meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px 16px;
+  gap: 8px 14px;
   align-items: center;
   color: var(--brand-muted);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 700;
+  letter-spacing: 0.02em;
 }
 
 .blog-category-chip {
   display: inline-flex;
   align-items: center;
-  min-height: 28px;
-  padding: 0 12px;
-  border: 1px solid rgba(0, 23, 54, 0.08);
-  background: #f7f9fc;
-  color: var(--brand-navy);
-  font-size: 0.72rem;
+  min-height: 22px;
+  padding: 0 8px;
+  border-radius: 999px;
+  border: 0;
+  background: #2962ff;
+  color: white;
+  font-size: 0.56rem;
   font-weight: 800;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
@@ -1277,8 +1284,86 @@ a {
 }
 
 .blog-read-link {
-  color: var(--brand-accent);
-  font-weight: 700;
+  color: #2962ff;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.blog-read-link.is-static {
+  cursor: default;
+}
+
+.blog-flow-list {
+  display: grid;
+  gap: 56px;
+}
+
+.blog-flow-item {
+  display: grid;
+  grid-template-columns: minmax(0, 0.58fr) minmax(320px, 0.42fr);
+  gap: 28px;
+  align-items: center;
+}
+
+.blog-flow-item.is-reversed {
+  grid-template-columns: minmax(320px, 0.42fr) minmax(0, 0.58fr);
+}
+
+.blog-flow-item.is-reversed .blog-flow-media-shell {
+  order: 2;
+}
+
+.blog-flow-item.is-reversed .blog-flow-copy {
+  order: 1;
+}
+
+.blog-flow-media-shell {
+  min-width: 0;
+}
+
+.blog-flow-media {
+  display: block;
+  min-height: 360px;
+  overflow: hidden;
+  background: #e9eef5;
+  border-radius: 0 0 38px 0;
+}
+
+.blog-flow-media img {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  object-fit: cover;
+  display: block;
+}
+
+.blog-flow-copy {
+  display: grid;
+  gap: 18px;
+  align-content: center;
+  padding-inline: 6px 0;
+}
+
+.blog-flow-copy h2 {
+  margin: 0;
+  color: var(--brand-navy);
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.14;
+  letter-spacing: -0.05em;
+}
+
+.blog-flow-copy h2 a {
+  color: inherit;
+}
+
+.blog-flow-copy p {
+  margin: 0;
+  max-width: 34rem;
+  color: var(--brand-muted);
+  font-size: 0.98rem;
+  line-height: 1.85;
 }
 
 .blog-list-item {
@@ -1586,8 +1671,15 @@ a {
   .blog-featured-card,
   .blog-article-layout,
   .blog-list-item,
-  .blog-reference-grid {
+  .blog-reference-grid,
+  .blog-flow-item,
+  .blog-flow-item.is-reversed {
     grid-template-columns: 1fr;
+  }
+
+  .blog-flow-item.is-reversed .blog-flow-media-shell,
+  .blog-flow-item.is-reversed .blog-flow-copy {
+    order: initial;
   }
 
   .blog-list-action {
@@ -1631,14 +1723,32 @@ a {
   .blog-stream-panel,
   .blog-detail-hero,
   .blog-article-panel {
-    padding: 30px 22px;
+    padding: 28px 0;
   }
 
   .blog-featured-media,
   .blog-article-media,
   .blog-archive-thumb,
-  .blog-reference-media {
+  .blog-reference-media,
+  .blog-flow-media {
     min-height: 240px;
+  }
+
+  .blog-flow-media img {
+    min-height: 240px;
+  }
+
+  .blog-flow-list {
+    gap: 36px;
+  }
+
+  .blog-flow-copy {
+    gap: 14px;
+    padding-inline: 0;
+  }
+
+  .blog-flow-copy h2 {
+    font-size: clamp(1.7rem, 7vw, 2.5rem);
   }
 
   .blog-list-item,
