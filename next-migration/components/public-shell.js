@@ -184,13 +184,6 @@ function Footer() {
             </div>
           </div>
         ))}
-        <div>
-          <h4>Support</h4>
-          <div className="hsa-footer-links">
-            <NavLink href="/faq">FAQ</NavLink>
-            <NavLink href="/contact">Contact</NavLink>
-          </div>
-        </div>
       </div>
       <div className="hsa-footer-bottom">
         <span>Copyright 2026 coolyne</span>

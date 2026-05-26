@@ -120,13 +120,6 @@ function Footer() {
             </div>
           </div>
         ))}
-        <div>
-          <h4>Support</h4>
-          <div className="hsa-footer-links">
-            <Link href="/faq">FAQ</Link>
-            <Link href="/contact">Contact</Link>
-          </div>
-        </div>
       </div>
       <div className="hsa-footer-bottom">
         <span>Copyright 2026 coolyne</span>
