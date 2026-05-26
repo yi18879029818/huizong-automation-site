@@ -1,5 +1,6 @@
 export const SITE_ROUTES = {
   home: "/",
+  faq: "/faq",
   products: "/products",
   "products-agv-forklift": "/products/agv-forklift",
   "products-lifting-agv": "/products/lifting-agv",

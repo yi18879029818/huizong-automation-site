@@ -43,7 +43,7 @@ function resolveChangeFrequency(kind, route) {
 
 export default async function sitemap() {
   const now = new Date();
-  const routes = [...new Set(getAllStructuredRoutes())];
+  const routes = [...new Set([...getAllStructuredRoutes(), "/faq"])];
   const pages = await Promise.all(routes.map((route) => getStructuredPage(toSlug(route))));
 
   return routes.map((route, index) => {

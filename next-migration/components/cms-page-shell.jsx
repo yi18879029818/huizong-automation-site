@@ -46,6 +46,12 @@ function Header({ currentSection }) {
           <Link className="hsa-top-link" href="/about">
             About
           </Link>
+          <Link
+            className={`hsa-top-link${currentSection === "faq" ? " hsa-top-active" : ""}`}
+            href="/faq"
+          >
+            FAQ
+          </Link>
           <Link className="hsa-top-link" href="/contact">
             Contact
           </Link>
@@ -90,6 +96,13 @@ function Footer() {
             </div>
           </div>
         ))}
+        <div>
+          <h4>Support</h4>
+          <div className="hsa-footer-links">
+            <Link href="/faq">FAQ</Link>
+            <Link href="/contact">Contact</Link>
+          </div>
+        </div>
       </div>
       <div className="hsa-footer-bottom">
         <span>Copyright 2026 coolyne</span>

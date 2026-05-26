@@ -78,6 +78,12 @@ function DesktopNavigation({ currentSection }) {
         About
       </NavLink>
       <NavLink
+        className={`hsa-top-link${currentSection === "faq" ? " hsa-top-active" : ""}`}
+        href="/faq"
+      >
+        FAQ
+      </NavLink>
+      <NavLink
         className={`hsa-top-link${currentSection === "contact" ? " hsa-top-active" : ""}`}
         href="/contact"
       >
@@ -102,6 +108,7 @@ function MobileNavigation() {
         </details>
       ))}
       <NavLink href="/about">About</NavLink>
+      <NavLink href="/faq">FAQ</NavLink>
       <NavLink href="/contact">Contact</NavLink>
     </div>
   );
@@ -177,6 +184,13 @@ function Footer() {
             </div>
           </div>
         ))}
+        <div>
+          <h4>Support</h4>
+          <div className="hsa-footer-links">
+            <NavLink href="/faq">FAQ</NavLink>
+            <NavLink href="/contact">Contact</NavLink>
+          </div>
+        </div>
       </div>
       <div className="hsa-footer-bottom">
         <span>Copyright 2026 coolyne</span>

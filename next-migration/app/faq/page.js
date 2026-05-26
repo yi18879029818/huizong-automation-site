@@ -16,7 +16,7 @@ export default async function FaqPage() {
   const faqs = await getFaqList();
 
   return (
-    <CmsPageShell>
+    <CmsPageShell currentSection="faq">
       <main className="shell-main">
         <section className="hero-panel is-detail">
           <div className="hero-grid">
