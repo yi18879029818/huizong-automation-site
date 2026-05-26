@@ -3,7 +3,10 @@
   "main": ".open-next/worker.js",
   "name": "huizong-automation-site-next",
   "compatibility_date": "2024-12-30",
-  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS",
@@ -24,5 +27,6 @@
       "database_name": "huizong-form-submissions",
       "database_id": "b03a1e30-1e26-4454-b84a-37237cca2ea2"
     }
-  ]
+  ],
+  "account_id": "d8ba55b09b0630cc450a71f73fc1d5fd"
 }
