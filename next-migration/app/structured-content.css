@@ -674,7 +674,7 @@ a {
 }
 
 .faq-hero-copy h1 {
-  font-size: clamp(2.5rem, 6.2vw, 4.9rem);
+  font-size: clamp(2.32rem, 5.8vw, 4.55rem);
   line-height: 0.98;
 }
 
