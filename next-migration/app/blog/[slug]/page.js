@@ -7,8 +7,16 @@ import { urlFor } from "@/lib/sanity/image.mjs";
 
 export const revalidate = 300;
 
+function resolveSlugParam(value) {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
 export async function generateMetadata({ params }) {
-  const post = await getPostBySlug(params.slug);
+  const post = await getPostBySlug(resolveSlugParam(params.slug));
 
   if (!post) {
     return {};
@@ -36,7 +44,8 @@ function formatPublishedDate(value) {
 }
 
 export default async function BlogDetailPage({ params }) {
-  const post = await getPostBySlug(params.slug);
+  const slug = resolveSlugParam(params.slug);
+  const post = await getPostBySlug(slug);
   const allPosts = await getPostList();
 
   if (!post) {
