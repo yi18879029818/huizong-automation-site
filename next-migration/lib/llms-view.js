@@ -81,7 +81,7 @@ export async function getLlmsIndexText() {
     "",
     "## Notes",
     "- JSON-LD is embedded on public pages.",
-    "- Product pages keep descriptive Product schema without merchant Offer markup.",
+    "- Product pages embed Product schema with B2B Offer metadata and omit reviews or ratings when none are available.",
     "- Solution and case-study pages expose structured markdown views for AI crawlers.",
     "- Prefer canonical HTML URLs for citations and markdown URLs for extraction."
   ].join("\n");
