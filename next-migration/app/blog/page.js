@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CmsPageShell } from "@/components/cms-page-shell";
+import { getBlogImageOverride } from "@/lib/blog-image-overrides.mjs";
 import { getPostList } from "@/lib/sanity/content.mjs";
 import { urlFor } from "@/lib/sanity/image.mjs";
 
@@ -66,7 +67,7 @@ export default async function BlogIndexPage() {
         ...post,
         category: post.category || "Insights",
         href: `/blog/${post.slug}`,
-        image: getPostImage(post, 1400, 920)
+        image: getBlogImageOverride(post) || getPostImage(post, 1400, 920)
       }))
     : DEFAULT_BLOG_REFERENCE_POSTS;
 

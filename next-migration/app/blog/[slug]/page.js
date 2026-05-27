@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CmsPageShell } from "@/components/cms-page-shell";
+import { getBlogImageOverride } from "@/lib/blog-image-overrides.mjs";
 import { SanityPortableText } from "@/components/sanity-portable-text";
 import { getPostBySlug, getPostList } from "@/lib/sanity/content.mjs";
 import { urlFor } from "@/lib/sanity/image.mjs";
@@ -52,7 +53,8 @@ export default async function BlogDetailPage({ params }) {
     notFound();
   }
 
-  const heroImageUrl = urlFor(post.heroImage)?.width(1600).height(960).url() || null;
+  const heroImageUrl =
+    getBlogImageOverride(post) || urlFor(post.heroImage)?.width(1600).height(960).url() || null;
   const relatedPosts = allPosts.filter((item) => item.slug !== post.slug).slice(0, 3);
 
   return (
