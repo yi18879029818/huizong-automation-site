@@ -7,11 +7,6 @@ import { urlFor } from "@/lib/sanity/image.mjs";
 
 export const revalidate = 300;
 
-export async function generateStaticParams() {
-  const posts = await getPostList();
-  return posts.map((post) => ({ slug: post.slug }));
-}
-
 export async function generateMetadata({ params }) {
   const post = await getPostBySlug(params.slug);
 
