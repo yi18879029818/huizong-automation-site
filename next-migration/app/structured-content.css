@@ -1518,6 +1518,10 @@ a {
   color: var(--brand-text);
 }
 
+.blog-article-prose > * + * {
+  margin-top: 1.4rem;
+}
+
 .blog-article-prose > p:first-child {
   color: var(--brand-navy);
   font-size: 1.18rem;
@@ -1526,6 +1530,27 @@ a {
 
 .blog-article-prose p {
   color: var(--brand-muted);
+  line-height: 1.9;
+}
+
+.blog-article-prose h2,
+.blog-article-prose h3 {
+  color: var(--brand-navy);
+  font-family: "Manrope", sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.blog-article-prose h2 {
+  margin-top: 2.2rem;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.05;
+}
+
+.blog-article-prose h3 {
+  margin-top: 1.6rem;
+  font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+  line-height: 1.2;
 }
 
 .blog-article-prose a {
@@ -1596,6 +1621,39 @@ a {
   width: 100%;
   height: auto;
   display: block;
+}
+
+.blog-article-prose .sanity-comparison-table {
+  margin-top: 1.8rem;
+  overflow-x: auto;
+}
+
+.blog-article-prose .sanity-comparison-table table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid rgba(0, 23, 54, 0.14);
+  background: #fff;
+}
+
+.blog-article-prose .sanity-comparison-table th,
+.blog-article-prose .sanity-comparison-table td {
+  padding: 14px 16px;
+  border: 1px solid rgba(0, 23, 54, 0.14);
+  text-align: left;
+  vertical-align: top;
+}
+
+.blog-article-prose .sanity-comparison-table th {
+  color: var(--brand-navy);
+  font-family: "Manrope", sans-serif;
+  font-size: 0.98rem;
+  font-weight: 900;
+  background: linear-gradient(180deg, #fbfcfe, #f3f7fb);
+}
+
+.blog-article-prose .sanity-comparison-table td {
+  color: var(--brand-muted);
+  line-height: 1.75;
 }
 
 .structured-form {
