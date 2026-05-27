@@ -81,6 +81,11 @@ export default async function BlogDetailPage({ params }) {
               </div>
             </div>
             <div className="blog-detail-sidecard">
+              {heroImageUrl ? (
+                <div className="blog-detail-sidecard-media">
+                  <img alt={post.title} src={heroImageUrl} />
+                </div>
+              ) : null}
               <span className="card-label">Reading Mode</span>
               <strong>Field Notes</strong>
               <p>
@@ -90,14 +95,6 @@ export default async function BlogDetailPage({ params }) {
             </div>
           </div>
         </section>
-
-        {heroImageUrl ? (
-          <section className="blog-article-media-shell">
-            <div className="blog-article-media">
-              <img alt={post.title} src={heroImageUrl} />
-            </div>
-          </section>
-        ) : null}
 
         <section className="section-panel blog-article-panel">
           <div className="blog-article-layout">
