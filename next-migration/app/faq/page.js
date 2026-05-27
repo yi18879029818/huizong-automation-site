@@ -190,14 +190,6 @@ export default function FaqPage() {
                   </a>
                 ))}
               </nav>
-              <div className="hero-actions">
-                <Link className="hero-button" href="/contact">
-                  Speak With An Expert
-                </Link>
-                <Link className="secondary-button" href="/contact">
-                  Contact coolyne
-                </Link>
-              </div>
             </div>
             <div className="faq-hero-aside">
               <div className="faq-hero-card faq-hero-card-muted">
