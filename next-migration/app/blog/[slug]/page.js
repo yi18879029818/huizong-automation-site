@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CmsPageShell } from "@/components/cms-page-shell";
+import { getBlogBodyOverride } from "@/lib/blog-body-overrides.mjs";
 import { getBlogImageOverride } from "@/lib/blog-image-overrides.mjs";
 import { SanityPortableText } from "@/components/sanity-portable-text";
 import { getPostBySlug, getPostList } from "@/lib/sanity/content.mjs";
@@ -55,6 +56,7 @@ export default async function BlogDetailPage({ params }) {
 
   const heroImageUrl =
     getBlogImageOverride(post) || urlFor(post.heroImage)?.width(1600).height(960).url() || null;
+  const articleBody = getBlogBodyOverride(post) || post.body;
   const relatedPosts = allPosts.filter((item) => item.slug !== post.slug).slice(0, 3);
 
   return (
@@ -124,7 +126,7 @@ export default async function BlogDetailPage({ params }) {
               ) : null}
             </aside>
             <div className="blog-article-prose mdx-prose">
-              <SanityPortableText value={post.body} />
+              <SanityPortableText value={articleBody} />
             </div>
           </div>
         </section>
