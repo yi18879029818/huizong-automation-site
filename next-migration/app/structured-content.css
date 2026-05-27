@@ -695,7 +695,12 @@ a {
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.08em;
+  text-decoration: none;
   white-space: nowrap;
+}
+
+.faq-topic-chip:hover {
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .faq-hero-aside {
@@ -720,6 +725,12 @@ a {
 
 .faq-hero-card-muted {
   background: rgba(0, 0, 0, 0.14);
+}
+
+.faq-hero-cta-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .faq-hero-metrics {
@@ -789,6 +800,43 @@ a {
   font-size: 2rem;
 }
 
+.faq-category-nav {
+  display: grid;
+  gap: 10px;
+}
+
+.faq-category-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 52px;
+  padding: 0 18px;
+  border: 1px solid rgba(0, 23, 54, 0.08);
+  background: #fff;
+  color: var(--brand-navy);
+  font-family: "Manrope", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  transition: border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
+}
+
+.faq-category-link:hover {
+  border-color: rgba(254, 107, 0, 0.28);
+  box-shadow: 0 16px 40px rgba(0, 23, 54, 0.08);
+  transform: translateY(-1px);
+}
+
+.faq-sidebar-actions {
+  display: grid;
+  gap: 12px;
+}
+
+.faq-sidebar-button {
+  justify-content: center;
+}
+
 .faq-sidebar-card p,
 .faq-section-header p,
 .faq-empty-panel p {
@@ -827,12 +875,18 @@ a {
 
 .faq-content-column {
   display: grid;
-  gap: 20px;
+  gap: 24px;
+}
+
+.faq-category-section {
+  display: grid;
+  gap: 18px;
 }
 
 .faq-section-header {
   display: grid;
   gap: 12px;
+  padding: 4px 0 2px;
 }
 
 .faq-section-header h2 {
@@ -926,6 +980,12 @@ a {
 
 .faq-accordion-body .mdx-prose {
   max-width: none;
+}
+
+.faq-accordion-body p {
+  margin: 0;
+  color: var(--brand-muted);
+  line-height: 1.8;
 }
 
 .faq-empty-panel {
@@ -1682,6 +1742,10 @@ a {
     position: static;
   }
 
+  .faq-category-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .blog-index-hero-grid,
   .blog-detail-hero-grid,
   .blog-featured-card,
@@ -1733,6 +1797,10 @@ a {
   .faq-hero-layout,
   .faq-section-panel {
     padding: 28px 22px;
+  }
+
+  .faq-category-nav {
+    grid-template-columns: 1fr;
   }
 
   .blog-index-hero,
