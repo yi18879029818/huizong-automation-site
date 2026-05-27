@@ -70,22 +70,12 @@ function markdownRewriteUrl(request) {
   return url;
 }
 
-async function markdownProxyResponse(request) {
+function markdownRewriteResponse(request) {
   const url = markdownRewriteUrl(request);
-  const upstream = await fetch(url, {
-    method: "GET",
-    headers: request.headers
-  });
-
-  const headers = new Headers(upstream.headers);
-  headers.set("x-ai-view", "markdown");
-  headers.set("Cache-Control", "public, max-age=0, s-maxage=600");
-
-  return new Response(upstream.body, {
-    status: upstream.status,
-    statusText: upstream.statusText,
-    headers
-  });
+  const response = NextResponse.rewrite(url);
+  response.headers.set("x-ai-view", "markdown");
+  response.headers.set("Cache-Control", "public, max-age=0, s-maxage=600");
+  return response;
 }
 
 function applySecurityHeaders(response, pathname = "/") {
@@ -254,7 +244,7 @@ export async function middleware(request) {
   });
 
   if (policy.response === "markdown") {
-    const markdownResponse = await markdownProxyResponse(request);
+    const markdownResponse = markdownRewriteResponse(request);
     return attachAgentHeaders(applySecurityHeaders(markdownResponse, pathname), policy.profile);
   }
 

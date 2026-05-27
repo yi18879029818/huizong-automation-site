@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { notFound } from "next/navigation";
 import { StructuredCatalogDetailPage } from "@/components/structured-catalog-pages";
 import { CmsPageShell } from "@/components/cms-page-shell";
@@ -7,13 +8,16 @@ import { getStructuredPage } from "@/lib/structured-content";
 
 export const revalidate = 300;
 
+const getCachedCaseStudyBySlug = cache(getCaseStudyBySlug);
+const getCachedStructuredFallback = cache((...slugParts) => getStructuredPage(slugParts));
+
 export async function generateStaticParams() {
   const caseStudies = await getCaseStudyList();
   return caseStudies.map((entry) => ({ slug: entry.slug }));
 }
 
 export async function generateMetadata({ params }) {
-  const caseStudy = await getCaseStudyBySlug(params.slug);
+  const caseStudy = await getCachedCaseStudyBySlug(params.slug);
 
   if (caseStudy) {
     return {
@@ -25,7 +29,7 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const fallbackPage = await getStructuredPage(["case-studies", params.slug]);
+  const fallbackPage = await getCachedStructuredFallback("case-studies", params.slug);
   if (!fallbackPage) {
     return {};
   }
@@ -40,7 +44,7 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function CaseStudyDetailPage({ params }) {
-  const caseStudy = await getCaseStudyBySlug(params.slug);
+  const caseStudy = await getCachedCaseStudyBySlug(params.slug);
 
   if (caseStudy) {
     return (
@@ -84,7 +88,7 @@ export default async function CaseStudyDetailPage({ params }) {
     );
   }
 
-  const fallbackPage = await getStructuredPage(["case-studies", params.slug]);
+  const fallbackPage = await getCachedStructuredFallback("case-studies", params.slug);
   if (!fallbackPage) {
     notFound();
   }

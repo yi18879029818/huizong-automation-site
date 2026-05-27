@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { notFound } from "next/navigation";
 import {
   StructuredCatalogDetailPage,
@@ -11,6 +12,8 @@ import { COMPANY } from "@/lib/site-config";
 
 export const dynamicParams = true;
 export const revalidate = 60;
+
+const getCachedStructuredPage = cache((...slugParts) => getStructuredPage(slugParts));
 
 export function generateStaticParams() {
   return getAllStructuredRoutes().map((route) => ({
@@ -110,7 +113,7 @@ function renderPureStructuredPage(page) {
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
-  const structuredPage = await getStructuredPage(resolvedParams.slug || []);
+  const structuredPage = await getCachedStructuredPage(...(resolvedParams.slug || []));
 
   if (structuredPage) {
     return buildStructuredMetadata(structuredPage);
@@ -121,7 +124,7 @@ export async function generateMetadata({ params }) {
 
 export default async function StructuredPage({ params }) {
   const resolvedParams = await params;
-  const structuredPage = await getStructuredPage(resolvedParams.slug || []);
+  const structuredPage = await getCachedStructuredPage(...(resolvedParams.slug || []));
 
   if (structuredPage) {
     return (
