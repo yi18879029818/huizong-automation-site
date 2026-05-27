@@ -85,14 +85,6 @@ export default async function BlogDetailPage({ params }) {
         <section className="section-panel blog-detail-hero">
           <div className="blog-detail-hero-grid">
             <div className="blog-detail-copy">
-              <span className="card-label">Blog</span>
-              <Link className="blog-back-link" href="/blog">
-                Back to all articles
-              </Link>
-              <div className="blog-meta-row">
-                <span>Article</span>
-                <span>{formatPublishedDate(post.publishedAt)}</span>
-              </div>
               <h1>{post.title}</h1>
               <p>{post.excerpt || "Structured editorial content managed in Sanity."}</p>
               <div className="hero-actions">
