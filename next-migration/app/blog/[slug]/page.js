@@ -1,13 +1,17 @@
 import Link from "next/link";
+import { cache } from "react";
 import { notFound } from "next/navigation";
 import { CmsPageShell } from "@/components/cms-page-shell";
 import { getBlogBodyOverride } from "@/lib/blog-body-overrides.mjs";
 import { getBlogImageOverride } from "@/lib/blog-image-overrides.mjs";
 import { SanityPortableText } from "@/components/sanity-portable-text";
-import { getPostBySlug, getPostList } from "@/lib/sanity/content.mjs";
+import { getPostBySlug, getRelatedPosts } from "@/lib/sanity/content.mjs";
 import { urlFor } from "@/lib/sanity/image.mjs";
 
 export const revalidate = 300;
+
+const getCachedPostBySlug = cache(getPostBySlug);
+const getCachedRelatedPosts = cache(getRelatedPosts);
 
 function resolveSlugParam(value) {
   try {
@@ -18,7 +22,7 @@ function resolveSlugParam(value) {
 }
 
 export async function generateMetadata({ params }) {
-  const post = await getPostBySlug(resolveSlugParam(params.slug));
+  const post = await getCachedPostBySlug(resolveSlugParam(params.slug));
 
   if (!post) {
     return {};
@@ -66,8 +70,10 @@ function getSidecardCopy(post) {
 
 export default async function BlogDetailPage({ params }) {
   const slug = resolveSlugParam(params.slug);
-  const post = await getPostBySlug(slug);
-  const allPosts = await getPostList();
+  const [post, relatedPosts] = await Promise.all([
+    getCachedPostBySlug(slug),
+    getCachedRelatedPosts(slug)
+  ]);
 
   if (!post) {
     notFound();
@@ -77,7 +83,6 @@ export default async function BlogDetailPage({ params }) {
     getBlogImageOverride(post) || urlFor(post.heroImage)?.width(1600).height(960).url() || null;
   const articleBody = getBlogBodyOverride(post) || post.body;
   const sidecardCopy = getSidecardCopy(post);
-  const relatedPosts = allPosts.filter((item) => item.slug !== post.slug).slice(0, 3);
 
   return (
     <CmsPageShell currentSection="blog">
