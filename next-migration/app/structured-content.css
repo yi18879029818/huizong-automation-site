@@ -2012,6 +2012,25 @@ a {
   filter: drop-shadow(0 35px 35px rgba(0, 0, 0, 0.6));
 }
 
+.shell-kind-product-detail .hero-aside {
+  align-content: center;
+  justify-items: center;
+}
+
+.shell-kind-product-detail .hero-visual {
+  display: grid;
+  place-items: center;
+  min-height: 420px;
+}
+
+.shell-kind-product-detail .hero-visual img {
+  width: min(100%, 430px);
+  max-height: 460px;
+  height: auto;
+  padding: 0;
+  object-fit: contain;
+}
+
 .metric-panel,
 .card-panel {
   padding: 28px;
