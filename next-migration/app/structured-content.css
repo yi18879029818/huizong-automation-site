@@ -1537,7 +1537,7 @@ a {
 .blog-article-prose h3 {
   color: var(--brand-navy);
   font-family: "Manrope", sans-serif;
-  font-weight: 900;
+  font-weight: 400;
   letter-spacing: -0.02em;
 }
 
