@@ -175,3 +175,5 @@
 - Left `review` and `aggregateRating` absent to avoid publishing fabricated trust signals.
 - Updated the llms metadata notes to match the live JSON-LD behavior before release verification.
 - Narrowed Google shopping-facing markup to single product detail pages only, while keeping `/products` overview pages as navigational lists instead of nested `Product` rich-result candidates.
+- Removed a duplicate homepage `ItemList` path so the homepage no longer emits two different entities with the same `@id`.
+- Added a dedicated structured data maintenance guideline for future schema changes and rich-result boundary decisions.

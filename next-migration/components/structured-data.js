@@ -245,6 +245,15 @@ function itemEntityStub(card, href, page) {
 }
 
 function collectionListSchema(page, url) {
+  if (
+    page.kind !== "product-overview" &&
+    page.kind !== "solution-overview" &&
+    page.kind !== "case-overview" &&
+    page.kind !== "case-category"
+  ) {
+    return null;
+  }
+
   const sourceItems = page.kind === "case-category" ? page.data.projects : page.data.cards;
 
   if (!sourceItems?.length) {
