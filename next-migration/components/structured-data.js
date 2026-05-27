@@ -227,7 +227,7 @@ function itemEntityStub(card, href, page) {
   const url = href ? absoluteUrl(href) : undefined;
   const type =
     page.section === "products"
-      ? "Product"
+      ? "WebPage"
       : page.section === "solutions"
         ? "Service"
         : page.kind === "case-category"
@@ -240,14 +240,7 @@ function itemEntityStub(card, href, page) {
     name: card.title,
     description: card.summary || card.description,
     url,
-    offers:
-      type === "Product"
-        ? productOfferSchema({
-            url,
-            offerId: url ? `${url}#offer` : undefined,
-            source: card
-          })
-        : undefined
+    offers: undefined
   });
 }
 
@@ -281,7 +274,7 @@ function collectionListSchema(page, url) {
 }
 
 function offerCatalogSchema(page, url) {
-  if (page.kind !== "product-overview" && page.kind !== "solution-overview") {
+  if (page.kind !== "solution-overview") {
     return null;
   }
 
@@ -300,19 +293,11 @@ function offerCatalogSchema(page, url) {
         "@type": "ListItem",
         position: index + 1,
         item: {
-          "@type": page.kind === "product-overview" ? "Product" : "Service",
+          "@type": "Service",
           "@id": itemUrl ? `${itemUrl}#entity` : undefined,
           name: card.title,
           description: card.summary,
-          url: itemUrl,
-          offers:
-            page.kind === "product-overview"
-              ? productOfferSchema({
-                  url: itemUrl,
-                  offerId: itemUrl ? `${itemUrl}#offer` : undefined,
-                  source: card
-                })
-              : undefined
+          url: itemUrl
         }
       });
     })
