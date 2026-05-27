@@ -45,6 +45,25 @@ function formatPublishedDate(value) {
   }).format(new Date(value));
 }
 
+function getSidecardCopy(post) {
+  const slug = typeof post === "string" ? post : post?.slug;
+
+  if (slug === "agv-what-is-automated-guided-vehicle") {
+    return {
+      eyebrow: "Reading Mode",
+      title: "Lifting AGV",
+      description: "Lifting AGV for automated material handling and smart warehouse transport"
+    };
+  }
+
+  return {
+    eyebrow: "Reading Mode",
+    title: "Field Notes",
+    description:
+      "This layout keeps the article body wide, the support actions close by, and the reading flow focused on one engineering topic at a time."
+  };
+}
+
 export default async function BlogDetailPage({ params }) {
   const slug = resolveSlugParam(params.slug);
   const post = await getPostBySlug(slug);
@@ -57,6 +76,7 @@ export default async function BlogDetailPage({ params }) {
   const heroImageUrl =
     getBlogImageOverride(post) || urlFor(post.heroImage)?.width(1600).height(960).url() || null;
   const articleBody = getBlogBodyOverride(post) || post.body;
+  const sidecardCopy = getSidecardCopy(post);
   const relatedPosts = allPosts.filter((item) => item.slug !== post.slug).slice(0, 3);
 
   return (
@@ -90,12 +110,9 @@ export default async function BlogDetailPage({ params }) {
                   <img alt={post.title} src={heroImageUrl} />
                 </div>
               ) : null}
-              <span className="card-label">Reading Mode</span>
-              <strong>Field Notes</strong>
-              <p>
-                This layout keeps the article body wide, the support actions close by, and the
-                reading flow focused on one engineering topic at a time.
-              </p>
+              <span className="card-label">{sidecardCopy.eyebrow}</span>
+              <strong>{sidecardCopy.title}</strong>
+              <p>{sidecardCopy.description}</p>
             </div>
           </div>
         </section>
