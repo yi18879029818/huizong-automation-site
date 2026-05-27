@@ -118,8 +118,7 @@ export default async function BlogDetailPage({ params }) {
           <div className="blog-article-layout">
             <aside className="blog-article-aside">
               <div className="blog-article-aside-card">
-                <span className="card-label">Published</span>
-                <strong>{formatPublishedDate(post.publishedAt)}</strong>
+                <span className="card-label">Project Inquiry</span>
                 <p>Use the contact page for project-specific consultation tied to this topic.</p>
                 <Link className="link-chip" href="/contact">
                   Contact coolyne
