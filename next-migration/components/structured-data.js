@@ -2,6 +2,9 @@ import { COMPANY, SITE_URL } from "@/lib/site-config";
 
 const SCHEMA_CONTEXT = "https://schema.org";
 const GLOBAL_MARKET = "https://schema.org/Worldwide";
+const DEFAULT_PRICE_CURRENCY = "USD";
+const DEFAULT_OFFER_VALID_UNTIL = "2026-12-31";
+const IN_STOCK_URL = "https://schema.org/InStock";
 
 function absoluteUrl(href = "/") {
   return `${SITE_URL}${href === "/" ? "" : href}`;
@@ -97,6 +100,37 @@ function metricProperties(metrics = []) {
     name: metric.label,
     value: metric.value
   }));
+}
+
+function offerPriceFor(source = {}) {
+  const price = source?.price ?? source?.priceUsd ?? source?.listPrice ?? source?.unitPrice;
+
+  if (price === undefined || price === null || price === "") {
+    return undefined;
+  }
+
+  return typeof price === "number" ? price.toString() : String(price).trim();
+}
+
+function productOfferSchema({ url, offerId, source }) {
+  if (!url) {
+    return undefined;
+  }
+
+  const price = offerPriceFor(source);
+
+  return cleanNode({
+    "@type": "Offer",
+    "@id": offerId,
+    url,
+    priceCurrency: source?.priceCurrency || DEFAULT_PRICE_CURRENCY,
+    price,
+    availability: IN_STOCK_URL,
+    priceValidUntil: DEFAULT_OFFER_VALID_UNTIL,
+    seller: {
+      "@id": idsFor(SITE_URL).organization
+    }
+  });
 }
 
 function detailTypeForPage(page) {
@@ -205,7 +239,15 @@ function itemEntityStub(card, href, page) {
     "@id": url ? `${url}#entity` : undefined,
     name: card.title,
     description: card.summary || card.description,
-    url
+    url,
+    offers:
+      type === "Product"
+        ? productOfferSchema({
+            url,
+            offerId: url ? `${url}#offer` : undefined,
+            source: card
+          })
+        : undefined
   });
 }
 
@@ -262,7 +304,15 @@ function offerCatalogSchema(page, url) {
           "@id": itemUrl ? `${itemUrl}#entity` : undefined,
           name: card.title,
           description: card.summary,
-          url: itemUrl
+          url: itemUrl,
+          offers:
+            page.kind === "product-overview"
+              ? productOfferSchema({
+                  url: itemUrl,
+                  offerId: itemUrl ? `${itemUrl}#offer` : undefined,
+                  source: card
+                })
+              : undefined
         }
       });
     })
@@ -289,7 +339,12 @@ function detailEntitySchema(page, url) {
       manufacturer: {
         "@id": ids.organization
       },
-      additionalProperty: metricProperties(page.data.metrics)
+      additionalProperty: metricProperties(page.data.metrics),
+      offers: productOfferSchema({
+        url,
+        offerId: ids.offer,
+        source: page.data
+      })
     };
   }
 

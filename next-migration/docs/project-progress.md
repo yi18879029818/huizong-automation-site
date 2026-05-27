@@ -167,3 +167,10 @@
 - Kept descriptive `Product` schema while dropping `Product.offers` and `BusinessAudience` from product detail JSON-LD output.
 - Updated the crawler-facing `llms` metadata summary so product routes no longer claim `Offer` markup is present.
 - Verified the Next.js production build succeeds before deployment.
+
+## 2026-05-27
+
+- Reintroduced B2B-safe `Offer` markup on all `Product` JSON-LD nodes so product detail pages and product list references satisfy Google Product snippets requirements.
+- Used quote-friendly Offer data with canonical product URL, `priceCurrency`, `availability`, and `priceValidUntil`, while omitting `price` when no real public price exists in content data.
+- Left `review` and `aggregateRating` absent to avoid publishing fabricated trust signals.
+- Updated the llms metadata notes to match the live JSON-LD behavior before release verification.
