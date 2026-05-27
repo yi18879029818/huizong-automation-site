@@ -174,3 +174,4 @@
 - Used quote-friendly Offer data with canonical product URL, `priceCurrency`, `availability`, and `priceValidUntil`, while omitting `price` when no real public price exists in content data.
 - Left `review` and `aggregateRating` absent to avoid publishing fabricated trust signals.
 - Updated the llms metadata notes to match the live JSON-LD behavior before release verification.
+- Narrowed Google shopping-facing markup to single product detail pages only, while keeping `/products` overview pages as navigational lists instead of nested `Product` rich-result candidates.
