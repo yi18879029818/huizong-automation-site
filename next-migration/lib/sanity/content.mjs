@@ -2,6 +2,7 @@ import {
   caseStudyListQuery,
   caseStudyQuery,
   faqListQuery,
+  relatedPostListQuery,
   postListQuery,
   postQuery
 } from "./queries.mjs";
@@ -20,6 +21,13 @@ export async function getPostBySlug(slug) {
     query: postQuery,
     params: { slug }
   });
+}
+
+export async function getRelatedPosts(slug) {
+  return (await sanityFetch({
+    query: relatedPostListQuery,
+    params: { slug }
+  })) || [];
 }
 
 export async function getFaqList() {
