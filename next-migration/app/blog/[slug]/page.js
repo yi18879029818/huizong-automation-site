@@ -131,7 +131,7 @@ export default async function BlogDetailPage({ params }) {
                     {relatedPosts.map((item) => (
                       <Link className="blog-related-link" href={`/blog/${item.slug}`} key={item._id}>
                         <strong>{item.title}</strong>
-                        <span>{formatPublishedDate(item.publishedAt)}</span>
+                        {item.publishedAt ? <span>{formatPublishedDate(item.publishedAt)}</span> : null}
                       </Link>
                     ))}
                   </div>
