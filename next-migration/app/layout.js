@@ -1,5 +1,6 @@
 import "@/app/globals.css";
 import "@/app/structured-content.css";
+import { cache } from "react";
 import Script from "next/script";
 import { COMPANY, SITE_URL } from "@/lib/site-config";
 import { SITE_ROUTES } from "@/lib/site-shell-config";
@@ -7,6 +8,7 @@ import ChatWidget from "@/components/ChatWidget";
 import { getSiteSettings } from "@/lib/sanity/page-data.mjs";
 
 const GTM_ID = "GTM-NND97MZW";
+const getCachedSiteSettings = cache(getSiteSettings);
 
 export const viewport = {
   width: "device-width",
@@ -28,7 +30,7 @@ function buildRobotsMetadata() {
 }
 
 export async function generateMetadata() {
-  const settings = await getSiteSettings();
+  const settings = await getCachedSiteSettings();
   const siteTitle = settings?.title || COMPANY.name;
   const siteDescription = settings?.description || COMPANY.description;
   const defaultImage = settings?.defaultOgImage?.src || "/assets/images/coolyne-logo.png";
