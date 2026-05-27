@@ -32,6 +32,15 @@ function heading(text, key, style = "h2") {
   };
 }
 
+function comparisonTable(headers, rows, key) {
+  return {
+    _key: key,
+    _type: "comparisonTable",
+    headers,
+    rows
+  };
+}
+
 const BLOG_BODY_OVERRIDES = {
   "agv-what-is-automated-guided-vehicle": [
     heading("How Does an AGV Work?", "agv-work-title"),
@@ -84,10 +93,54 @@ const BLOG_BODY_OVERRIDES = {
       "A forklift AGV is capable of automatic pickup, drop off, stacking, and docking. It is suitable for pallet putaway, outbound handling, rack docking, and line side feeding. For companies that want to reduce reliance on manual forklifts and improve pallet logistics automation, this type of AGV is widely used.",
       "agv-forklift-paragraph"
     ),
-    heading("Robotlyne composite AGV with robotic arm integration", "agv-composite-title", "h3"),
+    heading("coolyne composite AGV with robotic arm integration", "agv-composite-title", "h3"),
     paragraph(
-      "Robotlyne has developed a composite AGV that combines an AGV with a robotic arm. It can not only move autonomously, but also perform picking, machine tending, loading and unloading, assisted assembly, and workstation service tasks. It is suitable for a wide range of support applications, especially flexible automation scenarios that require both mobility and operational capability, such as machine loading and unloading, workstation support transport, and cross equipment collaboration.",
+      "coolyne has developed a composite AGV that combines an AGV with a robotic arm. It can not only move autonomously, but also perform picking, machine tending, loading and unloading, assisted assembly, and workstation service tasks. It is suitable for a wide range of support applications, especially flexible automation scenarios that require both mobility and operational capability, such as machine loading and unloading, workstation support transport, and cross equipment collaboration.",
       "agv-composite-paragraph"
+    ),
+    heading("What Is the Difference Between AGV and AMR?", "agv-amr-title"),
+    paragraph(
+      "Simply put, AGVs focus more on executing tasks reliably according to predefined rules and routes, while AMRs focus more on perceiving their surroundings and dynamically adjusting their travel path. Both belong to the category of mobile automation equipment, but they differ in application fit and key strengths.",
+      "agv-amr-paragraph-1"
+    ),
+    paragraph(
+      "AGVs are better suited for environments with fixed routes, clear workstation relationships, and stable logistics rules. AMRs are better suited for sites with more frequent changes, routes that need regular adjustment, and a stronger demand for flexibility.",
+      "agv-amr-paragraph-2"
+    ),
+    comparisonTable(
+      ["Comparison Item", "AGV", "AMR"],
+      [
+        [
+          "Navigation logic",
+          "Runs on predefined routes or guidance methods",
+          "Can plan routes autonomously based on environmental awareness"
+        ],
+        [
+          "Site adaptability",
+          "Better for environments with clear rules and fewer changes",
+          "Better for more dynamic environments with frequent changes"
+        ],
+        [
+          "Deployment characteristics",
+          "Clear routes, stable logic, and more controllable implementation",
+          "Greater flexibility, with higher requirements for system capability"
+        ],
+        [
+          "Scheduling style",
+          "Better for standardized and highly repetitive tasks",
+          "Better for multi task and dynamic task scheduling"
+        ],
+        [
+          "Main strengths",
+          "Stable, reliable, rule based, easier to manage, and lower in cost",
+          "Flexible, intelligent, and more adaptable"
+        ]
+      ],
+      "agv-amr-comparison-table"
+    ),
+    paragraph(
+      "In general, AMRs are usually more expensive than AGVs. If a company's logistics workflow is already fairly standardized, an AGV is often the more practical and cost effective option. If the application is more complex and transport routes need to be adjusted frequently, an AMR may be more attractive. The key question is not which technology is more advanced, but which solution is the better fit for your site.",
+      "agv-amr-paragraph-3"
     )
   ]
 };
