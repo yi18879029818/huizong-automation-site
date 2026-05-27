@@ -1167,6 +1167,18 @@ function ProductDetailBody({ page }) {
   if (slug === "ground-handling-forklift-agv") {
     return <GroundHandlingForkliftAgvBody page={page} />;
   }
+  if (slug === "lifting-agv") {
+    return <LiftingAgvBody page={page} />;
+  }
+  if (slug === "storage-agv") {
+    return <StorageAgvBody page={page} />;
+  }
+  if (slug === "agv-roller") {
+    return <AgvRollerBody page={page} />;
+  }
+  if (slug === "composite-mobile-robot") {
+    return <CompositeMobileRobotBody page={page} />;
+  }
   const visuals =
     PRODUCT_DETAIL_VISUALS[slug] || PRODUCT_DETAIL_VISUALS.default;
   const features = page.data.features || [];
@@ -1800,8 +1812,21 @@ function GroundHandlingForkliftAgvBody({ page }) {
     </main>
   );
 }
-function LiftingAgvBody() {
+function getProductHeroCopy(page, defaults) {
+  return {
+    kicker: page?.data?.kicker || defaults.kicker,
+    summary: page?.data?.heroSummary || page?.data?.summary || defaults.summary,
+    title: page?.data?.heroTitle || page?.data?.title || defaults.title,
+  };
+}
+function LiftingAgvBody({ page }) {
   const quickSpecs = getProductSpecs("lifting-agv").quickSpecs || [];
+  const hero = getProductHeroCopy(page, {
+    kicker: "Industrial Logistics Systems",
+    summary:
+      "Precision internal transport for workstation supply, supermarket replenishment, and flexible intralogistics loops engineered for high-throughput environments.",
+    title: "Lifting AGV",
+  });
 
   return (
     <main>
@@ -1812,12 +1837,12 @@ function LiftingAgvBody() {
           "Shared aisle movement",
           "Auto-charging ready",
         ]}
-        imageAlt="Lifting AGV top-lift vehicle"
+        imageAlt={hero.title}
         imageSrc="/assets/images/lifting-agv-top-lift.webp"
-        kicker="Industrial Logistics Systems"
+        kicker={hero.kicker}
         quickSpecs={quickSpecs}
-        summary="Precision internal transport for workstation supply, supermarket replenishment, and flexible intralogistics loops engineered for high-throughput environments."
-        title="Lifting AGV"
+        summary={hero.summary}
+        title={hero.title}
       />{" "}
       <section className="py-24 px-8 max-w-screen-2xl mx-auto bg-surface">
         {" "}
@@ -2152,7 +2177,14 @@ function LiftingAgvBody() {
     </main>
   );
 }
-function StorageAgvBody() {
+function StorageAgvBody({ page }) {
+  const hero = getProductHeroCopy(page, {
+    kicker: "Precision Logistics",
+    summary:
+      "Engineered for high-density buffer zones and automated inventory flow control. Precision in every movement.",
+    title: "Storage AGV",
+  });
+
   return (
     <main>
       {" "}
@@ -2173,16 +2205,15 @@ function StorageAgvBody() {
             {" "}
             <span className="inline-block px-3 py-1 bg-white/10 hsa-dark-kicker rounded-full text-xs font-bold tracking-[0.06em] mb-6 font-label">
               {" "}
-              Precision Logistics{" "}
+              {hero.kicker}{" "}
             </span>{" "}
             <h1 className="text-white font-headline text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
               {" "}
-              Storage AGV{" "}
+              {hero.title}{" "}
             </h1>{" "}
             <p className="hsa-dark-copy font-body text-xl md:text-2xl leading-relaxed mb-10">
               {" "}
-              Engineered for high-density buffer zones and automated inventory
-              flow control. Precision in every movement.{" "}
+              {hero.summary}{" "}
             </p>{" "}
             <div className="flex flex-wrap gap-4">
               {" "}
@@ -2477,7 +2508,13 @@ function StorageAgvBody() {
     </main>
   );
 }
-function AgvRollerBody() {
+function AgvRollerBody({ page }) {
+  const hero = getProductHeroCopy(page, {
+    kicker: "High-End Automation",
+    summary: "Seamless Material Transfer & Conveyor Integration",
+    title: "AGV Roller",
+  });
+
   return (
     <main className="bg-surface">
       {" "}
@@ -2495,15 +2532,15 @@ function AgvRollerBody() {
               {" "}
               <span className="inline-block py-1 px-3 bg-secondary-container text-on-secondary-container text-xs font-bold tracking-[0.08em] mb-6 rounded-sm">
                 {" "}
-                High-End Automation{" "}
+                {hero.kicker}{" "}
               </span>{" "}
               <h1 className="text-6xl md:text-8xl font-headline font-extrabold text-white leading-tight tracking-tighter mb-6">
                 {" "}
-                AGV Roller{" "}
+                {hero.title}{" "}
               </h1>{" "}
               <p className="text-2xl md:text-3xl text-on-primary-container font-light leading-relaxed mb-10 max-w-2xl">
                 {" "}
-                Seamless Material Transfer &amp; Conveyor Integration{" "}
+                {hero.summary}{" "}
               </p>{" "}
               <div className="flex flex-wrap gap-4">
                 {" "}
@@ -2513,7 +2550,7 @@ function AgvRollerBody() {
             <div className="hidden md:flex items-center justify-center">
               {" "}
               <img
-                alt="AGV Roller"
+                alt={hero.title}
                 className="w-full max-w-[540px] max-h-[560px] object-contain drop-shadow-[0_28px_50px_rgba(0,0,0,0.32)]"
                 src="/assets/images/agv-roller-hero.webp"
               />{" "}
@@ -2797,7 +2834,14 @@ function AgvRollerBody() {
     </main>
   );
 }
-function CompositeMobileRobotBody() {
+function CompositeMobileRobotBody({ page }) {
+  const hero = getProductHeroCopy(page, {
+    kicker: "Industrial Grade Robotics",
+    summary:
+      "The pinnacle of mobile manipulation. Integrating advanced robotics with autonomous mobility for complex task execution in high-precision environments.",
+    title: "Composite Mobile Robot",
+  });
+
   return (
     <main>
       {" "}
@@ -2819,17 +2863,15 @@ function CompositeMobileRobotBody() {
               {" "}
               <span className="inline-block px-3 py-1 mb-6 text-xs font-black tracking-[0.08em] bg-secondary-container text-on-secondary-container rounded-sm">
                 {" "}
-                Industrial Grade Robotics{" "}
+                {hero.kicker}{" "}
               </span>{" "}
               <h1 className="text-6xl md:text-8xl font-headline font-extrabold text-white tracking-tighter leading-[0.9] mb-8">
                 {" "}
-                Composite <br /> Mobile Robot{" "}
+                {hero.title}{" "}
               </h1>{" "}
               <p className="text-xl md:text-2xl hsa-dark-copy font-light leading-relaxed mb-10 max-w-2xl">
                 {" "}
-                The pinnacle of mobile manipulation. Integrating advanced
-                robotics with autonomous mobility for complex task execution in
-                high-precision environments.{" "}
+                {hero.summary}{" "}
               </p>{" "}
               <div className="flex flex-wrap gap-4">
                 {" "}
@@ -2839,7 +2881,7 @@ function CompositeMobileRobotBody() {
             <div className="hidden md:flex items-center justify-center">
               {" "}
               <img
-                alt="Composite Mobile Robot"
+                alt={hero.title}
                 className="w-full max-w-[430px] max-h-[520px] object-contain drop-shadow-[0_28px_50px_rgba(0,0,0,0.36)]"
                 src="/assets/images/cmr-hero.webp"
               />{" "}
