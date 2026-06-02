@@ -1418,30 +1418,29 @@ function ProductDetailBody({ page }) {
 function AgvForkliftBody() {
   return (
     <main>
-      <section className="relative min-h-[720px] flex items-center overflow-hidden kinetic-gradient">
-        <div className="absolute inset-0 opacity-20 mix-blend-overlay">
+      <section className="relative min-h-[700px] xl:min-h-[760px] flex items-center overflow-hidden kinetic-gradient">
+        <div className="absolute inset-0">
           <img
             alt="Warehouse environment"
-            className="w-full h-full object-cover"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDztEsOiohIzS3uZT5jZv_eW-vOJH0jI11qAX2nx8lFrTiYIhuljsB0j3VOzEl6w2ILYs3td4-2Dh0s38HPd_3-oO-Zg30C25w7VyqfkPr9br9f1Nnp0RaSC6Eb8JX1rt2aY1V_BFDJekWqtqruUlguA-5m3azKSFu26a0D61ziK_7pY619knYl-V7FKL1Z0HzKvd1Dn4tkboyKAl0egzcRgJ9_TP1Ajp5U8_cynS-v-ScVpL8GbgahHSQov2PgoPZdPV51OIivRi7e"
+            className="w-full h-full object-cover object-center opacity-100"
+            src="/downloads/agv-forklift-hero-wide.png"
           />
         </div>
-        <div className="relative max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,21,47,0.74)_0%,rgba(14,35,71,0.58)_28%,rgba(18,49,92,0.22)_56%,rgba(18,49,92,0.08)_100%)]" />
+        <div className="relative max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-1 gap-16 items-center w-full">
           <div className="space-y-8 py-20">
             <div className="flex items-center gap-3">
-              <span className="w-8 h-px bg-secondary" />
-              <span className="text-secondary text-[10px] font-black uppercase tracking-[0.4em]">
+              <span className="w-8 h-px bg-white/80" />
+              <span className="text-white text-[10px] font-black uppercase tracking-[0.4em]">
                 Industrial Robotics
               </span>
             </div>
-            <h1 className="text-6xl md:text-8xl font-extrabold text-white leading-[0.95] tracking-tighter uppercase italic">
+            <h1 className="text-6xl md:text-8xl font-extrabold text-white leading-[0.95] tracking-tighter uppercase">
               AGV
               <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-secondary-container">
-                Forklift
-              </span>
+              <span className="text-white">Forklift</span>
             </h1>
-            <p className="text-on-primary-container/80 text-lg md:text-xl max-w-xl leading-relaxed font-body">
+            <p className="text-white text-lg md:text-xl max-w-xl leading-relaxed font-body">
               The backbone of autonomous pallet movement and high-rack storage. Engineered for
               zero-tolerance logistics and seamless facility integration.
             </p>
@@ -1454,16 +1453,8 @@ function AgvForkliftBody() {
               </Link>
               <button className="border border-white/20 text-white px-10 py-4 rounded-sm font-bold text-xs tracking-[0.2em] uppercase hover:bg-white/10 transition-all">
                 Download Brochure
-              </button>
-            </div>
-          </div>
-          <div className="relative hidden lg:block">
-            <div className="absolute -inset-20 bg-secondary/10 blur-[150px] rounded-full" />
-            <img
-              alt="AGV Forklift unit"
-              className="relative z-10 w-full drop-shadow-[0_35px_35px_rgba(0,0,0,0.6)]"
-              src="/products/chacheAGV1.png"
-            />
+                </button>
+              </div>
           </div>
         </div>
       </section>
@@ -1867,29 +1858,29 @@ function getProductHeroCopy(page, defaults) {
 function LiftingAgvBody() {
   return (
     <main>
-      <section className="relative min-h-[870px] flex items-center overflow-hidden bg-primary-container">
-        <div className="absolute inset-0 opacity-40">
+      <section className="relative min-h-[700px] xl:min-h-[760px] flex items-center overflow-hidden bg-primary-container">
+        <div className="absolute inset-0">
           <img
             alt="Lifting AGV hero background"
-            className="w-full h-full object-cover"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlS56zjskWg97-Qtj755XE3xARQj2LpBCmKnBOh_hbrjwItOvu9loDGqgQtK0izm2j1_9-VBm1KJ8_KDsOx8T-0wkiV2iKX7jw6I3EE7QIi0SOopTh4_TbHLbcMMKCOFVzNgHIbjw5HE5BZH7fewQPNX7mebAu5XSUl5bhlfiWxS4oBXfaStHL1ipgVPwqNrw16yzOyhfXIm2fVHU2h7gimnNjK5BWBI1O573o9T8FMaLWNt5EdftZwjHr2jeC8z7fyzT0FuOXzx5h"
+            className="w-full h-full object-cover object-center"
+            src="/downloads/lifting-agv-hero-wide.png"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-container via-primary-container/80 to-transparent" />
         </div>
-          <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="flex flex-col justify-center">
-              <span className="font-label text-secondary font-bold tracking-[0.2em] uppercase text-xs mb-4">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,21,47,0.74)_0%,rgba(14,35,71,0.58)_28%,rgba(18,49,92,0.22)_56%,rgba(18,49,92,0.08)_100%)]" />
+          <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-1 gap-12">
+            <div className="flex flex-col justify-center py-20">
+              <span className="font-label text-white font-bold tracking-[0.2em] uppercase text-xs mb-4">
                 Industrial Logistics Systems
             </span>
             <h1 className="font-headline text-6xl md:text-7xl font-extrabold text-white leading-[1.1] tracking-tighter mb-6">
               Lifting AGV
             </h1>
-            <p className="text-on-primary-container text-xl md:text-2xl max-w-xl font-light leading-relaxed mb-10">
+            <p className="text-white text-xl md:text-2xl max-w-xl font-light leading-relaxed mb-10">
               Precision internal transport for workstation supply and supermarket replenishment. Engineered for high-throughput environments.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
-                className="bg-gradient-to-b from-secondary to-on-secondary-fixed-variant text-white px-8 py-4 rounded-md font-bold tracking-tight shadow-lg hover:brightness-110 transition-all flex items-center gap-2"
+                className="bg-secondary text-white px-8 py-4 rounded-md font-bold tracking-tight shadow-lg hover:bg-secondary-container transition-all flex items-center gap-2"
                 href="/contact"
               >
                 Explore Specifications
@@ -1902,13 +1893,6 @@ function LiftingAgvBody() {
                 View Case Studies
                 </Link>
               </div>
-            </div>
-            <div className="hidden lg:flex items-center justify-center">
-              <img
-                alt="Lifting AGV top-lift vehicle"
-                className="w-full max-w-[540px] h-auto max-h-[520px] object-contain drop-shadow-[0_24px_48px_rgba(0,0,0,0.35)]"
-                src="/assets/images/lifting-agv-top-lift.webp"
-              />
             </div>
           </div>
         </section>
@@ -2154,16 +2138,16 @@ function LiftingAgvBody() {
 function StorageAgvBody() {
   return (
     <main>
-      <section className="relative min-h-[819px] flex items-center overflow-hidden bg-primary-container">
-        <div className="absolute inset-0 opacity-40">
+      <section className="relative min-h-[700px] xl:min-h-[760px] flex items-center overflow-hidden bg-primary-container">
+        <div className="absolute inset-0">
           <img
             alt="Modern high-tech warehouse interior"
-            className="w-full h-full object-cover"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCy0IZwrrWtiZK-vVe43o3YRuspV_4K9Srbhgwsbs5o7FFCYEQChywe1gia7t-tqT1FdTtsD9pWaoPTLo7p5r0XLdpJ1-ka7VjdRy1aVy_K2BtmPSbcq0P2snILNLy0bwrJGA0Bla0GiAZODoFcTqe39i1AFLK27u6_7jx2w1Xx1l-KsyiZG6KjfiY68lpASKDE50nb9MGGR4N3Xh0AbqOEKhPseDcvZz3brHIk1XJ5h3u2n5a7zoYqJ_vMF1srKFle9wSBJKulavPQ"
+            className="w-full h-full object-cover object-center"
+            src="/downloads/storage-agv-hero-wide.png"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-primary-container via-primary-container/80 to-transparent" />
-        <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,21,47,0.74)_0%,rgba(14,35,71,0.58)_28%,rgba(18,49,92,0.22)_56%,rgba(18,49,92,0.08)_100%)]" />
+        <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full grid grid-cols-1 gap-12 items-center">
           <div className="max-w-2xl">
             <span className="inline-block px-3 py-1 bg-white/10 hsa-dark-kicker rounded-full text-xs font-bold tracking-[0.1em] uppercase mb-6 font-label">
               Precision Logistics
@@ -2171,7 +2155,7 @@ function StorageAgvBody() {
             <h1 className="text-white font-headline text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
               Storage AGV
             </h1>
-            <p className="hsa-dark-copy font-body text-xl md:text-2xl leading-relaxed mb-10">
+            <p className="text-white font-body text-xl md:text-2xl leading-relaxed mb-10">
               Engineered for high-density buffer zones and automated inventory flow control. Precision in every movement.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -2182,15 +2166,6 @@ function StorageAgvBody() {
                 Download Product Spec Sheet
               </button>
             </div>
-          </div>
-          <div className="hidden lg:block relative h-[500px]">
-            <div className="absolute inset-0 bg-white/5 rounded-xl backdrop-blur-md border border-white/10 p-4 transform translate-x-8 -translate-y-4">
-                <img
-                  alt="Storage AGV product"
-                  className="w-full h-full object-contain rounded-lg shadow-2xl bg-white"
-                  src="/assets/images/storage-agv-hero.webp"
-                />
-              </div>
           </div>
         </div>
       </section>
@@ -2387,20 +2362,25 @@ function StorageAgvBody() {
 function AgvRollerBody() {
   return (
     <main className="bg-surface">
-      <section className="relative min-h-[819px] flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-primary overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,140,0,0.18),transparent_34%),linear-gradient(90deg,rgba(4,32,74,0.98)_0%,rgba(4,32,74,0.96)_52%,rgba(3,27,63,0.9)_100%)]" />
+      <section className="relative min-h-[700px] xl:min-h-[760px] flex items-center overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <img
+            alt="AGV Roller hero background"
+            className="w-full h-full object-cover object-center"
+            src="/downloads/agv-roller-hero-wide.png"
+          />
         </div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,21,47,0.72)_0%,rgba(14,35,71,0.54)_28%,rgba(18,49,92,0.18)_56%,rgba(18,49,92,0.06)_100%)]" />
         <div className="relative z-10 max-w-7xl mx-auto px-8 md:px-12 w-full">
-          <div className="grid items-center gap-12 md:grid-cols-[minmax(0,1.05fr)_minmax(340px,0.95fr)]">
+          <div className="grid items-center gap-12 md:grid-cols-1">
             <div className="max-w-3xl">
-              <span className="inline-block py-1 px-3 bg-secondary-container text-on-secondary-container text-xs font-bold tracking-widest uppercase mb-6 rounded-sm">
+              <span className="inline-block py-1 px-3 bg-white/12 text-white text-xs font-bold tracking-widest uppercase mb-6 rounded-sm">
                 High-End Automation
               </span>
               <h1 className="text-6xl md:text-8xl font-headline font-extrabold text-white leading-tight tracking-tighter mb-6">
                 AGV Roller
               </h1>
-              <p className="text-2xl md:text-3xl text-on-primary-container font-light leading-relaxed mb-10 max-w-2xl">
+              <p className="text-2xl md:text-3xl text-white font-light leading-relaxed mb-10 max-w-2xl">
                 Seamless Material Transfer &amp; Conveyor Integration
               </p>
               <div className="flex flex-wrap gap-4">
@@ -2411,13 +2391,6 @@ function AgvRollerBody() {
                   View Technical Drawings
                 </button>
               </div>
-            </div>
-            <div className="hidden md:flex items-center justify-center">
-              <img
-                alt="AGV Roller"
-                className="w-full max-w-[540px] max-h-[560px] object-contain drop-shadow-[0_28px_50px_rgba(0,0,0,0.32)]"
-                src="/assets/images/agv-roller-hero.webp"
-              />
             </div>
           </div>
         </div>
