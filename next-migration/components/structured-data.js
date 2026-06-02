@@ -2,9 +2,6 @@ import { COMPANY, SITE_URL } from "@/lib/site-config";
 
 const SCHEMA_CONTEXT = "https://schema.org";
 const GLOBAL_MARKET = "https://schema.org/Worldwide";
-const DEFAULT_PRICE_CURRENCY = "USD";
-const DEFAULT_OFFER_VALID_UNTIL = "2026-12-31";
-const IN_STOCK_URL = "https://schema.org/InStock";
 
 function absoluteUrl(href = "/") {
   return `${SITE_URL}${href === "/" ? "" : href}`;
@@ -102,53 +99,6 @@ function metricProperties(metrics = []) {
   }));
 }
 
-function offerPriceFor(source = {}) {
-  const price = source?.price ?? source?.priceUsd ?? source?.listPrice ?? source?.unitPrice;
-
-  if (price === undefined || price === null || price === "") {
-    return undefined;
-  }
-
-  return typeof price === "number" ? price.toString() : String(price).trim();
-}
-
-function productOfferSchema({ url, offerId, source }) {
-  if (!url) {
-    return undefined;
-  }
-
-  const price = offerPriceFor(source);
-
-  return cleanNode({
-    "@type": "Offer",
-    "@id": offerId,
-    url,
-    priceCurrency: source?.priceCurrency || DEFAULT_PRICE_CURRENCY,
-    price,
-    availability: IN_STOCK_URL,
-    priceValidUntil: DEFAULT_OFFER_VALID_UNTIL,
-    seller: {
-      "@id": idsFor(SITE_URL).organization
-    }
-  });
-}
-
-function detailTypeForPage(page) {
-  if (page.kind === "product-detail") {
-    return "Product";
-  }
-
-  if (page.kind === "solution-detail") {
-    return "Service";
-  }
-
-  if (page.kind === "case-project-detail") {
-    return "Article";
-  }
-
-  return "Thing";
-}
-
 function itemHref(card, page) {
   if (card.href) {
     return card.href;
@@ -227,7 +177,7 @@ function itemEntityStub(card, href, page) {
   const url = href ? absoluteUrl(href) : undefined;
   const type =
     page.section === "products"
-      ? "WebPage"
+      ? "Product"
       : page.section === "solutions"
         ? "Service"
         : page.kind === "case-category"
@@ -239,21 +189,11 @@ function itemEntityStub(card, href, page) {
     "@id": url ? `${url}#entity` : undefined,
     name: card.title,
     description: card.summary || card.description,
-    url,
-    offers: undefined
+    url
   });
 }
 
 function collectionListSchema(page, url) {
-  if (
-    page.kind !== "product-overview" &&
-    page.kind !== "solution-overview" &&
-    page.kind !== "case-overview" &&
-    page.kind !== "case-category"
-  ) {
-    return null;
-  }
-
   const sourceItems = page.kind === "case-category" ? page.data.projects : page.data.cards;
 
   if (!sourceItems?.length) {
@@ -283,7 +223,7 @@ function collectionListSchema(page, url) {
 }
 
 function offerCatalogSchema(page, url) {
-  if (page.kind !== "solution-overview") {
+  if (page.kind !== "product-overview" && page.kind !== "solution-overview") {
     return null;
   }
 
@@ -302,7 +242,7 @@ function offerCatalogSchema(page, url) {
         "@type": "ListItem",
         position: index + 1,
         item: {
-          "@type": "Service",
+          "@type": page.kind === "product-overview" ? "Product" : "Service",
           "@id": itemUrl ? `${itemUrl}#entity` : undefined,
           name: card.title,
           description: card.summary,
@@ -318,28 +258,7 @@ function detailEntitySchema(page, url) {
   const description = page.data.heroSummary || page.data.summary || COMPANY.description;
 
   if (page.kind === "product-detail") {
-    return {
-      "@type": "Product",
-      "@id": ids.entity,
-      name: page.data.title,
-      description,
-      url,
-      image: page.data.image ? { "@id": ids.image } : undefined,
-      category: "Warehouse automation equipment",
-      brand: {
-        "@type": "Brand",
-        name: COMPANY.name
-      },
-      manufacturer: {
-        "@id": ids.organization
-      },
-      additionalProperty: metricProperties(page.data.metrics),
-      offers: productOfferSchema({
-        url,
-        offerId: ids.offer,
-        source: page.data
-      })
-    };
+    return null;
   }
 
   if (page.kind === "solution-detail") {
@@ -520,7 +439,6 @@ function mainEntityIdForPage(page, url) {
   }
 
   if (
-    page.kind === "product-detail" ||
     page.kind === "solution-detail" ||
     page.kind === "case-project-detail"
   ) {

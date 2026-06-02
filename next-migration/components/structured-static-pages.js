@@ -2376,6 +2376,103 @@ export function StructuredStaticPage({ page }) {
     body = <AboutBody page={page} />;
   } else if (page.kind === "contact-page") {
     body = <ContactBody page={page} />;
+  } else if (page.kind === "policy-page") {
+    body = (
+      <main className="mx-auto flex w-full max-w-[1100px] flex-col gap-10 px-6 py-16 md:px-10">
+        <section className="rounded-[28px] border border-[#d9dde5] bg-white px-8 py-10 shadow-[0_24px_80px_rgba(0,23,54,0.06)] md:px-12 md:py-14">
+          <div className="max-w-3xl">
+            <p className="mb-4 text-[11px] font-black uppercase tracking-[0.28em] text-[#fe6b00]">
+              {page.data.kicker || "Legal Information"}
+            </p>
+            <h1 className="text-4xl font-black tracking-tight text-[#001736] md:text-5xl">
+              {page.data.heroTitle || page.data.title}
+            </h1>
+            <p className="mt-6 max-w-3xl text-base leading-8 text-[#58606b] md:text-lg">
+              {page.data.heroSummary || page.data.summary}
+            </p>
+          </div>
+          {page.data.metrics?.length ? (
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
+              {page.data.metrics.map((metric) => (
+                <article
+                  className="rounded-[22px] border border-[#d9dde5] bg-[#f8f9fb] px-6 py-6"
+                  key={metric.label}
+                >
+                  <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[#58606b]">
+                    {metric.label}
+                  </p>
+                  <p className="mt-3 text-2xl font-black tracking-tight text-[#001736]">
+                    {metric.value}
+                  </p>
+                </article>
+              ))}
+            </div>
+          ) : null}
+        </section>
+
+        {page.data.features?.length ? (
+          <section className="grid gap-5 md:grid-cols-3">
+            {page.data.features.map((feature) => (
+              <article
+                className="rounded-[24px] border border-[#d9dde5] bg-white px-7 py-7 shadow-[0_16px_50px_rgba(0,23,54,0.05)]"
+                key={feature.title}
+              >
+                <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[#fe6b00]">
+                  {feature.label}
+                </p>
+                <h2 className="mt-4 text-2xl font-black tracking-tight text-[#001736]">
+                  {feature.title}
+                </h2>
+                <p className="mt-4 text-sm leading-7 text-[#58606b]">{feature.description}</p>
+              </article>
+            ))}
+          </section>
+        ) : null}
+
+        {page.data.integrations?.length ? (
+          <section className="rounded-[24px] border border-[#d9dde5] bg-[#001736] px-8 py-8 text-white md:px-10">
+            <p className="text-[11px] font-black uppercase tracking-[0.28em] text-[#ffb36d]">
+              Key Conditions
+            </p>
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {page.data.integrations.map((item) => (
+                <article
+                  className="rounded-[20px] border border-white/12 bg-white/5 px-5 py-5"
+                  key={item}
+                >
+                  <p className="text-sm leading-7 text-white/82">{item}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        <section className="rounded-[28px] border border-[#d9dde5] bg-white px-8 py-10 shadow-[0_24px_80px_rgba(0,23,54,0.06)] md:px-12">
+          <div className="prose prose-slate max-w-none prose-headings:font-black prose-headings:text-[#001736] prose-p:text-[#58606b] prose-p:leading-8 prose-li:text-[#58606b] prose-li:leading-8 prose-strong:text-[#001736]">
+            <page.data.Content />
+          </div>
+        </section>
+
+        {page.data.faqs?.length ? (
+          <section className="rounded-[24px] border border-[#d9dde5] bg-white px-8 py-8 shadow-[0_16px_50px_rgba(0,23,54,0.05)] md:px-10">
+            <h2 className="text-3xl font-black tracking-tight text-[#001736]">
+              Frequently Asked Questions
+            </h2>
+            <div className="mt-8 grid gap-5">
+              {page.data.faqs.map((faq) => (
+                <article
+                  className="rounded-[18px] border border-[#d9dde5] bg-[#f8f9fb] px-6 py-6"
+                  key={faq.question}
+                >
+                  <h3 className="text-lg font-black text-[#001736]">{faq.question}</h3>
+                  <p className="mt-3 text-sm leading-7 text-[#58606b]">{faq.answer}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
+      </main>
+    );
   }
   if (!body) {
     return null;

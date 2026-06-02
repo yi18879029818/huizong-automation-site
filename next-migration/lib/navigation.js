@@ -42,6 +42,8 @@ export const STRUCTURED_ROUTES = [
   "/",
   "/about",
   "/contact",
+  "/privacy-policy",
+  "/terms",
   "/products",
   "/products/agv-forklift",
   "/products/ground-handling-forklift-agv",

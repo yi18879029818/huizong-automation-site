@@ -11,7 +11,7 @@ import { getAllStructuredRoutes, getStructuredPage } from "@/lib/structured-cont
 import { COMPANY } from "@/lib/site-config";
 
 export const dynamicParams = true;
-export const revalidate = 60;
+export const revalidate = 0;
 
 const getCachedStructuredPage = cache((...slugParts) => getStructuredPage(slugParts));
 
@@ -89,6 +89,7 @@ function shouldRenderPureStructuredPage(page) {
     page.kind === "home-page" ||
     page.kind === "about-page" ||
     page.kind === "contact-page" ||
+    page.kind === "policy-page" ||
     page.section === "products" ||
     page.section === "solutions" ||
     page.section === "case-studies"
@@ -96,7 +97,12 @@ function shouldRenderPureStructuredPage(page) {
 }
 
 function renderPureStructuredPage(page) {
-  if (page.kind === "home-page" || page.kind === "about-page" || page.kind === "contact-page") {
+  if (
+    page.kind === "home-page" ||
+    page.kind === "about-page" ||
+    page.kind === "contact-page" ||
+    page.kind === "policy-page"
+  ) {
     return <StructuredStaticPage page={page} />;
   }
 

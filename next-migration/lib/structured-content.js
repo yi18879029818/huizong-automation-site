@@ -17,6 +17,18 @@ import ContactPage, {
   integrations as contactIntegrations,
   meta as contactMeta
 } from "@/content/pages/contact.mdx";
+import PrivacyPolicyPage, {
+  faqs as privacyPolicyFaqs,
+  features as privacyPolicyFeatures,
+  integrations as privacyPolicyIntegrations,
+  meta as privacyPolicyMeta
+} from "@/content/pages/privacy-policy.mdx";
+import TermsPage, {
+  faqs as termsFaqs,
+  features as termsFeatures,
+  integrations as termsIntegrations,
+  meta as termsMeta
+} from "@/content/pages/terms.mdx";
 import ProductOverview, {
   capabilities as productCapabilities,
   faqs as productFaqs,
@@ -445,6 +457,50 @@ export async function getStructuredPage(slug = []) {
         { href: "/contact", label: "Contact" }
       ]),
       data
+    });
+  }
+
+  if (section === "privacy-policy") {
+    return buildStaticPage({
+      kind: "policy-page",
+      section: "legal",
+      sectionLabel: "Legal",
+      href: "/privacy-policy",
+      title: withCompanyTitle(privacyPolicyMeta.title),
+      subnav: [],
+      breadcrumbs: createBreadcrumbs([
+        { href: "/", label: "Home" },
+        { href: "/privacy-policy", label: "Privacy Policy" }
+      ]),
+      data: {
+        ...privacyPolicyMeta,
+        Content: PrivacyPolicyPage,
+        features: privacyPolicyFeatures,
+        integrations: privacyPolicyIntegrations,
+        faqs: privacyPolicyFaqs
+      }
+    });
+  }
+
+  if (section === "terms") {
+    return buildStaticPage({
+      kind: "policy-page",
+      section: "legal",
+      sectionLabel: "Legal",
+      href: "/terms",
+      title: withCompanyTitle(termsMeta.title),
+      subnav: [],
+      breadcrumbs: createBreadcrumbs([
+        { href: "/", label: "Home" },
+        { href: "/terms", label: "Terms of Service" }
+      ]),
+      data: {
+        ...termsMeta,
+        Content: TermsPage,
+        features: termsFeatures,
+        integrations: termsIntegrations,
+        faqs: termsFaqs
+      }
     });
   }
 

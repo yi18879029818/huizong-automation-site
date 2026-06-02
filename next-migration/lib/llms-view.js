@@ -9,16 +9,7 @@ function absoluteUrl(href = "/") {
 function getStructuredRoutes() {
   return Array.from(
     new Set(
-      [
-        "/",
-        "/about",
-        "/contact",
-        "/faq",
-        "/blog",
-        ...getAllStructuredRoutes().filter(
-          (route) => !["/", "/about", "/contact", "/faq", "/blog"].includes(route)
-        )
-      ]
+      ["/", "/about", "/contact", ...getAllStructuredRoutes().filter((route) => !["/", "/about", "/contact"].includes(route))]
     )
   );
 }
@@ -39,7 +30,7 @@ async function pageEntryForRoute(route) {
     hasJsonLd: true,
     schemas:
       page.kind === "product-detail"
-        ? ["Organization", "WebSite", "WebPage", "Product", "BreadcrumbList", "FAQPage"]
+        ? ["Organization", "WebSite", "WebPage", "BreadcrumbList", "FAQPage"]
         : page.kind === "solution-detail"
           ? ["Organization", "WebSite", "WebPage", "Service", "BreadcrumbList", "FAQPage"]
           : page.kind === "case-project-detail"
@@ -81,7 +72,7 @@ export async function getLlmsIndexText() {
     "",
     "## Notes",
     "- JSON-LD is embedded on public pages.",
-    "- Product pages embed Product schema with B2B Offer metadata and omit reviews or ratings when none are available.",
+    "- Product detail pages use neutral webpage schema for B2B inquiry content rather than merchant product rich-result markup.",
     "- Solution and case-study pages expose structured markdown views for AI crawlers.",
     "- Prefer canonical HTML URLs for citations and markdown URLs for extraction."
   ].join("\n");
