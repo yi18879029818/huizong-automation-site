@@ -2990,9 +2990,9 @@ function SolutionOverviewBody({ page }) {
           {" "}
           <img
             className="w-full h-full object-cover opacity-30 mix-blend-soft-light scale-105"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfujFnEmwYtviRkzf7npRhGnksP1WeNEAHg5ttqRcI1VyZfdnGr3kSTvj1_WTJPDLckYdK76sNEyQlRiq-OZ4iiyPpE4NDOlas1RDhxDPy6KT_gc1s6J4gjDWehm7G05nVABrh0e63T6KmOziLVGDB0HX9FiXfSr_KK4wWy-JFPtSCQnxJjEgBwQdFjOPRxhTSekgyBQgiPuamWVZcgLwuTBusuTsiXcJ8agv3e-xaZkuGmJsXNRoPu4GZzx3y-y-SJnqecimEKpif"
+            src="/downloads/solutions-hero-asrs-wide.png"
           />{" "}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/60 to-transparent" />{" "}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/82 via-primary/38 to-transparent" />{" "}
         </div>{" "}
         <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full">
           {" "}
