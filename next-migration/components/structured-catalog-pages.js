@@ -3448,12 +3448,12 @@ function SolutionDetailBody({ page }) {
               <img
                 alt="ASRS background"
                 className="w-full h-full object-cover object-[78%_center] opacity-40 scale-[1.02]"
-                src={visuals.heroImage}
+                src="/downloads/asrs-hero-wide.jpg"
               />{" "}
             </div>{" "}
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,32,74,0.99)_0%,rgba(4,32,74,0.97)_32%,rgba(4,32,74,0.82)_62%,rgba(4,32,74,0.56)_100%)]" />{" "}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_44%,rgba(255,122,0,0.12),transparent_28%),radial-gradient(circle_at_30%_55%,rgba(17,88,173,0.16),transparent_36%)]" />{" "}
-            <div className="absolute inset-y-0 left-0 w-[56%] bg-[linear-gradient(90deg,rgba(4,32,74,0.94)_0%,rgba(4,32,74,0.8)_72%,transparent_100%)]" />{" "}
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,32,74,0.16)_0%,rgba(4,32,74,0.12)_32%,rgba(4,32,74,0.1)_62%,rgba(4,32,74,0.08)_100%)]" />{" "}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_44%,rgba(255,122,0,0.05),transparent_28%),radial-gradient(circle_at_30%_55%,rgba(17,88,173,0.08),transparent_36%)]" />{" "}
+            <div className="absolute inset-y-0 left-0 w-[56%] bg-[linear-gradient(90deg,rgba(4,32,74,0.18)_0%,rgba(4,32,74,0.1)_72%,transparent_100%)]" />{" "}
           </>
         ) : null}{" "}
         <div
