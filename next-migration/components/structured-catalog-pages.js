@@ -4795,11 +4795,11 @@ function SoftwareBody() {
         <div className="absolute inset-0 z-0">
           {" "}
           <img
-            className="w-full h-full object-cover opacity-40 mix-blend-overlay"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcG3rJ4wYt3VN3gMkvVF1nzgG183YmHH123O7RuuKBYsDbwqT-pnoDGS3zXIrjmd-2GL9-X3ac-9BLSpmMdzJz753VdRplLhIUVu3BuazAgySpUPwDjRWwnx980GJ9B9P44r6QlD0o0JonQspsMyndhpRCbEu5O3wF4loYQXMu0EcTKvbHrH9zClWaboEZDf-TTnHFJ2PCWduj9BqnonT73E3Vew_2wrQ10K-uGXnLesjY37gdX81HOasM5eXFze4jSlA044srv6v0"
+            className="w-full h-full object-cover object-center opacity-100"
+            src="/downloads/software-hero-wide.png"
             alt="Software network"
           />{" "}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-transparent" />{" "}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/8 via-primary/2 to-transparent" />{" "}
         </div>{" "}
         <div className="relative z-10 max-w-screen-2xl mx-auto px-8 lg:px-10 py-16 lg:py-20 grid lg:grid-cols-2 gap-12 items-center">
           {" "}
@@ -4810,11 +4810,11 @@ function SoftwareBody() {
               <h1 className="font-headline text-[3rem] lg:text-[4rem] font-extrabold text-on-primary leading-[1.04] tracking-tighter pr-4 lg:pr-6 max-w-[52rem]">
                 {" "}
                 Software - The Digital Intelligence for{" "}
-                <span className="text-secondary">
+                <span className="text-white">
                   Autonomous Logistics
                 </span>{" "}
               </h1>{" "}
-              <p className="text-on-primary-container text-[1rem] lg:text-[1.08rem] max-w-[43rem] font-light leading-[1.72] pr-2 lg:pr-4">
+              <p className="text-white text-[1rem] lg:text-[1.08rem] max-w-[43rem] font-light leading-[1.72] pr-2 lg:pr-4">
                 {" "}
                 A unified software ecosystem orchestrating inventory, hardware,
                 and workflow processes for absolute operational control.{" "}
