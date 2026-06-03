@@ -4380,11 +4380,12 @@ function PickingBody() {
         <div className="absolute inset-0 z-0">
           {" "}
           <img
-            className="w-full h-full object-cover object-[88%_center] scale-[0.92] opacity-40"
+            className="w-full h-full object-cover object-center opacity-100"
             src="/downloads/picking-hero-wide.png"
             alt="Picking hero"
           />{" "}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/60 via-primary/18 to-transparent" />{" "}
+          <div className="absolute inset-0 bg-primary/12" />{" "}
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,32,74,0.54)_0%,rgba(4,32,74,0.34)_32%,rgba(4,32,74,0.18)_62%,rgba(4,32,74,0.1)_100%)]" />{" "}
         </div>{" "}
         <div className="relative z-10 max-w-screen-2xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {" "}
@@ -4397,7 +4398,7 @@ function PickingBody() {
             <h1 className="text-5xl lg:text-7xl font-extrabold text-white leading-tight tracking-tighter mb-8">
               {" "}
               Picking &amp; Fulfillment <br />{" "}
-              <span className="text-on-primary-container">Solutions</span>{" "}
+              <span className="text-white">Solutions</span>{" "}
             </h1>{" "}
             <p className="text-xl text-white leading-relaxed mb-10 max-w-2xl font-light">
               {" "}
