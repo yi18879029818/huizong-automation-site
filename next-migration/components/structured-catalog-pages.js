@@ -3871,10 +3871,10 @@ function MaterialHandlingBody() {
           {" "}
           <img
             className="w-full h-full object-cover opacity-40 mix-blend-multiply"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsmyLGrpJMR38UhtQDmEWwQmRL5kE3CqNy8E7CwjUHWwniAgWukDlr5uCn4Cpb6QXQ07OzwFDJSSckShsB2VVqmfSn3tYQp05z_YcSroVvlE2UHpJqNfkrLyLergG3lupq8Ji9VxHzQhZ42MbHX489Asi7lSSVN0Uudd1fsaWPZd3fnMUCW3KcbgD3dwmXt3zp88MnyaV7VgFjnUMSR3LensIOJtJcytDfkzUiZKMBSizEzZOsEL45qUZudVVMLr_wQRH84luoJsaH"
+            src="/downloads/material-handling-hero-wide.png"
             alt="Modern automated warehouse"
           />{" "}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-transparent" />{" "}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/72 via-primary/24 to-transparent" />{" "}
         </div>{" "}
         <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full">
           {" "}
@@ -3886,7 +3886,7 @@ function MaterialHandlingBody() {
             {" "}
             Material Handling{" "}
           </h1>{" "}
-          <p className="text-xl md:text-2xl text-on-primary-container max-w-2xl font-light leading-relaxed">
+          <p className="text-xl md:text-2xl text-white max-w-2xl font-light leading-relaxed">
             {" "}
             Optimizing Intralogistics through Autonomous Transport &amp; Hybrid
             Automation. Engineering zero-latency movement for the world's most
