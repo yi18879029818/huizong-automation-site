@@ -4380,11 +4380,11 @@ function PickingBody() {
         <div className="absolute inset-0 z-0">
           {" "}
           <img
-            className="w-full h-full object-cover opacity-40"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeyvh4vHFGsb-iwx90hsOOgCouE1POoGDfd6t6KHSFKwoUR0wHEa1noS2yrBmPp_hfJl_cdSD_OJ3JP1ealJ_MM65762RPwDocbjGD6U6vwlkKLwTktDWKprtBMwaNjofHW0HNxl-MrGkNH0kWWZQqPTCKrdVppJiE7-HeI1y7XaIkMPMmKfJ0RbAyzmo7p6-L83E7KXJdjJylTM4MbvS4RGKkzydUHbSYHvcrFgYbltgrE6SQ8DrERl93zIPKUKmLs3DNqkJczlIh"
+            className="w-full h-full object-cover object-[88%_center] scale-[0.92] opacity-40"
+            src="/downloads/picking-hero-wide.png"
             alt="Picking hero"
           />{" "}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary to-transparent opacity-90" />{" "}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/60 via-primary/18 to-transparent" />{" "}
         </div>{" "}
         <div className="relative z-10 max-w-screen-2xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {" "}
@@ -4399,7 +4399,7 @@ function PickingBody() {
               Picking &amp; Fulfillment <br />{" "}
               <span className="text-on-primary-container">Solutions</span>{" "}
             </h1>{" "}
-            <p className="text-xl text-on-primary-container leading-relaxed mb-10 max-w-2xl font-light">
+            <p className="text-xl text-white leading-relaxed mb-10 max-w-2xl font-light">
               {" "}
               Advanced goods-to-person strategies for high-velocity order
               fulfillment and zero-error accuracy. Engineered for the next
