@@ -5105,29 +5105,40 @@ function CaseOverviewBody({ page }) {
   return (
     <main>
       {" "}
-      <section className="relative h-[440px] flex items-center overflow-hidden bg-primary">
+      <section className="relative h-[500px] flex items-center overflow-hidden bg-primary">
         {" "}
         <div className="absolute inset-0 z-0">
           {" "}
           <img
-            className="w-full h-full object-cover opacity-30 grayscale"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg5Zv1BCTFg_Oh_otNnfVHR-Ieli1m9_riedXcCosWoMX4hq4oLkD7S7R8q3oMGaw4fz4oI64b7w_xqJc-1waJ615Hzm8_-d9zxJwH-cfVbCVMVC7t7ZWjERnn_7mS7bAO3tDrg7gmigipLpKXiFZQpnn_XSq4iyODa3Z9kbr-etZtmW4ZRV8CKiHLb20ms9q-WTwOb4WgJ82lwSmbnB7jyvjjJaTiQZPY8s60URBc_8PX2jRTVL8ZKGpLIk1GaJuS10jEBy4ugzOr"
+            className="w-full h-full object-cover object-[84%_center]"
+            src="/downloads/case-studies-hero-wide.jpeg"
           />{" "}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/60 to-transparent" />{" "}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/78 via-primary/40 to-primary/12" />{" "}
         </div>{" "}
-        <div className="relative z-10 max-w-[1440px] mx-auto px-8 w-full">
+        <div className="relative z-10 max-w-[1440px] mx-auto px-8 w-full h-full">
           {" "}
-          <span className="text-[10px] tracking-[0.4em] text-secondary font-bold mb-6 block">
+          <span className="absolute left-8 top-20 text-[10px] tracking-[0.4em] text-secondary font-bold block">
             {" "}
             {page.data.kicker}{" "}
           </span>{" "}
-          <h1 className="font-headline text-6xl md:text-8xl font-extrabold text-on-primary tracking-tighter max-w-4xl leading-[0.85]">
+          <div className="absolute inset-0 flex items-center">
             {" "}
-            Logistics <br /> <span className="text-secondary">
-              Engineered
-            </span>{" "}
-            for Scale.{" "}
-          </h1>{" "}
+            <div className="mx-auto max-w-[1440px] w-full px-8">
+              {" "}
+              <div className="max-w-[780px] pt-20">
+                {" "}
+                <div className="font-headline font-extrabold tracking-tighter leading-[0.9] text-white drop-shadow-[0_10px_28px_rgba(6,18,38,0.34)]">
+                  {" "}
+                  <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-[5.6rem]">
+                    Logistics Engineered
+                  </span>{" "}
+                  <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-[5.6rem]">
+                    for Scale.
+                  </span>{" "}
+                </div>{" "}
+              </div>{" "}
+            </div>{" "}
+          </div>{" "}
         </div>{" "}
       </section>{" "}
       <section className="max-w-[1440px] mx-auto px-8 py-20">
