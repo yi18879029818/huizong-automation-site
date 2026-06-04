@@ -5109,12 +5109,15 @@ function CaseOverviewBody({ page }) {
         {" "}
         <div className="absolute inset-0 z-0">
           {" "}
-          <img
-            className="w-full h-full object-cover object-[84%_center]"
-            src="/downloads/case-studies-hero-wide.jpeg"
-          />{" "}
-          <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(0,23,54,0.56)_0%,rgba(15,56,97,0.30)_42%,rgba(254,107,0,0.12)_100%)]" />{" "}
-          <div className="absolute inset-y-0 left-0 w-[52%] bg-gradient-to-r from-primary/26 via-primary/12 to-transparent" />{" "}
+          <div className="absolute inset-x-[-4%] inset-y-[-6%]">
+            {" "}
+            <img
+              className="h-full w-full scale-[0.9] object-cover object-[82%_center]"
+              src="/downloads/case-studies-hero-wide.jpeg"
+            />{" "}
+          </div>{" "}
+          <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(0,23,54,0.66)_0%,rgba(15,56,97,0.38)_42%,rgba(254,107,0,0.18)_100%)]" />{" "}
+          <div className="absolute inset-y-0 left-0 w-[58%] bg-gradient-to-r from-primary/34 via-primary/16 to-transparent" />{" "}
         </div>{" "}
         <div className="relative z-10 max-w-[1440px] mx-auto px-8 w-full h-full">
           {" "}
