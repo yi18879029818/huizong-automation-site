@@ -5448,7 +5448,10 @@ function CaseCategoryBody({ page }) {
             backgroundSize: "cover",
           }}
         />{" "}
-        <div className="absolute inset-0 bg-primary/72" />{" "}
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor: "rgba(0, 23, 54, 0.72)" }}
+        />{" "}
         <div className="relative max-w-screen-2xl mx-auto px-8 py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {" "}
           <div className="lg:col-span-8">
