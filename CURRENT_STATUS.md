@@ -1,6 +1,6 @@
 # CURRENT_STATUS.md - 当前项目状态
 
-> 更新时间：2026-05-13
+> 更新时间：2026-06-04
 
 ## 项目概览
 
@@ -26,6 +26,12 @@
 | 卡片悬浮效果 | `next-migration/components/structured-static-pages.js` | 已部署 |
 | Footer Logo 缩小 | `public/assets/site-shell.css` | 已部署 |
 | 核心文档创建 | `AGENTS.md`, `ARCHITECTURE_*.md`, `CURRENT_STATUS.md` | 已推送 |
+
+### ✅ 已完成 (2026-06-04)
+
+| 功能 | 文件 | 状态 |
+|------|------|------|
+| Contact 页 intent 预填 | `public/assets/site-shell.js` | 本地完成，已验证 |
 
 ### 📌 GitHub 仓库
 
@@ -63,7 +69,6 @@
 | 事项 | 关联 | 备注 |
 |------|------|------|
 | 完善产品详情页 MDX 内容 | `/products/*` | 部分页面仍使用静态版本 |
-| Contact 页 intent 预填功能 | `/contact` | 提升转化率 |
 | 首页 Hero 区域灵动效果 | `/` | 同步 About 页效果 |
 
 ### 中优先级
@@ -107,7 +112,6 @@ npm run deploy   # ✅ 正常
 
 ## 下一步行动
 
-1. 将首页 Hero 区域也添加灵动效果（同步 About 页）
-2. 检查产品页面是否需要类似优化
-3. 验证所有页面动画效果正常显示
-
+1. 验证 `/contact?intent=quote` 与 `/contact?intent=site-visit` 的真实提交流程
+2. 将首页 Hero 区域灵动效果与 About 页做最终统一验收
+3. 继续补齐产品详情页 MDX 内容与下载资料管理

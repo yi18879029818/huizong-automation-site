@@ -872,6 +872,134 @@
     });
   }
 
+  var CONTACT_INTENT_PRESETS = {
+    quote: {
+      fieldValue: "Quick Quote",
+      formType: "quote-request",
+      formLabel: "Contact Page Quote Request",
+      successMessage: "Thanks, your quote request has been emailed to our team.",
+      heading: "Quotation Briefing",
+      description:
+        "Share your target payload, aisle constraints, throughput goals, and timeline so our engineering team can prepare a scoped quotation path.",
+      buttonLabel: "Request Quote",
+      message:
+        "I would like to request a quotation.\nPayload:\nLift height:\nAisle width:\nBattery preference:\nDaily throughput target:\nTarget deployment timeline:"
+    },
+    "site-visit": {
+      fieldValue: "Site Visit",
+      formType: "site-visit-request",
+      formLabel: "Contact Page Site Visit Request",
+      successMessage: "Thanks, your site visit request has been emailed to our team.",
+      heading: "Site Visit Planning",
+      description:
+        "Share your facility location, operating constraints, and preferred visit window so we can prepare the right engineering review before the first call.",
+      buttonLabel: "Schedule Site Visit",
+      message:
+        "I would like to schedule a site visit.\nFacility location:\nCurrent process or warehouse type:\nMain bottlenecks:\nPreferred visit window:\nProject stage:"
+    }
+  };
+
+  function isContactPath(pathname) {
+    return pathname === "/contact" || pathname === "/contact/";
+  }
+
+  function ensureHiddenField(form, name, label) {
+    var field = form.querySelector('input[type="hidden"][name="' + name + '"]');
+
+    if (!field) {
+      field = document.createElement("input");
+      field.type = "hidden";
+      field.name = name;
+      form.insertBefore(field, form.firstChild);
+    }
+
+    if (label) {
+      field.setAttribute("data-label", label);
+    }
+
+    return field;
+  }
+
+  function ensureIntentNotice(container) {
+    var notice = container.querySelector("[data-hsa-intent-notice]");
+
+    if (notice) {
+      return notice;
+    }
+
+    notice = document.createElement("div");
+    notice.setAttribute("data-hsa-intent-notice", "true");
+    notice.className =
+      "mt-5 inline-flex items-center gap-3 border border-secondary/20 bg-secondary/8 px-4 py-3 text-[11px] font-black uppercase tracking-[0.16em] text-secondary";
+
+    container.appendChild(notice);
+    return notice;
+  }
+
+  function applyContactIntentPrefill() {
+    var params;
+    var intentKey;
+    var preset;
+    var form;
+    var panel;
+    var intro;
+    var heading;
+    var copy;
+    var notice;
+    var submitButton;
+    var messageField;
+    var intentField;
+
+    if (!isContactPath(window.location.pathname || "/")) {
+      return;
+    }
+
+    params = new URL(window.location.href).searchParams;
+    intentKey = trimValue(params.get("intent") || "").toLowerCase();
+    preset = CONTACT_INTENT_PRESETS[intentKey];
+
+    if (!preset) {
+      return;
+    }
+
+    form = document.querySelector('form[data-form-label="Contact Page Project Briefing"]');
+
+    if (!form) {
+      return;
+    }
+
+    panel = form.closest(".bg-white");
+    intro = panel ? panel.querySelector(".mb-12") : null;
+    heading = intro ? intro.querySelector("h2") : null;
+    copy = intro ? intro.querySelector("p") : null;
+    submitButton = getSubmitButton(form);
+    messageField = form.querySelector('textarea[name="message"]');
+    intentField = ensureHiddenField(form, "intent", "Intent");
+
+    form.dataset.formType = preset.formType;
+    form.dataset.formLabel = preset.formLabel;
+    form.dataset.successMessage = preset.successMessage;
+    intentField.value = preset.fieldValue;
+
+    if (heading) {
+      heading.textContent = preset.heading;
+    }
+
+    if (copy) {
+      copy.textContent = preset.description;
+      notice = ensureIntentNotice(intro);
+      notice.textContent = "Intent detected: " + preset.fieldValue;
+    }
+
+    if (submitButton) {
+      submitButton.textContent = preset.buttonLabel;
+    }
+
+    if (messageField && !trimMultilineValue(messageField.value)) {
+      messageField.value = preset.message;
+    }
+  }
+
   function bindJourneyConversions() {
     document.addEventListener("click", function (ev) {
       var link = ev.target.closest("a[href], button[data-hsa-open-sales-modal]");
@@ -1489,6 +1617,7 @@
     bindDesktopMenus();
     bindMobile();
     bindForms();
+    applyContactIntentPrefill();
     bindJourneyConversions();
     bindTextTargets();
     bindOverviewCards();

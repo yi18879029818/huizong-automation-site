@@ -5364,10 +5364,10 @@ function CaseOverviewBody({ page }) {
         <div className="absolute inset-0 z-0">
           {" "}
           <img
-            className="w-full h-full object-cover opacity-30 grayscale"
+            className="w-full h-full object-cover opacity-55"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg5Zv1BCTFg_Oh_otNnfVHR-Ieli1m9_riedXcCosWoMX4hq4oLkD7S7R8q3oMGaw4fz4oI64b7w_xqJc-1waJ615Hzm8_-d9zxJwH-cfVbCVMVC7t7ZWjERnn_7mS7bAO3tDrg7gmigipLpKXiFZQpnn_XSq4iyODa3Z9kbr-etZtmW4ZRV8CKiHLb20ms9q-WTwOb4WgJ82lwSmbnB7jyvjjJaTiQZPY8s60URBc_8PX2jRTVL8ZKGpLIk1GaJuS10jEBy4ugzOr"
           />{" "}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/60 to-transparent" />{" "}
+          <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(0,23,54,0.42)_0%,rgba(15,56,97,0.24)_42%,rgba(254,107,0,0.12)_100%)]" />{" "}
         </div>{" "}
         <div className="relative z-10 max-w-[1440px] mx-auto px-8 w-full">
           {" "}
