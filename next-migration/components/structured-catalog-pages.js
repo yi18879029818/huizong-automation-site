@@ -5113,8 +5113,8 @@ function CaseOverviewBody({ page }) {
             className="w-full h-full object-cover object-[84%_center]"
             src="/downloads/case-studies-hero-wide.jpeg"
           />{" "}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/78 via-primary/40 to-primary/12" />{" "}
-          <div className="absolute inset-y-0 left-0 w-[52%] bg-gradient-to-r from-primary/46 via-primary/22 to-transparent" />{" "}
+          <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(0,23,54,0.56)_0%,rgba(15,56,97,0.30)_42%,rgba(254,107,0,0.12)_100%)]" />{" "}
+          <div className="absolute inset-y-0 left-0 w-[52%] bg-gradient-to-r from-primary/26 via-primary/12 to-transparent" />{" "}
         </div>{" "}
         <div className="relative z-10 max-w-[1440px] mx-auto px-8 w-full h-full">
           {" "}
