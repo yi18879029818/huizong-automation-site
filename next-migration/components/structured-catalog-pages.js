@@ -5114,6 +5114,7 @@ function CaseOverviewBody({ page }) {
             src="/downloads/case-studies-hero-wide.jpeg"
           />{" "}
           <div className="absolute inset-0 bg-gradient-to-r from-primary/78 via-primary/40 to-primary/12" />{" "}
+          <div className="absolute inset-y-0 left-0 w-[52%] bg-gradient-to-r from-primary/46 via-primary/22 to-transparent" />{" "}
         </div>{" "}
         <div className="relative z-10 max-w-[1440px] mx-auto px-8 w-full h-full">
           {" "}
@@ -5129,10 +5130,10 @@ function CaseOverviewBody({ page }) {
                 {" "}
                 <div className="font-headline font-extrabold tracking-tighter leading-[0.9] text-white drop-shadow-[0_10px_28px_rgba(6,18,38,0.34)]">
                   {" "}
-                  <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-[5.6rem]">
+                  <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-[4.9rem]">
                     Logistics Engineered
                   </span>{" "}
-                  <span className="block text-5xl sm:text-6xl md:text-7xl lg:text-[5.6rem]">
+                  <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-[4.9rem]">
                     for Scale.
                   </span>{" "}
                 </div>{" "}
