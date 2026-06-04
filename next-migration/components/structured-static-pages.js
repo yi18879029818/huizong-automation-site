@@ -28,10 +28,10 @@ function LiteYouTubeEmbed({ title, videoId }) {
           src={posterUrl}
         />
         <span className="absolute inset-0 bg-gradient-to-t from-secondary/70 via-secondary/18 to-secondary/12" />
-        <span className="absolute flex h-24 w-24 items-center justify-center rounded-full border border-white/80 bg-white text-secondary shadow-[0_24px_54px_rgba(0,23,54,0.34)] ring-4 ring-secondary/35 transition-transform duration-300 group-hover:scale-[1.08] group-hover:ring-secondary/50">
+        <span className="absolute flex h-18 w-18 items-center justify-center rounded-full bg-secondary text-white shadow-[0_20px_44px_rgba(255,145,77,0.36)] ring-2 ring-white/28 transition-transform duration-300 group-hover:scale-[1.06] group-hover:ring-white/44">
           <svg
             aria-hidden="true"
-            className="ml-1 h-10 w-10"
+            className="ml-0.5 h-8 w-8"
             fill="currentColor"
             viewBox="0 0 24 24"
           >
