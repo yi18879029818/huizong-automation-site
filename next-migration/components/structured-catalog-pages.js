@@ -5448,7 +5448,7 @@ function CaseCategoryBody({ page }) {
             backgroundSize: "cover",
           }}
         />{" "}
-        <div className="absolute inset-0 bg-primary/50" />{" "}
+        <div className="absolute inset-0 bg-primary/72" />{" "}
         <div className="relative max-w-screen-2xl mx-auto px-8 py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {" "}
           <div className="lg:col-span-8">
@@ -5461,7 +5461,7 @@ function CaseCategoryBody({ page }) {
               {" "}
               {page.data.title}{" "}
             </h1>{" "}
-            <p className="text-xl md:text-2xl text-white/92 font-light max-w-2xl leading-relaxed">
+            <p className="text-xl md:text-2xl text-white font-light max-w-2xl leading-relaxed">
               {" "}
               {page.data.summary}{" "}
             </p>{" "}
@@ -5474,7 +5474,7 @@ function CaseCategoryBody({ page }) {
                 {" "}
                 {getMetricValue(page.data.metrics, 2, "99.9%")}{" "}
               </div>{" "}
-              <div className="text-white/88 tracking-widest text-xs font-bold">
+              <div className="text-white tracking-widest text-xs font-bold">
                 {" "}
                 Standard Efficiency Across Installations{" "}
               </div>{" "}
