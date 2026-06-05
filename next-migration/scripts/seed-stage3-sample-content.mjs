@@ -163,7 +163,7 @@ const docs = [
           "A move-and-work robotics platform combining autonomous transport, manipulation, and vision-guided execution for hybrid operations.",
         metrics: [
           { _key: "products-card-cmr-metric-1", value: "10kg", label: "Handling" },
-          { _key: "products-card-cmr-metric-2", value: "2.5m/s", label: "Speed" },
+          { _key: "products-card-cmr-metric-2", value: "1.2-1.5m", label: "Speed" },
           { _key: "products-card-cmr-metric-3", value: "0.02mm", label: "Arm Precision" }
         ]
       }
@@ -585,7 +585,7 @@ const docs = [
       "A move-and-work platform that combines mobile autonomy with manipulation for flexible fulfillment, line-side tasks, and mixed-item handling.",
     metrics: [
       { _key: "cmr-metric-1", value: "10kg", label: "Handling" },
-      { _key: "cmr-metric-2", value: "2.5m/s", label: "Speed" },
+      { _key: "cmr-metric-2", value: "1.2-1.5m", label: "Speed" },
       { _key: "cmr-metric-3", value: "0.02mm", label: "Arm Precision" }
     ],
     features: [

@@ -374,7 +374,7 @@ const PRODUCT_SPEC_LIBRARY = {
   "composite-mobile-robot": {
     quickSpecs: [
       { value: "10kg", label: "Handling" },
-      { value: "2.5m/s", label: "Speed" },
+      { value: "1.2-1.5m", label: "Speed" },
       { value: "0.02mm", label: "Arm Precision" },
     ],
     bullets: [
@@ -386,7 +386,7 @@ const PRODUCT_SPEC_LIBRARY = {
     ],
     technicalSpecs: [
       { label: "Arm Precision", value: "0.02mm repeatability" },
-      { label: "Transit Speed", value: "Up to 2.5m/s" },
+      { label: "Transit Speed", value: "1.2-1.5m" },
       { label: "Handling Capacity", value: "Up to 10kg parts" },
       { label: "Manipulation Mode", value: "6-axis cobot + AMR base" },
       { label: "Guidance", value: "Vision-guided task execution" },
@@ -2659,7 +2659,7 @@ function CompositeMobileRobotBody() {
               <div className="mt-12 grid grid-cols-2 gap-8">
                 {[
                   { value: "0.02mm", label: "Arm Precision" },
-                  { value: "2.5m/s", label: "Transit Speed" }
+                  { value: "1.2-1.5m", label: "Transit Speed" }
                 ].map((item) => (
                   <div className="border-l-2 border-secondary-container pl-6" key={item.label}>
                     <div className="text-3xl font-black text-primary">{item.value}</div>
