@@ -72,8 +72,9 @@ export async function generateMetadata() {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" translate="no" suppressHydrationWarning>
       <head>
+        <meta content="notranslate" name="google" />
         <link
           rel="preload"
           href="/assets/fonts/inter-latin.woff2"
@@ -100,8 +101,8 @@ export default function RootLayout({ children }) {
             })(window,document,'script','dataLayer','${GTM_ID}');
           `}
         </Script>
-        <Script src="/assets/site-shell.min.js?v=20260608-blog-stability-1" strategy="afterInteractive" />
-        <Script src="/assets/site-motion.js?v=20260608-blog-stability-1" strategy="afterInteractive" />
+        <Script src="/assets/site-shell.min.js?v=20260608-blog-stability-2" strategy="afterInteractive" />
+        <Script src="/assets/site-motion.js?v=20260608-blog-stability-2" strategy="afterInteractive" />
       </head>
       <body className="antialiased" suppressHydrationWarning>
         <noscript>
