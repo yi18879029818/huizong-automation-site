@@ -8,7 +8,7 @@ import { SanityPortableText } from "@/components/sanity-portable-text";
 import { getPostBySlug, getRelatedPosts } from "@/lib/sanity/content.mjs";
 import { urlFor } from "@/lib/sanity/image.mjs";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 const getCachedPostBySlug = cache(getPostBySlug);
 const getCachedRelatedPosts = cache(getRelatedPosts);
@@ -52,6 +52,14 @@ function formatPublishedDate(value) {
 function getSidecardCopy(post) {
   const slug = typeof post === "string" ? post : post?.slug;
 
+  if (slug === "agv-guide") {
+    return {
+      eyebrow: "AGV Basics",
+      title: "Key Topics",
+      description: "System scope. Navigation. Safety logic. Forklift vs AGV."
+    };
+  }
+
   if (slug === "agv-what-is-automated-guided-vehicle") {
     return {
       eyebrow: "Reading Mode",
@@ -68,6 +76,43 @@ function getSidecardCopy(post) {
   };
 }
 
+function buildFallbackArticleBody(post) {
+  const excerpt =
+    post?.excerpt ||
+    "This article is being refreshed. Please use the blog index or contact page if you need the content immediately.";
+
+  return [
+    {
+      _type: "block",
+      _key: "fallback-intro",
+      style: "normal",
+      markDefs: [],
+      children: [
+        {
+          _type: "span",
+          _key: "fallback-intro-span",
+          marks: [],
+          text: excerpt
+        }
+      ]
+    },
+    {
+      _type: "block",
+      _key: "fallback-note",
+      style: "blockquote",
+      markDefs: [],
+      children: [
+        {
+          _type: "span",
+          _key: "fallback-note-span",
+          marks: [],
+          text: "If the full article does not appear after refresh, the page is likely serving a stale cache snapshot. Try opening the post again from the blog index."
+        }
+      ]
+    }
+  ];
+}
+
 export default async function BlogDetailPage({ params }) {
   const slug = resolveSlugParam(params.slug);
   const [post, relatedPosts] = await Promise.all([
@@ -81,7 +126,8 @@ export default async function BlogDetailPage({ params }) {
 
   const heroImageUrl =
     getBlogImageOverride(post) || urlFor(post.heroImage)?.width(1600).height(960).url() || null;
-  const articleBody = getBlogBodyOverride(post) || post.body;
+  const resolvedBody = getBlogBodyOverride(post) || post.body;
+  const articleBody = resolvedBody?.length ? resolvedBody : buildFallbackArticleBody(post);
   const sidecardCopy = getSidecardCopy(post);
 
   return (

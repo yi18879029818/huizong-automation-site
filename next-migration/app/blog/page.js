@@ -4,7 +4,7 @@ import { getBlogImageOverride } from "@/lib/blog-image-overrides.mjs";
 import { getPostList } from "@/lib/sanity/content.mjs";
 import { urlFor } from "@/lib/sanity/image.mjs";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Blog | coolyne",
