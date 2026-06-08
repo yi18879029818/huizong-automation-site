@@ -1,5 +1,5 @@
-@import url("/assets/site-shell.css?v=20260530-footer-resources");
-@import url("/assets/site-icons.css");
+@import url("/assets/site-shell.css?v=20260608-blog-stability-1");
+@import url("/assets/site-icons.css?v=20260608-blog-stability-1");
 
 @tailwind base;
 @tailwind components;

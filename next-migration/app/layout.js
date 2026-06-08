@@ -72,7 +72,7 @@ export async function generateMetadata() {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link
           rel="preload"
@@ -100,10 +100,10 @@ export default function RootLayout({ children }) {
             })(window,document,'script','dataLayer','${GTM_ID}');
           `}
         </Script>
-        <Script src="/assets/site-shell.min.js" strategy="afterInteractive" />
-        <Script src="/assets/site-motion.js?v=20260511-1" strategy="afterInteractive" />
+        <Script src="/assets/site-shell.min.js?v=20260608-blog-stability-1" strategy="afterInteractive" />
+        <Script src="/assets/site-motion.js?v=20260608-blog-stability-1" strategy="afterInteractive" />
       </head>
-      <body className="antialiased">
+      <body className="antialiased" suppressHydrationWarning>
         <noscript>
           <iframe
             height="0"
