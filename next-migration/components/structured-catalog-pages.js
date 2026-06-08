@@ -1606,7 +1606,7 @@ function AgvForkliftBody() {
                   [
                     "Pallet Transport",
                     "High-speed point-to-point movement across large facilities, replacing manual tuggers for repetitive long-haul tasks.",
-                    "https://lh3.googleusercontent.com/aida-public/AB6AXuCYFcOkg43a4CILwgiFZ4fupjXTw8wkNj0bSGVp5-fLb4OaIVeIgnuMuR_l6GMWc5u5AyW6hqZaVjz9v35NWeQ0HZY6GGeT3rUa9-74l1Pn2RYdmm4WQyphqYZwZ3qG0GjZq5waCI7nNxyZyvvtJnvcMFGeVPqLPwf6LdW6ahPdLSoYhJrk76OvITC1GocD0bl6iRvfN0MGnCl8xBxNQu8FEsynzMOVhnGj1qB0x0qgiljWmRXY9zFVc5gpKvl8PuV_jW8gX4MgbnEH"
+                    "/assets/images/ground-handling-pallet-transport.png"
                   ],
                   [
                     "Rack Interface",
@@ -1621,14 +1621,14 @@ function AgvForkliftBody() {
                   [
                     "Line Feeding",
                     "Just-in-time delivery of components to manufacturing lines, ensuring zero downtime in production cycles.",
-                    "https://lh3.googleusercontent.com/aida-public/AB6AXuCKPJPEd_sRXT9-cq133VMLTvKi-kGu-uQHF379phGEeUajG850SCHi5wIdO3hVN465t1rPGu_Akq4UYVeyvx9sq8wz052SxRH2F04v3HVi30PHkJux-p96fxOeEi6FC05Y3iuobaAGr7BCfY0lb7XnbGnN3x99kFkyoprExWKpZwy4djRzOvnoF-DP9C0snCLNHZovoLCN5ZbAqo1EYMwqelyeBlnqk2UZuSMy1n6KwERFqCXrTkSkbQ_CALa22Ztqx82Ym_WPyIDK"
+                    "/assets/images/ground-handling-line-feeding.png"
                   ]
                 ].map(([title, copy, image]) => (
                   <div className="space-y-6 group" key={title}>
                     <div className="aspect-video overflow-hidden">
                       <img
                         alt={title}
-                        className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-500"
+                        className="w-full h-full object-cover transition-all duration-500"
                         src={image}
                       />
                     </div>
