@@ -1435,9 +1435,12 @@ a {
 .blog-flow-copy h2 {
   margin: 0;
   color: var(--brand-navy);
-  font-size: clamp(2rem, 3vw, 3rem);
-  line-height: 1.14;
-  letter-spacing: -0.05em;
+  max-width: 12ch;
+  font-size: clamp(2rem, 2.45vw, 2.72rem);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
 }
 
 .blog-flow-copy h2 a {
