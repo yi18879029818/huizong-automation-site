@@ -1061,8 +1061,12 @@ a {
 .blog-detail-copy h1 {
   margin: 0;
   color: var(--brand-navy);
-  font-size: clamp(2.6rem, 5.6vw, 4.9rem);
-  line-height: 0.94;
+  max-width: 12.5ch;
+  font-size: clamp(2.35rem, 4.6vw, 4.15rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
 }
 
 .blog-index-copy p,
@@ -1076,7 +1080,7 @@ a {
 
 .blog-index-hero .hero-actions,
 .blog-detail-hero .hero-actions {
-  margin-top: 4px;
+  margin-top: 0;
 }
 
 .blog-outline-button {
@@ -1489,7 +1493,20 @@ a {
 
 .blog-detail-hero {
   margin-top: 36px;
-  padding: 48px;
+  padding: 40px 44px;
+}
+
+.blog-detail-hero-grid {
+  grid-template-columns: minmax(0, 1.38fr) minmax(300px, 0.62fr);
+}
+
+.blog-detail-copy {
+  gap: 14px;
+}
+
+.blog-detail-copy p {
+  max-width: 38rem;
+  line-height: 1.72;
 }
 
 .blog-back-link {
