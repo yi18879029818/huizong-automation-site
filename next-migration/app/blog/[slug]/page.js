@@ -49,30 +49,52 @@ function formatPublishedDate(value) {
   }).format(new Date(value));
 }
 
-function getSidecardCopy(post) {
-  const slug = typeof post === "string" ? post : post?.slug;
+const BLOG_SIDECARD_COPY = {
+  "agv-guide": {
+    eyebrow: "AGV Basics",
+    title: "Key Topics",
+    description: "System scope. Navigation methods. Safety logic. Forklift replacement fit."
+  },
+  "agv-vs-amr": {
+    eyebrow: "Transport Strategy",
+    title: "Comparison Focus",
+    description: "Navigation style. Safety trade-offs. Flexibility. Cost fit. Selection logic."
+  },
+  "warehouse-automation-guide": {
+    eyebrow: "Warehouse Automation",
+    title: "What This Covers",
+    description: "Robot workflows. Efficiency gains. Safety value. ROI checks. Deployment fit."
+  },
+  "agv-what-is-automated-guided-vehicle": {
+    eyebrow: "AGV Overview",
+    title: "Core Scope",
+    description: "How AGVs work. Main types. Application fit. Integration logic. Use cases."
+  }
+};
 
-  if (slug === "agv-guide") {
-    return {
-      eyebrow: "AGV Basics",
-      title: "Key Topics",
-      description: "System scope. Navigation. Safety logic. Forklift vs AGV."
-    };
+function normalizeTopicDescription(post) {
+  const raw = (post?.excerpt || "").trim();
+  if (!raw) {
+    return "Workflow scope. System logic. Operational fit. Integration priorities.";
   }
 
-  if (slug === "agv-what-is-automated-guided-vehicle") {
-    return {
-      eyebrow: "Reading Mode",
-      title: "Lifting AGV",
-      description: "Lifting AGV for automated material handling and smart warehouse transport"
-    };
+  const compact = raw.replace(/\s+/g, " ").trim();
+  const sentence = compact.split(/(?<=[.!?])\s+/)[0] || compact;
+  return sentence.length > 120 ? `${sentence.slice(0, 117).trim()}...` : sentence;
+}
+
+function getSidecardCopy(post) {
+  const slug = typeof post === "string" ? post : post?.slug;
+  const mapped = BLOG_SIDECARD_COPY[slug];
+
+  if (mapped) {
+    return mapped;
   }
 
   return {
-    eyebrow: "Reading Mode",
-    title: "Field Notes",
-    description:
-      "This layout keeps the article body wide, the support actions close by, and the reading flow focused on one engineering topic at a time."
+    eyebrow: "Topic Summary",
+    title: "What This Covers",
+    description: normalizeTopicDescription(post)
   };
 }
 
