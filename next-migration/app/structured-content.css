@@ -1435,7 +1435,7 @@ a {
 .blog-flow-copy h2 {
   margin: 0;
   color: var(--brand-navy);
-  max-width: 16ch;
+  max-width: 19ch;
   font-size: clamp(2rem, 2.45vw, 2.72rem);
   font-weight: 800;
   line-height: 1.06;
