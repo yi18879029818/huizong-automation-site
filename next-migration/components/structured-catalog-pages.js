@@ -1465,7 +1465,7 @@ function AgvForkliftBody() {
             <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-secondary mb-3">
               Precision Engineering
             </h2>
-            <h3 className="text-5xl md:text-6xl font-black text-primary tracking-tighter uppercase leading-none italic">
+            <h3 className="text-5xl md:text-6xl font-black text-primary tracking-tighter uppercase leading-none">
               Performance
               <br />
               Redefined.
@@ -1563,7 +1563,7 @@ function AgvForkliftBody() {
               <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-secondary mb-4">
                 Versatile Deployment
               </h2>
-              <h3 className="text-5xl font-black text-white tracking-tighter mb-10 leading-none uppercase italic">
+              <h3 className="text-5xl font-black text-white tracking-tighter mb-10 leading-none uppercase">
                 Designed for
                 <br />
                 every flow.
@@ -1632,7 +1632,7 @@ function AgvForkliftBody() {
                         src={image}
                       />
                     </div>
-                    <h4 className="text-xl font-black text-white uppercase tracking-tight italic">{title}</h4>
+                    <h4 className="text-xl font-black text-white uppercase tracking-tight">{title}</h4>
                     <p className="text-on-primary-container text-sm font-body leading-relaxed">{copy}</p>
                   </div>
                 ))}
@@ -1651,7 +1651,7 @@ function AgvForkliftBody() {
             <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-secondary mb-4">
               Software Ecosystem
             </h2>
-            <h3 className="text-5xl md:text-6xl font-black tracking-tighter mb-8 uppercase italic leading-none">
+            <h3 className="text-5xl md:text-6xl font-black tracking-tighter mb-8 uppercase leading-none">
               Intelligent
               <br />
               Integration.
@@ -1695,7 +1695,7 @@ function AgvForkliftBody() {
           </div>
           <div className="mt-20 p-10 md:p-16 bg-primary text-white flex flex-col md:flex-row items-center gap-12 group">
             <div className="flex-1">
-              <h4 className="text-3xl font-black mb-4 uppercase tracking-tight italic">
+              <h4 className="text-3xl font-black mb-4 uppercase tracking-tight">
                 Request a System Compatibility Audit
               </h4>
               <p className="text-on-primary-container text-lg font-body max-w-2xl opacity-80">
