@@ -1379,7 +1379,7 @@ a {
 
 .blog-flow-list {
   display: grid;
-  gap: 56px;
+  gap: 84px;
 }
 
 .blog-flow-item {
@@ -1387,6 +1387,7 @@ a {
   grid-template-columns: minmax(0, 0.58fr) minmax(320px, 0.42fr);
   gap: 28px;
   align-items: center;
+  padding-block: 6px;
 }
 
 .blog-flow-item.is-reversed {
@@ -1880,7 +1881,7 @@ a {
   }
 
   .blog-flow-list {
-    gap: 36px;
+    gap: 48px;
   }
 
   .blog-flow-copy {
