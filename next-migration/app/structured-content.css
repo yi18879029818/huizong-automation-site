@@ -1061,7 +1061,7 @@ a {
 .blog-detail-copy h1 {
   margin: 0;
   color: var(--brand-navy);
-  max-width: 12.5ch;
+  max-width: 16.5ch;
   font-size: clamp(2.35rem, 4.6vw, 4.15rem);
   font-weight: 700;
   line-height: 0.9;
