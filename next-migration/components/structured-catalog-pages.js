@@ -444,7 +444,7 @@ const SOLUTION_DETAIL_VISUALS = {
     heroImage: "/assets/images/fmcg-agv-hero-sharp.png",
     scenarioImages: [
       "/assets/images/fmcg-scenario-pallet-sharp.png",
-      "/assets/images/fmcg-scenario-production-sharp.png",
+      "/assets/images/fmcg-scenario-production-clean.png",
       "/assets/images/factory-transport-1.webp",
     ],
     synergyImage: "/downloads/home-smart-logistics-solutions.webp",
