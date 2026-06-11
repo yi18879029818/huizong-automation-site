@@ -432,7 +432,7 @@ const SOLUTION_DETAIL_VISUALS = {
     synergyImage: "/assets/images/picking-case-3.png",
   },
   "machine-tending-automation": {
-    heroImage: "/assets/images/cmr-hero-complete.webp",
+    heroImage: "/assets/images/machine-tending-hero-square.png",
     scenarioImages: [
       "/assets/images/cmr-scenario-1.webp",
       "/assets/images/cmr-feature.webp",
@@ -3560,7 +3560,7 @@ function SolutionDetailBody({ page }) {
               <div className="relative rounded-xl overflow-hidden shadow-2xl">
                 {" "}
                 <img
-                  className="w-full aspect-square object-cover"
+                  className={`w-full aspect-square ${visuals.heroImageClassName || "object-cover"}`}
                   src={visuals.heroImage}
                 />{" "}
                 <div className="absolute bottom-6 left-6 right-6 p-6 glass-panel rounded-lg border border-white/20">
