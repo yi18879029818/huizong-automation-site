@@ -443,8 +443,8 @@ const SOLUTION_DETAIL_VISUALS = {
   "food-beverage-fmcg-automation": {
     heroImage: "/assets/images/fmcg-agv-hero-sharp.png",
     scenarioImages: [
-      "/assets/images/material-handling-scenario-1-3.webp",
-      "/downloads/ground-handling-forklift-agv-scene.webp",
+      "/assets/images/fmcg-scenario-pallet-sharp.png",
+      "/assets/images/fmcg-scenario-production-sharp.png",
       "/assets/images/factory-transport-1.webp",
     ],
     synergyImage: "/downloads/home-smart-logistics-solutions.webp",
