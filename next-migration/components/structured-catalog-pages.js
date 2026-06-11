@@ -423,7 +423,7 @@ const SOLUTION_DETAIL_VISUALS = {
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAjENgwVmt-9umH_oW_6NeCrbqwRoGF2eVJPDmbW0LjCc9E4Pyyevy7-WMp4bZug-3XFptCxE-ilczeHDAqOJ8WTqagMHn_n86kFEU8dIJggTcC3AXJluAmaK9x-WRoP4o21vlMH-YmTgLTUZy3TcubjJK88PU-ple7kX4sBKixM_zvURe7IDahX4rlhHPKIGBsGf6srSHIIRtSRXihj_qIT0Je8n-QCarVml1c_g15ZC13XWb1aW4nEzEcbcc6qiwS5MOluOcQuv65",
   },
   "goods-to-person-picking-system": {
-    heroImage: "/downloads/picking-hero-wide.png",
+    heroImage: "/assets/images/goods-to-person-hero-square.png",
     scenarioImages: [
       "/assets/images/picking-case-1.png",
       "/assets/images/picking-case-2.png",
@@ -432,7 +432,7 @@ const SOLUTION_DETAIL_VISUALS = {
     synergyImage: "/assets/images/picking-case-3.png",
   },
   "machine-tending-automation": {
-    heroImage: "/assets/images/machine-tending-hero-square.png",
+    heroImage: "/assets/images/cmr-hero-complete.webp",
     scenarioImages: [
       "/assets/images/cmr-scenario-1.webp",
       "/assets/images/cmr-feature.webp",
