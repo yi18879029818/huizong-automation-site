@@ -432,7 +432,7 @@ const SOLUTION_DETAIL_VISUALS = {
     synergyImage: "/assets/images/picking-case-3.png",
   },
   "machine-tending-automation": {
-    heroImage: "/assets/images/cmr-hero.webp",
+    heroImage: "/assets/images/cmr-hero-complete.webp",
     scenarioImages: [
       "/assets/images/cmr-scenario-1.webp",
       "/assets/images/cmr-feature.webp",
@@ -441,7 +441,7 @@ const SOLUTION_DETAIL_VISUALS = {
     synergyImage: "/assets/images/cmr-point-of-use.webp",
   },
   "food-beverage-fmcg-automation": {
-    heroImage: "/assets/images/fmcg-agv-hero-sharp.png",
+    heroImage: "/assets/images/fmcg-agv-hero-square-centered.png",
     scenarioImages: [
       "/assets/images/fmcg-scenario-pallet-sharp.png",
       "/assets/images/fmcg-scenario-production-clean.png",
