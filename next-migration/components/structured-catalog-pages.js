@@ -3717,7 +3717,7 @@ function SolutionDetailBody({ page }) {
             >
               {" "}
               <img
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover transition-all duration-700"
                 src={
                   visuals.scenarioImages[index % visuals.scenarioImages.length]
                 }
