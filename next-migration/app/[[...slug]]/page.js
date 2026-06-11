@@ -90,6 +90,7 @@ function shouldRenderPureStructuredPage(page) {
     page.kind === "about-page" ||
     page.kind === "contact-page" ||
     page.kind === "policy-page" ||
+    page.kind === "industry-detail" ||
     page.section === "products" ||
     page.section === "solutions" ||
     page.section === "case-studies"

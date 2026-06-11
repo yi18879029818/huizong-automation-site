@@ -93,12 +93,30 @@ import SolutionPicking, {
   meta as pickingMeta,
   scenarios as pickingScenarios
 } from "@/content/solutions/picking.mdx";
+import SolutionGoodsToPersonPickingSystem, {
+  features as goodsToPersonFeatures,
+  integrations as goodsToPersonIntegrations,
+  meta as goodsToPersonMeta,
+  scenarios as goodsToPersonScenarios
+} from "@/content/solutions/goods-to-person-picking-system.mdx";
+import SolutionMachineTendingAutomation, {
+  features as machineTendingFeatures,
+  integrations as machineTendingIntegrations,
+  meta as machineTendingMeta,
+  scenarios as machineTendingScenarios
+} from "@/content/solutions/machine-tending-automation.mdx";
 import SolutionSoftware, {
   features as softwareFeatures,
   integrations as softwareIntegrations,
   meta as softwareMeta,
   scenarios as softwareScenarios
 } from "@/content/solutions/software.mdx";
+import IndustryFoodBeverageFmcgAutomation, {
+  features as fmcgFeatures,
+  integrations as fmcgIntegrations,
+  meta as fmcgMeta,
+  scenarios as fmcgScenarios
+} from "@/content/industries/food-beverage-fmcg-automation.mdx";
 import CaseOverview, {
   faqs as caseOverviewFaqs,
   meta as caseOverviewMeta
@@ -207,12 +225,39 @@ const SOLUTION_MODULES = [
     integrations: pickingIntegrations
   },
   {
+    slug: "goods-to-person-picking-system",
+    Content: SolutionGoodsToPersonPickingSystem,
+    meta: goodsToPersonMeta,
+    features: goodsToPersonFeatures,
+    scenarios: goodsToPersonScenarios,
+    integrations: goodsToPersonIntegrations
+  },
+  {
+    slug: "machine-tending-automation",
+    Content: SolutionMachineTendingAutomation,
+    meta: machineTendingMeta,
+    features: machineTendingFeatures,
+    scenarios: machineTendingScenarios,
+    integrations: machineTendingIntegrations
+  },
+  {
     slug: "software",
     Content: SolutionSoftware,
     meta: softwareMeta,
     features: softwareFeatures,
     scenarios: softwareScenarios,
     integrations: softwareIntegrations
+  }
+];
+
+const INDUSTRY_MODULES = [
+  {
+    slug: "food-beverage-fmcg-automation",
+    Content: IndustryFoodBeverageFmcgAutomation,
+    meta: fmcgMeta,
+    features: fmcgFeatures,
+    scenarios: fmcgScenarios,
+    integrations: fmcgIntegrations
   }
 ];
 
@@ -592,6 +637,9 @@ export async function getStructuredPage(slug = []) {
     if (entry) {
       const sanityData = await getCatalogDetailPageData(section, entry.slug);
       const data = mergeDetailEntry(entry, sanityData);
+      const isCampaignLanding =
+        entry.slug === "goods-to-person-picking-system" ||
+        entry.slug === "machine-tending-automation";
 
       return buildStaticPage({
         kind: "solution-detail",
@@ -599,11 +647,33 @@ export async function getStructuredPage(slug = []) {
         sectionLabel: navigation?.label || "Solutions",
         href: `/solutions/${entry.slug}`,
         title: withCompanyTitle(data.title || entry.meta.title),
-        subnav: navigation?.items || [],
+        subnav: isCampaignLanding ? [] : navigation?.items || [],
         breadcrumbs: createBreadcrumbs([
           { href: "/", label: "Home" },
           { href: "/solutions", label: "Solutions" },
           { href: `/solutions/${entry.slug}`, label: data.title || entry.meta.title }
+        ]),
+        data
+      });
+    }
+  }
+
+  if (section === "industries") {
+    const entry = INDUSTRY_MODULES.find((industry) => industry.slug === subsection);
+
+    if (entry) {
+      const data = createDetailData(entry);
+
+      return buildStaticPage({
+        kind: "industry-detail",
+        section,
+        sectionLabel: "Industries",
+        href: `/industries/${entry.slug}`,
+        title: withCompanyTitle(data.title || entry.meta.title),
+        subnav: [],
+        breadcrumbs: createBreadcrumbs([
+          { href: "/", label: "Home" },
+          { href: `/industries/${entry.slug}`, label: data.title || entry.meta.title }
         ]),
         data
       });

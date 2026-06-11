@@ -422,6 +422,33 @@ const SOLUTION_DETAIL_VISUALS = {
     synergyImage:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAjENgwVmt-9umH_oW_6NeCrbqwRoGF2eVJPDmbW0LjCc9E4Pyyevy7-WMp4bZug-3XFptCxE-ilczeHDAqOJ8WTqagMHn_n86kFEU8dIJggTcC3AXJluAmaK9x-WRoP4o21vlMH-YmTgLTUZy3TcubjJK88PU-ple7kX4sBKixM_zvURe7IDahX4rlhHPKIGBsGf6srSHIIRtSRXihj_qIT0Je8n-QCarVml1c_g15ZC13XWb1aW4nEzEcbcc6qiwS5MOluOcQuv65",
   },
+  "goods-to-person-picking-system": {
+    heroImage: "/downloads/picking-hero-wide.png",
+    scenarioImages: [
+      "/assets/images/picking-case-1.png",
+      "/assets/images/picking-case-2.png",
+      "/assets/images/picking-case-3.png",
+    ],
+    synergyImage: "/assets/images/picking-case-3.png",
+  },
+  "machine-tending-automation": {
+    heroImage: "/assets/images/cmr-hero.webp",
+    scenarioImages: [
+      "/assets/images/cmr-scenario-1.webp",
+      "/assets/images/cmr-feature.webp",
+      "/assets/images/cmr-point-of-use.webp",
+    ],
+    synergyImage: "/assets/images/cmr-point-of-use.webp",
+  },
+  "food-beverage-fmcg-automation": {
+    heroImage: "/downloads/ground-handling-forklift-agv-scene-home.webp",
+    scenarioImages: [
+      "/assets/images/material-handling-scenario-1-3.webp",
+      "/downloads/ground-handling-forklift-agv-scene.webp",
+      "/assets/images/factory-transport-1.webp",
+    ],
+    synergyImage: "/downloads/home-smart-logistics-solutions.webp",
+  },
   default: {
     heroImage:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuDfujFnEmwYtviRkzf7npRhGnksP1WeNEAHg5ttqRcI1VyZfdnGr3kSTvj1_WTJPDLckYdK76sNEyQlRiq-OZ4iiyPpE4NDOlas1RDhxDPy6KT_gc1s6J4gjDWehm7G05nVABrh0e63T6KmOziLVGDB0HX9FiXfSr_KK4wWy-JFPtSCQnxJjEgBwQdFjOPRxhTSekgyBQgiPuamWVZcgLwuTBusuTsiXcJ8agv3e-xaZkuGmJsXNRoPu4GZzx3y-y-SJnqecimEKpif",
@@ -7097,7 +7124,7 @@ export function StructuredCatalogDetailPage({ page }) {
         {" "}
         {page.kind === "product-detail" ? (
           <ProductDetailBody page={page} />
-        ) : page.kind === "solution-detail" ? (
+        ) : page.kind === "solution-detail" || page.kind === "industry-detail" ? (
           <SolutionDetailBody page={page} />
         ) : page.kind === "case-category" ? (
           <CaseCategoryBody page={page} />
