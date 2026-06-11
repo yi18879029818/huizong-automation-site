@@ -441,7 +441,7 @@ const SOLUTION_DETAIL_VISUALS = {
     synergyImage: "/assets/images/cmr-point-of-use.webp",
   },
   "food-beverage-fmcg-automation": {
-    heroImage: "/downloads/ground-handling-forklift-agv-scene-home.webp",
+    heroImage: "/assets/images/fmcg-agv-hero-sharp.png",
     scenarioImages: [
       "/assets/images/material-handling-scenario-1-3.webp",
       "/downloads/ground-handling-forklift-agv-scene.webp",
