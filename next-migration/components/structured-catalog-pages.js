@@ -3,9 +3,16 @@ import { PublicPageChrome } from "@/components/public-shell";
 import CountUpValue from "@/components/CountUpValue";
 import WarehouseFlowSimulation from "@/components/WarehouseFlowSimulation";
 
-function LiteYouTubeEmbed({ title, videoId }) {
+function LiteYouTubeEmbed({
+  title,
+  videoId,
+  posterUrl: customPosterUrl,
+  overlayClassName = "bg-gradient-to-t from-secondary/72 via-secondary/16 to-secondary/10",
+  children,
+}) {
   const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
-  const posterUrl = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+  const posterUrl =
+    customPosterUrl || `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
 
   return (
     <div
@@ -24,7 +31,7 @@ function LiteYouTubeEmbed({ title, videoId }) {
           loading="lazy"
           src={posterUrl}
         />
-        <span className="absolute inset-0 bg-gradient-to-t from-secondary/72 via-secondary/16 to-secondary/10" />
+        <span className={`absolute inset-0 ${overlayClassName}`} />
         <span className="absolute flex h-18 w-18 items-center justify-center rounded-full bg-secondary text-white shadow-[0_20px_44px_rgba(255,145,77,0.36)] ring-2 ring-white/28 transition-transform duration-300 group-hover:scale-[1.06] group-hover:ring-white/44">
           <svg
             aria-hidden="true"
@@ -52,6 +59,11 @@ function LiteYouTubeEmbed({ title, videoId }) {
           />
         </a>
       </noscript>
+      {children ? (
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 p-10">
+          {children}
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -2701,21 +2713,20 @@ function CompositeMobileRobotBody() {
             </h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="md:col-span-2 group relative overflow-hidden rounded-xl bg-surface-container-lowest h-[500px]">
-                <img
-                  alt="Move-and-work automation"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  src="/assets/images/cmr-scenario-1.webp"
-                />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
-              <div className="absolute bottom-0 left-0 p-10">
+            <div className="md:col-span-2 relative overflow-hidden rounded-xl bg-surface-container-lowest h-[500px]">
+              <LiteYouTubeEmbed
+                title="Move-and-work automation video"
+                videoId="rlwzMlFwFDE"
+                posterUrl="/assets/images/cmr-scenario-1.webp"
+                overlayClassName="bg-gradient-to-t from-primary via-primary/48 to-primary/10"
+              >
                 <h4 className="text-3xl font-headline font-bold text-white mb-4">
                   Move-and-Work Automation
                 </h4>
-                  <p className="text-white text-lg max-w-md">
+                <p className="text-white text-lg max-w-md">
                   CMR units perform assembly, inspection, and maintenance tasks while in transit between stations, maximizing uptime and reducing bottlenecking.
                 </p>
-              </div>
+              </LiteYouTubeEmbed>
             </div>
             <div className="group relative overflow-hidden rounded-xl bg-primary h-[500px]">
               <div className="absolute inset-0 p-10 flex flex-col justify-end z-20">
