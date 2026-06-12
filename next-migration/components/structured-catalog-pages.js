@@ -3947,6 +3947,23 @@ function MachineTendingAutomationBody({ page }) {
         "Tie dispatch logic to machine states, schedule changes, queue status, and production priorities.",
     },
   ];
+  const machineTendingRobotHighlights = [
+    {
+      title: "Mobile manipulation at the machine edge",
+      copy:
+        "Use a mobile base plus robotic arm when part presentation, pickup, or handoff changes across cells and fixed guarding layouts.",
+    },
+    {
+      title: "One robot logic across multiple cells",
+      copy:
+        "Deploy the same Machine Tending Robot across staging, machining, inspection, and return loops instead of building a unique fixed robot around every machine.",
+    },
+    {
+      title: "Better fit for mixed part families",
+      copy:
+        "Handle variable trays, fixtures, cartons, and component sets where flexible routing matters as much as robotic precision.",
+    },
+  ];
   const resultsCards = [
     {
       title: "Less idle time around machines",
@@ -4230,6 +4247,62 @@ function MachineTendingAutomationBody({ page }) {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1440px] px-6 py-24 md:px-12">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(320px,0.98fr)] lg:items-center">
+          <div className="overflow-hidden rounded-[2.25rem] border border-outline-variant/18 bg-primary text-white shadow-[0_28px_72px_rgba(4,23,58,0.16)]">
+            <img
+              alt="Machine Tending Robot"
+              className="aspect-[4/3] w-full object-cover"
+              src="/assets/images/cmr-hero-complete.webp"
+            />
+            <div className="space-y-4 p-8">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-secondary">
+                Machine Tending Robot
+              </div>
+              <h2 className="text-[2.2rem] font-black leading-[0.96] tracking-tight text-white md:text-[2.6rem]">
+                Add mobile manipulation where fixed tending is too rigid
+              </h2>
+              <p className="text-base leading-relaxed text-white/78">
+                This page can also scale with a Machine Tending Robot layer:
+                a composite mobile robot that combines autonomous transport
+                with robotic handling for machine-side loading, unloading, and
+                flexible part presentation across multiple cells.
+              </p>
+            </div>
+          </div>
+          <div>
+            <span className="hsa-ui-kicker">Mobile Manipulation</span>
+            <h2 className="hsa-ui-title max-w-4xl">
+              Where a Machine Tending Robot strengthens the deployment
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-on-surface-variant">
+              When one CNC cell needs more than transport, the Machine Tending
+              Robot adds a mobile manipulation layer. It bridges line-side part
+              delivery and robotic task execution without forcing every cell
+              into a fixed automation footprint.
+            </p>
+            <div className="mt-8 grid gap-5">
+              {machineTendingRobotHighlights.map((item) => (
+                <div
+                  className="rounded-[1.75rem] border border-outline-variant/18 bg-surface-container-low px-6 py-6 shadow-sm"
+                  key={item.title}
+                >
+                  <div className="text-[10px] font-black uppercase tracking-[0.22em] text-secondary">
+                    Machine Tending Robot
+                  </div>
+                  <h3 className="mt-3 text-[1.35rem] font-black leading-[1.02] tracking-tight text-primary">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">
+                    {item.copy}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
