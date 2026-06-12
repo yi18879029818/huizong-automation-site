@@ -3460,6 +3460,9 @@ function SolutionDetailBody({ page }) {
   if (slug === "material-handling") {
     return <MaterialHandlingBody />;
   }
+  if (slug === "machine-tending-automation") {
+    return <MachineTendingAutomationBody page={page} />;
+  }
   if (slug === "picking") {
     return <PickingBody />;
   }
@@ -3896,6 +3899,455 @@ function SolutionDetailBody({ page }) {
           </div>{" "}
         </div>{" "}
       </section>{" "}
+    </main>
+  );
+}
+
+function MachineTendingAutomationBody({ page }) {
+  const visuals =
+    SOLUTION_DETAIL_VISUALS["machine-tending-automation"] ||
+    SOLUTION_DETAIL_VISUALS.default;
+  const proofMetrics = page.data.metrics || [];
+  const bestFitCards = [
+    {
+      title: "CNC and precision machining cells",
+      copy:
+        "Best for factories where parts, fixtures, and bins must reach multiple machines without relying on manual walking loops.",
+    },
+    {
+      title: "Operations under labor pressure",
+      copy:
+        "A good fit when machine uptime is limited by loading, unloading, and line-side presentation rather than machining speed itself.",
+    },
+    {
+      title: "Mixed automation environments",
+      copy:
+        "Works where mobile transport, cobots, and machine states must coordinate without rebuilding every cell around a single fixed robot.",
+    },
+  ];
+  const deliveryCards = [
+    {
+      title: "Line-side part delivery",
+      copy:
+        "Move raw parts, trays, fixtures, and empty containers to the right machine at the right sequence point.",
+    },
+    {
+      title: "Machine loading support",
+      copy:
+        "Support cobot or operator-assisted loading where fixed automation alone is too rigid, too costly, or too hard to scale.",
+    },
+    {
+      title: "Return-loop control",
+      copy:
+        "Route finished parts, scrap bins, and reusable carriers back to buffers, washing, or downstream stations.",
+    },
+    {
+      title: "MES and CNC coordination",
+      copy:
+        "Tie dispatch logic to machine states, schedule changes, queue status, and production priorities.",
+    },
+  ];
+  const resultsCards = [
+    {
+      title: "Less idle time around machines",
+      metric: "Cell-ready flow",
+      copy:
+        "Reduce waiting caused by missing material, empty carriers, or late retrieval between machining cycles.",
+    },
+    {
+      title: "More stable labor allocation",
+      metric: "24/7 support",
+      copy:
+        "Use mobile transport to keep operators and cobots focused on value-added handling instead of part chasing.",
+    },
+    {
+      title: "Faster scale-up across cells",
+      metric: "Mobile + cobot",
+      copy:
+        "Expand machine tending coverage across more CNC or precision cells without redesigning each workstation from scratch.",
+    },
+  ];
+  const faqs = [
+    {
+      question: "What factories are the best fit for machine tending automation?",
+      answer:
+        "Factories with CNC, machining, inspection, or finishing cells where part movement around the machine is predictable enough to automate but too varied for a single fixed robot to solve alone.",
+    },
+    {
+      question: "Can this work with our existing CNC and MES environment?",
+      answer:
+        "Yes. The page is positioned around machine-state triggers, MES dispatch logic, and mobile fleet coordination so the deployment can align with existing production systems.",
+    },
+    {
+      question: "Do we need a cobot on every machine?",
+      answer:
+        "No. Some projects use mobile delivery with operator loading, while others combine mobile robots with cobots only where handling frequency and cycle time justify it.",
+    },
+    {
+      question: "Can deployment start with one cell and expand later?",
+      answer:
+        "Yes. A phased rollout is often the practical route: one line, one family of parts, or one constrained machine cluster first, then broader cell coverage once workflow timing is validated.",
+    },
+  ];
+  const quickTags = [
+    proofMetrics[0]?.value || "CNC-ready",
+    proofMetrics[1]?.value || "24/7 cell supply",
+    proofMetrics[2]?.value || "Mobile + cobot",
+  ];
+
+  return (
+    <main className="bg-white text-primary">
+      <section className="relative kinetic-gradient lg:min-h-[820px] xl:min-h-[860px]">
+        <div className="absolute inset-0">
+          <img
+            alt="Machine tending automation background"
+            className="h-full w-full object-cover opacity-20 mix-blend-overlay"
+            src="/assets/images/warehouse-network-1.webp"
+          />
+        </div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,25,61,0.97)_0%,rgba(3,37,88,0.92)_44%,rgba(3,37,88,0.56)_100%)]" />
+      <div className="relative mx-auto grid max-w-[1440px] gap-8 px-6 py-8 md:px-12 lg:grid-cols-[minmax(0,1.16fr)_408px] lg:items-start xl:grid-cols-[minmax(0,1.2fr)_432px]">
+          <div className="max-w-[62rem] pt-4">
+            <span
+              className="hsa-ui-kicker hsa-ui-kicker--light"
+              style={{
+                color: "#ffe7d8",
+                textShadow: "0 2px 14px rgba(0, 0, 0, 0.18)",
+              }}
+            >
+              CNC &amp; Cell Automation
+            </span>
+            <h1
+              className="mt-6 max-w-[17.8ch] font-headline text-[2.8rem] font-black leading-[0.92] tracking-tight text-white sm:text-[3.2rem] xl:text-[3.7rem]"
+              style={{
+                color: "#ffffff",
+                textShadow: "0 6px 28px rgba(0, 0, 0, 0.24)",
+              }}
+            >
+              Machine Tending Automation for CNC and Precision Machining Cells
+            </h1>
+            <p
+              className="mt-4 max-w-[42rem] text-[0.98rem] font-medium leading-relaxed md:text-[1.02rem]"
+              style={{
+                color: "#f4f7fc",
+                textShadow: "0 2px 16px rgba(0, 0, 0, 0.18)",
+              }}
+            >
+              Reduce machine idle time, stabilize part delivery, and coordinate
+              cobot-assisted handling with mobile robot transport between
+              staging, machining, inspection, and finished-goods return.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              {quickTags.map((tag) => (
+                <span
+                  className="rounded-full border px-4 py-[0.55rem] text-[10px] font-black uppercase tracking-[0.15em]"
+                  key={tag}
+                  style={{
+                    background: "rgba(255, 255, 255, 0.18)",
+                    borderColor: "rgba(255, 255, 255, 0.42)",
+                    color: "#ffffff",
+                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08)",
+                    textShadow: "0 1px 8px rgba(0, 0, 0, 0.14)",
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="relative lg:pt-1">
+            <div className="absolute -inset-10 rounded-[2rem] bg-secondary/12 blur-[90px]" />
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/12 bg-white px-4 py-4 shadow-[0_28px_90px_rgba(0,0,0,0.32)]">
+              <div className="mb-4">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-secondary">
+                  Project Briefing
+                </div>
+                <h2 className="mt-3 max-w-[12ch] text-[1.56rem] font-black leading-[1.02] tracking-tight text-primary">
+                  Request a CNC cell review
+                </h2>
+                <p className="mt-3 text-[12px] leading-relaxed text-on-surface-variant">
+                  Share your machine profile, loading method, and cell scope.
+                  We will reply with a suitable automation direction.
+                </p>
+              </div>
+              <form
+                className="space-y-3"
+                data-form-label="Machine Tending Landing Page Briefing"
+                data-form-type="consultation"
+                data-hsa-form=""
+                data-success-redirect="/thanks/"
+                data-success-message="Thanks, your machine tending briefing has been sent to our team."
+              >
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <label className="text-[8px] font-black tracking-[0.16em] text-outline">
+                      Full Name
+                    </label>
+                    <input
+                      className="w-full border-2 border-outline-variant/30 bg-surface-container-lowest px-3 py-[0.62rem] text-[13px] font-bold placeholder:font-normal placeholder:text-outline-variant/50 focus:border-secondary focus:ring-0"
+                      name="fullName"
+                      placeholder="ENTER NAME"
+                      type="text"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[8px] font-black tracking-[0.16em] text-outline">
+                      Work Email
+                    </label>
+                    <input
+                      className="w-full border-2 border-outline-variant/30 bg-surface-container-lowest px-3 py-[0.62rem] text-[13px] font-bold placeholder:font-normal placeholder:text-outline-variant/50 focus:border-secondary focus:ring-0"
+                      name="email"
+                      placeholder="WORK@COMPANY.COM"
+                      required
+                      type="email"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[8px] font-black tracking-[0.16em] text-outline">
+                    Machine Type
+                  </label>
+                  <input
+                    className="w-full border-2 border-outline-variant/30 bg-surface-container-lowest px-3 py-[0.62rem] text-[13px] font-bold placeholder:font-normal placeholder:text-outline-variant/50 focus:border-secondary focus:ring-0"
+                    name="machineType"
+                    placeholder="CNC / machining / inspection"
+                    type="text"
+                  />
+                </div>
+                <input
+                  name="topic"
+                  type="hidden"
+                  value="Machine Tending Automation"
+                />
+                <button
+                  className="hsa-ui-btn-primary w-full justify-center py-[0.92rem]"
+                  type="submit"
+                >
+                  Request Review
+                </button>
+                <details className="rounded-[1.25rem] border border-outline-variant/22 bg-surface-container-lowest/65 px-3.5 py-3">
+                  <summary className="cursor-pointer list-none text-[10px] font-black uppercase tracking-[0.16em] text-outline">
+                    Add optional project details
+                  </summary>
+                  <div className="mt-3 space-y-3">
+                    <div className="space-y-2">
+                      <label className="text-[8px] font-black tracking-[0.16em] text-outline">
+                        Cells in Scope
+                      </label>
+                      <input
+                        className="w-full border-2 border-outline-variant/30 bg-white px-3 py-[0.62rem] text-[13px] font-bold placeholder:font-normal placeholder:text-outline-variant/50 focus:border-secondary focus:ring-0"
+                        name="cellCount"
+                        placeholder="E.G. 4 CELLS"
+                        type="text"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[8px] font-black tracking-[0.16em] text-outline">
+                        Workflow Details
+                      </label>
+                      <textarea
+                        className="w-full resize-none border-2 border-outline-variant/30 bg-white px-3 py-2.5 text-[13px] font-bold placeholder:font-normal placeholder:text-outline-variant/50 focus:border-secondary focus:ring-0"
+                        name="message"
+                        placeholder="CURRENT LOADING METHOD, PART FLOW, OR BOTTLENECKS..."
+                        rows="2"
+                      />
+                    </div>
+                  </div>
+                </details>
+              </form>
+              <div className="mt-3 flex flex-wrap gap-3 text-[10px] font-bold uppercase tracking-[0.11em] text-outline">
+                <span>Response within 24h</span>
+                <span>Engineering-led review</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1440px] px-6 py-24 md:px-12">
+        <div className="mb-14 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl">
+            <span className="hsa-ui-kicker">Best Fit</span>
+            <h2 className="hsa-ui-title max-w-4xl">
+              Where machine tending automation fits best
+            </h2>
+          </div>
+          <p className="hsa-ui-body max-w-2xl">
+            This page is for factories that need predictable part movement
+            around CNC, machining, inspection, or finishing cells without
+            rebuilding every workstation around a single fixed robot.
+          </p>
+        </div>
+        <div className="grid gap-6 md:grid-cols-3">
+          {bestFitCards.map((card) => (
+            <div
+              className="rounded-[2rem] border border-outline-variant/20 bg-surface-container-low px-7 py-8 shadow-sm"
+              key={card.title}
+            >
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary text-white">
+                <span className="material-symbols-outlined">precision_manufacturing</span>
+              </div>
+              <h3 className="text-2xl font-black tracking-tight text-primary">
+                {card.title}
+              </h3>
+              <p className="mt-4 text-base leading-relaxed text-on-surface-variant">
+                {card.copy}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-surface-container-low py-24">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-12">
+          <div className="mb-14 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl">
+              <span className="hsa-ui-kicker">What You Get</span>
+              <h2 className="hsa-ui-title max-w-4xl">
+                What a machine tending deployment actually covers
+              </h2>
+            </div>
+            <p className="hsa-ui-body max-w-2xl">
+              The value is not only the robot itself. A useful deployment must
+              define line-side presentation, machine loading support, return
+              loops, and dispatch logic between MES, CNC states, and transport.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {deliveryCards.map((card) => (
+              <div
+                className="rounded-[2rem] border border-outline-variant/20 bg-white px-7 py-8 shadow-sm"
+                key={card.title}
+              >
+                <div className="text-[10px] font-black uppercase tracking-[0.22em] text-secondary">
+                  Deployment Scope
+                </div>
+                <h3 className="mt-4 text-2xl font-black tracking-tight text-primary">
+                  {card.title}
+                </h3>
+                <p className="mt-4 text-base leading-relaxed text-on-surface-variant">
+                  {card.copy}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1440px] px-6 py-24 md:px-12">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-start">
+          <div>
+            <span className="hsa-ui-kicker">Operational Value</span>
+            <h2 className="hsa-ui-title max-w-4xl">
+              Why factories move to machine tending automation
+            </h2>
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
+              {resultsCards.map((card) => (
+                <div
+                  className="rounded-[2rem] border border-outline-variant/20 bg-white px-6 py-7 shadow-sm"
+                  key={card.title}
+                >
+                  <div className="text-[10px] font-black uppercase tracking-[0.22em] text-secondary">
+                    {card.metric}
+                  </div>
+                  <h3 className="mt-4 text-2xl font-black tracking-tight text-primary">
+                    {card.title}
+                  </h3>
+                  <p className="mt-4 text-sm leading-relaxed text-on-surface-variant">
+                    {card.copy}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="overflow-hidden rounded-[2rem] border border-outline-variant/20 bg-primary text-white shadow-[0_24px_60px_rgba(5,24,60,0.18)]">
+            <img
+              alt="Machine tending automation"
+              className="aspect-[4/3] w-full object-cover"
+              src={visuals.heroImage}
+            />
+            <div className="space-y-5 p-8">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-secondary">
+                Integration Logic
+              </div>
+              <h3 className="text-3xl font-black tracking-tight">
+                Machine state to mobile dispatch
+              </h3>
+              <div className="space-y-4 text-sm leading-relaxed text-white/78">
+                {[
+                  "Order or schedule signal from MES",
+                  "Machine cell status and queue condition",
+                  "Material dispatch to staging or machine-side point",
+                  "Finished-part return to buffer or downstream process",
+                ].map((item) => (
+                  <div className="flex items-start gap-3" key={item}>
+                    <span className="mt-1 h-2.5 w-2.5 rounded-full bg-secondary" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-primary py-24 text-white">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-12">
+          <div className="mb-14 max-w-3xl">
+            <span className="hsa-ui-kicker hsa-ui-kicker--light">FAQ</span>
+            <h2 className="hsa-ui-title max-w-4xl text-white">
+              Questions buyers usually ask first
+            </h2>
+          </div>
+          <div className="grid gap-5">
+            {faqs.map((item) => (
+              <details
+                className="group rounded-[1.6rem] border border-white/12 bg-white/6 px-7 py-6"
+                key={item.question}
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-lg font-black tracking-tight text-white">
+                  <span>{item.question}</span>
+                  <span className="material-symbols-outlined text-secondary transition-transform group-open:rotate-45">
+                    add
+                  </span>
+                </summary>
+                <p className="mt-4 max-w-4xl text-sm leading-relaxed text-white/76">
+                  {item.answer}
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1440px] px-6 py-24 md:px-12">
+        <div className="rounded-[2.25rem] border border-outline-variant/20 bg-surface-container-low px-8 py-12 md:px-12">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+            <div className="max-w-3xl">
+              <span className="hsa-ui-kicker">Final CTA</span>
+              <h2 className="hsa-ui-title max-w-4xl">
+                Request a machine tending layout review
+              </h2>
+              <p className="mt-6 text-lg leading-relaxed text-on-surface-variant">
+                Send your machine count, part flow, and current loading method.
+                We will outline where mobile transport, cobot support, and
+                machine-state coordination can reduce idle time first.
+              </p>
+            </div>
+            <div className="flex flex-col gap-4 sm:flex-row lg:flex-col xl:flex-row">
+              <Link className="hsa-ui-btn-primary" href="/contact?intent=quote">
+                Request Layout Review
+              </Link>
+              <Link
+                className="hsa-ui-btn-secondary border-primary/18 bg-white text-primary shadow-[0_14px_34px_rgba(0,23,54,0.08)] hover:border-primary/28 hover:bg-white"
+                href="/contact?intent=site-visit"
+              >
+                Plan Site Review
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

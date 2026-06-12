@@ -2210,6 +2210,25 @@ a {
   }
 }
 
+body[data-page-key="solutions-machine-tending-automation"] .hsa-top-nav,
+body[data-page-key="solutions-machine-tending-automation"] .hsa-mobile-menu,
+body[data-page-key="solutions-machine-tending-automation"] .hsa-mobile-toggle {
+  display: none !important;
+}
+
+body[data-page-key="solutions-machine-tending-automation"] .hsa-cookie-banner {
+  display: none !important;
+}
+
+body[data-page-key="solutions-machine-tending-automation"] .hsa-header-inner {
+  justify-content: space-between;
+  min-height: 76px;
+}
+
+body[data-page-key="solutions-machine-tending-automation"] .hsa-cta {
+  margin-left: auto;
+}
+
 @media (max-width: 960px) {
   .hero-grid {
     grid-template-columns: 1fr;
