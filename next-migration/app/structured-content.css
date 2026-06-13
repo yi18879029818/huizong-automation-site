@@ -1062,9 +1062,9 @@ a {
   margin: 0;
   color: var(--brand-navy);
   max-width: 18.5ch;
-  font-size: clamp(2.1rem, 4.1vw, 3.7rem);
+  font-size: clamp(2rem, 3.8vw, 3.45rem);
   font-weight: 700;
-  line-height: 0.9;
+  line-height: 0.98;
   letter-spacing: -0.045em;
   text-wrap: balance;
 }
@@ -1916,8 +1916,8 @@ a {
   .blog-index-copy h1,
   .blog-detail-copy h1 {
     max-width: 100%;
-    font-size: clamp(1.6rem, 6.2vw, 2.15rem);
-    line-height: 0.92;
+    font-size: clamp(1.48rem, 5.6vw, 1.95rem);
+    line-height: 1;
   }
 
   .blog-list-item,
