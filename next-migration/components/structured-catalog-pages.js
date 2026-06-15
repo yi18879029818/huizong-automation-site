@@ -4257,7 +4257,7 @@ function MachineTendingAutomationBody({ page }) {
             <img
               alt="Machine Tending Robot"
               className="aspect-[4/3] w-full object-cover"
-              src="/assets/images/cmr-hero-complete.webp"
+              src="/assets/images/machine-tending-robot-upper.png"
             />
             <div className="space-y-4 p-8">
               <div className="text-[10px] font-black uppercase tracking-[0.24em] text-secondary">
@@ -4337,7 +4337,7 @@ function MachineTendingAutomationBody({ page }) {
             <img
               alt="Machine tending automation"
               className="aspect-[4/3] w-full object-cover"
-              src={visuals.heroImage}
+              src="/assets/images/machine-tending-robot-lower.png"
             />
             <div className="space-y-5 p-8">
               <div className="text-[10px] font-black uppercase tracking-[0.24em] text-secondary">
