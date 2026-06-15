@@ -4189,11 +4189,7 @@ function MachineTendingAutomationBody({ page }) {
               Where machine tending automation fits best
             </h2>
           </div>
-          <p className="hsa-ui-body max-w-2xl">
-            This page is for factories that need predictable part movement
-            around CNC, machining, inspection, or finishing cells without
-            rebuilding every workstation around a single fixed robot.
-          </p>
+          <p className="hsa-ui-body max-w-2xl">机床上下料自动化</p>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
           {bestFitCards.map((card) => (
