@@ -58,10 +58,10 @@ const BLOG_BODY_OVERRIDES = {
   "agv-what-is-automated-guided-vehicle": [
     heading("How Does an AGV Work?", "agv-work-title"),
     imageBlock(
-      "image-5783b3a49a8d612176f234d8f3bb7d86b1efdab2-1448x1086-png",
-      "Overview graphic explaining what an automated guided vehicle is and where AGVs are commonly used",
-      "AGV concept overview showing definition, working method, main types, and common applications",
-      "agv-intro-visual"
+      "image-abf8172c04bcdd4f2c227a3135d028bad609769c-1448x1086-png",
+      "How an AGV works from task reception to navigation, transport execution, and status feedback",
+      "How an AGV works across task reception, positioning, transport execution, and system feedback.",
+      "agv-workflow-visual"
     ),
     paragraph(
       "The working logic of an AGV can usually be divided into four steps: task reception, positioning and navigation, transport execution, and status feedback. A higher level management system or scheduling system first sends a task instruction. The AGV then travels to the pickup point based on a predefined route or navigation logic, delivers the material to the target location, sends back real time status updates and exception alerts, and updates the related material information in the management system.",
@@ -79,6 +79,12 @@ const BLOG_BODY_OVERRIDES = {
     paragraph(
       "AGVs can be understood from two main angles: one is classification by navigation method, and the other is classification by application type. Different classifications correspond to different site conditions and operational needs.",
       "agv-types-paragraph-1"
+    ),
+    imageBlock(
+      "image-688ad0cfcd0741b61b8ec4fc697a364ead30a3c9-1448x1086-png",
+      "Main types of AGVs and their applications including towing AGV, unit load AGV, forklift AGV, and composite AGV",
+      "Main AGV types and their typical applications in warehouse and factory automation.",
+      "agv-types-visual"
     ),
     heading("By Navigation Method", "agv-navigation-title", "h3"),
     heading("QR code guided AGV", "agv-qr-title", "h3"),
@@ -107,12 +113,6 @@ const BLOG_BODY_OVERRIDES = {
       "This type of AGV carries pallets, bins, or totes directly and is well suited for standardized load transport. It is commonly used for semi finished goods transfer, pallet movement, automatic transport between workstations, and distribution between warehouses and production lines. This type of AGV is also used in ASRS applications.",
       "agv-unit-load-paragraph"
     ),
-    imageBlock(
-      "image-6123cc3dc223e7b59ad96e0fc50b1b18ec808bc2-1448x1086-png",
-      "AGV moving cartons and pallet loads beside conveyor equipment in a warehouse automation setting",
-      "AGV transport scene with conveyor-side transfer and pallet handling inside a warehouse",
-      "agv-unit-load-visual"
-    ),
     heading("Forklift AGV", "agv-forklift-title", "h3"),
     paragraph(
       "A forklift AGV is capable of automatic pickup, drop off, stacking, and docking. It is suitable for pallet putaway, outbound handling, rack docking, and line side feeding. For companies that want to reduce reliance on manual forklifts and improve pallet logistics automation, this type of AGV is widely used.",
@@ -127,6 +127,12 @@ const BLOG_BODY_OVERRIDES = {
     paragraph(
       "Simply put, AGVs focus more on executing tasks reliably according to predefined rules and routes, while AMRs focus more on perceiving their surroundings and dynamically adjusting their travel path. Both belong to the category of mobile automation equipment, but they differ in application fit and key strengths.",
       "agv-amr-paragraph-1"
+    ),
+    imageBlock(
+      "image-7f5b7d139e0f8ff6f10416446383924e5dd54881-1448x1086-png",
+      "AGV versus AMR comparison showing fixed-route operation and dynamic autonomous navigation",
+      "AGV vs AMR comparison across routing logic, flexibility, and operating environment.",
+      "agv-vs-amr-visual"
     ),
     paragraph(
       "AGVs are better suited for environments with fixed routes, clear workstation relationships, and stable logistics rules. AMRs are better suited for sites with more frequent changes, routes that need regular adjustment, and a stronger demand for flexibility.",
