@@ -41,9 +41,28 @@ function comparisonTable(headers, rows, key) {
   };
 }
 
+function imageBlock(assetId, alt, caption, key) {
+  return {
+    _key: key,
+    _type: "imageWithAlt",
+    alt,
+    caption,
+    asset: {
+      _type: "reference",
+      _ref: assetId
+    }
+  };
+}
+
 const BLOG_BODY_OVERRIDES = {
   "agv-what-is-automated-guided-vehicle": [
     heading("How Does an AGV Work?", "agv-work-title"),
+    imageBlock(
+      "image-5783b3a49a8d612176f234d8f3bb7d86b1efdab2-1448x1086-png",
+      "Overview graphic explaining what an automated guided vehicle is and where AGVs are commonly used",
+      "AGV concept overview showing definition, working method, main types, and common applications",
+      "agv-intro-visual"
+    ),
     paragraph(
       "The working logic of an AGV can usually be divided into four steps: task reception, positioning and navigation, transport execution, and status feedback. A higher level management system or scheduling system first sends a task instruction. The AGV then travels to the pickup point based on a predefined route or navigation logic, delivers the material to the target location, sends back real time status updates and exception alerts, and updates the related material information in the management system.",
       "agv-work-paragraph-1"
@@ -87,6 +106,12 @@ const BLOG_BODY_OVERRIDES = {
     paragraph(
       "This type of AGV carries pallets, bins, or totes directly and is well suited for standardized load transport. It is commonly used for semi finished goods transfer, pallet movement, automatic transport between workstations, and distribution between warehouses and production lines. This type of AGV is also used in ASRS applications.",
       "agv-unit-load-paragraph"
+    ),
+    imageBlock(
+      "image-6123cc3dc223e7b59ad96e0fc50b1b18ec808bc2-1448x1086-png",
+      "AGV moving cartons and pallet loads beside conveyor equipment in a warehouse automation setting",
+      "AGV transport scene with conveyor-side transfer and pallet handling inside a warehouse",
+      "agv-unit-load-visual"
     ),
     heading("Forklift AGV", "agv-forklift-title", "h3"),
     paragraph(
