@@ -7660,3 +7660,47 @@ export function StructuredCatalogDetailPage({ page }) {
     </PublicPageChrome>
   );
 }
+      <section className="bg-white py-10 md:py-14">
+        {" "}
+        <div className="mx-auto max-w-[1440px] px-6 md:px-12">
+          {" "}
+          <div className="mb-8 max-w-3xl">
+            {" "}
+            <span className="mb-4 block text-[10px] font-black tracking-[0.28em] text-secondary">
+              {" "}
+              Product Handling{" "}
+            </span>{" "}
+            <h2 className="font-headline text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
+              {" "}
+              See the transport workflow in live operation.{" "}
+            </h2>{" "}
+            <p className="mt-4 text-lg leading-relaxed text-on-surface-variant">
+              {" "}
+              This handling clip shows the Ground Handling Forklift AGV moving palletized loads
+              through a real transfer sequence, making it easier to evaluate floor-level
+              stability, aisle behavior, and product fit for internal dispatch.{" "}
+            </p>{" "}
+          </div>{" "}
+          <div className="overflow-hidden rounded-[28px] border border-outline-variant/20 bg-primary shadow-[0_26px_80px_rgba(0,23,54,0.16)]">
+            {" "}
+            <div className="aspect-video w-full overflow-hidden bg-primary">
+              {" "}
+              <video
+                autoPlay
+                className="h-full w-full object-cover"
+                controls
+                loop
+                muted
+                playsInline
+                poster="/downloads/ground-handling-forklift-agv-hero-wide.png"
+                preload="metadata"
+              >
+                <source
+                  src="/downloads/ground-handling-forklift-agv-handling.mp4"
+                  type="video/mp4"
+                />
+              </video>{" "}
+            </div>{" "}
+          </div>{" "}
+        </div>{" "}
+      </section>{" "}
