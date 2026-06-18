@@ -54,6 +54,16 @@ function imageBlock(assetId, alt, caption, key) {
   };
 }
 
+function videoBlock(src, title, key, caption = "") {
+  return {
+    _key: key,
+    _type: "inlineVideo",
+    src,
+    title,
+    caption
+  };
+}
+
 const BLOG_BODY_OVERRIDES = {
   "agv-what-is-automated-guided-vehicle": [
     heading("How Does an AGV Work?", "agv-work-title"),
@@ -122,6 +132,12 @@ const BLOG_BODY_OVERRIDES = {
     paragraph(
       "coolyne has developed a composite AGV that combines an AGV with a robotic arm. It can not only move autonomously, but also perform picking, machine tending, loading and unloading, assisted assembly, and workstation service tasks. It is suitable for a wide range of support applications, especially flexible automation scenarios that require both mobility and operational capability, such as machine loading and unloading, workstation support transport, and cross equipment collaboration.",
       "agv-composite-paragraph"
+    ),
+    videoBlock(
+      "/downloads/cnc-machine-tending.mp4",
+      "Composite AGV with robotic arm integration for CNC machine tending",
+      "agv-composite-video",
+      "Composite AGV performing CNC machine tending, loading, and unloading support."
     ),
     heading("What Is the Difference Between AGV and AMR?", "agv-amr-title"),
     paragraph(

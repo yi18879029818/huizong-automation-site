@@ -34,6 +34,23 @@ const portableTextComponents = {
         </figure>
       );
     },
+    inlineVideo: ({ value }) => {
+      if (!value?.src) {
+        return null;
+      }
+
+      return (
+        <figure className="sanity-inline-video">
+          <div className="sanity-inline-video-frame">
+            <video controls playsInline preload="metadata">
+              <source src={value.src} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          {value.caption ? <figcaption>{value.caption}</figcaption> : null}
+        </figure>
+      );
+    },
     comparisonTable: ({ value }) => {
       if (!value?.headers?.length || !value?.rows?.length) {
         return null;
