@@ -54,6 +54,15 @@ function imageBlock(assetId, alt, caption, key) {
   };
 }
 
+function videoBlock(src, caption, key) {
+  return {
+    _key: key,
+    _type: "videoEmbed",
+    src,
+    caption
+  };
+}
+
 const BLOG_BODY_OVERRIDES = {
   "agv-what-is-automated-guided-vehicle": [
     heading("How Does an AGV Work?", "agv-work-title"),
@@ -79,12 +88,6 @@ const BLOG_BODY_OVERRIDES = {
     paragraph(
       "AGVs can be understood from two main angles: one is classification by navigation method, and the other is classification by application type. Different classifications correspond to different site conditions and operational needs.",
       "agv-types-paragraph-1"
-    ),
-    imageBlock(
-      "image-688ad0cfcd0741b61b8ec4fc697a364ead30a3c9-1448x1086-png",
-      "Main types of AGVs and their applications including towing AGV, unit load AGV, forklift AGV, and composite AGV",
-      "Main AGV types and their typical applications in warehouse and factory automation.",
-      "agv-types-visual"
     ),
     heading("By Navigation Method", "agv-navigation-title", "h3"),
     heading("QR code guided AGV", "agv-qr-title", "h3"),
@@ -123,16 +126,15 @@ const BLOG_BODY_OVERRIDES = {
       "coolyne has developed a composite AGV that combines an AGV with a robotic arm. It can not only move autonomously, but also perform picking, machine tending, loading and unloading, assisted assembly, and workstation service tasks. It is suitable for a wide range of support applications, especially flexible automation scenarios that require both mobility and operational capability, such as machine loading and unloading, workstation support transport, and cross equipment collaboration.",
       "agv-composite-paragraph"
     ),
+    videoBlock(
+      "/videos/cnc-machine-tending.mp4",
+      "Composite AGV with robotic arm integration supporting CNC machine tending and loading and unloading.",
+      "agv-composite-video"
+    ),
     heading("What Is the Difference Between AGV and AMR?", "agv-amr-title"),
     paragraph(
       "Simply put, AGVs focus more on executing tasks reliably according to predefined rules and routes, while AMRs focus more on perceiving their surroundings and dynamically adjusting their travel path. Both belong to the category of mobile automation equipment, but they differ in application fit and key strengths.",
       "agv-amr-paragraph-1"
-    ),
-    imageBlock(
-      "image-7f5b7d139e0f8ff6f10416446383924e5dd54881-1448x1086-png",
-      "AGV versus AMR comparison showing fixed-route operation and dynamic autonomous navigation",
-      "AGV vs AMR comparison across routing logic, flexibility, and operating environment.",
-      "agv-vs-amr-visual"
     ),
     paragraph(
       "AGVs are better suited for environments with fixed routes, clear workstation relationships, and stable logistics rules. AMRs are better suited for sites with more frequent changes, routes that need regular adjustment, and a stronger demand for flexibility.",

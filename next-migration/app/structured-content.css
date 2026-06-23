@@ -1644,6 +1644,18 @@ a {
   display: block;
 }
 
+.blog-article-prose .sanity-inline-video {
+  margin: 1.75rem 0;
+}
+
+.blog-article-prose .sanity-inline-video video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 18px;
+  background: #061120;
+}
+
 .blog-article-prose .sanity-comparison-table {
   margin-top: 1.8rem;
   overflow-x: auto;

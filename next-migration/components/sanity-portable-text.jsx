@@ -34,6 +34,20 @@ const portableTextComponents = {
         </figure>
       );
     },
+    videoEmbed: ({ value }) => {
+      if (!value?.src) {
+        return null;
+      }
+
+      return (
+        <figure className="sanity-inline-video">
+          <video controls playsInline preload="metadata">
+            <source src={value.src} type="video/mp4" />
+          </video>
+          {value.caption ? <figcaption>{value.caption}</figcaption> : null}
+        </figure>
+      );
+    },
     comparisonTable: ({ value }) => {
       if (!value?.headers?.length || !value?.rows?.length) {
         return null;
