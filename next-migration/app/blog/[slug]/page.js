@@ -135,8 +135,8 @@ function buildFallbackArticleBody(post) {
   ];
 }
 
-const REDUNDANT_BLOG_ASSET_IDS = {
-  "agv-guide": ["51bf7a4e07fe44f2871756ccd30dcbfc48fd4d93"]
+const DEDUPED_BLOG_ASSET_IDS = {
+  "what-is-asrs": ["7741c86d1f3e584a526af174f0e672d41b03b877"]
 };
 
 function blockContainsAssetId(block, assetIds) {
@@ -163,13 +163,28 @@ function pruneRedundantBlogBlocks(slug, blocks) {
     return blocks;
   }
 
-  const assetIds = REDUNDANT_BLOG_ASSET_IDS[slug];
+  const assetIds = DEDUPED_BLOG_ASSET_IDS[slug];
 
   if (!assetIds?.length) {
     return blocks;
   }
 
-  return blocks.filter((block) => !blockContainsAssetId(block, assetIds));
+  const seenAssetIds = new Set();
+
+  return blocks.filter((block) => {
+    const matchedAssetId = assetIds.find((assetId) => blockContainsAssetId(block, [assetId]));
+
+    if (!matchedAssetId) {
+      return true;
+    }
+
+    if (seenAssetIds.has(matchedAssetId)) {
+      return false;
+    }
+
+    seenAssetIds.add(matchedAssetId);
+    return true;
+  });
 }
 
 export default async function BlogDetailPage({ params }) {
