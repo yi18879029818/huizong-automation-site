@@ -1,6 +1,7 @@
 import { PublicPageChrome } from "@/components/public-shell";
 import Script from "next/script";
 
+import AboutMilestonesTimeline from "@/components/AboutMilestonesTimeline";
 import CountUpValue from "@/components/CountUpValue";
 import { InlineIcon } from "@/components/inline-icon";
 import WarehouseFlowSimulation from "@/components/WarehouseFlowSimulation";
@@ -27,10 +28,10 @@ function LiteYouTubeEmbed({ title, videoId }) {
           src={posterUrl}
         />
         <span className="absolute inset-0 bg-gradient-to-t from-secondary/70 via-secondary/18 to-secondary/12" />
-        <span className="absolute flex h-20 w-20 items-center justify-center rounded-full bg-white/92 text-secondary shadow-[0_20px_44px_rgba(0,23,54,0.26)] transition-transform duration-300 group-hover:scale-105">
+        <span className="absolute flex h-18 w-18 items-center justify-center rounded-full bg-secondary text-white shadow-[0_20px_44px_rgba(255,145,77,0.36)] ring-2 ring-white/28 transition-transform duration-300 group-hover:scale-[1.06] group-hover:ring-white/44">
           <svg
             aria-hidden="true"
-            className="ml-1 h-8 w-8"
+            className="ml-0.5 h-8 w-8"
             fill="currentColor"
             viewBox="0 0 24 24"
           >
@@ -284,7 +285,261 @@ const HOME_TRUST_SHOWCASE = [
   },
 ];
 
-function HomeBody() {
+const ABOUT_TIMELINE_FALLBACK = [
+  {
+    year: "2004",
+    title: "Founded in Shenzhen",
+    copy: "Strategic establishment for AGV research in the Asian industrial corridor.",
+    side: "left",
+  },
+  {
+    year: "2012",
+    title: "Global Expansion",
+    copy: "Standardizing international services across European and North American sectors.",
+    side: "right",
+  },
+  {
+    year: "2018",
+    title: "Digital Twin Launch",
+    copy: "Shift to software-first engineering with Cloud Orchestration platforms.",
+    side: "left",
+  },
+  {
+    year: "2024",
+    title: "Swarm Intelligence",
+    copy: "Multi-brand scheduling and decentralized autonomous fleet management.",
+    side: "right",
+  },
+];
+
+const ABOUT_CERTIFICATE_STATS_FALLBACK = [
+  { icon: "verified", value: "30+", label: "Software Copyrights" },
+  { icon: "description", value: "20+", label: "Hardware Patents" },
+  { icon: "gavel", value: "ISO 9001", label: "Quality Management" },
+  { icon: "workspace_premium", value: "CE Standard", label: "Safety Certified" },
+];
+
+const CONTACT_METHODS_FALLBACK = [
+  {
+    icon: "phone_in_talk",
+    accentTone: "primary",
+    title: "Inquiry Hotline",
+    value: "+86 13510816743",
+    caption: "Global Support | Mon-Fri 09:00-17:00",
+  },
+  {
+    icon: "chat",
+    accentTone: "secondary",
+    title: "Instant Messaging",
+    value: "+86 13510816743",
+    caption: "WhatsApp Business | 24H Monitoring",
+  },
+  {
+    icon: "mail",
+    accentTone: "primary-container",
+    title: "Email Correspondence",
+    value: "sales@robotlyne.com",
+    caption: "Estimated Response: < 12 Hours",
+  },
+  {
+    icon: "location_on",
+    accentTone: "tertiary",
+    title: "Global Headquarters",
+    value: "Kinetic Precision Industrial Park",
+    caption: "Bao'an District | Shenzhen | GD China",
+  },
+];
+
+function getHomeViewModel(page) {
+  const data = page?.data || {};
+
+  return {
+    heroKicker: data.kicker || "Industrial Intelligence",
+    heroTitle: data.heroTitle || "Warehouse\nAutomation\nSystems",
+    heroSummary:
+      data.heroSummary ||
+      "coolyne designs complete warehouse automation programs with AGV fleets, storage systems, conveyors, and software orchestration for live industrial operations.",
+    heroBackgroundSrc:
+      data.heroBackgroundImage?.src || "/downloads/home-insights-asrs-home.jpg",
+    heroBackgroundAlt:
+      data.heroBackgroundImage?.alt || "Futuristic automated warehouse",
+    heroPrimaryCta: data.heroPrimaryCta || { href: "/contact", label: "Speak With An Expert" },
+    heroSecondaryCta: data.heroSecondaryCta || { href: "/solutions", label: "Explore Solutions" },
+    heroPanelKicker: data.heroPanelKicker || "Composite Mobile Robot",
+    heroPanelChip: data.heroPanelChip || "360 View",
+    heroPanelPoster:
+      data.heroPanelPosterImage?.src || "/assets/images/cmr-hero.webp",
+    heroPanelPosterAlt:
+      data.heroPanelPosterImage?.alt || "Composite mobile robot preview",
+    industryTitle: data.industryTitle || "Built for Complex Industrial Operations",
+    industrySummary:
+      data.industrySummary ||
+      "Deep domain expertise across industries with demanding material handling requirements. Solutions designed around your operational constraints.",
+    industries:
+      Array.isArray(data.industryCards) && data.industryCards.length
+        ? data.industryCards
+        : HOME_INDUSTRIES,
+    trustTitle:
+      data.trustTitle || "Proof points buyers look for before they request a quote.",
+    trustSummary:
+      data.trustSummary ||
+      "We pair delivery metrics, documentation, and implementation discipline so operations teams can evaluate coolyne as a long-cycle automation partner, not just an equipment vendor.",
+    trustShowcase:
+      Array.isArray(data.trustShowcase) && data.trustShowcase.length
+        ? data.trustShowcase
+        : HOME_TRUST_SHOWCASE,
+    partnerTitle: data.partnerTitle || "Brand Collaboration",
+    partnerSummary:
+      data.partnerSummary ||
+      "Selected industrial brands and manufacturing groups that reflect the trust range of our automation delivery work.",
+    partnerBrands:
+      Array.isArray(data.partnerBrands) && data.partnerBrands.length
+        ? data.partnerBrands
+        : HOME_PARTNER_BRANDS_SAFE,
+  };
+}
+
+function getAboutViewModel(page) {
+  const data = page?.data || {};
+
+  return {
+    heroKicker: data.kicker || "coolyne Warehouse Automation",
+    heroTitle: data.heroTitle || "Engineering\nthe Future",
+    heroSummary:
+      data.heroSummary ||
+      "coolyne engineers AGV, AMR, and software-driven warehouse systems that keep storage, transport, and fulfillment flows synchronized at industrial scale.",
+    heroBackgroundSrc:
+      data.heroBackgroundImage?.src || "/downloads/about/about-building-banner.webp",
+    heroBackgroundAlt:
+      data.heroBackgroundImage?.alt || "coolyne operations building exterior",
+    timelineEyebrow: data.timelineEyebrow || "Industrial Timeline",
+    metrics:
+      Array.isArray(data.metrics) && data.metrics.length
+        ? data.metrics
+        : [
+            { value: "500+", label: "Engineers" },
+            { value: "70+", label: "Core Patents" },
+            { value: "80+", label: "Active Markets" },
+          ],
+    introTitle: data.introTitle || "Specialized Intelligence,\nGlobal Delivery.",
+    introParagraphs:
+      Array.isArray(data.introParagraphs) && data.introParagraphs.length
+        ? data.introParagraphs
+        : [
+            "coolyne stands at the intersection of warehouse engineering and digital orchestration. Our focus remains on the design, customization, and global deployment of intelligent storage, transport, and fulfillment systems.",
+            "From intricate intralogistics simulation to the final hardware rollout, our lifecycle services ensure that your facility operates at the peak of technical capability.",
+          ],
+    features:
+      Array.isArray(data.features) && data.features.length
+        ? data.features
+        : [
+            {
+              title: "AGV Excellence",
+              description:
+                "Automated Guided Vehicles designed for high-payload stability and sub-millimeter precision.",
+              icon: "precision_manufacturing",
+            },
+            {
+              title: "Composite Robotics",
+              description:
+                "Integrating arm manipulation with mobile bases for complex pick-and-place tasks.",
+              icon: "hub",
+            },
+            {
+              title: "Unmanned Vehicles",
+              description:
+                "Heavy-duty transport solutions for both indoor and controlled outdoor industrial environments.",
+              icon: "airport_shuttle",
+            },
+            {
+              title: "R&D Customization",
+              description:
+                "Bespoke engineering solutions tailored to unique operational constraints and workflows.",
+              icon: "biotech",
+            },
+          ],
+    timelineTitle: data.timelineTitle || "Evolution of Excellence",
+    timelineItems:
+      Array.isArray(data.timelineItems) && data.timelineItems.length
+        ? data.timelineItems
+        : ABOUT_TIMELINE_FALLBACK,
+    certificateTitle: data.certificateTitle || "Certificates & Global Honors",
+    certificateEyebrow: data.certificateEyebrow || "Quality Verification",
+    certificateSummary:
+      data.certificateSummary ||
+      "Adhering to the world's most rigorous industrial safety and quality standards for mission-critical operations.",
+    certificateStats:
+      Array.isArray(data.certificateStats) && data.certificateStats.length
+        ? data.certificateStats
+        : ABOUT_CERTIFICATE_STATS_FALLBACK,
+    certificates:
+      Array.isArray(data.certificates) && data.certificates.length
+        ? data.certificates
+        : null,
+    certificateGalleryNote:
+      data.certificateGalleryNote ||
+      "Selected certificates are displayed below in a horizontal gallery so visitors can quickly scan quality, patent, and compliance proof without leaving the page.",
+    certificateBadgeLabel:
+      data.certificateBadgeLabel || "featured certificates",
+    ctaTitle: data.ctaTitle || "Ready to Engineer Your Future?",
+    ctaSummary:
+      data.ctaSummary ||
+      "Consult with our technical experts to audit your facility's potential for autonomous integration.",
+    ctaLink: data.ctaLink || { href: "/contact", label: "Partner with us" },
+  };
+}
+
+function getContactViewModel(page) {
+  const data = page?.data || {};
+
+  return {
+    heroKicker: data.kicker || "Consult an Expert",
+    heroTitle: data.heroTitle || "Architect Your\nEfficiency",
+    heroSummary:
+      data.heroSummary ||
+      "Connect with our engineering specialists to assess project feasibility and optimize your automation roadmap.",
+    heroBackgroundSrc: data.heroBackgroundImage?.src || "/downloads/jianxuan.png",
+    heroBackgroundAlt: data.heroBackgroundImage?.alt || "High-precision robotic arm",
+    contactSectionTitle: data.contactSectionTitle || "Direct Access",
+    contactSectionSummary: data.contactSectionSummary || "",
+    contactMethods:
+      Array.isArray(data.contactMethods) && data.contactMethods.length
+        ? data.contactMethods
+        : CONTACT_METHODS_FALLBACK,
+    formTitle: data.formTitle || "Project Briefing",
+    formSummary:
+      data.formSummary ||
+      "Submit your project parameters for a professional ROI assessment and preliminary engineering scope.",
+    consentCopy:
+      data.consentCopy ||
+      "I agree to receive Kinetic Precision project insights and updates. Preferences can be managed at any time.",
+    submitLabel: data.submitLabel || "Initiate Consultation",
+    mapImage:
+      data.mapImage?.src || "/downloads/about/about-building-banner.webp",
+    mapImageAlt: data.mapImage?.alt || "Industrial map style",
+    mapLabel: data.mapLabel || "Global Logistics Hub",
+  };
+}
+
+function getToneClass(tone) {
+  if (tone === "secondary") {
+    return "bg-secondary";
+  }
+
+  if (tone === "primary-container") {
+    return "bg-primary-container";
+  }
+
+  if (tone === "tertiary") {
+    return "bg-tertiary";
+  }
+
+  return "bg-primary";
+}
+
+function HomeBody({ page }) {
+  const vm = getHomeViewModel(page);
+
   return (
     <>
       <Script
@@ -300,12 +555,12 @@ function HomeBody() {
           <div className="absolute inset-0 z-0 overflow-hidden">
             {" "}
               <img
-                alt="Futuristic automated warehouse"
+                alt={vm.heroBackgroundAlt}
                 className="w-full h-full object-cover opacity-40"
                 fetchPriority="high"
                 height="846"
                 loading="eager"
-                src="/downloads/home-insights-asrs-home.jpg"
+                src={vm.heroBackgroundSrc}
                 width="1504"
               />{" "}
             <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/80 to-transparent" />{" "}
@@ -316,32 +571,26 @@ function HomeBody() {
               {" "}
               <div className="hsa-home-hero-copy">
                 <span className="hsa-ui-kicker hsa-ui-kicker--light">
-                  Industrial Intelligence
+                  {vm.heroKicker}
                 </span>
-                <h1 className="hsa-ui-hero-title text-white max-w-[7.4ch]">
-                  Warehouse
-                  <br />
-                  Automation
-                  <br />
-                  <span className="text-white/30">Systems</span>
+                <h1 className="hsa-ui-hero-title max-w-[9ch] whitespace-pre-line text-white">
+                  {vm.heroTitle}
                 </h1>
                 <p className="hsa-ui-hero-copy">
-                  coolyne designs complete warehouse automation programs with
-                  AGV fleets, storage systems, conveyors, and software
-                  orchestration for live industrial operations.
+                  {vm.heroSummary}
                 </p>
                 <div className="hsa-ui-actions">
                   <a
                     className="hsa-ui-btn-primary"
-                    href="/contact"
+                    href={vm.heroPrimaryCta.href}
                   >
-                    Speak With An Expert
+                    {vm.heroPrimaryCta.label}
                   </a>
                   <a
                     className="hsa-ui-btn-light"
-                    href="/solutions"
+                    href={vm.heroSecondaryCta.href}
                   >
-                    Explore Solutions
+                    {vm.heroSecondaryCta.label}
                   </a>
                 </div>
               </div>{" "}
@@ -352,22 +601,22 @@ function HomeBody() {
                   <div className="hsa-home-robot-meta">
                     {" "}
                     <span className="hsa-home-robot-kicker">
-                      Composite Mobile Robot
+                      {vm.heroPanelKicker}
                     </span>{" "}
-                    <span className="hsa-home-robot-chip">360 View</span>{" "}
+                    <span className="hsa-home-robot-chip">{vm.heroPanelChip}</span>{" "}
                   </div>{" "}
                   <div
                     className="hsa-home-robot-stage"
                     aria-label="Interactive 3D robot model area"
                   >
                     <img
-                      alt="Composite mobile robot preview"
+                      alt={vm.heroPanelPosterAlt}
                       className="hsa-home-robot-poster"
                       decoding="async"
                       fetchPriority="high"
                       height="1207"
                       loading="eager"
-                      src="/assets/images/cmr-hero.webp"
+                      src={vm.heroPanelPoster}
                       width="735"
                     />
                     {" "}
@@ -723,30 +972,26 @@ function HomeBody() {
               {" "}
               <span className="hsa-ui-kicker justify-center">Industries We Serve</span>{" "}
               <h2 className="hsa-ui-title max-w-4xl mx-auto">
-                {" "}
-                Built for Complex Industrial Operations{" "}
+                {vm.industryTitle}
               </h2>{" "}
               <p className="hsa-ui-body max-w-3xl mx-auto">
-                {" "}
-                Deep domain expertise across industries with demanding material
-                handling requirements. Solutions designed around your
-                operational constraints.{" "}
+                {vm.industrySummary}
               </p>{" "}
             </div>{" "}
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
               {" "}
-              {HOME_INDUSTRIES.map((item) => (
+              {vm.industries.map((item) => (
                 <div
                   className="hsa-ui-card hsa-ui-card--soft p-8"
                   key={item.title}
                 >
                   {" "}
-                  <InlineIcon className="mb-6 h-8 w-8 text-primary" name={item.icon} />
+                  <InlineIcon className="mb-6 h-8 w-8 text-primary" name={item.icon || "factory"} />
                   <h3 className="mb-4 text-[1.2rem] font-black leading-[1.15] tracking-tight text-secondary">
                     {item.title}
                   </h3>
                   <p className="mb-6 text-[1rem] leading-[1.72] text-on-surface-variant">
-                    {item.summary}
+                    {item.summary || item.description}
                   </p>
                   <ul className="space-y-2 text-[15px] leading-relaxed text-on-surface-variant">
                     {item.bullets.map((bullet) => (
@@ -847,12 +1092,10 @@ function HomeBody() {
               {" "}
               <span className="hsa-ui-kicker justify-center">Delivery Confidence</span>{" "}
               <h2 className="mx-auto max-w-4xl font-headline text-[54.6px] font-black leading-[0.94] tracking-[-0.05em] text-secondary">
-                Proof points buyers look for before they request a quote.
+                {vm.trustTitle}
               </h2>{" "}
               <p className="mx-auto mt-6 max-w-3xl text-[1.02rem] leading-[1.8] text-on-surface-variant">
-                We pair delivery metrics, documentation, and implementation
-                discipline so operations teams can evaluate coolyne as a
-                long-cycle automation partner, not just an equipment vendor.
+                {vm.trustSummary}
               </p>
             </div>{" "}
               <div className="relative overflow-hidden">
@@ -864,7 +1107,7 @@ function HomeBody() {
                       className="hsa-trust-marquee-group"
                       key={groupIndex}
                     >
-                      {HOME_TRUST_SHOWCASE.map((item) => (
+                      {vm.trustShowcase.map((item) => (
                         <div
                           className={`group relative shrink-0 h-[536px] w-[360px] overflow-hidden rounded-[30px] border border-outline-variant/14 shadow-[0_28px_60px_rgba(0,23,54,0.08)] transition-transform duration-500 ${
                             item.stage === "hero-proof"
@@ -1077,15 +1320,10 @@ function HomeBody() {
               {" "}
               <span className="hsa-ui-kicker justify-center">Partner Brands</span>{" "}
               <h2 className="hsa-ui-title max-w-4xl mx-auto">
-                {" "}
-                Trusted Across Manufacturing and Smart Logistics{" "}
+                {vm.partnerTitle}
               </h2>{" "}
               <p className="hsa-ui-body max-w-3xl mx-auto">
-                {" "}
-                We collaborate with industrial leaders across electronics,
-                mobility, infrastructure, communications, and advanced
-                manufacturing to engineer automation that performs reliably at
-                scale.{" "}
+                {vm.partnerSummary}
               </p>{" "}
             </div>{" "}
             <div className="hsa-brand-marquee">
@@ -1102,14 +1340,14 @@ function HomeBody() {
                     key={`brand-loop-${loop}`}
                   >
                     {" "}
-                    {HOME_PARTNER_BRANDS_SAFE.map((brand) => (
+                    {vm.partnerBrands.map((brand) => (
                       <div
                         className="group flex min-h-[152px] min-w-[260px] flex-shrink-0 items-center justify-center bg-white px-2 py-2 shadow-[0_24px_56px_rgba(0,23,54,0.12)]"
                         key={`${brand.name}-${loop}`}
                       >
                         {" "}
                         <img
-                          alt={brand.name}
+                          alt={brand.alt || brand.name}
                           className="max-h-[120px] w-auto max-w-[94%] object-contain transition-transform duration-300 group-hover:scale-[1.12]"
                           src={brand.src}
                         />{" "}
@@ -1126,505 +1364,762 @@ function HomeBody() {
   );
 }
 function AboutBody() {
-  const certificateShowcase = [
+  const milestones = [
     {
-      src: "/downloads/certificates/patent-01.png",
-      alt: "Utility model patent certificate for a wave edge cleaning device",
-      title: "Utility Model Patent"
+      year: "2004",
+      label: "Company foundation",
+      title: "Founded in Shenzhen, China.",
+      detail:
+        "Huizong established its engineering base in Shenzhen and set the operating foundation for long-cycle automation delivery.",
     },
     {
-      src: "/downloads/certificates/patent-02.png",
-      alt: "Utility model patent certificate for a special transfer mechanism",
-      title: "Utility Model Patent"
+      year: "2005",
+      label: "First robotics product",
+      title: "Introduced its first robotic arm product.",
+      detail:
+        "The team moved beyond equipment manufacturing into applied robotics products shaped by real industrial use cases.",
     },
     {
-      src: "/downloads/certificates/credit-honor-01.png",
-      alt: "Bidding and tendering enterprise credit rating certificate in English",
-      title: "AAA Credit Rating"
+      year: "2013",
+      label: "Warehouse automation",
+      title:
+        "Began delivering warehouse automation and intralogistics solutions for manufacturers.",
+      detail:
+        "Huizong expanded into integrated material-flow programs spanning automation hardware, layout logic, and execution planning.",
     },
     {
-      src: "/downloads/certificates/credit-honor-02.png",
-      alt: "AAA enterprise credit rating certificate",
-      title: "AAA Enterprise Credit"
+      year: "2016",
+      label: "National high-tech recognition",
+      title: "Earned China's National High Tech Enterprise certification.",
+      detail:
+        "The certification reflected stronger R&D capability and a more mature technical position in industrial automation.",
     },
     {
-      src: "/downloads/certificates/credit-honor-03.png",
-      alt: "AAA contract honoring and trust keeping certificate",
-      title: "AAA Contract Trust"
+      year: "2020",
+      label: "Pandemic-response production",
+      title:
+        "Launched an automated mask production system that earned widespread recognition and was featured by CCTV.",
+      detail:
+        "During COVID-19, Huizong converted engineering capability into a high-urgency production system with visible public impact.",
     },
     {
-      src: "/downloads/certificates/quality-certification-01-home.jpg",
-      alt: "ISO 9001 quality management system certification",
-      title: "ISO 9001 Certification"
+      year: "2022",
+      label: "Specialized enterprise",
+      title: "Recognized as a Specialized and Advanced Enterprise.",
+      detail:
+        "This milestone marked a stronger delivery reputation in focused, technically demanding automation programs.",
     },
     {
-      src: "/downloads/certificates/compliance-certification-01.png",
-      alt: "Certificate of machinery directive attestation for board separator machine",
-      title: "Machinery Directive"
+      year: "2026",
+      label: "Global delivery scale",
+      title:
+        "Delivered AGV integration services for more than 100 manufacturers across 20 countries.",
+      detail:
+        "The same engineering model had scaled across broader warehouse automation and internal logistics deployments worldwide.",
     },
-    {
-      src: "/downloads/certificates/compliance-certification-02.png",
-      alt: "Certificate of machinery directive attestation for forming cut foot machine",
-      title: "Machinery Directive"
-    }
   ];
-
+  const softwareCopyrights = [
+    "2014SR151519",
+    "2015SR102648",
+    "2015SR223827",
+    "2015SR226255",
+    "2017SR593068",
+    "2017SR603490",
+    "2017SR610094",
+    "2018SR505735",
+    "2018SR507028",
+    "2018SR509257",
+    "2018SR505719",
+    "2018SR926948",
+    "2019SR0499375",
+    "2019SR0499596",
+    "2019SR0169832",
+    "2019SR0505068",
+    "2019SR0285119",
+    "2020SR0145071",
+    "2020SR0292154",
+    "2021SR0547459",
+    "2021SR0547460",
+    "2021SR0551353",
+    "2021SR0556482",
+    "2021SR0551530",
+    "2021SR0551531",
+    "2021SR0455525",
+    "2025SR0600763",
+    "2025SR0600778",
+    "2025SR0601545",
+    "2025SR1000425",
+  ];
+  const patentNumbers = [
+    "ZL 2014 2 0461476.0",
+    "ZL 2014 2 0483776.9",
+    "ZL 2018 2 1357671.3",
+    "ZL 2018 2 1399169.9",
+    "ZL 2019 2 2314506.0",
+    "ZL 2020 2 2544190.7",
+    "ZL 2021 2 1417005.6",
+    "ZL 2021 2 1383298.0",
+    "ZL 2021 2 1382925.9",
+    "ZL 2021 2 1382903.2",
+    "ZL 2021 2 1417003.7",
+    "ZL 2021 2 1421260.8",
+    "ZL 2023 2 1768725.6",
+    "ZL 2023 2 1869043.4",
+    "ZL 2023 2 1909733.8",
+    "ZL 2023 2 1923869.4",
+    "ZL 2024 2 0852738.X",
+    "ZL 2024 2 1146082.6",
+    "ZL 2024 2 0938530.X",
+    "ZL 2021 1 1556445.4",
+  ];
+  const trustCards = [
+    ["local_shipping", "80+", "Markets"],
+    ["workspace_premium", "100+", "Patents"],
+    ["construction", "500+", "Company Staff"],
+  ];
+  const contactCards = [
+    [
+      "phone_in_talk",
+      "Inquiry Hotline",
+      "+86 13510816743",
+      "tel:8613510816743",
+      "Mon-Fri 09:00-17:00",
+    ],
+    [
+      "chat",
+      "WhatsApp",
+      "+86 13510816743",
+      "https://wa.me/8613510816743?text=Hello%20there!",
+      "24-hour monitored business line",
+    ],
+    [
+      "mail",
+      "Email",
+      "sales@robotlyne.com",
+      "mailto:sales@robotlyne.com",
+      "Typical response within 12 hours",
+    ],
+    [
+      "location_on",
+      "Address",
+      "Yongtai East Road 3-13, Building 5, Bao'an District, Shenzhen, Guangdong 518103, China",
+      "https://www.google.com/maps/place/%E4%B8%AD%E5%9B%BD%E5%B9%BF%E4%B8%9C%E7%9C%81%E6%B7%B1%E5%9C%B3%E5%B8%82%E5%AE%9D%E5%AE%89%E5%8C%BA%E6%B0%B8%E6%B3%B0%E4%B8%9C%E8%B7%AF3-13%E5%8F%B75+3+%E9%82%AE%E6%94%BF%E7%BC%96%E7%A0%81:+518103/@22.6709809,113.8313066,17z/data=!4m5!3m4!1s0x340394c1247175a1:0x43cbc8fb8771e037!8m2!3d22.67058!4d113.83121?entry=ttu",
+      "Shenzhen operations and engineering base",
+    ],
+  ];
+  const strengths = [
+    {
+      title: "Embodied intelligence R&D",
+      copy:
+        "Engineering teams combine robot control, motion planning, and site-specific adaptation to fit actual production constraints.",
+    },
+    {
+      title: "Multi-brand fleet compatibility",
+      copy:
+        "Huizong connects AGVs, composite robots, and surrounding devices into one coordinated intralogistics workflow.",
+    },
+    {
+      title: "Simulation before deployment",
+      copy:
+        "Intralogistics simulation and 3D digital-twin modeling reduce commissioning risk and sharpen layout decisions early.",
+    },
+    {
+      title: "Lifecycle delivery support",
+      copy:
+        "Customized development, integration, rollout, and after-sales response stay within one operating team.",
+    },
+  ];
   return (
-    <>
-      {" "}
-      <div className="page-content">
-        {" "}
-        <main>
-          {" "}
-          <section className="relative h-[80vh] flex items-center overflow-hidden bg-primary">
-            {" "}
-            <div className="absolute inset-0 z-0 overflow-hidden">
-              {" "}
-              <img
-                alt="coolyne operations building exterior"
-                className="h-full w-full scale-[1.03] object-cover object-center opacity-28 mix-blend-screen"
-                src="/downloads/about/about-building-banner.webp"
-              />{" "}
-              <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(111,191,255,0.25),transparent_60%)] animate-pulse-glow" />{" "}
-              <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(254,107,0,0.15),transparent_50%)]" />{" "}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(0,150,255,0.1),transparent_70%)] animate-float" />{" "}
-            </div>{" "}
-            <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/88 to-primary/32 z-10" />{" "}
-            <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-primary/20 z-10" />{" "}
-            <div className="relative z-20 px-12 md:px-24 w-full max-w-[1440px] mx-auto">
-              {" "}
-              <span className="block mb-6 text-[10px] font-black tracking-[0.4em] text-[#d7e5f8] drop-shadow-[0_2px_10px_rgba(0,23,54,0.28)] animate-fade-in">
-                {" "}
-                coolyne Warehouse Automation{" "}
-              </span>{" "}
-              <h1 className="text-white text-5xl md:text-8xl font-black leading-tight max-w-4xl tracking-tighter font-headline animate-fade-in-up delay-100">
-                {" "}
-                Engineering <br /> the{" "}
-                <span className="text-secondary-container text-gradient">Future</span>{" "}
-              </h1>{" "}
-              <p className="mt-8 max-w-2xl text-lg font-light leading-relaxed text-[#d7e5f8] drop-shadow-[0_2px_12px_rgba(0,23,54,0.28)] md:text-xl animate-fade-in-up delay-200">
-                {" "}
-                coolyne engineers AGV, AMR, and software-driven warehouse
-                systems that keep storage, transport, and fulfillment flows
-                synchronized at industrial scale.{" "}
-              </p>{" "}
-              <div className="mt-16 flex gap-12">
-                {" "}
-                <div className="flex flex-col animate-fade-in-up delay-300">
-                  {" "}
-                  <CountUpValue
-                    as="span"
-                    className="font-headline text-4xl font-black text-white"
-                    value="500+"
-                  />{" "}
-                  <span className="mt-2 text-[10px] font-bold tracking-[0.3em] text-[#d7e5f8]">
-                    {" "}
-                    Engineers{" "}
-                  </span>{" "}
-                </div>{" "}
-                <div className="h-16 w-px bg-white/18" />{" "}
-                <div className="flex flex-col animate-fade-in-up delay-400">
-                  {" "}
-                  <CountUpValue
-                    as="span"
-                    className="font-headline text-4xl font-black text-white"
-                    value="70+"
-                  />{" "}
-                  <span className="mt-2 text-[10px] font-bold tracking-[0.3em] text-[#d7e5f8]">
-                    {" "}
-                    Core Patents{" "}
-                  </span>{" "}
-                </div>{" "}
-              </div>{" "}
-            </div>{" "}
-          </section>{" "}
-          <section className="py-32 px-12 bg-surface">
-            {" "}
-            <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-24 items-start">
-              {" "}
-              <div className="lg:col-span-5">
-                {" "}
-                <div className="w-12 h-1 bg-secondary mb-8" />{" "}
-                <h2 className="text-4xl md:text-5xl font-black text-primary tracking-tighter font-headline mb-10 leading-none">
-                  {" "}
-                  Specialized Intelligence, <br /> Global Delivery.{" "}
-                </h2>{" "}
-                <p className="text-on-surface-variant text-lg leading-relaxed mb-8">
-                  {" "}
-                  coolyne stands at the intersection of warehouse engineering and
-                  digital orchestration. Our focus remains on the design,
-                  customization, and global deployment of intelligent storage,
-                  transport, and fulfillment systems.{" "}
-                </p>{" "}
-                <p className="text-on-surface-variant text-lg leading-relaxed">
-                  {" "}
-                  From intricate intralogistics simulation to the final hardware
-                  rollout, our lifecycle services ensure that your facility
-                  operates at the peak of technical capability.{" "}
-                </p>{" "}
-              </div>{" "}
-              <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-4">
-                {" "}
-                {[
-                  [
-                    "precision_manufacturing",
-                    "text-secondary",
-                    "AGV Excellence",
-                    "Automated Guided Vehicles designed for high-payload stability and sub-millimeter precision.",
-                  ],
-                  [
-                    "hub",
-                    "text-primary",
-                    "Composite Robotics",
-                    "Integrating arm manipulation with mobile bases for complex pick-and-place tasks.",
-                  ],
-                  [
-                    "airport_shuttle",
-                    "text-primary",
-                    "Unmanned Vehicles",
-                    "Heavy-duty transport solutions for both indoor and controlled outdoor industrial environments.",
-                  ],
-                  [
-                    "biotech",
-                    "text-primary",
-                    "R&D Customization",
-                    "Bespoke engineering solutions tailored to unique operational constraints and workflows.",
-                  ],
-                ].map(([icon, color, title, copy]) => (
-                  <div
-                    className="bg-surface-container-low p-10 border border-outline-variant/10 hover:border-primary/30 transition-all duration-300 group rounded-xl hover-lift"
-                    key={title}
-                  >
-                    {" "}
-                    <InlineIcon
-                      className={`about-feature-icon mb-6 block h-10 w-10 ${color} transition-transform duration-300 group-hover:scale-110`}
-                      name={icon}
-                    />{" "}
-                    <h3 className="text-xl font-black text-primary mb-3 font-headline tracking-tight">
-                      {" "}
-                      {title}{" "}
-                    </h3>{" "}
-                    <p className="text-sm text-on-surface-variant leading-relaxed font-body">
-                      {copy}
-                    </p>{" "}
+    <div className="page-content bg-white">
+      <main className="overflow-hidden bg-white">
+        <section className="relative isolate overflow-hidden bg-primary text-white lg:min-h-[54rem] xl:min-h-[58rem]">
+          <div className="absolute inset-0">
+            <img
+              alt="Huizong intelligent mobile robotics deployment"
+              className="h-full w-full object-cover object-center"
+              src="/downloads/about/robotlyne/about-photo-hero.webp"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(110deg,rgba(0,23,54,0.84)_8%,rgba(0,23,54,0.52)_42%,rgba(0,23,54,0.86)_100%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(254,107,0,0.24),transparent_18%),radial-gradient(circle_at_18%_82%,rgba(0,0,0,0.28),transparent_34%)]" />
+          </div>
+
+          <div className="relative z-10 mx-auto max-w-[1440px] px-6 pb-80 pt-16 md:px-12 md:pb-72 md:pt-20 lg:px-16 lg:pb-[28rem] lg:pt-20 xl:pb-[31rem] xl:pt-20">
+            <div className="grid gap-10 lg:-translate-y-[10px] lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-start xl:gap-14">
+              <div className="order-2 lg:order-1">
+                  <div className="relative mx-auto max-w-[27rem] lg:mx-0 lg:max-w-[29rem] xl:max-w-[31rem]">
+                    <div className="overflow-hidden rounded-[2.5rem] border border-white/14 bg-white/8 shadow-[0_36px_90px_rgba(0,0,0,0.35)] backdrop-blur-sm">
+                    <img
+                      alt="Industrial robotics and AGV systems"
+                      className="aspect-[5/4.55] w-full object-cover object-center"
+                      src="/downloads/about/robotlyne/hero-industrial.webp"
+                    />
                   </div>
-                ))}{" "}
-              </div>{" "}
-            </div>{" "}
-          </section>{" "}
-          <section className="bg-primary text-white overflow-hidden border-y border-outline-variant/20 relative">
-            {" "}
-            <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(254,107,0,0.1),transparent_60%)]" />
-              <div className="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(111,191,255,0.1),transparent_60%)]" />
-            </div>
-            <div className="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-3 relative z-10">
-              {" "}
-              {[
-                ["Global Presence", "80+", "Active Markets"],
-                ["Intellectual Asset", "70+", "Core Patents Held"],
-                ["Human Capital", "500+", "Specialized Engineers"],
-              ].map(([kicker, value, label], index) => (
-                <div
-                  className={`p-20 flex flex-col items-center justify-center hover:bg-white/5 transition-all duration-300 cursor-pointer group ${index < 2 ? "border-b md:border-b-0 md:border-r border-outline-variant/10" : ""}`}
-                  key={label}
-                >
-                  {" "}
-                  <span className="text-xs tracking-[0.5em] text-secondary-fixed-dim font-black mb-6 group-hover:text-secondary transition-colors duration-300">
-                    {" "}
-                    {kicker}{" "}
-                  </span>{" "}
-                  <CountUpValue
-                    as="span"
-                    className="text-7xl font-black font-headline tracking-tighter group-hover:scale-110 transition-transform duration-300"
-                    value={value}
-                  />{" "}
-                  <span className="mt-6 text-[10px] tracking-[0.2em] text-on-primary-container font-bold group-hover:text-white transition-colors duration-300">
-                    {" "}
-                    {label}{" "}
-                  </span>{" "}
                 </div>
-              ))}{" "}
-            </div>{" "}
-          </section>{" "}
-          <section className="py-32 bg-surface-container-lowest overflow-hidden">
-            {" "}
-            <div className="max-w-[1440px] mx-auto px-12">
-              {" "}
-              <div className="mb-24 text-center max-w-3xl mx-auto">
-                {" "}
-                <span className="text-secondary tracking-[0.4em] text-[10px] font-black">
-                  {" "}
-                  Industrial Timeline{" "}
-                </span>{" "}
-                <h2 className="text-4xl md:text-5xl font-black text-primary mt-4 mb-6 tracking-tight font-headline">
-                  {" "}
-                  Evolution of Excellence{" "}
-                </h2>{" "}
-                <div className="w-16 h-1 bg-secondary mx-auto" />{" "}
-              </div>{" "}
-              <div className="relative flex flex-col gap-0">
-                {" "}
-                <div className="absolute left-[20px] md:left-1/2 top-0 bottom-0 w-px timeline-path -translate-x-1/2 z-0" />{" "}
-                {[
-                  [
-                    "2004",
-                    "Founded in Shenzhen",
-                    "Strategic establishment for AGV research in the Asian industrial corridor.",
-                    true,
-                  ],
-                  [
-                    "2012",
-                    "Global Expansion",
-                    "Standardizing international services across European and North American sectors.",
-                    false,
-                  ],
-                  [
-                    "2018",
-                    "Digital Twin Launch",
-                    "Shift to software-first engineering with Cloud Orchestration platforms.",
-                    true,
-                  ],
-                  [
-                    "2024",
-                    "Swarm Intelligence",
-                    "Multi-brand scheduling and decentralized autonomous fleet management.",
-                    false,
-                  ],
-                ].map(([year, title, copy, left]) => (
-                  <div
-                    className="relative flex flex-col md:flex-row items-center mb-24 last:mb-0 group"
-                    key={year}
+              </div>
+
+              <div className="order-1 max-w-[48rem] lg:order-2 lg:justify-self-end lg:pr-3">
+                <span className="inline-flex items-center gap-3 pl-px text-[11px] font-black uppercase leading-none tracking-[0.3em] text-secondary-fixed-dim">
+                  <span className="h-px w-10 bg-secondary-fixed-dim/80" />
+                  About Huizong
+                </span>
+                <h1 className="mt-4 max-w-[14.5ch] font-headline text-4xl font-black leading-[0.92] tracking-tight text-white md:max-w-[13.5ch] md:text-[3.85rem] lg:max-w-[15.5ch] lg:text-[3.25rem] xl:text-[3.55rem]">
+                  Intelligent mobile robotics for real industrial flow.
+                </h1>
+                <p className="mt-4 max-w-[46rem] text-[0.98rem] leading-7 text-primary-fixed-dim md:text-base">
+                  Huizong Intelligent Equipment Co., Ltd. delivers AGVs,
+                  composite robots, unmanned vehicles, and warehouse automation
+                  systems for industrial customers that need reliability in the
+                  real world, not just on paper.
+                </p>
+                <p className="mt-3 hidden max-w-[46rem] text-[0.98rem] leading-7 text-primary-fixed-dim md:block md:text-base">
+                  With embodied-intelligence R&amp;D, customized development,
+                  after-sales service, multi-brand robot scheduling,
+                  intralogistics simulation, workflow orchestration, and 3D
+                  digital-twin deployment, the company builds full delivery
+                  systems instead of isolated hardware.
+                </p>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                  <a
+                    className="inline-flex items-center justify-center rounded-[0.9rem] bg-[linear-gradient(135deg,#ff8d3a,#fe6b00)] px-7 py-3.5 text-[11px] font-black uppercase tracking-[0.22em] text-white shadow-[0_18px_36px_rgba(254,107,0,0.22)] transition-all hover:-translate-y-[1px] hover:shadow-[0_22px_42px_rgba(254,107,0,0.28)]"
+                    href="#about-contact"
                   >
-                    {" "}
-                    {left ? (
-                      <div className="md:w-1/2 md:pr-16 md:text-right order-2 md:order-1 opacity-80 group-hover:opacity-100 transition-opacity">
-                        {" "}
-                        <h4 className="text-2xl font-black text-primary font-headline tracking-tight">
-                          {title}
-                        </h4>{" "}
-                        <p className="text-on-surface-variant text-sm mt-3 max-w-sm md:ml-auto leading-relaxed">
-                          {copy}
-                        </p>{" "}
-                      </div>
-                    ) : (
-                      <div className="md:w-1/2 order-1 hidden md:block" />
-                    )}{" "}
-                    <div
-                      className={`z-10 w-12 h-12 rounded-none border-4 border-surface border-double flex items-center justify-center text-white font-black text-[10px] order-1 md:order-2 shadow-xl ring-8 ring-surface ${left ? "bg-primary" : "bg-secondary"}`}
+                    Talk To Our Experts
+                  </a>
+                  <a
+                    className="inline-flex items-center justify-center rounded-[0.9rem] border border-white/24 bg-white/10 px-7 py-3.5 text-[11px] font-black uppercase tracking-[0.22em] text-white transition-colors hover:bg-white/16"
+                    href="#about-trust"
+                  >
+                    View Proof Assets
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="pointer-events-none absolute bottom-0 left-1/2 h-20 w-[145%] -translate-x-1/2 translate-y-[62%] rounded-[100%] bg-white md:h-24 lg:h-28" />
+        </section>
+
+        <section className="px-6 pb-24 pt-20 md:px-12 md:pt-24 lg:px-16 lg:pb-28">
+          <div className="mx-auto max-w-[1380px]">
+            <div className="grid gap-14 lg:grid-cols-[minmax(0,0.95fr)_minmax(360px,0.92fr)] lg:items-center">
+              <div className="max-w-3xl">
+                <span className="text-[11px] font-black uppercase tracking-[0.3em] text-secondary">
+                  Global company profile
+                </span>
+                <div className="mt-8 flex flex-col gap-6 md:flex-row md:items-end">
+                  <span
+                    className="block bg-cover bg-center bg-clip-text font-headline text-[5.5rem] font-black leading-none text-transparent md:text-[7rem] lg:text-[9rem]"
+                    style={{
+                      backgroundImage:
+                        "url('/downloads/about/robotlyne/about-photo-2.webp')",
+                    }}
+                  >
+                    80+
+                  </span>
+                  <div className="max-w-xl pb-2">
+                    <div className="text-[11px] font-black uppercase tracking-[0.24em] text-secondary">
+                      Markets reached
+                    </div>
+                    <h2 className="mt-3 font-headline text-3xl font-black tracking-tight text-primary md:text-5xl">
+                      One delivery model shaped for industrial reality.
+                    </h2>
+                  </div>
+                </div>
+                <p className="mt-7 max-w-[42rem] text-base leading-8 text-on-surface-variant">
+                  Founded in Shenzhen in 2004, Huizong has grown from robotics
+                  equipment manufacturing into a broader automation delivery
+                  partner serving warehouse and factory projects across more
+                  than 80 markets.
+                </p>
+                <p className="mt-5 max-w-[42rem] text-base leading-8 text-on-surface-variant">
+                  The company combines hardware, scheduling software,
+                  simulation, and customized engineering so customers can move
+                  from planning to deployment without fragmenting ownership
+                  across multiple vendors.
+                </p>
+                <div className="mt-8 grid gap-4 sm:grid-cols-3">
+                  {trustCards.map(([icon, value, label]) => (
+                    <article
+                      className="rounded-[1.5rem] border border-outline-variant/20 bg-[#fbf8f4] px-5 py-6"
+                      key={`${label}-overview`}
                     >
-                      {" "}
-                      {year}{" "}
-                    </div>{" "}
-                    {left ? (
-                      <div className="md:w-1/2 order-3" />
-                    ) : (
-                      <div className="md:w-1/2 md:pl-16 order-2 md:order-3 opacity-80 group-hover:opacity-100 transition-opacity">
-                        {" "}
-                        <h4 className="text-2xl font-black text-primary font-headline tracking-tight">
-                          {title}
-                        </h4>{" "}
-                        <p className="text-on-surface-variant text-sm mt-3 max-w-sm leading-relaxed">
-                          {copy}
-                        </p>{" "}
+                      <InlineIcon className="h-6 w-6 text-secondary" name={icon} />
+                      <CountUpValue
+                        as="div"
+                        className="mt-4 font-headline text-3xl font-black tracking-tight text-primary"
+                        value={value}
+                      />
+                      <div className="mt-2 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">
+                        {label}
                       </div>
-                    )}{" "}
+                    </article>
+                  ))}
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="absolute -left-4 top-8 h-[80%] w-[72%] rounded-[3rem] bg-[#fff0e4] md:-left-8" />
+                <div className="relative overflow-hidden rounded-[2.75rem_1.4rem_7rem_1.4rem] bg-white p-4 shadow-[0_28px_90px_rgba(17,40,94,0.12)]">
+                  <img
+                    alt="Huizong Shenzhen operations base"
+                    className="aspect-[4/5] w-full rounded-[2.3rem_1rem_6rem_1rem] object-cover object-center"
+                    src="/downloads/about/about-building-banner.webp"
+                  />
+                </div>
+                <article className="absolute bottom-6 left-0 max-w-[18rem] rounded-[1.6rem] bg-white p-6 shadow-[0_22px_60px_rgba(17,40,94,0.16)] md:-left-10">
+                  <div className="text-[10px] font-black uppercase tracking-[0.24em] text-secondary">
+                    Shenzhen base
                   </div>
-                ))}{" "}
-              </div>{" "}
-            </div>{" "}
-          </section>{" "}
-          <section className="relative overflow-hidden py-32 px-12 bg-surface">
-            {" "}
-            <div className="absolute inset-0 z-0">
-              {" "}
-              <img
-                    alt="coolyne warehouse automation showroom"
-                className="h-full w-full object-cover object-[68%_center] opacity-[0.42] saturate-[1.02] contrast-[1.02]"
-                src="/downloads/about/about-certificates-bg.webp"
-              />{" "}
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,249,251,0.78),rgba(248,249,251,0.66))]" />{" "}
-              <div className="absolute inset-y-0 left-0 w-[44%] bg-gradient-to-r from-surface via-surface/82 to-transparent" />{" "}
-              <div className="absolute inset-y-0 right-0 w-[48%] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.02),rgba(248,249,251,0.06)_42%,rgba(248,249,251,0.16)_72%,rgba(248,249,251,0.28)_100%)]" />{" "}
-            </div>{" "}
-            <div className="relative z-10 max-w-[1440px] mx-auto">
-              {" "}
-              <div className="flex flex-col md:flex-row justify-between items-end gap-6 mb-20 border-b border-outline-variant/30 pb-12">
-                {" "}
-                <div className="max-w-xl">
-                  {" "}
-                  <span className="text-secondary tracking-[0.4em] text-[10px] font-black">
-                    {" "}
-                    Quality Verification{" "}
-                  </span>{" "}
-                  <h2 className="text-4xl font-black text-primary mt-4 font-headline tracking-tight">
-                    {" "}
-                    Certificates &amp; Global Honors{" "}
-                  </h2>{" "}
-                </div>{" "}
-                <p className="text-on-surface-variant text-sm max-w-sm font-light">
-                  {" "}
-                  Adhering to the world's most rigorous industrial safety and
-                  quality standards for mission-critical operations.{" "}
-                </p>{" "}
-              </div>{" "}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-outline-variant/20 border border-outline-variant/20">
-                {" "}
-                {[
-                  ["verified", "30+", "Software Copyrights"],
-                  ["description", "20+", "Hardware Patents"],
-                  ["gavel", "ISO 9001", "Quality Management"],
-                  ["workspace_premium", "CE Standard", "Safety Certified"],
-                ].map(([icon, value, label]) => (
-                  <div
-                    className="bg-surface p-12 flex flex-col items-center group hover:bg-surface-container-low transition-colors"
-                    key={label}
+                  <p className="mt-4 text-sm leading-7 text-on-surface-variant">
+                    Engineering, customization, and project response stay close
+                    to one operations hub with global B2B delivery experience.
+                  </p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="relative overflow-hidden bg-[#f8f6f2] px-6 py-24 md:px-12 lg:px-16 lg:py-28">
+          <div className="absolute top-0 left-1/2 h-28 w-[140%] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-white" />
+          <div className="relative mx-auto max-w-[1380px]">
+            <div className="grid gap-14 lg:grid-cols-[minmax(0,0.96fr)_minmax(0,1.04fr)] lg:items-start">
+              <div>
+                <span className="text-[11px] font-black uppercase tracking-[0.3em] text-secondary">
+                  Our strengths
+                </span>
+                <h2 className="mt-4 max-w-[13ch] font-headline text-3xl font-black tracking-tight text-primary md:text-5xl">
+                  Hardware, software, and delivery discipline in one team.
+                </h2>
+                <div className="mt-10 grid gap-4 sm:grid-cols-[minmax(0,1.12fr)_minmax(0,0.88fr)]">
+                  <img
+                    alt="Huizong company building"
+                    className="aspect-[1.02/1] w-full rounded-[1.8rem] object-cover object-center shadow-[0_18px_44px_rgba(17,40,94,0.12)] sm:row-span-2 sm:h-full"
+                    loading="lazy"
+                    src="/downloads/about/robotlyne/about-photo-1.webp"
+                  />
+                  <img
+                    alt="Huizong office lobby"
+                    className="aspect-[1/1] w-full rounded-[1.6rem] object-cover object-center shadow-[0_18px_44px_rgba(17,40,94,0.12)]"
+                    loading="lazy"
+                    src="/downloads/about/robotlyne/about-photo-2.webp"
+                  />
+                  <img
+                    alt="Huizong engineering operations"
+                    className="aspect-[1/0.88] w-full rounded-[1.6rem] object-cover object-center shadow-[0_18px_44px_rgba(17,40,94,0.12)]"
+                    loading="lazy"
+                    src="/downloads/about/robotlyne/about-photo-3.webp"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-6 pt-2">
+                {strengths.map((item, index) => (
+                  <article
+                    className="rounded-[1.75rem] bg-white px-7 py-7 shadow-[0_20px_52px_rgba(17,40,94,0.08)]"
+                    key={item.title}
                   >
-                    {" "}
-                    <InlineIcon
-                      className="mb-8 h-12 w-12 text-primary/40 transition-colors group-hover:text-primary"
-                      name={icon}
-                    />{" "}
-                    <div className="text-center">
-                      {" "}
-                      <span className="text-3xl font-black text-primary font-headline">
-                        {value}
-                      </span>{" "}
-                      <p className="text-[9px] text-outline tracking-[0.3em] font-black mt-4">
-                        {" "}
-                        {label}{" "}
-                      </p>{" "}
-                    </div>{" "}
-                  </div>
-                ))}{" "}
-              </div>{" "}
-              <div className="mt-14 flex flex-col gap-6 border-t border-outline-variant/20 pt-10 md:flex-row md:items-end md:justify-between">
-                {" "}
-                <div className="max-w-3xl">
-                  {" "}
-                  <p className="text-on-surface-variant text-base leading-relaxed md:text-lg">
-                    {" "}
-                    Selected clear certificates are displayed below in a
-                    horizontal gallery so visitors can quickly scan quality,
-                    patent, and compliance proof without leaving the page.{" "}
-                  </p>{" "}
-                </div>{" "}
-                <div className="inline-flex items-center gap-3 self-start rounded-full border border-primary/10 bg-white px-5 py-3 shadow-sm">
-                  {" "}
-                  <InlineIcon className="h-5 w-5 text-secondary" name="workspace_premium" />{" "}
-                  <span className="text-[11px] font-black uppercase tracking-[0.22em] text-primary">
-                    {" "}
-                    8 featured certificates{" "}
-                  </span>{" "}
-                </div>{" "}
-              </div>{" "}
-              <div className="mt-10 relative flex items-center gap-4">
-                {" "}
-                <button
-                  aria-label="Previous certificates"
-                  className="z-10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white text-secondary shadow-[0_18px_36px_rgba(0,23,54,0.14)] transition-all hover:-translate-x-0.5 hover:text-primary"
-                  data-hsa-brand-carousel-prev=""
-                  type="button"
+                    <div className="flex items-start gap-4">
+                      <span className="mt-1 flex h-9 w-9 items-center justify-center rounded-full bg-secondary-container text-sm font-black text-white">
+                        {index + 1}
+                      </span>
+                      <div>
+                        <h3 className="text-xl font-black tracking-tight text-primary">
+                          {item.title}
+                        </h3>
+                        <p className="mt-3 text-sm leading-7 text-on-surface-variant">
+                          {item.copy}
+                        </p>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="relative overflow-hidden bg-primary text-white">
+          <div className="absolute inset-0">
+            <img
+              alt="Huizong milestones background"
+              className="h-full w-full object-cover object-center"
+              loading="lazy"
+              src="/downloads/about/robotlyne/hero-industrial.webp"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,15,38,0.78),rgba(0,18,45,0.93))]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(254,107,0,0.18),transparent_28%)]" />
+          </div>
+          <div className="relative mx-auto max-w-[1380px] px-6 py-24 md:px-12 lg:px-16 lg:py-28">
+            <div className="max-w-5xl">
+              <span className="text-[11px] font-black uppercase tracking-[0.3em] text-secondary-fixed-dim">
+                Milestones
+              </span>
+              <h2 className="mt-4 max-w-[19ch] font-headline text-3xl font-black tracking-tight md:text-5xl xl:max-w-[21ch]">
+                Development history from Shenzhen foundation to global delivery.
+              </h2>
+            </div>
+
+            <AboutMilestonesTimeline milestones={milestones} />
+          </div>
+        </section>
+
+        <section className="px-6 py-24 md:px-12 lg:px-16 lg:py-28">
+          <div className="mx-auto max-w-[1380px]">
+            <div className="grid gap-12 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:items-center">
+              <div className="max-w-2xl">
+                <span className="text-[11px] font-black uppercase tracking-[0.3em] text-secondary">
+                  Customization services
+                </span>
+                <h2 className="mt-4 font-headline text-3xl font-black tracking-tight text-primary md:text-5xl">
+                  Customized development built around site conditions.
+                </h2>
+                <p className="mt-6 text-base leading-8 text-on-surface-variant">
+                  Huizong adapts hardware platforms, control logic, and process
+                  orchestration for customers that need more than an off-the-
+                  shelf robot. That work spans planning, simulation, integration,
+                  and deployment support.
+                </p>
+                <p className="mt-5 text-base leading-8 text-on-surface-variant">
+                  Patent records, proprietary software, and long-cycle delivery
+                  experience help the team turn custom requirements into systems
+                  that are easier to commission and easier to run.
+                </p>
+                <a
+                  className="mt-9 inline-flex items-center justify-center rounded-[0.9rem] bg-[linear-gradient(135deg,#ff8d3a,#fe6b00)] px-6 py-3 text-xs font-black uppercase tracking-[0.22em] text-white shadow-[0_18px_36px_rgba(254,107,0,0.16)] transition-all hover:-translate-y-[1px] hover:shadow-[0_22px_42px_rgba(254,107,0,0.24)]"
+                  href="#about-contact"
                 >
-                  {" "}
-                  <InlineIcon className="h-5 w-5" name="chevron_left" />{" "}
-                </button>{" "}
-                <div className="min-w-0 flex-1 overflow-hidden">
-                  {" "}
+                  Start A Project Conversation
+                </a>
+              </div>
+
+              <div className="relative overflow-hidden rounded-[2.5rem] bg-[#faf5ef] px-7 py-10 md:px-12 md:py-12">
+                <div className="absolute right-0 top-0 h-full w-[55%] bg-[radial-gradient(circle_at_top,rgba(254,107,0,0.15),transparent_54%)]" />
+                <div className="relative">
+                  <div className="text-right">
+                    <CountUpValue
+                      as="div"
+                      className="font-headline text-[5rem] font-black leading-none tracking-tight text-primary md:text-[7.5rem]"
+                      value="100+"
+                    />
+                    <div className="mt-2 text-[11px] font-black uppercase tracking-[0.28em] text-secondary">
+                      Patents
+                    </div>
+                  </div>
+                  <p className="mt-8 max-w-2xl text-sm leading-7 text-on-surface-variant">
+                    Backed by 30 software copyrights and a growing patent
+                    portfolio, Huizong turns operational knowledge into
+                    repeatable technical systems.
+                  </p>
+                  <div className="mt-8 grid gap-6 md:grid-cols-2" id="about-trust">
+                    <article className="overflow-hidden rounded-[1.8rem] bg-white shadow-[0_20px_52px_rgba(17,40,94,0.08)]">
+                      <div className="flex h-[18.5rem] items-center justify-center bg-[#f8f6f2] p-4">
+                        <img
+                          alt="Software copyrights collage"
+                          className="h-full w-full object-contain object-center"
+                          loading="lazy"
+                          src="/downloads/about/robotlyne/software-copyrights.webp"
+                        />
+                      </div>
+                      <div className="p-6">
+                        <div className="text-[10px] font-black uppercase tracking-[0.24em] text-secondary">
+                          Software copyrights
+                        </div>
+                        <div className="mt-3 text-lg font-black tracking-tight text-primary">
+                          30 proprietary registrations
+                        </div>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {softwareCopyrights.slice(0, 8).map((number) => (
+                            <span
+                              className="rounded-full border border-outline-variant/20 bg-[#fffaf5] px-3 py-2 text-[10px] font-bold tracking-[0.08em] text-on-surface-variant"
+                              key={number}
+                            >
+                              {number}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </article>
+                    <article className="overflow-hidden rounded-[1.8rem] bg-white shadow-[0_20px_52px_rgba(17,40,94,0.08)]">
+                      <div className="flex h-[18.5rem] items-center justify-center bg-[#f8f6f2] p-4">
+                        <img
+                          alt="Product patents collage"
+                          className="h-full w-full object-contain object-center"
+                          loading="lazy"
+                          src="/downloads/about/robotlyne/product-patents.webp"
+                        />
+                      </div>
+                      <div className="p-6">
+                        <div className="text-[10px] font-black uppercase tracking-[0.24em] text-secondary">
+                          Patent records
+                        </div>
+                        <div className="mt-3 text-lg font-black tracking-tight text-primary">
+                          20+ disclosed patent numbers
+                        </div>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {patentNumbers.slice(0, 6).map((number) => (
+                            <span
+                              className="rounded-full border border-outline-variant/20 bg-[#fffaf5] px-3 py-2 text-[10px] font-bold tracking-[0.08em] text-on-surface-variant"
+                              key={number}
+                            >
+                              {number}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="relative overflow-hidden bg-primary py-24 lg:py-28">
+          <div className="absolute inset-0">
+            <img
+              alt="Huizong business partners background"
+              className="h-full w-full object-cover object-center opacity-[0.22]"
+              loading="lazy"
+              src="/downloads/about/robotlyne/hero-industrial.webp"
+            />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,23,54,0.88),rgba(0,23,54,0.94))]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_18%,rgba(254,107,0,0.10),transparent_24%),radial-gradient(circle_at_82%_78%,rgba(255,255,255,0.04),transparent_22%)]" />
+          </div>
+          <div className="relative mx-auto max-w-[1380px] px-6 md:px-12 lg:px-16">
+            <div className="max-w-2xl">
+              <span className="text-[11px] font-black uppercase tracking-[0.3em] text-secondary-fixed-dim">
+                Business partners
+              </span>
+              <h2 className="mt-4 font-headline text-3xl font-black tracking-tight text-white md:text-5xl">
+                Trusted by operators building serious industrial capacity.
+              </h2>
+            </div>
+          </div>
+          <div className="relative mt-12 w-full overflow-hidden rounded-[2.1rem] border-y border-white/10 bg-[rgba(6,29,66,0.36)] py-6 shadow-[0_20px_52px_rgba(0,0,0,0.18)] backdrop-blur-sm">
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-[rgba(6,29,66,0.92)] md:w-12" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-[rgba(6,29,66,0.92)] md:w-12" />
+            <div className="about-brand-marquee">
+              <div className="about-brand-marquee-track">
+                {[0, 1].map((loop) => (
                   <div
-                    className="flex gap-6 overflow-x-auto scroll-smooth pb-3 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-                    data-hsa-brand-carousel-track=""
+                    aria-hidden={loop === 1}
+                    className="about-brand-marquee-group"
+                    key={`about-brand-loop-${loop}`}
                   >
-                    {" "}
-                    {certificateShowcase.map((certificate) => (
-                      <a
-                        className="group flex h-[300px] min-w-[240px] flex-shrink-0 flex-col justify-between bg-white p-4 shadow-[0_24px_56px_rgba(0,23,54,0.12)] transition-transform duration-300 hover:-translate-y-1"
-                        href={certificate.src}
-                        key={certificate.src}
-                        target="_blank"
-                        rel="noreferrer"
+                    {HOME_PARTNER_BRANDS_SAFE.map((brand) => (
+                      <div
+                        className="flex min-h-[142px] min-w-[252px] items-center justify-center rounded-[1.7rem] border border-outline-variant/16 bg-white px-3 py-4 shadow-[0_16px_40px_rgba(17,40,94,0.08)]"
+                        key={`${brand.name}-${loop}`}
                       >
-                        {" "}
-                        <div className="h-[236px] overflow-hidden bg-surface">
-                          {" "}
-                          <img
-                            alt={certificate.alt}
-                            className="h-full w-full object-contain object-top transition-transform duration-300 group-hover:scale-[1.02]"
-                            src={certificate.src}
-                          />{" "}
-                        </div>{" "}
-                        <div className="border-t border-outline-variant/20 pt-4">
-                          {" "}
-                          <p className="text-[11px] font-black uppercase tracking-[0.22em] text-primary">
-                            {" "}
-                            {certificate.title}{" "}
-                          </p>{" "}
-                        </div>{" "}
-                      </a>
-                    ))}{" "}
-                  </div>{" "}
-                </div>{" "}
+                        <img
+                          alt={brand.name}
+                          className="h-[104px] w-[196px] max-w-full object-contain"
+                          loading="lazy"
+                          src={brand.src}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          className="relative overflow-hidden bg-white px-6 py-24 md:px-12 lg:px-16 lg:py-28"
+          id="about-contact"
+        >
+          <div className="absolute top-0 left-1/2 h-28 w-[140%] -translate-x-1/2 -translate-y-1/2 rounded-[100%] bg-white" />
+          <div className="relative mx-auto grid max-w-[1380px] gap-10 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)]">
+            <div className="space-y-8">
+              <div>
+                <span className="text-[11px] font-black uppercase tracking-[0.3em] text-secondary">
+                  Contact Huizong
+                </span>
+                <h2 className="mt-4 max-w-[12ch] font-headline text-3xl font-black tracking-tight text-primary md:text-5xl">
+                  Start the next automation conversation.
+                </h2>
+                <p className="mt-6 max-w-2xl text-base leading-8 text-on-surface-variant">
+                  Share your throughput goals, facility constraints, or target
+                  deployment schedule and we will route the brief to the right
+                  engineering and delivery team.
+                </p>
+              </div>
+
+              <div className="grid gap-4">
+                {contactCards.map(([icon, title, value, href, copy]) => {
+                  const isExternal = href.startsWith("http");
+                  return (
+                    <a
+                      className="group flex items-start gap-4 rounded-[1.6rem] border border-outline-variant/18 bg-[#fbf8f4] p-5 transition-colors hover:border-secondary hover:bg-[#fff6ee]"
+                      href={href}
+                      key={title}
+                      rel={isExternal ? "noreferrer" : undefined}
+                      target={isExternal ? "_blank" : undefined}
+                    >
+                      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary-container/12 text-secondary">
+                        <InlineIcon className="h-6 w-6" name={icon} />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-[10px] font-black uppercase tracking-[0.22em] text-secondary">
+                          {title}
+                        </span>
+                        <span className="mt-2 block text-base font-black leading-6 text-primary">
+                          {value}
+                        </span>
+                        <span className="mt-2 block text-sm leading-6 text-on-surface-variant">
+                          {copy}
+                        </span>
+                      </span>
+                    </a>
+                  );
+                })}
+              </div>
+
+              <div className="rounded-[1.8rem] border border-outline-variant/18 bg-[#fbf8f4] p-6">
+                <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <div className="text-[10px] font-black uppercase tracking-[0.24em] text-secondary">
+                      WeChat support
+                    </div>
+                    <p className="mt-3 max-w-md text-sm leading-7 text-on-surface-variant">
+                      Connect with the sales and project coordination team
+                      directly through WeChat support.
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <button
+                      className="inline-flex min-w-[11.5rem] items-center justify-center gap-2 rounded-[0.9rem] border border-outline-variant/24 bg-white px-6 py-3.5 text-xs font-black uppercase tracking-[0.2em] text-primary transition-colors hover:border-secondary hover:bg-[#fff7ef]"
+                      data-hsa-open-sales-modal=""
+                      type="button"
+                    >
+                      <InlineIcon className="h-5 w-5 text-secondary" name="chat" />
+                      WeChat QR
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-[2.2rem] border border-outline-variant/18 bg-white p-8 text-on-surface shadow-[0_20px_54px_rgba(17,40,94,0.08)] md:p-10">
+              <div className="max-w-2xl">
+                <div className="text-[11px] font-black uppercase tracking-[0.3em] text-secondary">
+                  Send a project brief
+                </div>
+                <h3 className="mt-4 font-headline text-3xl font-black tracking-tight text-primary">
+                  Message Us
+                </h3>
+                <p className="mt-4 text-sm leading-7 text-on-surface-variant">
+                  Share your throughput goals, target output, or integration
+                  constraints and our team will reply with the right next step.
+                </p>
+              </div>
+
+              <form
+                className="mt-8 space-y-6"
+                data-form-label="About Page Message Us"
+                data-form-type="consultation"
+                data-hsa-form=""
+                data-success-message="Thanks, your message has been emailed to our team."
+                data-success-redirect="/thanks/"
+                noValidate
+              >
+                <div className="grid gap-6 md:grid-cols-2">
+                  <label className="space-y-2">
+                    <span className="text-[10px] font-black uppercase tracking-[0.22em] text-outline">
+                      Full Name
+                    </span>
+                    <input
+                      className="w-full rounded-[1rem] border border-outline-variant/30 bg-surface-container-low px-4 py-3 text-sm font-medium text-on-surface outline-none transition-colors focus:border-secondary"
+                      name="fullName"
+                      placeholder="Your name"
+                      type="text"
+                    />
+                  </label>
+                  <label className="space-y-2">
+                    <span className="text-[10px] font-black uppercase tracking-[0.22em] text-outline">
+                      Company
+                    </span>
+                    <input
+                      className="w-full rounded-[1rem] border border-outline-variant/30 bg-surface-container-low px-4 py-3 text-sm font-medium text-on-surface outline-none transition-colors focus:border-secondary"
+                      name="company"
+                      placeholder="Company name"
+                      type="text"
+                    />
+                  </label>
+                </div>
+
+                <div className="grid gap-6 md:grid-cols-2">
+                  <label className="space-y-2">
+                    <span className="text-[10px] font-black uppercase tracking-[0.22em] text-outline">
+                      Email
+                    </span>
+                    <input
+                      className="w-full rounded-[1rem] border border-outline-variant/30 bg-surface-container-low px-4 py-3 text-sm font-medium text-on-surface outline-none transition-colors focus:border-secondary"
+                      name="email"
+                      placeholder="name@company.com"
+                      required
+                      type="email"
+                    />
+                  </label>
+                  <label className="space-y-2">
+                    <span className="text-[10px] font-black uppercase tracking-[0.22em] text-outline">
+                      Phone / WhatsApp
+                    </span>
+                    <input
+                      className="w-full rounded-[1rem] border border-outline-variant/30 bg-surface-container-low px-4 py-3 text-sm font-medium text-on-surface outline-none transition-colors focus:border-secondary"
+                      name="phone"
+                      placeholder="+86 135 1081 6743"
+                      type="tel"
+                    />
+                  </label>
+                </div>
+
+                <label className="block space-y-2">
+                  <span className="text-[10px] font-black uppercase tracking-[0.22em] text-outline">
+                    Message
+                  </span>
+                  <textarea
+                    className="min-h-[180px] w-full resize-y rounded-[1rem] border border-outline-variant/30 bg-surface-container-low px-4 py-3 text-sm font-medium text-on-surface outline-none transition-colors focus:border-secondary"
+                    name="message"
+                    placeholder="Tell us about your automation project, throughput goals, and facility constraints."
+                    required
+                  />
+                </label>
+
+                <label className="flex items-start gap-3 text-sm leading-6 text-on-surface-variant">
+                  <input
+                    className="mt-1 h-4 w-4 rounded border-outline-variant text-secondary focus:ring-secondary"
+                    name="marketingConsent"
+                    type="checkbox"
+                    value="Yes"
+                  />
+                  <span>
+                    I agree to receive follow-up communication related to my
+                    automation inquiry.
+                  </span>
+                </label>
+
                 <button
-                  aria-label="Next certificates"
-                  className="z-10 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-white text-secondary shadow-[0_18px_36px_rgba(0,23,54,0.14)] transition-all hover:translate-x-0.5 hover:text-primary"
-                  data-hsa-brand-carousel-next=""
-                  type="button"
+                  className="inline-flex items-center justify-center rounded-[0.9rem] bg-[#a64900] px-8 py-4 text-xs font-black uppercase tracking-[0.24em] text-white shadow-[0_16px_30px_rgba(166,73,0,0.18)] transition-all hover:-translate-y-[1px] hover:bg-[#8f3f00] hover:shadow-[0_20px_38px_rgba(166,73,0,0.24)]"
+                  type="submit"
                 >
-                  {" "}
-                  <InlineIcon className="h-5 w-5" name="chevron_right" />{" "}
-                </button>{" "}
-              </div>{" "}
-            </div>{" "}
-          </section>{" "}
-          <section className="py-32 px-12 bg-white">
-            {" "}
-            <div className="max-w-[1440px] mx-auto bg-primary p-16 md:p-24 relative overflow-hidden">
-              {" "}
-              <div className="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
-                {" "}
-                <svg
-                  className="w-full h-full"
-                  preserveAspectRatio="none"
-                  viewBox="0 0 100 100"
-                >
-                  {" "}
-                  <path d="M0 0 L100 0 L100 100 Z" fill="currentColor" />{" "}
-                </svg>{" "}
-              </div>{" "}
-              <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-12">
-                {" "}
-                <div className="max-w-2xl">
-                  {" "}
-                  <h2 className="text-4xl md:text-5xl font-black text-white font-headline tracking-tighter mb-6">
-                    {" "}
-                    Ready to Engineer Your Future?{" "}
-                  </h2>{" "}
-                  <p className="text-on-primary-container text-lg opacity-80">
-                    {" "}
-                    Consult with our technical experts to audit your facility's
-                    potential for autonomous integration.{" "}
-                  </p>{" "}
-                </div>{" "}
-                <div className="flex shrink-0 gap-6">
-                  {" "}
-                  <button
-                    className="bg-secondary text-on-secondary px-10 py-5 font-black text-xs tracking-[0.2em] hover:bg-secondary-container transition-colors"
-                    data-hsa-open-expert-modal=""
-                    type="button"
-                  >
-                    {" "}
-                    Partner with us{" "}
-                  </button>{" "}
-                </div>{" "}
-              </div>{" "}
-            </div>{" "}
-          </section>{" "}
-        </main>{" "}
-      </div>{" "}
-    </>
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }
-function ContactBody() {
+
+function ContactBody({ page }) {
+  const vm = getContactViewModel(page);
+
   return (
     <>
       {" "}
@@ -1638,9 +2133,9 @@ function ContactBody() {
               {" "}
               <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-transparent z-10" />{" "}
               <img
-                alt="High-precision robotic arm"
+                alt={vm.heroBackgroundAlt}
                 className="w-full h-full object-cover"
-                src="/downloads/jianxuan.png"
+                src={vm.heroBackgroundSrc}
               />{" "}
             </div>{" "}
             <div className="relative z-20 max-w-7xl mx-auto px-8 py-20 w-full">
@@ -1648,17 +2143,13 @@ function ContactBody() {
               <div className="max-w-3xl">
                 {" "}
                 <span className="inline-block px-3 py-1 bg-secondary text-white text-[10px] font-black tracking-[0.25em] mb-6">
-                  {" "}
-                  Consult an Expert{" "}
+                  {vm.heroKicker}
                 </span>{" "}
-                <h1 className="font-headline text-5xl md:text-8xl font-black text-white leading-[0.95] tracking-tighter mb-8 ">
-                  {" "}
-                  Architect Your <br /> Efficiency{" "}
+                <h1 className="mb-8 whitespace-pre-line font-headline text-5xl font-black leading-[0.95] tracking-tighter text-white md:text-8xl">
+                  {vm.heroTitle}
                 </h1>{" "}
                 <p className="text-[#d7e5f8] text-xl md:text-2xl font-light leading-relaxed max-w-xl border-l-2 border-secondary pl-6 drop-shadow-[0_10px_24px_rgba(0,15,40,0.28)]">
-                  {" "}
-                  Connect with our engineering specialists to assess project
-                  feasibility and optimize your automation roadmap.{" "}
+                  {vm.heroSummary}
                 </p>{" "}
               </div>{" "}
             </div>{" "}
@@ -1672,67 +2163,45 @@ function ContactBody() {
                 <div>
                   {" "}
                   <h2 className="font-headline text-4xl font-black text-primary mb-4 tracking-tight">
-                    {" "}
-                    Direct Access{" "}
+                    {vm.contactSectionTitle}
                   </h2>{" "}
+                  {vm.contactSectionSummary ? (
+                    <p className="text-on-surface-variant font-medium max-w-xl mb-4">
+                      {vm.contactSectionSummary}
+                    </p>
+                  ) : null}{" "}
                   <div className="h-1.5 w-16 bg-secondary" />{" "}
                 </div>{" "}
                 <div className="grid grid-cols-1 gap-4">
                   {" "}
-                  {[
-                    [
-                      "phone_in_talk",
-                      "bg-primary group-hover:bg-secondary",
-                      "Inquiry Hotline",
-                      "+86 13510816743",
-                      "Global Support 閳?Mon-Fri 09:00-17:00",
-                    ],
-                    [
-                      "chat",
-                      "bg-secondary",
-                      "Instant Messaging",
-                      "+86 13510816743",
-                      "WhatsApp Business 閳?24H Monitoring",
-                    ],
-                    [
-                      "mail",
-                      "bg-primary-container",
-                      "Email Correspondence",
-                        "sales@robotlyne.com",
-                      "Estimated Response: < 12 Hours",
-                    ],
-                    [
-                      "location_on",
-                      "bg-tertiary",
-                      "Global Headquarters",
-                      "Kinetic Precision Industrial Park",
-                      "Bao'an District 閳?Shenzhen 閳?GD China",
-                    ],
-                  ].map(([icon, bg, title, value, caption]) => (
+                  {vm.contactMethods.map((method) => (
                     <div
                       className="group flex items-center gap-6 p-8 bg-surface-container-low border border-outline-variant/30 hover:bg-white hover:shadow-xl hover:shadow-primary/5 transition-all duration-300"
-                      key={title}
+                      key={`${method.title}-${method.value}`}
                     >
                       {" "}
                       <div
-                        className={`w-14 h-14 ${bg} flex items-center justify-center shrink-0`}
+                        className={`w-14 h-14 ${getToneClass(method.accentTone)} flex items-center justify-center shrink-0`}
                       >
                         {" "}
-                        <InlineIcon className="h-6 w-6 text-white" name={icon} />{" "}
+                        <InlineIcon
+                          className="h-6 w-6 text-white"
+                          name={method.icon || "support_agent"}
+                        />{" "}
                       </div>{" "}
                       <div>
                         {" "}
                         <h3 className="text-[10px] font-black text-outline tracking-[0.2em] mb-1">
-                          {title}
+                          {method.title}
                         </h3>{" "}
                         <p
-                          className={`font-black text-primary tracking-tight ${title === "Global Headquarters" ? "text-lg leading-tight " : title === "Email Correspondence" ? "text-2xl lowercase" : "text-2xl"}`}
+                          className={`font-black text-primary tracking-tight ${method.icon === "location_on" ? "text-lg leading-tight" : method.value.includes("@") ? "text-2xl lowercase" : "text-2xl"}`}
                         >
                           {" "}
-                          {value}{" "}
+                          {method.value}{" "}
                         </p>{" "}
                         <p className="text-[11px] text-outline-variant font-bold mt-1 ">
-                          {caption}
+                          {method.caption}
                         </p>{" "}
                       </div>{" "}
                     </div>
@@ -1746,13 +2215,10 @@ function ContactBody() {
                   <div className="mb-12">
                     {" "}
                     <h2 className="font-headline text-3xl font-black text-primary mb-3 tracking-tight">
-                      {" "}
-                      Project Briefing{" "}
+                      {vm.formTitle}
                     </h2>{" "}
                     <p className="text-on-surface-variant font-medium max-w-lg">
-                      {" "}
-                      Submit your project parameters for a professional ROI
-                      assessment and preliminary engineering scope.{" "}
+                      {vm.formSummary}
                     </p>{" "}
                   </div>{" "}
                   <form
@@ -1833,10 +2299,7 @@ function ContactBody() {
                       <div className="text-[11px] font-bold text-on-surface-variant leading-tight">
                         {" "}
                         <label className="tracking-wide">
-                          {" "}
-                          I agree to receive Kinetic Precision project insights
-                          and updates. Preferences can be managed at any
-                          time.{" "}
+                          {vm.consentCopy}
                         </label>{" "}
                       </div>{" "}
                     </div>{" "}
@@ -1844,8 +2307,7 @@ function ContactBody() {
                       className="w-full md:w-auto bg-secondary text-white px-12 py-5 rounded-none font-black text-xs tracking-[0.2em] hover:bg-primary transition-all duration-300 shadow-xl shadow-secondary/10"
                       type="submit"
                     >
-                      {" "}
-                      Initiate Consultation{" "}
+                      {vm.submitLabel}
                     </button>{" "}
                   </form>{" "}
                 </div>{" "}
@@ -1853,9 +2315,9 @@ function ContactBody() {
                   {" "}
                   <div className="absolute inset-0 bg-primary/20 z-10 mix-blend-multiply" />{" "}
                   <img
-                    alt="Industrial map style"
+                    alt={vm.mapImageAlt}
                     className="w-full h-full object-cover grayscale brightness-50"
-                    src="/downloads/about/about-building-banner.webp"
+                    src={vm.mapImage}
                   />{" "}
                   <div className="absolute bottom-4 left-4 z-20">
                     {" "}
@@ -1863,8 +2325,7 @@ function ContactBody() {
                       {" "}
                       <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />{" "}
                       <span className="text-[10px] font-black text-white tracking-widest">
-                        {" "}
-                        Global Logistics Hub{" "}
+                        {vm.mapLabel}
                       </span>{" "}
                     </div>{" "}
                   </div>{" "}
@@ -1910,11 +2371,108 @@ function ContactBody() {
 export function StructuredStaticPage({ page }) {
   let body = null;
   if (page.kind === "home-page") {
-    body = <HomeBody />;
+    body = <HomeBody page={page} />;
   } else if (page.kind === "about-page") {
-    body = <AboutBody />;
+    body = <AboutBody page={page} />;
   } else if (page.kind === "contact-page") {
-    body = <ContactBody />;
+    body = <ContactBody page={page} />;
+  } else if (page.kind === "policy-page") {
+    body = (
+      <main className="mx-auto flex w-full max-w-[1100px] flex-col gap-10 px-6 py-16 md:px-10">
+        <section className="rounded-[28px] border border-[#d9dde5] bg-white px-8 py-10 shadow-[0_24px_80px_rgba(0,23,54,0.06)] md:px-12 md:py-14">
+          <div className="max-w-3xl">
+            <p className="mb-4 text-[11px] font-black uppercase tracking-[0.28em] text-[#fe6b00]">
+              {page.data.kicker || "Legal Information"}
+            </p>
+            <h1 className="text-4xl font-black tracking-tight text-[#001736] md:text-5xl">
+              {page.data.heroTitle || page.data.title}
+            </h1>
+            <p className="mt-6 max-w-3xl text-base leading-8 text-[#58606b] md:text-lg">
+              {page.data.heroSummary || page.data.summary}
+            </p>
+          </div>
+          {page.data.metrics?.length ? (
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
+              {page.data.metrics.map((metric) => (
+                <article
+                  className="rounded-[22px] border border-[#d9dde5] bg-[#f8f9fb] px-6 py-6"
+                  key={metric.label}
+                >
+                  <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[#58606b]">
+                    {metric.label}
+                  </p>
+                  <p className="mt-3 text-2xl font-black tracking-tight text-[#001736]">
+                    {metric.value}
+                  </p>
+                </article>
+              ))}
+            </div>
+          ) : null}
+        </section>
+
+        {page.data.features?.length ? (
+          <section className="grid gap-5 md:grid-cols-3">
+            {page.data.features.map((feature) => (
+              <article
+                className="rounded-[24px] border border-[#d9dde5] bg-white px-7 py-7 shadow-[0_16px_50px_rgba(0,23,54,0.05)]"
+                key={feature.title}
+              >
+                <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[#fe6b00]">
+                  {feature.label}
+                </p>
+                <h2 className="mt-4 text-2xl font-black tracking-tight text-[#001736]">
+                  {feature.title}
+                </h2>
+                <p className="mt-4 text-sm leading-7 text-[#58606b]">{feature.description}</p>
+              </article>
+            ))}
+          </section>
+        ) : null}
+
+        {page.data.integrations?.length ? (
+          <section className="rounded-[24px] border border-[#d9dde5] bg-[#001736] px-8 py-8 text-white md:px-10">
+            <p className="text-[11px] font-black uppercase tracking-[0.28em] text-[#ffb36d]">
+              Key Conditions
+            </p>
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {page.data.integrations.map((item) => (
+                <article
+                  className="rounded-[20px] border border-white/12 bg-white/5 px-5 py-5"
+                  key={item}
+                >
+                  <p className="text-sm leading-7 text-white/82">{item}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        <section className="rounded-[28px] border border-[#d9dde5] bg-white px-8 py-10 shadow-[0_24px_80px_rgba(0,23,54,0.06)] md:px-12">
+          <div className="prose prose-slate max-w-none prose-headings:font-black prose-headings:text-[#001736] prose-p:text-[#58606b] prose-p:leading-8 prose-li:text-[#58606b] prose-li:leading-8 prose-strong:text-[#001736]">
+            <page.data.Content />
+          </div>
+        </section>
+
+        {page.data.faqs?.length ? (
+          <section className="rounded-[24px] border border-[#d9dde5] bg-white px-8 py-8 shadow-[0_16px_50px_rgba(0,23,54,0.05)] md:px-10">
+            <h2 className="text-3xl font-black tracking-tight text-[#001736]">
+              Frequently Asked Questions
+            </h2>
+            <div className="mt-8 grid gap-5">
+              {page.data.faqs.map((faq) => (
+                <article
+                  className="rounded-[18px] border border-[#d9dde5] bg-[#f8f9fb] px-6 py-6"
+                  key={faq.question}
+                >
+                  <h3 className="text-lg font-black text-[#001736]">{faq.question}</h3>
+                  <p className="mt-3 text-sm leading-7 text-[#58606b]">{faq.answer}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
+      </main>
+    );
   }
   if (!body) {
     return null;

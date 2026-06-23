@@ -1,11 +1,18 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { PublicPageChrome } from "@/components/public-shell";
 import CountUpValue from "@/components/CountUpValue";
 import WarehouseFlowSimulation from "@/components/WarehouseFlowSimulation";
 
-function LiteYouTubeEmbed({ title, videoId }) {
+function LiteYouTubeEmbed({
+  title,
+  videoId,
+  posterUrl: customPosterUrl,
+  overlayClassName = "bg-gradient-to-t from-secondary/72 via-secondary/16 to-secondary/10",
+  children,
+}) {
   const embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
-  const posterUrl = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+  const posterUrl =
+    customPosterUrl || `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
 
   return (
     <div
@@ -24,11 +31,11 @@ function LiteYouTubeEmbed({ title, videoId }) {
           loading="lazy"
           src={posterUrl}
         />
-        <span className="absolute inset-0 bg-gradient-to-t from-secondary/72 via-secondary/16 to-secondary/10" />
-        <span className="absolute flex h-20 w-20 items-center justify-center rounded-full bg-white/92 text-secondary shadow-[0_20px_44px_rgba(0,23,54,0.26)] transition-transform duration-300 group-hover:scale-105">
+        <span className={`absolute inset-0 ${overlayClassName}`} />
+        <span className="absolute flex h-18 w-18 items-center justify-center rounded-full bg-secondary text-white shadow-[0_20px_44px_rgba(255,145,77,0.36)] ring-2 ring-white/28 transition-transform duration-300 group-hover:scale-[1.06] group-hover:ring-white/44">
           <svg
             aria-hidden="true"
-            className="ml-1 h-8 w-8"
+            className="ml-0.5 h-8 w-8"
             fill="currentColor"
             viewBox="0 0 24 24"
           >
@@ -52,6 +59,11 @@ function LiteYouTubeEmbed({ title, videoId }) {
           />
         </a>
       </noscript>
+      {children ? (
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 p-10">
+          {children}
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -132,6 +144,50 @@ const PRODUCT_DETAIL_VISUALS = {
       "/assets/images/factory-transport-1.webp",
     ],
     integrationImage: "/downloads/ground-handling-forklift-agv.png",
+  },
+  "lifting-agv": {
+    heroImage: "/assets/images/lifting-agv-top-lift.webp",
+    featureImage: "/assets/images/lifting-agv-workstation.webp",
+    scenarioImages: [
+      "/assets/images/lifting-agv-workstation.webp",
+      PRODUCT_CARD_IMAGES["lifting-agv"],
+      PRODUCT_CARD_IMAGES["storage-agv"],
+      PRODUCT_CARD_IMAGES["agv-forklift"],
+    ],
+    integrationImage: "/assets/images/lifting-agv-workstation.webp",
+  },
+  "storage-agv": {
+    heroImage: "/assets/images/storage-agv-hero.webp",
+    featureImage: "/assets/images/storage-agv-release.webp",
+    scenarioImages: [
+      "/assets/images/storage-agv-release.webp",
+      PRODUCT_CARD_IMAGES["storage-agv"],
+      PRODUCT_CARD_IMAGES["agv-roller"],
+      PRODUCT_CARD_IMAGES["agv-forklift"],
+    ],
+    integrationImage: "/assets/images/storage-agv-release.webp",
+  },
+  "agv-roller": {
+    heroImage: "/assets/images/agv-roller-hero.webp",
+    featureImage: "/assets/images/agv-roller-scenario-1.webp",
+    scenarioImages: [
+      "/assets/images/agv-roller-scenario-1.webp",
+      "/assets/images/agv-roller-scenario-2.webp",
+      PRODUCT_CARD_IMAGES["agv-roller"],
+      PRODUCT_CARD_IMAGES["lifting-agv"],
+    ],
+    integrationImage: "/assets/images/agv-roller-ecosystem.webp",
+  },
+  "composite-mobile-robot": {
+    heroImage: "/assets/images/cmr-hero.webp",
+    featureImage: "/assets/images/cmr-feature.webp",
+    scenarioImages: [
+      "/assets/images/cmr-scenario-1.webp",
+      "/assets/images/cmr-point-of-use.webp",
+      PRODUCT_CARD_IMAGES["composite-mobile-robot"],
+      PRODUCT_CARD_IMAGES["agv-roller"],
+    ],
+    integrationImage: "/assets/images/cmr-feature.webp",
   },
   default: {
     heroImage: "/products/chacheAGV2.png",
@@ -330,7 +386,7 @@ const PRODUCT_SPEC_LIBRARY = {
   "composite-mobile-robot": {
     quickSpecs: [
       { value: "10kg", label: "Handling" },
-      { value: "2.5m/s", label: "Speed" },
+      { value: "1.2-1.5m", label: "Speed" },
       { value: "0.02mm", label: "Arm Precision" },
     ],
     bullets: [
@@ -342,7 +398,7 @@ const PRODUCT_SPEC_LIBRARY = {
     ],
     technicalSpecs: [
       { label: "Arm Precision", value: "0.02mm repeatability" },
-      { label: "Transit Speed", value: "Up to 2.5m/s" },
+      { label: "Transit Speed", value: "1.2-1.5m" },
       { label: "Handling Capacity", value: "Up to 10kg parts" },
       { label: "Manipulation Mode", value: "6-axis cobot + AMR base" },
       { label: "Guidance", value: "Vision-guided task execution" },
@@ -365,6 +421,33 @@ const SOLUTION_DETAIL_VISUALS = {
     ],
     synergyImage:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuAjENgwVmt-9umH_oW_6NeCrbqwRoGF2eVJPDmbW0LjCc9E4Pyyevy7-WMp4bZug-3XFptCxE-ilczeHDAqOJ8WTqagMHn_n86kFEU8dIJggTcC3AXJluAmaK9x-WRoP4o21vlMH-YmTgLTUZy3TcubjJK88PU-ple7kX4sBKixM_zvURe7IDahX4rlhHPKIGBsGf6srSHIIRtSRXihj_qIT0Je8n-QCarVml1c_g15ZC13XWb1aW4nEzEcbcc6qiwS5MOluOcQuv65",
+  },
+  "goods-to-person-picking-system": {
+    heroImage: "/assets/images/goods-to-person-hero-square.png",
+    scenarioImages: [
+      "/assets/images/picking-case-1.png",
+      "/assets/images/picking-case-2.png",
+      "/assets/images/picking-case-3.png",
+    ],
+    synergyImage: "/assets/images/picking-case-3.png",
+  },
+  "machine-tending-automation": {
+    heroImage: "/assets/images/cmr-hero-complete.webp",
+    scenarioImages: [
+      "/assets/images/cmr-scenario-1.webp",
+      "/assets/images/cmr-feature.webp",
+      "/assets/images/cmr-point-of-use.webp",
+    ],
+    synergyImage: "/assets/images/cmr-point-of-use.webp",
+  },
+  "food-beverage-fmcg-automation": {
+    heroImage: "/assets/images/fmcg-agv-hero-square-centered.png",
+    scenarioImages: [
+      "/assets/images/fmcg-scenario-pallet-sharp.png",
+      "/assets/images/fmcg-scenario-production-clean.png",
+      "/assets/images/factory-transport-1.webp",
+    ],
+    synergyImage: "/downloads/home-smart-logistics-solutions.webp",
   },
   default: {
     heroImage:
@@ -392,7 +475,7 @@ const CASE_OVERVIEW_IMAGES = {
 };
 const CASE_CATEGORY_VISUALS = {
   asrs: {
-    hero: "https://lh3.googleusercontent.com/aida-public/AB6AXuDaYfi_VgscfniX2CtLQhMwU73LU12yVp3_l0b1mLjBUgamZfSbPhIwKxQcgfXyqwNpb5it7Pj9OT-q1pCMHtbi-5-xnGZ42xkCxRhYSJmpFFeTtiMVtaC3HrHyuojv6HjazK4teSg8RH0Lk95YyxEMmli1l1L2AOvRWtAf2R6kIW6itG8IP60WRIUQTcmpgd6YmWvG7RsHa798tc3cXRl-lSLQcAzkVdv8rjhu2uyumX0aMlLgDPO5gveyt0hrcy2tGy-oiJU8HpIi",
+    hero: "/downloads/asrs-hero-racks.png",
     images: [
       "/assets/images/case-study-3.webp",
       "/assets/images/case-study-2-1.webp",
@@ -451,7 +534,7 @@ function sectionIntro(kicker, title, summary) {
         {" "}
         {kicker}{" "}
       </span>{" "}
-      <h1 className="font-headline text-6xl md:text-9xl font-extrabold leading-[0.9] tracking-tighter mb-8 text-kern-tight">
+      <h1 className="font-headline text-5xl sm:text-6xl md:text-7xl xl:text-[6.5rem] font-extrabold leading-[0.92] tracking-tighter mb-8 text-kern-tight">
         {" "}
         {title}{" "}
       </h1>{" "}
@@ -480,23 +563,33 @@ function ProductHeroSection({
   summary,
   imageSrc,
   imageAlt,
+  backgroundImageSrc = "",
   quickSpecs = [],
   featureTags = [],
   imageClassName = "",
   titleClassName = "",
   summaryClassName = "",
   ctaWrapperClassName = "",
+  hideIllustration = false,
 }) {
   return (
     <section className="relative min-h-[720px] flex items-center overflow-hidden kinetic-gradient">
-      <div className="absolute inset-0 opacity-20 mix-blend-overlay">
+      <div className="absolute inset-0">
         <img
           alt="Warehouse environment"
-          className="w-full h-full object-cover"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDztEsOiohIzS3uZT5jZv_eW-vOJH0jI11qAX2nx8lFrTiYIhuljsB0j3VOzEl6w2ILYs3td4-2Dh0s38HPd_3-oO-Zg30C25w7VyqfkPr9br9f1Nnp0RaSC6Eb8JX1rt2aY1V_BFDJekWqtqruUlguA-5m3azKSFu26a0D61ziK_7pY619knYl-V7FKL1Z0HzKvd1Dn4tkboyKAl0egzcRgJ9_TP1Ajp5U8_cynS-v-ScVpL8GbgahHSQov2PgoPZdPV51OIivRi7e"
+          className={`w-full h-full object-cover ${backgroundImageSrc ? "opacity-100" : "opacity-20 mix-blend-overlay"}`.trim()}
+          src={
+            backgroundImageSrc ||
+            "https://lh3.googleusercontent.com/aida-public/AB6AXuDztEsOiohIzS3uZT5jZv_eW-vOJH0jI11qAX2nx8lFrTiYIhuljsB0j3VOzEl6w2ILYs3td4-2Dh0s38HPd_3-oO-Zg30C25w7VyqfkPr9br9f1Nnp0RaSC6Eb8JX1rt2aY1V_BFDJekWqtqruUlguA-5m3azKSFu26a0D61ziK_7pY619knYl-V7FKL1Z0HzKvd1Dn4tkboyKAl0egzcRgJ9_TP1Ajp5U8_cynS-v-ScVpL8GbgahHSQov2PgoPZdPV51OIivRi7e"
+          }
         />
       </div>
-      <div className="relative max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
+      {backgroundImageSrc ? (
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,22,54,0.74)_0%,rgba(0,29,72,0.54)_28%,rgba(3,40,95,0.16)_56%,rgba(3,40,95,0.08)_100%)]" />
+      ) : null}
+      <div
+        className={`relative max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-1 ${hideIllustration ? "lg:grid-cols-1" : "lg:grid-cols-2"} gap-16 items-center w-full`.trim()}
+      >
         <div className="space-y-8 py-20">
           <span className="hsa-ui-kicker hsa-ui-kicker--light">{kicker}</span>
           <h1
@@ -524,14 +617,16 @@ function ProductHeroSection({
             </Link>
           </div>
         </div>
-        <div className="relative hidden lg:block">
-          <div className="absolute -inset-20 bg-secondary/10 blur-[150px] rounded-full" />
-          <img
-            alt={imageAlt}
-            className={`relative z-10 w-full drop-shadow-[0_35px_35px_rgba(0,0,0,0.6)] ${imageClassName}`.trim()}
-            src={imageSrc}
-          />
-        </div>
+        {!hideIllustration ? (
+          <div className="relative hidden lg:block">
+            <div className="absolute -inset-20 bg-secondary/10 blur-[150px] rounded-full" />
+            <img
+              alt={imageAlt}
+              className={`relative z-10 w-full drop-shadow-[0_35px_35px_rgba(0,0,0,0.6)] ${imageClassName}`.trim()}
+              src={imageSrc}
+            />
+          </div>
+        ) : null}
       </div>
     </section>
   );
@@ -961,7 +1056,7 @@ function ProductOverviewBody({ page }) {
   return (
     <main>
       {" "}
-      <section className="relative min-h-[700px] flex items-center overflow-hidden bg-primary text-white">
+      <section className="relative min-h-[760px] md:min-h-[700px] flex items-center overflow-hidden bg-primary text-white">
         {" "}
         <div className="absolute inset-0 opacity-40">
           {" "}
@@ -971,19 +1066,19 @@ function ProductOverviewBody({ page }) {
             src="/downloads/1.png"
           />{" "}
         </div>{" "}
-        <div className="max-w-screen-2xl mx-auto px-8 relative z-10 w-full">
+        <div className="max-w-screen-2xl mx-auto px-8 pt-16 pb-12 md:py-0 relative z-10 w-full">
           {" "}
           <div className="max-w-4xl">
             {" "}
             {sectionIntro(
               page.data.kicker,
-              "Warehouse Automation",
+              page.data.heroTitle || page.data.title || "Warehouse Automation",
               page.data.summary,
             )}{" "}
-            <div className="flex flex-wrap items-center gap-10">
+            <div className="flex flex-wrap items-center gap-6 md:gap-10">
               {" "}
               <Link
-                className="bg-secondary text-white px-10 py-4 font-bold tracking-[0.2em] text-[10px] shadow-lg hover:bg-white hover:text-primary transition-all"
+                className="bg-secondary text-white px-8 md:px-10 py-4 font-bold tracking-[0.18em] text-[10px] shadow-lg hover:bg-white hover:text-primary transition-all"
                 href="/contact"
               >
                 {" "}
@@ -1118,7 +1213,7 @@ function ProductOverviewBody({ page }) {
 function ProductDetailBody({ page }) {
   const slug = getSlug(page);
   if (slug === "agv-forklift") {
-    return <AgvForkliftBody />;
+    return <AgvForkliftBody page={page} />;
   }
   if (slug === "ground-handling-forklift-agv") {
     return <GroundHandlingForkliftAgvBody page={page} />;
@@ -1127,13 +1222,13 @@ function ProductDetailBody({ page }) {
     return <LiftingAgvBody page={page} />;
   }
   if (slug === "storage-agv") {
-    return <StorageAgvBody />;
+    return <StorageAgvBody page={page} />;
   }
   if (slug === "agv-roller") {
-    return <AgvRollerBody />;
+    return <AgvRollerBody page={page} />;
   }
   if (slug === "composite-mobile-robot") {
-    return <CompositeMobileRobotBody />;
+    return <CompositeMobileRobotBody page={page} />;
   }
   const visuals =
     PRODUCT_DETAIL_VISUALS[slug] || PRODUCT_DETAIL_VISUALS.default;
@@ -1360,270 +1455,339 @@ function ProductDetailBody({ page }) {
   );
 }
 function AgvForkliftBody() {
-  const quickSpecs = getProductSpecs("agv-forklift").quickSpecs || [];
-
   return (
     <main>
-      {" "}
-      <ProductHeroSection
-        featureTags={[
-          "High-rack pallet handling",
-          "SLAM guidance",
-          "WMS and WCS integration",
-        ]}
-        imageAlt="Forklift Stacker AGV unit"
-        imageSrc="/products/chacheAGV1.png"
-        kicker="Industrial Robotics"
-        quickSpecs={quickSpecs}
-        summary="The backbone of autonomous pallet movement and high-rack storage, engineered for stable pallet handling, dense warehouse travel, and reliable integration into live facility operations."
-        title="Forklift Stacker AGV"
-      />{" "}
-      <ProductPerformanceSection
-        capabilities={[
-          "Millimeter-level pallet positioning in shared industrial aisles",
-          "High-rack putaway and retrieval with stable mast control",
-          "Opportunity charging logic for continuous shift coverage",
-          "Safety sensing with LiDAR, ultrasonic, and bumper protection",
-        ]}
-        eyebrow="Precision Engineering"
-        featureCopy="Integrated safety systems combine ultrasonic sensing, 3D cameras, and bumper feedback to keep pallet moves stable in mixed traffic conditions."
-        featureImage="https://lh3.googleusercontent.com/aida-public/AB6AXuBVGHLQyPWswkMy-WbK_JVcGyrHGLxBjQHB6BaQgaH5AO6apmCESe8-F4IztySJ_YXtdQjqaM9UtkmWha_-9pLHdAbJJMODpLI4DHKLtgbXJPw6U1CtffR0dVzpxDWQ1og5H4ng8D8nsjLDBpH7z-ev2nnRJpzOnq299vPA2fSp3XdW_2FkcVI4f_HQICK6lpXM8Ywu0d4LpluwrKWyfx7v1EW1Xw7Rxorok-yNdXCsPYi86oOiPdny4QW2DN3pkTUgjFUWjTHf4jnC"
-        featureImageAlt="Forklift sensor detail"
-        featureTitle="Multi-sensor fusion for live warehouse safety"
-        leadCopy="Equipped with high-fidelity LiDAR and SLAM algorithms, the Forklift Stacker AGV maps its environment in real time and executes pallet travel with the positional accuracy high-throughput sites need."
-        leadTitle="Autonomous navigation tuned for pallet flow."
-        secondaryCards={[
-          {
-            title: "24/7 operational availability",
-            copy: "Automated charging logic routes low-battery vehicles during natural demand lulls so fleet throughput stays stable across the shift.",
-          },
-          {
-            title: "Heavy-load capacity",
-            copy: "Designed for industrial pallets up to 1,400kg with lift performance ready for high-rack and buffer-zone movement.",
-          },
-        ]}
-        statCards={quickSpecs}
-        summary="A denser view of the engineering snapshot: motion accuracy, safety architecture, energy logic, and the practical handling capabilities buyers usually want to confirm before the technical review."
-        title="Performance built for real warehouse throughput."
-      />{" "}
-      <ProductTechnicalDataSection slug="agv-forklift" />{" "}
+      <section className="relative min-h-[700px] xl:min-h-[760px] flex items-center overflow-hidden kinetic-gradient">
+        <div className="absolute inset-0">
+          <img
+            alt="Warehouse environment"
+            className="w-full h-full object-cover object-center opacity-100"
+            src="/downloads/agv-forklift-hero-wide.png"
+          />
+        </div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,21,47,0.74)_0%,rgba(14,35,71,0.58)_28%,rgba(18,49,92,0.22)_56%,rgba(18,49,92,0.08)_100%)]" />
+        <div className="relative max-w-[1440px] mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-1 gap-16 items-center w-full">
+          <div className="space-y-8 py-20">
+            <div className="flex items-center gap-3">
+              <span className="w-8 h-px bg-white/80" />
+              <span className="text-white text-[10px] font-black uppercase tracking-[0.4em]">
+                Industrial Robotics
+              </span>
+            </div>
+            <h1 className="text-6xl md:text-8xl font-extrabold text-white leading-[0.95] tracking-tighter uppercase">
+              AGV
+              <br />
+              <span className="text-white">Forklift</span>
+            </h1>
+            <p className="text-white text-lg md:text-xl max-w-xl leading-relaxed font-body">
+              The backbone of autonomous pallet movement and high-rack storage. Engineered for
+              zero-tolerance logistics and seamless facility integration.
+            </p>
+            <div className="flex flex-wrap gap-4 pt-4">
+              <Link
+                className="bg-secondary text-white px-10 py-4 rounded-sm font-bold text-xs tracking-[0.2em] uppercase hover:bg-secondary-container transition-all"
+                href="/contact"
+              >
+                View Specifications
+              </Link>
+              <button className="border border-white/20 text-white px-10 py-4 rounded-sm font-bold text-xs tracking-[0.2em] uppercase hover:bg-white/10 transition-all">
+                Download Brochure
+                </button>
+              </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 px-6 md:px-12 max-w-[1440px] mx-auto">
+        <div className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-8">
+          <div>
+            <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-secondary mb-3">
+              Precision Engineering
+            </h2>
+            <h3 className="text-5xl md:text-6xl font-black text-primary tracking-tighter uppercase leading-none">
+              Performance
+              <br />
+              Redefined.
+            </h3>
+          </div>
+          <p className="text-on-surface-variant max-w-md text-lg">
+            Every component is stress-tested for 24/7 reliability in demanding high-throughput
+            environments.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          <div className="md:col-span-8 bg-white p-10 md:p-14 border border-outline-variant/30 flex flex-col justify-between group overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-secondary/5 -mr-16 -mt-16 rounded-full group-hover:scale-150 transition-transform duration-700" />
+            <div>
+              <div className="w-12 h-12 bg-primary flex items-center justify-center mb-8">
+                <span className="material-symbols-outlined text-white">navigation</span>
+              </div>
+              <h4 className="text-3xl font-black text-primary mb-6 uppercase tracking-tight">
+                Autonomous SLAM Navigation
+              </h4>
+              <p className="text-on-surface-variant text-lg max-w-2xl mb-12 font-body leading-relaxed">
+                Equipped with high-fidelity LiDAR and SLAM algorithms, the AGV Forklift maps its
+                environment in real-time, navigating complex warehouse floors with millimeter
+                precision without reflectors.
+              </p>
+            </div>
+            <div className="grid grid-cols-3 gap-8 pt-10 border-t border-outline-variant/30">
+              {[
+                ["+/- 5mm", "Stop Accuracy"],
+                ["360 deg", "Obstacle Detection"],
+                ["L5", "Autonomy Level"]
+              ].map(([value, label]) => (
+                <div key={label}>
+                  <div className="text-3xl font-black text-primary tracking-tighter">{value}</div>
+                  <div className="text-[10px] font-black uppercase tracking-widest text-outline mt-1">
+                    {label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="md:col-span-4 bg-primary p-12 text-white flex flex-col justify-center relative overflow-hidden">
+            <div className="absolute bottom-0 right-0 opacity-10">
+              <span className="material-symbols-outlined text-[10rem]">bolt</span>
+            </div>
+            <div className="w-12 h-12 bg-secondary flex items-center justify-center mb-8">
+              <span className="material-symbols-outlined text-white">battery_charging_full</span>
+            </div>
+            <h4 className="text-2xl font-black mb-4 uppercase tracking-tight">
+              24/7 Operational Availability
+            </h4>
+            <p className="text-on-primary-container text-sm leading-relaxed font-body">
+              Automated opportunity charging ensures your fleet never stops. The system intelligently
+              routes low-battery units during natural demand lulls.
+            </p>
+          </div>
+
+          <div className="md:col-span-4 bg-surface-container-low p-12 border border-outline-variant/30 flex flex-col justify-center">
+            <div className="w-12 h-12 bg-primary/10 flex items-center justify-center mb-8">
+              <span className="material-symbols-outlined text-primary">precision_manufacturing</span>
+            </div>
+            <h4 className="text-2xl font-black text-primary mb-4 uppercase tracking-tight">
+              Heavy-Load Capacity
+            </h4>
+            <p className="text-on-surface-variant text-sm leading-relaxed font-body">
+              Designed for the heaviest industrial pallets. Capacity up to 2,500kg with variable
+              lift heights up to 10 meters for high-rack integration.
+            </p>
+          </div>
+
+          <div className="md:col-span-8 overflow-hidden relative group h-96">
+            <img
+              alt="Forklift sensor detail"
+              className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVGHLQyPWswkMy-WbK_JVcGyrHGLxBjQHB6BaQgaH5AO6apmCESe8-F4IztySJ_YXtdQjqaM9UtkmWha_-9pLHdAbJJMODpLI4DHKLtgbXJPw6U1CtffR0dVzpxDWQ1og5H4ng8D8nsjLDBpH7z-ev2nnRJpzOnq299vPA2fSp3XdW_2FkcVI4f_HQICK6lpXM8Ywu0d4LpluwrKWyfx7v1EW1Xw7Rxorok-yNdXCsPYi86oOiPdny4QW2DN3pkTUgjFUWjTHf4jnC"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent p-12 flex flex-col justify-end">
+              <h4 className="text-2xl font-black text-white mb-3 uppercase tracking-tight">
+                Multi-Sensor Fusion
+              </h4>
+              <p className="text-on-primary-container/80 max-w-md text-sm font-body leading-relaxed italic">
+                Integrated safety systems combining ultrasonic, 3D cameras, and pressure-sensitive
+                bumpers for zero-incident operation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-primary py-32 border-y border-white/10">
-        {" "}
         <div className="max-w-[1440px] mx-auto px-6 md:px-12">
-          {" "}
           <div className="flex flex-col lg:flex-row gap-20">
-            {" "}
             <div className="lg:w-1/3">
-              {" "}
-              <h2 className="text-[10px] font-black tracking-[0.4em] text-secondary mb-4">
-                {" "}
-                Versatile Deployment{" "}
-              </h2>{" "}
-              <h3 className="text-5xl font-black text-white tracking-tighter mb-10 leading-none ">
-                {" "}
-                Designed for <br /> every flow.{" "}
-              </h3>{" "}
+              <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-secondary mb-4">
+                Versatile Deployment
+              </h2>
+              <h3 className="text-5xl font-black text-white tracking-tighter mb-10 leading-none uppercase">
+                Designed for
+                <br />
+                every flow.
+              </h3>
               <p className="text-on-primary-container text-lg mb-12 font-body leading-relaxed">
-                {" "}
-                From internal factory transport routes to the final dispatch
-                line, our AGV Forklifts adapt to your specific workflow
-                requirements.{" "}
-              </p>{" "}
+                From the receiving dock to the final dispatch line, our AGV Forklifts adapt to your
+                specific workflow requirements.
+              </p>
               <div className="space-y-3">
-                {" "}
-                {[
-                  "Pallet Transport",
-                  "Rack Interface",
-                  "Factory Transport",
-                ].map((item, index) => (
+                {["Pallet Transport", "Rack Interface", "Dock Transfer"].map((item, index) => (
                   <div
-                    className={`flex items-center gap-4 p-5 bg-white/5 border-l-4 transition-all ${index === 0 ? "border-secondary" : "border-transparent hover:border-white/20 cursor-pointer"}`}
+                    className={`flex items-center gap-4 p-5 bg-white/5 border-l-4 transition-all ${
+                      index === 0
+                        ? "border-secondary"
+                        : "border-transparent hover:border-white/20 cursor-pointer"
+                    }`}
                     key={item}
                   >
-                    {" "}
                     <span
-                      className={`material-symbols-outlined ${index === 0 ? "text-secondary" : "text-white/30"}`}
+                      className={`material-symbols-outlined ${
+                        index === 0 ? "text-secondary" : "text-white/30"
+                      }`}
                     >
-                      {" "}
-                      check_circle{" "}
-                    </span>{" "}
+                      check_circle
+                    </span>
                     <span
-                      className={`font-bold text-xs tracking-widest ${index === 0 ? "text-white" : "text-white/50"}`}
+                      className={`font-bold text-xs tracking-widest uppercase ${
+                        index === 0 ? "text-white" : "text-white/50"
+                      }`}
                     >
-                      {" "}
-                      {item}{" "}
-                    </span>{" "}
+                      {item}
+                    </span>
                   </div>
-                ))}{" "}
-              </div>{" "}
-            </div>{" "}
+                ))}
+              </div>
+            </div>
             <div className="lg:w-2/3">
-              {" "}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {" "}
                 {[
                   [
                     "Pallet Transport",
                     "High-speed point-to-point movement across large facilities, replacing manual tuggers for repetitive long-haul tasks.",
-                    "https://lh3.googleusercontent.com/aida-public/AB6AXuCYFcOkg43a4CILwgiFZ4fupjXTw8wkNj0bSGVp5-fLb4OaIVeIgnuMuR_l6GMWc5u5AyW6hqZaVjz9v35NWeQ0HZY6GGeT3rUa9-74l1Pn2RYdmm4WQyphqYZwZ3qG0GjZq5waCI7nNxyZyvvtJnvcMFGeVPqLPwf6LdW6ahPdLSoYhJrk76OvITC1GocD0bl6iRvfN0MGnCl8xBxNQu8FEsynzMOVhnGj1qB0x0qgiljWmRXY9zFVc5gpKvl8PuV_jW8gX4MgbnEH",
+                    "/assets/images/ground-handling-pallet-transport.png"
                   ],
                   [
                     "Rack Interface",
-                    "Precision vertical lifting for placing and retrieving pallets from intelligent high-density racking systems up to 2M.",
-                    "/assets/images/rack-interface-1.avif",
+                    "Precision vertical lifting for placing and retrieving pallets from high-density racking systems up to 10m.",
+                    "https://lh3.googleusercontent.com/aida-public/AB6AXuCXVsMNRb6zsAKC01BgIlJzISS8gwYMnu07p0d46DN1n_GSvsoHtZHlZuwQA_8nm_qHRCyoiW8m8Nx8tlV19McZ8u3hyGHM2fSql3pWtiGGdo5Y0lqk38hLjENgaIMPffYcj59xoSNsBMuQpL4jQt-hK4-igEomEKcoDXMsvc-uNr5_hV1gF7haHC6hIjTKhPTLv8ZzfK46S9sPJBlTiF1eHP9zVenpziQsGY5ImCtzmk8LCiZ2M3wj7W7PZAIMPeyPKQp6W0PYzlUl"
                   ],
                   [
-                    "Factory Transport",
-                    "Seamlessly moving loads between production cells, staging areas, and automated storage systems across the factory floor.",
-                    "/assets/images/factory-transport-1.webp",
+                    "Dock Transfer",
+                    "Seamlessly moving loads from trailer unloading zones to staging areas or automated storage systems.",
+                    "https://lh3.googleusercontent.com/aida-public/AB6AXuDm-2anC4fgMzLdYXzmYB4jDZ575l2fRfFA2ZVGNJoRbRDM15dz0twtuS6eTSJfmxDGxNbSKl_Mx1Kcy6jb7_dOY5zckz0aH-0ZdW0PipiCLd681Ml6Daqv_T6-t-0Z8KsA0PLGA4_2h4YMyf1Pygs7el8fu4U1tZeZky5FmF2vXDK5nkm2k3BjqLv25D5rELB6Bml8e_L3c3X_DNE5neVpc_geVVD-5x6JzQBv67pGMQpE9Lln_0NlFkFUnlIvWEDiPwlh4IZI5-ab"
                   ],
                   [
                     "Line Feeding",
                     "Just-in-time delivery of components to manufacturing lines, ensuring zero downtime in production cycles.",
-                    "/assets/images/line-feeding-1.png",
-                  ],
+                    "/assets/images/ground-handling-line-feeding.png"
+                  ]
                 ].map(([title, copy, image]) => (
                   <div className="space-y-6 group" key={title}>
-                    {" "}
                     <div className="aspect-video overflow-hidden">
-                      {" "}
                       <img
                         alt={title}
                         className="w-full h-full object-cover transition-all duration-500"
                         src={image}
-                      />{" "}
-                    </div>{" "}
-                    <h4 className="text-xl font-black text-white tracking-tight">
-                      {title}
-                    </h4>{" "}
-                    <p className="text-on-primary-container text-sm font-body leading-relaxed">
-                      {copy}
-                    </p>{" "}
+                      />
+                    </div>
+                    <h4 className="text-xl font-black text-white uppercase tracking-tight">{title}</h4>
+                    <p className="text-on-primary-container text-sm font-body leading-relaxed">{copy}</p>
                   </div>
-                ))}{" "}
-              </div>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-32 bg-white text-primary overflow-hidden relative">
-        {" "}
         <div className="absolute -right-64 top-0 w-full h-full opacity-[0.03] pointer-events-none">
-          {" "}
-          <span className="material-symbols-outlined text-[60rem]">
-            hub
-          </span>{" "}
-        </div>{" "}
+          <span className="material-symbols-outlined text-[60rem]">hub</span>
+        </div>
         <div className="max-w-[1440px] mx-auto px-6 md:px-12 relative">
-          {" "}
           <div className="max-w-3xl mb-20">
-            {" "}
-            <h2 className="text-[10px] font-black tracking-[0.4em] text-secondary mb-4">
-              {" "}
-              Software Ecosystem{" "}
-            </h2>{" "}
-            <h3 className="text-5xl md:text-6xl font-black tracking-tighter mb-8 leading-none">
-              {" "}
-              Intelligent <br /> Integration.{" "}
-            </h3>{" "}
+            <h2 className="text-[10px] font-black uppercase tracking-[0.4em] text-secondary mb-4">
+              Software Ecosystem
+            </h2>
+            <h3 className="text-5xl md:text-6xl font-black tracking-tighter mb-8 uppercase leading-none">
+              Intelligent
+              <br />
+              Integration.
+            </h3>
             <p className="text-on-surface-variant text-xl leading-relaxed font-body">
-              {" "}
-              Our AGVs are fully integrated components of your digital supply
-              chain, communicating in real-time with existing WMS/WCS systems
-              for perfect synchronization.{" "}
-            </p>{" "}
-          </div>{" "}
+              Our AGVs are fully integrated components of your digital supply chain, communicating
+              in real-time with existing WMS/WCS systems for perfect synchronization.
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border border-outline-variant/30">
-            {" "}
             {[
               [
                 "settings_input_component",
                 "WMS/WCS Bridge",
-                "Direct API integration with SAP, Oracle, and Manhattan Associates. Zero-latency mission assignment and tracking.",
+                "Direct API integration with SAP, Oracle, and Manhattan Associates. Zero-latency mission assignment and tracking."
               ],
               [
                 "monitor_heart",
                 "Fleet Control",
-                "Centralized traffic management prevents congestion and optimizes route selection across the entire autonomous fleet.",
+                "Centralized traffic management prevents congestion and optimizes route selection across the entire autonomous fleet."
               ],
               [
                 "analytics",
                 "Predictive Analytics",
-                "Cloud-based telemetry monitors component health, predicting maintenance needs before they impact uptime.",
-              ],
+                "Cloud-based telemetry monitors component health, predicting maintenance needs before they impact uptime."
+              ]
             ].map(([icon, title, copy], index, list) => (
               <div
-                className={`p-12 hover:bg-surface-container-low transition-colors group ${index < list.length - 1 ? "border-r border-b md:border-b-0 border-outline-variant/30" : ""}`}
+                className={`p-12 hover:bg-surface-container-low transition-colors group ${
+                  index < list.length - 1 ? "border-r border-b md:border-b-0 border-outline-variant/30" : ""
+                }`}
                 key={title}
               >
-                {" "}
                 <div className="w-12 h-12 bg-primary flex items-center justify-center mb-8 group-hover:bg-secondary transition-colors">
-                  {" "}
-                  <span className="material-symbols-outlined text-white">
-                    {icon}
-                  </span>{" "}
-                </div>{" "}
-                <h4 className="text-xl font-black mb-4 tracking-tight">
-                  {title}
-                </h4>{" "}
-                <p className="text-on-surface-variant text-sm font-body leading-relaxed">
-                  {copy}
-                </p>{" "}
+                  <span className="material-symbols-outlined text-white">{icon}</span>
+                </div>
+                <h4 className="text-xl font-black mb-4 uppercase tracking-tight">{title}</h4>
+                <p className="text-on-surface-variant text-sm font-body leading-relaxed">{copy}</p>
               </div>
-            ))}{" "}
-          </div>{" "}
+            ))}
+          </div>
           <div className="mt-20 p-10 md:p-16 bg-primary text-white flex flex-col md:flex-row items-center gap-12 group">
-            {" "}
             <div className="flex-1">
-              {" "}
-              <h4 className="text-3xl font-black mb-4 tracking-tight">
-                {" "}
-                Request a System Compatibility Audit{" "}
-              </h4>{" "}
+              <h4 className="text-3xl font-black mb-4 uppercase tracking-tight">
+                Request a System Compatibility Audit
+              </h4>
               <p className="text-on-primary-container text-lg font-body max-w-2xl opacity-80">
-                {" "}
-                Our engineering team will assess your current infrastructure and
-                provide a detailed integration roadmap for a seamless
-                transition.{" "}
-              </p>{" "}
-            </div>{" "}
+                Our engineering team will assess your current infrastructure and provide a detailed
+                integration roadmap for a seamless transition.
+              </p>
+            </div>
             <Link
-              className="bg-secondary text-white px-10 py-5 rounded-sm font-bold text-xs tracking-[0.2em] hover:bg-secondary-container transition-all whitespace-nowrap shadow-xl"
+              className="bg-secondary text-white px-10 py-5 rounded-sm font-bold text-xs tracking-[0.2em] uppercase hover:bg-secondary-container transition-all whitespace-nowrap shadow-xl"
               href="/contact"
             >
-              {" "}
-              Talk to an Architect{" "}
-            </Link>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+              Talk to an Architect
+            </Link>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
+
 function GroundHandlingForkliftAgvBody({ page }) {
   const features = page.data.features || [];
   const scenarios = page.data.scenarios || [];
   const integrations = page.data.integrations || [];
   const quickSpecs = getProductSpecs("ground-handling-forklift-agv").quickSpecs || [];
+  const heroTitle =
+    page.data.heroTitle || page.data.title || "Ground Handling Forklift AGV";
+  const heroSummary =
+    page.data.heroSummary ||
+    page.data.summary ||
+    "Laser-guided pallet transfer for horizontal movement, short-distance stacking, and internal logistics dispatch where dense aisles, mixed traffic, and stable floor-level handling all matter.";
+  const heroKicker = page.data.kicker || "Ground Handling Series";
 
   return (
     <main>
       {" "}
       <ProductHeroSection
+        backgroundImageSrc="/downloads/ground-handling-forklift-agv-hero-wide.png"
         featureTags={[
           scenarios[0] || "Pallet transfer",
           scenarios[1] || "Short-haul dispatch",
           integrations[0] || "Laser SLAM control",
         ]}
+        hideIllustration={true}
         imageAlt="Ground Handling Forklift AGV hero"
         imageSrc="/downloads/ground-handling-forklift-agv.png"
-        kicker="Ground Handling Series"
+        kicker={heroKicker}
         quickSpecs={quickSpecs}
-        summary="Laser-guided pallet transfer for horizontal movement, short-distance stacking, and internal logistics dispatch where dense aisles, mixed traffic, and stable floor-level handling all matter."
+        summary={heroSummary}
         ctaWrapperClassName="-mt-[22px] pt-0"
         summaryClassName="md:max-w-2xl"
         titleClassName="text-5xl md:text-7xl"
-        title="Ground Handling Forklift AGV"
+        title={heroTitle}
       />{" "}
       <ProductIntroductionSection slug="ground-handling-forklift-agv" />{" "}
       <ProductTechnicalDataSection slug="ground-handling-forklift-agv" />{" "}
@@ -1723,1417 +1887,1036 @@ function GroundHandlingForkliftAgvBody({ page }) {
     </main>
   );
 }
+function getProductHeroCopy(page, defaults) {
+  return {
+    kicker: page?.data?.kicker || defaults.kicker,
+    summary: page?.data?.heroSummary || page?.data?.summary || defaults.summary,
+    title: page?.data?.heroTitle || page?.data?.title || defaults.title,
+  };
+}
 function LiftingAgvBody() {
-  const quickSpecs = getProductSpecs("lifting-agv").quickSpecs || [];
-
   return (
     <main>
-      {" "}
-      <ProductHeroSection
-        featureTags={[
-          "Under-cart lifting",
-          "Shared aisle movement",
-          "Auto-charging ready",
-        ]}
-        imageAlt="Lifting AGV top-lift vehicle"
-        imageSrc="/assets/images/lifting-agv-top-lift.webp"
-        kicker="Industrial Logistics Systems"
-        quickSpecs={quickSpecs}
-        summary="Precision internal transport for workstation supply, supermarket replenishment, and flexible intralogistics loops engineered for high-throughput environments."
-        title="Lifting AGV"
-      />{" "}
+      <section className="relative min-h-[700px] xl:min-h-[760px] flex items-center overflow-hidden bg-primary-container">
+        <div className="absolute inset-0">
+          <img
+            alt="Lifting AGV hero background"
+            className="w-full h-full object-cover object-center"
+            src="/downloads/lifting-agv-hero-wide.png"
+          />
+        </div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,21,47,0.74)_0%,rgba(14,35,71,0.58)_28%,rgba(18,49,92,0.22)_56%,rgba(18,49,92,0.08)_100%)]" />
+          <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-1 gap-12">
+            <div className="flex flex-col justify-center py-20">
+              <span className="font-label text-white font-bold tracking-[0.2em] uppercase text-xs mb-4">
+                Industrial Logistics Systems
+            </span>
+            <h1 className="font-headline text-6xl md:text-7xl font-extrabold text-white leading-[1.1] tracking-tighter mb-6">
+              Lifting AGV
+            </h1>
+            <p className="text-white text-xl md:text-2xl max-w-xl font-light leading-relaxed mb-10">
+              Precision internal transport for workstation supply and supermarket replenishment. Engineered for high-throughput environments.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link
+                className="bg-secondary text-white px-8 py-4 rounded-md font-bold tracking-tight shadow-lg hover:bg-secondary-container transition-all flex items-center gap-2"
+                href="/contact"
+              >
+                Explore Specifications
+                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </Link>
+              <Link
+                className="border border-outline-variant/30 text-white px-8 py-4 rounded-md font-bold hover:bg-white/5 transition-all"
+                href="/case-studies"
+              >
+                View Case Studies
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
       <section className="py-24 px-8 max-w-screen-2xl mx-auto bg-surface">
-        {" "}
         <div className="px-4 md:px-6 lg:px-8">
-          {" "}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
-            {" "}
             <div className="md:col-span-5">
-              {" "}
               <h2 className="font-headline text-4xl font-bold tracking-tight text-primary mb-8">
-                {" "}
-                Adaptive Internal Mobility{" "}
-              </h2>{" "}
+                Adaptive Internal Mobility
+              </h2>
               <p className="text-on-surface-variant text-lg leading-relaxed mb-6">
-                {" "}
-                The Lift-top AGV is the cornerstone of flexible internal
-                movement. Designed to autonomously slide beneath carts and
-                specialized racks, it employs a heavy-duty vertical lift
-                mechanism to mobilize goods without manual intervention.{" "}
-              </p>{" "}
-                <p className="text-on-surface-variant text-lg leading-relaxed">
-                  {" "}
-                  By decoupling the transport unit from the load carrier, this system
-                  enables a lean logistics flow that adapts in real time to
-                  warehouse shifts and inventory demands.{" "}
-                </p>{" "}
-            </div>{" "}
+                The Lift-top AGV is the cornerstone of flexible internal movement. Designed to autonomously slide beneath carts and specialized racks, it employs a heavy-duty vertical lift mechanism to mobilize goods without manual intervention.
+              </p>
+              <p className="text-on-surface-variant text-lg leading-relaxed">
+                By decoupling the transport unit from the load carrier, Huizong Intelligent Automation enables a lean logistics flow that adapts in real time to production shifts and inventory demands.
+              </p>
+            </div>
             <div className="md:col-span-7">
-              {" "}
               <div className="bg-surface-container-low p-8 rounded-xl relative overflow-hidden">
-                {" "}
                 <div className="grid grid-cols-2 gap-4">
-                  {" "}
-                  {[
-                    { value: "1,000kg", label: "Max Payload" },
-                    { value: "1.8m/s", label: "Travel Speed" },
-                    { value: "+/-5mm", label: "Stop Accuracy" },
-                    { value: "24/7", label: "Auto-Charging" },
+                    {[
+                      { value: "1,000kg", label: "Max Payload" },
+                      { value: "1.8m/s", label: "Travel Speed" },
+                      { value: "+/-5mm", label: "Stop Accuracy" },
+                      { value: "24/7", label: "Auto-Charging" }
                   ].map((metric) => (
                     <div
                       className="bg-surface-container-lowest p-6 rounded-lg shadow-sm border border-outline-variant/10"
                       key={metric.label}
                     >
-                      {" "}
-                      <div className="text-secondary font-bold text-3xl mb-1">
-                        {metric.value}
-                      </div>{" "}
-                      <div className="text-on-surface-variant text-xs tracking-widest font-semibold">
-                        {" "}
-                        {metric.label}{" "}
-                      </div>{" "}
+                      <div className="text-secondary font-bold text-3xl mb-1">{metric.value}</div>
+                      <div className="text-on-surface-variant text-xs uppercase tracking-widest font-semibold">
+                        {metric.label}
+                      </div>
                     </div>
-                  ))}{" "}
-                </div>{" "}
-              </div>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
-      <ProductTechnicalDataSection slug="lifting-agv" />{" "}
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-8 max-w-screen-2xl mx-auto bg-surface-container-low">
-        {" "}
         <div className="px-4 md:px-6 lg:px-8">
-          {" "}
           <div className="mb-16">
-            {" "}
-            <span className="text-secondary font-bold tracking-[0.2em] text-xs block mb-4">
-              {" "}
-              Deployment Dynamics{" "}
-            </span>{" "}
+            <span className="text-secondary font-bold tracking-[0.2em] text-xs uppercase block mb-4">
+              Deployment Dynamics
+            </span>
             <h2 className="font-headline text-4xl font-extrabold text-primary tracking-tight">
-              {" "}
-              Application Scenarios{" "}
-            </h2>{" "}
-          </div>{" "}
+              Application Scenarios
+            </h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-auto md:h-[700px]">
-            {" "}
             <div className="md:col-span-2 bg-surface-container-lowest rounded-xl p-8 flex flex-col justify-between relative overflow-hidden group border border-outline-variant/20 shadow-sm">
-              {" "}
               <div className="relative z-10">
-                {" "}
                 <span className="material-symbols-outlined text-secondary text-4xl mb-6">
-                  {" "}
-                  precision_manufacturing{" "}
-                </span>{" "}
-                <h3 className="text-2xl font-bold text-primary mb-3">
-                  Workstation Supply
-                </h3>{" "}
+                  precision_manufacturing
+                </span>
+                <h3 className="text-2xl font-bold text-primary mb-3">Workstation Supply</h3>
                 <p className="text-on-surface-variant max-w-md">
-                  {" "}
-                  Seamless delivery of raw materials and sub-assemblies directly
-                  to production lines with precise timing and positioning.{" "}
-                </p>{" "}
-              </div>{" "}
-              <div className="absolute top-0 right-0 w-1/2 h-full hidden lg:block">
-                {" "}
-                <img
-                  alt="Workstation supply"
-                  className="w-full h-full object-cover"
-                  src="/assets/images/lifting-agv-workstation.webp"
-                />{" "}
-              </div>{" "}
-            </div>{" "}
+                  Seamless delivery of raw materials and sub-assemblies directly to production lines with precise timing and positioning.
+                </p>
+              </div>
+                <div className="absolute top-0 right-0 w-1/2 h-full hidden lg:block">
+                  <img
+                    alt="Workstation supply"
+                    className="w-full h-full object-cover"
+                    src="/assets/images/lifting-agv-workstation.webp"
+                  />
+                </div>
+              </div>
             <div className="bg-primary text-white rounded-xl p-8 flex flex-col justify-between border border-primary-container shadow-sm">
-              {" "}
               <div>
-                {" "}
                 <span className="material-symbols-outlined text-secondary-fixed text-4xl mb-6">
-                  {" "}
-                  local_mall{" "}
-                </span>{" "}
-                <h3 className="text-2xl font-bold mb-3">
-                  Supermarket Replenishment
-                </h3>{" "}
+                  local_mall
+                </span>
+                <h3 className="text-2xl font-bold mb-3">Supermarket Replenishment</h3>
                 <p className="text-on-primary-container">
-                  {" "}
-                  Automated flow from bulk storage to staging zones, ensuring
-                  pick-faces are always stocked for rapid fulfillment.{" "}
-                </p>{" "}
-              </div>{" "}
-            </div>{" "}
+                  Automated flow from bulk storage to staging zones, ensuring pick-faces are always stocked for rapid fulfillment.
+                </p>
+              </div>
+            </div>
             <div className="bg-surface-container-lowest rounded-xl p-8 flex flex-col justify-between border border-outline-variant/20 shadow-sm">
-              {" "}
               <div>
-                {" "}
                 <span className="material-symbols-outlined text-secondary text-4xl mb-6">
-                  {" "}
-                  shopping_cart{" "}
-                </span>{" "}
-                <h3 className="text-2xl font-bold text-primary mb-3">
-                  Cart Transfer
-                </h3>{" "}
+                  shopping_cart
+                </span>
+                <h3 className="text-2xl font-bold text-primary mb-3">Cart Transfer</h3>
                 <p className="text-on-surface-variant">
-                  {" "}
-                  Standardized handling of manual carts and trolleys, bridging
-                  the gap between human operators and automated zones.{" "}
-                </p>{" "}
-              </div>{" "}
-            </div>{" "}
+                  Standardized handling of manual carts and trolleys, bridging the gap between human operators and automated zones.
+                </p>
+              </div>
+            </div>
             <div className="md:col-span-2 bg-surface-container-high rounded-xl p-8 flex flex-col justify-between relative overflow-hidden border border-outline-variant/10 shadow-sm">
-              {" "}
               <div className="relative z-10">
-                {" "}
-                <span className="material-symbols-outlined text-secondary text-4xl mb-6">
-                  route
-                </span>{" "}
-                <h3 className="text-2xl font-bold text-primary mb-3">
-                  Flexible Routes
-                </h3>{" "}
+                <span className="material-symbols-outlined text-secondary text-4xl mb-6">route</span>
+                <h3 className="text-2xl font-bold text-primary mb-3">Flexible Routes</h3>
                 <p className="text-on-surface-variant max-w-lg">
-                  {" "}
-                  Dynamic pathfinding that bypasses obstacles and reconfigures
-                  instantly when warehouse layouts change.{" "}
-                </p>{" "}
-              </div>{" "}
+                  Dynamic pathfinding that bypasses obstacles and reconfigures instantly when warehouse layouts change.
+                </p>
+              </div>
               <div className="absolute bottom-[-20%] right-[-10%] w-2/3 h-1/2 opacity-20 rotate-[-15deg]">
-                {" "}
-                <span className="material-symbols-outlined text-[300px] text-primary">
-                  map
-                </span>{" "}
-              </div>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+                <span className="material-symbols-outlined text-[300px] text-primary">map</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-8 max-w-screen-2xl mx-auto bg-surface">
-        {" "}
         <div className="px-4 md:px-6 lg:px-8">
-          {" "}
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
-            {" "}
             <div className="lg:col-span-1">
-              {" "}
               <h2 className="font-headline text-4xl font-bold text-primary tracking-tight mb-6">
-                {" "}
-                Engineered Advantages{" "}
-              </h2>{" "}
+                Engineered Advantages
+              </h2>
               <p className="text-on-surface-variant">
-                {" "}
-                Precision is not an option; it is our standard. Our Lifting AGVs
-                provide the competitive edge required for modern logistics.{" "}
-              </p>{" "}
-            </div>{" "}
+                Precision is not an option; it is our standard. Our Lifting AGVs provide the competitive edge required for modern logistics.
+              </p>
+            </div>
             <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-8">
-              {" "}
               {[
                 {
                   title: "Shared Aisle Use",
-                  copy: "Advanced LiDAR and sensory arrays allow for safe, collaborative movement alongside human workers and manual forklifts.",
+                  copy:
+                    "Advanced LiDAR and sensory arrays allow for safe, collaborative movement alongside human workers and manual forklifts."
                 },
                 {
                   title: "Route Flexibility",
-                  copy: "No physical floor markers or magnetic tape required. SLAM-based navigation enables instant route modification via software.",
+                  copy:
+                    "No physical floor markers or magnetic tape required. SLAM-based navigation enables instant route modification via software."
                 },
                 {
                   title: "Station Response Speed",
-                  copy: "Proprietary dispatching logic ensures the nearest available AGV is tasked, reducing latency and idle time by up to 35%.",
-                },
+                  copy:
+                    "Proprietary dispatching logic ensures the nearest available AGV is tasked, reducing latency and idle time by up to 35%."
+                }
               ].map((item) => (
                 <div className="flex flex-col gap-4" key={item.title}>
-                  {" "}
-                  <div className="w-12 h-1 border-t-4 border-secondary mb-4" />{" "}
-                  <h4 className="text-xl font-bold text-primary">
-                    {item.title}
-                  </h4>{" "}
-                  <p className="text-on-surface-variant text-sm leading-relaxed">
-                    {item.copy}
-                  </p>{" "}
+                  <div className="w-12 h-1 border-t-4 border-secondary mb-4" />
+                  <h4 className="text-xl font-bold text-primary">{item.title}</h4>
+                  <p className="text-on-surface-variant text-sm leading-relaxed">{item.copy}</p>
                 </div>
-              ))}{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-8 max-w-screen-2xl mx-auto bg-primary text-white overflow-hidden relative">
-        {" "}
         <div className="relative z-10">
-          {" "}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            {" "}
             <div className="order-2 lg:order-1 p-4 md:p-6">
-              {" "}
               <div className="relative h-[400px] w-full max-w-[640px] mx-auto bg-primary-container rounded-xl flex items-center justify-center p-12 md:p-14 border border-on-primary-fixed-variant/20">
-                {" "}
                 <div className="grid grid-cols-3 gap-6 w-full text-center">
-                  {" "}
                   {[
                     { title: "WMS", label: "Warehouse Management" },
-                    { title: "Dispatch", label: "Control Hub", accent: true },
-                    { title: "WCS", label: "Control System" },
+                    { title: "Fleet", label: "Control Hub", accent: true },
+                    { title: "WCS", label: "Control System" }
                   ].map((item) => (
                     <div
-                      className={`p-4 rounded-lg border ${item.accent ? "bg-secondary/20 border-secondary/30 scale-110 shadow-xl shadow-secondary/10" : "bg-surface/5 border-white/10 backdrop-blur-md"}`}
+                      className={`p-4 rounded-lg border ${
+                        item.accent
+                          ? "bg-secondary/20 border-secondary/30 scale-110 shadow-xl shadow-secondary/10"
+                          : "bg-surface/5 border-white/10 backdrop-blur-md"
+                      }`}
                       key={item.title}
                     >
-                      {" "}
-                      <div
-                        className={`font-bold text-lg mb-1 ${item.accent ? "text-white" : "text-secondary"}`}
-                      >
-                        {" "}
-                        {item.title}{" "}
-                      </div>{" "}
-                      <div
-                        className={`text-[10px] tracking-tighter ${item.accent ? "opacity-80" : "opacity-60"}`}
-                      >
-                        {" "}
-                        {item.label}{" "}
-                      </div>{" "}
+                      <div className={`font-bold text-lg mb-1 ${item.accent ? "text-white" : "text-secondary"}`}>
+                        {item.title}
+                      </div>
+                      <div className={`text-[10px] uppercase tracking-tighter ${item.accent ? "opacity-80" : "opacity-60"}`}>
+                        {item.label}
+                      </div>
                     </div>
-                  ))}{" "}
-                </div>{" "}
+                  ))}
+                </div>
                 <div className="absolute inset-0 flex items-center justify-center opacity-20">
-                  {" "}
-                  <div className="w-64 h-64 border border-secondary rounded-full animate-pulse" />{" "}
-                  <div className="absolute w-96 h-96 border border-secondary/50 rounded-full animate-pulse" />{" "}
-                </div>{" "}
-              </div>{" "}
-            </div>{" "}
+                  <div className="w-64 h-64 border border-secondary rounded-full animate-pulse" />
+                  <div className="absolute w-96 h-96 border border-secondary/50 rounded-full animate-pulse" />
+                </div>
+              </div>
+            </div>
             <div className="order-1 lg:order-2">
-              {" "}
-              <span className="text-secondary-fixed-dim font-bold tracking-[0.2em] text-xs mb-4 block">
-                {" "}
-                Ecosystem Synergy{" "}
-              </span>{" "}
+              <span className="text-secondary-fixed-dim font-bold tracking-[0.2em] text-xs uppercase mb-4 block">
+                Ecosystem Synergy
+              </span>
               <h2 className="font-headline text-4xl font-extrabold tracking-tight mb-8">
-                {" "}
-                Seamless Integration Framework{" "}
-              </h2>{" "}
+                Seamless Integration Framework
+              </h2>
               <p className="text-on-primary-container text-lg leading-relaxed mb-8">
-                {" "}
-                coolyne AGVs are not isolated machines; they are nodes in an
-                intelligent warehouse network. Our API-first approach ensures
-                effortless connection to your existing WMS and WCS.{" "}
-              </p>{" "}
+                Huizong Intelligent Automation AGVs are not isolated machines; they are nodes in an intelligent network. Our API-first approach ensures effortless connection to your existing WMS and WCS.
+              </p>
               <ul className="space-y-4">
-                {" "}
                 {[
                   "Centralized fleet coordination via dispatch manager",
                   "Real-time status monitoring and predictive maintenance alerts",
-                  "Scalable infrastructure - add 1 or 100 AGVs without system rework",
+                  "Scalable infrastructure - add 1 or 100 AGVs without system rework"
                 ].map((item) => (
                   <li className="flex items-start gap-3" key={item}>
-                    {" "}
                     <span
                       className="material-symbols-outlined text-secondary"
                       style={{ fontVariationSettings: "'FILL' 1" }}
                     >
-                      {" "}
-                      check_circle{" "}
-                    </span>{" "}
-                    <span>{item}</span>{" "}
+                      check_circle
+                    </span>
+                    <span>{item}</span>
                   </li>
-                ))}{" "}
-              </ul>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-32 px-8 max-w-screen-2xl mx-auto bg-surface text-center">
-        {" "}
         <div className="max-w-4xl mx-auto">
-          {" "}
-          <h2 className="font-headline text-5xl font-black text-primary tracking-tighter mb-6 ">
-            {" "}
-            Ready to Transform Your Throughput?{" "}
-          </h2>{" "}
+          <h2 className="font-headline text-5xl font-black text-primary tracking-tighter mb-6 uppercase">
+            Ready to Transform Your Throughput?
+          </h2>
           <p className="text-on-surface-variant text-xl mb-12">
-            {" "}
-            Consult with our senior logistics engineers to design a custom
-            Lifting AGV workflow tailored to your facility.{" "}
-          </p>{" "}
+            Consult with our senior logistics engineers to design a custom Lifting AGV workflow tailored to your facility.
+          </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            {" "}
             <Link
               className="w-full sm:w-auto bg-secondary text-white px-10 py-5 rounded-md font-extrabold text-lg shadow-xl hover:translate-y-[-2px] transition-all"
               href="/contact"
             >
-              {" "}
-              Schedule an Expert Consultation{" "}
-            </Link>{" "}
-            <a
-              className="w-full sm:w-auto bg-[#0A2F66] text-white font-bold px-10 py-5 hover:bg-[#123a79] rounded-md transition-all text-center"
-              download={"Technical Data Sheet.pdf"}
-              href="/downloads/lifting-agv-technical-data-sheet.pdf"
-            >
-              {" "}
-              Specifications{" "}
-            </a>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+              Schedule an Expert Consultation
+            </Link>
+            <button className="w-full sm:w-auto text-primary font-bold px-10 py-5 hover:bg-surface-container-low rounded-md transition-all">
+              Download Technical Data Sheet
+            </button>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
+
 function StorageAgvBody() {
   return (
     <main>
-      {" "}
-      <section className="relative min-h-[819px] flex items-center overflow-hidden bg-primary-container">
-        {" "}
-        <div className="absolute inset-0 opacity-40">
-          {" "}
+      <section className="relative min-h-[700px] xl:min-h-[760px] flex items-center overflow-hidden bg-primary-container">
+        <div className="absolute inset-0">
           <img
             alt="Modern high-tech warehouse interior"
-            className="w-full h-full object-cover"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCy0IZwrrWtiZK-vVe43o3YRuspV_4K9Srbhgwsbs5o7FFCYEQChywe1gia7t-tqT1FdTtsD9pWaoPTLo7p5r0XLdpJ1-ka7VjdRy1aVy_K2BtmPSbcq0P2snILNLy0bwrJGA0Bla0GiAZODoFcTqe39i1AFLK27u6_7jx2w1Xx1l-KsyiZG6KjfiY68lpASKDE50nb9MGGR4N3Xh0AbqOEKhPseDcvZz3brHIk1XJ5h3u2n5a7zoYqJ_vMF1srKFle9wSBJKulavPQ"
-          />{" "}
-        </div>{" "}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary-container via-primary-container/80 to-transparent" />{" "}
-        <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {" "}
+            className="w-full h-full object-cover object-center"
+            src="/downloads/storage-agv-hero-wide.png"
+          />
+        </div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,21,47,0.74)_0%,rgba(14,35,71,0.58)_28%,rgba(18,49,92,0.22)_56%,rgba(18,49,92,0.08)_100%)]" />
+        <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full grid grid-cols-1 gap-12 items-center">
           <div className="max-w-2xl">
-            {" "}
-            <span className="inline-block px-3 py-1 bg-white/10 hsa-dark-kicker rounded-full text-xs font-bold tracking-[0.06em] mb-6 font-label">
-              {" "}
-              Precision Logistics{" "}
-            </span>{" "}
+            <span className="inline-block px-3 py-1 bg-white/10 hsa-dark-kicker rounded-full text-xs font-bold tracking-[0.1em] uppercase mb-6 font-label">
+              Precision Logistics
+            </span>
             <h1 className="text-white font-headline text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
-              {" "}
-              Storage AGV{" "}
-            </h1>{" "}
-            <p className="hsa-dark-copy font-body text-xl md:text-2xl leading-relaxed mb-10">
-              {" "}
-              Engineered for high-density buffer zones and automated inventory
-              flow control. Precision in every movement.{" "}
-            </p>{" "}
+              Storage AGV
+            </h1>
+            <p className="text-white font-body text-xl md:text-2xl leading-relaxed mb-10">
+              Engineered for high-density buffer zones and automated inventory flow control. Precision in every movement.
+            </p>
             <div className="flex flex-wrap gap-4">
-              {" "}
-              <ProductHeroContactButton className="px-8 py-4 text-lg tracking-[0.12em]" />{" "}
-            </div>{" "}
-          </div>{" "}
-          <div className="hidden lg:block relative h-[500px]">
-            {" "}
-            <div className="absolute inset-0 bg-white/5 rounded-xl backdrop-blur-md border border-white/10 p-4 transform translate-x-8 -translate-y-4">
-              {" "}
-              <img
-                alt="Storage AGV product"
-                className="w-full h-full object-contain rounded-lg shadow-2xl bg-white"
-                src="/assets/images/storage-agv-hero.webp"
-              />{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+              <button className="bg-secondary text-on-secondary px-8 py-4 rounded-md font-headline font-bold text-lg hover:bg-secondary-container transition-all shadow-xl shadow-black/20">
+                Request a System Audit
+              </button>
+              <button className="bg-transparent border border-outline-variant text-white px-8 py-4 rounded-md font-headline font-bold text-lg hover:bg-white/10 transition-all backdrop-blur-sm">
+                Download Product Spec Sheet
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-8 max-w-screen-2xl mx-auto bg-surface">
-        {" "}
         <div className="px-4 md:px-6 lg:px-8">
-          {" "}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
-            {" "}
             <div className="lg:col-span-5">
-              {" "}
               <h2 className="font-headline text-4xl font-bold text-primary mb-8 leading-tight">
-                {" "}
-                The Backbone of Automated Storage{" "}
-              </h2>{" "}
+                The Backbone of Automated Storage
+              </h2>
               <p className="font-body text-lg text-on-surface-variant leading-relaxed">
-                {" "}
-                Our Storage AGV isn't just a vehicle; it's the critical link in
-                your automated storage structures. Designed with zero-tolerance
-                engineering, it ensures surgical precision and relentless speed
-                in material release, transforming static storage into a dynamic,
-                high-performance ecosystem.{" "}
-              </p>{" "}
-            </div>{" "}
+                Our Storage AGV isn't just a vehicle; it's the critical link in your automated storage structures. Designed with zero-tolerance engineering, it ensures surgical precision and relentless speed in material release, transforming static storage into a dynamic, high-performance ecosystem.
+              </p>
+            </div>
             <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-3 gap-6">
-              {" "}
               {[
                 {
                   icon: "grid_view",
                   title: "Space Efficiency",
-                  copy: "Reduced footprint, maximizing vertical and horizontal density.",
+                  copy: "Reduced footprint, maximizing vertical and horizontal density."
                 },
                 {
                   icon: "speed",
                   title: "Retrieval Speed",
-                  copy: "High-throughput cycles optimized for peak demand periods.",
+                  copy: "High-throughput cycles optimized for peak demand periods."
                 },
                 {
                   icon: "account_tree",
                   title: "Expansion Flexibility",
-                  copy: "Scalable modules that evolve alongside your industrial operations.",
-                },
+                  copy: "Scalable modules that evolve alongside your industrial operations."
+                }
               ].map((item) => (
                 <div
                   className="p-8 bg-surface-container-low rounded-xl group hover:bg-surface-container-high transition-all"
                   key={item.title}
                 >
-                  {" "}
                   <span className="material-symbols-outlined text-secondary text-4xl mb-4">
-                    {" "}
-                    {item.icon}{" "}
-                  </span>{" "}
-                  <h3 className="font-headline font-bold text-primary mb-2">
-                    {item.title}
-                  </h3>{" "}
-                  <p className="font-body text-sm text-on-surface-variant">
-                    {item.copy}
-                  </p>{" "}
+                    {item.icon}
+                  </span>
+                  <h3 className="font-headline font-bold text-primary mb-2">{item.title}</h3>
+                  <p className="font-body text-sm text-on-surface-variant">{item.copy}</p>
                 </div>
-              ))}{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
-      <ProductTechnicalDataSection slug="storage-agv" />{" "}
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-8 max-w-screen-2xl mx-auto bg-surface-container-low">
-        {" "}
         <div className="px-4 md:px-6 lg:px-8">
-          {" "}
           <div className="mb-16">
-            {" "}
-            <span className="font-label text-xs font-bold tracking-widest text-secondary block mb-2">
-              {" "}
-              Deployment Framework{" "}
-            </span>{" "}
-            <h2 className="font-headline text-4xl font-bold text-primary">
-              Application Scenarios
-            </h2>{" "}
-          </div>{" "}
+            <span className="font-label text-xs font-bold tracking-widest text-secondary uppercase block mb-2">
+              Deployment Framework
+            </span>
+            <h2 className="font-headline text-4xl font-bold text-primary">Application Scenarios</h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-6 gap-6 h-full lg:h-[600px]">
-            {" "}
             <div className="md:col-span-3 lg:col-span-4 bg-surface-container-lowest rounded-xl overflow-hidden flex flex-col relative group">
-              {" "}
               <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity">
-                {" "}
                 <img
                   alt="Dense buffer zones"
                   className="w-full h-full object-cover"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAqqVftNXRE9o0toJOXD-Pia6weWqAkNpUNpI51qgly1lpQyvmp0t97BnZBoBR02Tvy1y3trejSmoZluzzYuU9FFufezhvlv69cwEx43cmKdVUJv7QogXzccrHzCiXBXOAFwi2I0WtawCqxw14tXAC8sHwPOiNM-IsQ-jPYSXw3b2iSmGmv73siIMKvzww5O3ak8FtyGAXwFqDMapTOHelZOrEoSHxYyNQ8cQyeabWNB7A3y0GDzwgUqwdvSway1SI9aDpABu9Bo12"
-                />{" "}
-              </div>{" "}
+                />
+              </div>
               <div className="p-10 relative z-10 mt-auto">
-                {" "}
                 <h3 className="font-headline text-2xl font-bold text-primary mb-3">
-                  {" "}
-                  Dense Buffer Zones{" "}
-                </h3>{" "}
+                  Dense Buffer Zones
+                </h3>
                 <p className="font-body text-on-surface-variant max-w-lg mb-6">
-                  {" "}
-                  Maximizing vertical and horizontal space usage through
-                  adaptive navigation algorithms that eliminate wasted
-                  aisles.{" "}
-                </p>{" "}
-                <div className="h-1 w-12 bg-secondary group-hover:w-24 transition-all" />{" "}
-              </div>{" "}
-            </div>{" "}
+                  Maximizing vertical and horizontal space usage through adaptive navigation algorithms that eliminate wasted aisles.
+                </p>
+                <div className="h-1 w-12 bg-secondary group-hover:w-24 transition-all" />
+              </div>
+            </div>
             <div className="md:col-span-3 lg:col-span-2 bg-primary rounded-xl p-10 flex flex-col justify-between text-white group overflow-hidden relative">
-              {" "}
               <div className="absolute top-0 right-0 p-4 opacity-10 scale-150">
-                {" "}
-                <span className="material-symbols-outlined text-9xl">
-                  sync_alt
-                </span>{" "}
-              </div>{" "}
+                <span className="material-symbols-outlined text-9xl">sync_alt</span>
+              </div>
               <div>
-                {" "}
-                <h3 className="font-headline text-2xl font-bold mb-4">
-                  Automated Transfer
-                </h3>{" "}
+                <h3 className="font-headline text-2xl font-bold mb-4">Automated Transfer</h3>
                 <p className="text-primary-fixed opacity-80 mb-8 leading-relaxed">
-                  {" "}
-                  Seamless handovers between long-term storage and high-speed
-                  transport zones with millisecond precision.{" "}
-                </p>{" "}
-              </div>{" "}
-              <span className="material-symbols-outlined text-4xl text-secondary">
-                arrow_forward
-              </span>{" "}
-            </div>{" "}
+                  Seamless handovers between long-term storage and high-speed transport zones with millisecond precision.
+                </p>
+              </div>
+              <span className="material-symbols-outlined text-4xl text-secondary">arrow_forward</span>
+            </div>
             <div className="md:col-span-6 bg-surface-container-highest rounded-xl p-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center group">
-              {" "}
               <div>
-                {" "}
                 <h3 className="font-headline text-2xl font-bold text-primary mb-4">
-                  {" "}
-                  Storage Release{" "}
-                </h3>{" "}
+                  Storage Release
+                </h3>
                 <p className="font-body text-on-surface-variant text-lg">
-                  {" "}
-                  Rapid, controlled retrieval for downstream processes. Our
-                  system predicts demand spikes to stage inventory for immediate
-                  release.{" "}
-                </p>{" "}
-              </div>{" "}
+                  Rapid, controlled retrieval for downstream processes. Our system predicts demand spikes to stage inventory for immediate release.
+                </p>
+              </div>
               <div className="rounded-lg overflow-hidden h-48 lg:h-64 shadow-lg bg-surface">
-                {" "}
-                <img
-                  alt="Storage release"
-                  className="w-full h-full object-cover opacity-80"
-                  src="/assets/images/storage-agv-release.webp"
-                />{" "}
-              </div>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+                  <img
+                    alt="Storage release"
+                    className="w-full h-full object-cover opacity-80"
+                    src="/assets/images/storage-agv-release.webp"
+                  />
+                </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-32 bg-primary overflow-hidden relative">
-        {" "}
         <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-          {" "}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#7594cb,transparent)] opacity-20" />{" "}
-        </div>{" "}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#7594cb,transparent)] opacity-20" />
+        </div>
         <div className="max-w-screen-2xl mx-auto px-8 relative z-10">
-          {" "}
           <div className="bg-surface-container-lowest/10 backdrop-blur-xl border border-white/10 rounded-xl p-12 lg:p-20">
-            {" "}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              {" "}
               <div>
-                {" "}
-                <span className="font-label text-xs font-bold tracking-widest hsa-dark-kicker block mb-4">
-                  {" "}
-                  System Integration{" "}
-                </span>{" "}
+                <span className="font-label text-xs font-bold tracking-widest hsa-dark-kicker uppercase block mb-4">
+                  System Integration
+                </span>
                 <h2 className="font-headline text-4xl md:text-5xl font-extrabold text-white mb-8 leading-tight">
-                  {" "}
-                  The ASRS Synergy{" "}
-                </h2>{" "}
+                  The ASRS Synergy
+                </h2>
                 <p className="font-body text-xl hsa-dark-copy leading-relaxed mb-8">
-                  {" "}
-                  Integration is not an afterthought. The Storage AGV acts as
-                  the kinetic extension of your ASRS (Automated Storage and
-                  Retrieval Systems). By bridging the gap between static racking
-                  and mobile logistics, we create a complete, zero-error
-                  high-density storage solution that operates 24/7.{" "}
-                </p>{" "}
+                  Integration is not an afterthought. The Storage AGV acts as the kinetic extension of your ASRS (Automated Storage and Retrieval Systems). By bridging the gap between static racking and mobile logistics, we create a complete, zero-error high-density storage solution that operates 24/7.
+                </p>
                 <div className="flex items-center space-x-4">
-                  {" "}
                   <div className="flex -space-x-4">
-                    {" "}
                     {[
                       { icon: "robot_2", className: "bg-secondary" },
                       { icon: "hub", className: "bg-primary-container" },
-                      { icon: "lan", className: "bg-on-primary-container" },
+                      { icon: "lan", className: "bg-on-primary-container" }
                     ].map((item) => (
                       <div
                         className={`w-12 h-12 rounded-full flex items-center justify-center border-4 border-primary ${item.className}`}
                         key={item.icon}
                       >
-                        {" "}
                         <span
                           className="material-symbols-outlined text-white text-xl"
                           style={{ fontVariationSettings: "'FILL' 1" }}
                         >
-                          {" "}
-                          {item.icon}{" "}
-                        </span>{" "}
+                          {item.icon}
+                        </span>
                       </div>
-                    ))}{" "}
-                  </div>{" "}
+                    ))}
+                  </div>
                   <span className="text-white font-headline font-bold text-sm">
-                    {" "}
-                    Unified Control Architecture{" "}
-                  </span>{" "}
-                </div>{" "}
-              </div>{" "}
+                    Unified Control Architecture
+                  </span>
+                </div>
+              </div>
               <div className="relative">
-                {" "}
                 <div className="rounded-xl overflow-hidden aspect-video shadow-2xl">
-                  {" "}
                   <img
                     alt="System integration"
                     className="w-full h-full object-cover"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkSq4B_JdV_Po8h-Y8NEdTnzUYTsyDX142bP4Z-fXxgvP6CSMfx06Qwy9EQfZawWQdAXEHLpd3FVlrMkhWsGBpZKmGAgFjzrjCx82FPP9lN0m_Eu_BtCADzH7iuQSGpUKAU9qb_6kLSHtytR-nWIr6VjRv_nz0nQ6Yvpu2JFCY1TuTX2gWnXvUo9sV7i5sLuDul0BQR81MkQemYjhMCyRo5qUF8YGvLd2viLUpx-nJOTdaCIgfgmWbQALsWDVBoV_DkiWdV_JuZm6y"
-                  />{" "}
-                </div>{" "}
+                  />
+                </div>
                 <div className="absolute -bottom-6 -right-6 bg-white/70 backdrop-blur-[16px] p-6 rounded-lg border border-outline-variant shadow-xl max-w-xs">
-                  {" "}
-                  <p className="text-secondary font-headline font-bold text-sm mb-1">
-                    REAL-TIME SYNC
-                  </p>{" "}
+                  <p className="text-secondary font-headline font-bold text-sm mb-1">REAL-TIME SYNC</p>
                   <p className="text-on-surface text-xs leading-relaxed">
-                    {" "}
-                    System-wide synchronization with 99.9% uptime and adaptive
-                    pathfinding.{" "}
-                  </p>{" "}
-                </div>{" "}
-              </div>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+                    System-wide synchronization with 99.9% uptime and adaptive pathfinding.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-8 max-w-screen-2xl mx-auto bg-surface-container-low text-center">
-        {" "}
         <div className="max-w-4xl mx-auto">
-          {" "}
           <h2 className="font-headline text-4xl md:text-5xl font-bold text-primary mb-8">
-            {" "}
-            Optimize Your Inventory Flow Today{" "}
-          </h2>{" "}
+            Optimize Your Inventory Flow Today
+          </h2>
           <p className="font-body text-xl text-on-surface-variant mb-12">
-            {" "}
-            Join the world's most advanced logistics facilities in deploying
-            precision AGV technology.{" "}
-          </p>{" "}
+            Join the world's most advanced logistics facilities in deploying precision AGV technology.
+          </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-            {" "}
-            <Link
-              className="w-full sm:w-auto bg-secondary text-on-secondary px-10 py-5 rounded-md font-headline font-extrabold text-xl hover:bg-secondary-container transition-all shadow-lg active:scale-95"
-              href="/contact"
-            >
-              {" "}
-              Request a System Audit{" "}
-            </Link>{" "}
-            <a
-              className="w-full sm:w-auto bg-white border-2 border-primary text-primary px-10 py-5 rounded-md font-headline font-extrabold text-xl hover:bg-primary hover:text-white transition-all active:scale-95"
-              download={"Technical Data Sheet.pdf"}
-              href="/downloads/lifting-agv-technical-data-sheet.pdf"
-            >
-              {" "}
-              Download Product Spec Sheet{" "}
-            </a>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+            <button className="w-full sm:w-auto bg-secondary text-on-secondary px-10 py-5 rounded-md font-headline font-extrabold text-xl hover:bg-secondary-container transition-all shadow-lg active:scale-95">
+              Request a System Audit
+            </button>
+            <button className="w-full sm:w-auto bg-white border-2 border-primary text-primary px-10 py-5 rounded-md font-headline font-extrabold text-xl hover:bg-primary hover:text-white transition-all active:scale-95">
+              Download Product Spec Sheet
+            </button>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
+
 function AgvRollerBody() {
   return (
     <main className="bg-surface">
-      {" "}
-      <section className="relative min-h-[819px] flex items-center overflow-hidden">
-        {" "}
-        <div className="absolute inset-0 bg-primary overflow-hidden">
-          {" "}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,140,0,0.18),transparent_34%),linear-gradient(90deg,rgba(4,32,74,0.98)_0%,rgba(4,32,74,0.96)_52%,rgba(3,27,63,0.9)_100%)]" />{" "}
-        </div>{" "}
+      <section className="relative min-h-[700px] xl:min-h-[760px] flex items-center overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <img
+            alt="AGV Roller hero background"
+            className="w-full h-full object-cover object-center"
+            src="/downloads/agv-roller-hero-wide.png"
+          />
+        </div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,21,47,0.72)_0%,rgba(14,35,71,0.54)_28%,rgba(18,49,92,0.18)_56%,rgba(18,49,92,0.06)_100%)]" />
         <div className="relative z-10 max-w-7xl mx-auto px-8 md:px-12 w-full">
-          {" "}
-          <div className="grid items-center gap-12 md:grid-cols-[minmax(0,1.05fr)_minmax(340px,0.95fr)]">
-            {" "}
+          <div className="grid items-center gap-12 md:grid-cols-1">
             <div className="max-w-3xl">
-              {" "}
-              <span className="inline-block py-1 px-3 bg-secondary-container text-on-secondary-container text-xs font-bold tracking-[0.08em] mb-6 rounded-sm">
-                {" "}
-                High-End Automation{" "}
-              </span>{" "}
+              <span className="inline-block py-1 px-3 bg-white/12 text-white text-xs font-bold tracking-widest uppercase mb-6 rounded-sm">
+                High-End Automation
+              </span>
               <h1 className="text-6xl md:text-8xl font-headline font-extrabold text-white leading-tight tracking-tighter mb-6">
-                {" "}
-                AGV Roller{" "}
-              </h1>{" "}
-              <p className="text-2xl md:text-3xl text-on-primary-container font-light leading-relaxed mb-10 max-w-2xl">
-                {" "}
-                Seamless Material Transfer &amp; Conveyor Integration{" "}
-              </p>{" "}
+                AGV Roller
+              </h1>
+              <p className="text-2xl md:text-3xl text-white font-light leading-relaxed mb-10 max-w-2xl">
+                Seamless Material Transfer &amp; Conveyor Integration
+              </p>
               <div className="flex flex-wrap gap-4">
-                {" "}
-                <ProductHeroContactButton className="px-8 py-4 text-sm tracking-[0.16em]" />{" "}
-              </div>{" "}
-            </div>{" "}
-            <div className="hidden md:flex items-center justify-center">
-              {" "}
-              <img
-                alt="AGV Roller"
-                className="w-full max-w-[540px] max-h-[560px] object-contain drop-shadow-[0_28px_50px_rgba(0,0,0,0.32)]"
-                src="/assets/images/agv-roller-hero.webp"
-              />{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+                <button className="px-8 py-4 bg-secondary text-white font-bold rounded-md hover:translate-y-[-2px] transition-all shadow-xl shadow-secondary/20">
+                  Request Specifications
+                </button>
+                <button className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold rounded-md hover:bg-white/20 transition-all">
+                  View Technical Drawings
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-8 md:px-12 max-w-7xl mx-auto">
-        {" "}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
-          {" "}
           <div className="md:col-span-5">
-            {" "}
-            <h2 className="text-xs font-label tracking-[0.2em] text-secondary mb-4">
-              {" "}
-              Precision Engineering{" "}
-            </h2>{" "}
+            <h2 className="text-xs font-label uppercase tracking-[0.2em] text-secondary mb-4">
+              Precision Engineering
+            </h2>
             <h3 className="text-4xl font-headline font-bold text-primary mb-6">
-              {" "}
-              The Flexible Link in Modern Logistics{" "}
-            </h3>{" "}
+              The Flexible Link in Modern Logistics
+            </h3>
             <p className="text-on-surface-variant text-lg leading-relaxed">
-              {" "}
-              The AGV Roller represents the pinnacle of hybrid automation. By
-              bridging the gap between static conveyor infrastructures and
-              dynamic mobile operation zones, it ensures continuous flow without
-              the need for manual intervention or expensive fixed-path
-              modifications.{" "}
-            </p>{" "}
-          </div>{" "}
+              The AGV Roller represents the pinnacle of hybrid automation. By bridging the gap between static conveyor infrastructures and dynamic mobile operation zones, it ensures continuous flow without the need for manual intervention or expensive fixed-path modifications.
+            </p>
+          </div>
           <div className="md:col-span-7 bg-surface-container-low p-8 rounded-xl flex items-center justify-center">
-            {" "}
             <div className="grid grid-cols-2 gap-4 w-full">
-              {" "}
               {[
                 {
                   icon: "link",
                   title: "Hybrid Integration",
-                  copy: "Connects legacy systems to modern mobile fleets.",
+                  copy: "Connects legacy systems to modern mobile fleets."
                 },
                 {
                   icon: "bolt",
                   title: "Zero Downtime",
-                  copy: "Continuous operation with fast-swap battery modules.",
-                },
+                  copy: "Continuous operation with fast-swap battery modules."
+                }
               ].map((item) => (
                 <div
                   className="bg-surface-container-lowest p-6 rounded-lg border-b-2 border-secondary/20"
                   key={item.title}
                 >
-                  {" "}
                   <span className="material-symbols-outlined text-secondary text-4xl mb-4">
-                    {" "}
-                    {item.icon}{" "}
-                  </span>{" "}
-                  <p className="font-bold text-primary">{item.title}</p>{" "}
-                  <p className="text-sm text-slate-500">{item.copy}</p>{" "}
+                    {item.icon}
+                  </span>
+                  <p className="font-bold text-primary">{item.title}</p>
+                  <p className="text-sm text-slate-500">{item.copy}</p>
                 </div>
-              ))}{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
-      <ProductTechnicalDataSection slug="agv-roller" />{" "}
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-8 md:px-12 max-w-7xl mx-auto bg-surface-container-low">
-        {" "}
         <div>
-          {" "}
           <div className="text-center mb-16">
-            {" "}
             <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary mb-4">
-              {" "}
-              Application Scenarios{" "}
-            </h2>{" "}
-            <p className="text-slate-500">
-              Designed for complex industrial throughput requirements.
-            </p>{" "}
-          </div>{" "}
+              Application Scenarios
+            </h2>
+            <p className="text-slate-500">Designed for complex industrial throughput requirements.</p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {" "}
             <div className="md:col-span-2 relative group overflow-hidden rounded-xl bg-primary h-[400px]">
-              {" "}
-              <img
-                alt="Conveyor handoff"
-                className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700"
-                src="/assets/images/agv-roller-scenario-1.webp"
-              />{" "}
-              <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />{" "}
+                <img
+                  alt="Conveyor handoff"
+                  className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700"
+                  src="/assets/images/agv-roller-scenario-1.webp"
+                />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
               <div className="absolute bottom-0 p-8">
-                {" "}
-                <h4 className="text-2xl font-bold text-white mb-2">
-                  Conveyor Handoff
-                </h4>{" "}
+                <h4 className="text-2xl font-bold text-white mb-2">Conveyor Handoff</h4>
                 <p className="text-on-primary-container max-w-md">
-                  {" "}
-                  Smooth, synchronized transitions from fixed lines to mobile
-                  units with millimeter precision.{" "}
-                </p>{" "}
-              </div>{" "}
-            </div>{" "}
+                  Smooth, synchronized transitions from fixed lines to mobile units with millimeter precision.
+                </p>
+              </div>
+            </div>
             <div className="relative group overflow-hidden rounded-xl bg-surface-container-lowest h-[400px] border border-outline-variant/20">
-              {" "}
               <div className="p-8 h-full flex flex-col justify-between">
-                {" "}
                 <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary">
-                  {" "}
-                  <span className="material-symbols-outlined">
-                    inventory_2
-                  </span>{" "}
-                </div>{" "}
+                  <span className="material-symbols-outlined">inventory_2</span>
+                </div>
                 <div>
-                  {" "}
-                  <h4 className="text-xl font-bold text-primary mb-2">
-                    Carton Transfer
-                  </h4>{" "}
+                  <h4 className="text-xl font-bold text-primary mb-2">Carton Transfer</h4>
                   <p className="text-on-surface-variant">
-                    {" "}
-                    High-speed handling of boxes and small containers with
-                    adaptive weight sensing.{" "}
-                  </p>{" "}
-                </div>{" "}
-              </div>{" "}
-            </div>{" "}
+                    High-speed handling of boxes and small containers with adaptive weight sensing.
+                  </p>
+                </div>
+              </div>
+            </div>
             <div className="relative group overflow-hidden rounded-xl bg-surface-container-lowest h-[400px] border border-outline-variant/20">
-              {" "}
               <div className="p-8 h-full flex flex-col justify-between">
-                {" "}
                 <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center text-secondary">
-                  {" "}
-                  <span className="material-symbols-outlined">
-                    package_2
-                  </span>{" "}
-                </div>{" "}
+                  <span className="material-symbols-outlined">package_2</span>
+                </div>
                 <div>
-                  {" "}
-                  <h4 className="text-xl font-bold text-primary mb-2">
-                    Packing Transfer
-                  </h4>{" "}
+                  <h4 className="text-xl font-bold text-primary mb-2">Packing Transfer</h4>
                   <p className="text-on-surface-variant">
-                    {" "}
-                    Moving goods seamlessly between sorting docks and final
-                    packing stations.{" "}
-                  </p>{" "}
-                </div>{" "}
-              </div>{" "}
-            </div>{" "}
+                    Moving goods seamlessly between sorting docks and final packing stations.
+                  </p>
+                </div>
+              </div>
+            </div>
             <div className="md:col-span-2 relative group overflow-hidden rounded-xl bg-primary h-[400px]">
-              {" "}
-              <img
-                alt="Adaptive routing"
-                className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700"
-                src="/assets/images/agv-roller-scenario-2.webp"
-              />{" "}
-              <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />{" "}
+                <img
+                  alt="Adaptive routing"
+                  className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700"
+                  src="/assets/images/agv-roller-scenario-2.webp"
+                />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
               <div className="absolute bottom-0 p-8">
-                {" "}
-                <h4 className="text-2xl font-bold text-white mb-2">
-                  Adaptive Routing
-                </h4>{" "}
+                <h4 className="text-2xl font-bold text-white mb-2">Adaptive Routing</h4>
                 <p className="text-on-primary-container max-w-md">
-                  {" "}
-                  Real-time reconfiguration of logistics paths without the need
-                  for physical track updates.{" "}
-                </p>{" "}
-              </div>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+                  Real-time reconfiguration of logistics paths without the need for physical track updates.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-8 md:px-12 max-w-7xl mx-auto">
-        {" "}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {" "}
           {[
             {
               number: "01",
               title: "Hybrid Automation",
-              copy: "Bridges the critical gap between fixed conveyor belts and flexible mobile zones, creating a unified flow ecosystem.",
+              copy: "Bridges the critical gap between fixed conveyor belts and flexible mobile zones, creating a unified flow ecosystem."
             },
             {
               number: "02",
               title: "Modular Routing",
-              copy: "Easily scalable architecture that allows you to add units and redefine paths via software, not hardware.",
+              copy: "Easily scalable architecture that allows you to add units and redefine paths via software, not hardware."
             },
             {
               number: "03",
               title: "Fixed-to-Mobile",
-              copy: "Enhances end-to-end throughput by removing manual touchpoints at transfer interfaces.",
-            },
+              copy: "Enhances end-to-end throughput by removing manual touchpoints at transfer interfaces."
+            }
           ].map((item) => (
             <div className="flex flex-col items-start" key={item.title}>
-              {" "}
-              <div className="mb-6 text-secondary font-black text-6xl opacity-20">
-                {item.number}
-              </div>{" "}
-              <h4 className="text-xl font-bold text-primary mb-4">
-                {item.title}
-              </h4>{" "}
-              <p className="text-on-surface-variant">{item.copy}</p>{" "}
+              <div className="mb-6 text-secondary font-black text-6xl opacity-20">{item.number}</div>
+              <h4 className="text-xl font-bold text-primary mb-4">{item.title}</h4>
+              <p className="text-on-surface-variant">{item.copy}</p>
             </div>
-          ))}{" "}
-        </div>{" "}
-      </section>{" "}
+          ))}
+        </div>
+      </section>
+
       <section className="py-24 bg-primary text-white overflow-hidden relative">
-        {" "}
         <div className="max-w-7xl mx-auto px-8 md:px-12 flex flex-col md:flex-row items-center gap-16 relative z-10">
-          {" "}
           <div className="md:w-1/2">
-            {" "}
-            <h2 className="text-4xl font-headline font-bold mb-8">
-              Ecosystem Synergy
-            </h2>{" "}
+            <h2 className="text-4xl font-headline font-bold mb-8">Ecosystem Synergy</h2>
             <p className="text-on-primary-container text-xl leading-relaxed mb-8">
-              {" "}
-              The AGV Roller is not an isolated component. It is engineered to
-              perform in perfect concert with 'Material Handling' software and
-              hardware ecosystems.{" "}
-            </p>{" "}
+              The AGV Roller is not an isolated component. It is engineered to perform in perfect concert with 'Material Handling' software and hardware ecosystems.
+            </p>
             <ul className="space-y-4">
-              {" "}
               {[
                 "Real-time API integration with WMS platforms",
                 "Dynamic load balancing across multiple AGV fleets",
-                "Autonomous charging and maintenance scheduling",
+                "Autonomous charging and maintenance scheduling"
               ].map((item) => (
                 <li className="flex items-center space-x-3" key={item}>
-                  {" "}
-                  <span className="material-symbols-outlined text-secondary">
-                    check_circle
-                  </span>{" "}
-                  <span>{item}</span>{" "}
+                  <span className="material-symbols-outlined text-secondary">check_circle</span>
+                  <span>{item}</span>
                 </li>
-              ))}{" "}
-            </ul>{" "}
-          </div>{" "}
+              ))}
+            </ul>
+          </div>
           <div className="md:w-1/2 bg-white/5 p-4 rounded-2xl backdrop-blur-xl border border-white/10">
-            {" "}
-            <img
-              alt="Ecosystem synergy"
-              className="rounded-xl transition-all duration-700"
-              src="/assets/images/agv-roller-ecosystem.webp"
-            />{" "}
-          </div>{" "}
-        </div>{" "}
-        <div className="absolute -right-24 -bottom-24 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />{" "}
-      </section>{" "}
+              <img
+                alt="Ecosystem synergy"
+                className="rounded-xl transition-all duration-700"
+                src="/assets/images/agv-roller-ecosystem.webp"
+              />
+          </div>
+        </div>
+        <div className="absolute -right-24 -bottom-24 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
+      </section>
+
       <section className="py-24 bg-surface flex flex-col items-center justify-center text-center px-8">
-        {" "}
         <div className="max-w-3xl">
-          {" "}
           <h2 className="text-4xl md:text-6xl font-headline font-extrabold text-primary mb-6 tracking-tighter">
-            {" "}
-            Optimize Your Conveyor Network{" "}
-          </h2>{" "}
+            Optimize Your Conveyor Network
+          </h2>
           <p className="text-on-surface-variant text-lg mb-12">
-            {" "}
-            Consult with our systems architects to design a bespoke mobile
-            transfer solution tailored to your facility's unique throughput
-            requirements.{" "}
-          </p>{" "}
+            Consult with our systems architects to design a bespoke mobile transfer solution tailored to your facility's unique throughput requirements.
+          </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            {" "}
-            <a
-              className="px-10 py-5 bg-secondary text-white font-bold rounded-md hover:bg-secondary-container transition-all shadow-xl shadow-secondary/20"
-              download={"Technical Data Sheet.pdf"}
-              href="/downloads/lifting-agv-technical-data-sheet.pdf"
-            >
-              {" "}
-              Request Specifications{" "}
-            </a>{" "}
-            <Link
-              className="px-10 py-5 border-2 border-primary text-primary font-bold rounded-md hover:bg-primary hover:text-white transition-all"
-              href="/contact"
-            >
-              {" "}
-              Consult an Expert{" "}
-            </Link>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+            <button className="px-10 py-5 bg-secondary text-white font-bold rounded-md hover:bg-secondary-container transition-all shadow-xl shadow-secondary/20">
+              Request Specifications
+            </button>
+            <button className="px-10 py-5 border-2 border-primary text-primary font-bold rounded-md hover:bg-primary hover:text-white transition-all">
+              Consult an Expert
+            </button>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
+
 function CompositeMobileRobotBody() {
   return (
-    <main>
-      {" "}
-      <section className="relative h-[870px] flex items-center overflow-hidden bg-primary">
-        {" "}
-        <div className="absolute inset-0 z-0">
-          {" "}
-          <img
-            alt="Composite Mobile Robot"
-            className="w-full h-full object-cover opacity-40 mix-blend-overlay"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkFe54W91kOQWoHqGbwB6dzJldIkJ5zpa0k6zpN8tJu_acx6hARMpvxGFywrbhnrE1o4tZRLoPnsltaVanzWQhSuVXsFPoxEkvijoyhe-_hK614xebINBPZIUjr-T6MqA6SiR9TJrbremFLVS8tVCuYeWxbiVLmJ9SXKBunOEGYOYhD1rbKKwOWXs9RVRxfq4ZeKvig65QokQRDtAc8bUJgja9QQI30yokMFWUw6JH9eueEw9qNUp-CL-mRN6-oDXbsrON7a7CLYQl"
-          />{" "}
-        </div>{" "}
-        <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full">
-          {" "}
-          <div className="grid items-center gap-12 md:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)]">
-            {" "}
-            <div className="max-w-3xl">
-              {" "}
-              <span className="inline-block px-3 py-1 mb-6 text-xs font-black tracking-[0.08em] bg-secondary-container text-on-secondary-container rounded-sm">
-                {" "}
-                Industrial Grade Robotics{" "}
-              </span>{" "}
-              <h1 className="text-6xl md:text-8xl font-headline font-extrabold text-white tracking-tighter leading-[0.9] mb-8">
-                {" "}
-                Composite <br /> Mobile Robot{" "}
-              </h1>{" "}
-              <p className="text-xl md:text-2xl hsa-dark-copy font-light leading-relaxed mb-10 max-w-2xl">
-                {" "}
-                The pinnacle of mobile manipulation. Integrating advanced
-                robotics with autonomous mobility for complex task execution in
-                high-precision environments.{" "}
-              </p>{" "}
-              <div className="flex flex-wrap gap-4">
-                {" "}
-                <ProductHeroContactButton className="px-8 py-4 text-sm tracking-[0.16em]" />{" "}
-              </div>{" "}
-            </div>{" "}
-            <div className="hidden md:flex items-center justify-center">
-              {" "}
-              <img
-                alt="Composite Mobile Robot"
-                className="w-full max-w-[430px] max-h-[520px] object-contain drop-shadow-[0_28px_50px_rgba(0,0,0,0.36)]"
-                src="/assets/images/cmr-hero.webp"
-              />{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
+      <main>
+        <section className="relative h-[870px] flex items-center overflow-hidden bg-primary">
+          <div className="absolute inset-0 z-0">
+            <img
+              alt="Composite Mobile Robot"
+              className="w-full h-full object-cover opacity-40 mix-blend-overlay"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAkFe54W91kOQWoHqGbwB6dzJldIkJ5zpa0k6zpN8tJu_acx6hARMpvxGFywrbhnrE1o4tZRLoPnsltaVanzWQhSuVXsFPoxEkvijoyhe-_hK614xebINBPZIUjr-T6MqA6SiR9TJrbremFLVS8tVCuYeWxbiVLmJ9SXKBunOEGYOYhD1rbKKwOWXs9RVRxfq4ZeKvig65QokQRDtAc8bUJgja9QQI30yokMFWUw6JH9eueEw9qNUp-CL-mRN6-oDXbsrON7a7CLYQl"
+            />
+          </div>
+          <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full">
+            <div className="grid items-center gap-12 md:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)]">
+              <div className="max-w-3xl">
+                <span className="inline-block px-3 py-1 mb-6 text-xs font-black tracking-widest uppercase bg-secondary-container text-on-secondary-container rounded-sm">
+                  Industrial Grade Robotics
+                </span>
+                <h1 className="text-6xl md:text-8xl font-headline font-extrabold text-white tracking-tighter leading-[0.9] mb-8">
+                  Composite <br />
+                  Mobile Robot
+                </h1>
+                <p className="text-xl md:text-2xl hsa-dark-copy font-light leading-relaxed mb-10 max-w-2xl">
+                  The pinnacle of mobile manipulation. Integrating advanced robotics with autonomous mobility for complex task execution in high-precision environments.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <button className="px-8 py-4 text-white bg-secondary font-bold rounded-md hover:bg-secondary-container transition-all flex items-center gap-2 group">
+                    Request a Technical Consultation
+                    <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
+                      arrow_forward
+                    </span>
+                  </button>
+                  <button className="px-8 py-4 text-white border border-outline-variant font-bold rounded-md hover:bg-white/10 transition-all">
+                    Download Product Spec Sheet
+                  </button>
+                </div>
+              </div>
+              <div className="hidden md:flex items-center justify-center">
+                <img
+                  alt="Composite Mobile Robot"
+                  className="w-full max-w-[430px] max-h-[520px] object-contain drop-shadow-[0_28px_50px_rgba(0,0,0,0.36)]"
+                  src="/assets/images/cmr-hero.webp"
+                />
+              </div>
+            </div>
+          </div>
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 flex flex-col items-center gap-2">
-          {" "}
-          <span className="text-[10px] tracking-widest font-black">
-            Scroll to Explore
-          </span>{" "}
-          <div className="w-[1px] h-12 bg-gradient-to-b from-secondary to-transparent" />{" "}
-        </div>{" "}
-      </section>{" "}
+          <span className="text-[10px] uppercase tracking-widest font-black">Scroll to Explore</span>
+          <div className="w-[1px] h-12 bg-gradient-to-b from-secondary to-transparent" />
+        </div>
+      </section>
+
       <section className="py-24 px-8 max-w-screen-2xl mx-auto bg-surface">
-        {" "}
         <div className="px-6 md:px-8 lg:px-12">
-          {" "}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            {" "}
             <div>
-              {" "}
               <h2 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight mb-8">
-                {" "}
-                Bridging the Gap in{" "}
-                <span className="text-secondary">Flexible Automation</span>{" "}
-              </h2>{" "}
+                Bridging the Gap in <span className="text-secondary">Flexible Automation</span>
+              </h2>
               <div className="space-y-6 text-lg text-on-surface-variant leading-relaxed">
-                {" "}
                 <p>
-                  {" "}
-                  Traditional robotics forces a choice between mobility and
-                  manipulation. Stationary arms are fixed to work-cells, while
-                  mobile platforms are limited to simple logistics.{" "}
-                </p>{" "}
+                  Traditional robotics forces a choice between mobility and manipulation. Stationary arms are fixed to work-cells, while mobile platforms are limited to simple logistics.
+                </p>
                 <p className="font-semibold text-primary">
-                  {" "}
-                  The Composite Mobile Robot (CMR) eliminates this boundary
-                  through advanced 'mobile manipulation'.{" "}
-                </p>{" "}
+                  The Composite Mobile Robot (CMR) eliminates this boundary through advanced 'mobile manipulation'.
+                </p>
                 <p>
-                  {" "}
-                  By fusing a high-precision robotic arm with an autonomous
-                  navigation base, the CMR performs complex, adaptive task
-                  execution while in transit. This enables a level of
-                  operational fluidity previously impossible in industrial
-                  settings.{" "}
-                </p>{" "}
-              </div>{" "}
+                  By fusing a high-precision robotic arm with an autonomous navigation base, the CMR performs complex, adaptive task execution while in transit. This enables a level of operational fluidity previously impossible in industrial settings.
+                </p>
+              </div>
               <div className="mt-12 grid grid-cols-2 gap-8">
-                {" "}
                 {[
                   { value: "0.02mm", label: "Arm Precision" },
-                  { value: "2.5m/s", label: "Transit Speed" },
+                  { value: "1.2-1.5m", label: "Transit Speed" }
                 ].map((item) => (
-                  <div
-                    className="border-l-2 border-secondary-container pl-6"
-                    key={item.label}
-                  >
-                    {" "}
-                    <div className="text-3xl font-black text-primary">
-                      {item.value}
-                    </div>{" "}
-                    <div className="text-sm tracking-wide text-outline font-bold">
-                      {" "}
-                      {item.label}{" "}
-                    </div>{" "}
+                  <div className="border-l-2 border-secondary-container pl-6" key={item.label}>
+                    <div className="text-3xl font-black text-primary">{item.value}</div>
+                    <div className="text-sm uppercase tracking-wide text-outline font-bold">
+                      {item.label}
+                    </div>
                   </div>
-                ))}{" "}
-              </div>{" "}
-            </div>{" "}
+                ))}
+              </div>
+            </div>
             <div className="relative">
-              {" "}
-              <div className="aspect-[4/5] bg-surface-container-high rounded-xl overflow-hidden shadow-2xl">
-                {" "}
-                <img
-                  alt="Robotic interface"
-                  className="w-full h-full object-cover"
-                  src="/assets/images/cmr-feature.webp"
-                />{" "}
-              </div>{" "}
+                <div className="aspect-[4/5] bg-surface-container-high rounded-xl overflow-hidden shadow-2xl">
+                  <img
+                    alt="Robotic interface"
+                    className="w-full h-full object-cover"
+                    src="/assets/images/cmr-feature.webp"
+                  />
+                </div>
               <div className="absolute -bottom-10 -left-10 bg-white/70 backdrop-blur-[20px] p-8 rounded-xl border border-white/20 shadow-xl max-w-xs">
-                {" "}
-                <span className="material-symbols-outlined text-secondary text-4xl mb-4">
-                  memory
-                </span>{" "}
-                <h3 className="font-headline font-bold text-xl mb-2">
-                  Adaptive Logic
-                </h3>{" "}
+                <span className="material-symbols-outlined text-secondary text-4xl mb-4">memory</span>
+                <h3 className="font-headline font-bold text-xl mb-2">Adaptive Logic</h3>
                 <p className="text-sm text-on-surface-variant">
-                  {" "}
-                  Embedded AI-driven task management allows the robot to
-                  prioritize workflows in real-time based on environment
-                  changes.{" "}
-                </p>{" "}
-              </div>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
-      <ProductTechnicalDataSection slug="composite-mobile-robot" />{" "}
+                  Embedded AI-driven task management allows the robot to prioritize workflows in real-time based on environment changes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-8 max-w-screen-2xl mx-auto bg-surface-container-low">
-        {" "}
         <div className="px-6 md:px-8 lg:px-12">
-          {" "}
           <div className="mb-16">
-            {" "}
-            <h2 className="text-sm font-black tracking-[0.2em] text-secondary mb-4">
-              {" "}
-              Application Scenarios{" "}
-            </h2>{" "}
+            <h2 className="text-sm font-black tracking-[0.2em] uppercase text-secondary mb-4">
+              Application Scenarios
+            </h2>
             <h3 className="text-4xl font-headline font-bold text-primary">
-              {" "}
-              Redefining Operational Flux{" "}
-            </h3>{" "}
-          </div>{" "}
+              Redefining Operational Flux
+            </h3>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {" "}
-            <div className="md:col-span-2 group relative overflow-hidden rounded-xl bg-surface-container-lowest h-[500px]">
-              {" "}
-              <img
-                alt="Move-and-work automation"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                src="/assets/images/cmr-scenario-1.webp"
-              />{" "}
-              <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />{" "}
-              <div className="absolute bottom-0 left-0 p-10">
-                {" "}
+            <div className="md:col-span-2 relative overflow-hidden rounded-xl bg-surface-container-lowest h-[500px]">
+              <LiteYouTubeEmbed
+                title="Move-and-work automation video"
+                videoId="rlwzMlFwFDE"
+                posterUrl="/assets/images/cmr-scenario-1.webp"
+                overlayClassName="bg-gradient-to-t from-primary via-primary/48 to-primary/10"
+              >
                 <h4 className="text-3xl font-headline font-bold text-white mb-4">
-                  {" "}
-                  Move-and-Work Automation{" "}
-                </h4>{" "}
+                  Move-and-Work Automation
+                </h4>
                 <p className="text-white text-lg max-w-md">
-                  {" "}
-                  CMR units perform assembly, inspection, and maintenance tasks
-                  while in transit between stations, maximizing uptime and
-                  reducing bottlenecking.{" "}
-                </p>{" "}
-              </div>{" "}
-            </div>{" "}
+                  CMR units perform assembly, inspection, and maintenance tasks while in transit between stations, maximizing uptime and reducing bottlenecking.
+                </p>
+              </LiteYouTubeEmbed>
+            </div>
             <div className="group relative overflow-hidden rounded-xl bg-primary h-[500px]">
-              {" "}
               <div className="absolute inset-0 p-10 flex flex-col justify-end z-20">
-                {" "}
                 <h4 className="text-2xl font-headline font-bold text-white mb-4">
-                  {" "}
-                  Flexible Fulfillment{" "}
-                </h4>{" "}
-                <p className="text-white text-sm">
-                  {" "}
-                  Dynamic sorting for high-variability order picking. Perfect
-                  for e-commerce hubs requiring rapid layout adaptation without
-                  infrastructure changes.{" "}
-                </p>{" "}
-              </div>{" "}
-              <img
-                alt="Logistics warehouse"
-                className="absolute inset-0 w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-500"
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPDSZ8xqcXQbA1mRojhVWkYkXhN954HexXdny8-f4O6wUqk8nrYKSPjdJZPVj3-m17drzLTiSpZeU_leGeoJuHKdO-6czIVyMiPhS4NhcDUHYXk-zT3QHazquPfZzGqW-AMtsfEd0Z_TMw68WYpLdx5kJFckFl6YZEAin1TJtjVK0t0goYj0nQsip43gl0-35YQHkGrsBUwXQwtv8ByLhr0gY6rmqEALy4ixmbyC7Gc9n6ugJd6vUfTLUTh3qHCMlRxMxTDEh-PLSt"
-              />{" "}
-            </div>{" "}
+                  Flexible Fulfillment
+                </h4>
+                  <p className="text-white text-sm">
+                  Dynamic sorting for high-variability order picking. Perfect for e-commerce hubs requiring rapid layout adaptation without infrastructure changes.
+                </p>
+              </div>
+                <img
+                  alt="Logistics warehouse"
+                  className="absolute inset-0 w-full h-full object-cover opacity-40 grayscale group-hover:grayscale-0 transition-all duration-500"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPDSZ8xqcXQbA1mRojhVWkYkXhN954HexXdny8-f4O6wUqk8nrYKSPjdJZPVj3-m17drzLTiSpZeU_leGeoJuHKdO-6czIVyMiPhS4NhcDUHYXk-zT3QHazquPfZzGqW-AMtsfEd0Z_TMw68WYpLdx5kJFckFl6YZEAin1TJtjVK0t0goYj0nQsip43gl0-35YQHkGrsBUwXQwtv8ByLhr0gY6rmqEALy4ixmbyC7Gc9n6ugJd6vUfTLUTh3qHCMlRxMxTDEh-PLSt"
+                />
+            </div>
             <div className="md:col-span-3 group relative overflow-hidden rounded-xl bg-surface-container-lowest h-[400px]">
-              {" "}
               <div className="flex flex-col md:flex-row h-full">
-                {" "}
                 <div className="w-full md:w-1/2 p-12 flex flex-col justify-center">
-                  {" "}
                   <span
                     className="material-symbols-outlined text-secondary text-5xl mb-6"
                     style={{ fontVariationSettings: "'FILL' 1" }}
                   >
-                    {" "}
-                    precision_manufacturing{" "}
-                  </span>{" "}
+                    precision_manufacturing
+                  </span>
                   <h4 className="text-3xl font-headline font-bold text-primary mb-4">
-                    {" "}
-                    Point-of-Use Handling{" "}
-                  </h4>{" "}
+                    Point-of-Use Handling
+                  </h4>
                   <p className="text-on-surface-variant text-lg">
-                    {" "}
-                    Eliminate fixed delivery points. CMRs deliver materials and
-                    immediately perform the required operation directly at the
-                    assembly point, creating a seamless production loop.{" "}
-                  </p>{" "}
-                </div>{" "}
+                    Eliminate fixed delivery points. CMRs deliver materials and immediately perform the required operation directly at the assembly point, creating a seamless production loop.
+                  </p>
+                </div>
                 <div className="w-full md:w-1/2 overflow-hidden">
-                  {" "}
-                  <img
-                    alt="Robotic hand"
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    src="/assets/images/cmr-point-of-use.webp"
-                  />{" "}
-                </div>{" "}
-              </div>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+                    <img
+                      alt="Robotic hand"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      src="/assets/images/cmr-point-of-use.webp"
+                    />
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-8 max-w-screen-2xl mx-auto bg-primary text-white overflow-hidden relative">
-        {" "}
-        <div className="absolute top-0 right-0 w-1/3 h-full bg-secondary-container/10 -skew-x-12 translate-x-1/2" />{" "}
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-secondary-container/10 -skew-x-12 translate-x-1/2" />
         <div className="relative z-10 px-6 md:px-8 lg:px-12">
-          {" "}
           <div className="max-w-2xl mb-20">
-            {" "}
             <h2 className="text-4xl md:text-5xl font-headline font-extrabold tracking-tight">
-              {" "}
-              Engineering the Zero-Tolerance Advantage{" "}
-            </h2>{" "}
-          </div>{" "}
+              Engineering the Zero-Tolerance Advantage
+            </h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {" "}
             {[
               {
                 title: "Workflow Adaptability",
-                copy: "No two warehouse cycles are identical. Our CMR platform features rapid re-configuration logic, allowing you to switch between tasks like sorting, inspection, and delivery in minutes, not days.",
+                copy: "No two warehouse cycles are identical. Our CMR platform features rapid re-configuration logic, allowing you to switch between tasks like sorting, inspection, and delivery in minutes, not days."
               },
               {
                 title: "Task Diversity",
-                copy: "Equipped with multi-purpose end-effectors, the robot handles everything from fragile electronics to 10kg industrial parts with the same level of consistent stationary precision.",
+                copy: "Equipped with multi-purpose end-effectors, the robot handles everything from fragile electronics to 20kg industrial parts with the same level of consistent stationary precision."
               },
               {
                 title: "Hybrid Execution",
-                copy: "Combines the navigational intelligence of an AMR with the dexterity of a 6-axis cobot. It doesn't just transport value; it creates value at every point in the facility.",
-              },
+                copy: "Combines the navigational intelligence of an AMR with the dexterity of a 6-axis cobot. It doesn't just transport value; it creates value at every point in the facility."
+              }
             ].map((item) => (
               <div className="space-y-6" key={item.title}>
-                {" "}
-                <div className="w-12 h-1 bg-secondary" />{" "}
-                <h4 className="text-2xl font-headline font-bold">
-                  {item.title}
-                </h4>{" "}
-                <p className="text-primary-fixed-dim leading-relaxed">
-                  {item.copy}
-                </p>{" "}
+                <div className="w-12 h-1 bg-secondary" />
+                <h4 className="text-2xl font-headline font-bold">{item.title}</h4>
+                <p className="text-primary-fixed-dim leading-relaxed">{item.copy}</p>
               </div>
-            ))}{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-8 max-w-screen-2xl mx-auto bg-surface">
-        {" "}
         <div>
-          {" "}
           <div className="bg-surface-container-lowest rounded-xl p-12 md:p-20 shadow-sm border border-outline-variant/10">
-            {" "}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-              {" "}
               <div>
-                {" "}
                 <h2 className="text-4xl font-headline font-bold text-primary mb-8">
-                  {" "}
-                  Seamless Ecosystem Integration{" "}
-                </h2>{" "}
+                  Seamless Ecosystem Integration
+                </h2>
                 <p className="text-lg text-on-surface-variant mb-10">
-                  {" "}
-                  The CMR is designed to act as the connective tissue of your
-                  automated facility. It integrates natively with our robot
-                  orchestration software and picking solutions for a unified
-                  orchestration of assets.{" "}
-                </p>{" "}
+                  The CMR is designed to act as the connective tissue of your automated facility. It integrates natively with our Fleet Management Software and Picking Solutions for a unified orchestration of assets.
+                </p>
                 <ul className="space-y-6">
-                  {" "}
                   <li className="flex items-start gap-4">
-                    {" "}
-                    <span className="material-symbols-outlined text-secondary mt-1">
-                      hub
-                    </span>{" "}
+                    <span className="material-symbols-outlined text-secondary mt-1">hub</span>
                     <div>
-                      {" "}
-                      <span className="block font-bold text-primary">
-                        Orchestration Synergy
-                      </span>{" "}
+                      <span className="block font-bold text-primary">Fleet Management Synergy</span>
                       <span className="text-sm text-on-surface-variant">
-                        {" "}
-                        Real-time path optimization and traffic control in mixed
-                        operation environments.{" "}
-                      </span>{" "}
-                    </div>{" "}
-                  </li>{" "}
+                        Real-time path optimization and traffic control in mixed operation environments.
+                      </span>
+                    </div>
+                  </li>
                   <li className="flex items-start gap-4">
-                    {" "}
                     <span className="material-symbols-outlined text-secondary mt-1">
-                      {" "}
-                      settings_input_component{" "}
-                    </span>{" "}
+                      settings_input_component
+                    </span>
                     <div>
-                      {" "}
-                      <span className="block font-bold text-primary">
-                        Flexible Picking Integration
-                      </span>{" "}
+                      <span className="block font-bold text-primary">Flexible Picking Integration</span>
                       <span className="text-sm text-on-surface-variant">
-                        {" "}
-                        Plug-and-play compatibility with standard automated
-                        storage and retrieval systems (AS/RS).{" "}
-                      </span>{" "}
-                    </div>{" "}
-                  </li>{" "}
-                </ul>{" "}
-              </div>{" "}
+                        Plug-and-play compatibility with standard automated storage and retrieval systems (AS/RS).
+                      </span>
+                    </div>
+                  </li>
+                </ul>
+              </div>
               <div className="grid grid-cols-2 gap-4">
-                {" "}
                 {[
                   { icon: "lan", label: "Unified API" },
                   { icon: "security", label: "Certified Safety" },
                   { icon: "monitoring", label: "Edge Analytics" },
-                  { icon: "cloud_sync", label: "Digital Twin" },
+                  { icon: "cloud_sync", label: "Digital Twin" }
                 ].map((item) => (
                   <div
                     className="aspect-square bg-surface-container rounded-lg flex flex-col items-center justify-center p-8 text-center hover:bg-primary-container group transition-all duration-300"
                     key={item.label}
                   >
-                    {" "}
                     <span className="material-symbols-outlined text-4xl mb-4 text-primary group-hover:text-white">
-                      {" "}
-                      {item.icon}{" "}
-                    </span>{" "}
-                    <span className="font-headline font-bold group-hover:text-white">
-                      {item.label}
-                    </span>{" "}
+                      {item.icon}
+                    </span>
+                    <span className="font-headline font-bold group-hover:text-white">{item.label}</span>
                   </div>
-                ))}{" "}
-              </div>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 px-8 max-w-screen-2xl mx-auto">
-        {" "}
         <div>
-          {" "}
           <div className="relative overflow-hidden bg-primary-container rounded-xl p-16 text-center">
-            {" "}
-            <div className="absolute inset-0 bg-gradient-to-r from-secondary/10 to-transparent" />{" "}
+            <div className="absolute inset-0 bg-gradient-to-r from-secondary/10 to-transparent" />
             <div className="relative z-10">
-              {" "}
               <h2 className="text-4xl md:text-5xl font-headline font-extrabold text-white mb-8">
-                {" "}
-                Ready to Architect Your <br /> Next-Gen Workflow?{" "}
-              </h2>{" "}
+                Ready to Architect Your <br />
+                Next-Gen Workflow?
+              </h2>
               <p className="text-xl text-white max-w-2xl mx-auto mb-12">
-                {" "}
-                Connect with our engineering specialists to discuss your
-                specific operational challenges and discover how composite
-                mobility can transform your throughput.{" "}
-              </p>{" "}
+                Connect with our engineering specialists to discuss your specific operational challenges and discover how composite mobility can transform your throughput.
+              </p>
               <div className="flex flex-col md:flex-row justify-center gap-4">
-                {" "}
-                <Link
-                  className="px-10 py-5 text-white bg-secondary font-bold rounded-md hover:bg-secondary-container transition-all"
-                  href="/contact"
-                >
-                  {" "}
-                  Request a Technical Consultation{" "}
-                </Link>{" "}
-                <a
-                  className="px-10 py-5 text-white border border-outline-variant font-bold rounded-md hover:bg-white/5 transition-all"
-              download={"Technical Data Sheet.pdf"}
-                  href="/downloads/lifting-agv-technical-data-sheet.pdf"
-                >
-                  {" "}
-                  View Technical Specifications{" "}
-                </a>{" "}
-              </div>{" "}
-            </div>{" "}
-          </div>{" "}
-        </div>{" "}
-      </section>{" "}
+                <button className="px-10 py-5 text-white bg-secondary font-bold rounded-md hover:bg-secondary-container transition-all">
+                  Request a Technical Consultation
+                </button>
+                <button className="px-10 py-5 text-white border border-outline-variant font-bold rounded-md hover:bg-white/5 transition-all">
+                  View Technical Specifications
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }
+
 function SolutionsInquiryForm() {
   return (
     <form
@@ -3245,9 +3028,9 @@ function SolutionOverviewBody({ page }) {
           {" "}
           <img
             className="w-full h-full object-cover opacity-30 mix-blend-soft-light scale-105"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfujFnEmwYtviRkzf7npRhGnksP1WeNEAHg5ttqRcI1VyZfdnGr3kSTvj1_WTJPDLckYdK76sNEyQlRiq-OZ4iiyPpE4NDOlas1RDhxDPy6KT_gc1s6J4gjDWehm7G05nVABrh0e63T6KmOziLVGDB0HX9FiXfSr_KK4wWy-JFPtSCQnxJjEgBwQdFjOPRxhTSekgyBQgiPuamWVZcgLwuTBusuTsiXcJ8agv3e-xaZkuGmJsXNRoPu4GZzx3y-y-SJnqecimEKpif"
+            src="/downloads/solutions-hero-asrs-wide.png"
           />{" "}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/60 to-transparent" />{" "}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/82 via-primary/38 to-transparent" />{" "}
         </div>{" "}
         <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full">
           {" "}
@@ -3677,6 +3460,9 @@ function SolutionDetailBody({ page }) {
   if (slug === "material-handling") {
     return <MaterialHandlingBody />;
   }
+  if (slug === "machine-tending-automation") {
+    return <MachineTendingAutomationBody page={page} />;
+  }
   if (slug === "picking") {
     return <PickingBody />;
   }
@@ -3703,12 +3489,12 @@ function SolutionDetailBody({ page }) {
               <img
                 alt="ASRS background"
                 className="w-full h-full object-cover object-[78%_center] opacity-40 scale-[1.02]"
-                src={visuals.heroImage}
+                src="/downloads/asrs-hero-wide.jpg"
               />{" "}
             </div>{" "}
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,32,74,0.99)_0%,rgba(4,32,74,0.97)_32%,rgba(4,32,74,0.82)_62%,rgba(4,32,74,0.56)_100%)]" />{" "}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_44%,rgba(255,122,0,0.12),transparent_28%),radial-gradient(circle_at_30%_55%,rgba(17,88,173,0.16),transparent_36%)]" />{" "}
-            <div className="absolute inset-y-0 left-0 w-[56%] bg-[linear-gradient(90deg,rgba(4,32,74,0.94)_0%,rgba(4,32,74,0.8)_72%,transparent_100%)]" />{" "}
+            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,32,74,0.16)_0%,rgba(4,32,74,0.12)_32%,rgba(4,32,74,0.1)_62%,rgba(4,32,74,0.08)_100%)]" />{" "}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_44%,rgba(255,122,0,0.05),transparent_28%),radial-gradient(circle_at_30%_55%,rgba(17,88,173,0.08),transparent_36%)]" />{" "}
+            <div className="absolute inset-y-0 left-0 w-[56%] bg-[linear-gradient(90deg,rgba(4,32,74,0.18)_0%,rgba(4,32,74,0.1)_72%,transparent_100%)]" />{" "}
           </>
         ) : null}{" "}
         <div
@@ -3777,7 +3563,7 @@ function SolutionDetailBody({ page }) {
               <div className="relative rounded-xl overflow-hidden shadow-2xl">
                 {" "}
                 <img
-                  className="w-full aspect-square object-cover"
+                  className={`w-full aspect-square ${visuals.heroImageClassName || "object-cover"}`}
                   src={visuals.heroImage}
                 />{" "}
                 <div className="absolute bottom-6 left-6 right-6 p-6 glass-panel rounded-lg border border-white/20">
@@ -3934,7 +3720,7 @@ function SolutionDetailBody({ page }) {
             >
               {" "}
               <img
-                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                className="w-full h-full object-cover transition-all duration-700"
                 src={
                   visuals.scenarioImages[index % visuals.scenarioImages.length]
                 }
@@ -4116,6 +3902,528 @@ function SolutionDetailBody({ page }) {
     </main>
   );
 }
+
+function MachineTendingAutomationBody({ page }) {
+  const visuals =
+    SOLUTION_DETAIL_VISUALS["machine-tending-automation"] ||
+    SOLUTION_DETAIL_VISUALS.default;
+  const proofMetrics = page.data.metrics || [];
+  const bestFitCards = [
+    {
+      title: "CNC and precision machining cells",
+      copy:
+        "Best for factories where parts, fixtures, and bins must reach multiple machines without relying on manual walking loops.",
+    },
+    {
+      title: "Operations under labor pressure",
+      copy:
+        "A good fit when machine uptime is limited by loading, unloading, and line-side presentation rather than machining speed itself.",
+    },
+    {
+      title: "Mixed automation environments",
+      copy:
+        "Works where mobile transport, cobots, and machine states must coordinate without rebuilding every cell around a single fixed robot.",
+    },
+  ];
+  const deliveryCards = [
+    {
+      title: "Line-side part delivery",
+      copy:
+        "Move raw parts, trays, fixtures, and empty containers to the right machine at the right sequence point.",
+    },
+    {
+      title: "Machine loading support",
+      copy:
+        "Support cobot or operator-assisted loading where fixed automation alone is too rigid, too costly, or too hard to scale.",
+    },
+    {
+      title: "Return-loop control",
+      copy:
+        "Route finished parts, scrap bins, and reusable carriers back to buffers, washing, or downstream stations.",
+    },
+    {
+      title: "MES and CNC coordination",
+      copy:
+        "Tie dispatch logic to machine states, schedule changes, queue status, and production priorities.",
+    },
+  ];
+  const machineTendingRobotHighlights = [
+    {
+      title: "Mobile manipulation at the machine edge",
+      copy:
+        "Use a mobile base plus robotic arm when part presentation, pickup, or handoff changes across cells and fixed guarding layouts.",
+    },
+    {
+      title: "One robot logic across multiple cells",
+      copy:
+        "Deploy the same Machine Tending Robot across staging, machining, inspection, and return loops instead of building a unique fixed robot around every machine.",
+    },
+    {
+      title: "Better fit for mixed part families",
+      copy:
+        "Handle variable trays, fixtures, cartons, and component sets where flexible routing matters as much as robotic precision.",
+    },
+  ];
+  const resultsCards = [
+    {
+      title: "Less idle time around machines",
+      metric: "Cell-ready flow",
+      copy:
+        "Reduce waiting caused by missing material, empty carriers, or late retrieval between machining cycles.",
+    },
+    {
+      title: "More stable labor allocation",
+      metric: "24/7 support",
+      copy:
+        "Use mobile transport to keep operators and cobots focused on value-added handling instead of part chasing.",
+    },
+    {
+      title: "Faster scale-up across cells",
+      metric: "Mobile + cobot",
+      copy:
+        "Expand machine tending coverage across more CNC or precision cells without redesigning each workstation from scratch.",
+    },
+  ];
+  const faqs = [
+    {
+      question: "What factories are the best fit for machine tending automation?",
+      answer:
+        "Factories with CNC, machining, inspection, or finishing cells where part movement around the machine is predictable enough to automate but too varied for a single fixed robot to solve alone.",
+    },
+    {
+      question: "Can this work with our existing CNC and MES environment?",
+      answer:
+        "Yes. The page is positioned around machine-state triggers, MES dispatch logic, and mobile fleet coordination so the deployment can align with existing production systems.",
+    },
+    {
+      question: "Do we need a cobot on every machine?",
+      answer:
+        "No. Some projects use mobile delivery with operator loading, while others combine mobile robots with cobots only where handling frequency and cycle time justify it.",
+    },
+    {
+      question: "Can deployment start with one cell and expand later?",
+      answer:
+        "Yes. A phased rollout is often the practical route: one line, one family of parts, or one constrained machine cluster first, then broader cell coverage once workflow timing is validated.",
+    },
+  ];
+  const quickTags = [
+    proofMetrics[0]?.value || "CNC-ready",
+    proofMetrics[1]?.value || "24/7 cell supply",
+    proofMetrics[2]?.value || "Mobile + cobot",
+  ];
+
+  return (
+    <main className="bg-white text-primary">
+      <section className="relative kinetic-gradient lg:min-h-[820px] xl:min-h-[860px]">
+        <div className="absolute inset-0">
+          <img
+            alt="Machine tending automation background"
+            className="h-full w-full object-cover opacity-20 mix-blend-overlay"
+            src="/assets/images/warehouse-network-1.webp"
+          />
+        </div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(2,25,61,0.97)_0%,rgba(3,37,88,0.92)_44%,rgba(3,37,88,0.56)_100%)]" />
+      <div className="relative mx-auto grid max-w-[1440px] gap-8 px-6 py-8 md:px-12 lg:grid-cols-[minmax(0,1.16fr)_408px] lg:items-start xl:grid-cols-[minmax(0,1.2fr)_432px]">
+          <div className="max-w-[62rem] pt-4">
+            <span
+              className="hsa-ui-kicker hsa-ui-kicker--light"
+              style={{
+                color: "#ffe7d8",
+                textShadow: "0 2px 14px rgba(0, 0, 0, 0.18)",
+              }}
+            >
+              CNC &amp; Cell Automation
+            </span>
+            <h1
+              className="mt-6 max-w-[17.8ch] font-headline text-[2.8rem] font-black leading-[0.92] tracking-tight text-white sm:text-[3.2rem] xl:text-[3.7rem]"
+              style={{
+                color: "#ffffff",
+                textShadow: "0 6px 28px rgba(0, 0, 0, 0.24)",
+              }}
+            >
+              Machine Tending Automation for CNC and Precision Machining Cells
+            </h1>
+            <p
+              className="mt-4 max-w-[42rem] text-[0.98rem] font-medium leading-relaxed md:text-[1.02rem]"
+              style={{
+                color: "#f4f7fc",
+                textShadow: "0 2px 16px rgba(0, 0, 0, 0.18)",
+              }}
+            >
+              Reduce machine idle time, stabilize part delivery, and coordinate
+              cobot-assisted handling with mobile robot transport between
+              staging, machining, inspection, and finished-goods return.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              {quickTags.map((tag) => (
+                <span
+                  className="rounded-full border px-4 py-[0.55rem] text-[10px] font-black uppercase tracking-[0.15em]"
+                  key={tag}
+                  style={{
+                    background: "rgba(255, 255, 255, 0.18)",
+                    borderColor: "rgba(255, 255, 255, 0.42)",
+                    color: "#ffffff",
+                    boxShadow: "inset 0 1px 0 rgba(255,255,255,0.08)",
+                    textShadow: "0 1px 8px rgba(0, 0, 0, 0.14)",
+                  }}
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="relative lg:pt-1">
+            <div className="absolute -inset-10 rounded-[2rem] bg-secondary/12 blur-[90px]" />
+            <div className="relative overflow-hidden rounded-[2rem] border border-white/12 bg-white px-4 py-4 shadow-[0_28px_90px_rgba(0,0,0,0.32)]">
+              <div className="mb-4">
+                <div className="text-[10px] font-black uppercase tracking-[0.24em] text-secondary">
+                  Project Briefing
+                </div>
+                <h2 className="mt-3 max-w-[12ch] text-[1.56rem] font-black leading-[1.02] tracking-tight text-primary">
+                  Request a CNC cell review
+                </h2>
+                <p className="mt-3 text-[12px] leading-relaxed text-on-surface-variant">
+                  Share your machine profile, loading method, and cell scope.
+                  We will reply with a suitable automation direction.
+                </p>
+              </div>
+              <form
+                className="space-y-3"
+                data-form-label="Machine Tending Landing Page Briefing"
+                data-form-type="consultation"
+                data-hsa-form=""
+                data-success-redirect="/thanks/"
+                data-success-message="Thanks, your machine tending briefing has been sent to our team."
+              >
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <label className="text-[8px] font-black tracking-[0.16em] text-outline">
+                      Full Name
+                    </label>
+                    <input
+                      className="w-full border-2 border-outline-variant/30 bg-surface-container-lowest px-3 py-[0.62rem] text-[13px] font-bold placeholder:font-normal placeholder:text-outline-variant/50 focus:border-secondary focus:ring-0"
+                      name="fullName"
+                      placeholder="ENTER NAME"
+                      type="text"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-[8px] font-black tracking-[0.16em] text-outline">
+                      Work Email
+                    </label>
+                    <input
+                      className="w-full border-2 border-outline-variant/30 bg-surface-container-lowest px-3 py-[0.62rem] text-[13px] font-bold placeholder:font-normal placeholder:text-outline-variant/50 focus:border-secondary focus:ring-0"
+                      name="email"
+                      placeholder="WORK@COMPANY.COM"
+                      required
+                      type="email"
+                    />
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[8px] font-black tracking-[0.16em] text-outline">
+                    Machine Type
+                  </label>
+                  <input
+                    className="w-full border-2 border-outline-variant/30 bg-surface-container-lowest px-3 py-[0.62rem] text-[13px] font-bold placeholder:font-normal placeholder:text-outline-variant/50 focus:border-secondary focus:ring-0"
+                    name="machineType"
+                    placeholder="CNC / machining / inspection"
+                    type="text"
+                  />
+                </div>
+                <input
+                  name="topic"
+                  type="hidden"
+                  value="Machine Tending Automation"
+                />
+                <button
+                  className="hsa-ui-btn-primary w-full justify-center py-[0.92rem]"
+                  type="submit"
+                >
+                  Request Review
+                </button>
+                <details className="rounded-[1.25rem] border border-outline-variant/22 bg-surface-container-lowest/65 px-3.5 py-3">
+                  <summary className="cursor-pointer list-none text-[10px] font-black uppercase tracking-[0.16em] text-outline">
+                    Add optional project details
+                  </summary>
+                  <div className="mt-3 space-y-3">
+                    <div className="space-y-2">
+                      <label className="text-[8px] font-black tracking-[0.16em] text-outline">
+                        Cells in Scope
+                      </label>
+                      <input
+                        className="w-full border-2 border-outline-variant/30 bg-white px-3 py-[0.62rem] text-[13px] font-bold placeholder:font-normal placeholder:text-outline-variant/50 focus:border-secondary focus:ring-0"
+                        name="cellCount"
+                        placeholder="E.G. 4 CELLS"
+                        type="text"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[8px] font-black tracking-[0.16em] text-outline">
+                        Workflow Details
+                      </label>
+                      <textarea
+                        className="w-full resize-none border-2 border-outline-variant/30 bg-white px-3 py-2.5 text-[13px] font-bold placeholder:font-normal placeholder:text-outline-variant/50 focus:border-secondary focus:ring-0"
+                        name="message"
+                        placeholder="CURRENT LOADING METHOD, PART FLOW, OR BOTTLENECKS..."
+                        rows="2"
+                      />
+                    </div>
+                  </div>
+                </details>
+              </form>
+              <div className="mt-3 flex flex-wrap gap-3 text-[10px] font-bold uppercase tracking-[0.11em] text-outline">
+                <span>Response within 24h</span>
+                <span>Engineering-led review</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1440px] px-6 py-24 md:px-12">
+        <div className="mb-14 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="max-w-3xl">
+            <span className="hsa-ui-kicker">Best Fit</span>
+            <h2 className="hsa-ui-title max-w-4xl">
+              Where machine tending automation fits best
+            </h2>
+          </div>
+          <p className="hsa-ui-body max-w-2xl">
+            Best for CNC loading, unloading, and part-transfer workflows
+            where machine-side delivery must stay stable across machining,
+            inspection, and finishing cells.
+          </p>
+        </div>
+        <div className="grid gap-6 md:grid-cols-3">
+          {bestFitCards.map((card) => (
+            <div
+              className="rounded-[2rem] border border-outline-variant/20 bg-surface-container-low px-7 py-8 shadow-sm"
+              key={card.title}
+            >
+              <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-secondary text-white">
+                <span className="material-symbols-outlined">precision_manufacturing</span>
+              </div>
+              <h3 className="text-2xl font-black tracking-tight text-primary">
+                {card.title}
+              </h3>
+              <p className="mt-4 text-base leading-relaxed text-on-surface-variant">
+                {card.copy}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-surface-container-low py-24">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-12">
+          <div className="mb-14 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl">
+              <span className="hsa-ui-kicker">What You Get</span>
+              <h2 className="hsa-ui-title max-w-4xl">
+                What a machine tending deployment actually covers
+              </h2>
+            </div>
+            <p className="hsa-ui-body max-w-2xl">
+              The value is not only the robot itself. A useful deployment must
+              define line-side presentation, machine loading support, return
+              loops, and dispatch logic between MES, CNC states, and transport.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {deliveryCards.map((card) => (
+              <div
+                className="rounded-[2rem] border border-outline-variant/20 bg-white px-7 py-8 shadow-sm"
+                key={card.title}
+              >
+                <div className="text-[10px] font-black uppercase tracking-[0.22em] text-secondary">
+                  Deployment Scope
+                </div>
+                <h3 className="mt-4 text-2xl font-black tracking-tight text-primary">
+                  {card.title}
+                </h3>
+                <p className="mt-4 text-base leading-relaxed text-on-surface-variant">
+                  {card.copy}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1440px] px-6 py-24 md:px-12">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.02fr)_minmax(320px,0.98fr)] lg:items-center">
+          <div className="overflow-hidden rounded-[2.25rem] border border-outline-variant/18 bg-primary text-white shadow-[0_28px_72px_rgba(4,23,58,0.16)]">
+            <img
+              alt="Machine Tending Robot"
+              className="aspect-[4/3] w-full object-cover"
+              src="/assets/images/machine-tending-robot-upper.png"
+            />
+            <div className="space-y-4 p-8">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-secondary">
+                Machine Tending Robot
+              </div>
+              <h2 className="text-[2.2rem] font-black leading-[0.96] tracking-tight text-white md:text-[2.6rem]">
+                Add mobile manipulation where fixed tending is too rigid
+              </h2>
+              <p className="text-base leading-relaxed text-white/78">
+                This page can also scale with a Machine Tending Robot layer:
+                a composite mobile robot that combines autonomous transport
+                with robotic handling for machine-side loading, unloading, and
+                flexible part presentation across multiple cells.
+              </p>
+            </div>
+          </div>
+          <div>
+            <span className="hsa-ui-kicker">Mobile Manipulation</span>
+            <h2 className="hsa-ui-title max-w-4xl">
+              Where a Machine Tending Robot strengthens the deployment
+            </h2>
+            <p className="mt-6 max-w-2xl text-lg leading-relaxed text-on-surface-variant">
+              When one CNC cell needs more than transport, the Machine Tending
+              Robot adds a mobile manipulation layer. It bridges line-side part
+              delivery and robotic task execution without forcing every cell
+              into a fixed automation footprint.
+            </p>
+            <div className="mt-8 grid gap-5">
+              {machineTendingRobotHighlights.map((item) => (
+                <div
+                  className="rounded-[1.75rem] border border-outline-variant/18 bg-surface-container-low px-6 py-6 shadow-sm"
+                  key={item.title}
+                >
+                  <div className="text-[10px] font-black uppercase tracking-[0.22em] text-secondary">
+                    Machine Tending Robot
+                  </div>
+                  <h3 className="mt-3 text-[1.35rem] font-black leading-[1.02] tracking-tight text-primary">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-on-surface-variant">
+                    {item.copy}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1440px] px-6 py-24 md:px-12">
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-start">
+          <div>
+            <span className="hsa-ui-kicker">Operational Value</span>
+            <h2 className="hsa-ui-title max-w-4xl">
+              Why factories move to machine tending automation
+            </h2>
+            <div className="mt-10 grid gap-6 md:grid-cols-3">
+              {resultsCards.map((card) => (
+                <div
+                  className="rounded-[2rem] border border-outline-variant/20 bg-white px-6 py-7 shadow-sm"
+                  key={card.title}
+                >
+                  <div className="text-[10px] font-black uppercase tracking-[0.22em] text-secondary">
+                    {card.metric}
+                  </div>
+                  <h3 className="mt-4 text-2xl font-black tracking-tight text-primary">
+                    {card.title}
+                  </h3>
+                  <p className="mt-4 text-sm leading-relaxed text-on-surface-variant">
+                    {card.copy}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="overflow-hidden rounded-[2rem] border border-outline-variant/20 bg-primary text-white shadow-[0_24px_60px_rgba(5,24,60,0.18)]">
+            <img
+              alt="Machine tending automation"
+              className="aspect-[4/3] w-full object-cover"
+              src="/assets/images/machine-tending-robot-lower.png"
+            />
+            <div className="space-y-5 p-8">
+              <div className="text-[10px] font-black uppercase tracking-[0.24em] text-secondary">
+                Integration Logic
+              </div>
+              <h3 className="text-3xl font-black tracking-tight">
+                Machine state to mobile dispatch
+              </h3>
+              <div className="space-y-4 text-sm leading-relaxed text-white/78">
+                {[
+                  "Order or schedule signal from MES",
+                  "Machine cell status and queue condition",
+                  "Material dispatch to staging or machine-side point",
+                  "Finished-part return to buffer or downstream process",
+                ].map((item) => (
+                  <div className="flex items-start gap-3" key={item}>
+                    <span className="mt-1 h-2.5 w-2.5 rounded-full bg-secondary" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-primary py-24 text-white">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-12">
+          <div className="mb-14 max-w-3xl">
+            <span className="hsa-ui-kicker hsa-ui-kicker--light">FAQ</span>
+            <h2 className="hsa-ui-title max-w-4xl text-white">
+              Questions buyers usually ask first
+            </h2>
+          </div>
+          <div className="grid gap-5">
+            {faqs.map((item) => (
+              <details
+                className="group rounded-[1.6rem] border border-white/12 bg-white/6 px-7 py-6"
+                key={item.question}
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-5 text-lg font-black tracking-tight text-white">
+                  <span>{item.question}</span>
+                  <span className="material-symbols-outlined text-secondary transition-transform group-open:rotate-45">
+                    add
+                  </span>
+                </summary>
+                <p className="mt-4 max-w-4xl text-sm leading-relaxed text-white/76">
+                  {item.answer}
+                </p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[1440px] px-6 py-24 md:px-12">
+        <div className="rounded-[2.25rem] border border-outline-variant/20 bg-surface-container-low px-8 py-12 md:px-12">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+            <div className="max-w-3xl">
+              <span className="hsa-ui-kicker">Final CTA</span>
+              <h2 className="hsa-ui-title max-w-4xl">
+                Request a machine tending layout review
+              </h2>
+              <p className="mt-6 text-lg leading-relaxed text-on-surface-variant">
+                Send your machine count, part flow, and current loading method.
+                We will outline where mobile transport, cobot support, and
+                machine-state coordination can reduce idle time first.
+              </p>
+            </div>
+            <div className="flex flex-col gap-4 sm:flex-row lg:flex-col xl:flex-row">
+              <Link className="hsa-ui-btn-primary" href="/contact?intent=quote">
+                Request Layout Review
+              </Link>
+              <Link
+                className="hsa-ui-btn-secondary border-primary/18 bg-white text-primary shadow-[0_14px_34px_rgba(0,23,54,0.08)] hover:border-primary/28 hover:bg-white"
+                href="/contact?intent=site-visit"
+              >
+                Plan Site Review
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
 function MaterialHandlingBody() {
   return (
     <main>
@@ -4126,10 +4434,10 @@ function MaterialHandlingBody() {
           {" "}
           <img
             className="w-full h-full object-cover opacity-40 mix-blend-multiply"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsmyLGrpJMR38UhtQDmEWwQmRL5kE3CqNy8E7CwjUHWwniAgWukDlr5uCn4Cpb6QXQ07OzwFDJSSckShsB2VVqmfSn3tYQp05z_YcSroVvlE2UHpJqNfkrLyLergG3lupq8Ji9VxHzQhZ42MbHX489Asi7lSSVN0Uudd1fsaWPZd3fnMUCW3KcbgD3dwmXt3zp88MnyaV7VgFjnUMSR3LensIOJtJcytDfkzUiZKMBSizEzZOsEL45qUZudVVMLr_wQRH84luoJsaH"
+            src="/downloads/material-handling-hero-wide.png"
             alt="Modern automated warehouse"
           />{" "}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-transparent" />{" "}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/72 via-primary/24 to-transparent" />{" "}
         </div>{" "}
         <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full">
           {" "}
@@ -4141,7 +4449,7 @@ function MaterialHandlingBody() {
             {" "}
             Material Handling{" "}
           </h1>{" "}
-          <p className="text-xl md:text-2xl text-on-primary-container max-w-2xl font-light leading-relaxed">
+          <p className="text-xl md:text-2xl text-white max-w-2xl font-light leading-relaxed">
             {" "}
             Optimizing Intralogistics through Autonomous Transport &amp; Hybrid
             Automation. Engineering zero-latency movement for the world's most
@@ -4635,11 +4943,12 @@ function PickingBody() {
         <div className="absolute inset-0 z-0">
           {" "}
           <img
-            className="w-full h-full object-cover opacity-40"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeyvh4vHFGsb-iwx90hsOOgCouE1POoGDfd6t6KHSFKwoUR0wHEa1noS2yrBmPp_hfJl_cdSD_OJ3JP1ealJ_MM65762RPwDocbjGD6U6vwlkKLwTktDWKprtBMwaNjofHW0HNxl-MrGkNH0kWWZQqPTCKrdVppJiE7-HeI1y7XaIkMPMmKfJ0RbAyzmo7p6-L83E7KXJdjJylTM4MbvS4RGKkzydUHbSYHvcrFgYbltgrE6SQ8DrERl93zIPKUKmLs3DNqkJczlIh"
+            className="w-full h-full object-cover object-center opacity-100"
+            src="/downloads/picking-hero-wide.png"
             alt="Picking hero"
           />{" "}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary to-transparent opacity-90" />{" "}
+          <div className="absolute inset-0 bg-primary/12" />{" "}
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,32,74,0.54)_0%,rgba(4,32,74,0.34)_32%,rgba(4,32,74,0.18)_62%,rgba(4,32,74,0.1)_100%)]" />{" "}
         </div>{" "}
         <div className="relative z-10 max-w-screen-2xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {" "}
@@ -4652,9 +4961,9 @@ function PickingBody() {
             <h1 className="text-5xl lg:text-7xl font-extrabold text-white leading-tight tracking-tighter mb-8">
               {" "}
               Picking &amp; Fulfillment <br />{" "}
-              <span className="text-on-primary-container">Solutions</span>{" "}
+              <span className="text-white">Solutions</span>{" "}
             </h1>{" "}
-            <p className="text-xl text-on-primary-container leading-relaxed mb-10 max-w-2xl font-light">
+            <p className="text-xl text-white leading-relaxed mb-10 max-w-2xl font-light">
               {" "}
               Advanced goods-to-person strategies for high-velocity order
               fulfillment and zero-error accuracy. Engineered for the next
@@ -5359,29 +5668,44 @@ function CaseOverviewBody({ page }) {
   return (
     <main>
       {" "}
-      <section className="relative h-[440px] flex items-center overflow-hidden bg-primary">
+      <section className="relative h-[500px] flex items-center overflow-hidden bg-primary">
         {" "}
         <div className="absolute inset-0 z-0">
           {" "}
-          <img
-            className="w-full h-full object-cover opacity-55"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBg5Zv1BCTFg_Oh_otNnfVHR-Ieli1m9_riedXcCosWoMX4hq4oLkD7S7R8q3oMGaw4fz4oI64b7w_xqJc-1waJ615Hzm8_-d9zxJwH-cfVbCVMVC7t7ZWjERnn_7mS7bAO3tDrg7gmigipLpKXiFZQpnn_XSq4iyODa3Z9kbr-etZtmW4ZRV8CKiHLb20ms9q-WTwOb4WgJ82lwSmbnB7jyvjjJaTiQZPY8s60URBc_8PX2jRTVL8ZKGpLIk1GaJuS10jEBy4ugzOr"
-          />{" "}
-          <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(0,23,54,0.42)_0%,rgba(15,56,97,0.24)_42%,rgba(254,107,0,0.12)_100%)]" />{" "}
+          <div className="absolute inset-x-[-4%] inset-y-[-6%]">
+            {" "}
+            <img
+              className="h-full w-full scale-[0.9] object-cover object-[82%_center]"
+              src="/downloads/case-studies-hero-wide.jpeg"
+            />{" "}
+          </div>{" "}
+          <div className="absolute inset-0 bg-[linear-gradient(100deg,rgba(0,23,54,0.66)_0%,rgba(15,56,97,0.38)_42%,rgba(254,107,0,0.18)_100%)]" />{" "}
+          <div className="absolute inset-y-0 left-0 w-[58%] bg-gradient-to-r from-primary/34 via-primary/16 to-transparent" />{" "}
         </div>{" "}
-        <div className="relative z-10 max-w-[1440px] mx-auto px-8 w-full">
+        <div className="relative z-10 max-w-[1440px] mx-auto px-8 w-full h-full">
           {" "}
-          <span className="text-[10px] tracking-[0.4em] text-secondary font-bold mb-6 block">
+          <span className="absolute left-8 top-20 text-[10px] tracking-[0.4em] text-secondary font-bold block">
             {" "}
             {page.data.kicker}{" "}
           </span>{" "}
-          <h1 className="font-headline text-6xl md:text-8xl font-extrabold text-on-primary tracking-tighter max-w-4xl leading-[0.85]">
+          <div className="absolute inset-0 flex items-center">
             {" "}
-            Logistics <br /> <span className="text-secondary">
-              Engineered
-            </span>{" "}
-            for Scale.{" "}
-          </h1>{" "}
+            <div className="mx-auto max-w-[1440px] w-full px-8">
+              {" "}
+              <div className="max-w-[780px] pt-20">
+                {" "}
+                <div className="font-headline font-extrabold tracking-tighter leading-[0.9] text-white drop-shadow-[0_10px_28px_rgba(6,18,38,0.34)]">
+                  {" "}
+                  <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-[4.9rem]">
+                    Logistics Engineered
+                  </span>{" "}
+                  <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-[4.9rem]">
+                    for Scale.
+                  </span>{" "}
+                </div>{" "}
+              </div>{" "}
+            </div>{" "}
+          </div>{" "}
         </div>{" "}
       </section>{" "}
       <section className="max-w-[1440px] mx-auto px-8 py-20">
@@ -5679,10 +6003,18 @@ function CaseCategoryBody({ page }) {
       <section className="relative bg-primary overflow-hidden min-h-[500px] flex items-center">
         {" "}
         <div
-          className="absolute inset-0 opacity-20"
-          style={{ backgroundImage: `url('${visuals.hero}')` }}
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url('${visuals.hero}')`,
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
         />{" "}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-transparent" />{" "}
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor: "rgba(0, 23, 54, 0.72)" }}
+        />{" "}
         <div className="relative max-w-screen-2xl mx-auto px-8 py-24 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {" "}
           <div className="lg:col-span-8">
@@ -5695,7 +6027,7 @@ function CaseCategoryBody({ page }) {
               {" "}
               {page.data.title}{" "}
             </h1>{" "}
-            <p className="text-xl md:text-2xl text-on-primary-container font-light max-w-2xl leading-relaxed">
+            <p className="text-xl md:text-2xl text-white font-light max-w-2xl leading-relaxed">
               {" "}
               {page.data.summary}{" "}
             </p>{" "}
@@ -5708,7 +6040,7 @@ function CaseCategoryBody({ page }) {
                 {" "}
                 {getMetricValue(page.data.metrics, 2, "99.9%")}{" "}
               </div>{" "}
-              <div className="text-on-primary-container tracking-widest text-xs font-bold">
+              <div className="text-white tracking-widest text-xs font-bold">
                 {" "}
                 Standard Efficiency Across Installations{" "}
               </div>{" "}
@@ -7317,7 +7649,7 @@ export function StructuredCatalogDetailPage({ page }) {
         {" "}
         {page.kind === "product-detail" ? (
           <ProductDetailBody page={page} />
-        ) : page.kind === "solution-detail" ? (
+        ) : page.kind === "solution-detail" || page.kind === "industry-detail" ? (
           <SolutionDetailBody page={page} />
         ) : page.kind === "case-category" ? (
           <CaseCategoryBody page={page} />

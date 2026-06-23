@@ -1,14 +1,9 @@
 import Link from "next/link";
 import { cache } from "react";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { CmsPageShell } from "@/components/cms-page-shell";
 import { getBlogBodyOverride } from "@/lib/blog-body-overrides.mjs";
 import { getBlogImageOverride } from "@/lib/blog-image-overrides.mjs";
-import {
-  getCanonicalBlogSlug,
-  getFallbackPostBySlug,
-  getFallbackRelatedPosts
-} from "@/lib/blog-post-fallbacks.mjs";
 import { SanityPortableText } from "@/components/sanity-portable-text";
 import { getPostBySlug, getRelatedPosts } from "@/lib/sanity/content.mjs";
 import { urlFor } from "@/lib/sanity/image.mjs";
@@ -26,6 +21,22 @@ function resolveSlugParam(value) {
   }
 }
 
+export async function generateMetadata({ params }) {
+  const post = await getCachedPostBySlug(resolveSlugParam(params.slug));
+
+  if (!post) {
+    return {};
+  }
+
+  return {
+    title: `${post.title} | coolyne`,
+    description: post.excerpt || "Warehouse automation article from coolyne.",
+    alternates: {
+      canonical: `/blog/${post.slug}`
+    }
+  };
+}
+
 function formatPublishedDate(value) {
   if (!value) {
     return "Publishing schedule pending";
@@ -39,6 +50,21 @@ function formatPublishedDate(value) {
 }
 
 const BLOG_SIDECARD_COPY = {
+  "agv-guide": {
+    eyebrow: "AGV Basics",
+    title: "Key Topics",
+    description: "System scope. Navigation methods. Safety logic. Forklift replacement fit."
+  },
+  "agv-vs-amr": {
+    eyebrow: "Transport Strategy",
+    title: "Comparison Focus",
+    description: "Navigation style. Safety trade-offs. Flexibility. Cost fit. Selection logic."
+  },
+  "warehouse-automation-guide": {
+    eyebrow: "Warehouse Automation",
+    title: "What This Covers",
+    description: "Robot workflows. Efficiency gains. Safety value. ROI checks. Deployment fit."
+  },
   "agv-what-is-automated-guided-vehicle": {
     eyebrow: "AGV Overview",
     title: "Core Scope",
@@ -58,7 +84,8 @@ function normalizeTopicDescription(post) {
 }
 
 function getSidecardCopy(post) {
-  const mapped = BLOG_SIDECARD_COPY[post?.slug];
+  const slug = typeof post === "string" ? post : post?.slug;
+  const mapped = BLOG_SIDECARD_COPY[slug];
 
   if (mapped) {
     return mapped;
@@ -90,65 +117,37 @@ function buildFallbackArticleBody(post) {
           text: excerpt
         }
       ]
+    },
+    {
+      _type: "block",
+      _key: "fallback-note",
+      style: "blockquote",
+      markDefs: [],
+      children: [
+        {
+          _type: "span",
+          _key: "fallback-note-span",
+          marks: [],
+          text: "If the full article does not appear after refresh, the page is likely serving a stale cache snapshot. Try opening the post again from the blog index."
+        }
+      ]
     }
   ];
 }
 
-async function loadPostBundle(slug) {
-  const canonicalSlug = getCanonicalBlogSlug(slug);
-  const [sanityPost, sanityRelatedPosts] = await Promise.all([
-    getCachedPostBySlug(canonicalSlug),
-    getCachedRelatedPosts(canonicalSlug)
-  ]);
-
-  const post = sanityPost || getFallbackPostBySlug(canonicalSlug);
-  const relatedPosts = sanityRelatedPosts.length
-    ? sanityRelatedPosts
-    : getFallbackRelatedPosts(canonicalSlug);
-
-  return {
-    canonicalSlug,
-    post,
-    relatedPosts
-  };
-}
-
-export async function generateMetadata({ params }) {
-  const resolvedParams = await params;
-  const slug = resolveSlugParam(resolvedParams.slug);
-  const { canonicalSlug, post } = await loadPostBundle(slug);
-
-  if (!post) {
-    return {};
-  }
-
-  return {
-    title: post.title,
-    description: post.excerpt || "Warehouse automation article from coolyne.",
-    alternates: {
-      canonical: `/blog/${canonicalSlug}`
-    }
-  };
-}
-
 export default async function BlogDetailPage({ params }) {
-  const resolvedParams = await params;
-  const slug = resolveSlugParam(resolvedParams.slug);
-  const { canonicalSlug, post, relatedPosts } = await loadPostBundle(slug);
-
-  if (slug !== canonicalSlug) {
-    redirect(`/blog/${canonicalSlug}`);
-  }
+  const slug = resolveSlugParam(params.slug);
+  const [post, relatedPosts] = await Promise.all([
+    getCachedPostBySlug(slug),
+    getCachedRelatedPosts(slug)
+  ]);
 
   if (!post) {
     notFound();
   }
 
   const heroImageUrl =
-    getBlogImageOverride(post) ||
-    post.image ||
-    urlFor(post.heroImage)?.width(1600).height(960).url() ||
-    null;
+    getBlogImageOverride(post) || urlFor(post.heroImage)?.width(1600).height(960).url() || null;
   const resolvedBody = getBlogBodyOverride(post) || post.body;
   const articleBody = resolvedBody?.length ? resolvedBody : buildFallbackArticleBody(post);
   const sidecardCopy = getSidecardCopy(post);

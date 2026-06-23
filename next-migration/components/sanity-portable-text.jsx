@@ -1,5 +1,4 @@
 import { PortableText } from "@portabletext/react";
-import { isSanityConfigured } from "@/lib/sanity/env.mjs";
 import { urlFor } from "@/lib/sanity/image.mjs";
 
 const portableTextComponents = {
@@ -22,10 +21,6 @@ const portableTextComponents = {
   },
   types: {
     imageWithAlt: ({ value }) => {
-      if (!isSanityConfigured()) {
-        return null;
-      }
-
       const imageUrl = urlFor(value)?.width(1200).url();
 
       if (!imageUrl) {
@@ -65,18 +60,6 @@ const portableTextComponents = {
             </tbody>
           </table>
         </div>
-      );
-    },
-    videoEmbed: ({ value }) => {
-      if (!value?.src) {
-        return null;
-      }
-
-      return (
-        <figure className="sanity-inline-video">
-          <video controls playsInline preload="metadata" src={value.src} />
-          {value.caption ? <figcaption>{value.caption}</figcaption> : null}
-        </figure>
       );
     }
   }

@@ -24,12 +24,10 @@ export async function getPostBySlug(slug) {
 }
 
 export async function getRelatedPosts(slug) {
-  return (
-    (await sanityFetch({
-      query: relatedPostListQuery,
-      params: { slug }
-    })) || []
-  );
+  return (await sanityFetch({
+    query: relatedPostListQuery,
+    params: { slug }
+  })) || [];
 }
 
 export async function getFaqList() {

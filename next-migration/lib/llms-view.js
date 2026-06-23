@@ -14,8 +14,8 @@ function getStructuredRoutes() {
   );
 }
 
-function pageEntryForRoute(route) {
-  const page = getStructuredPage(route === "/" ? [] : route.slice(1).split("/"));
+async function pageEntryForRoute(route) {
+  const page = await getStructuredPage(route === "/" ? [] : route.slice(1).split("/"));
 
   if (!page) {
     return null;
@@ -30,28 +30,24 @@ function pageEntryForRoute(route) {
     hasJsonLd: true,
     schemas:
       page.kind === "product-detail"
-        ? ["Organization", "WebSite", "WebPage", "Product", "Offer", "BreadcrumbList", "FAQPage"]
+        ? ["Organization", "WebSite", "WebPage", "BreadcrumbList", "FAQPage"]
         : page.kind === "solution-detail"
           ? ["Organization", "WebSite", "WebPage", "Service", "BreadcrumbList", "FAQPage"]
           : page.kind === "case-project-detail"
             ? ["Organization", "WebSite", "WebPage", "Article", "BreadcrumbList"]
             : ["Organization", "WebSite", "WebPage", "BreadcrumbList"],
-    offer:
-      page.kind === "product-detail"
-        ? {
-            model: "custom-quotation",
-            seller: COMPANY.name,
-            quoteUrl: absoluteUrl("/contact"),
-            eligibleRegion: "Worldwide",
-            businessFunction: "Sell",
-            itemCondition: "NewCondition"
-          }
-        : undefined
+    offer: undefined
   };
 }
 
-export function getLlmsIndexText() {
+export async function getLlmsIndexText() {
   const routes = getStructuredRoutes();
+  const pages = await Promise.all(
+    routes.map(async (route) => ({
+      route,
+      page: await getStructuredPage(route === "/" ? [] : route.slice(1).split("/"))
+    }))
+  );
 
   return [
     `# ${COMPANY.name}`,
@@ -69,37 +65,38 @@ export function getLlmsIndexText() {
     `- Per-page markdown endpoint: ${absoluteUrl("/api/markdown?path=/products/agv-forklift")}`,
     "",
     "## Structured pages",
-    ...routes.map((route) => {
-      const page = getStructuredPage(route === "/" ? [] : route.slice(1).split("/"));
+    ...pages.map(({ route, page }) => {
       const label = page?.data?.title || route;
       return `- ${label}: ${absoluteUrl(route)} | markdown: ${absoluteUrl(`/api/markdown?path=${route}`)}`;
     }),
     "",
     "## Notes",
     "- JSON-LD is embedded on public pages.",
-    "- Product pages include Product and Offer schema with B2B quotation facts.",
+    "- Product detail pages use neutral webpage schema for B2B inquiry content rather than merchant product rich-result markup.",
     "- Solution and case-study pages expose structured markdown views for AI crawlers.",
     "- Prefer canonical HTML URLs for citations and markdown URLs for extraction."
   ].join("\n");
 }
 
-export function getLlmsFullText() {
+export async function getLlmsFullText() {
   const routes = getStructuredRoutes();
 
-  const sections = routes
-    .map((route) => {
-      const page = getStructuredPage(route === "/" ? [] : route.slice(1).split("/"));
+  const sections = (
+    await Promise.all(
+      routes.map(async (route) => {
+        const page = await getStructuredPage(route === "/" ? [] : route.slice(1).split("/"));
 
-      if (!page) {
-        return null;
-      }
+        if (!page) {
+          return null;
+        }
 
-      return [
-        `\n\n<!-- ${page.kind} | ${absoluteUrl(route)} -->`,
-        renderStructuredPageMarkdown(page)
-      ].join("\n");
-    })
-    .filter(Boolean);
+        return [
+          `\n\n<!-- ${page.kind} | ${absoluteUrl(route)} -->`,
+          renderStructuredPageMarkdown(page)
+        ].join("\n");
+      })
+    )
+  ).filter(Boolean);
 
   return [
     `# ${COMPANY.name} - Full AI Readable Corpus`,
@@ -111,7 +108,9 @@ export function getLlmsFullText() {
   ].join("\n");
 }
 
-export function getLlmsJsonIndex() {
+export async function getLlmsJsonIndex() {
+  const pages = (await Promise.all(getStructuredRoutes().map(pageEntryForRoute))).filter(Boolean);
+
   return {
     site: {
       name: COMPANY.name,
@@ -146,6 +145,6 @@ export function getLlmsJsonIndex() {
         discovery: [absoluteUrl("/llms.json"), absoluteUrl("/llms.txt"), absoluteUrl("/llms-full.txt")]
       }
     },
-    pages: getStructuredRoutes().map(pageEntryForRoute).filter(Boolean)
+    pages
   };
 }

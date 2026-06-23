@@ -22,9 +22,98 @@ export const seoProjection = `{
   twitterCard
 }`;
 
+export const linkProjection = `{
+  title,
+  href
+}`;
+
+export const metricProjection = `{
+  value,
+  label,
+  copy,
+  icon
+}`;
+
+export const navCardItemProjection = `{
+  href,
+  title,
+  label,
+  summary,
+  metrics[]${metricProjection}
+}`;
+
+export const faqItemProjection = `{
+  question,
+  answer
+}`;
+
+export const featureCardProjection = `{
+  label,
+  title,
+  description,
+  icon,
+  bullets[]
+}`;
+
+export const logoItemProjection = `{
+  name,
+  href,
+  image${imageProjection}
+}`;
+
+export const heroProjection = `{
+  kicker,
+  title,
+  summary,
+  backgroundImage${imageProjection},
+  primaryCta${linkProjection},
+  secondaryCta${linkProjection},
+  panelKicker,
+  panelChip,
+  panelPosterImage${imageProjection}
+}`;
+
+export const timelineItemProjection = `{
+  year,
+  title,
+  description,
+  side
+}`;
+
+export const certificateItemProjection = `{
+  title,
+  href,
+  image${imageProjection}
+}`;
+
+export const trustShowcaseItemProjection = `{
+  id,
+  kind,
+  stage,
+  tab,
+  value,
+  label,
+  copy,
+  eyebrow,
+  title,
+  image${imageProjection}
+}`;
+
+export const contactMethodProjection = `{
+  icon,
+  accentTone,
+  title,
+  value,
+  caption
+}`;
+
+export const detailListItemProjection = `{
+  title,
+  description
+}`;
+
 export const portableTextProjection = `[]{
   ...,
-  _type == "image" => ${imageProjection},
   _type == "imageWithAlt" => ${imageProjection}
 }`;
 
@@ -84,5 +173,116 @@ export const faqListQuery = `*[_type == "faq"] | order(orderRank asc, _createdAt
   question,
   answer${portableTextProjection},
   orderRank,
+  seo${seoProjection}
+}`;
+
+export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
+  title,
+  description,
+  contactEmail,
+  contactPhone,
+  address,
+  defaultOgImage${imageProjection},
+  socialLinks[]${linkProjection},
+  seo${seoProjection}
+}`;
+
+export const homePageQuery = `*[_type == "homePage"][0]{
+  title,
+  kicker,
+  summary,
+  hero${heroProjection},
+  metrics[]${metricProjection},
+  cards[]${navCardItemProjection},
+  capabilities[],
+  industryTitle,
+  industrySummary,
+  industryCards[]${featureCardProjection},
+  trustTitle,
+  trustSummary,
+  trustShowcase[]${trustShowcaseItemProjection},
+  partnerTitle,
+  partnerSummary,
+  partnerBrands[]${logoItemProjection},
+  faqs[]${faqItemProjection},
+  seo${seoProjection}
+}`;
+
+export const aboutPageQuery = `*[_type == "aboutPage"][0]{
+  title,
+  kicker,
+  summary,
+  hero${heroProjection},
+  metrics[]${metricProjection},
+  timelineEyebrow,
+  introTitle,
+  introParagraphs[],
+  features[]${featureCardProjection},
+  timelineTitle,
+  timelineItems[]${timelineItemProjection},
+  certificateTitle,
+  certificateEyebrow,
+  certificateSummary,
+  certificateStats[]${metricProjection},
+  certificates[]${certificateItemProjection},
+  certificateGalleryNote,
+  certificateBadgeLabel,
+  ctaTitle,
+  ctaSummary,
+  ctaLink${linkProjection},
+  faqs[]${faqItemProjection},
+  seo${seoProjection}
+}`;
+
+export const contactPageQuery = `*[_type == "contactPage"][0]{
+  title,
+  kicker,
+  summary,
+  hero${heroProjection},
+  metrics[]${metricProjection},
+  contactSectionTitle,
+  contactSectionSummary,
+  contactMethods[]${contactMethodProjection},
+  formTitle,
+  formSummary,
+  consentCopy,
+  submitLabel,
+  mapImage${imageProjection},
+  mapLabel,
+  faqs[]${faqItemProjection},
+  seo${seoProjection}
+}`;
+
+export const catalogOverviewPageQuery = `*[_type == "catalogOverviewPage" && section == $section][0]{
+  section,
+  title,
+  kicker,
+  summary,
+  hero${heroProjection},
+  metrics[]${metricProjection},
+  cards[]${navCardItemProjection},
+  capabilities[],
+  faqs[]${faqItemProjection},
+  seo${seoProjection}
+}`;
+
+export const catalogDetailPageQuery = `*[_type == "catalogDetailPage" && section == $section && slug.current == $slug][0]{
+  section,
+  title,
+  "slug": slug.current,
+  label,
+  kicker,
+  summary,
+  hero${heroProjection},
+  metrics[]${metricProjection},
+  features[]${featureCardProjection},
+  scenarios[],
+  integrations[],
+  projects[]${detailListItemProjection},
+  bottlenecks[]${detailListItemProjection},
+  solutionStack[],
+  commissioning[],
+  capabilities[],
+  faqs[]${faqItemProjection},
   seo${seoProjection}
 }`;

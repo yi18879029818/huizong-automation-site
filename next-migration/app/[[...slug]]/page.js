@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { notFound } from "next/navigation";
 import {
   StructuredCatalogDetailPage,
@@ -10,7 +11,9 @@ import { getAllStructuredRoutes, getStructuredPage } from "@/lib/structured-cont
 import { COMPANY } from "@/lib/site-config";
 
 export const dynamicParams = true;
-export const revalidate = 60;
+export const revalidate = 0;
+
+const getCachedStructuredPage = cache((...slugParts) => getStructuredPage(slugParts));
 
 export function generateStaticParams() {
   return getAllStructuredRoutes().map((route) => ({
@@ -19,49 +22,63 @@ export function generateStaticParams() {
 }
 
 function buildStructuredMetadata(page) {
+  const seo = page.data.seo || {};
   const description =
+    seo.description ||
     page.data.heroSummary ||
     page.data.summary ||
     "Fleet structured content page.";
-  const image = page.data.image || "/assets/images/agv-forklift-original.png";
+  const image =
+    seo.ogImage?.src ||
+    page.data.heroBackgroundImage?.src ||
+    page.data.image ||
+    "/assets/images/agv-forklift-original.png";
+  const title = seo.title || page.title;
+  const canonical = seo.canonicalUrl || page.currentHref;
+  const shouldIndex = !seo.noindex;
+  const keywords = Array.isArray(seo.keywords) && seo.keywords.length ? seo.keywords : undefined;
 
   return {
-    title: page.title,
+    title,
     description,
+    keywords,
     alternates: {
-      canonical: page.currentHref,
+      canonical,
       languages: {
-        "x-default": page.currentHref
+        "x-default": canonical
       }
     },
     robots: {
-      index: true,
-      follow: true,
+      index: shouldIndex,
+      follow: shouldIndex,
       googleBot: {
-        index: true,
-        follow: true,
+        index: shouldIndex,
+        follow: shouldIndex,
         "max-image-preview": "large",
         "max-snippet": -1,
         "max-video-preview": -1
       }
     },
     openGraph: {
-      title: page.title,
-      description,
-      url: page.currentHref,
+      title: seo.ogTitle || title,
+      description: seo.ogDescription || description,
+      url: canonical,
       siteName: COMPANY.name,
       type: page.kind === "case-project-detail" ? "article" : "website",
       images: [
         {
           url: image,
-          alt: page.data.title
+          alt: seo.ogImage?.alt || page.data.title
         }
       ]
     },
+    twitter: {
+      card: seo.twitterCard || "summary_large_image",
+      title: seo.ogTitle || title,
+      description: seo.ogDescription || description,
+      images: [image]
+    },
     other: {
-      "llms-json": "/llms.json",
-      "llms-index": "/llms.txt",
-      "llms-full": "/llms-full.txt",
       "ai-markdown": `/api/markdown?path=${page.currentHref}`
     }
   };
@@ -72,6 +89,8 @@ function shouldRenderPureStructuredPage(page) {
     page.kind === "home-page" ||
     page.kind === "about-page" ||
     page.kind === "contact-page" ||
+    page.kind === "policy-page" ||
+    page.kind === "industry-detail" ||
     page.section === "products" ||
     page.section === "solutions" ||
     page.section === "case-studies"
@@ -79,7 +98,12 @@ function shouldRenderPureStructuredPage(page) {
 }
 
 function renderPureStructuredPage(page) {
-  if (page.kind === "home-page" || page.kind === "about-page" || page.kind === "contact-page") {
+  if (
+    page.kind === "home-page" ||
+    page.kind === "about-page" ||
+    page.kind === "contact-page" ||
+    page.kind === "policy-page"
+  ) {
     return <StructuredStaticPage page={page} />;
   }
 
@@ -96,7 +120,7 @@ function renderPureStructuredPage(page) {
 
 export async function generateMetadata({ params }) {
   const resolvedParams = await params;
-  const structuredPage = getStructuredPage(resolvedParams.slug || []);
+  const structuredPage = await getCachedStructuredPage(...(resolvedParams.slug || []));
 
   if (structuredPage) {
     return buildStructuredMetadata(structuredPage);
@@ -107,7 +131,7 @@ export async function generateMetadata({ params }) {
 
 export default async function StructuredPage({ params }) {
   const resolvedParams = await params;
-  const structuredPage = getStructuredPage(resolvedParams.slug || []);
+  const structuredPage = await getCachedStructuredPage(...(resolvedParams.slug || []));
 
   if (structuredPage) {
     return (

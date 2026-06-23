@@ -1,5 +1,5 @@
-@import "../public/assets/site-shell.css";
-@import "../public/assets/site-icons.css";
+@import url("/assets/site-shell.css?v=20260608-blog-stability-2");
+@import url("/assets/site-icons.css?v=20260608-blog-stability-2");
 
 @tailwind base;
 @tailwind components;

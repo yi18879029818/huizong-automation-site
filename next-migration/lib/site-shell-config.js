@@ -1,5 +1,7 @@
 export const SITE_ROUTES = {
   home: "/",
+  faq: "/faq",
+  blog: "/blog",
   products: "/products",
   "products-agv-forklift": "/products/agv-forklift",
   "products-lifting-agv": "/products/lifting-agv",
@@ -10,7 +12,10 @@ export const SITE_ROUTES = {
   "solutions-asrs": "/solutions/asrs",
   "solutions-material-handling": "/solutions/material-handling",
   "solutions-picking": "/solutions/picking",
+  "solutions-goods-to-person-picking-system": "/solutions/goods-to-person-picking-system",
+  "solutions-machine-tending-automation": "/solutions/machine-tending-automation",
   "solutions-software": "/solutions/software",
+  "industries-food-beverage-fmcg-automation": "/industries/food-beverage-fmcg-automation",
   "case-studies": "/case-studies",
   "case-studies-asrs": "/case-studies/asrs",
   "case-studies-material-handling": "/case-studies/material-handling",
