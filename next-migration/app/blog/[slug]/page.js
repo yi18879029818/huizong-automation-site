@@ -135,6 +135,43 @@ function buildFallbackArticleBody(post) {
   ];
 }
 
+const REDUNDANT_BLOG_ASSET_IDS = {
+  "agv-guide": ["51bf7a4e07fe44f2871756ccd30dcbfc48fd4d93"]
+};
+
+function blockContainsAssetId(block, assetIds) {
+  if (!block || !assetIds?.length) {
+    return false;
+  }
+
+  const refs = [
+    block?.asset?._ref,
+    block?.asset?._id,
+    block?.image?.asset?._ref,
+    block?.image?.asset?._id,
+    block?.node?.asset?._ref,
+    block?.node?.asset?._id,
+    block?.value?.asset?._ref,
+    block?.value?.asset?._id
+  ].filter(Boolean);
+
+  return refs.some((ref) => assetIds.some((assetId) => ref.includes(assetId)));
+}
+
+function pruneRedundantBlogBlocks(slug, blocks) {
+  if (!Array.isArray(blocks)) {
+    return blocks;
+  }
+
+  const assetIds = REDUNDANT_BLOG_ASSET_IDS[slug];
+
+  if (!assetIds?.length) {
+    return blocks;
+  }
+
+  return blocks.filter((block) => !blockContainsAssetId(block, assetIds));
+}
+
 export default async function BlogDetailPage({ params }) {
   const slug = resolveSlugParam(params.slug);
   const [post, relatedPosts] = await Promise.all([
@@ -148,7 +185,7 @@ export default async function BlogDetailPage({ params }) {
 
   const heroImageUrl =
     getBlogImageOverride(post) || urlFor(post.heroImage)?.width(1600).height(960).url() || null;
-  const resolvedBody = getBlogBodyOverride(post) || post.body;
+  const resolvedBody = pruneRedundantBlogBlocks(slug, getBlogBodyOverride(post) || post.body);
   const articleBody = resolvedBody?.length ? resolvedBody : buildFallbackArticleBody(post);
   const sidecardCopy = getSidecardCopy(post);
 
