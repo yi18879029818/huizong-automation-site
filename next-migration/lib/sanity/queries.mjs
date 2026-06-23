@@ -13,6 +13,7 @@ export const imageProjection = `{
 export const seoProjection = `{
   title,
   description,
+  keywords,
   canonicalUrl,
   noindex,
   ogTitle,
@@ -23,7 +24,8 @@ export const seoProjection = `{
 
 export const portableTextProjection = `[]{
   ...,
-  _type == "image" => ${imageProjection}
+  _type == "image" => ${imageProjection},
+  _type == "imageWithAlt" => ${imageProjection}
 }`;
 
 export const postListQuery = `*[_type == "post" && defined(slug.current)] | order(publishedAt desc, _createdAt desc) {
@@ -45,6 +47,13 @@ export const postQuery = `*[_type == "post" && slug.current == $slug][0] {
   body${portableTextProjection},
   heroImage${imageProjection},
   seo${seoProjection}
+}`;
+
+export const relatedPostListQuery = `*[_type == "post" && defined(slug.current) && slug.current != $slug] | order(publishedAt desc, _createdAt desc)[0...3] {
+  _id,
+  title,
+  "slug": slug.current,
+  publishedAt
 }`;
 
 export const caseStudyListQuery = `*[_type == "caseStudy" && defined(slug.current)] | order(publishedAt desc, _createdAt desc) {
