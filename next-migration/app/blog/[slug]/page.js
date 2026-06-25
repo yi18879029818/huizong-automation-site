@@ -3,7 +3,9 @@ import { cache } from "react";
 import { notFound } from "next/navigation";
 import { CmsPageShell } from "@/components/cms-page-shell";
 import { getBlogBodyOverride } from "@/lib/blog-body-overrides.mjs";
+import { injectBlogInternalLinks } from "@/lib/blog-internal-links.mjs";
 import { getBlogImageOverride } from "@/lib/blog-image-overrides.mjs";
+import { getLocalPostBySlug } from "@/lib/local-blog-posts.mjs";
 import { SanityPortableText } from "@/components/sanity-portable-text";
 import { getPostBySlug, getRelatedPosts } from "@/lib/sanity/content.mjs";
 import { urlFor } from "@/lib/sanity/image.mjs";
@@ -22,7 +24,8 @@ function resolveSlugParam(value) {
 }
 
 export async function generateMetadata({ params }) {
-  const post = await getCachedPostBySlug(resolveSlugParam(params.slug));
+  const slug = resolveSlugParam(params.slug);
+  const post = (await getCachedPostBySlug(slug)) || getLocalPostBySlug(slug);
 
   if (!post) {
     return {};
@@ -139,6 +142,140 @@ const DEDUPED_BLOG_ASSET_IDS = {
   "what-is-asrs": ["7741c86d1f3e584a526af174f0e672d41b03b877"]
 };
 
+const BLOG_BLOCK_INSERTIONS = {
+  "goods-to-person-guide": [
+    {
+      afterTextIncludes:
+        "A goods-to-person system, often shortened to G2P or GTP, is a warehousing and order fulfillment method in which automation brings inventory to a fixed picking station.",
+      block: {
+        _type: "staticImage",
+        _key: "g2p-guide-station-overview-image",
+        src: "/assets/images/g2p-guide-station-overview.webp",
+        alt: "Goods-to-person picking station with mobile robots delivering blue totes to a fixed operator workstation",
+        caption:
+          "Goods-to-person concept example: mobile robots deliver totes to a fixed picking station instead of sending the operator through the warehouse."
+      }
+    },
+    {
+      afterTextIncludes:
+        "The simplest way to understand the difference is this: in person-to-goods picking, the person travels to the product; in goods-to-person picking, the product travels to the person.",
+      block: {
+        _type: "staticImage",
+        _key: "g2p-guide-person-to-goods-contrast-image",
+        src: "/assets/images/g2p-guide-person-to-goods-contrast.webp",
+        alt: "Worker pushing a cart through warehouse aisles in a traditional person-to-goods picking environment",
+        caption:
+          "Traditional person-to-goods picking relies on operator travel through storage aisles, which is the movement G2P aims to reduce."
+      }
+    },
+    {
+      afterTextIncludes:
+        "The operator follows the on-screen instruction, picks the required quantity, confirms the action, and the system updates inventory data before returning the remaining goods to storage or routing them to the next step.",
+      block: {
+        _type: "staticImage",
+        _key: "g2p-guide-pick-station-detail-image",
+        src: "/assets/images/g2p-guide-pick-station-detail.webp",
+        alt: "Operator picking from a blue tote at a goods-to-person workstation with on-screen instructions",
+        caption:
+          "Typical G2P workflow at the station: the operator picks from the delivered tote, confirms the task, and the software records the inventory update."
+      }
+    },
+    {
+      afterTextIncludes:
+        "Mobile-robot goods-to-person systems are often attractive when a team wants more deployment flexibility or a more phased automation path.",
+      block: {
+        _type: "staticImage",
+        _key: "g2p-guide-mobile-robot-system-image",
+        src: "/assets/images/g2p-guide-mobile-robot-system.webp",
+        alt: "Large goods-to-person fulfillment area with multiple mobile robots, picking stations, and conveyor connections",
+        caption:
+          "Mobile-robot G2P example: multiple robots feed several workstations in parallel while conveyors support outbound flow."
+      }
+    }
+  ],
+  "what-is-asrs": [
+    {
+      afterTextIncludes:
+        "At a high level, ASRS works by receiving a load at an inbound point, identifying it, assigning it to a storage location, moving it into storage with automated equipment, and retrieving it again when a downstream process requests it.",
+      block: {
+        _type: "staticImage",
+        _key: "what-is-asrs-storage-aisle-image",
+        src: "/assets/images/asrs-guide-storage-aisle.webp",
+        alt: "Pallet conveyor and stacker-crane aisle inside a pallet-based ASRS warehouse",
+        caption:
+          "High-level ASRS aisle example: pallet loads move from conveyor infeed into dense automated storage and back out on request."
+      }
+    },
+    {
+      afterTextIncludes:
+        "The equipment retrieves the load and sends it to the next station, conveyor, or transport system.",
+      block: {
+        _type: "videoEmbed",
+        _key: "what-is-asrs-workflow-video",
+        src: "/videos/asrs-workflow.mp4",
+        caption:
+          "ASRS workflow example showing automated storage, retrieval, and conveyor-linked material flow."
+      }
+    },
+    {
+      afterTextIncludes:
+        "identification and safety devices such as scanners, sensors, and access controls",
+      block: {
+        _type: "staticImage",
+        _key: "what-is-asrs-control-interface-image",
+        src: "/assets/images/asrs-guide-control-interface.webp",
+        alt: "ASRS interface station with pallet conveyor, scanner column, HMI screen, and stacker-crane aisle",
+        caption:
+          "ASRS interface example: scanners, controls, and conveyor handoff equipment coordinate how loads enter and leave the storage aisle."
+      }
+    },
+    {
+      afterTextIncludes:
+        "If your operation mainly stores finished goods pallets, unit-load is usually the more relevant starting point. If the operation is built around parts, bins, or small-case handling, mini-load is often closer to the real need.",
+      block: {
+        _type: "staticImage",
+        _key: "what-is-asrs-unitload-miniload-image",
+        src: "/assets/images/asrs-guide-unitload-miniload-comparison.webp",
+        alt: "Side-by-side comparison of pallet unit-load ASRS and tote-focused mini-load automated storage",
+        caption:
+          "Unit-load and mini-load comparison: pallet-oriented crane storage on one side and tote-focused automated handling on the other."
+      }
+    },
+    {
+      afterTextIncludes:
+        "One Coolyne example is its `Automated Warehouse Upgrade` project, where ASRS is used as part of a larger warehouse redesign rather than as a stand-alone machine.",
+      block: {
+        _type: "staticImage",
+        _key: "what-is-asrs-integrated-material-flow-image",
+        src: "/assets/images/asrs-guide-integrated-material-flow.webp",
+        alt: "Integrated ASRS project with autonomous pallet movers feeding conveyors and high-density automated storage",
+        caption:
+          "Integrated material-flow example: ASRS works with autonomous pallet movers and conveyor interfaces as part of a larger intralogistics system."
+      }
+    }
+  ],
+  "warehouse-automation-guide": [
+    {
+      afterTextIncludes: "Different robot categories play different roles in a warehouse.",
+      block: {
+        _type: "videoEmbed",
+        _key: "warehouse-automation-lifting-agv-video",
+        src: "/videos/lifting-agv.mp4",
+        caption:
+          "Lifting AGV supporting repetitive pallet transport and lift-assisted material movement in warehouse automation."
+      }
+    }
+  ]
+};
+
+function getBlockText(block) {
+  if (block?._type !== "block" || !Array.isArray(block.children)) {
+    return "";
+  }
+
+  return block.children.map((child) => child?.text || "").join("");
+}
+
 function blockContainsAssetId(block, assetIds) {
   if (!block || !assetIds?.length) {
     return false;
@@ -187,12 +324,43 @@ function pruneRedundantBlogBlocks(slug, blocks) {
   });
 }
 
+function insertBlogVideoBlocks(slug, blocks) {
+  if (!Array.isArray(blocks)) {
+    return blocks;
+  }
+
+  const insertions = BLOG_BLOCK_INSERTIONS[slug];
+
+  if (!insertions?.length) {
+    return blocks;
+  }
+
+  const pendingInsertions = [...insertions];
+  const nextBlocks = [];
+
+  for (const block of blocks) {
+    nextBlocks.push(block);
+
+    const blockText = getBlockText(block);
+    if (!blockText) {
+      continue;
+    }
+
+    while (pendingInsertions.length && blockText.includes(pendingInsertions[0].afterTextIncludes)) {
+      nextBlocks.push(pendingInsertions.shift().block);
+    }
+  }
+
+  return nextBlocks;
+}
+
 export default async function BlogDetailPage({ params }) {
   const slug = resolveSlugParam(params.slug);
-  const [post, relatedPosts] = await Promise.all([
+  const [remotePost, relatedPosts] = await Promise.all([
     getCachedPostBySlug(slug),
     getCachedRelatedPosts(slug)
   ]);
+  const post = remotePost || getLocalPostBySlug(slug);
 
   if (!post) {
     notFound();
@@ -200,8 +368,13 @@ export default async function BlogDetailPage({ params }) {
 
   const heroImageUrl =
     getBlogImageOverride(post) || urlFor(post.heroImage)?.width(1600).height(960).url() || null;
-  const resolvedBody = pruneRedundantBlogBlocks(slug, getBlogBodyOverride(post) || post.body);
-  const articleBody = resolvedBody?.length ? resolvedBody : buildFallbackArticleBody(post);
+  const resolvedBody = insertBlogVideoBlocks(
+    slug,
+    pruneRedundantBlogBlocks(slug, getBlogBodyOverride(post) || post.body)
+  );
+  const articleBody = resolvedBody?.length
+    ? injectBlogInternalLinks(slug, resolvedBody)
+    : buildFallbackArticleBody(post);
   const sidecardCopy = getSidecardCopy(post);
 
   return (

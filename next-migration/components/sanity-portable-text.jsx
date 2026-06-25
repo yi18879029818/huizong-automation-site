@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { PortableText } from "@portabletext/react";
+import { normalizeInternalHref } from "@/lib/blog-internal-links.mjs";
 import { urlFor } from "@/lib/sanity/image.mjs";
 
 const portableTextComponents = {
@@ -13,11 +15,19 @@ const portableTextComponents = {
     number: ({ children }) => <ol>{children}</ol>
   },
   marks: {
-    link: ({ children, value }) => (
-      <a href={value?.href} rel="noreferrer" target="_blank">
-        {children}
-      </a>
-    )
+    link: ({ children, value }) => {
+      const internalHref = normalizeInternalHref(value?.href);
+
+      if (internalHref) {
+        return <Link href={internalHref}>{children}</Link>;
+      }
+
+      return (
+        <a href={value?.href} rel="noreferrer" target="_blank">
+          {children}
+        </a>
+      );
+    }
   },
   types: {
     imageWithAlt: ({ value }) => {
@@ -30,6 +40,23 @@ const portableTextComponents = {
       return (
         <figure className="sanity-inline-image">
           <img alt={value.alt || ""} src={imageUrl} />
+          {value.caption ? <figcaption>{value.caption}</figcaption> : null}
+        </figure>
+      );
+    },
+    staticImage: ({ value }) => {
+      if (!value?.src) {
+        return null;
+      }
+
+      return (
+        <figure className="sanity-inline-image">
+          <img
+            alt={value.alt || ""}
+            decoding="async"
+            loading="lazy"
+            src={value.src}
+          />
           {value.caption ? <figcaption>{value.caption}</figcaption> : null}
         </figure>
       );
