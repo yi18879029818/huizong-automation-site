@@ -182,6 +182,17 @@ const BLOG_BLOCK_INSERTIONS = {
     },
     {
       afterTextIncludes:
+        "The operator follows the on-screen instruction, picks the required quantity, confirms the action, and the system updates inventory data before returning the remaining goods to storage or routing them to the next step.",
+      block: {
+        _type: "videoEmbed",
+        _key: "g2p-guide-workflow-video",
+        src: "/videos/goods-to-person-guide.mp4",
+        caption:
+          "Goods-to-person workflow video: inventory is delivered to the picking station, picked by the operator, and routed onward under system control."
+      }
+    },
+    {
+      afterTextIncludes:
         "Mobile-robot goods-to-person systems are often attractive when a team wants more deployment flexibility or a more phased automation path.",
       block: {
         _type: "staticImage",
