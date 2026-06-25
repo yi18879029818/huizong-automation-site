@@ -143,6 +143,32 @@ const DEDUPED_BLOG_ASSET_IDS = {
 };
 
 const BLOG_BLOCK_INSERTIONS = {
+  "what-is-intralogistics": [
+    {
+      afterTextIncludes:
+        "In practical terms, intralogistics usually includes receiving, storage, putaway, replenishment, picking, internal transfer, staging, and shipping support, along with the control logic that keeps those movements accurate and coordinated.",
+      block: {
+        _type: "staticImage",
+        _key: "intralogistics-guide-process-flow-image",
+        src: "/assets/images/intralogistics-guide-process-flow.webp",
+        alt: "Intralogistics process scene with pallet storage, conveyor equipment, and autonomous material movement inside a warehouse operation",
+        caption:
+          "Intralogistics process example: storage, pallet movement, conveyor handling, and coordinated internal flow work together inside one operation."
+      }
+    },
+    {
+      afterTextIncludes:
+        "AGVs fit this picture when the operation has structured internal transport work. If the same loads move between the same points every day, with consistent pickup and drop-off conditions, AGVs can replace repetitive forklift travel with a more controlled transport pattern.",
+      block: {
+        _type: "staticImage",
+        _key: "intralogistics-guide-agv-transport-image",
+        src: "/assets/images/intralogistics-guide-agv-transport.webp",
+        alt: "AGV moving pallet loads along a defined transport route beside conveyor equipment in a warehouse",
+        caption:
+          "Structured intralogistics transport example: an AGV moves pallet loads along a defined route as part of a coordinated warehouse flow."
+      }
+    }
+  ],
   "goods-to-person-guide": [
     {
       afterTextIncludes:
