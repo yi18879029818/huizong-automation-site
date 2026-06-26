@@ -5,6 +5,22 @@ function toSlug(route) {
   return route === "/" ? [] : route.slice(1).split("/");
 }
 
+function toAbsoluteUrl(urlOrPath, fallbackRoute) {
+  if (typeof urlOrPath === "string" && urlOrPath.trim()) {
+    const normalized = urlOrPath.trim();
+
+    if (/^https?:\/\//i.test(normalized)) {
+      return normalized;
+    }
+
+    if (normalized.startsWith("/")) {
+      return `${SITE_URL}${normalized}`;
+    }
+  }
+
+  return `${SITE_URL}${fallbackRoute}`;
+}
+
 function resolvePriority(kind, route) {
   if (route === "/") {
     return 1;
@@ -48,7 +64,7 @@ export default async function sitemap() {
 
   return routes.map((route, index) => {
     const page = pages[index];
-    const canonical = page?.data?.seo?.canonicalUrl || `${SITE_URL}${route}`;
+    const canonical = toAbsoluteUrl(page?.data?.seo?.canonicalUrl, route);
 
     return {
       url: canonical,
