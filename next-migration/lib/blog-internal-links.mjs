@@ -112,6 +112,20 @@ const BLOG_INTERNAL_LINK_RULES = {
       phrase: "broader automation foundation",
       href: "/blog/warehouse-automation-guide"
     }
+  ],
+  "what-is-machine-tending": [
+    {
+      phrase: "machine tending automation",
+      href: "/solutions/machine-tending-automation"
+    },
+    {
+      phrase: "material handling",
+      href: "/blog/what-is-intralogistics"
+    },
+    {
+      phrase: "Coolyne's product overview",
+      href: "/products"
+    }
   ]
 };
 
