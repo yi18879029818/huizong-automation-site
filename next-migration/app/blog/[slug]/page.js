@@ -142,6 +142,13 @@ const DEDUPED_BLOG_ASSET_IDS = {
   "what-is-asrs": ["7741c86d1f3e584a526af174f0e672d41b03b877"]
 };
 
+const REMOVED_BLOG_ASSET_IDS = {
+  "warehouse-automation-guide": [
+    "f7640d4851438f8d7b13b27ecaa5cd603246d5e6",
+    "9e319ea07a85e56ec46e081c51c466b0717ce273"
+  ]
+};
+
 const BLOG_BLOCK_INSERTIONS = {
   "what-is-intralogistics": [
     {
@@ -166,6 +173,17 @@ const BLOG_BLOCK_INSERTIONS = {
         alt: "AGV moving pallet loads along a defined transport route beside conveyor equipment in a warehouse",
         caption:
           "Structured intralogistics transport example: an AGV moves pallet loads along a defined route as part of a coordinated warehouse flow."
+      }
+    },
+    {
+      afterTextIncludes:
+        "AGVs fit this picture when the operation has structured internal transport work. If the same loads move between the same points every day, with consistent pickup and drop-off conditions, AGVs can replace repetitive forklift travel with a more controlled transport pattern.",
+      block: {
+        _type: "videoEmbed",
+        _key: "intralogistics-guide-agv-transport-video",
+        src: "/videos/intralogistics-guide.mp4",
+        caption:
+          "Intralogistics transport video: AGV-based internal movement supports repeatable point-to-point material flow inside a structured warehouse operation."
       }
     }
   ],
@@ -293,6 +311,17 @@ const BLOG_BLOCK_INSERTIONS = {
   ],
   "warehouse-automation-guide": [
     {
+      afterTextIncludes: "How Warehouse Automation Robots Work",
+      block: {
+        _type: "staticImage",
+        _key: "warehouse-automation-guide-workflow-image",
+        src: "/assets/images/warehouse-automation-guide-workflow.webp",
+        alt: "Autonomous mobile robot carrying cartons between storage aisles and automation equipment in a warehouse",
+        caption:
+          "Warehouse automation workflow example: a mobile robot moves cartons between storage, transfer, and processing areas inside a coordinated warehouse system."
+      }
+    },
+    {
       afterTextIncludes: "Different robot categories play different roles in a warehouse.",
       block: {
         _type: "videoEmbed",
@@ -300,6 +329,17 @@ const BLOG_BLOCK_INSERTIONS = {
         src: "/videos/lifting-agv.mp4",
         caption:
           "Lifting AGV supporting repetitive pallet transport and lift-assisted material movement in warehouse automation."
+      }
+    },
+    {
+      afterTextIncludes: "How Warehouse Automation Robots Enhance Workplace Safety",
+      block: {
+        _type: "staticImage",
+        _key: "warehouse-automation-guide-safety-image",
+        src: "/assets/images/warehouse-automation-guide-safety.webp",
+        alt: "Warehouse operator working beside protected pedestrian lanes and an autonomous transport robot carrying blue totes",
+        caption:
+          "Safety-focused warehouse automation example: protected walkways, operator stations, and autonomous transport routes reduce conflict in shared work zones."
       }
     }
   ]
@@ -361,6 +401,20 @@ function pruneRedundantBlogBlocks(slug, blocks) {
   });
 }
 
+function pruneRemovedBlogBlocks(slug, blocks) {
+  if (!Array.isArray(blocks)) {
+    return blocks;
+  }
+
+  const assetIds = REMOVED_BLOG_ASSET_IDS[slug];
+
+  if (!assetIds?.length) {
+    return blocks;
+  }
+
+  return blocks.filter((block) => !blockContainsAssetId(block, assetIds));
+}
+
 function insertBlogVideoBlocks(slug, blocks) {
   if (!Array.isArray(blocks)) {
     return blocks;
@@ -407,7 +461,10 @@ export default async function BlogDetailPage({ params }) {
     getBlogImageOverride(post) || urlFor(post.heroImage)?.width(1600).height(960).url() || null;
   const resolvedBody = insertBlogVideoBlocks(
     slug,
-    pruneRedundantBlogBlocks(slug, getBlogBodyOverride(post) || post.body)
+    pruneRedundantBlogBlocks(
+      slug,
+      pruneRemovedBlogBlocks(slug, getBlogBodyOverride(post) || post.body)
+    )
   );
   const articleBody = resolvedBody?.length
     ? injectBlogInternalLinks(slug, resolvedBody)
