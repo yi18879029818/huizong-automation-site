@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CmsPageShell } from "@/components/cms-page-shell";
 import { getBlogImageOverride } from "@/lib/blog-image-overrides.mjs";
+import { mergeBlogPosts } from "@/lib/local-blog-posts.mjs";
 import { getPostList } from "@/lib/sanity/content.mjs";
 import { urlFor } from "@/lib/sanity/image.mjs";
 
@@ -61,7 +62,7 @@ const DEFAULT_BLOG_REFERENCE_POSTS = [
 ];
 
 export default async function BlogIndexPage() {
-  const posts = await getPostList();
+  const posts = mergeBlogPosts(await getPostList());
   const items = posts.length
     ? posts.map((post) => ({
         ...post,
