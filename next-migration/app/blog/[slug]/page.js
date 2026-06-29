@@ -324,6 +324,17 @@ const BLOG_BLOCK_INSERTIONS = {
     },
     {
       afterTextIncludes:
+        "The operating cycle often looks straightforward from the outside. A part is picked from a tray, conveyor, feeder, or pallet. The machine is checked for status. A door opens or an access point becomes available. The part is loaded into the fixture or chuck. The machine cycle starts. When the process is complete, the part is removed and either placed in an output location, routed to the next operation, or returned for a secondary step.",
+      block: {
+        _type: "videoEmbed",
+        _key: "machine-tending-operating-cycle-video",
+        src: "/videos/what-is-machine-tending-guide.mp4",
+        caption:
+          "Machine tending workflow video: the robot picks, loads, unloads, and hands off parts in a repeatable CNC support cycle."
+      }
+    },
+    {
+      afterTextIncludes:
         "A machine tending system usually combines four basics: a robot or cobot, a way to present parts, a machine interface, and a safety method that matches the cell design. Around those basics, teams may add conveyors, trays, pallets, vision systems, air blow-off, part verification, or inspection steps. The exact combination depends on the part, the cycle, and how tightly the machine must be integrated with the tending device.",
       block: {
         _type: "staticImage",
