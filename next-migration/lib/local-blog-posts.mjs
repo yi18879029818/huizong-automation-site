@@ -60,6 +60,16 @@ function comparisonTable(headers, rows, key) {
   };
 }
 
+function staticImage(src, alt, caption, key) {
+  return {
+    _key: key,
+    _type: "staticImage",
+    src,
+    alt,
+    caption
+  };
+}
+
 function paragraphWithLink(beforeText, linkText, href, afterText, key) {
   const markKey = `${key}-link`;
 
@@ -308,6 +318,12 @@ const LOCAL_BLOG_POSTS = {
         "The handoff point matters as much as the travel itself. If the material arrives but is stacked too far away, mixed with another SKU, placed at the wrong height, or blocked by empty containers, the delivery is technically complete but operationally poor. Good line side logistics pays close attention to point-of-use presentation, not just transport completion.",
         "line-side-logistics-p-13"
       ),
+      staticImage(
+        "/assets/images/line-side-logistics-lineseeding-1.png",
+        "AMR delivering bins to a production line for line-side replenishment",
+        "AMR-based line-side replenishment keeps bins moving to the operator without interrupting production.",
+        "line-side-logistics-image-1"
+      ),
       heading(
         "The Signals That Trigger Replenishment at the Right Time",
         "line-side-logistics-h3-2",
@@ -418,6 +434,12 @@ const LOCAL_BLOG_POSTS = {
         "So in practice, the useful question is not 'What is the most advanced option?' It is 'What can keep this particular flow moving with the least friction?'",
         "line-side-logistics-p-26"
       ),
+      staticImage(
+        "/assets/images/line-side-logistics-automation-1.png",
+        "Composite mobile robot supporting line-side part handling beside an assembly cell",
+        "Composite mobile robots combine delivery flexibility with workstation-side handling support.",
+        "line-side-logistics-image-2"
+      ),
       comparisonTable(
         ["Method", "Best fit", "Main strength", "Main limit"],
         [
@@ -475,6 +497,12 @@ const LOCAL_BLOG_POSTS = {
       paragraph(
         "Automation starts to make more sense once the transport task stops being occasional and starts becoming repetitive. When the same loads move between the same kinds of points again and again, automated transport and orchestration software can reduce emergency runs, smooth delivery cadence, and make task status more visible. The useful mindset here is not 'replace a driver.' It is 'remove a recurring source of line-side instability.'",
         "line-side-logistics-p-29"
+      ),
+      staticImage(
+        "/assets/images/line-side-logistics-automation-2.png",
+        "Mobile manipulator transferring material at a production workstation",
+        "Software-orchestrated mobile manipulators help stabilize repetitive line-side handoffs at the workstation.",
+        "line-side-logistics-image-3"
       ),
       paragraph(
         "As a practical rule, automation works best after the route, handoff points, and replenishment rules are already reasonably stable. If your team is comparing transport options in more detail, our AGV Guide and AGV vs AMR comparison are useful next reads.",
@@ -549,6 +577,12 @@ const LOCAL_BLOG_POSTS = {
       paragraph(
         "At the end of the day, line side logistics is working when the line stays supplied without overstocking, without constant chasing, and without unnecessary transport noise. That is the real goal, whether the plant uses manual carts, forklifts, tugger trains, AGVs, or a more software-orchestrated transport model.",
         "line-side-logistics-p-38"
+      ),
+      staticImage(
+        "/assets/images/line-side-logistics-system-view.png",
+        "Integrated line-side logistics with AGV transport and composite robot workstations",
+        "A mature line-side flow often combines transport robots, workstation automation, and clearly defined handoff zones.",
+        "line-side-logistics-image-4"
       ),
       paragraph(
         "If your team can already see that the real issue is not just transport, but unstable line-side flow, the next step is usually to map the current process and identify where shortages, overstock, wrong deliveries, or repeated emergency runs keep happening. Once those loss points are visible, it becomes much easier to judge whether the answer is better rules, better layout, or a different automation path for the production line.",
