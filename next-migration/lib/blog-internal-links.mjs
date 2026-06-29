@@ -126,6 +126,24 @@ const BLOG_INTERNAL_LINK_RULES = {
       phrase: "Coolyne's product overview",
       href: "/products"
     }
+  ],
+  "line-side-logistics": [
+    {
+      phrase: "AGV Guide",
+      href: "/blog/agv-guide"
+    },
+    {
+      phrase: "AGV vs AMR comparison",
+      href: "/blog/agv-vs-amr"
+    },
+    {
+      phrase: "What Is Intralogistics?",
+      href: "/blog/what-is-intralogistics"
+    },
+    {
+      phrase: "free initial review of your line-side logistics flow",
+      href: "/contact"
+    }
   ]
 };
 

@@ -309,6 +309,32 @@ const BLOG_BLOCK_INSERTIONS = {
       }
     }
   ],
+  "what-is-machine-tending": [
+    {
+      afterTextIncludes:
+        "CNC machine tending is most common where a part needs to be loaded and unloaded repeatedly with a reasonably stable cycle. Typical examples include CNC lathes, vertical machining centers, horizontal machining centers, grinders, and multi-operation cells where one machine finishes a step and the next station takes over. The more often the same sequence repeats, the more natural machine tending becomes as an improvement target.",
+      block: {
+        _type: "staticImage",
+        _key: "machine-tending-common-cnc-cell-image",
+        src: "/assets/images/machine-tending-material-pick-2.png",
+        alt: "Mobile machine tending robot with robotic arm serving CNC equipment inside a machining workshop",
+        caption:
+          "CNC machine tending example: a mobile robot with a robotic arm supports repeatable loading and unloading work across machining equipment."
+      }
+    },
+    {
+      afterTextIncludes:
+        "A machine tending system usually combines four basics: a robot or cobot, a way to present parts, a machine interface, and a safety method that matches the cell design. Around those basics, teams may add conveyors, trays, pallets, vision systems, air blow-off, part verification, or inspection steps. The exact combination depends on the part, the cycle, and how tightly the machine must be integrated with the tending device.",
+      block: {
+        _type: "staticImage",
+        _key: "machine-tending-system-basics-image",
+        src: "/assets/images/machine-tending-material-pick-3.png",
+        alt: "Machine tending robot positioned beside a CNC machine with organized part trays for automated loading and unloading",
+        caption:
+          "Machine tending system setup: robot, part presentation, machine interface, and cell integration work together around the CNC process."
+      }
+    }
+  ],
   "warehouse-automation-guide": [
     {
       afterTextIncludes: "How Warehouse Automation Robots Work",
