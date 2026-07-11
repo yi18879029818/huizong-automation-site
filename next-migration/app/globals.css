@@ -1,3 +1,6 @@
+@import url("/assets/site-shell.css?v=20260608-blog-stability-2");
+@import url("/assets/site-icons.css?v=20260608-blog-stability-2");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -511,6 +514,8 @@ body.antialiased {
   position: relative;
   overflow: hidden;
   padding: 10px 0;
+  mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 8%, #000 92%, transparent 100%);
 }
 
 .hsa-brand-marquee-track {
@@ -543,6 +548,11 @@ body.antialiased {
 }
 
 @media (max-width: 760px) {
+  .hsa-brand-marquee {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
   .hsa-brand-marquee-track {
     animation-duration: 24s;
   }
@@ -555,48 +565,6 @@ body.antialiased {
 
 @media (prefers-reduced-motion: reduce) {
   .hsa-brand-marquee-track {
-    animation: none;
-  }
-}
-
-.about-brand-marquee {
-  position: relative;
-  overflow: hidden;
-  padding: 10px 0;
-}
-
-.about-brand-marquee-track {
-  display: flex;
-  width: max-content;
-  will-change: transform;
-  animation: hsaBrandMarquee 30s linear infinite;
-}
-
-.about-brand-marquee-group {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  gap: 28px;
-  padding-right: 28px;
-}
-
-.about-brand-marquee:hover .about-brand-marquee-track {
-  animation-play-state: paused;
-}
-
-@media (max-width: 760px) {
-  .about-brand-marquee-track {
-    animation-duration: 24s;
-  }
-
-  .about-brand-marquee-group {
-    gap: 18px;
-    padding-right: 18px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .about-brand-marquee-track {
     animation: none;
   }
 }

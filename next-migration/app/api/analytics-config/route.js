@@ -10,18 +10,10 @@ function trimValue(value, limit = 64) {
 }
 
 export async function GET() {
-  let env = process.env || {};
-
-  try {
-    const context = await getCloudflareContext({ async: true });
-    if (context?.env) {
-      env = context.env;
-    }
-  } catch {
-    // Fall back to process.env during plain Next.js local dev.
-  }
-
-  const measurementId = trimValue(env.GA4_MEASUREMENT_ID);
+  const { env } = await getCloudflareContext({ async: true });
+  const measurementId = trimValue(
+    env.GA4_MEASUREMENT_ID || env.NEXT_PUBLIC_GA_MEASUREMENT_ID
+  );
 
   return Response.json(
     {

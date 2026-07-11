@@ -43,18 +43,6 @@ Backend behavior:
 
 The repository now includes a lightweight admin panel at `/admin/`.
 
-The Next.js layer now also includes an internal automation console at:
-
-- `/internal/automation`
-
-This console is intended for trusted internal use and works through same-origin Next.js API routes that proxy to `huizong-api`, which then bridges into the `AI guangao V3` control plane.
-It is also protected by HTTP Basic authentication at the middleware layer for both the page itself and the `/api/automation/*` proxy routes.
-The console now includes a deployment-health view backed by `GET /api/automation/health`, so internal operators can verify site proxy configuration and upstream bridge reachability before sending automation actions.
-The automation proxy now also attaches a minimal tracing context to each internal request, including a generated trace id, the authenticated operator username, and the requested action name, so the website and backend layers can correlate manual automation triggers without waiting for a full audit-log system.
-Manual `create_search_ad` and `optimize_ads` triggers are now also recorded into the site's Cloudflare D1 binding and can be viewed from the console through `GET /api/automation/audit/recent`.
-When downstream action history includes persisted trace metadata, the console now prefers exact `traceId` correlation before falling back to `taskId` or nearby timestamps.
-The upstream summary read-model exposed by `huizong-api` now also documents these downstream trace fields explicitly on action-history items, so the site is no longer depending on an undocumented `dict` shape there.
-
 If you prefer a standalone local viewer instead of the hosted `/admin/` page, open:
 
 - `admin.html`
@@ -117,36 +105,11 @@ Visitor journey schema reference:
 
 Create a Cloudflare D1 database and bind it to this Pages project as `FORM_DB`.
 
-Bootstrap schema file:
-
-- `database/form_db.bootstrap.sql`
-
-Component schema files:
+Suggested schema file:
 
 - `database/form_submissions.sql`
-- `database/visitor_tracking.sql`
-- `database/automation_audit_log.sql`
 
 You can also let the Functions create the table automatically on first use, but keeping the SQL file in the repo makes the storage model explicit.
-For production or a fresh environment, prefer applying the unified bootstrap file instead of relying on lazy table creation.
-
-From [next-migration](E:/codex/coolyne.com/huizong-automation-site/next-migration):
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\init-form-db.ps1
-```
-
-Useful variants:
-
-```powershell
-# Local wrangler dev database
-powershell -ExecutionPolicy Bypass -File .\scripts\init-form-db.ps1 -Local
-```
-
-```powershell
-# Preview D1 database
-powershell -ExecutionPolicy Bypass -File .\scripts\init-form-db.ps1 -Preview
-```
 
 ## Environment variables
 
@@ -164,12 +127,6 @@ Required variables:
 - `ADMIN_USERNAME` - admin login username for `/admin/`
 - `ADMIN_PASSWORD` - admin login password for `/admin/`
 - `GA4_MEASUREMENT_ID` - optional Google Analytics 4 measurement ID, for example `G-XXXXXXXXXX`
-- `HUIZONG_API_BASE_URL` - base URL of the `huizong-api` backend used by the internal automation console
-- `HUIZONG_INTERNAL_API_TOKEN` - internal token used by the site server to call `huizong-api` automation bridge routes
-- `INTERNAL_AUTOMATION_USERNAME` - optional dedicated Basic Auth username for `/internal/automation` and `/api/automation/*`
-- `INTERNAL_AUTOMATION_PASSWORD` - optional dedicated Basic Auth password for `/internal/automation` and `/api/automation/*`
-
-If the dedicated internal automation credentials are not set, these routes fall back to `ADMIN_USERNAME` and `ADMIN_PASSWORD`.
 
 Required binding:
 
@@ -182,24 +139,15 @@ For hosted environments, set the same values in Cloudflare Pages project variabl
 This repo does not require a Node mail SDK, so no extra runtime package is needed. To test the full form flow locally you still need Node.js installed so you can run Wrangler.
 
 1. Install Node.js 18+.
-2. For `next-migration` production builds on Windows, prefer Node.js 20 LTS. The repo now includes `next-migration/.nvmrc` and declares `>=18.17 <25` in `next-migration/package.json` because Next.js 14 SWC loading was not reliable under local Node.js 25.
-3. Create `.dev.vars` from `.dev.vars.example`.
-4. Start a local Cloudflare Pages dev server:
+2. Create `.dev.vars` from `.dev.vars.example`.
+3. Start a local Cloudflare Pages dev server:
 
 ```bash
 npx wrangler pages dev public
 ```
 
-5. Open the local URL shown by Wrangler.
-6. Click `Speak With An Expert`, fill the modal form, and submit.
-
-For the Next.js migration layer build verification:
-
-```bash
-cd next-migration
-npm install
-npm run build
-```
+4. Open the local URL shown by Wrangler.
+5. Click `Speak With An Expert`, fill the modal form, and submit.
 
 If you only open `public/index.html` directly in the browser, the `/api/contact` endpoint will not exist.
 
@@ -223,23 +171,8 @@ The `functions/` directory is detected automatically by Cloudflare Pages.
 Additional production setup:
 
 1. Add the `FORM_DB` D1 binding in Pages settings.
-2. Apply the D1 bootstrap schema with `next-migration/scripts/init-form-db.ps1`.
-3. Add `ADMIN_USERNAME` and `ADMIN_PASSWORD` in Pages variables/secrets.
-4. Add `HUIZONG_API_BASE_URL` and `HUIZONG_INTERNAL_API_TOKEN` if you want `/internal/automation` to work in the deployed site.
-5. Add `INTERNAL_AUTOMATION_USERNAME` and `INTERNAL_AUTOMATION_PASSWORD`, or rely on the admin credentials fallback, if you want `/internal/automation` to remain access-controlled in production.
-6. Redeploy the site after changing bindings, environment variables, or admin API code.
-
-Cloudflare Worker Git-integration note:
-
-- `Workers Builds: huizong-automation-site` should not be treated as the primary release signal anymore if it still appears on PRs.
-- This check is tied to the old Cloudflare account that previously hosted the project and is now considered a legacy residual integration.
-- The active Worker deployment path for the current site is `huizong-automation-site-next` under `next-migration/`, together with the explicit deployment flow documented in `DEPLOY_AUTOMATION_CONSOLE.md`.
-- If the legacy `huizong-automation-site` build check is still connected in GitHub or Cloudflare, remove or disable that integration to avoid blocking releases on an obsolete account.
-
-For the internal automation console deployment path on the Next.js Worker layer, use:
-
-- [DEPLOY_AUTOMATION_CONSOLE.md](E:/codex/coolyne.com/huizong-automation-site/DEPLOY_AUTOMATION_CONSOLE.md)
-- [next-migration/scripts/deploy-automation-console.ps1](E:/codex/coolyne.com/huizong-automation-site/next-migration/scripts/deploy-automation-console.ps1)
+2. Add `ADMIN_USERNAME` and `ADMIN_PASSWORD` in Pages variables/secrets.
+3. Redeploy the site after changing bindings, environment variables, or admin API code.
 
 Note:
 

@@ -15,7 +15,9 @@ function trimValue(value, limit = 64) {
 }
 
 export async function onRequestGet(context) {
-  const measurementId = trimValue(context.env.GA4_MEASUREMENT_ID);
+  const measurementId = trimValue(
+    context.env.GA4_MEASUREMENT_ID || context.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
+  );
 
   return json({
     ok: true,

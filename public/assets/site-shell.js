@@ -91,6 +91,14 @@
     }
   }
 
+  function safeStorageRemove(storage, key) {
+    try {
+      storage.removeItem(key);
+    } catch (error) {
+      return;
+    }
+  }
+
   function getTrackingIds() {
     var visitorId = safeStorageGet(window.localStorage, "hsa-visitor-id");
     var sessionId = safeStorageGet(window.sessionStorage, "hsa-session-id");
@@ -518,11 +526,238 @@
     window.gtag("event", eventName, params || {});
   }
 
+  function trackGaLeadEvent(params, onComplete) {
+    var completed = false;
+    var startedAt = Date.now();
+    var payload = Object.assign({}, params || {});
+
+    function finish() {
+      var elapsed;
+      var remaining;
+
+      if (completed) {
+        return;
+      }
+
+      elapsed = Date.now() - startedAt;
+      remaining = 1500 - elapsed;
+
+      if (remaining > 0) {
+        window.setTimeout(finish, remaining);
+        return;
+      }
+
+      completed = true;
+      if (typeof onComplete === "function") {
+        onComplete();
+      }
+    }
+
+    if (!analyticsState.measurementId || typeof window.gtag !== "function") {
+      finish();
+      return;
+    }
+
+    payload.event_callback = finish;
+    payload.event_timeout = 1200;
+    window.gtag("event", "generate_lead", payload);
+    window.setTimeout(finish, 1400);
+  }
+
+  function getPendingLeadStorageKey() {
+    return "hsa-pending-lead";
+  }
+
+  function getCurrentPagePath() {
+    return (window.location.pathname || "/") + (window.location.search || "");
+  }
+
+  function storePendingLead(params) {
+    var payload;
+
+    if (!window.sessionStorage) {
+      return;
+    }
+
+    payload = Object.assign({}, params || {}, {
+      storedAt: Date.now()
+    });
+
+    safeStorageSet(window.sessionStorage, getPendingLeadStorageKey(), JSON.stringify(payload));
+  }
+
+  function readPendingLead() {
+    var rawValue;
+    var parsed;
+
+    if (!window.sessionStorage) {
+      return null;
+    }
+
+    rawValue = safeStorageGet(window.sessionStorage, getPendingLeadStorageKey());
+    if (!rawValue) {
+      return null;
+    }
+
+    try {
+      parsed = JSON.parse(rawValue);
+    } catch (error) {
+      safeStorageRemove(window.sessionStorage, getPendingLeadStorageKey());
+      return null;
+    }
+
+    if (!parsed || typeof parsed !== "object") {
+      safeStorageRemove(window.sessionStorage, getPendingLeadStorageKey());
+      return null;
+    }
+
+    if (parsed.storedAt && Date.now() - parsed.storedAt > 30 * 60 * 1000) {
+      safeStorageRemove(window.sessionStorage, getPendingLeadStorageKey());
+      return null;
+    }
+
+    return parsed;
+  }
+
+  function clearPendingLead() {
+    if (!window.sessionStorage) {
+      return;
+    }
+
+    safeStorageRemove(window.sessionStorage, getPendingLeadStorageKey());
+  }
+
+  function maybeTrackPendingLead() {
+    var normalizedPathname;
+    var pendingLead;
+
+    normalizedPathname = (window.location.pathname || "/").replace(/\/+$/, "") || "/";
+    if (normalizedPathname !== "/thanks") {
+      return;
+    }
+
+    pendingLead = readPendingLead();
+    if (!pendingLead) {
+      return;
+    }
+
+    clearPendingLead();
+    trackGaEvent("generate_lead", {
+      form_type: pendingLead.form_type || "general",
+      form_label: pendingLead.form_label || "Website Form",
+      page_path: pendingLead.page_path || document.referrer || getCurrentPagePath()
+    });
+  }
+
   function trackGaPageView() {
+    var pagePath = getCurrentPagePath();
+
     trackGaEvent("page_view", {
       page_title: document.title || "",
       page_location: window.location.href || "",
-      page_path: window.location.pathname || "/"
+      page_path: pagePath
+    });
+  }
+
+  function getDownloadFileName(url) {
+    var pathname;
+    var segments;
+
+    if (!url || !url.pathname) {
+      return "";
+    }
+
+    pathname = url.pathname;
+    segments = pathname.split("/");
+    return decodeURIComponent(segments[segments.length - 1] || "");
+  }
+
+  function getDownloadExtension(fileName) {
+    var lastDotIndex;
+
+    if (!fileName) {
+      return "";
+    }
+
+    lastDotIndex = fileName.lastIndexOf(".");
+
+    if (lastDotIndex < 0) {
+      return "";
+    }
+
+    return fileName.slice(lastDotIndex + 1).toLowerCase();
+  }
+
+  function isTrackableDownloadLink(anchor) {
+    var url;
+    var extension;
+    var trackableExtensions = {
+      pdf: true,
+      doc: true,
+      docx: true,
+      xls: true,
+      xlsx: true,
+      csv: true,
+      ppt: true,
+      pptx: true,
+      zip: true,
+      rar: true,
+      "7z": true
+    };
+
+    if (!anchor || !anchor.href) {
+      return false;
+    }
+
+    try {
+      url = new URL(anchor.href, window.location.href);
+    } catch (error) {
+      return false;
+    }
+
+    if (url.origin !== window.location.origin) {
+      return false;
+    }
+
+    if (anchor.hasAttribute("download")) {
+      return true;
+    }
+
+    extension = getDownloadExtension(getDownloadFileName(url));
+    return Boolean(trackableExtensions[extension]);
+  }
+
+  function bindFileDownloads() {
+    if (document.documentElement.dataset.hsaFileDownloadsBound) {
+      return;
+    }
+
+    document.documentElement.dataset.hsaFileDownloadsBound = "1";
+    document.addEventListener("click", function (event) {
+      var anchor = event.target && event.target.closest ? event.target.closest("a[href]") : null;
+      var url;
+      var fileName;
+      var fileExtension;
+
+      if (!anchor || !isTrackableDownloadLink(anchor)) {
+        return;
+      }
+
+      try {
+        url = new URL(anchor.href, window.location.href);
+      } catch (error) {
+        return;
+      }
+
+      fileName = getDownloadFileName(url);
+      fileExtension = getDownloadExtension(fileName);
+
+      trackGaEvent("file_download", {
+        file_name: fileName,
+        file_extension: fileExtension,
+        page_path: (window.location.pathname || "/") + (window.location.search || ""),
+        link_url: url.pathname
+      });
     });
   }
 
@@ -586,6 +821,7 @@
           window.__hsaTrackGaEvent = trackGaEvent;
           bindAnalyticsPageviews();
           trackGaPageView();
+          maybeTrackPendingLead();
           return true;
         });
       })
@@ -648,11 +884,6 @@
               formLabel: payload.formLabel,
               submissionId: result.id || ""
             });
-            trackGaEvent("generate_lead", {
-              form_type: payload.formType || "general",
-              form_label: payload.formLabel || "Website Form",
-              page_path: window.location.pathname || "/"
-            });
             setFormStatus(
               form,
               form.dataset.successMessage || "Thanks, your form has been sent successfully.",
@@ -660,9 +891,18 @@
             );
             showToast(form.dataset.successMessage || "Form sent successfully.");
             if (form.dataset.successRedirect) {
-              window.setTimeout(function () {
-                window.location.href = form.dataset.successRedirect;
-              }, 120);
+              storePendingLead({
+                form_type: payload.formType || "general",
+                form_label: payload.formLabel || "Website Form",
+                page_path: getCurrentPagePath()
+              });
+              window.location.href = form.dataset.successRedirect;
+            } else {
+              trackGaLeadEvent({
+                form_type: payload.formType || "general",
+                form_label: payload.formLabel || "Website Form",
+                page_path: getCurrentPagePath()
+              });
             }
 
             if (form.classList.contains("hsa-expert-modal__form")) {
@@ -870,6 +1110,134 @@
         bindManagedForm(form);
       }
     });
+  }
+
+  var CONTACT_INTENT_PRESETS = {
+    quote: {
+      fieldValue: "Quick Quote",
+      formType: "quote-request",
+      formLabel: "Contact Page Quote Request",
+      successMessage: "Thanks, your quote request has been emailed to our team.",
+      heading: "Quotation Briefing",
+      description:
+        "Share your target payload, aisle constraints, throughput goals, and timeline so our engineering team can prepare a scoped quotation path.",
+      buttonLabel: "Request Quote",
+      message:
+        "I would like to request a quotation.\nPayload:\nLift height:\nAisle width:\nBattery preference:\nDaily throughput target:\nTarget deployment timeline:"
+    },
+    "site-visit": {
+      fieldValue: "Site Visit",
+      formType: "site-visit-request",
+      formLabel: "Contact Page Site Visit Request",
+      successMessage: "Thanks, your site visit request has been emailed to our team.",
+      heading: "Site Visit Planning",
+      description:
+        "Share your facility location, operating constraints, and preferred visit window so we can prepare the right engineering review before the first call.",
+      buttonLabel: "Schedule Site Visit",
+      message:
+        "I would like to schedule a site visit.\nFacility location:\nCurrent process or warehouse type:\nMain bottlenecks:\nPreferred visit window:\nProject stage:"
+    }
+  };
+
+  function isContactPath(pathname) {
+    return pathname === "/contact" || pathname === "/contact/";
+  }
+
+  function ensureHiddenField(form, name, label) {
+    var field = form.querySelector('input[type="hidden"][name="' + name + '"]');
+
+    if (!field) {
+      field = document.createElement("input");
+      field.type = "hidden";
+      field.name = name;
+      form.insertBefore(field, form.firstChild);
+    }
+
+    if (label) {
+      field.setAttribute("data-label", label);
+    }
+
+    return field;
+  }
+
+  function ensureIntentNotice(container) {
+    var notice = container.querySelector("[data-hsa-intent-notice]");
+
+    if (notice) {
+      return notice;
+    }
+
+    notice = document.createElement("div");
+    notice.setAttribute("data-hsa-intent-notice", "true");
+    notice.className =
+      "mt-5 inline-flex items-center gap-3 border border-secondary/20 bg-secondary/8 px-4 py-3 text-[11px] font-black uppercase tracking-[0.16em] text-secondary";
+
+    container.appendChild(notice);
+    return notice;
+  }
+
+  function applyContactIntentPrefill() {
+    var params;
+    var intentKey;
+    var preset;
+    var form;
+    var panel;
+    var intro;
+    var heading;
+    var copy;
+    var notice;
+    var submitButton;
+    var messageField;
+    var intentField;
+
+    if (!isContactPath(window.location.pathname || "/")) {
+      return;
+    }
+
+    params = new URL(window.location.href).searchParams;
+    intentKey = trimValue(params.get("intent") || "").toLowerCase();
+    preset = CONTACT_INTENT_PRESETS[intentKey];
+
+    if (!preset) {
+      return;
+    }
+
+    form = document.querySelector('form[data-form-label="Contact Page Project Briefing"]');
+
+    if (!form) {
+      return;
+    }
+
+    panel = form.closest(".bg-white");
+    intro = panel ? panel.querySelector(".mb-12") : null;
+    heading = intro ? intro.querySelector("h2") : null;
+    copy = intro ? intro.querySelector("p") : null;
+    submitButton = getSubmitButton(form);
+    messageField = form.querySelector('textarea[name="message"]');
+    intentField = ensureHiddenField(form, "intent", "Intent");
+
+    form.dataset.formType = preset.formType;
+    form.dataset.formLabel = preset.formLabel;
+    form.dataset.successMessage = preset.successMessage;
+    intentField.value = preset.fieldValue;
+
+    if (heading) {
+      heading.textContent = preset.heading;
+    }
+
+    if (copy) {
+      copy.textContent = preset.description;
+      notice = ensureIntentNotice(intro);
+      notice.textContent = "Intent detected: " + preset.fieldValue;
+    }
+
+    if (submitButton) {
+      submitButton.textContent = preset.buttonLabel;
+    }
+
+    if (messageField && !trimMultilineValue(messageField.value)) {
+      messageField.value = preset.message;
+    }
   }
 
   function bindJourneyConversions() {
@@ -1489,7 +1857,9 @@
     bindDesktopMenus();
     bindMobile();
     bindForms();
+    applyContactIntentPrefill();
     bindJourneyConversions();
+    bindFileDownloads();
     bindTextTargets();
     bindOverviewCards();
     bindBrandCarousel();

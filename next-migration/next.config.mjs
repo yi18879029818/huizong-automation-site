@@ -1,10 +1,7 @@
 import createMDX from "@next/mdx";
 import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
-if (
-  process.env.NODE_ENV === "development" &&
-  process.env.OPENNEXT_LOCAL_DEV === "1"
-) {
+if (process.env.NODE_ENV === "development") {
   await initOpenNextCloudflareForDev();
 }
 
@@ -14,7 +11,6 @@ const withMDX = createMDX({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  distDir: process.env.NODE_ENV === "development" ? ".next-dev" : ".next",
   reactStrictMode: true,
   output: "standalone",
   images: {

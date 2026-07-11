@@ -2,9 +2,12 @@
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
   ).matches;
+  const motionDisabledForPage = /^\/blog(?:\/|$)/.test(window.location.pathname);
   const root = document.documentElement;
 
-  root.classList.add(prefersReducedMotion ? "motion-reduced" : "motion-enhanced");
+  root.classList.add(
+    prefersReducedMotion || motionDisabledForPage ? "motion-reduced" : "motion-enhanced"
+  );
 
   let revealObserver = null;
   let countupObserver = null;
@@ -163,7 +166,7 @@
         );
       }
 
-      if (prefersReducedMotion) {
+      if (prefersReducedMotion || motionDisabledForPage) {
         element.classList.add("is-motion-visible");
         return;
       }
@@ -308,7 +311,7 @@
       element.dataset.countupReady = "true";
       element.dataset.countupSource = extractCountText(element);
 
-      if (prefersReducedMotion) {
+      if (prefersReducedMotion || motionDisabledForPage) {
         return;
       }
 
@@ -338,7 +341,7 @@
     });
   }
 
-  if (!prefersReducedMotion) {
+  if (!prefersReducedMotion && !motionDisabledForPage) {
     revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {

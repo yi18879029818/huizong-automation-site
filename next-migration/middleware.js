@@ -11,8 +11,6 @@ const SECURITY_HEADERS = {
   "X-Frame-Options": "SAMEORIGIN"
 };
 
-const INTERNAL_AUTOMATION_PATH_PREFIXES = ["/internal/automation", "/api/automation"];
-
 function isLocalHost(hostname = "") {
   return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
 }
@@ -92,101 +90,6 @@ function applySecurityHeaders(response, pathname = "/") {
   return response;
 }
 
-function isInternalAutomationPath(pathname = "") {
-  return INTERNAL_AUTOMATION_PATH_PREFIXES.some(
-    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
-  );
-}
-
-function decodeBasicAuth(header) {
-  if (!header || !header.startsWith("Basic ")) {
-    return null;
-  }
-
-  try {
-    const encoded = header.slice(6).trim();
-    const decoded = atob(encoded);
-    const separatorIndex = decoded.indexOf(":");
-
-    if (separatorIndex === -1) {
-      return null;
-    }
-
-    return {
-      username: decoded.slice(0, separatorIndex),
-      password: decoded.slice(separatorIndex + 1)
-    };
-  } catch (_error) {
-    return null;
-  }
-}
-
-function internalAutomationCredentials() {
-  const username =
-    process.env.INTERNAL_AUTOMATION_USERNAME ||
-    process.env.AUTOMATION_CONSOLE_USERNAME ||
-    process.env.ADMIN_USERNAME ||
-    "";
-  const password =
-    process.env.INTERNAL_AUTOMATION_PASSWORD ||
-    process.env.AUTOMATION_CONSOLE_PASSWORD ||
-    process.env.ADMIN_PASSWORD ||
-    "";
-
-  return {
-    username,
-    password,
-    configured: Boolean(username && password)
-  };
-}
-
-function challengeInternalAutomationAccess(pathname) {
-  const response = NextResponse.json(
-    {
-      ok: false,
-      error: "INTERNAL_AUTOMATION_AUTH_NOT_CONFIGURED"
-    },
-    { status: 503 }
-  );
-  response.headers.set("Cache-Control", "no-store");
-  return applySecurityHeaders(response, pathname);
-}
-
-function unauthorizedInternalAutomationResponse(pathname) {
-  const response = NextResponse.json(
-    {
-      ok: false,
-      error: "UNAUTHORIZED"
-    },
-    { status: 401 }
-  );
-  response.headers.set("WWW-Authenticate", 'Basic realm="Huizong Internal Automation"');
-  response.headers.set("Cache-Control", "no-store");
-  return applySecurityHeaders(response, pathname);
-}
-
-function enforceInternalAutomationAccess(request, pathname) {
-  if (!isInternalAutomationPath(pathname)) {
-    return null;
-  }
-
-  const credentials = internalAutomationCredentials();
-  if (!credentials.configured) {
-    return challengeInternalAutomationAccess(pathname);
-  }
-
-  const auth = decodeBasicAuth(request.headers.get("authorization"));
-  if (!auth) {
-    return unauthorizedInternalAutomationResponse(pathname);
-  }
-
-  if (auth.username !== credentials.username || auth.password !== credentials.password) {
-    return unauthorizedInternalAutomationResponse(pathname);
-  }
-
-  return null;
-}
-
 function attachAgentHeaders(response, profile) {
   const alternates = [
     `<${SITE_URL}/llms.json>; rel="alternate"; type="application/json"`,
@@ -216,11 +119,6 @@ export async function middleware(request) {
   const canonicalRedirect = canonicalHostRedirect(request);
   if (canonicalRedirect) {
     return applySecurityHeaders(canonicalRedirect, pathname);
-  }
-
-  const internalAutomationResponse = enforceInternalAutomationAccess(request, pathname);
-  if (internalAutomationResponse) {
-    return internalAutomationResponse;
   }
 
   const policy = getAgentResponsePolicy({

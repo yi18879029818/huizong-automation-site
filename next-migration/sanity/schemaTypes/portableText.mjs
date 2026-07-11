@@ -43,6 +43,9 @@ export const portableText = defineType({
       options: {
         hotspot: true
       }
+    }),
+    defineArrayMember({
+      type: "comparisonTable"
     })
   ]
 });

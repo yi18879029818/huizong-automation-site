@@ -2,6 +2,9 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
   "name": "huizong-automation-site-next",
+  "account_id": "d8ba55b09b0630cc450a71f73fc1d5fd",
+  "keep_vars": true,
+  "workers_dev": false,
   "compatibility_date": "2024-12-30",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
   "assets": {
@@ -11,7 +14,7 @@
   },
   "vars": {
     "GA4_MEASUREMENT_ID": "G-P4MLY74P4X",
-    "HUIZONG_API_BASE_URL": "https://gaxlgfkemprx.usw-1.sealos.app"
+    "NEXT_PUBLIC_GA_MEASUREMENT_ID": "G-P4MLY74P4X"
   },
   "d1_databases": [
     {

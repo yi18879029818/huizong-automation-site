@@ -5,6 +5,20 @@ const FIELD_NAME_LIMIT = 80;
 const FIELD_LABEL_LIMIT = 120;
 const FIELD_VALUE_LIMIT = 4000;
 const META_VALUE_LIMIT = 240;
+const MAX_ATTACHMENTS = 2;
+const MAX_ATTACHMENT_SIZE = 10 * 1024 * 1024;
+const ATTACHMENT_NAME_LIMIT = 180;
+const ALLOWED_ATTACHMENT_TYPES = new Set([
+  "application/pdf",
+  "image/png",
+  "image/jpeg",
+  "image/webp",
+  "application/acad",
+  "image/vnd.dwg",
+  "application/dxf",
+  "image/vnd.dxf",
+  "application/octet-stream"
+]);
 
 function json(body, status = 200) {
   return Response.json(body, {
@@ -107,6 +121,17 @@ function parsePayload(raw) {
   const fields = Array.isArray(raw && raw.fields)
     ? raw.fields.map(normalizeField)
     : fallbackFields(raw);
+  const attachments = Array.isArray(raw && raw.attachments)
+    ? raw.attachments
+        .slice(0, MAX_ATTACHMENTS)
+        .map((attachment) => ({
+          filename: trimSingleLine(attachment && attachment.filename, ATTACHMENT_NAME_LIMIT),
+          type: trimSingleLine(attachment && attachment.type, 120) || "application/octet-stream",
+          size: Number(attachment && attachment.size) || 0,
+          content: trimSingleLine(attachment && attachment.content, MAX_ATTACHMENT_SIZE * 2),
+        }))
+        .filter((attachment) => attachment.filename && attachment.content)
+    : [];
 
   return {
     formType: trimSingleLine(raw && raw.formType, 60) || "general",
@@ -115,7 +140,8 @@ function parsePayload(raw) {
     pageUrl: trimSingleLine(raw && raw.pageUrl, 400),
     pagePath: trimSingleLine(raw && raw.pagePath, 240),
     submittedAt: trimSingleLine(raw && raw.submittedAt, 80),
-    fields
+    fields,
+    attachments
   };
 }
 
@@ -146,6 +172,24 @@ function validatePayload(payload) {
     return "Invalid email address.";
   }
 
+  if ((payload.attachments || []).length > MAX_ATTACHMENTS) {
+    return "Too many attachments were submitted.";
+  }
+
+  for (const attachment of payload.attachments || []) {
+    if (!attachment.filename || !attachment.content) {
+      return "Invalid attachment payload.";
+    }
+
+    if (attachment.size > MAX_ATTACHMENT_SIZE) {
+      return `${attachment.filename} exceeds the 10MB upload limit.`;
+    }
+
+    if (!ALLOWED_ATTACHMENT_TYPES.has(attachment.type)) {
+      return `${attachment.filename} is not an allowed upload type.`;
+    }
+  }
+
   return "";
 }
 
@@ -170,29 +214,33 @@ function formatFieldText(fields) {
   return fields.map((field) => `${field.label}: ${field.value || "Not provided"}`).join("\n");
 }
 
-function getFieldValue(payload, name) {
-  return payload.fields.find((field) => field.name === name)?.value || "";
+function getOriginFromUrl(value) {
+  if (!value) {
+    return "";
+  }
+
+  try {
+    return new URL(value).origin;
+  } catch {
+    return "";
+  }
 }
 
-function getCustomerName(payload) {
-  return getFieldValue(payload, "fullName") || "there";
+function toAbsoluteUrl(path, origin) {
+  if (!path) {
+    return "";
+  }
+
+  if (/^https?:\/\//i.test(path)) {
+    return path;
+  }
+
+  const normalizedOrigin = origin || "https://www.coolyne.com";
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  return `${normalizedOrigin}${normalizedPath}`;
 }
 
-function getCustomerEmail(payload) {
-  return payload.fields.find(
-    (field) => field.type === "email" || field.name.toLowerCase() === "email"
-  )?.value || "";
-}
-
-function getCompanyName(payload) {
-  return getFieldValue(payload, "company");
-}
-
-function formatSenderAddress(email, name = "coolyne") {
-  return `${name} <${email}>`;
-}
-
-function getInternalEmailHtml(payload) {
+function getEmailHtml(payload) {
   const meta = [
     ["Form", payload.formLabel],
     ["Page", payload.pageTitle],
@@ -218,7 +266,7 @@ function getInternalEmailHtml(payload) {
   `.trim();
 }
 
-function getInternalEmailText(payload) {
+function getEmailText(payload) {
   return [
     "New website form submission",
     "",
@@ -231,80 +279,87 @@ function getInternalEmailText(payload) {
   ].join("\n");
 }
 
-function getInternalEmailSubject(payload) {
-  const identity = getCustomerName(payload) || getCustomerEmail(payload) || "New submission";
+function buildResendAttachments(payload) {
+  return (payload.attachments || []).map((attachment) => ({
+    filename: attachment.filename,
+    content: attachment.content
+  }));
+}
+
+function getEmailSubject(payload) {
+  const nameField = payload.fields.find((field) => field.name === "fullName");
+  const emailField = payload.fields.find(
+    (field) => field.type === "email" || field.name.toLowerCase() === "email"
+  );
+  const identity =
+    (nameField && nameField.value) || (emailField && emailField.value) || "New submission";
 
   return `[coolyne Website] ${payload.formLabel} - ${identity}`;
 }
 
-function getCustomerEmailSubject(payload) {
-  return `Thanks for contacting coolyne, ${getCustomerName(payload)}`;
+function getCustomerName(payload) {
+  const nameField = payload.fields.find((field) => field.name === "fullName");
+  return nameField && nameField.value ? nameField.value : "there";
 }
 
-function getCustomerEmailHtml(payload) {
-  const message = getFieldValue(payload, "message") || "Not provided";
-  const company = getCompanyName(payload);
-  const pageUrl = payload.pageUrl || "https://www.coolyne.com";
-  const nextStepItems = [
-    "Our team will review your request and reply with the best fit solution.",
-    "If your inquiry is urgent, reply to this email and we will prioritize it.",
-    "You can also revisit the product and solution pages while we prepare next steps."
-  ];
+function getCustomerEmailSubject(payload) {
+  return `Thank you for contacting coolyne about ${payload.formLabel}`;
+}
+
+function getCustomerEmailHtml(payload, options) {
+  const customerName = getCustomerName(payload);
+  const downloadUrl = options.downloadUrl;
+  const salesEmail = options.salesEmail;
+  const replyHref = salesEmail ? `mailto:${salesEmail}` : "";
+  const submittedSummary = payload.fields
+    .filter((field) => field.value)
+    .slice(0, 4)
+    .map(
+      (field) =>
+        `<li style="margin:0 0 8px;color:#4b5563;"><strong style="color:#111827;">${escapeHtml(
+          field.label
+        )}:</strong> ${escapeHtml(field.value)}</li>`
+    )
+    .join("");
 
   return `
-    <div style="margin:0;background:#f5f7fb;padding:0;font-family:Arial,Helvetica,sans-serif;color:#102033;">
-      <div style="max-width:640px;margin:0 auto;background:#ffffff;">
-        <div style="padding:28px 32px 18px;background:linear-gradient(135deg,#0f2748,#1c4b7d);color:#fff;">
-          <div style="font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;opacity:.85;">
-            coolyne
-          </div>
-          <h2 style="margin:14px 0 0;font-size:28px;line-height:1.15;">Thanks for reaching out, ${escapeHtml(getCustomerName(payload))}.</h2>
-          <p style="margin:12px 0 0;font-size:15px;line-height:1.7;max-width:520px;opacity:.9;">
-            We received your message and our team is preparing the next step for your automation inquiry.
-          </p>
+    <div style="font-family:Arial,Helvetica,sans-serif;color:#111827;line-height:1.7;background:#f3f4f6;margin:0;padding:32px 16px;">
+      <div style="max-width:640px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:20px;overflow:hidden;">
+        <div style="padding:32px 32px 24px;background:linear-gradient(135deg,#111827 0%,#1f2937 100%);">
+          <p style="margin:0 0 10px;color:#f59e0b;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;">coolyne</p>
+          <h1 style="margin:0;color:#ffffff;font-size:28px;line-height:1.2;">Thank you for your inquiry</h1>
         </div>
-
-        <div style="padding:28px 32px;">
-          <div style="margin:0 0 22px;padding:18px 20px;border:1px solid #e6eaf0;border-radius:16px;background:#f9fbfd;">
-            <div style="font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#60708a;margin-bottom:10px;">Your request</div>
-            <table style="width:100%;border-collapse:collapse;border-spacing:0;font-size:14px;line-height:1.65;">
-              <tr>
-                <td style="padding:6px 0;width:140px;color:#60708a;font-weight:700;vertical-align:top;">Name</td>
-                <td style="padding:6px 0;vertical-align:top;">${escapeHtml(getCustomerName(payload))}</td>
-              </tr>
-              ${company ? `<tr><td style="padding:6px 0;width:140px;color:#60708a;font-weight:700;vertical-align:top;">Company</td><td style="padding:6px 0;vertical-align:top;">${escapeHtml(company)}</td></tr>` : ""}
-              <tr>
-                <td style="padding:6px 0;width:140px;color:#60708a;font-weight:700;vertical-align:top;">Email</td>
-                <td style="padding:6px 0;vertical-align:top;">${escapeHtml(getCustomerEmail(payload))}</td>
-              </tr>
-              <tr>
-                <td style="padding:6px 0;width:140px;color:#60708a;font-weight:700;vertical-align:top;">Page</td>
-                <td style="padding:6px 0;vertical-align:top;">${escapeHtml(payload.pageTitle)}</td>
-              </tr>
-              <tr>
-                <td style="padding:6px 0;width:140px;color:#60708a;font-weight:700;vertical-align:top;">Message</td>
-                <td style="padding:6px 0;white-space:pre-wrap;vertical-align:top;">${escapeHtml(message)}</td>
-              </tr>
-            </table>
+        <div style="padding:32px;">
+          <p style="margin:0 0 16px;">Hi ${escapeHtml(customerName)},</p>
+          <p style="margin:0 0 16px;color:#374151;">
+            We have received your message and our team will review it shortly. Thank you for reaching out to coolyne for your automation project.
+          </p>
+          <p style="margin:0 0 18px;color:#374151;">
+            In the meantime, you can reply directly to our sales team or download our product catalog right away.
+          </p>
+          ${
+            replyHref
+              ? `<div style="margin:0 0 14px;">
+            <a href="${escapeHtml(replyHref)}" style="display:inline-block;min-width:240px;padding:14px 24px;border:1px solid #111827;border-radius:8px;background:#111827;color:#ffffff;font-weight:700;font-size:14px;letter-spacing:0.08em;text-align:center;text-decoration:none;text-transform:uppercase;">
+              Reply to Sales Team
+            </a>
+          </div>`
+              : ""
+          }
+          <div style="margin:0 0 24px;">
+            <a href="${escapeHtml(downloadUrl)}" style="display:inline-block;min-width:240px;padding:14px 24px;border:1px solid #d97706;border-radius:8px;background:#f59e0b;color:#111827;font-weight:700;font-size:14px;letter-spacing:0.08em;text-align:center;text-decoration:none;text-transform:uppercase;">
+              Download Product Catalog
+            </a>
           </div>
-
-          <div style="margin:0 0 22px;">
-            <div style="font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#60708a;margin-bottom:12px;">What happens next</div>
-            <ul style="margin:0;padding:0 0 0 18px;color:#102033;">
-              ${nextStepItems
-                .map((item) => `<li style="margin:0 0 8px;line-height:1.7;">${escapeHtml(item)}</li>`)
-                .join("")}
+          <div style="margin:0 0 24px;padding:18px 20px;border-radius:14px;background:#f9fafb;border:1px solid #e5e7eb;">
+            <p style="margin:0 0 10px;font-weight:700;">Your submitted details</p>
+            <ul style="padding-left:18px;margin:0;">
+              ${submittedSummary || '<li style="color:#4b5563;">Your message has been received successfully.</li>'}
             </ul>
           </div>
-
-          <div style="margin:0 0 24px;padding:18px 20px;border-radius:16px;background:#0f2748;color:#fff;">
-            <div style="font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;opacity:.8;">Continue browsing</div>
-            <p style="margin:10px 0 16px;font-size:14px;line-height:1.7;opacity:.9;">You can review our product and solution pages while we prepare a tailored reply.</p>
-            <a href="${escapeHtml(pageUrl)}" style="display:inline-block;background:#ff8d3a;color:#fff;text-decoration:none;font-weight:700;font-size:14px;padding:12px 18px;border-radius:999px;">Open the page again</a>
-          </div>
-
-          <p style="margin:0;color:#60708a;font-size:13px;line-height:1.7;">
-            If you need a faster reply, simply respond to this email and our sales team will see it directly.
+          <p style="margin:0;color:#6b7280;font-size:13px;">
+            If the button does not work in your email client, use this direct download link:<br />
+            <a href="${escapeHtml(downloadUrl)}" style="color:#b45309;word-break:break-all;">${escapeHtml(downloadUrl)}</a>
           </p>
         </div>
       </div>
@@ -312,62 +367,28 @@ function getCustomerEmailHtml(payload) {
   `.trim();
 }
 
-function getCustomerEmailText(payload) {
-  const message = getFieldValue(payload, "message") || "Not provided";
-  const company = getCompanyName(payload);
-  return [
-    `Thanks for reaching out, ${getCustomerName(payload)}.`,
+function getCustomerEmailText(payload, options) {
+  const customerName = getCustomerName(payload);
+  const lines = [
+    `Hi ${customerName},`,
     "",
-    "We received your message and our team is preparing the next step for your automation inquiry.",
+    "Thank you for contacting coolyne. We have received your inquiry and our team will review it shortly.",
     "",
-    `Name: ${getCustomerName(payload)}`,
-    company ? `Company: ${company}` : "",
-    `Email: ${getCustomerEmail(payload)}`,
-    `Page: ${payload.pageTitle}`,
+    options.salesEmail ? `Reply to sales team: ${options.salesEmail}` : "",
+    `Download product catalog: ${options.downloadUrl}`,
     "",
-    "Message:",
-    message,
-    "",
-    "Next steps:",
-    "1. Our team will review your request and reply with the best fit solution.",
-    "2. If your inquiry is urgent, reply to this email and we will prioritize it.",
-    "3. You can also revisit the product and solution pages while we prepare next steps.",
-    "",
-    `Open page: ${payload.pageUrl || "https://www.coolyne.com"}`
-  ]
-    .filter(Boolean)
-    .join("\n");
-}
+    "Submitted details:",
+    formatFieldText(payload.fields)
+  ].filter(Boolean);
 
-async function sendResendEmail(resendApiKey, message) {
-  const response = await fetch("https://api.resend.com/emails", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${resendApiKey}`,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(message)
-  });
-
-  const rawResult = await response.text();
-  let result = {};
-
-  if (rawResult) {
-    try {
-      result = JSON.parse(rawResult);
-    } catch {
-      result = { raw: rawResult };
-    }
-  }
-
-  return { response, result };
+  return lines.join("\n");
 }
 
 export async function handleContactSubmission(request, env) {
   const resendApiKey = env.RESEND_API_KEY;
   const toEmail = env.CONTACT_TO_EMAIL;
   const fromEmail = env.CONTACT_FROM_EMAIL;
-  const customerFromEmail = (env.CONTACT_CUSTOMER_FROM_EMAIL || "").trim() || fromEmail;
+  const customerFromEmail = env.CONTACT_CUSTOMER_FROM_EMAIL || fromEmail;
   const formDb = env.FORM_DB;
   let body;
 
@@ -388,86 +409,101 @@ export async function handleContactSubmission(request, env) {
     return json({ ok: false, error: validationError }, 400);
   }
 
-  const customerEmail = getCustomerEmail(payload);
-  const replyTo = customerEmail || undefined;
+  const replyTo = payload.fields.find(
+    (field) => field.type === "email" || field.name.toLowerCase() === "email"
+  );
+  const pageOrigin = getOriginFromUrl(payload.pageUrl);
+  const customerDownloadUrl = toAbsoluteUrl("/downloads/product-catalog.pdf", pageOrigin);
 
-  const internalEmail = await sendResendEmail(resendApiKey, {
-    from: formatSenderAddress(fromEmail),
-    to: [toEmail],
-    reply_to: replyTo,
-    subject: getInternalEmailSubject(payload),
-    html: getInternalEmailHtml(payload),
-    text: getInternalEmailText(payload),
-    tags: [
-      { name: "form_type", value: payload.formType },
-      { name: "delivery", value: "internal" }
-    ]
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${resendApiKey}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      from: fromEmail,
+      to: [toEmail],
+      reply_to: replyTo ? replyTo.value : undefined,
+      subject: getEmailSubject(payload),
+      html: getEmailHtml(payload),
+      text: getEmailText(payload),
+      attachments: buildResendAttachments(payload)
+    })
   });
 
-  if (!internalEmail.response.ok) {
-    console.error("Internal email send failed", {
-      status: internalEmail.response.status,
-      statusText: internalEmail.response.statusText,
+  const rawResult = await response.text();
+  let result = {};
+
+  if (rawResult) {
+    try {
+      result = JSON.parse(rawResult);
+    } catch {
+      result = { raw: rawResult };
+    }
+  }
+
+  if (!response.ok) {
+    console.error("Resend send failed", {
+      status: response.status,
+      statusText: response.statusText,
       fromEmail,
       toEmail,
-      result: internalEmail.result
+      result
     });
     return json({ ok: false, error: "Email delivery failed." }, 502);
   }
 
-  let customerEmailResult = await sendResendEmail(resendApiKey, {
-    from: formatSenderAddress(customerFromEmail),
-    to: [customerEmail],
-    reply_to: toEmail,
-    subject: getCustomerEmailSubject(payload),
-    html: getCustomerEmailHtml(payload),
-    text: getCustomerEmailText(payload),
-    tags: [
-      { name: "form_type", value: payload.formType },
-      { name: "delivery", value: "customer_confirmation" }
-    ]
-  });
-
-  if (!customerEmailResult.response.ok && customerFromEmail !== fromEmail) {
-    console.warn("Customer email send failed with dedicated sender; retrying with verified sender", {
-      status: customerEmailResult.response.status,
-      statusText: customerEmailResult.response.statusText,
-      customerFromEmail,
-      fallbackFromEmail: fromEmail,
-      customerEmail,
-      result: customerEmailResult.result
+  if (replyTo && replyTo.value) {
+    const customerResponse = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${resendApiKey}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        from: customerFromEmail,
+        to: [replyTo.value],
+        reply_to: toEmail,
+        subject: getCustomerEmailSubject(payload),
+        html: getCustomerEmailHtml(payload, {
+          salesEmail: toEmail,
+          downloadUrl: customerDownloadUrl
+        }),
+        text: getCustomerEmailText(payload, {
+          salesEmail: toEmail,
+          downloadUrl: customerDownloadUrl
+        })
+      })
     });
 
-    customerEmailResult = await sendResendEmail(resendApiKey, {
-      from: formatSenderAddress(fromEmail),
-      to: [customerEmail],
-      reply_to: toEmail,
-      subject: getCustomerEmailSubject(payload),
-      html: getCustomerEmailHtml(payload),
-      text: getCustomerEmailText(payload),
-      tags: [
-        { name: "form_type", value: payload.formType },
-        { name: "delivery", value: "customer_confirmation_fallback" }
-      ]
-    });
-  }
+    if (!customerResponse.ok) {
+      const customerRawResult = await customerResponse.text();
+      let customerResult = {};
 
-  if (!customerEmailResult.response.ok) {
-    console.error("Customer email send failed", {
-      status: customerEmailResult.response.status,
-      statusText: customerEmailResult.response.statusText,
-      fromEmail,
-      customerEmail,
-      result: customerEmailResult.result
-    });
-    return json({ ok: false, error: "Customer email delivery failed." }, 502);
+      if (customerRawResult) {
+        try {
+          customerResult = JSON.parse(customerRawResult);
+        } catch {
+          customerResult = { raw: customerRawResult };
+        }
+      }
+
+      console.error("Customer confirmation send failed", {
+        status: customerResponse.status,
+        statusText: customerResponse.statusText,
+        customerFromEmail,
+        customerToEmail: replyTo.value,
+        result: customerResult
+      });
+    }
   }
 
   let stored = false;
   let storageWarning = "";
 
   try {
-    stored = await storeSubmission(formDb, payload, internalEmail.result.id || "");
+    stored = await storeSubmission(formDb, payload, result.id || "");
 
     if (!stored) {
       storageWarning = "FORM_DB binding is unavailable, so this submission was emailed but not stored.";
@@ -484,7 +520,7 @@ export async function handleContactSubmission(request, env) {
 
   return json({
     ok: true,
-    id: internalEmail.result.id || null,
+    id: result.id || null,
     stored,
     storageWarning: storageWarning || null
   });

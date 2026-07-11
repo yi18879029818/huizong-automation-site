@@ -1,7 +1,6 @@
 import { COMPANY, SITE_URL } from "@/lib/site-config";
 
 const SCHEMA_CONTEXT = "https://schema.org";
-const GOOD_RELATIONS_SELL = "http://purl.org/goodrelations/v1#Sell";
 const GLOBAL_MARKET = "https://schema.org/Worldwide";
 
 function absoluteUrl(href = "/") {
@@ -100,22 +99,6 @@ function metricProperties(metrics = []) {
   }));
 }
 
-function detailTypeForPage(page) {
-  if (page.kind === "product-detail") {
-    return "Product";
-  }
-
-  if (page.kind === "solution-detail") {
-    return "Service";
-  }
-
-  if (page.kind === "case-project-detail") {
-    return "Article";
-  }
-
-  return "Thing";
-}
-
 function itemHref(card, page) {
   if (card.href) {
     return card.href;
@@ -193,9 +176,11 @@ function pageNode(page, url, mainEntityId) {
 function itemEntityStub(card, href, page) {
   const url = href ? absoluteUrl(href) : undefined;
   const type =
-    page.section === "products"
-      ? "Product"
-      : page.section === "solutions"
+    page.kind === "product-overview"
+      ? "WebPage"
+      : page.section === "products"
+        ? "Product"
+        : page.section === "solutions"
         ? "Service"
         : page.kind === "case-category"
           ? "Article"
@@ -212,6 +197,7 @@ function itemEntityStub(card, href, page) {
 
 function collectionListSchema(page, url) {
   const sourceItems = page.kind === "case-category" ? page.data.projects : page.data.cards;
+  const shouldEmbedItemEntity = page.kind !== "product-overview";
 
   if (!sourceItems?.length) {
     return null;
@@ -233,14 +219,18 @@ function collectionListSchema(page, url) {
         position: index + 1,
         name: card.title,
         url: href ? absoluteUrl(href) : undefined,
-        item: itemEntityStub(card, href, page)
+        item: shouldEmbedItemEntity ? itemEntityStub(card, href, page) : undefined
       });
     })
   };
 }
 
 function offerCatalogSchema(page, url) {
-  if (page.kind !== "product-overview" && page.kind !== "solution-overview") {
+  if (page.kind === "product-overview") {
+    return null;
+  }
+
+  if (page.kind !== "solution-overview") {
     return null;
   }
 
@@ -259,7 +249,7 @@ function offerCatalogSchema(page, url) {
         "@type": "ListItem",
         position: index + 1,
         item: {
-          "@type": page.kind === "product-overview" ? "Product" : "Service",
+          "@type": "Service",
           "@id": itemUrl ? `${itemUrl}#entity` : undefined,
           name: card.title,
           description: card.summary,
@@ -270,81 +260,12 @@ function offerCatalogSchema(page, url) {
   };
 }
 
-function productOfferSchema(page, url) {
-  if (page.kind !== "product-detail") {
-    return null;
-  }
-
-  const ids = idsFor(url);
-
-  return {
-    "@type": "Offer",
-    "@id": ids.offer,
-    name: `${page.data.title} custom quotation`,
-    url,
-    itemOffered: {
-      "@id": ids.entity
-    },
-    seller: {
-      "@id": ids.organization
-    },
-    eligibleRegion: GLOBAL_MARKET,
-    category: "B2B warehouse automation procurement",
-    businessFunction: GOOD_RELATIONS_SELL,
-    itemCondition: "https://schema.org/NewCondition",
-    priceSpecification: {
-      "@type": "PriceSpecification",
-      name: "Custom project quotation",
-      description: `Pricing is quoted per ${page.data.title} scope, payload class, lift height, navigation stack, software integration, commissioning, and lifecycle support.`
-    },
-    eligibleCustomerType: {
-      "@type": "BusinessAudience",
-      audienceType: "Warehouse and manufacturing operators"
-    },
-    description: `Custom quotation available for ${page.data.title} deployment, integration, commissioning, and lifecycle support.`,
-    additionalProperty: [
-      {
-        "@type": "PropertyValue",
-        name: "Procurement model",
-        value: "Request for quotation"
-      },
-      {
-        "@type": "PropertyValue",
-        name: "Commercial path",
-        value: absoluteUrl("/contact")
-      }
-    ]
-  };
-}
-
 function detailEntitySchema(page, url) {
   const ids = idsFor(url);
   const description = page.data.heroSummary || page.data.summary || COMPANY.description;
 
   if (page.kind === "product-detail") {
-    return {
-      "@type": "Product",
-      "@id": ids.entity,
-      name: page.data.title,
-      description,
-      url,
-      image: page.data.image ? { "@id": ids.image } : undefined,
-      category: "Warehouse automation equipment",
-      brand: {
-        "@id": ids.organization
-      },
-      manufacturer: {
-        "@id": ids.organization
-      },
-      audience: {
-        "@type": "BusinessAudience",
-        audienceType: "Warehouse and manufacturing operators"
-      },
-      additionalProperty: metricProperties(page.data.metrics),
-      offers: {
-        "@id": ids.offer
-      }
-    };
+    return null;
   }
 
   if (page.kind === "solution-detail") {
@@ -525,7 +446,6 @@ function mainEntityIdForPage(page, url) {
   }
 
   if (
-    page.kind === "product-detail" ||
     page.kind === "solution-detail" ||
     page.kind === "case-project-detail"
   ) {
@@ -542,8 +462,7 @@ function entitySchemas(page, url) {
     contactPageEntity(page, url),
     collectionListSchema(page, url),
     offerCatalogSchema(page, url),
-    detailEntitySchema(page, url),
-    productOfferSchema(page, url)
+    detailEntitySchema(page, url)
   ].filter(Boolean);
 }
 

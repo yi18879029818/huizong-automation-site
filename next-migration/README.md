@@ -80,17 +80,8 @@ Before deploying:
    - `RESEND_API_KEY`
    - `CONTACT_TO_EMAIL`
    - `CONTACT_FROM_EMAIL`
-   - `CONTACT_CUSTOMER_FROM_EMAIL` (optional; use only if that sender address is verified)
    - `OPENAI_API_KEY`
-3. Initialize the D1 schema:
-   - `powershell -ExecutionPolicy Bypass -File .\scripts\init-form-db.ps1`
-4. For local preview, copy `.dev.vars.example` to `.dev.vars`.
-
-For the internal automation console rollout on the Worker deployment path, use:
-
-- [../DEPLOY_AUTOMATION_CONSOLE.md](E:/codex/coolyne.com/huizong-automation-site/DEPLOY_AUTOMATION_CONSOLE.md)
-- [scripts/deploy-automation-console.ps1](E:/codex/coolyne.com/huizong-automation-site/next-migration/scripts/deploy-automation-console.ps1)
-- [scripts/init-form-db.ps1](E:/codex/coolyne.com/huizong-automation-site/next-migration/scripts/init-form-db.ps1)
+3. For local preview, copy `.dev.vars.example` to `.dev.vars`.
 
 Notes:
 

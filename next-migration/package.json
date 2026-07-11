@@ -2,9 +2,6 @@
   "name": "huizong-next-migration",
   "private": true,
   "version": "0.1.0",
-  "engines": {
-    "node": ">=18.17 <25"
-  },
   "scripts": {
     "predev": "node ./scripts/sync-legacy-public.mjs",
     "dev": "next dev",
@@ -25,6 +22,7 @@
     "cheerio": "^1.1.2",
     "next": "14.2.35",
     "next-sanity": "^9.12.3",
+    "playwright": "^1.61.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "sanity": "^3.99.0",
@@ -36,7 +34,6 @@
     "autoprefixer": "^10.5.0",
     "postcss": "^8.5.10",
     "tailwindcss": "^3.4.17",
-    "terser": "^5.44.0",
     "wrangler": "^4.38.0"
   }
 }

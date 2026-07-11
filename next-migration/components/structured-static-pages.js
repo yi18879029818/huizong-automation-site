@@ -1,9 +1,10 @@
-﻿import { PublicPageChrome } from "@/components/public-shell";
+import { PublicPageChrome } from "@/components/public-shell";
 import Script from "next/script";
 
 import AboutMilestonesTimeline from "@/components/AboutMilestonesTimeline";
 import CountUpValue from "@/components/CountUpValue";
 import { InlineIcon } from "@/components/inline-icon";
+import { ProjectReviewForm } from "@/components/project-review-form";
 import WarehouseFlowSimulation from "@/components/WarehouseFlowSimulation";
 
 function LiteYouTubeEmbed({ title, videoId }) {
@@ -28,10 +29,10 @@ function LiteYouTubeEmbed({ title, videoId }) {
           src={posterUrl}
         />
         <span className="absolute inset-0 bg-gradient-to-t from-secondary/70 via-secondary/18 to-secondary/12" />
-        <span className="absolute flex h-20 w-20 items-center justify-center rounded-full bg-white/92 text-secondary shadow-[0_20px_44px_rgba(0,23,54,0.26)] transition-transform duration-300 group-hover:scale-105">
+        <span className="absolute flex h-18 w-18 items-center justify-center rounded-full bg-secondary text-white shadow-[0_20px_44px_rgba(255,145,77,0.36)] ring-2 ring-white/28 transition-transform duration-300 group-hover:scale-[1.06] group-hover:ring-white/44">
           <svg
             aria-hidden="true"
-            className="ml-1 h-8 w-8"
+            className="ml-0.5 h-8 w-8"
             fill="currentColor"
             viewBox="0 0 24 24"
           >
@@ -147,25 +148,25 @@ const HOME_INDUSTRIES = [
 ];
 
 const HOME_PARTNER_BRANDS = [
-  { name: "DENSO", src: encodeURI("/downloads/閸氬牅缍旈崫浣哄/DENSO.webp") },
-  { name: "TP-Link", src: encodeURI("/downloads/閸氬牅缍旈崫浣哄/tplink.webp") },
-  { name: "BYD", src: encodeURI("/downloads/閸氬牅缍旈崫浣哄/濮ｆ柧绨规潻?webp") },
+  { name: "DENSO", src: encodeURI("/downloads/鍚堜綔鍝佺墝/DENSO.webp") },
+  { name: "TP-Link", src: encodeURI("/downloads/鍚堜綔鍝佺墝/tplink.webp") },
+  { name: "BYD", src: encodeURI("/downloads/鍚堜綔鍝佺墝/姣斾簹杩?webp") },
   {
     name: "Han's Laser",
-    src: encodeURI("/downloads/閸氬牅缍旈崫浣哄/婢堆勬濠碘偓閸?webp"),
+    src: encodeURI("/downloads/鍚堜綔鍝佺墝/澶ф棌婵€鍏?webp"),
   },
   {
     name: "Fenghua Advanced",
-    src: encodeURI("/downloads/閸氬牅缍旈崫浣哄/妞嬪骸宕曟妯碱潠.webp"),
+    src: encodeURI("/downloads/鍚堜綔鍝佺墝/椋庡崕楂樼.webp"),
   },
-  { name: "Hytera", src: encodeURI("/downloads/閸氬牅缍旈崫浣哄/濞寸柉鍏樻潏?webp") },
-  { name: "HGTECH", src: encodeURI("/downloads/閸氬牅缍旈崫浣哄/閸楀骸浼愮粔鎴炲Η.webp") },
-  { name: "CR", src: encodeURI("/downloads/閸氬牅缍旈崫浣哄/閸楀孩榧?webp") },
+  { name: "Hytera", src: encodeURI("/downloads/鍚堜綔鍝佺墝/娴疯兘杈?webp") },
+  { name: "HGTECH", src: encodeURI("/downloads/鍚堜綔鍝佺墝/鍗庡伐绉戞妧.webp") },
+  { name: "CR", src: encodeURI("/downloads/鍚堜綔鍝佺墝/鍗庢鼎.webp") },
   {
     name: "Longood Intelligent",
-    src: encodeURI("/downloads/閸氬牅缍旈崫浣哄/閺堟顫栭弲楦垮厴.webp"),
+    src: encodeURI("/downloads/鍚堜綔鍝佺墝/鏈楃鏅鸿兘.webp"),
   },
-  { name: "Inovance", src: encodeURI("/downloads/閸氬牅缍旈崫浣哄/閼诲崬鈻夐懙?webp") },
+  { name: "Inovance", src: encodeURI("/downloads/鍚堜綔鍝佺墝/鑻卞▉鑵?webp") },
 ];
 
 const HOME_PARTNER_BRANDS_SAFE = [
@@ -285,7 +286,324 @@ const HOME_TRUST_SHOWCASE = [
   },
 ];
 
-function HomeBody() {
+const ABOUT_TIMELINE_FALLBACK = [
+  {
+    year: "2004",
+    title: "Founded in Shenzhen",
+    copy: "Strategic establishment for AGV research in the Asian industrial corridor.",
+    side: "left",
+  },
+  {
+    year: "2012",
+    title: "Global Expansion",
+    copy: "Standardizing international services across European and North American sectors.",
+    side: "right",
+  },
+  {
+    year: "2018",
+    title: "Digital Twin Launch",
+    copy: "Shift to software-first engineering with Cloud Orchestration platforms.",
+    side: "left",
+  },
+  {
+    year: "2024",
+    title: "Swarm Intelligence",
+    copy: "Multi-brand scheduling and decentralized autonomous fleet management.",
+    side: "right",
+  },
+];
+
+const ABOUT_CERTIFICATE_STATS_FALLBACK = [
+  { icon: "verified", value: "30+", label: "Software Copyrights" },
+  { icon: "description", value: "20+", label: "Hardware Patents" },
+  { icon: "gavel", value: "ISO 9001", label: "Quality Management" },
+  { icon: "workspace_premium", value: "CE Standard", label: "Safety Certified" },
+];
+
+const CONTACT_METHODS_FALLBACK = [
+  {
+    icon: "phone_in_talk",
+    accentTone: "primary",
+    title: "Inquiry Hotline",
+    value: "+86 13510816743",
+    caption: "Global Support | Mon-Fri 09:00-17:00",
+  },
+  {
+    icon: "chat",
+    accentTone: "secondary",
+    title: "Instant Messaging",
+    value: "+86 13510816743",
+    caption: "WhatsApp Business | 24H Monitoring",
+  },
+  {
+    icon: "mail",
+    accentTone: "primary-container",
+    title: "Email Correspondence",
+    value: "sales@robotlyne.com",
+    caption: "Estimated Response: < 12 Hours",
+  },
+  {
+    icon: "location_on",
+    accentTone: "tertiary",
+    title: "Global Headquarters",
+    value: "Kinetic Precision Industrial Park",
+    caption: "Bao'an District | Shenzhen | GD China",
+  },
+];
+
+const HOME_BOTTLENECK_SOLUTIONS = [
+  {
+    title: "Manual forklift cost",
+    summary: "Replace repetitive pallet moves, predictable route work, and routine dock handling with autonomous flow.",
+    links: [
+      { href: "/products/agv-forklift", label: "Forklift AGV" },
+      { href: "/products/ground-handling-forklift-agv", label: "Ground Handling Forklift AGV" },
+    ],
+  },
+  {
+    title: "Unstable line-side delivery",
+    summary: "Keep point-of-use replenishment aligned to takt rhythm with repeatable dispatch and workstation delivery.",
+    links: [
+      { href: "/products/lifting-agv", label: "Lifting AGV" },
+      { href: "/solutions/material-handling", label: "Material Handling" },
+    ],
+  },
+  {
+    title: "Limited warehouse space",
+    summary: "Improve storage density before adding new floor area by coordinating vertical storage and automated transfer.",
+    links: [
+      { href: "/solutions/asrs", label: "ASRS" },
+      { href: "/products/storage-agv", label: "Storage AGV" },
+    ],
+  },
+  {
+    title: "Low picking efficiency",
+    summary: "Shorten walking paths, stabilize order release, and support higher SKU complexity with guided fulfillment logic.",
+    links: [
+      { href: "/solutions/picking", label: "Picking" },
+      { href: "/solutions/goods-to-person-picking-system", label: "Goods-to-Person" },
+    ],
+  },
+  {
+    title: "Conveyor transfer gaps",
+    summary: "Bridge fixed-line and mobile flow where manual transfer creates delay, labor dependency, or interface errors.",
+    links: [{ href: "/products/agv-roller", label: "AGV Roller" }],
+  },
+  {
+    title: "Flexible machine tending",
+    summary: "Support part presentation, machine service, and mixed-task execution where fixed automation is too rigid.",
+    links: [{ href: "/products/composite-mobile-robot", label: "Composite Mobile Robot" }],
+  },
+];
+
+const HOME_ARCHITECTURE_FLOW = ["WMS / ERP", "WCS / RCS", "Robot Fleet", "ASRS / Conveyor / Workstations / Production Line"];
+const HOME_ARCHITECTURE_CAPABILITIES = [
+  "Task orchestration",
+  "Traffic control",
+  "Equipment integration",
+  "Safety logic",
+  "Real-time monitoring",
+];
+
+const HOME_PROJECT_STAGES = [
+  "Share workflow and layout",
+  "Review site constraints",
+  "Recommend solution",
+  "Confirm interface and safety logic",
+  "Manufacture and test",
+  "Install, commission, train, support",
+];
+
+function getHomeViewModel(page) {
+  const data = page?.data || {};
+
+  return {
+    heroKicker: data.kicker || "Industrial Intelligence",
+    heroTitle: data.heroTitle || "Warehouse\nAutomation\nSystems",
+    heroSummary:
+      data.heroSummary ||
+      "coolyne designs complete warehouse automation programs with AGV fleets, storage systems, conveyors, and software orchestration for live industrial operations.",
+    heroBackgroundSrc:
+      data.heroBackgroundImage?.src || "/downloads/home-insights-asrs-home.jpg",
+    heroBackgroundAlt:
+      data.heroBackgroundImage?.alt || "Futuristic automated warehouse",
+    heroPrimaryCta: data.heroPrimaryCta || { href: "/contact", label: "Speak With An Expert" },
+    heroSecondaryCta: data.heroSecondaryCta || { href: "/solutions", label: "Explore Solutions" },
+    heroPanelKicker: data.heroPanelKicker || "Composite Mobile Robot",
+    heroPanelChip: data.heroPanelChip || "360 View",
+    heroPanelPoster:
+      data.heroPanelPosterImage?.src || "/assets/images/cmr-hero.webp",
+    heroPanelPosterAlt:
+      data.heroPanelPosterImage?.alt || "Composite mobile robot preview",
+    industryTitle: data.industryTitle || "Built for Complex Industrial Operations",
+    industrySummary:
+      data.industrySummary ||
+      "Deep domain expertise across industries with demanding material handling requirements. Solutions designed around your operational constraints.",
+    industries:
+      Array.isArray(data.industryCards) && data.industryCards.length
+        ? data.industryCards
+        : HOME_INDUSTRIES,
+    trustTitle:
+      data.trustTitle || "Proof points buyers look for before they request a quote.",
+    trustSummary:
+      data.trustSummary ||
+      "We pair delivery metrics, documentation, and implementation discipline so operations teams can evaluate coolyne as a long-cycle automation partner, not just an equipment vendor.",
+    trustShowcase:
+      Array.isArray(data.trustShowcase) && data.trustShowcase.length
+        ? data.trustShowcase
+        : HOME_TRUST_SHOWCASE,
+    partnerTitle: data.partnerTitle || "Brand Collaboration",
+    partnerSummary:
+      data.partnerSummary ||
+      "Selected industrial brands and manufacturing groups that reflect the trust range of our automation delivery work.",
+    partnerBrands:
+      Array.isArray(data.partnerBrands) && data.partnerBrands.length
+        ? data.partnerBrands
+        : HOME_PARTNER_BRANDS_SAFE,
+  };
+}
+
+function getAboutViewModel(page) {
+  const data = page?.data || {};
+
+  return {
+    heroKicker: data.kicker || "coolyne Warehouse Automation",
+    heroTitle: data.heroTitle || "Engineering\nthe Future",
+    heroSummary:
+      data.heroSummary ||
+      "coolyne engineers AGV, AMR, and software-driven warehouse systems that keep storage, transport, and fulfillment flows synchronized at industrial scale.",
+    heroBackgroundSrc:
+      data.heroBackgroundImage?.src || "/downloads/about/about-building-banner.webp",
+    heroBackgroundAlt:
+      data.heroBackgroundImage?.alt || "coolyne operations building exterior",
+    timelineEyebrow: data.timelineEyebrow || "Industrial Timeline",
+    metrics:
+      Array.isArray(data.metrics) && data.metrics.length
+        ? data.metrics
+        : [
+            { value: "500+", label: "Engineers" },
+            { value: "70+", label: "Core Patents" },
+            { value: "80+", label: "Active Markets" },
+          ],
+    introTitle: data.introTitle || "Specialized Intelligence,\nGlobal Delivery.",
+    introParagraphs:
+      Array.isArray(data.introParagraphs) && data.introParagraphs.length
+        ? data.introParagraphs
+        : [
+            "coolyne stands at the intersection of warehouse engineering and digital orchestration. Our focus remains on the design, customization, and global deployment of intelligent storage, transport, and fulfillment systems.",
+            "From intricate intralogistics simulation to the final hardware rollout, our lifecycle services ensure that your facility operates at the peak of technical capability.",
+          ],
+    features:
+      Array.isArray(data.features) && data.features.length
+        ? data.features
+        : [
+            {
+              title: "AGV Excellence",
+              description:
+                "Automated Guided Vehicles designed for high-payload stability and sub-millimeter precision.",
+              icon: "precision_manufacturing",
+            },
+            {
+              title: "Composite Robotics",
+              description:
+                "Integrating arm manipulation with mobile bases for complex pick-and-place tasks.",
+              icon: "hub",
+            },
+            {
+              title: "Unmanned Vehicles",
+              description:
+                "Heavy-duty transport solutions for both indoor and controlled outdoor industrial environments.",
+              icon: "airport_shuttle",
+            },
+            {
+              title: "R&D Customization",
+              description:
+                "Bespoke engineering solutions tailored to unique operational constraints and workflows.",
+              icon: "biotech",
+            },
+          ],
+    timelineTitle: data.timelineTitle || "Evolution of Excellence",
+    timelineItems:
+      Array.isArray(data.timelineItems) && data.timelineItems.length
+        ? data.timelineItems
+        : ABOUT_TIMELINE_FALLBACK,
+    certificateTitle: data.certificateTitle || "Certificates & Global Honors",
+    certificateEyebrow: data.certificateEyebrow || "Quality Verification",
+    certificateSummary:
+      data.certificateSummary ||
+      "Adhering to the world's most rigorous industrial safety and quality standards for mission-critical operations.",
+    certificateStats:
+      Array.isArray(data.certificateStats) && data.certificateStats.length
+        ? data.certificateStats
+        : ABOUT_CERTIFICATE_STATS_FALLBACK,
+    certificates:
+      Array.isArray(data.certificates) && data.certificates.length
+        ? data.certificates
+        : null,
+    certificateGalleryNote:
+      data.certificateGalleryNote ||
+      "Selected certificates are displayed below in a horizontal gallery so visitors can quickly scan quality, patent, and compliance proof without leaving the page.",
+    certificateBadgeLabel:
+      data.certificateBadgeLabel || "featured certificates",
+    ctaTitle: data.ctaTitle || "Ready to Engineer Your Future?",
+    ctaSummary:
+      data.ctaSummary ||
+      "Consult with our technical experts to audit your facility's potential for autonomous integration.",
+    ctaLink: data.ctaLink || { href: "/contact", label: "Partner with us" },
+  };
+}
+
+function getContactViewModel(page) {
+  const data = page?.data || {};
+
+  return {
+    heroKicker: data.kicker || "Consult an Expert",
+    heroTitle: data.heroTitle || "Architect Your\nEfficiency",
+    heroSummary:
+      data.heroSummary ||
+      "Connect with our engineering specialists to assess project feasibility and optimize your automation roadmap.",
+    heroBackgroundSrc: data.heroBackgroundImage?.src || "/downloads/jianxuan.png",
+    heroBackgroundAlt: data.heroBackgroundImage?.alt || "High-precision robotic arm",
+    contactSectionTitle: data.contactSectionTitle || "Direct Access",
+    contactSectionSummary: data.contactSectionSummary || "",
+    contactMethods:
+      Array.isArray(data.contactMethods) && data.contactMethods.length
+        ? data.contactMethods
+        : CONTACT_METHODS_FALLBACK,
+    formTitle: data.formTitle || "Project Review Form",
+    formSummary:
+      data.formSummary ||
+      "Share the operational inputs our engineering team needs for a first-pass feasibility review and quotation path.",
+    consentCopy:
+      data.consentCopy ||
+      "I agree to receive Kinetic Precision project insights and updates. Preferences can be managed at any time.",
+    submitLabel: data.submitLabel || "Request Project Review",
+    mapImage:
+      data.mapImage?.src || "/downloads/about/about-building-banner.webp",
+    mapImageAlt: data.mapImage?.alt || "Industrial map style",
+    mapLabel: data.mapLabel || "Global Logistics Hub",
+  };
+}
+
+function getToneClass(tone) {
+  if (tone === "secondary") {
+    return "bg-secondary";
+  }
+
+  if (tone === "primary-container") {
+    return "bg-primary-container";
+  }
+
+  if (tone === "tertiary") {
+    return "bg-tertiary";
+  }
+
+  return "bg-primary";
+}
+
+function HomeBody({ page }) {
+  const vm = getHomeViewModel(page);
+
   return (
     <>
       <Script
@@ -301,12 +619,12 @@ function HomeBody() {
           <div className="absolute inset-0 z-0 overflow-hidden">
             {" "}
               <img
-                alt="Futuristic automated warehouse"
+                alt={vm.heroBackgroundAlt}
                 className="w-full h-full object-cover opacity-40"
                 fetchPriority="high"
                 height="846"
                 loading="eager"
-                src="/downloads/home-insights-asrs-home.jpg"
+                src={vm.heroBackgroundSrc}
                 width="1504"
               />{" "}
             <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/80 to-transparent" />{" "}
@@ -317,32 +635,26 @@ function HomeBody() {
               {" "}
               <div className="hsa-home-hero-copy">
                 <span className="hsa-ui-kicker hsa-ui-kicker--light">
-                  Industrial Intelligence
+                  {vm.heroKicker}
                 </span>
-                <h1 className="hsa-ui-hero-title text-white max-w-[7.4ch]">
-                  Warehouse
-                  <br />
-                  Automation
-                  <br />
-                  <span className="text-white/30">Systems</span>
+                <h1 className="hsa-ui-hero-title max-w-[9ch] whitespace-pre-line text-white">
+                  {vm.heroTitle}
                 </h1>
                 <p className="hsa-ui-hero-copy">
-                  coolyne designs complete warehouse automation programs with
-                  AGV fleets, storage systems, conveyors, and software
-                  orchestration for live industrial operations.
+                  {vm.heroSummary}
                 </p>
                 <div className="hsa-ui-actions">
                   <a
                     className="hsa-ui-btn-primary"
-                    href="/contact"
+                    href={vm.heroPrimaryCta.href}
                   >
-                    Speak With An Expert
+                    {vm.heroPrimaryCta.label}
                   </a>
                   <a
                     className="hsa-ui-btn-light"
-                    href="/solutions"
+                    href={vm.heroSecondaryCta.href}
                   >
-                    Explore Solutions
+                    {vm.heroSecondaryCta.label}
                   </a>
                 </div>
               </div>{" "}
@@ -353,22 +665,22 @@ function HomeBody() {
                   <div className="hsa-home-robot-meta">
                     {" "}
                     <span className="hsa-home-robot-kicker">
-                      Composite Mobile Robot
+                      {vm.heroPanelKicker}
                     </span>{" "}
-                    <span className="hsa-home-robot-chip">360 View</span>{" "}
+                    <span className="hsa-home-robot-chip">{vm.heroPanelChip}</span>{" "}
                   </div>{" "}
                   <div
                     className="hsa-home-robot-stage"
                     aria-label="Interactive 3D robot model area"
                   >
                     <img
-                      alt="Composite mobile robot preview"
+                      alt={vm.heroPanelPosterAlt}
                       className="hsa-home-robot-poster"
                       decoding="async"
                       fetchPriority="high"
                       height="1207"
                       loading="eager"
-                      src="/assets/images/cmr-hero.webp"
+                      src={vm.heroPanelPoster}
                       width="735"
                     />
                     {" "}
@@ -724,30 +1036,26 @@ function HomeBody() {
               {" "}
               <span className="hsa-ui-kicker justify-center">Industries We Serve</span>{" "}
               <h2 className="hsa-ui-title max-w-4xl mx-auto">
-                {" "}
-                Built for Complex Industrial Operations{" "}
+                {vm.industryTitle}
               </h2>{" "}
               <p className="hsa-ui-body max-w-3xl mx-auto">
-                {" "}
-                Deep domain expertise across industries with demanding material
-                handling requirements. Solutions designed around your
-                operational constraints.{" "}
+                {vm.industrySummary}
               </p>{" "}
             </div>{" "}
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
               {" "}
-              {HOME_INDUSTRIES.map((item) => (
+              {vm.industries.map((item) => (
                 <div
                   className="hsa-ui-card hsa-ui-card--soft p-8"
                   key={item.title}
                 >
                   {" "}
-                  <InlineIcon className="mb-6 h-8 w-8 text-primary" name={item.icon} />
+                  <InlineIcon className="mb-6 h-8 w-8 text-primary" name={item.icon || "factory"} />
                   <h3 className="mb-4 text-[1.2rem] font-black leading-[1.15] tracking-tight text-secondary">
                     {item.title}
                   </h3>
                   <p className="mb-6 text-[1rem] leading-[1.72] text-on-surface-variant">
-                    {item.summary}
+                    {item.summary || item.description}
                   </p>
                   <ul className="space-y-2 text-[15px] leading-relaxed text-on-surface-variant">
                     {item.bullets.map((bullet) => (
@@ -840,6 +1148,120 @@ function HomeBody() {
             </div>{" "}
           </div>{" "}
         </section>{" "}
+        <section className="px-8 py-24 max-w-screen-2xl mx-auto bg-surface">
+          <div className="mx-auto max-w-[1680px]">
+            <div className="mb-14 max-w-4xl">
+              <span className="hsa-ui-kicker">Operational Bottlenecks</span>
+              <h2 className="hsa-ui-title max-w-4xl">
+                Warehouse Automation for Real Operational Bottlenecks
+              </h2>
+              <p className="hsa-ui-body max-w-3xl">
+                Start from the constraint that is slowing the operation, then match it to the
+                product or solution layer most likely to create a measurable engineering path.
+              </p>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {HOME_BOTTLENECK_SOLUTIONS.map((item) => (
+                <article className="hsa-ui-card hsa-ui-card--soft p-8" key={item.title}>
+                  <p className="mb-4 text-[11px] font-black uppercase tracking-[0.22em] text-primary">
+                    Pain Point
+                  </p>
+                  <h3 className="mb-4 text-[1.45rem] font-black leading-[1.08] tracking-tight text-secondary">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm leading-[1.8] text-on-surface-variant">{item.summary}</p>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    {item.links.map((link) => (
+                      <a
+                        className="inline-flex items-center rounded-full border border-outline-variant/30 px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-primary transition-colors hover:border-primary hover:bg-white"
+                        href={link.href}
+                        key={link.href}
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>{" "}
+        <section className="px-8 py-24 max-w-screen-2xl mx-auto bg-white">
+          <div className="mx-auto grid max-w-[1680px] gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(340px,0.9fr)] lg:items-start">
+            <div className="hsa-ui-card p-8 md:p-10">
+              <span className="hsa-ui-kicker">System Integration</span>
+              <h2 className="hsa-ui-title max-w-4xl">Connected Automation Architecture</h2>
+              <p className="hsa-ui-body max-w-3xl">
+                We align upstream planning systems with execution software and the physical robot
+                layer, so storage, transfer, and workstation activity move through one control
+                model instead of disconnected islands.
+              </p>
+              <div className="mt-10 grid gap-4 md:grid-cols-4">
+                {HOME_ARCHITECTURE_FLOW.map((node, index) => (
+                  <div className="relative" key={node}>
+                    <div className="flex min-h-[138px] items-end rounded-[24px] bg-primary px-6 py-6 text-white shadow-[0_18px_48px_rgba(0,23,54,0.08)]">
+                      <strong className="text-[1.15rem] leading-[1.2] tracking-tight">{node}</strong>
+                    </div>
+                    {index < HOME_ARCHITECTURE_FLOW.length - 1 ? (
+                      <div className="hidden md:flex absolute right-[-14px] top-1/2 h-6 w-7 -translate-y-1/2 items-center justify-center text-secondary">
+                        <InlineIcon className="h-5 w-5" name="arrow_forward" />
+                      </div>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="hsa-ui-card hsa-ui-card--soft p-8 md:p-10">
+              <p className="mb-4 text-[11px] font-black uppercase tracking-[0.22em] text-primary">
+                Execution Scope
+              </p>
+              <div className="flex flex-wrap gap-3">
+                {HOME_ARCHITECTURE_CAPABILITIES.map((item) => (
+                  <span
+                    className="inline-flex rounded-full border border-outline-variant/30 bg-white px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-secondary"
+                    key={item}
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+              <p className="mt-8 text-sm leading-[1.85] text-on-surface-variant">
+                This layer is where task orchestration, traffic control, equipment integration,
+                safety logic, and real-time monitoring are coordinated into one project-level
+                delivery model.
+              </p>
+            </div>
+          </div>
+        </section>{" "}
+        <section className="px-8 py-24 max-w-screen-2xl mx-auto bg-surface">
+          <div className="mx-auto max-w-[1680px]">
+            <div className="mb-14 max-w-4xl">
+              <span className="hsa-ui-kicker">Project Delivery</span>
+              <h2 className="hsa-ui-title max-w-4xl">How a Coolyne Project Moves Forward</h2>
+              <p className="hsa-ui-body max-w-3xl">
+                Our first-phase workflow is designed to qualify constraints early, align the
+                interface logic, and move toward manufacture and commissioning with fewer surprises.
+              </p>
+            </div>
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {HOME_PROJECT_STAGES.map((item, index) => (
+                <div className="hsa-ui-card hsa-ui-card--soft p-8" key={item}>
+                  <div className="mb-6 flex items-center justify-between">
+                    <span className="text-[10px] font-black uppercase tracking-[0.24em] text-outline">
+                      Step {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-[12px] font-black text-white">
+                      {index + 1}
+                    </span>
+                  </div>
+                  <h3 className="text-[1.35rem] font-black leading-[1.18] tracking-tight text-secondary">
+                    {item}
+                  </h3>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>{" "}
         <section className="relative pt-20 pb-[80px] px-8 max-w-screen-2xl mx-auto overflow-hidden bg-white">
           {" "}
           <div className="mx-auto max-w-[1680px]">
@@ -848,12 +1270,10 @@ function HomeBody() {
               {" "}
               <span className="hsa-ui-kicker justify-center">Delivery Confidence</span>{" "}
               <h2 className="mx-auto max-w-4xl font-headline text-[54.6px] font-black leading-[0.94] tracking-[-0.05em] text-secondary">
-                Proof points buyers look for before they request a quote.
+                {vm.trustTitle}
               </h2>{" "}
               <p className="mx-auto mt-6 max-w-3xl text-[1.02rem] leading-[1.8] text-on-surface-variant">
-                We pair delivery metrics, documentation, and implementation
-                discipline so operations teams can evaluate coolyne as a
-                long-cycle automation partner, not just an equipment vendor.
+                {vm.trustSummary}
               </p>
             </div>{" "}
               <div className="relative overflow-hidden">
@@ -865,7 +1285,7 @@ function HomeBody() {
                       className="hsa-trust-marquee-group"
                       key={groupIndex}
                     >
-                      {HOME_TRUST_SHOWCASE.map((item) => (
+                      {vm.trustShowcase.map((item) => (
                         <div
                           className={`group relative shrink-0 h-[536px] w-[360px] overflow-hidden rounded-[30px] border border-outline-variant/14 shadow-[0_28px_60px_rgba(0,23,54,0.08)] transition-transform duration-500 ${
                             item.stage === "hero-proof"
@@ -1078,15 +1498,10 @@ function HomeBody() {
               {" "}
               <span className="hsa-ui-kicker justify-center">Partner Brands</span>{" "}
               <h2 className="hsa-ui-title max-w-4xl mx-auto">
-                {" "}
-                Trusted Across Manufacturing and Smart Logistics{" "}
+                {vm.partnerTitle}
               </h2>{" "}
               <p className="hsa-ui-body max-w-3xl mx-auto">
-                {" "}
-                We collaborate with industrial leaders across electronics,
-                mobility, infrastructure, communications, and advanced
-                manufacturing to engineer automation that performs reliably at
-                scale.{" "}
+                {vm.partnerSummary}
               </p>{" "}
             </div>{" "}
             <div className="hsa-brand-marquee">
@@ -1103,14 +1518,14 @@ function HomeBody() {
                     key={`brand-loop-${loop}`}
                   >
                     {" "}
-                    {HOME_PARTNER_BRANDS_SAFE.map((brand) => (
+                    {vm.partnerBrands.map((brand) => (
                       <div
                         className="group flex min-h-[152px] min-w-[260px] flex-shrink-0 items-center justify-center bg-white px-2 py-2 shadow-[0_24px_56px_rgba(0,23,54,0.12)]"
                         key={`${brand.name}-${loop}`}
                       >
                         {" "}
                         <img
-                          alt={brand.name}
+                          alt={brand.alt || brand.name}
                           className="max-h-[120px] w-auto max-w-[94%] object-contain transition-transform duration-300 group-hover:scale-[1.12]"
                           src={brand.src}
                         />{" "}
@@ -1880,7 +2295,9 @@ function AboutBody() {
   );
 }
 
-function ContactBody() {
+function ContactBody({ page }) {
+  const vm = getContactViewModel(page);
+
   return (
     <>
       {" "}
@@ -1894,9 +2311,9 @@ function ContactBody() {
               {" "}
               <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/90 to-transparent z-10" />{" "}
               <img
-                alt="High-precision robotic arm"
+                alt={vm.heroBackgroundAlt}
                 className="w-full h-full object-cover"
-                src="/downloads/jianxuan.png"
+                src={vm.heroBackgroundSrc}
               />{" "}
             </div>{" "}
             <div className="relative z-20 max-w-7xl mx-auto px-8 py-20 w-full">
@@ -1904,17 +2321,13 @@ function ContactBody() {
               <div className="max-w-3xl">
                 {" "}
                 <span className="inline-block px-3 py-1 bg-secondary text-white text-[10px] font-black tracking-[0.25em] mb-6">
-                  {" "}
-                  Consult an Expert{" "}
+                  {vm.heroKicker}
                 </span>{" "}
-                <h1 className="font-headline text-5xl md:text-8xl font-black text-white leading-[0.95] tracking-tighter mb-8 ">
-                  {" "}
-                  Architect Your <br /> Efficiency{" "}
+                <h1 className="mb-8 whitespace-pre-line font-headline text-5xl font-black leading-[0.95] tracking-tighter text-white md:text-8xl">
+                  {vm.heroTitle}
                 </h1>{" "}
                 <p className="text-[#d7e5f8] text-xl md:text-2xl font-light leading-relaxed max-w-xl border-l-2 border-secondary pl-6 drop-shadow-[0_10px_24px_rgba(0,15,40,0.28)]">
-                  {" "}
-                  Connect with our engineering specialists to assess project
-                  feasibility and optimize your automation roadmap.{" "}
+                  {vm.heroSummary}
                 </p>{" "}
               </div>{" "}
             </div>{" "}
@@ -1928,67 +2341,45 @@ function ContactBody() {
                 <div>
                   {" "}
                   <h2 className="font-headline text-4xl font-black text-primary mb-4 tracking-tight">
-                    {" "}
-                    Direct Access{" "}
+                    {vm.contactSectionTitle}
                   </h2>{" "}
+                  {vm.contactSectionSummary ? (
+                    <p className="text-on-surface-variant font-medium max-w-xl mb-4">
+                      {vm.contactSectionSummary}
+                    </p>
+                  ) : null}{" "}
                   <div className="h-1.5 w-16 bg-secondary" />{" "}
                 </div>{" "}
                 <div className="grid grid-cols-1 gap-4">
                   {" "}
-                  {[
-                    [
-                      "phone_in_talk",
-                      "bg-primary group-hover:bg-secondary",
-                      "Inquiry Hotline",
-                      "+86 13510816743",
-                      "Global Support 闁?Mon-Fri 09:00-17:00",
-                    ],
-                    [
-                      "chat",
-                      "bg-secondary",
-                      "Instant Messaging",
-                      "+86 13510816743",
-                      "WhatsApp Business 闁?24H Monitoring",
-                    ],
-                    [
-                      "mail",
-                      "bg-primary-container",
-                      "Email Correspondence",
-                        "sales@robotlyne.com",
-                      "Estimated Response: < 12 Hours",
-                    ],
-                    [
-                      "location_on",
-                      "bg-tertiary",
-                      "Global Headquarters",
-                      "Kinetic Precision Industrial Park",
-                      "Bao'an District 闁?Shenzhen 闁?GD China",
-                    ],
-                  ].map(([icon, bg, title, value, caption]) => (
+                  {vm.contactMethods.map((method) => (
                     <div
                       className="group flex items-center gap-6 p-8 bg-surface-container-low border border-outline-variant/30 hover:bg-white hover:shadow-xl hover:shadow-primary/5 transition-all duration-300"
-                      key={title}
+                      key={`${method.title}-${method.value}`}
                     >
                       {" "}
                       <div
-                        className={`w-14 h-14 ${bg} flex items-center justify-center shrink-0`}
+                        className={`w-14 h-14 ${getToneClass(method.accentTone)} flex items-center justify-center shrink-0`}
                       >
                         {" "}
-                        <InlineIcon className="h-6 w-6 text-white" name={icon} />{" "}
+                        <InlineIcon
+                          className="h-6 w-6 text-white"
+                          name={method.icon || "support_agent"}
+                        />{" "}
                       </div>{" "}
                       <div>
                         {" "}
                         <h3 className="text-[10px] font-black text-outline tracking-[0.2em] mb-1">
-                          {title}
+                          {method.title}
                         </h3>{" "}
                         <p
-                          className={`font-black text-primary tracking-tight ${title === "Global Headquarters" ? "text-lg leading-tight " : title === "Email Correspondence" ? "text-2xl lowercase" : "text-2xl"}`}
+                          className={`font-black text-primary tracking-tight ${method.icon === "location_on" ? "text-lg leading-tight" : method.value.includes("@") ? "text-2xl lowercase" : "text-2xl"}`}
                         >
                           {" "}
-                          {value}{" "}
+                          {method.value}{" "}
                         </p>{" "}
                         <p className="text-[11px] text-outline-variant font-bold mt-1 ">
-                          {caption}
+                          {method.caption}
                         </p>{" "}
                       </div>{" "}
                     </div>
@@ -2002,116 +2393,21 @@ function ContactBody() {
                   <div className="mb-12">
                     {" "}
                     <h2 className="font-headline text-3xl font-black text-primary mb-3 tracking-tight">
-                      {" "}
-                      Project Briefing{" "}
+                      {vm.formTitle}
                     </h2>{" "}
                     <p className="text-on-surface-variant font-medium max-w-lg">
-                      {" "}
-                      Submit your project parameters for a professional ROI
-                      assessment and preliminary engineering scope.{" "}
+                      {vm.formSummary}
                     </p>{" "}
                   </div>{" "}
-                  <form
-                    className="space-y-8"
-                    data-form-label="Contact Page Project Briefing"
-                    data-form-type="consultation"
-                    data-hsa-form=""
-                    data-success-redirect="/thanks/"
-                    data-success-message="Thanks, your project briefing has been emailed to our team."
-                  >
-                    {" "}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      {" "}
-                      {[
-                        ["Full Name", "fullName", "ENTER NAME", "text", false],
-                        [
-                          "Email Address",
-                          "email",
-                          "WORK@COMPANY.COM",
-                          "email",
-                          true,
-                        ],
-                      ].map(([label, name, placeholder, type, required]) => (
-                        <div className="space-y-2" key={name}>
-                          {" "}
-                          <label className="text-[10px] font-black tracking-[0.15em] text-outline">
-                            {" "}
-                            {label}{" "}
-                          </label>{" "}
-                          <input
-                            className="w-full bg-surface-container-lowest border-2 border-outline-variant/40 focus:border-secondary focus:ring-0 transition-all py-3 px-4 font-bold placeholder:text-outline-variant/40 placeholder:font-normal"
-                            name={name}
-                            placeholder={placeholder}
-                            required={required}
-                            type={type}
-                          />{" "}
-                        </div>
-                      ))}{" "}
-                    </div>{" "}
-                    <div className="space-y-2">
-                      {" "}
-                      <label className="text-[10px] font-black tracking-[0.15em] text-outline">
-                        {" "}
-                        Phone Contact{" "}
-                      </label>{" "}
-                      <input
-                        className="w-full bg-surface-container-lowest border-2 border-outline-variant/40 focus:border-secondary focus:ring-0 transition-all py-3 px-4 font-bold placeholder:text-outline-variant/40 placeholder:font-normal"
-                        name="phone"
-                        placeholder="+1 (000) 000-0000"
-                        type="tel"
-                      />{" "}
-                    </div>{" "}
-                    <div className="space-y-2">
-                      {" "}
-                      <label className="text-[10px] font-black tracking-[0.15em] text-outline">
-                        {" "}
-                        Scope Details{" "}
-                      </label>{" "}
-                      <textarea
-                        className="w-full bg-surface-container-lowest border-2 border-outline-variant/40 focus:border-secondary focus:ring-0 transition-all py-3 px-4 font-bold placeholder:text-outline-variant/40 placeholder:font-normal resize-none"
-                        name="message"
-                        placeholder="DESCRIBE YOUR AUTOMATION NEEDS..."
-                        required
-                        rows="4"
-                      />{" "}
-                    </div>{" "}
-                    <div className="flex items-start gap-4 pt-4">
-                      {" "}
-                      <div className="flex items-center h-5">
-                        {" "}
-                        <input
-                          className="w-5 h-5 text-secondary border-outline-variant rounded-none focus:ring-secondary"
-                          name="marketingConsent"
-                          type="checkbox"
-                          value="Yes"
-                        />{" "}
-                      </div>{" "}
-                      <div className="text-[11px] font-bold text-on-surface-variant leading-tight">
-                        {" "}
-                        <label className="tracking-wide">
-                          {" "}
-                          I agree to receive Kinetic Precision project insights
-                          and updates. Preferences can be managed at any
-                          time.{" "}
-                        </label>{" "}
-                      </div>{" "}
-                    </div>{" "}
-                    <button
-                      className="w-full md:w-auto bg-secondary text-white px-12 py-5 rounded-none font-black text-xs tracking-[0.2em] hover:bg-primary transition-all duration-300 shadow-xl shadow-secondary/10"
-                      type="submit"
-                    >
-                      {" "}
-                      Initiate Consultation{" "}
-                    </button>{" "}
-                  </form>{" "}
+                  <ProjectReviewForm />{" "}
                 </div>{" "}
                 <div className="mt-8 overflow-hidden h-48 relative border border-outline-variant/20">
                   {" "}
                   <div className="absolute inset-0 bg-primary/20 z-10 mix-blend-multiply" />{" "}
                   <img
-                    alt="Industrial map style"
+                    alt={vm.mapImageAlt}
                     className="w-full h-full object-cover grayscale brightness-50"
-                    src="/downloads/about/about-building-banner.webp"
+                    src={vm.mapImage}
                   />{" "}
                   <div className="absolute bottom-4 left-4 z-20">
                     {" "}
@@ -2119,8 +2415,7 @@ function ContactBody() {
                       {" "}
                       <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />{" "}
                       <span className="text-[10px] font-black text-white tracking-widest">
-                        {" "}
-                        Global Logistics Hub{" "}
+                        {vm.mapLabel}
                       </span>{" "}
                     </div>{" "}
                   </div>{" "}
@@ -2166,15 +2461,111 @@ function ContactBody() {
 export function StructuredStaticPage({ page }) {
   let body = null;
   if (page.kind === "home-page") {
-    body = <HomeBody />;
+    body = <HomeBody page={page} />;
   } else if (page.kind === "about-page") {
-    body = <AboutBody />;
+    body = <AboutBody page={page} />;
   } else if (page.kind === "contact-page") {
-    body = <ContactBody />;
+    body = <ContactBody page={page} />;
+  } else if (page.kind === "policy-page") {
+    body = (
+      <main className="mx-auto flex w-full max-w-[1100px] flex-col gap-10 px-6 py-16 md:px-10">
+        <section className="rounded-[28px] border border-[#d9dde5] bg-white px-8 py-10 shadow-[0_24px_80px_rgba(0,23,54,0.06)] md:px-12 md:py-14">
+          <div className="max-w-3xl">
+            <p className="mb-4 text-[11px] font-black uppercase tracking-[0.28em] text-[#fe6b00]">
+              {page.data.kicker || "Legal Information"}
+            </p>
+            <h1 className="text-4xl font-black tracking-tight text-[#001736] md:text-5xl">
+              {page.data.heroTitle || page.data.title}
+            </h1>
+            <p className="mt-6 max-w-3xl text-base leading-8 text-[#58606b] md:text-lg">
+              {page.data.heroSummary || page.data.summary}
+            </p>
+          </div>
+          {page.data.metrics?.length ? (
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
+              {page.data.metrics.map((metric) => (
+                <article
+                  className="rounded-[22px] border border-[#d9dde5] bg-[#f8f9fb] px-6 py-6"
+                  key={metric.label}
+                >
+                  <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[#58606b]">
+                    {metric.label}
+                  </p>
+                  <p className="mt-3 text-2xl font-black tracking-tight text-[#001736]">
+                    {metric.value}
+                  </p>
+                </article>
+              ))}
+            </div>
+          ) : null}
+        </section>
+
+        {page.data.features?.length ? (
+          <section className="grid gap-5 md:grid-cols-3">
+            {page.data.features.map((feature) => (
+              <article
+                className="rounded-[24px] border border-[#d9dde5] bg-white px-7 py-7 shadow-[0_16px_50px_rgba(0,23,54,0.05)]"
+                key={feature.title}
+              >
+                <p className="text-[11px] font-black uppercase tracking-[0.24em] text-[#fe6b00]">
+                  {feature.label}
+                </p>
+                <h2 className="mt-4 text-2xl font-black tracking-tight text-[#001736]">
+                  {feature.title}
+                </h2>
+                <p className="mt-4 text-sm leading-7 text-[#58606b]">{feature.description}</p>
+              </article>
+            ))}
+          </section>
+        ) : null}
+
+        {page.data.integrations?.length ? (
+          <section className="rounded-[24px] border border-[#d9dde5] bg-[#001736] px-8 py-8 text-white md:px-10">
+            <p className="text-[11px] font-black uppercase tracking-[0.28em] text-[#ffb36d]">
+              Key Conditions
+            </p>
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {page.data.integrations.map((item) => (
+                <article
+                  className="rounded-[20px] border border-white/12 bg-white/5 px-5 py-5"
+                  key={item}
+                >
+                  <p className="text-sm leading-7 text-white/82">{item}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
+
+        <section className="rounded-[28px] border border-[#d9dde5] bg-white px-8 py-10 shadow-[0_24px_80px_rgba(0,23,54,0.06)] md:px-12">
+          <div className="prose prose-slate max-w-none prose-headings:font-black prose-headings:text-[#001736] prose-p:text-[#58606b] prose-p:leading-8 prose-li:text-[#58606b] prose-li:leading-8 prose-strong:text-[#001736]">
+            <page.data.Content />
+          </div>
+        </section>
+
+        {page.data.faqs?.length ? (
+          <section className="rounded-[24px] border border-[#d9dde5] bg-white px-8 py-8 shadow-[0_16px_50px_rgba(0,23,54,0.05)] md:px-10">
+            <h2 className="text-3xl font-black tracking-tight text-[#001736]">
+              Frequently Asked Questions
+            </h2>
+            <div className="mt-8 grid gap-5">
+              {page.data.faqs.map((faq) => (
+                <article
+                  className="rounded-[18px] border border-[#d9dde5] bg-[#f8f9fb] px-6 py-6"
+                  key={faq.question}
+                >
+                  <h3 className="text-lg font-black text-[#001736]">{faq.question}</h3>
+                  <p className="mt-3 text-sm leading-7 text-[#58606b]">{faq.answer}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        ) : null}
+      </main>
+    );
   }
   if (!body) {
     return null;
   }
   return <PublicPageChrome page={page}>{body}</PublicPageChrome>;
 }
-
