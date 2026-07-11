@@ -322,13 +322,36 @@ const HOME_BOTTLENECK_SOLUTIONS = [
   },
 ];
 
-const HOME_ARCHITECTURE_FLOW = ["WMS / ERP", "WCS / RCS", "Robot Fleet", "ASRS / Conveyor / Workstations / Production Line"];
+const HOME_ARCHITECTURE_FLOW = [
+  { id: "planning", lines: ["WMS / ERP"] },
+  { id: "control", lines: ["WCS / RCS"] },
+  { id: "fleet", lines: ["Robot Fleet"] },
+  {
+    id: "execution",
+    lines: ["ASRS / Conveyor", "Workstations", "Production Line"],
+    isWide: true,
+  },
+];
 const HOME_ARCHITECTURE_CAPABILITIES = [
   "Task orchestration",
   "Traffic control",
   "Equipment integration",
   "Safety logic",
   "Real-time monitoring",
+];
+const HOME_ARCHITECTURE_OUTCOMES = [
+  {
+    title: "Unified Dispatch",
+    copy: "Centralized scheduling across robots, equipment, and workstations.",
+  },
+  {
+    title: "Real-Time Feedback",
+    copy: "Operational data is returned to the control layer for monitoring and adjustment.",
+  },
+  {
+    title: "Safer Collaboration",
+    copy: "Traffic rules and safety logic reduce conflicts across the production floor.",
+  },
 ];
 
 const HOME_PROJECT_STAGES = [
@@ -1104,49 +1127,91 @@ function HomeBody({ page }) {
           </div>
         </section>{" "}
         <section className="px-8 py-24 max-w-screen-2xl mx-auto bg-white">
-          <div className="mx-auto grid max-w-[1680px] gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(340px,0.9fr)] lg:items-start">
-            <div className="hsa-ui-card p-8 md:p-10">
-              <span className="hsa-ui-kicker">System Integration</span>
-              <h2 className="hsa-ui-title max-w-4xl">Connected Automation Architecture</h2>
-              <p className="hsa-ui-body max-w-3xl">
-                We align upstream planning systems with execution software and the physical robot
-                layer, so storage, transfer, and workstation activity move through one control
-                model instead of disconnected islands.
-              </p>
-              <div className="mt-10 grid gap-4 md:grid-cols-4">
-                {HOME_ARCHITECTURE_FLOW.map((node, index) => (
-                  <div className="relative" key={node}>
-                    <div className="flex min-h-[138px] items-end rounded-[24px] bg-primary px-6 py-6 text-white shadow-[0_18px_48px_rgba(0,23,54,0.08)]">
-                      <strong className="text-[1.15rem] leading-[1.2] tracking-tight">{node}</strong>
-                    </div>
-                    {index < HOME_ARCHITECTURE_FLOW.length - 1 ? (
-                      <div className="hidden md:flex absolute right-[-14px] top-1/2 h-6 w-7 -translate-y-1/2 items-center justify-center text-secondary">
-                        <InlineIcon className="h-5 w-5" name="arrow_forward" />
+          <div className="mx-auto grid max-w-[1680px] gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-stretch">
+            <div className="hsa-ui-card flex h-full flex-col p-8 md:p-10">
+              <div>
+                <span className="hsa-ui-kicker">System Integration</span>
+                <h2 className="hsa-ui-title max-w-4xl">Connected Automation Architecture</h2>
+                <p className="hsa-ui-body max-w-3xl">
+                  We align upstream planning systems with execution software and the physical robot
+                  layer, so storage, transfer, and workstation activity move through one control
+                  model instead of disconnected islands.
+                </p>
+              </div>
+              <div className="mt-10 rounded-[28px] border border-outline-variant/16 bg-surface p-5 md:mt-auto md:p-6">
+                <div className="flex flex-col gap-3 md:flex-row md:items-stretch md:gap-2">
+                  {HOME_ARCHITECTURE_FLOW.map((node, index) => (
+                    <Fragment key={node.id}>
+                      <div
+                        className={`flex min-h-[118px] flex-1 items-end rounded-[20px] bg-primary px-5 py-5 text-white shadow-[0_14px_34px_rgba(0,23,54,0.08)] ${
+                          node.isWide ? "md:min-w-[236px] md:flex-[1.34]" : ""
+                        }`}
+                      >
+                        <strong className="text-[1.02rem] leading-[1.22] tracking-tight">
+                          {node.lines.map((line) => (
+                            <span className="block" key={line}>
+                              {line}
+                            </span>
+                          ))}
+                        </strong>
                       </div>
-                    ) : null}
-                  </div>
-                ))}
+                      {index < HOME_ARCHITECTURE_FLOW.length - 1 ? (
+                        <>
+                          <div className="flex items-center justify-center py-1 text-secondary/75 md:hidden">
+                            <InlineIcon className="h-5 w-5" name="arrow_downward" />
+                          </div>
+                          <div className="hidden min-w-[56px] items-center justify-center md:flex">
+                            <span className="h-px flex-1 bg-secondary/24" />
+                            <InlineIcon className="mx-1 h-4 w-4 text-secondary/70" name="arrow_forward" />
+                          </div>
+                        </>
+                      ) : null}
+                    </Fragment>
+                  ))}
+                </div>
               </div>
             </div>
-            <div className="hsa-ui-card hsa-ui-card--soft p-8 md:p-10">
-              <p className="mb-4 text-[11px] font-black uppercase tracking-[0.22em] text-primary">
-                Execution Scope
-              </p>
-              <div className="flex flex-wrap gap-3">
-                {HOME_ARCHITECTURE_CAPABILITIES.map((item) => (
-                  <span
-                    className="inline-flex rounded-full border border-outline-variant/30 bg-white px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-secondary"
-                    key={item}
-                  >
-                    {item}
-                  </span>
-                ))}
+            <div className="hsa-ui-card hsa-ui-card--soft flex h-full flex-col p-8 md:p-10">
+              <div>
+                <p className="mb-4 text-[11px] font-black uppercase tracking-[0.22em] text-primary">
+                  Execution Scope
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  {HOME_ARCHITECTURE_CAPABILITIES.map((item) => (
+                    <span
+                      className="inline-flex rounded-full border border-outline-variant/30 bg-white px-4 py-2 text-[11px] font-black uppercase tracking-[0.18em] text-secondary"
+                      key={item}
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+                <p className="mt-8 text-sm leading-[1.85] text-on-surface-variant">
+                  This layer coordinates task orchestration, traffic control, equipment
+                  integration, safety logic, and real-time monitoring into one project-level
+                  delivery model.
+                </p>
               </div>
-              <p className="mt-8 text-sm leading-[1.85] text-on-surface-variant">
-                This layer is where task orchestration, traffic control, equipment integration,
-                safety logic, and real-time monitoring are coordinated into one project-level
-                delivery model.
-              </p>
+              <div className="mt-10 border-t border-outline-variant/14 pt-8 md:mt-auto">
+                <p className="mb-5 text-[11px] font-black uppercase tracking-[0.22em] text-primary">
+                  System Outcomes
+                </p>
+                <div className="grid gap-4">
+                  {HOME_ARCHITECTURE_OUTCOMES.map((item) => (
+                    <article
+                      className="rounded-[22px] border border-outline-variant/16 bg-white px-5 py-5 shadow-[0_12px_28px_rgba(0,23,54,0.05)]"
+                      key={item.title}
+                    >
+                      <h3 className="text-[1rem] font-black leading-[1.2] tracking-tight text-secondary">
+                        {item.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-[1.75] text-on-surface-variant">
+                        {item.copy}
+                      </p>
+                    </article>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>{" "}
