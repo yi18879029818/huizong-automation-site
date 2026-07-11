@@ -212,80 +212,6 @@ const HOME_PARTNER_BRANDS_SAFE = [
   },
 ];
 
-const HOME_TRUST_METRICS = [
-  {
-    value: "42+",
-    label: "Deployment Countries",
-    copy: "Programs aligned for multi-region industrial rollouts and support coordination.",
-    image: "/downloads/certificates/credit-honor-01-home.jpg",
-  },
-  {
-    value: "24/7",
-    label: "Operations Coverage",
-    copy: "Software orchestration and service continuity designed for round-the-clock execution.",
-    image: "/downloads/certificates/compliance-certification-01-home.jpg",
-  },
-  {
-    value: "99.9%",
-    label: "Process Accuracy",
-    copy: "Automation logic built around traceability, repeatability, and low-error material flow.",
-    image: "/downloads/certificates/compliance-certification-02-home.jpg",
-  },
-];
-
-const HOME_TRUST_PROOFS = [
-  {
-    eyebrow: "Formal Audit",
-    title: "Quality Certification",
-    copy: "Formal quality management and process control records supporting project delivery discipline.",
-    image: "/downloads/certificates/quality-certification-01-home.jpg",
-  },
-  {
-    eyebrow: "Patent Records",
-    title: "Patent Portfolio",
-    copy: "Technical invention and utility model filings connected to automation equipment and system methods.",
-    image: "/downloads/certificates/patent-02-home.jpg",
-  },
-];
-
-const HOME_TRUST_SHOWCASE = [
-  {
-    id: "deployment-countries",
-    kind: "metric",
-    stage: "edge-metric",
-    tab: "Global Rollout",
-    ...HOME_TRUST_METRICS[0],
-  },
-  {
-    id: "operations-coverage",
-    kind: "metric",
-    stage: "feature-metric",
-    tab: "Always-On Coverage",
-    ...HOME_TRUST_METRICS[1],
-  },
-  {
-    id: "quality-certification",
-    kind: "proof",
-    stage: "hero-proof",
-    tab: "Quality System",
-    ...HOME_TRUST_PROOFS[0],
-  },
-  {
-    id: "process-accuracy",
-    kind: "metric",
-    stage: "wide-metric",
-    tab: "Process Control",
-    ...HOME_TRUST_METRICS[2],
-  },
-  {
-    id: "patent-portfolio",
-    kind: "proof",
-    stage: "edge-proof",
-    tab: "Patent Records",
-    ...HOME_TRUST_PROOFS[1],
-  },
-];
-
 const ABOUT_TIMELINE_FALLBACK = [
   {
     year: "2004",
@@ -443,15 +369,6 @@ function getHomeViewModel(page) {
       Array.isArray(data.industryCards) && data.industryCards.length
         ? data.industryCards
         : HOME_INDUSTRIES,
-    trustTitle:
-      data.trustTitle || "Proof points buyers look for before they request a quote.",
-    trustSummary:
-      data.trustSummary ||
-      "We pair delivery metrics, documentation, and implementation discipline so operations teams can evaluate coolyne as a long-cycle automation partner, not just an equipment vendor.",
-    trustShowcase:
-      Array.isArray(data.trustShowcase) && data.trustShowcase.length
-        ? data.trustShowcase
-        : HOME_TRUST_SHOWCASE,
     partnerTitle: data.partnerTitle || "Brand Collaboration",
     partnerSummary:
       data.partnerSummary ||
@@ -1261,102 +1178,6 @@ function HomeBody({ page }) {
               ))}
             </div>
           </div>
-        </section>{" "}
-        <section className="relative pt-20 pb-[80px] px-8 max-w-screen-2xl mx-auto overflow-hidden bg-white">
-          {" "}
-          <div className="mx-auto max-w-[1680px]">
-            {" "}
-            <div className="mx-auto mb-8 max-w-5xl text-center">
-              {" "}
-              <span className="hsa-ui-kicker justify-center">Delivery Confidence</span>{" "}
-              <h2 className="mx-auto max-w-4xl font-headline text-[54.6px] font-black leading-[0.94] tracking-[-0.05em] text-secondary">
-                {vm.trustTitle}
-              </h2>{" "}
-              <p className="mx-auto mt-6 max-w-3xl text-[1.02rem] leading-[1.8] text-on-surface-variant">
-                {vm.trustSummary}
-              </p>
-            </div>{" "}
-              <div className="relative overflow-hidden">
-              <div className="hsa-trust-marquee">
-                <div className="hsa-trust-marquee-track">
-                  {[0, 1].map((groupIndex) => (
-                    <div
-                      aria-hidden={groupIndex === 1}
-                      className="hsa-trust-marquee-group"
-                      key={groupIndex}
-                    >
-                      {vm.trustShowcase.map((item) => (
-                        <div
-                          className={`group relative shrink-0 h-[536px] w-[360px] overflow-hidden rounded-[30px] border border-outline-variant/14 shadow-[0_28px_60px_rgba(0,23,54,0.08)] transition-transform duration-500 ${
-                            item.stage === "hero-proof"
-                              ? "bg-[linear-gradient(180deg,#8fc0de_0%,#c9d5df_55%,#eceff3_100%)]"
-                              : item.stage === "feature-proof" || item.stage === "edge-proof"
-                                ? "bg-white"
-                                : item.stage === "wide-metric"
-                                  ? "bg-[linear-gradient(180deg,#f4f8fc_0%,#edf3f8_100%)]"
-                                  : "bg-[linear-gradient(180deg,#f7fafc_0%,#eef3f8_100%)]"
-                          }`}
-                          key={`${groupIndex}-${item.id}`}
-                        >
-                          <div className="flex h-full flex-col">
-                            <div
-                              className={`relative flex h-[304px] shrink-0 items-center justify-center overflow-hidden ${
-                                item.stage === "hero-proof"
-                                  ? "px-7 pt-7"
-                                  : "px-7 pt-7"
-                              }`}
-                            >
-                              <img
-                                alt={item.title || item.label}
-                                className="relative z-10 h-[224px] w-[224px] object-contain"
-                                loading="lazy"
-                                src={item.image}
-                              />
-                            </div>
-                            <div
-                              className={`mt-auto flex-1 border-t border-outline-variant/10 bg-white/92 ${
-                                item.stage === "hero-proof" ? "p-7 md:p-8" : "p-6 md:p-7"
-                              }`}
-                            >
-                              {item.kind === "metric" ? (
-                                <>
-                                  <CountUpValue
-                                    as="div"
-                                    className={`font-black leading-none tracking-[-0.05em] ${
-                                      item.stage === "wide-metric"
-                                        ? "text-[4rem] text-secondary"
-                                        : "text-[3.8rem] text-secondary"
-                                    }`}
-                                    value={item.value}
-                                  />
-                                  <p className="mt-6 max-w-[28ch] text-sm leading-[1.76] text-on-surface-variant">
-                                    {item.copy}
-                                  </p>
-                                </>
-                              ) : (
-                                <>
-                                  <h3
-                                    className={`font-black leading-[1.04] tracking-[-0.04em] text-secondary ${
-                                      item.stage === "hero-proof" ? "max-w-[12ch] text-[2rem]" : "max-w-[12ch] text-[1.72rem]"
-                                    }`}
-                                  >
-                                    {item.title}
-                                  </h3>
-                                  <p className="mt-4 max-w-[26ch] text-sm leading-[1.74] text-on-surface-variant">
-                                    {item.copy}
-                                  </p>
-                                </>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>{" "}
-          </div>{" "}
         </section>{" "}
         <section className="pt-0 pb-32 px-8 max-w-screen-2xl mx-auto bg-white">
           {" "}
