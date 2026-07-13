@@ -2534,27 +2534,6 @@ function LiftingAgvBody() {
         </div>
       </section>
 
-      <section className="py-32 px-8 max-w-screen-2xl mx-auto bg-surface text-center">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="font-headline text-5xl font-black text-primary tracking-tighter mb-6 uppercase">
-            Ready to Transform Your Throughput?
-          </h2>
-          <p className="text-on-surface-variant text-xl mb-12">
-            Consult with our senior logistics engineers to design a custom Lifting AGV workflow tailored to your facility.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Link
-              className="w-full sm:w-auto bg-secondary text-white px-10 py-5 rounded-md font-extrabold text-lg shadow-xl hover:translate-y-[-2px] transition-all"
-              href="/contact"
-            >
-              Schedule an Expert Consultation
-            </Link>
-            <button className="w-full sm:w-auto text-primary font-bold px-10 py-5 hover:bg-surface-container-low rounded-md transition-all">
-              Download Technical Data Sheet
-            </button>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }
