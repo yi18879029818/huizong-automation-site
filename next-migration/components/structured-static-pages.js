@@ -366,90 +366,89 @@ const HOME_PROJECT_STAGES = [
 
 const HOME_PORTFOLIO_SHOWCASE = [
   {
-    alt: "ASRS System",
+    alt: "ASRS warehouse with storage aisles, conveyors, and autonomous pallet handling",
     title: "ASRS Global Logistics Hub",
     label: "Logistics Sector",
     summary:
-      "Dense pallet storage, controlled order release, and synchronized outbound handling for facilities that need stable high-throughput warehouse execution.",
-    image: "/assets/images/home-card-1-home.jpg",
+      "High-density storage and controlled outbound coordination for facilities that need reliable warehouse execution across multi-shift operations.",
+    image: "/assets/images/asrs-guide-integrated-material-flow.webp",
     href: "/case-studies/asrs",
     imagePosition: "center center",
-    highlights: [
+    details: [
       {
-        icon: "inventory_2",
-        title: "Dense Storage",
-        detail: "High-bay pallet capacity with accurate location control.",
+        title: "Project Scope",
+        detail:
+          "High-bay pallet storage, order release coordination, and automated pallet flow between storage and dispatch.",
       },
       {
-        icon: "route",
-        title: "Sequenced Output",
-        detail: "Material release aligned to downstream shipping flow.",
+        title: "Solution Used",
+        detail: "ASRS, conveyor interfaces, and storage-side automation handoff logic.",
+      },
+      {
+        title: "Integration",
+        detail: "WMS integration, location control, and shipping-side release signals.",
+      },
+      {
+        title: "Project Results",
+        detail: "Multi-shift operation, denser storage use, and more disciplined outbound sequencing.",
       },
     ],
   },
   {
-    alt: "AGV Project",
+    alt: "Warehouse AGV project with automated pallet transport inside an operational facility",
     title: "Smart Warehousing AGV",
-    label: "Manufacturing",
+    label: "Warehouse Operations",
     summary:
       "Autonomous pallet transport linking receiving, buffer storage, and replenishment lanes with less manual forklift dependency inside the warehouse.",
     image: "/assets/images/home-card-2-home.jpg",
     href: "/case-studies/material-handling",
     imagePosition: "42% center",
-    highlights: [
+    details: [
       {
-        icon: "local_shipping",
-        title: "Pallet Transfer",
-        detail: "Stable point-to-point movement across warehouse zones.",
+        title: "Project Scope",
+        detail:
+          "Pallet transport between receiving, buffer storage, replenishment lanes, and shipping-side staging.",
       },
       {
-        icon: "forklift",
-        title: "Forklift Relief",
-        detail: "Reduced repetitive manual transport on internal routes.",
-      },
-    ],
-  },
-  {
-    alt: "Workshop Automation",
-    title: "Precision Intralogistics",
-    label: "Engineering",
-    summary:
-      "Controlled intralogistics routing between warehouse buffers, line-side points, and workstations where timing and handoff discipline matter every shift.",
-    image: "/assets/images/home-card-3-home.jpg",
-    href: "/solutions/material-handling",
-    imagePosition: "72% center",
-    highlights: [
-      {
-        icon: "compare_arrows",
-        title: "Flow Handoffs",
-        detail: "Transfer logic coordinated between storage and work areas.",
+        title: "Solution Used",
+        detail: "Forklift AGV routes, pickup and drop stations, and dispatch coordination.",
       },
       {
-        icon: "monitoring",
-        title: "Live Visibility",
-        detail: "Task status monitored for intervention and improvement.",
+        title: "Integration",
+        detail: "WMS integration, barcode-driven tasks, and dock-side workflow coordination.",
+      },
+      {
+        title: "Project Results",
+        detail: "Reduced repetitive forklift travel, steadier internal flow, and clearer task visibility across shifts.",
       },
     ],
   },
   {
-    alt: "Electronics Automation",
+    alt: "Technical assembly automation with coordinated robotics and line-side material support",
     title: "High-Tech Assembly Robotics",
-    label: "Technology",
+    label: "Electronics Manufacturing",
     summary:
-      "Production support architecture combining software coordination, robotics, and workstation supply for high-mix technical assembly environments.",
+      "Production support architecture that combines robotics, workstation supply, and control-layer scheduling for high-mix technical assembly environments.",
     image: "/assets/images/home-card-4-home.jpg",
-    href: "/solutions/picking",
+    href: "/case-studies/projects/automated-warehouse-upgrade",
     imagePosition: "center center",
-    highlights: [
+    details: [
       {
-        icon: "precision_manufacturing",
-        title: "Cell Support",
-        detail: "Automation layers designed around repeatable assembly steps.",
+        title: "Project Scope",
+        detail:
+          "Line-side delivery, workstation supply, and coordinated movement between technical assembly cells.",
       },
       {
-        icon: "hub",
-        title: "System Sync",
-        detail: "Equipment and control signals linked into one workflow.",
+        title: "Solution Used",
+        detail: "Composite mobile robots, workstation handoff points, and project-level dispatch control.",
+      },
+      {
+        title: "Integration",
+        detail: "Production line signals, workstation readiness checks, and safety logic coordination.",
+      },
+      {
+        title: "Project Results",
+        detail: "More stable cell support, cleaner material handoffs, and less dependence on manual point-to-point supply.",
       },
     ],
   },
@@ -906,9 +905,9 @@ function HomeBody({ page }) {
           {" "}
           <div>
             {" "}
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
+            <div className="mb-10 flex flex-col items-start justify-between gap-6 md:mb-12 md:flex-row md:items-end lg:gap-10">
               {" "}
-              <div className="max-w-xl">
+              <div className="max-w-2xl">
                 {" "}
                 <span className="text-primary font-bold tracking-[0.3em] text-[11px] mb-4 block">
                   {" "}
@@ -918,38 +917,41 @@ function HomeBody({ page }) {
                   {" "}
                   Delivered Precision{" "}
                 </h2>{" "}
-                <p className="text-on-surface-variant mt-8 font-medium">
+                <p className="mt-5 max-w-[38rem] text-[15px] font-medium leading-[1.8] text-on-surface-variant md:text-[16px]">
                   {" "}
                   Global deployments across multiple high-demand industries
                   requiring 24/7 operational reliability.{" "}
                 </p>{" "}
               </div>{" "}
-              <button className="text-secondary font-black tracking-widest text-[12px] flex items-center gap-4 group hover:text-primary transition-colors">
+              <a
+                className="group inline-flex min-h-[52px] items-center gap-4 self-start rounded-full border border-outline-variant/18 px-6 py-3 text-[14px] font-black tracking-[0.08em] text-secondary transition-colors hover:border-primary/30 hover:text-primary md:self-end"
+                href="/case-studies"
+              >
                 {" "}
                 View All Case Studies{" "}
                 <InlineIcon
                   className="h-5 w-5 text-primary transition-transform group-hover:translate-x-2"
                   name="arrow_forward"
                 />{" "}
-              </button>{" "}
+              </a>{" "}
             </div>{" "}
-            <div className="space-y-12 md:space-y-14">
+            <div className="space-y-10 md:space-y-12">
               {" "}
               {HOME_PORTFOLIO_SHOWCASE.map(
-                ({ alt, title, label, summary, image, href, imagePosition, highlights }, index) => {
+                ({ alt, title, label, summary, image, href, imagePosition, details }, index) => {
                   const isReversed = index % 2 === 1;
 
                   return (
                     <article
-                      className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:gap-14"
+                      className="grid items-stretch gap-7 md:gap-8 lg:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)] lg:gap-12"
                       key={title}
                     >
                       <div className={isReversed ? "lg:order-2" : ""}>
                         <a
-                          className="group block overflow-hidden rounded-[28px] border border-outline-variant/18 bg-surface shadow-[0_20px_48px_rgba(0,23,54,0.07)]"
+                          className="group block h-full overflow-hidden rounded-[28px] border border-outline-variant/18 bg-surface shadow-[0_20px_48px_rgba(0,23,54,0.07)]"
                           href={href}
                         >
-                          <div className="aspect-[1.55/1] overflow-hidden">
+                          <div className="min-h-[250px] overflow-hidden md:min-h-[320px] lg:min-h-[380px]">
                             <img
                               alt={alt}
                               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
@@ -960,40 +962,40 @@ function HomeBody({ page }) {
                           </div>
                         </a>
                       </div>
-                      <div className={`max-w-[34rem] ${isReversed ? "lg:order-1" : ""}`}>
-                        <span className="mb-4 block text-[12px] font-medium tracking-[0.02em] text-secondary/82">
-                          {label}
-                        </span>
-                        <h3 className="max-w-[16ch] text-[2rem] font-black leading-[1.08] tracking-tight text-secondary md:text-[2.35rem]">
-                          {title}
-                        </h3>
-                        <p className="mt-5 max-w-[34ch] text-[1rem] leading-[1.8] text-on-surface-variant">
-                          {summary}
-                        </p>
-                        <div className="mt-8 grid gap-5 sm:grid-cols-2">
-                          {highlights.map((item) => (
-                            <div className="flex items-start gap-4" key={item.title}>
-                              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[18px] border border-outline-variant/20 bg-surface text-secondary">
-                                <InlineIcon className="h-6 w-6" name={item.icon} />
-                              </span>
-                              <div>
-                                <p className="text-[0.98rem] font-black leading-[1.2] text-secondary">
-                                  {item.title}
-                                </p>
-                                <p className="mt-1 text-[0.84rem] leading-[1.65] text-on-surface-variant">
-                                  {item.detail}
-                                </p>
-                              </div>
+                      <div className={`flex h-full flex-col ${isReversed ? "lg:order-1" : ""}`}>
+                        <div>
+                          <span className="mb-3 block text-[12px] font-semibold tracking-[0.12em] text-secondary/82">
+                            {label}
+                          </span>
+                          <h3 className="max-w-[16ch] text-[2rem] font-black leading-[1.06] tracking-tight text-secondary md:text-[2.3rem]">
+                            {title}
+                          </h3>
+                          <p className="mt-5 max-w-[42rem] text-[15px] leading-[1.85] text-on-surface-variant md:text-[16px]">
+                            {summary}
+                          </p>
+                        </div>
+                        <div className="mt-7 grid gap-4 sm:grid-cols-2">
+                          {details.map((item) => (
+                            <div
+                              className="rounded-[22px] border border-outline-variant/18 bg-surface px-5 py-4 shadow-[0_10px_24px_rgba(0,23,54,0.04)]"
+                              key={item.title}
+                            >
+                              <p className="text-[14px] font-black leading-[1.25] tracking-[0.06em] text-secondary">
+                                {item.title}
+                              </p>
+                              <p className="mt-2 text-[13.5px] leading-[1.72] text-on-surface-variant md:text-[14px]">
+                                {item.detail}
+                              </p>
                             </div>
                           ))}
                         </div>
-                        <div className="mt-9">
+                        <div className="mt-auto pt-7">
                           <a
-                            className="inline-flex items-center rounded-full bg-secondary px-5 py-3 text-[12px] font-black tracking-[0.08em] text-white transition-all hover:bg-primary hover:translate-y-[-1px]"
+                            className="inline-flex min-h-[54px] items-center rounded-full bg-secondary px-7 py-3.5 text-[14px] font-black tracking-[0.06em] text-white transition-all hover:bg-primary hover:translate-y-[-1px]"
                             href={href}
                           >
-                            Learn More
-                            <InlineIcon className="ml-2 h-4 w-4" name="arrow_forward" />
+                            View Project Details
+                            <InlineIcon className="ml-2 h-4.5 w-4.5" name="arrow_forward" />
                           </a>
                         </div>
                       </div>
