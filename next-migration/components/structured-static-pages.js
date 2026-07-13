@@ -935,7 +935,7 @@ function HomeBody({ page }) {
                 />{" "}
               </a>{" "}
             </div>{" "}
-            <div className="space-y-10 md:space-y-12">
+            <div className="space-y-12 md:space-y-14">
               {" "}
               {HOME_PORTFOLIO_SHOWCASE.map(
                 ({ alt, title, label, summary, image, href, imagePosition, details }, index) => {
@@ -946,12 +946,12 @@ function HomeBody({ page }) {
                       className="grid items-stretch gap-7 md:gap-8 lg:grid-cols-[minmax(0,1.04fr)_minmax(0,0.96fr)] lg:gap-12"
                       key={title}
                     >
-                      <div className={isReversed ? "lg:order-2" : ""}>
+                      <div className={`h-full ${isReversed ? "lg:order-2" : ""}`}>
                         <a
                           className="group block h-full overflow-hidden rounded-[28px] border border-outline-variant/18 bg-surface shadow-[0_20px_48px_rgba(0,23,54,0.07)]"
                           href={href}
                         >
-                          <div className="min-h-[250px] overflow-hidden md:min-h-[320px] lg:min-h-[380px]">
+                          <div className="h-full min-h-[250px] overflow-hidden md:min-h-[320px] lg:min-h-[420px]">
                             <img
                               alt={alt}
                               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
@@ -991,11 +991,11 @@ function HomeBody({ page }) {
                         </div>
                         <div className="mt-auto pt-7">
                           <a
-                            className="inline-flex min-h-[54px] items-center rounded-full bg-secondary px-7 py-3.5 text-[14px] font-black tracking-[0.06em] text-white transition-all hover:bg-primary hover:translate-y-[-1px]"
+                            className="inline-flex min-h-[46px] min-w-[248px] items-center justify-between gap-8 rounded-full bg-secondary px-8 py-2.5 text-[13px] font-black tracking-[0.05em] text-white whitespace-nowrap transition-all hover:bg-primary hover:translate-y-[-1px]"
                             href={href}
                           >
                             View Project Details
-                            <InlineIcon className="ml-2 h-4.5 w-4.5" name="arrow_forward" />
+                            <InlineIcon className="h-5 w-5 shrink-0" name="arrow_forward" />
                           </a>
                         </div>
                       </div>

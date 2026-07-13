@@ -206,7 +206,7 @@ const PRODUCT_DETAIL_VISUALS = {
 const PRODUCT_SPEC_LIBRARY = {
   "agv-forklift": {
     quickSpecs: [
-      { value: "1,400kg", label: "Payload" },
+      { value: "2,500kg", label: "Payload" },
       { value: "1.8m/s", label: "Speed" },
       { value: "+/-5mm", label: "Accuracy" },
     ],
@@ -218,7 +218,7 @@ const PRODUCT_SPEC_LIBRARY = {
       "Automatic carrier recognition",
     ],
     technicalSpecs: [
-      { label: "Payload Capacity", value: "Up to 1,400kg" },
+      { label: "Payload Capacity", value: "Up to 2,500kg" },
       { label: "Travel Speed", value: "Up to 1.8m/s" },
       { label: "Stop Accuracy", value: "+/-5mm" },
       { label: "Navigation", value: "SLAM + LiDAR reflector-free guidance" },
@@ -1840,6 +1840,239 @@ function ProductDetailBody({ page }) {
   );
 }
 function AgvForkliftBody() {
+  const scenarios = [
+    {
+      icon: "shelves",
+      title: "High Rack Warehouse",
+      copy: "Autonomous pallet movement for storage aisles where rack interface, lift planning, and traffic safety must work together.",
+    },
+    {
+      icon: "inventory_2",
+      title: "Pallet Storage",
+      copy: "Move pallets between receiving, buffer, rack, and dispatch positions with a mission-based transport flow.",
+    },
+    {
+      icon: "swap_horiz",
+      title: "Inbound / Outbound",
+      copy: "Coordinate dock-side pickup, staging, putaway, and retrieval without relying on repeated operator-led routes.",
+    },
+    {
+      icon: "account_tree",
+      title: "ASRS Integration",
+      copy: "Connect mobile pallet movement with automated storage handoffs through defined control and status signals.",
+    },
+  ];
+  const specifications = [
+    ["Payload Capacity", "Up to 2,500 kg", "Confirm with pallet and fork configuration"],
+    ["Lift Height", "Up to 10 m", "Rack and load geometry require validation"],
+    ["Operation", "24/7 autonomous operation", "Charging strategy is project-specific"],
+    ["Navigation", "LiDAR + SLAM", "Reflector-free guidance architecture"],
+    ["Travel Speed", "Up to 1.8 m/s", "Final profile depends on load and site rules"],
+    ["Stop Accuracy", "+/- 5 mm", "Reference value for engineering review"],
+    ["Safety Suite", "3D vision + ultrasonic + bumper feedback", "Safety layout is site-specific"],
+    ["Control Layer", "WMS / WCS / fleet control", "Interface scope confirmed during evaluation"],
+  ];
+  const workflow = [
+    ["01", "WMS", "Order, inventory, or replenishment demand becomes a pallet task."],
+    ["02", "Task Assignment", "The control layer assigns the mission and destination."],
+    ["03", "Navigation", "The AGV plans a route through the defined warehouse map."],
+    ["04", "Pallet Detection", "Sensors validate pallet position, clearance, and pickup conditions."],
+    ["05", "Transport", "The vehicle moves the load with traffic and safety logic active."],
+    ["06", "Storage", "The pallet is placed at rack, buffer, ASRS, or outbound staging."],
+  ];
+  const integrationItems = [
+    ["ERP", "Business order and master-data context", "domain"],
+    ["WMS", "Inventory tasks, locations, and status events", "inventory_2"],
+    ["WCS", "Equipment orchestration and handoff logic", "account_tree"],
+    ["RCS", "Fleet dispatch, routing, and traffic control", "route"],
+    ["ASRS", "Automated storage and rack interface", "shelves"],
+    ["Conveyor", "Fixed-to-mobile transfer points", "conveyor_belt"],
+  ];
+  const comparisonRows = [
+    ["Task release", "Operator-led", "Mission-led from control layer"],
+    ["Aisle movement", "Manual route decisions", "Mapped route with autonomous navigation"],
+    ["Pallet traceability", "Depends on manual updates", "Status events can be coordinated with WMS/WCS"],
+    ["High-rack work", "Operator and vehicle availability required", "Lift and storage task coordinated by system logic"],
+    ["Process changes", "Training and route changes", "Map, task, and interface rules can be reviewed digitally"],
+  ];
+  const relatedSolutions = [
+    ["Material Handling", "Dock-to-rack pallet flow and internal transport architecture.", "/solutions/material-handling"],
+    ["ASRS", "High-density storage and automated pallet handoff planning.", "/solutions/asrs"],
+    ["Warehouse Software", "WMS, WCS, and fleet control coordination for execution visibility.", "/solutions/software"],
+  ];
+  const caseStudies = [
+    ["Material Handling Case Studies", "Review the existing material-flow project portfolio.", "/case-studies/material-handling"],
+    ["ASRS Case Studies", "Explore storage and retrieval automation project examples.", "/case-studies/asrs"],
+    ["Automated Warehouse Upgrade", "See a project page focused on throughput, space, and safety requirements.", "/case-studies/projects/automated-warehouse-upgrade"],
+  ];
+  const faqItems = [
+    ["What warehouse layouts are suitable for an autonomous forklift AGV?", "Suitability depends on rack geometry, aisle width, floor conditions, pallet standards, traffic rules, and the required pickup and drop-off points. A layout review is needed before a final configuration is selected."],
+    ["Can the AGV forklift connect with our WMS or WCS?", "The product page is designed around WMS, WCS, and fleet-control coordination. The actual interface, signals, ownership of task logic, and integration scope should be confirmed during technical evaluation."],
+    ["Does 24/7 autonomous operation mean the vehicle never needs charging?", "No. 24/7 operation describes the intended operating model. Battery capacity, opportunity charging, shift rhythm, and fleet size must be evaluated against the warehouse workload."],
+    ["Can it work with ASRS and conveyors?", "It can be evaluated for ASRS and conveyor handoffs when the mechanical interface, pallet format, signal exchange, and safety boundaries are defined as part of the project scope."],
+    ["What should we provide for a technical evaluation?", "Send a warehouse layout, pallet and load information, rack details, travel routes, operating hours, throughput expectations, and the systems that need to exchange tasks or status."],
+  ];
+  const faqSchema = faqItems.map(([question, answer]) => ({
+    "@type": "Question",
+    name: question,
+    acceptedAnswer: { "@type": "Answer", text: answer },
+  }));
+
+  return (
+    <main className="agv-forklift-product-page">
+      <style>{`
+        body:not([data-page-key="home"]) .page-content > main.agv-forklift-product-page > section:first-child {
+          height: auto !important;
+          min-height: 760px !important;
+        }
+        @media (max-width: 760px) {
+          body:not([data-page-key="home"]) .page-content > main.agv-forklift-product-page > section:first-child {
+            min-height: 0 !important;
+          }
+        }
+      `}</style>
+      <section className="relative !h-auto !min-h-[760px] overflow-hidden bg-primary text-white">
+        <div className="absolute inset-0">
+          <img
+            alt="Autonomous forklift AGV operating in a high-rack warehouse"
+            className="h-full w-full object-cover object-center"
+            src="/downloads/agv-forklift-hero-wide.png"
+          />
+        </div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,20,45,0.9)_0%,rgba(8,29,64,0.76)_35%,rgba(8,29,64,0.26)_74%,rgba(8,29,64,0.16)_100%)]" />
+        <div className="relative mx-auto grid min-h-[760px] max-w-[1440px] items-center gap-12 px-6 py-24 md:px-12 lg:grid-cols-[minmax(0,1.08fr)_minmax(360px,0.92fr)]">
+          <div className="max-w-3xl">
+            <div className="mb-6 flex items-center gap-3">
+              <span className="h-px w-9 bg-secondary" />
+              <span className="text-[10px] font-black uppercase tracking-[0.38em] text-white/80">Industrial Robotics / Forklift AGV</span>
+            </div>
+            <h1 className="max-w-4xl text-5xl font-black leading-[0.96] tracking-[-0.06em] md:text-7xl xl:text-[5.8rem]">Autonomous Forklift AGV for High-Rack Warehouse Automation</h1>
+            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-white/82 md:text-xl">Autonomous pallet handling for high-rack storage, inbound and outbound flow, and controlled warehouse integration. Use the page below to qualify fit before requesting a technical evaluation.</p>
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link className="hsa-ui-btn-primary" href="#technical-specifications">Review Specifications</Link>
+              <Link className="hsa-ui-btn-secondary border-white/30 bg-white/5 text-white hover:bg-white/12" href="/contact?intent=quote">Request Technical Evaluation</Link>
+            </div>
+            <div className="mt-14 grid max-w-3xl grid-cols-1 gap-px overflow-hidden border border-white/15 bg-white/15 sm:grid-cols-3">
+              {[["2,500 kg", "Payload"], ["10 m", "Lift Height"], ["24/7", "Autonomous Operation"]].map(([value, label]) => (
+                <div className="bg-primary/72 px-5 py-5 backdrop-blur-sm" key={label}>
+                  <div className="text-3xl font-black tracking-tight text-white md:text-4xl">{value}</div>
+                  <div className="mt-2 text-[10px] font-black uppercase tracking-[0.18em] text-secondary">{label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="hidden lg:block">
+            <div className="ml-auto max-w-md border border-white/18 bg-primary/45 p-7 backdrop-blur-md">
+              <div className="mb-8 flex items-center justify-between border-b border-white/15 pb-5">
+                <span className="text-[10px] font-black uppercase tracking-[0.24em] text-secondary">Qualification View</span>
+                <span className="material-symbols-outlined text-white/70" aria-hidden="true">radar</span>
+              </div>
+              <div className="space-y-5 text-sm text-white/78">
+                {["High-rack putaway and retrieval", "Pallet transport between defined zones", "WMS / WCS / fleet-control coordination"].map((item) => (
+                  <div className="flex items-start gap-3" key={item}><span className="mt-1 h-2 w-2 shrink-0 bg-secondary" /><span>{item}</span></div>
+                ))}
+              </div>
+              <div className="mt-9 border-t border-white/15 pt-5 text-xs leading-relaxed text-white/52">Final configuration depends on load profile, rack geometry, route conditions, and system interfaces.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-24 md:py-28">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-12">
+          <div className="mb-14 max-w-3xl">
+            <span className="hsa-ui-kicker">Application Fit</span>
+            <h2 className="hsa-ui-title">Where the forklift AGV creates a clear automation boundary.</h2>
+            <p className="hsa-ui-body mt-6">Start with the material flow, rack interface, and control points that the project needs to coordinate.</p>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            {scenarios.map((item, index) => (
+              <article className={`group border p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_42px_rgba(0,23,54,0.1)] ${index === 0 ? "border-primary bg-primary text-white" : "border-outline-variant/22 bg-surface"}`} key={item.title}>
+                <span className={`material-symbols-outlined mb-10 flex h-12 w-12 items-center justify-center ${index === 0 ? "bg-secondary text-white" : "bg-primary/8 text-primary"}`} aria-hidden="true">{item.icon}</span>
+                <h3 className={`text-xl font-black tracking-tight ${index === 0 ? "text-white" : "text-primary"}`}>{item.title}</h3>
+                <p className={`mt-4 text-sm leading-[1.8] ${index === 0 ? "text-on-primary-container" : "text-on-surface-variant"}`}>{item.copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-surface-container-low py-24 md:py-28" id="technical-specifications">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-12">
+          <div className="mb-14 flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl"><span className="hsa-ui-kicker">Technical Specifications</span><h2 className="hsa-ui-title">A qualification-ready view of the platform.</h2></div>
+            <p className="hsa-ui-body max-w-xl">These are product-level reference points. Final values and interfaces are confirmed against the warehouse layout, pallet profile, rack conditions, and safety review.</p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            {specifications.map(([label, value, note], index) => (
+              <article className="border border-outline-variant/18 bg-white p-6" key={label}>
+                <div className="mb-8 flex items-start justify-between gap-4"><span className="text-[10px] font-black uppercase tracking-[0.2em] text-outline">0{index + 1}</span><span className="material-symbols-outlined text-secondary" aria-hidden="true">tune</span></div>
+                <div className="text-[11px] font-black uppercase tracking-[0.16em] text-primary">{label}</div>
+                <div className="mt-3 text-xl font-black leading-tight tracking-tight text-primary">{value}</div>
+                <p className="mt-4 text-xs leading-relaxed text-on-surface-variant">{note}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-primary py-24 text-white md:py-28" id="how-it-works">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-12">
+          <div className="mb-14 max-w-3xl"><span className="hsa-ui-kicker hsa-ui-kicker--light">How It Works</span><h2 className="mt-4 text-4xl font-black tracking-tight md:text-6xl">From warehouse demand to stored pallet.</h2><p className="mt-6 max-w-2xl text-lg leading-relaxed text-on-primary-container">A clear task chain helps engineering teams define ownership between the WMS, execution layer, vehicle, and storage equipment.</p></div>
+          <div className="grid gap-px overflow-hidden border border-white/12 bg-white/12 md:grid-cols-2 xl:grid-cols-6">
+            {workflow.map(([step, title, copy], index) => (
+              <article className="relative bg-primary px-5 py-7" key={step}>
+                {index < workflow.length - 1 ? <span className="absolute right-[-11px] top-11 z-10 hidden h-5 w-5 items-center justify-center bg-secondary text-white xl:flex"><span className="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span></span> : null}
+                <div className="text-[10px] font-black tracking-[0.22em] text-secondary">{step}</div><h3 className="mt-8 text-lg font-black tracking-tight">{title}</h3><p className="mt-4 text-sm leading-[1.75] text-on-primary-container">{copy}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-24 md:py-28" id="warehouse-integration">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-12">
+          <div className="grid gap-14 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-end">
+            <div><span className="hsa-ui-kicker">Warehouse Integration</span><h2 className="hsa-ui-title">Connect the vehicle to the control points already shaping your warehouse.</h2><p className="hsa-ui-body mt-6">The integration boundary is defined around task release, execution status, equipment handoff, and safety ownership. It should be scoped with your existing architecture.</p></div>
+            <div className="overflow-hidden border border-outline-variant/20 bg-surface-container-low"><img alt="Autonomous pallet movement at a conveyor handoff" className="h-72 w-full object-cover md:h-96" loading="lazy" src="/assets/images/autonomous-forklifts-detail-1.png" /></div>
+          </div>
+          <div className="mt-14 grid gap-px border border-outline-variant/20 bg-outline-variant/20 sm:grid-cols-2 xl:grid-cols-3">
+            {integrationItems.map(([label, copy, icon]) => (
+              <article className="bg-white p-7 transition-colors hover:bg-surface" key={label}><span className="material-symbols-outlined text-secondary" aria-hidden="true">{icon}</span><h3 className="mt-8 text-2xl font-black tracking-tight text-primary">{label}</h3><p className="mt-3 text-sm leading-[1.8] text-on-surface-variant">{copy}</p></article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-surface-container-low py-24 md:py-28">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-12">
+          <div className="mb-14 max-w-3xl"><span className="hsa-ui-kicker">Operating Model</span><h2 className="hsa-ui-title">Manual Forklift vs AGV Forklift</h2><p className="hsa-ui-body mt-6">Use the comparison to frame the process change. It is not a promise of a universal replacement; the right boundary depends on the site and workload.</p></div>
+          <div className="overflow-x-auto border border-outline-variant/20 bg-white"><div className="min-w-[720px]"><div className="grid grid-cols-[1.1fr_1fr_1fr] bg-primary text-white"><div className="px-6 py-5 text-[10px] font-black uppercase tracking-[0.2em]">Decision Area</div><div className="border-l border-white/15 px-6 py-5 text-[10px] font-black uppercase tracking-[0.2em]">Manual Forklift</div><div className="border-l border-white/15 px-6 py-5 text-[10px] font-black uppercase tracking-[0.2em] text-secondary">AGV Forklift</div></div>{comparisonRows.map(([area, manual, agv]) => (<div className="grid grid-cols-[1.1fr_1fr_1fr] border-t border-outline-variant/18" key={area}><div className="px-6 py-6 text-sm font-black text-primary">{area}</div><div className="border-l border-outline-variant/18 px-6 py-6 text-sm leading-relaxed text-on-surface-variant">{manual}</div><div className="border-l border-outline-variant/18 bg-secondary/5 px-6 py-6 text-sm leading-relaxed text-primary">{agv}</div></div>))}</div></div>
+        </div>
+      </section>
+
+      <section className="bg-white py-24 md:py-28">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-12">
+          <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between"><div className="max-w-3xl"><span className="hsa-ui-kicker">Explore the System Context</span><h2 className="hsa-ui-title">Related Solutions and Case Studies</h2></div><Link className="hero-button shrink-0" href="/case-studies">View All Case Studies</Link></div>
+          <div className="grid gap-10 lg:grid-cols-2">
+            <div><h3 className="mb-5 text-[11px] font-black uppercase tracking-[0.22em] text-primary">Related Solutions</h3><div className="space-y-3">{relatedSolutions.map(([title, copy, href]) => (<Link className="group flex items-center justify-between gap-6 border border-outline-variant/20 bg-surface px-6 py-5 transition-all hover:border-primary hover:bg-white" href={href} key={href}><span><span className="block text-lg font-black text-primary">{title}</span><span className="mt-1 block text-sm leading-relaxed text-on-surface-variant">{copy}</span></span><span className="material-symbols-outlined shrink-0 text-secondary transition-transform group-hover:translate-x-1" aria-hidden="true">arrow_forward</span></Link>))}</div></div>
+            <div><h3 className="mb-5 text-[11px] font-black uppercase tracking-[0.22em] text-primary">Case Studies</h3><div className="space-y-3">{caseStudies.map(([title, copy, href]) => (<Link className="group flex items-center justify-between gap-6 border border-outline-variant/20 bg-surface px-6 py-5 transition-all hover:border-primary hover:bg-white" href={href} key={href}><span><span className="block text-lg font-black text-primary">{title}</span><span className="mt-1 block text-sm leading-relaxed text-on-surface-variant">{copy}</span></span><span className="material-symbols-outlined shrink-0 text-secondary transition-transform group-hover:translate-x-1" aria-hidden="true">arrow_forward</span></Link>))}</div><p className="mt-5 text-xs leading-relaxed text-outline">The linked pages describe application contexts and project themes. They do not represent a claim that this exact product configuration was deployed in every example.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-primary py-24 text-white md:py-28" id="faq">
+        <div className="mx-auto max-w-[1100px] px-6 md:px-12"><div className="mb-12 max-w-3xl"><span className="hsa-ui-kicker hsa-ui-kicker--light">FAQ</span><h2 className="mt-4 text-4xl font-black tracking-tight md:text-6xl">Questions to settle before the site review.</h2></div><div className="divide-y divide-white/15 border-y border-white/15">{faqItems.map(([question, answer]) => (<details className="group py-6" key={question}><summary className="flex cursor-pointer list-none items-center justify-between gap-8 text-lg font-black tracking-tight marker:hidden md:text-xl"><span>{question}</span><span className="material-symbols-outlined shrink-0 text-secondary transition-transform group-open:rotate-45" aria-hidden="true">add</span></summary><p className="max-w-3xl pt-5 text-sm leading-[1.9] text-on-primary-container">{answer}</p></details>))}</div><script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify({"@context":"https://schema.org","@type":"FAQPage",mainEntity:faqSchema})}} /></div>
+      </section>
+
+      <section className="border-t border-outline-variant/20 bg-white py-20 text-primary md:py-24">
+        <div className="mx-auto flex max-w-[1440px] flex-col gap-10 px-6 md:px-12 lg:flex-row lg:items-end lg:justify-between"><div className="max-w-3xl"><span className="text-[10px] font-black uppercase tracking-[0.28em] text-primary/65">Next Step</span><h2 className="mt-4 text-4xl font-black leading-tight tracking-tight md:text-6xl">Turn your warehouse layout into an engineering conversation.</h2><p className="mt-5 max-w-2xl text-lg leading-relaxed text-primary/75">Share the operating context first. We can then review layout, pallet, rack, control, and safety conditions before a project-specific specification is prepared.</p></div><div className="flex w-full shrink-0 flex-col gap-3 sm:flex-row lg:w-auto lg:flex-col"><Link className="inline-flex min-h-12 items-center justify-center bg-primary px-6 py-3 text-center text-xs font-black uppercase tracking-[0.12em] text-white transition hover:bg-primary/90" href="/contact?intent=site-visit">Send Warehouse Layout</Link><Link className="inline-flex min-h-12 items-center justify-center border border-primary/30 px-6 py-3 text-center text-xs font-black uppercase tracking-[0.12em] text-primary transition hover:bg-primary/10" href="/contact?intent=quote">Request Technical Evaluation</Link><a className="inline-flex min-h-12 items-center justify-center border border-primary/30 px-6 py-3 text-center text-xs font-black uppercase tracking-[0.12em] text-primary transition hover:bg-primary/10" download href="/downloads/product-catalog.pdf">Download Specification</a></div></div>
+      </section>
+    </main>
+  );
+}
+
+function AgvForkliftBodyLegacy() {
   return (
     <main>
       <section className="relative min-h-[700px] xl:min-h-[760px] flex items-center overflow-hidden kinetic-gradient">
@@ -8007,6 +8240,7 @@ export function StructuredCatalogOverviewPage({ page }) {
 }
 export function StructuredCatalogDetailPage({ page }) {
   const isProductDetail = page.kind === "product-detail";
+  const productSlug = isProductDetail ? getSlug(page) : "";
 
   return (
     <PublicPageChrome page={page}>
@@ -8022,7 +8256,7 @@ export function StructuredCatalogDetailPage({ page }) {
         ) : (
           <CaseProjectDetailBody page={page} />
         )}{" "}
-        {isProductDetail ? <ProductDecisionSupportSection page={page} /> : null}{" "}
+        {isProductDetail && productSlug !== "agv-forklift" ? <ProductDecisionSupportSection page={page} /> : null}{" "}
       </div>{" "}
     </PublicPageChrome>
   );

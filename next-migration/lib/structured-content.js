@@ -583,7 +583,24 @@ export async function getStructuredPage(slug = []) {
 
     if (entry) {
       const sanityData = await getCatalogDetailPageData(section, entry.slug);
-      const data = mergeDetailEntry(entry, sanityData);
+      const mergedData = mergeDetailEntry(entry, sanityData);
+      const data = entry.slug === "agv-forklift"
+        ? {
+            ...mergedData,
+            title: agvForkliftMeta.title,
+            summary: agvForkliftMeta.summary,
+            heroTitle: agvForkliftMeta.heroTitle,
+            heroSummary: agvForkliftMeta.heroSummary,
+            metrics: agvForkliftMeta.metrics,
+            seo: {
+              ...(mergedData.seo || {}),
+              title: agvForkliftMeta.title,
+              description: agvForkliftMeta.heroSummary,
+              ogTitle: agvForkliftMeta.title,
+              ogDescription: agvForkliftMeta.heroSummary
+            }
+          }
+        : mergedData;
 
       return buildStaticPage({
         kind: "product-detail",
