@@ -400,9 +400,9 @@ const HOME_PORTFOLIO_SHOWCASE = [
     label: "Warehouse Operations",
     summary:
       "Autonomous pallet transport linking receiving, buffer storage, and replenishment lanes with less manual forklift dependency inside the warehouse.",
-    image: "/assets/images/home-card-2-home.jpg",
+    image: "/assets/images/ground-handling-pallet-transport.png",
     href: "/case-studies/material-handling",
-    imagePosition: "42% center",
+    imagePosition: "62% center",
     details: [
       {
         title: "Project Scope",
@@ -429,9 +429,9 @@ const HOME_PORTFOLIO_SHOWCASE = [
     label: "Electronics Manufacturing",
     summary:
       "Production support architecture that combines robotics, workstation supply, and control-layer scheduling for high-mix technical assembly environments.",
-    image: "/assets/images/home-card-4-home.jpg",
+    image: "/assets/images/line-side-logistics-automation-1.png",
     href: "/case-studies/projects/automated-warehouse-upgrade",
-    imagePosition: "center center",
+    imagePosition: "58% center",
     details: [
       {
         title: "Project Scope",
