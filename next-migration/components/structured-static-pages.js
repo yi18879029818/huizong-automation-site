@@ -364,6 +364,97 @@ const HOME_PROJECT_STAGES = [
   "Install, commission, train, support",
 ];
 
+const HOME_PORTFOLIO_SHOWCASE = [
+  {
+    alt: "ASRS System",
+    title: "ASRS Global Logistics Hub",
+    label: "Logistics Sector",
+    summary:
+      "Dense pallet storage, controlled order release, and synchronized outbound handling for facilities that need stable high-throughput warehouse execution.",
+    image: "/assets/images/home-card-1-home.jpg",
+    href: "/case-studies/asrs",
+    imagePosition: "center center",
+    highlights: [
+      {
+        icon: "inventory_2",
+        title: "Dense Storage",
+        detail: "High-bay pallet capacity with accurate location control.",
+      },
+      {
+        icon: "route",
+        title: "Sequenced Output",
+        detail: "Material release aligned to downstream shipping flow.",
+      },
+    ],
+  },
+  {
+    alt: "AGV Project",
+    title: "Smart Warehousing AGV",
+    label: "Manufacturing",
+    summary:
+      "Autonomous pallet transport linking receiving, buffer storage, and replenishment lanes with less manual forklift dependency inside the warehouse.",
+    image: "/assets/images/home-card-2-home.jpg",
+    href: "/case-studies/material-handling",
+    imagePosition: "42% center",
+    highlights: [
+      {
+        icon: "local_shipping",
+        title: "Pallet Transfer",
+        detail: "Stable point-to-point movement across warehouse zones.",
+      },
+      {
+        icon: "forklift",
+        title: "Forklift Relief",
+        detail: "Reduced repetitive manual transport on internal routes.",
+      },
+    ],
+  },
+  {
+    alt: "Workshop Automation",
+    title: "Precision Intralogistics",
+    label: "Engineering",
+    summary:
+      "Controlled intralogistics routing between warehouse buffers, line-side points, and workstations where timing and handoff discipline matter every shift.",
+    image: "/assets/images/home-card-3-home.jpg",
+    href: "/solutions/material-handling",
+    imagePosition: "72% center",
+    highlights: [
+      {
+        icon: "compare_arrows",
+        title: "Flow Handoffs",
+        detail: "Transfer logic coordinated between storage and work areas.",
+      },
+      {
+        icon: "monitoring",
+        title: "Live Visibility",
+        detail: "Task status monitored for intervention and improvement.",
+      },
+    ],
+  },
+  {
+    alt: "Electronics Automation",
+    title: "High-Tech Assembly Robotics",
+    label: "Technology",
+    summary:
+      "Production support architecture combining software coordination, robotics, and workstation supply for high-mix technical assembly environments.",
+    image: "/assets/images/home-card-4-home.jpg",
+    href: "/solutions/picking",
+    imagePosition: "center center",
+    highlights: [
+      {
+        icon: "precision_manufacturing",
+        title: "Cell Support",
+        detail: "Automation layers designed around repeatable assembly steps.",
+      },
+      {
+        icon: "hub",
+        title: "System Sync",
+        detail: "Equipment and control signals linked into one workflow.",
+      },
+    ],
+  },
+];
+
 function getHomeViewModel(page) {
   const data = page?.data || {};
 
@@ -842,96 +933,73 @@ function HomeBody({ page }) {
                 />{" "}
               </button>{" "}
             </div>{" "}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <div className="space-y-12 md:space-y-14">
               {" "}
-              {[
-                {
-                  alt: "ASRS System",
-                  title: "ASRS Global Logistics Hub",
-                  label: "Logistics Sector",
-                  image: "/assets/images/home-card-1-home.jpg",
-                  href: null,
-                  imagePosition: "center center",
+              {HOME_PORTFOLIO_SHOWCASE.map(
+                ({ alt, title, label, summary, image, href, imagePosition, highlights }, index) => {
+                  const isReversed = index % 2 === 1;
+
+                  return (
+                    <article
+                      className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:gap-14"
+                      key={title}
+                    >
+                      <div className={isReversed ? "lg:order-2" : ""}>
+                        <a
+                          className="group block overflow-hidden rounded-[28px] border border-outline-variant/18 bg-surface shadow-[0_20px_48px_rgba(0,23,54,0.07)]"
+                          href={href}
+                        >
+                          <div className="aspect-[1.55/1] overflow-hidden">
+                            <img
+                              alt={alt}
+                              className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                              loading="lazy"
+                              style={{ objectPosition: imagePosition }}
+                              src={image}
+                            />
+                          </div>
+                        </a>
+                      </div>
+                      <div className={`max-w-[34rem] ${isReversed ? "lg:order-1" : ""}`}>
+                        <span className="mb-4 block text-[12px] font-medium tracking-[0.02em] text-secondary/82">
+                          {label}
+                        </span>
+                        <h3 className="max-w-[16ch] text-[2rem] font-black leading-[1.08] tracking-tight text-secondary md:text-[2.35rem]">
+                          {title}
+                        </h3>
+                        <p className="mt-5 max-w-[34ch] text-[1rem] leading-[1.8] text-on-surface-variant">
+                          {summary}
+                        </p>
+                        <div className="mt-8 grid gap-5 sm:grid-cols-2">
+                          {highlights.map((item) => (
+                            <div className="flex items-start gap-4" key={item.title}>
+                              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[18px] border border-outline-variant/20 bg-surface text-secondary">
+                                <InlineIcon className="h-6 w-6" name={item.icon} />
+                              </span>
+                              <div>
+                                <p className="text-[0.98rem] font-black leading-[1.2] text-secondary">
+                                  {item.title}
+                                </p>
+                                <p className="mt-1 text-[0.84rem] leading-[1.65] text-on-surface-variant">
+                                  {item.detail}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="mt-9">
+                          <a
+                            className="inline-flex items-center rounded-full bg-secondary px-5 py-3 text-[12px] font-black tracking-[0.08em] text-white transition-all hover:bg-primary hover:translate-y-[-1px]"
+                            href={href}
+                          >
+                            Learn More
+                            <InlineIcon className="ml-2 h-4 w-4" name="arrow_forward" />
+                          </a>
+                        </div>
+                      </div>
+                    </article>
+                  );
                 },
-                {
-                  alt: "AGV Project",
-                  title: "Smart Warehousing AGV",
-                  label: "Manufacturing",
-                  image: "/assets/images/home-card-2-home.jpg",
-                  href: "/case-studies/material-handling",
-                  imagePosition: "42% center",
-                },
-                {
-                  alt: "Workshop Automation",
-                  title: "Precision Intralogistics",
-                  label: "Engineering",
-                  image: "/assets/images/home-card-3-home.jpg",
-                  href: "/solutions/material-handling",
-                  imagePosition: "72% center",
-                },
-                {
-                  alt: "Electronics Automation",
-                  title: "High-Tech Assembly Robotics",
-                  label: "Technology",
-                  image: "/assets/images/home-card-4-home.jpg",
-                  href: "/solutions/picking",
-                  imagePosition: "center center",
-                },
-              ].map(({ alt, title, label, image, href, imagePosition }) =>
-                href ? (
-                  <a
-                    className="group block cursor-pointer bg-white"
-                    href={href}
-                    key={title}
-                  >
-                    {" "}
-                    <div className="aspect-square bg-surface overflow-hidden">
-                      {" "}
-                      <img
-                        alt={alt}
-                        className="w-full h-full object-cover group-hover:scale-[1.06] transition-all duration-700"
-                        loading="lazy"
-                        style={{ objectPosition: imagePosition }}
-                        src={image}
-                      />{" "}
-                    </div>{" "}
-                    <div className="px-5 pt-6 pb-5 md:px-6">
-                      <h4 className="mb-3 font-black text-lg leading-tight group-hover:text-primary transition-colors">
-                        {" "}
-                        {title}{" "}
-                      </h4>{" "}
-                      <p className="block text-[11px] text-primary tracking-[0.16em] font-black">
-                        {label}
-                      </p>
-                    </div>
-                  </a>
-                ) : (
-                  <div
-                    className="group cursor-pointer bg-white"
-                    key={title}
-                  >
-                    {" "}
-                    <div className="aspect-square bg-surface overflow-hidden">
-                      {" "}
-                      <img
-                        alt={alt}
-                        className="w-full h-full object-cover group-hover:scale-[1.06] transition-all duration-700"
-                        loading="lazy"
-                        style={{ objectPosition: imagePosition }}
-                        src={image}
-                      />{" "}
-                    </div>{" "}
-                    <div className="px-5 pt-6 pb-5 md:px-6">
-                      <h4 className="mb-3 font-black text-lg leading-tight group-hover:text-primary transition-colors">
-                        {" "}
-                        {title}{" "}
-                      </h4>{" "}
-                      <p className="block text-[11px] text-primary tracking-[0.16em] font-black">
-                        {label}
-                      </p>
-                    </div>
-                  </div>
-                ),
               )}{" "}
             </div>{" "}
           </div>{" "}
