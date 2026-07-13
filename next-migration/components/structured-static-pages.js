@@ -967,7 +967,7 @@ function HomeBody({ page }) {
                           <span className="mb-3 block text-[12px] font-semibold tracking-[0.12em] text-secondary/82">
                             {label}
                           </span>
-                          <h3 className="max-w-[16ch] text-[2rem] font-black leading-[1.06] tracking-tight text-secondary md:text-[2.3rem]">
+                          <h3 className="max-w-none text-[2rem] font-black leading-[1.06] tracking-tight text-secondary md:text-[2.15rem] lg:whitespace-nowrap xl:text-[2.28rem]">
                             {title}
                           </h3>
                           <p className="mt-5 max-w-[42rem] text-[15px] leading-[1.85] text-on-surface-variant md:text-[16px]">
