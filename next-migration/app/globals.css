@@ -149,6 +149,11 @@ body.antialiased {
     text-wrap: balance;
   }
 
+  .forklift-hero-title,
+  .forklift-section-title {
+    text-wrap: pretty;
+  }
+
   .hsa-ui-title--light {
     color: #ffffff;
   }
