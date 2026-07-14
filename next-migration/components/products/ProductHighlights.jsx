@@ -25,7 +25,7 @@ export default function ProductHighlights() {
       <div className="mx-auto max-w-[1440px] px-6 md:px-12">
         <div className="mb-14 max-w-3xl">
           <span className="hsa-ui-kicker">Automation Value</span>
-          <h2 className="hsa-ui-title forklift-section-title">Why Choose Forklift Stacker AGV?</h2>
+          <h2 className="hsa-ui-title forklift-section-title forklift-highlights-title">Why Choose Forklift Stacker AGV?</h2>
           <p className="hsa-ui-body mt-6">
             Built for the repetitive, high-load movements that make warehouse automation worth engineering carefully.
           </p>

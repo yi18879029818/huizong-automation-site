@@ -2170,6 +2170,17 @@ a {
   max-width: 100%;
 }
 
+.forklift-highlights-title {
+  max-width: none;
+  font-size: clamp(2rem, 3vw, 3.25rem);
+}
+
+@media (min-width: 1024px) {
+  .forklift-highlights-title {
+    white-space: nowrap;
+  }
+}
+
 .forklift-workflow-step {
   min-height: 216px;
   padding: 18px 16px 20px;
