@@ -1,14 +1,15 @@
 import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
-function executable(command) {
-  return process.platform === "win32" && command === "npm" ? "npm.cmd" : command;
-}
+const openNextCli = fileURLToPath(
+  new URL("../node_modules/@opennextjs/cloudflare/dist/cli/index.js", import.meta.url)
+);
 
 function run(command, args, { inherit = false } = {}) {
   const outputOptions = inherit
     ? { stdio: "inherit" }
     : { encoding: "utf8", stdio: "pipe" };
-  const result = spawnSync(executable(command), args, {
+  const result = spawnSync(command, args, {
     ...outputOptions
   });
 
@@ -87,7 +88,8 @@ try {
   }
 
   console.log(`Repository confirmed at ${localHead}. Deploying production...`);
-  run("npm", ["run", "deploy"], { inherit: true });
+  run(process.execPath, [openNextCli, "build"], { inherit: true });
+  run(process.execPath, [openNextCli, "deploy"], { inherit: true });
   console.log("\nProduction release completed.");
 } catch (error) {
   console.error(`\nRelease failed: ${error.message}`);
