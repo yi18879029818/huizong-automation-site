@@ -2348,7 +2348,18 @@ function GroundHandlingForkliftAgvBody({ page }) {
           </div>
         </div>
       </section>
-      <ProductTechnicalDataSection slug="ground-handling-forklift-agv" />{" "}
+      <section className="bg-surface py-14 md:py-20" id="technical-specifications">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-12">
+          <div className="overflow-hidden rounded-[1.5rem] border border-outline-variant/20 bg-white p-3 shadow-[0_20px_50px_rgba(0,23,54,0.08)] md:p-5">
+            <img
+              alt="Ground Handling Forklift AGV device specifications and operating reference"
+              className="block h-auto w-full"
+              loading="lazy"
+              src="/assets/images/ground-handling-forklift-agv-specifications.png"
+            />
+          </div>
+        </div>
+      </section>
       <section className="bg-primary py-28 text-white">
         {" "}
         <div className="mx-auto max-w-[1440px] px-6 md:px-12">
