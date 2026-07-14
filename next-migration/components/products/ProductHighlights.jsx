@@ -40,7 +40,7 @@ export default function ProductHighlights() {
                 <span className={`material-symbols-outlined flex h-12 w-12 items-center justify-center ${index === 1 ? "bg-secondary text-white" : "bg-primary/8 text-primary"}`} aria-hidden="true">
                   {item.icon}
                 </span>
-                <span className={`text-5xl font-black tracking-[-0.08em] ${index === 1 ? "text-white" : "text-primary"}`}>
+                <span className={`text-4xl font-black tracking-[-0.08em] md:text-[2.5rem] ${index === 1 ? "text-white" : "text-primary"}`}>
                   {item.metric}
                 </span>
               </div>
