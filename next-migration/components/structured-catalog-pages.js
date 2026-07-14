@@ -656,7 +656,7 @@ function ProductDecisionSupportSection({ page }) {
       <div className="mx-auto max-w-screen-2xl px-8">
         <div className={isGroundHandlingForkliftAgv ? "mb-14 max-w-none" : "mb-14 max-w-4xl"}>
           <span className="hsa-ui-kicker">Project Qualification</span>
-          <h2 className={isGroundHandlingForkliftAgv ? "hsa-ui-title ground-handling-section-title" : "hsa-ui-title max-w-4xl"}>
+          <h2 className={isGroundHandlingForkliftAgv ? "font-headline text-4xl font-extrabold tracking-tight text-primary md:text-5xl" : "hsa-ui-title max-w-4xl"}>
             Review fit, technical scope, and project inputs before quotation.
           </h2>
           <p className="hsa-ui-body max-w-3xl">
