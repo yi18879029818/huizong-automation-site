@@ -2172,6 +2172,12 @@ a {
   }
 }
 
+.forklift-hero {
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: visible;
+}
+
 .forklift-section-title {
   max-width: 100%;
 }
