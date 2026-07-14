@@ -2337,18 +2337,6 @@ function GroundHandlingForkliftAgvBody({ page }) {
         title={heroTitle}
       />{" "}
       <ProductIntroductionSection slug="ground-handling-forklift-agv" />{" "}
-      <section className="bg-white py-14 md:py-20" id="product-detail">
-        <div className="mx-auto max-w-[1440px] px-6 md:px-12">
-          <div className="overflow-hidden border border-outline-variant/20 bg-surface shadow-[0_20px_50px_rgba(0,23,54,0.08)]">
-            <img
-              alt="Smart AGV Forklift product overview showing stable transport, compact design, and intelligent operation"
-              className="block h-auto w-full"
-              loading="lazy"
-              src="/assets/images/ground-handling-smart-agv-forklift-detail.png"
-            />
-          </div>
-        </div>
-      </section>
       <section className="bg-surface py-14 md:py-20" id="technical-specifications">
         <div className="mx-auto max-w-[1440px] px-6 md:px-12">
           <div className="overflow-hidden rounded-[1.5rem] border border-outline-variant/20 bg-white p-3 shadow-[0_20px_50px_rgba(0,23,54,0.08)] md:p-5">
