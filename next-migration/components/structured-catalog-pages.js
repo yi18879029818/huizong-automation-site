@@ -2651,22 +2651,30 @@ function LiftingAgvBody() {
               src="/assets/images/lifting-agv-top-lift-detail.png"
             />
           </div>
-          <div className="mt-10 overflow-hidden border border-outline-variant/20 bg-surface shadow-[0_20px_50px_rgba(0,23,54,0.08)]">
-            <img
-              alt="Top-Lift AGV carrying a palletized load in a warehouse"
-              className="block h-auto w-full"
-              loading="lazy"
-              src="/assets/images/lifting-agv-detail-cover.png"
-            />
-          </div>
-          <div className="mt-10 overflow-hidden border border-outline-variant/20 bg-surface shadow-[0_20px_50px_rgba(0,23,54,0.08)]">
-            <img
-              alt="Automated guided vehicle workflow, components, and applications"
-              className="block h-auto w-full"
-              loading="lazy"
-              src="/assets/images/lifting-agv-detail-explainer.png"
-            />
-          </div>
+          <details className="group mt-8">
+            <summary className="flex cursor-pointer list-none items-center justify-between border border-outline-variant/30 bg-surface px-6 py-5 text-sm font-black tracking-[0.12em] text-primary transition-colors hover:bg-surface-container-low [&::-webkit-details-marker]:hidden">
+              <span>View More Product Details</span>
+              <span className="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+            </summary>
+            <div className="mt-10 space-y-10">
+              <div className="overflow-hidden border border-outline-variant/20 bg-surface shadow-[0_20px_50px_rgba(0,23,54,0.08)]">
+                <img
+                  alt="Top-Lift AGV carrying a palletized load in a warehouse"
+                  className="block h-auto w-full"
+                  loading="lazy"
+                  src="/assets/images/lifting-agv-detail-cover.png"
+                />
+              </div>
+              <div className="overflow-hidden border border-outline-variant/20 bg-surface shadow-[0_20px_50px_rgba(0,23,54,0.08)]">
+                <img
+                  alt="Automated guided vehicle workflow, components, and applications"
+                  className="block h-auto w-full"
+                  loading="lazy"
+                  src="/assets/images/lifting-agv-detail-explainer.png"
+                />
+              </div>
+            </div>
+          </details>
         </div>
       </section>
 
