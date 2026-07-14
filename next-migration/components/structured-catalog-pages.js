@@ -3035,7 +3035,7 @@ function AgvRollerBody() {
       </section>
 
       <section className="bg-surface py-14 md:py-20">
-        <div className="mx-auto max-w-7xl px-8 md:px-12">
+        <div className="mx-auto max-w-7xl px-8 md:px-0">
           <details className="group">
             <summary className="block cursor-pointer list-none [&::-webkit-details-marker]:hidden">
               <div className="relative overflow-hidden border border-outline-variant/20 bg-surface shadow-[0_20px_50px_rgba(0,23,54,0.08)]">
