@@ -5,9 +5,11 @@ function executable(command) {
 }
 
 function run(command, args, { inherit = false } = {}) {
+  const outputOptions = inherit
+    ? { stdio: "inherit" }
+    : { encoding: "utf8", stdio: "pipe" };
   const result = spawnSync(executable(command), args, {
-    encoding: "utf8",
-    stdio: inherit ? "inherit" : "pipe"
+    ...outputOptions
   });
 
   if (result.error) {
