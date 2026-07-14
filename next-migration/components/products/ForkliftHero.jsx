@@ -15,8 +15,8 @@ export default function ForkliftHero({ page }) {
     "Automate pallet storage, retrieval and internal transportation with a high-performance autonomous forklift system designed for 24/7 warehouse operations.";
 
   return (
-    <section className="forklift-hero overflow-hidden bg-primary text-white lg:min-h-[clamp(600px,calc(100svh-8px),760px)]">
-      <div className="mx-auto grid max-w-[1440px] gap-8 px-6 py-10 md:px-12 md:py-14 lg:min-h-[clamp(520px,calc(100svh-72px),680px)] lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-stretch lg:gap-10 lg:py-8 xl:gap-14">
+    <section className="forklift-hero overflow-hidden bg-primary text-white lg:min-h-[clamp(640px,calc(100svh-8px),760px)]">
+      <div className="mx-auto grid max-w-[1440px] gap-8 px-6 py-10 md:px-12 md:py-14 lg:min-h-[clamp(560px,calc(100svh-72px),680px)] lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-stretch lg:gap-10 lg:py-8 xl:gap-14">
         <div className="relative z-10">
           <div className="mb-5 flex items-center gap-3">
             <span className="h-px w-9 bg-secondary" />
