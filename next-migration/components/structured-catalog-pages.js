@@ -647,15 +647,16 @@ function getProductDecisionSupport(slug, page) {
 
 function ProductDecisionSupportSection({ page }) {
   const slug = getSlug(page);
+  const isGroundHandlingForkliftAgv = slug === "ground-handling-forklift-agv";
   const support = getProductDecisionSupport(slug, page);
   const technicalSpecs = (getProductSpecs(slug).technicalSpecs || []).slice(0, 4);
 
   return (
     <section className="bg-surface py-24">
       <div className="mx-auto max-w-screen-2xl px-8">
-        <div className="mb-14 max-w-4xl">
+        <div className={isGroundHandlingForkliftAgv ? "mb-14 max-w-none" : "mb-14 max-w-4xl"}>
           <span className="hsa-ui-kicker">Project Qualification</span>
-          <h2 className="hsa-ui-title max-w-4xl">
+          <h2 className={isGroundHandlingForkliftAgv ? "hsa-ui-title ground-handling-section-title" : "hsa-ui-title max-w-4xl"}>
             Review fit, technical scope, and project inputs before quotation.
           </h2>
           <p className="hsa-ui-body max-w-3xl">
@@ -1446,7 +1447,7 @@ function ProductIntroductionSection({ slug }) {
 function ProductOverviewBody({ page }) {
   const cards = page.data.cards || [];
   return (
-    <main>
+    <main className="ground-handling-forklift-agv-product-page">
       {" "}
       <section className="relative min-h-[760px] md:min-h-[700px] flex items-center overflow-hidden bg-primary text-white">
         {" "}
@@ -2418,13 +2419,13 @@ function GroundHandlingForkliftAgvBody({ page }) {
         {" "}
         <div className="mx-auto max-w-[1440px] px-6 md:px-12">
           {" "}
-          <div className="mb-14 max-w-3xl">
+          <div className="mb-14 max-w-none">
             {" "}
             <span className="mb-4 block text-[10px] font-black tracking-[0.28em] text-secondary">
               {" "}
               System Integration{" "}
             </span>{" "}
-            <h2 className="font-headline text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
+            <h2 className="ground-handling-section-title font-headline font-extrabold tracking-tight text-primary">
               {" "}
               Coordination-ready from navigation to charging.{" "}
             </h2>{" "}

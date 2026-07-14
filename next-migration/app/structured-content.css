@@ -2212,6 +2212,14 @@ a {
   line-height: 1.06;
 }
 
+/* Align long Ground Handling section titles without forcing a wrap. */
+.ground-handling-forklift-agv-product-page .ground-handling-section-title {
+  max-width: none;
+  font-size: clamp(1.9rem, 2.7vw, 3rem);
+  line-height: 1.06;
+  text-wrap: pretty;
+}
+
 .forklift-workflow-step {
   min-height: 216px;
   padding: 18px 16px 20px;
