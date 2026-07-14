@@ -32,6 +32,27 @@ function isAncestor(ancestor, descendant) {
   return result.status === 0;
 }
 
+function wait(milliseconds) {
+  Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, milliseconds);
+}
+
+function runWithRetry(command, args, options = {}) {
+  const attempts = options.attempts ?? 3;
+
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      return run(command, args, options);
+    } catch (error) {
+      if (attempt === attempts) {
+        throw error;
+      }
+
+      console.warn(`${command} failed (attempt ${attempt}/${attempts}). Retrying...`);
+      wait(3000);
+    }
+  }
+}
+
 function fail(message) {
   console.error(`\nRelease blocked: ${message}`);
   process.exit(1);
@@ -48,7 +69,7 @@ try {
   }
 
   console.log("Fetching origin/main...");
-  run("git", ["fetch", "origin", "main"], { inherit: true });
+  runWithRetry("git", ["fetch", "origin", "main"], { inherit: true });
 
   const localHead = run("git", ["rev-parse", "HEAD"]);
   const remoteHead = run("git", ["rev-parse", "origin/main"]);
@@ -58,9 +79,9 @@ try {
   }
 
   console.log("Pushing main to origin...");
-  run("git", ["push", "origin", "main"], { inherit: true });
+  runWithRetry("git", ["push", "origin", "main"], { inherit: true });
 
-  const publishedHead = run("git", ["ls-remote", "origin", "refs/heads/main"]).split(/\s+/)[0];
+  const publishedHead = runWithRetry("git", ["ls-remote", "origin", "refs/heads/main"]).split(/\s+/)[0];
   if (publishedHead !== localHead) {
     fail("origin/main does not match the local main commit after push.");
   }
