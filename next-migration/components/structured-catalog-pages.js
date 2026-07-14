@@ -2651,6 +2651,22 @@ function LiftingAgvBody() {
               src="/assets/images/lifting-agv-top-lift-detail.png"
             />
           </div>
+          <div className="mt-10 overflow-hidden border border-outline-variant/20 bg-surface shadow-[0_20px_50px_rgba(0,23,54,0.08)]">
+            <img
+              alt="Top-Lift AGV carrying a palletized load in a warehouse"
+              className="block h-auto w-full"
+              loading="lazy"
+              src="/assets/images/lifting-agv-detail-cover.png"
+            />
+          </div>
+          <div className="mt-10 overflow-hidden border border-outline-variant/20 bg-surface shadow-[0_20px_50px_rgba(0,23,54,0.08)]">
+            <img
+              alt="Automated guided vehicle workflow, components, and applications"
+              className="block h-auto w-full"
+              loading="lazy"
+              src="/assets/images/lifting-agv-detail-explainer.png"
+            />
+          </div>
         </div>
       </section>
 
