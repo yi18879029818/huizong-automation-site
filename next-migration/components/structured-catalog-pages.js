@@ -3034,6 +3034,35 @@ function AgvRollerBody() {
         </div>
       </section>
 
+      <section className="bg-surface py-14 md:py-20">
+        <div className="mx-auto max-w-7xl px-8 md:px-12">
+          <details className="group">
+            <summary className="block cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+              <div className="relative overflow-hidden border border-outline-variant/20 bg-surface shadow-[0_20px_50px_rgba(0,23,54,0.08)]">
+                <img
+                  alt="AGV roller fleet supporting a production-line automation cell"
+                  className="block h-auto w-full"
+                  loading="lazy"
+                  src="/assets/images/agv-roller-detail-cover.png"
+                />
+                <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-primary/90 px-6 py-4 text-sm font-black tracking-[0.12em] text-white backdrop-blur-sm md:px-8">
+                  <span>View Roller AGV Feature Details</span>
+                  <span className="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+                </div>
+              </div>
+            </summary>
+            <div className="mt-10 overflow-hidden border border-outline-variant/20 bg-surface shadow-[0_20px_50px_rgba(0,23,54,0.08)]">
+              <img
+                alt="Roller AGV features including storage transfer, machine tending, line-side delivery, and goods-to-person picking"
+                className="block h-auto w-full"
+                loading="lazy"
+                src="/assets/images/agv-roller-detail-features.png"
+              />
+            </div>
+          </details>
+        </div>
+      </section>
+
       <section className="py-24 px-8 md:px-12 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {[
