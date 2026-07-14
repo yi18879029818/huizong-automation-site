@@ -647,14 +647,13 @@ function getProductDecisionSupport(slug, page) {
 
 function ProductDecisionSupportSection({ page }) {
   const slug = getSlug(page);
-  const isGroundHandlingForkliftAgv = slug === "ground-handling-forklift-agv";
   const support = getProductDecisionSupport(slug, page);
   const technicalSpecs = (getProductSpecs(slug).technicalSpecs || []).slice(0, 4);
 
   return (
     <section className="bg-surface py-24">
       <div className="mx-auto max-w-screen-2xl px-8">
-        <div className={isGroundHandlingForkliftAgv ? "mb-14 max-w-none" : "mb-14 max-w-4xl"}>
+        <div className="mb-14 max-w-none">
           <span className="hsa-ui-kicker">Project Qualification</span>
           <h2 className="font-headline text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
             Review fit, technical scope, and project inputs before quotation.
