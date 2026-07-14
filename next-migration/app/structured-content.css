@@ -2188,6 +2188,18 @@ a {
   }
 }
 
+/* Keep the forklift product page hierarchy compact and consistent. */
+.agv-forklift-product-page .forklift-hero-title {
+  font-size: clamp(2.7rem, 3.5vw, 3.4rem);
+  line-height: 0.98;
+}
+
+.agv-forklift-product-page .hsa-ui-title,
+.agv-forklift-product-page .forklift-section-title {
+  font-size: clamp(1.9rem, 2.7vw, 3rem);
+  line-height: 1.06;
+}
+
 .forklift-workflow-step {
   min-height: 216px;
   padding: 18px 16px 20px;
