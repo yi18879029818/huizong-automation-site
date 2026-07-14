@@ -28,7 +28,7 @@ export default function IntegrationArchitecture() {
             />
           </div>
         </div>
-        <div className="mx-auto mt-14 max-w-4xl">
+        <div className="mt-14 w-full">
           {SYSTEM_LAYERS.map(([label, copy], index) => (
             <div className="relative flex items-center gap-5" key={label}>
               {index < SYSTEM_LAYERS.length - 1 ? <span className="absolute left-6 top-14 h-8 w-px bg-secondary/45" aria-hidden="true" /> : null}

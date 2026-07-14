@@ -1962,7 +1962,7 @@ function AgvForkliftBody({ page }) {
       </section>
 
       <section className="bg-primary py-24 text-white md:py-28" id="faq">
-        <div className="mx-auto max-w-[1100px] px-6 md:px-12">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-12">
           <div className="mb-12 max-w-none">
             <span className="hsa-ui-kicker hsa-ui-kicker--light">FAQ</span>
             <h2 className="forklift-section-title forklift-section-title--compact forklift-section-title--single-line mt-4 text-4xl font-black tracking-tight md:text-6xl">Frequently Asked Questions</h2>
