@@ -14,8 +14,8 @@ const APPLICATIONS = [
   {
     title: "ASRS Integration",
     copy: "Connect autonomous forklift operations with automated storage systems.",
-    image: "/assets/images/autonomous-forklifts-detail-3.png",
-    alt: "Autonomous forklifts moving pallets beside a conveyor and storage racks",
+    image: "/assets/images/agv-forklift-asrs-integration.png",
+    alt: "Autonomous forklifts operating beside conveyors in a high-rack warehouse",
   },
 ];
 
