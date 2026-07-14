@@ -11,10 +11,10 @@ export default function TechnologyCapabilities() {
   return (
     <section className="bg-white py-24 md:py-28" id="technology">
       <div className="mx-auto max-w-[1440px] px-6 md:px-12">
-        <div className="mb-14 max-w-3xl">
+        <div className="mb-14 max-w-none">
           <span className="hsa-ui-kicker">Technology Capability</span>
-          <h2 className="hsa-ui-title forklift-section-title">Intelligent Technology Behind Autonomous Forklift</h2>
-          <p className="hsa-ui-body mt-6">
+          <h2 className="hsa-ui-title forklift-section-title forklift-section-title--compact forklift-section-title--single-line">Intelligent Technology Behind Autonomous Forklift</h2>
+          <p className="hsa-ui-body mt-6 max-w-3xl">
             The vehicle is one layer in a controlled automation system. These capabilities define how it moves, stays safe and shares status with the warehouse.
           </p>
         </div>

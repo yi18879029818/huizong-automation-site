@@ -1892,10 +1892,10 @@ function AgvForkliftBody({ page }) {
 
       <section className="bg-surface-container-low py-24 md:py-28" id="comparison">
         <div className="mx-auto max-w-[1440px] px-6 md:px-12">
-          <div className="mb-14 max-w-3xl">
+          <div className="mb-14 max-w-none">
             <span className="hsa-ui-kicker">Operating Model</span>
-            <h2 className="hsa-ui-title forklift-section-title">Autonomous Forklift AGV vs Manual Forklift</h2>
-            <p className="hsa-ui-body mt-6">
+            <h2 className="hsa-ui-title forklift-section-title forklift-section-title--compact forklift-section-title--single-line">Autonomous Forklift AGV vs Manual Forklift</h2>
+            <p className="hsa-ui-body mt-6 max-w-3xl">
               Use the comparison to frame the process change. It is not a promise of a universal replacement; the right boundary depends on the site and workload.
             </p>
           </div>
@@ -1963,9 +1963,9 @@ function AgvForkliftBody({ page }) {
 
       <section className="bg-primary py-24 text-white md:py-28" id="faq">
         <div className="mx-auto max-w-[1100px] px-6 md:px-12">
-          <div className="mb-12 max-w-3xl">
+          <div className="mb-12 max-w-none">
             <span className="hsa-ui-kicker hsa-ui-kicker--light">FAQ</span>
-            <h2 className="forklift-section-title mt-4 text-4xl font-black tracking-tight md:text-6xl">Frequently Asked Questions</h2>
+            <h2 className="forklift-section-title forklift-section-title--compact forklift-section-title--single-line mt-4 text-4xl font-black tracking-tight md:text-6xl">Frequently Asked Questions</h2>
           </div>
           <div className="divide-y divide-white/15 border-y border-white/15">
             {faqItems.map(([question, answer]) => (

@@ -2175,8 +2175,15 @@ a {
   font-size: clamp(2rem, 3vw, 3.25rem);
 }
 
+.forklift-section-title--compact {
+  max-width: none;
+  font-size: clamp(2rem, 3vw, 3.25rem);
+  line-height: 1.04;
+}
+
 @media (min-width: 1024px) {
-  .forklift-highlights-title {
+  .forklift-highlights-title,
+  .forklift-section-title--single-line {
     white-space: nowrap;
   }
 }

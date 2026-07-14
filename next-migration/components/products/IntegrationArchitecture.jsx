@@ -14,7 +14,7 @@ export default function IntegrationArchitecture() {
         <div className="grid gap-14 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-start">
           <div>
             <span className="hsa-ui-kicker">Warehouse Integration</span>
-            <h2 className="hsa-ui-title forklift-section-title">Connected Warehouse Automation System</h2>
+            <h2 className="hsa-ui-title forklift-section-title forklift-section-title--compact">Connected Warehouse Automation System</h2>
             <p className="hsa-ui-body mt-6">
               Coolyne provides integrated automation solutions beyond individual robots. The integration boundary is defined around task release, execution status, equipment handoff and safety ownership.
             </p>
