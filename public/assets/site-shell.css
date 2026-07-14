@@ -1083,7 +1083,7 @@ body[data-page-key="home"] .page-content > section:first-child > .container.mx-a
 .content-shell:not([data-page-key="home"]) .page-content>section:first-child,
 .content-shell:not([data-page-key="home"]) .page-content>main:first-child>section:first-child{
   min-height:600px!important;
-  height:600px!important;
+  height:auto!important;
 }
 
 .content-shell[data-page-key="home"] .page-content > section:first-child > .container.mx-auto,
@@ -1108,7 +1108,7 @@ body[data-page-key="home"] .page-content > section:first-child > .container.mx-a
   .content-shell:not([data-page-key="home"]) .page-content>section:first-child,
   .content-shell:not([data-page-key="home"]) .page-content>main:first-child>section:first-child{
     min-height:520px!important;
-    height:520px!important;
+    height:auto!important;
   }
 
   .content-shell[data-page-key="home"] .page-content > section:first-child > .container.mx-auto,
