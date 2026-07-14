@@ -2641,68 +2641,15 @@ function LiftingAgvBody() {
         </div>
       </section>
 
-      <section className="py-24 px-8 max-w-screen-2xl mx-auto bg-primary text-white overflow-hidden relative">
-        <div className="relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div className="order-2 lg:order-1 p-4 md:p-6">
-              <div className="relative h-[400px] w-full max-w-[640px] mx-auto bg-primary-container rounded-xl flex items-center justify-center p-12 md:p-14 border border-on-primary-fixed-variant/20">
-                <div className="grid grid-cols-3 gap-6 w-full text-center">
-                  {[
-                    { title: "WMS", label: "Warehouse Management" },
-                    { title: "Fleet", label: "Control Hub", accent: true },
-                    { title: "WCS", label: "Control System" }
-                  ].map((item) => (
-                    <div
-                      className={`p-4 rounded-lg border ${
-                        item.accent
-                          ? "bg-secondary/20 border-secondary/30 scale-110 shadow-xl shadow-secondary/10"
-                          : "bg-surface/5 border-white/10 backdrop-blur-md"
-                      }`}
-                      key={item.title}
-                    >
-                      <div className={`font-bold text-lg mb-1 ${item.accent ? "text-white" : "text-secondary"}`}>
-                        {item.title}
-                      </div>
-                      <div className={`text-[10px] uppercase tracking-tighter ${item.accent ? "opacity-80" : "opacity-60"}`}>
-                        {item.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center opacity-20">
-                  <div className="w-64 h-64 border border-secondary rounded-full animate-pulse" />
-                  <div className="absolute w-96 h-96 border border-secondary/50 rounded-full animate-pulse" />
-                </div>
-              </div>
-            </div>
-            <div className="order-1 lg:order-2">
-              <span className="text-secondary-fixed-dim font-bold tracking-[0.2em] text-xs uppercase mb-4 block">
-                Ecosystem Synergy
-              </span>
-              <h2 className="font-headline text-4xl font-extrabold tracking-tight mb-8">
-                Seamless Integration Framework
-              </h2>
-              <p className="text-on-primary-container text-lg leading-relaxed mb-8">
-                Huizong Intelligent Automation AGVs are not isolated machines; they are nodes in an intelligent network. Our API-first approach ensures effortless connection to your existing WMS and WCS.
-              </p>
-              <ul className="space-y-4">
-                {[
-                  "Centralized fleet coordination via dispatch manager",
-                  "Real-time status monitoring and predictive maintenance alerts",
-                  "Scalable infrastructure - add 1 or 100 AGVs without system rework"
-                ].map((item) => (
-                  <li className="flex items-start gap-3" key={item}>
-                    <span
-                      className="material-symbols-outlined text-secondary"
-                      style={{ fontVariationSettings: "'FILL' 1" }}
-                    >
-                      check_circle
-                    </span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+      <section className="bg-white py-14 md:py-20">
+        <div className="mx-auto max-w-[1440px] px-6 md:px-12">
+          <div className="overflow-hidden border border-outline-variant/20 bg-surface shadow-[0_20px_50px_rgba(0,23,54,0.08)]">
+            <img
+              alt="Top-Lift AGV smart material handling cart product overview"
+              className="block h-auto w-full"
+              loading="lazy"
+              src="/assets/images/lifting-agv-top-lift-detail.png"
+            />
           </div>
         </div>
       </section>
