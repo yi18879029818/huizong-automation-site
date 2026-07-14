@@ -2413,7 +2413,7 @@ function GroundHandlingForkliftAgvBody({ page }) {
               {" "}
               System Integration{" "}
             </span>{" "}
-            <h2 className="ground-handling-section-title font-headline font-extrabold tracking-tight text-primary">
+            <h2 className="font-headline text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
               {" "}
               Coordination-ready from navigation to charging.{" "}
             </h2>{" "}
