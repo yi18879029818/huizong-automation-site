@@ -2335,6 +2335,7 @@ function GroundHandlingForkliftAgvBody({ page }) {
         titleClassName="text-5xl md:text-7xl"
         title={heroTitle}
       />{" "}
+      <ProductIntroductionSection slug="ground-handling-forklift-agv" />{" "}
       <section className="bg-white py-14 md:py-20" id="product-detail">
         <div className="mx-auto max-w-[1440px] px-6 md:px-12">
           <div className="overflow-hidden border border-outline-variant/20 bg-surface shadow-[0_20px_50px_rgba(0,23,54,0.08)]">
@@ -2347,7 +2348,6 @@ function GroundHandlingForkliftAgvBody({ page }) {
           </div>
         </div>
       </section>
-      <ProductIntroductionSection slug="ground-handling-forklift-agv" />{" "}
       <ProductTechnicalDataSection slug="ground-handling-forklift-agv" />{" "}
       <section className="bg-primary py-28 text-white">
         {" "}
