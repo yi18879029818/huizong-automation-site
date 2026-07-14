@@ -2166,6 +2166,12 @@ a {
   max-width: 100%;
 }
 
+@media (min-width: 1024px) {
+  .forklift-hero-inner {
+    padding-block: 50px;
+  }
+}
+
 .forklift-section-title {
   max-width: 100%;
 }
