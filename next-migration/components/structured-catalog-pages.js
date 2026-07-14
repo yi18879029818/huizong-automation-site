@@ -2901,24 +2901,6 @@ function StorageAgvBody() {
         </div>
       </section>
 
-      <section className="py-24 px-8 max-w-screen-2xl mx-auto bg-surface-container-low text-center">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="font-headline text-4xl md:text-5xl font-bold text-primary mb-8">
-            Optimize Your Inventory Flow Today
-          </h2>
-          <p className="font-body text-xl text-on-surface-variant mb-12">
-            Join the world's most advanced logistics facilities in deploying precision AGV technology.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
-            <button className="w-full sm:w-auto bg-secondary text-on-secondary px-10 py-5 rounded-md font-headline font-extrabold text-xl hover:bg-secondary-container transition-all shadow-lg active:scale-95">
-              Request a System Audit
-            </button>
-            <button className="w-full sm:w-auto bg-white border-2 border-primary text-primary px-10 py-5 rounded-md font-headline font-extrabold text-xl hover:bg-primary hover:text-white transition-all active:scale-95">
-              Download Product Spec Sheet
-            </button>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }
@@ -3129,24 +3111,6 @@ function AgvRollerBody() {
         <div className="absolute -right-24 -bottom-24 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
       </section>
 
-      <section className="py-24 bg-surface flex flex-col items-center justify-center text-center px-8">
-        <div className="max-w-3xl">
-          <h2 className="text-4xl md:text-6xl font-headline font-extrabold text-primary mb-6 tracking-tighter">
-            Optimize Your Conveyor Network
-          </h2>
-          <p className="text-on-surface-variant text-lg mb-12">
-            Consult with our systems architects to design a bespoke mobile transfer solution tailored to your facility's unique throughput requirements.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="px-10 py-5 bg-secondary text-white font-bold rounded-md hover:bg-secondary-container transition-all shadow-xl shadow-secondary/20">
-              Request Specifications
-            </button>
-            <button className="px-10 py-5 border-2 border-primary text-primary font-bold rounded-md hover:bg-primary hover:text-white transition-all">
-              Consult an Expert
-            </button>
-          </div>
-        </div>
-      </section>
     </main>
   );
 }
