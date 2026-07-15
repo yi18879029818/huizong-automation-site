@@ -149,6 +149,11 @@ body.antialiased {
     text-wrap: balance;
   }
 
+  .hsa-home-section-title {
+    max-width: none;
+    text-wrap: wrap;
+  }
+
   .forklift-hero-title,
   .forklift-section-title {
     text-wrap: pretty;

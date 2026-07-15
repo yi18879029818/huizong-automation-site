@@ -1013,10 +1013,10 @@ function HomeBody({ page }) {
           {" "}
           <div className="mx-auto max-w-[1680px]">
             {" "}
-            <div className="mb-16 text-center max-w-5xl mx-auto">
+            <div className="mb-16 text-center mx-auto">
               {" "}
               <span className="hsa-ui-kicker justify-center">Live Automation</span>{" "}
-              <h2 className="hsa-ui-title max-w-4xl mx-auto">
+              <h2 className="hsa-ui-title hsa-home-section-title mx-auto">
                 {" "}
                 Tailored Warehouse Automation In Motion{" "}
               </h2>{" "}
@@ -1043,10 +1043,10 @@ function HomeBody({ page }) {
           {" "}
           <div className="mx-auto max-w-[1680px]">
             {" "}
-            <div className="mb-16 text-center max-w-4xl mx-auto">
+            <div className="mb-16 text-center mx-auto">
               {" "}
               <span className="hsa-ui-kicker justify-center">Industries We Serve</span>{" "}
-              <h2 className="hsa-ui-title max-w-4xl mx-auto">
+              <h2 className="hsa-ui-title hsa-home-section-title mx-auto">
                 {vm.industryTitle}
               </h2>{" "}
               <p className="hsa-ui-body max-w-3xl mx-auto">
@@ -1161,9 +1161,9 @@ function HomeBody({ page }) {
         </section>{" "}
         <section className="px-8 py-24 max-w-screen-2xl mx-auto bg-surface">
           <div className="mx-auto max-w-[1680px]">
-            <div className="mb-14 max-w-4xl">
+            <div className="mb-14">
               <span className="hsa-ui-kicker">Operational Bottlenecks</span>
-              <h2 className="hsa-ui-title max-w-4xl">
+              <h2 className="hsa-ui-title hsa-home-section-title">
                 Warehouse Automation for Real Operational Bottlenecks
               </h2>
               <p className="hsa-ui-body max-w-3xl">
@@ -1288,9 +1288,9 @@ function HomeBody({ page }) {
         </section>{" "}
         <section className="px-8 py-24 max-w-screen-2xl mx-auto bg-surface">
           <div className="mx-auto max-w-[1680px]">
-            <div className="mb-14 max-w-4xl">
+            <div className="mb-14">
               <span className="hsa-ui-kicker">Project Delivery</span>
-              <h2 className="hsa-ui-title max-w-4xl">How a Coolyne Project Moves Forward</h2>
+              <h2 className="hsa-ui-title hsa-home-section-title">How a Coolyne Project Moves Forward</h2>
               <p className="hsa-ui-body max-w-3xl">
                 Our first-phase workflow is designed to qualify constraints early, align the
                 interface logic, and move toward manufacture and commissioning with fewer surprises.
