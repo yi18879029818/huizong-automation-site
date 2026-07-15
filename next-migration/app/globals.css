@@ -151,6 +151,7 @@ body.antialiased {
 
   .hsa-home-section-title {
     max-width: none;
+    font-size: clamp(2rem, 3.3vw, 3.5rem);
     text-wrap: wrap;
   }
 
