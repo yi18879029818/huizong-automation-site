@@ -126,6 +126,12 @@ const LOCAL_BLOG_POSTS = {
         "Automated guided vehicles, or AGVs, automate repetitive material movement in factories, warehouses, and distribution centers. They transport pallets, containers, components, and finished goods without a driver.",
         "agv-advantages-intro"
       ),
+      staticImage(
+        "/assets/images/blog-agv-advantages-material-flow.png",
+        "AGV forklifts supporting repeatable pallet movement in a warehouse",
+        "AGV forklifts supporting repeatable pallet movement in a warehouse.",
+        "agv-advantages-material-flow-image"
+      ),
       heading(
         "Automated Guided Vehicle Advantages and Disadvantages at a Glance",
         "agv-advantages-overview"
@@ -143,6 +149,12 @@ const LOCAL_BLOG_POSTS = {
           ["More flexible than conveyors", "Poor planning may lead to a low ROI"]
         ],
         "agv-advantages-comparison"
+      ),
+      staticImage(
+        "/assets/images/blog-agv-advantages-comparison.png",
+        "Manual forklift work contrasted with coordinated AGV material flow",
+        "Manual forklift work contrasted with coordinated AGV material flow.",
+        "agv-advantages-comparison-image"
       ),
       heading("Advantages of Automated Guided Vehicles", "agv-advantages-title"),
       heading("1. Consistent Material Flow", "agv-advantages-flow-title", "h3"),
@@ -210,6 +222,12 @@ const LOCAL_BLOG_POSTS = {
       paragraph(
         "AGVs may need to communicate with conveyors, automatic doors, elevators, production machines, racks, robotic cells, and pallet-handling equipment. They may also need to connect with WMS, WCS, MES, ERP, and production scheduling systems.",
         "agv-disadvantages-integration-1"
+      ),
+      staticImage(
+        "/assets/images/blog-agv-advantages-integration.png",
+        "AGVs working alongside production equipment and conveyors",
+        "AGVs working alongside production equipment and conveyors.",
+        "agv-advantages-integration-image"
       ),
       heading("4. Facility, Charging, and Maintenance Requirements", "agv-disadvantages-maintenance-title", "h3"),
       paragraph(
