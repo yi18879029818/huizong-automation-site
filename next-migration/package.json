@@ -10,6 +10,7 @@
     "start": "next start",
     "preview": "opennextjs-cloudflare build && wrangler dev",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "seo:audit": "node ./scripts/seo-audit.mjs",
     "release:production": "node ./scripts/release-production.mjs",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts"
   },

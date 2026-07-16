@@ -1,6 +1,7 @@
+import { SEO_KEYWORD_SOURCE_BY_ROUTE } from "./seo-keyword-source.js";
+
 // Search-focused metadata for the public pages in the current sitemap scope.
-// These phrases are derived from the page content and SERP intent research;
-// no search-volume or difficulty values are assumed here.
+// The keyword order and search-volume source are the approved spreadsheet snapshot.
 export const SEO_PAGE_OVERRIDES = {
   "/": {
     title: "Warehouse Automation Systems",
@@ -217,3 +218,20 @@ export const SEO_PAGE_OVERRIDES = {
     ]
   }
 };
+
+for (const [route, override] of Object.entries(SEO_PAGE_OVERRIDES)) {
+  const source = SEO_KEYWORD_SOURCE_BY_ROUTE[route];
+
+  if (!source) {
+    continue;
+  }
+
+  override.keywords = [
+    ...new Set([
+      source.primary,
+      ...source.secondary,
+      ...source.geo,
+      ...(override.keywords || [])
+    ].filter(Boolean))
+  ];
+}
