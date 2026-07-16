@@ -154,7 +154,11 @@ function pageTypeForKind(kind) {
 
 function pageNode(page, url, mainEntityId) {
   const ids = idsFor(url);
-  const description = page.data.heroSummary || page.data.summary || COMPANY.description;
+  const description =
+    page.data.seo?.description ||
+    page.data.heroSummary ||
+    page.data.summary ||
+    COMPANY.description;
 
   return {
     "@type": pageTypeForKind(page.kind),
@@ -262,7 +266,11 @@ function offerCatalogSchema(page, url) {
 
 function detailEntitySchema(page, url) {
   const ids = idsFor(url);
-  const description = page.data.heroSummary || page.data.summary || COMPANY.description;
+  const description =
+    page.data.seo?.description ||
+    page.data.heroSummary ||
+    page.data.summary ||
+    COMPANY.description;
 
   if (page.kind === "product-detail") {
     return null;

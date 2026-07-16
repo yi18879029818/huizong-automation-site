@@ -147,6 +147,7 @@ import {
   getHomePageData
 } from "@/lib/sanity/page-data.mjs";
 import { NAV_SECTIONS, STRUCTURED_ROUTES } from "@/lib/navigation";
+import { SEO_PAGE_OVERRIDES } from "@/lib/seo-page-overrides";
 
 const PRODUCT_MODULES = [
   {
@@ -388,6 +389,17 @@ function buildStaticPage({
   breadcrumbs,
   data
 }) {
+  const seoOverride = SEO_PAGE_OVERRIDES[href];
+  const resolvedData = seoOverride
+    ? {
+        ...data,
+        seo: {
+          ...(data.seo || {}),
+          ...seoOverride
+        }
+      }
+    : data;
+
   return {
     kind,
     section,
@@ -396,7 +408,7 @@ function buildStaticPage({
     title,
     subnav,
     breadcrumbs,
-    data
+    data: resolvedData
   };
 }
 

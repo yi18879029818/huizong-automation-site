@@ -798,6 +798,116 @@ function ProductDecisionSupportSection({ page }) {
   );
 }
 
+const CONTEXTUAL_PATHWAYS = {
+  "/products/agv-forklift": [
+    ["/solutions/asrs", "ASRS warehouse automation"],
+    ["/solutions/material-handling", "Material handling automation"],
+    ["/solutions/software", "Warehouse automation software"],
+  ],
+  "/products/ground-handling-forklift-agv": [
+    ["/solutions/material-handling", "Material handling automation"],
+    ["/products/agv-roller", "AGV roller conveyor transfer"],
+    ["/solutions/software", "Warehouse automation software"],
+  ],
+  "/products/lifting-agv": [
+    ["/solutions/material-handling", "Material handling automation"],
+    ["/products/composite-mobile-robot", "Composite mobile robotics"],
+    ["/solutions/software", "Warehouse automation software"],
+  ],
+  "/products/storage-agv": [
+    ["/solutions/asrs", "ASRS warehouse automation"],
+    ["/products/agv-forklift", "Autonomous forklift AGV"],
+    ["/solutions/software", "Warehouse automation software"],
+  ],
+  "/products/agv-roller": [
+    ["/solutions/material-handling", "Material handling automation"],
+    ["/solutions/picking", "Picking and fulfillment automation"],
+    ["/solutions/software", "Warehouse automation software"],
+  ],
+  "/products/composite-mobile-robot": [
+    ["/solutions/machine-tending-automation", "CNC machine tending automation"],
+    ["/solutions/picking", "Picking and fulfillment automation"],
+    ["/solutions/software", "Warehouse automation software"],
+  ],
+  "/solutions/asrs": [
+    ["/products/storage-agv", "Storage AGV"],
+    ["/products/agv-forklift", "Autonomous forklift AGV"],
+    ["/solutions/software", "Warehouse automation software"],
+  ],
+  "/solutions/material-handling": [
+    ["/products/ground-handling-forklift-agv", "Ground handling forklift AGV"],
+    ["/products/agv-roller", "AGV roller conveyor transfer"],
+    ["/solutions/software", "Warehouse automation software"],
+  ],
+  "/solutions/picking": [
+    ["/solutions/goods-to-person-picking-system", "Goods-to-person picking system"],
+    ["/products/storage-agv", "Storage AGV"],
+    ["/solutions/software", "Warehouse automation software"],
+  ],
+  "/solutions/goods-to-person-picking-system": [
+    ["/solutions/picking", "Picking and fulfillment automation"],
+    ["/products/storage-agv", "Storage AGV"],
+    ["/solutions/software", "Warehouse automation software"],
+  ],
+  "/solutions/machine-tending-automation": [
+    ["/products/composite-mobile-robot", "Composite mobile robot"],
+    ["/solutions/material-handling", "Material handling automation"],
+    ["/solutions/software", "Warehouse automation software"],
+  ],
+  "/solutions/software": [
+    ["/products/agv-forklift", "Autonomous forklift AGV"],
+    ["/solutions/asrs", "ASRS warehouse automation"],
+    ["/solutions/material-handling", "Material handling automation"],
+  ],
+  "/industries/food-beverage-fmcg-automation": [
+    ["/products/agv-forklift", "Autonomous forklift AGV"],
+    ["/solutions/material-handling", "Material handling automation"],
+    ["/solutions/asrs", "ASRS warehouse automation"],
+  ],
+  "/solutions": [
+    ["/industries/food-beverage-fmcg-automation", "Food, beverage and FMCG automation"],
+    ["/solutions/goods-to-person-picking-system", "Goods-to-person picking system"],
+    ["/solutions/machine-tending-automation", "CNC machine tending automation"],
+  ],
+  "/products": [
+    ["/products/agv-forklift", "Autonomous forklift AGV"],
+    ["/products/ground-handling-forklift-agv", "Ground handling forklift AGV"],
+    ["/products/composite-mobile-robot", "Composite mobile robot"],
+  ],
+};
+
+function ContextualPathways({ page }) {
+  const pathways = CONTEXTUAL_PATHWAYS[page.currentHref];
+
+  if (!pathways?.length) {
+    return null;
+  }
+
+  return (
+    <section className="border-y border-outline-variant/15 bg-surface-container-low py-10">
+      <div className="mx-auto flex max-w-screen-2xl flex-col gap-5 px-8 lg:flex-row lg:items-center lg:justify-between">
+        <div>
+          <span className="hsa-ui-kicker">Related Pathways</span>
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-on-surface-variant">
+            Explore adjacent automation systems and software that commonly support this workflow.
+          </p>
+        </div>
+        <nav aria-label="Related automation pathways" className="flex flex-wrap gap-3">
+          {pathways.map(([href, label]) => (
+            <Link
+              className="border border-outline-variant/25 bg-white px-4 py-3 text-sm font-bold text-primary transition-colors hover:border-primary"
+              href={href}
+              key={href}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
+      </div>
+    </section>
+  );
+}
+
 function InlineArrow() {
   return (
     <span className="material-symbols-outlined text-base text-secondary">arrow_forward</span>
@@ -3527,6 +3637,7 @@ function SolutionOverviewBody({ page }) {
         <div className="absolute inset-0 z-0">
           {" "}
           <img
+            alt="ASRS warehouse automation system"
             className="w-full h-full object-cover opacity-30 mix-blend-soft-light scale-105"
             src="/downloads/solutions-hero-asrs-wide.png"
           />{" "}
@@ -3628,6 +3739,7 @@ function SolutionOverviewBody({ page }) {
               <div className="absolute top-0 right-0 w-2/5 h-full opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
                 {" "}
                 <img
+                  alt="Warehouse automation integration"
                   className="w-full h-full object-cover"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzXrtbkjqH7aRzBMQtLiIPlYZpP5XwVtlAv8xR_TlPMihn97CzuZy0O03otmRhlOA_pFxb9SgirTOcvxQiRTW9P5kpqRwBTBUNDOYdZVPygAP-3gBHzP2yNAvGsmsAVrQie68cAHSNWK2iOq552mQca9POTkgRdv3ndUFQRr17WMLxSYXZMpgmkgIilgBde7NSZ864IXlOCoH39l21mbYUlCbrodYCQI5wvhS5ky8_0Y0fJYI1HVYraAprhOkO-75X4aedi_D4NXy0"
                 />{" "}
@@ -3766,6 +3878,7 @@ function SolutionOverviewBody({ page }) {
                 <div className="w-full md:w-2/5 bg-primary relative overflow-hidden">
                   {" "}
                   <img
+                    alt="Automated warehouse operations"
                     className="absolute inset-0 w-full h-full object-cover grayscale brightness-50 opacity-40 group-hover:scale-105 group-hover:opacity-50 transition-all duration-700"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdUnh8dxxKahx04foaBZhubiX9XVAddItfj8vNmtxaIqM0qHkfxIA9urrJSP4Wqzj2Jc_CKuAUP2ZQ1Go495KEgElXx2np3dbyVFXDgnbqU7j79iXF8JUwVZw61dHGuHSv2g9WMlR-F1sGyci2workXzX80Bd7s6F4gKtH4nngsXdGrt7DEKpz_GnnzRYFJivAfCVfVdorWEYlWaB2qYEPXaMHNXw_uhgHiNSp9LBIpO4_olcB4_BN26pzefAHKpH9bIKsP0zxU54H"
                   />{" "}
@@ -3925,6 +4038,7 @@ function SolutionOverviewBody({ page }) {
               <div className="relative h-[480px] rounded-none overflow-hidden mb-8 border border-outline-variant/20 shadow-sm">
                 {" "}
                 <img
+                  alt={item.title || "Warehouse automation solution"}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                   src={item.image}
                 />{" "}
@@ -4063,6 +4177,7 @@ function SolutionDetailBody({ page }) {
               <div className="relative rounded-xl overflow-hidden shadow-2xl">
                 {" "}
                 <img
+                  alt={`${page.data.title || "Warehouse automation"} solution overview`}
                   className={`w-full aspect-square ${visuals.heroImageClassName || "object-cover"}`}
                   src={visuals.heroImage}
                 />{" "}
@@ -4220,6 +4335,7 @@ function SolutionDetailBody({ page }) {
             >
               {" "}
               <img
+                alt={`${scenario} warehouse automation scenario`}
                 className="w-full h-full object-cover transition-all duration-700"
                 src={
                   visuals.scenarioImages[index % visuals.scenarioImages.length]
@@ -4339,6 +4455,7 @@ function SolutionDetailBody({ page }) {
               <div className="rounded-xl overflow-hidden border border-white/10 shadow-2xl">
                 {" "}
                 <img
+                  alt={`${page.data.title || "Automation"} system integration`}
                   className="w-full h-auto"
                   src={visuals.synergyImage}
                 />{" "}
@@ -8137,6 +8254,7 @@ export function StructuredCatalogOverviewPage({ page }) {
         ) : (
           <CaseOverviewBody page={page} />
         )}{" "}
+        <ContextualPathways page={page} />
       </div>{" "}
     </PublicPageChrome>
   );
@@ -8160,6 +8278,7 @@ export function StructuredCatalogDetailPage({ page }) {
           <CaseProjectDetailBody page={page} />
         )}{" "}
         {isProductDetail && productSlug !== "agv-forklift" ? <ProductDecisionSupportSection page={page} /> : null}{" "}
+        <ContextualPathways page={page} />
       </div>{" "}
     </PublicPageChrome>
   );
