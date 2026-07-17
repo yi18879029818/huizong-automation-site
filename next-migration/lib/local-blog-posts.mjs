@@ -120,6 +120,12 @@ const WAREHOUSE_AUTOMATION_TRENDS_2026_BODY = [
     "These findings show that the main question in 2026 is no longer whether companies should adopt warehouse automation. The more important issue is how to select, integrate, and scale the right technologies.",
     "warehouse-trends-2026-thesis"
   ),
+  staticImage(
+    "/assets/images/warehouse-trends-2026-panorama.png",
+    "Panoramic warehouse automation environment with AMRs, autonomous forklifts, conveyors, and robotic workstations",
+    "Warehouse automation in 2026 is increasingly defined by coordinated fleets, conveyor links, robotic workstations, and shared software control.",
+    "warehouse-trends-2026-panorama-image"
+  ),
   heading(
     "1. Artificial Intelligence Is Taking a More Active Role in Real-Time Warehouse Decisions",
     "warehouse-trends-2026-ai-title"
@@ -148,6 +154,12 @@ const WAREHOUSE_AUTOMATION_TRENDS_2026_BODY = [
   paragraph(
     "This does not mean AGVs will disappear. In applications involving fixed routes, standardized pallets, and repetitive transportation tasks, AGVs can still provide cost and stability advantages. In dynamic warehouses where workers, vehicles, and goods move frequently, AMRs and SLAM-based autonomous forklifts generally offer greater flexibility.",
     "warehouse-trends-2026-mobile-3"
+  ),
+  staticImage(
+    "/assets/images/warehouse-trends-2026-agv-amr-pallets.png",
+    "AGV and AMR pallet transport supporting warehouse automation in a shared operating area",
+    "AGVs and AMRs continue to expand where pallet transport, replenishment, and flexible order movement need to run with less manual forklift dependency.",
+    "warehouse-trends-2026-mobile-image"
   ),
   heading("3. Goods-to-Person Systems and High-Density Storage Will Become More Common", "warehouse-trends-2026-storage-title"),
   paragraph(
@@ -191,6 +203,12 @@ const WAREHOUSE_AUTOMATION_TRENDS_2026_BODY = [
   paragraph(
     "For this reason, system integration capabilities will become an increasingly important criterion when companies evaluate automation suppliers in 2026.",
     "warehouse-trends-2026-integration-4"
+  ),
+  staticImage(
+    "/assets/images/warehouse-trends-2026-mobile-robots.png",
+    "Warehouse automation project combining autonomous forklifts, AMRs, and mobile manipulation workstations",
+    "In practice, the 2026 trend is less about one machine type and more about how autonomous forklifts, AMRs, and workstation automation work together in one delivery model.",
+    "warehouse-trends-2026-integration-image"
   ),
   heading("6. Digital Twins Are Evolving from Visualization Tools into Operational Tools", "warehouse-trends-2026-digital-twin-title"),
   paragraph(
