@@ -204,12 +204,6 @@ const WAREHOUSE_AUTOMATION_TRENDS_2026_BODY = [
     "For this reason, system integration capabilities will become an increasingly important criterion when companies evaluate automation suppliers in 2026.",
     "warehouse-trends-2026-integration-4"
   ),
-  staticImage(
-    "/assets/images/warehouse-trends-2026-mobile-robots.png",
-    "Warehouse automation project combining autonomous forklifts, AMRs, and mobile manipulation workstations",
-    "In practice, the 2026 trend is less about one machine type and more about how autonomous forklifts, AMRs, and workstation automation work together in one delivery model.",
-    "warehouse-trends-2026-integration-image"
-  ),
   heading("6. Digital Twins Are Evolving from Visualization Tools into Operational Tools", "warehouse-trends-2026-digital-twin-title"),
   paragraph(
     "A digital twin creates a virtual model of the warehouse, including its layout, racking, equipment, orders, and workforce.",
