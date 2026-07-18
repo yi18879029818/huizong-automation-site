@@ -355,6 +355,12 @@ const LOCAL_BLOG_POSTS = {
         "AGVs do not necessarily need to travel faster than manually operated forklifts to improve efficiency. Their value often comes from reducing waiting time and minimizing the operational fluctuations caused by reliance on manual labor. More importantly, stable transportation provides a reliable foundation for the entire production or warehouse logistics workflow.",
         "agv-advantages-flow-2"
       ),
+      staticImage(
+        "/assets/images/blog-agv-advantages-transport-real.jpg",
+        "AGV transporting loads through a production or warehouse aisle",
+        "AGV transport is often most valuable where repeatable movement between stations needs to stay stable across long operating hours.",
+        "agv-advantages-transport-real-image"
+      ),
       heading("2. Reduced Dependence on Manual Labor", "agv-advantages-labor-title", "h3"),
       paragraph(
         "AGVs can automate repetitive tasks normally performed by forklift drivers, tugger operators, or material handlers. Employees can then focus on production support, quality control, exception handling, maintenance, or process improvement.",
@@ -377,6 +383,12 @@ const LOCAL_BLOG_POSTS = {
       paragraph(
         "AGVs complete pickup, transport, and unloading according to programmed coordinates and system commands. This can improve pallet positioning, conveyor transfers, rack alignment, production line deliveries, and inventory movement records.",
         "agv-advantages-accuracy-1"
+      ),
+      staticImage(
+        "/assets/images/blog-agv-advantages-docking-real.png",
+        "AGV load docking and transfer point showing accurate goods handoff",
+        "Accurate AGV docking and load handoff can improve transfer consistency where equipment needs repeatable positioning.",
+        "agv-advantages-docking-real-image"
       ),
       paragraph(
         "Controlled speed, turning, stopping distance, and load positioning can also reduce damage to pallets, racks, machines, and finished goods.",
