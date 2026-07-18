@@ -156,9 +156,9 @@ const WAREHOUSE_AUTOMATION_TRENDS_2026_BODY = [
     "warehouse-trends-2026-mobile-3"
   ),
   staticImage(
-    "/assets/images/warehouse-trends-2026-agv-amr-pallets.png",
-    "AGV and AMR pallet transport supporting warehouse automation in a shared operating area",
-    "AGVs and AMRs continue to expand where pallet transport, replenishment, and flexible order movement need to run with less manual forklift dependency.",
+    "/assets/images/warehouse-trends-2026-autonomous-forklift-real.png",
+    "Autonomous forklift operating in a real factory environment as part of warehouse automation expansion",
+    "Autonomous forklifts continue to expand in 2026 where repeatable pallet transport, line-side delivery, and driverless movement need to scale in real operating environments.",
     "warehouse-trends-2026-mobile-image"
   ),
   heading("3. Goods-to-Person Systems and High-Density Storage Will Become More Common", "warehouse-trends-2026-storage-title"),
