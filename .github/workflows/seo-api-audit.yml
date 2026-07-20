@@ -1,0 +1,44 @@
+name: SEO API audit
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 2 * * 1"
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate with Google Cloud via WIF
+        id: google-auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: projects/1097518421419/locations/global/workloadIdentityPools/github-actions/providers/github
+          service_account: ga4-report-reader@coolyne-ga4-bigquery.iam.gserviceaccount.com
+          token_format: access_token
+          access_token_scopes: https://www.googleapis.com/auth/webmasters.readonly
+
+      - name: Run SEO API audit
+        working-directory: next-migration
+        env:
+          GSC_PROPERTY: sc-domain:coolyne.com
+          GSC_ACCESS_TOKEN: ${{ steps.google-auth.outputs.access_token }}
+          PAGESPEED_API_KEY: ${{ secrets.PAGESPEED_API_KEY }}
+          PAGESPEED_STRATEGIES: mobile,desktop
+          PAGESPEED_LIMIT: "18"
+        run: node ./scripts/seo-audit.mjs
+
+      - name: Upload audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-api-audit
+          path: next-migration/docs/seo-api-audit.json
+          if-no-files-found: warn

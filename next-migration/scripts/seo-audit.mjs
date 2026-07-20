@@ -84,8 +84,16 @@ async function runPageSpeed(url, strategy) {
   };
 }
 
-async function loadServiceAccount() {
-  const source = process.env.GSC_SERVICE_ACCOUNT_JSON || process.env.GOOGLE_APPLICATION_CREDENTIALS;
+function expandEnvironment(value) {
+  return value.replace(/\$\{([A-Z0-9_]+)\}/g, (_, name) => process.env[name] || "");
+}
+
+async function loadCredentialConfig() {
+  const source =
+    process.env.GSC_EXTERNAL_ACCOUNT_JSON ||
+    process.env.GSC_EXTERNAL_ACCOUNT_FILE ||
+    process.env.GSC_SERVICE_ACCOUNT_JSON ||
+    process.env.GOOGLE_APPLICATION_CREDENTIALS;
 
   if (!source) {
     return null;
@@ -93,8 +101,79 @@ async function loadServiceAccount() {
 
   const raw = source.trim().startsWith("{")
     ? source
-    : await readFile(resolve(process.cwd(), source), "utf8");
+    : await readFile(resolve(process.cwd(), expandEnvironment(source)), "utf8");
   return JSON.parse(raw);
+}
+
+async function readExternalSubjectToken(config) {
+  const source = config.credential_source || {};
+  let raw;
+
+  if (source.file) {
+    raw = await readFile(resolve(process.cwd(), expandEnvironment(source.file)), "utf8");
+  } else if (source.url) {
+    const headers = Object.fromEntries(
+      Object.entries(source.headers || {}).map(([key, value]) => [key, expandEnvironment(value)])
+    );
+    const response = await fetch(expandEnvironment(source.url), { headers });
+    raw = await response.text();
+    if (!response.ok) {
+      throw new Error(`External identity subject token request failed: ${response.status} ${raw.slice(0, 500)}`);
+    }
+  } else {
+    throw new Error("External account credential_source must define file or url.");
+  }
+
+  const format = source.format || { type: "text" };
+  if (format.type === "json") {
+    const parsed = JSON.parse(raw);
+    raw = format.subject_token_field_name ? parsed?.[format.subject_token_field_name] : parsed;
+  }
+
+  if (typeof raw !== "string" || !raw.trim()) {
+    throw new Error("External account subject token is empty.");
+  }
+
+  return raw.trim();
+}
+
+async function exchangeExternalAccount(config) {
+  const subjectToken = await readExternalSubjectToken(config);
+  const body = new URLSearchParams({
+    grant_type: "urn:ietf:params:oauth:grant-type:token-exchange",
+    audience: config.audience,
+    scope: "https://www.googleapis.com/auth/cloud-platform",
+    requested_token_type: "urn:ietf:params:oauth:token-type:access_token",
+    subject_token_type: config.subject_token_type,
+    subject_token: subjectToken
+  });
+  const stsToken = await readJsonResponse(
+    await fetch(config.token_url || "https://sts.googleapis.com/v1/token", {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      body
+    })
+  );
+
+  if (!config.service_account_impersonation_url) {
+    return stsToken.access_token;
+  }
+
+  const impersonation = await readJsonResponse(
+    await fetch(expandEnvironment(config.service_account_impersonation_url), {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${stsToken.access_token}`,
+        "content-type": "application/json"
+      },
+      body: JSON.stringify({
+        scope: ["https://www.googleapis.com/auth/webmasters.readonly"],
+        lifetime: "3600s"
+      })
+    })
+  );
+
+  return impersonation.accessToken;
 }
 
 async function getSearchConsoleAccessToken() {
@@ -102,10 +181,15 @@ async function getSearchConsoleAccessToken() {
     return process.env.GSC_ACCESS_TOKEN;
   }
 
-  const serviceAccount = await loadServiceAccount();
+  const credentialConfig = await loadCredentialConfig();
+  if (credentialConfig?.type === "external_account") {
+    return exchangeExternalAccount(credentialConfig);
+  }
+
+  const serviceAccount = credentialConfig;
   if (!serviceAccount?.client_email || !serviceAccount?.private_key) {
     throw new Error(
-      "GSC credentials are missing. Set GSC_ACCESS_TOKEN or GSC_SERVICE_ACCOUNT_JSON/GOOGLE_APPLICATION_CREDENTIALS."
+      "GSC credentials are missing. Set GSC_ACCESS_TOKEN, an external account file, or a service account JSON file."
     );
   }
 
