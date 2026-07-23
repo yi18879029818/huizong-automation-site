@@ -1667,7 +1667,7 @@ function AboutBody() {
   return (
     <div className="page-content bg-white">
       <main className="overflow-hidden bg-white">
-        <section className="relative isolate overflow-hidden bg-primary text-white lg:min-h-[54rem] xl:min-h-[58rem]">
+        <section className="relative isolate overflow-hidden bg-primary text-white lg:min-h-[44rem] xl:min-h-[46rem]">
           <div className="absolute inset-0">
             <img
               alt="Huizong intelligent mobile robotics deployment"
@@ -1678,7 +1678,7 @@ function AboutBody() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_18%,rgba(254,107,0,0.24),transparent_18%),radial-gradient(circle_at_18%_82%,rgba(0,0,0,0.28),transparent_34%)]" />
           </div>
 
-          <div className="relative z-10 mx-auto max-w-[1440px] px-6 pb-80 pt-16 md:px-12 md:pb-72 md:pt-20 lg:px-16 lg:pb-[28rem] lg:pt-20 xl:pb-[31rem] xl:pt-20">
+          <div className="relative z-10 mx-auto max-w-[1440px] px-6 pb-48 pt-16 md:px-12 md:pb-52 md:pt-20 lg:px-16 lg:pb-40 lg:pt-20 xl:pb-44 xl:pt-20">
             <div className="grid gap-10 lg:-translate-y-[10px] lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-start xl:gap-14">
               <div className="order-2 lg:order-1">
                   <div className="relative mx-auto max-w-[27rem] lg:mx-0 lg:max-w-[29rem] xl:max-w-[31rem]">
