@@ -5,6 +5,7 @@ const ROBOTS_TXT = [
   "Content-Signal: search=yes, ai-input=yes, ai-train=no, use=reference",
   "Allow: /",
   "Disallow: /studio",
+  "Disallow: /downloads/warehouse-automation-evaluation-checklist.html",
   "",
   `Host: ${SITE_HOST}`,
   `Sitemap: ${SITE_URL}/sitemap.xml`
