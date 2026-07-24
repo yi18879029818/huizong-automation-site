@@ -110,9 +110,9 @@ export const SEO_PAGE_OVERRIDES = {
     ]
   },
   "/products/composite-mobile-robot": {
-    title: "Composite Mobile Robot for Automation",
+    title: "Composite Mobile Robot for Machine Tending & Material Handling",
     description:
-      "Composite mobile robot for autonomous transport, robotic manipulation, machine tending, and flexible workstation supply in industrial environments.",
+      "Composite mobile robot combining an AMR base and robotic arm for machine tending, point-of-use material handling, kitting, inspection, and flexible workstation automation.",
     keywords: [
       "composite mobile robot",
       "mobile manipulator robot",

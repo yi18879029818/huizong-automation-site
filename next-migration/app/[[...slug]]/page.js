@@ -139,11 +139,11 @@ export default async function StructuredPage({ params }) {
   if (structuredPage) {
     return (
       <>
+        <StructuredData page={structuredPage} />
         {shouldRenderPureStructuredPage(structuredPage) ? (
           renderPureStructuredPage(structuredPage)
         ) : (
           <>
-            <StructuredData page={structuredPage} />
             {structuredPage.kind === "home-page" ||
             structuredPage.kind === "product-overview" ||
             structuredPage.kind === "solution-overview" ||

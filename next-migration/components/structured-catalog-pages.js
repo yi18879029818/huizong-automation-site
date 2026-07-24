@@ -393,7 +393,7 @@ const PRODUCT_SPEC_LIBRARY = {
   "composite-mobile-robot": {
     quickSpecs: [
       { value: "10kg", label: "Handling" },
-      { value: "1.2-1.5m", label: "Speed" },
+      { value: "1.2-1.5 m/s", label: "Travel Speed" },
       { value: "0.02mm", label: "Arm Precision" },
     ],
     bullets: [
@@ -405,7 +405,7 @@ const PRODUCT_SPEC_LIBRARY = {
     ],
     technicalSpecs: [
       { label: "Arm Precision", value: "0.02mm repeatability" },
-      { label: "Transit Speed", value: "1.2-1.5m" },
+      { label: "Transit Speed", value: "1.2-1.5 m/s" },
       { label: "Handling Capacity", value: "Up to 10kg parts" },
       { label: "Manipulation Mode", value: "6-axis cobot + AMR base" },
       { label: "Guidance", value: "Vision-guided task execution" },
@@ -3308,7 +3308,7 @@ function CompositeMobileRobotBody() {
               <div className="mt-12 grid grid-cols-2 gap-8">
                 {[
                   { value: "0.02mm", label: "Arm Precision" },
-                  { value: "1.2-1.5m", label: "Transit Speed" }
+                  { value: "1.2-1.5 m/s", label: "Transit Speed" }
                 ].map((item) => (
                   <div className="border-l-2 border-secondary-container pl-6" key={item.label}>
                     <div className="text-3xl font-black text-primary">{item.value}</div>
@@ -3425,7 +3425,7 @@ function CompositeMobileRobotBody() {
               },
               {
                 title: "Task Diversity",
-                copy: "Equipped with multi-purpose end-effectors, the robot handles everything from fragile electronics to 20kg industrial parts with the same level of consistent stationary precision."
+                copy: "Project-specific end-effectors support a range of part types. Payload, gripping, and repeatability requirements are confirmed during engineering review."
               },
               {
                 title: "Hybrid Execution",
@@ -3451,7 +3451,7 @@ function CompositeMobileRobotBody() {
                   Seamless Ecosystem Integration
                 </h2>
                 <p className="text-lg text-on-surface-variant mb-10">
-                  The CMR is designed to act as the connective tissue of your automated facility. It integrates natively with our Fleet Management Software and Picking Solutions for a unified orchestration of assets.
+                  The CMR can connect with fleet control, workstation signals, and picking workflows through a project-defined integration plan for coordinated task execution.
                 </p>
                 <ul className="space-y-6">
                   <li className="flex items-start gap-4">
@@ -3470,7 +3470,7 @@ function CompositeMobileRobotBody() {
                     <div>
                       <span className="block font-bold text-primary">Flexible Picking Integration</span>
                       <span className="text-sm text-on-surface-variant">
-                        Plug-and-play compatibility with standard automated storage and retrieval systems (AS/RS).
+                        Interface planning for AS/RS, workstations, and other upstream or downstream equipment.
                       </span>
                     </div>
                   </li>
@@ -3479,7 +3479,7 @@ function CompositeMobileRobotBody() {
               <div className="grid grid-cols-2 gap-4">
                 {[
                   { icon: "lan", label: "Unified API" },
-                  { icon: "security", label: "Certified Safety" },
+                  { icon: "security", label: "Safety Logic" },
                   { icon: "monitoring", label: "Edge Analytics" },
                   { icon: "cloud_sync", label: "Digital Twin" }
                 ].map((item) => (

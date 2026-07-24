@@ -273,7 +273,26 @@ function detailEntitySchema(page, url) {
     COMPANY.description;
 
   if (page.kind === "product-detail") {
-    return null;
+    return {
+      "@type": "Product",
+      "@id": ids.entity,
+      name: page.data.title,
+      description,
+      url,
+      image: page.data.image ? absoluteUrl(page.data.image) : undefined,
+      brand: {
+        "@id": ids.organization
+      },
+      manufacturer: {
+        "@id": ids.organization
+      },
+      category: "Industrial mobile robotics",
+      additionalProperty: metricProperties(page.data.metrics),
+      audience: {
+        "@type": "BusinessAudience",
+        audienceType: "Industrial automation teams"
+      }
+    };
   }
 
   if (page.kind === "solution-detail") {
@@ -454,6 +473,7 @@ function mainEntityIdForPage(page, url) {
   }
 
   if (
+    page.kind === "product-detail" ||
     page.kind === "solution-detail" ||
     page.kind === "case-project-detail"
   ) {
