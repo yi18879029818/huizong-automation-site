@@ -15,3 +15,7 @@ next-migration/.wrangler/
 next-migration/out/
 next-migration/.vercel/
 next-migration/*.tsbuildinfo
+
+.dev.vars*
+!.dev.vars.example
+!.env.example
