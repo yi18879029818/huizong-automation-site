@@ -17,6 +17,11 @@ export const dynamic = "force-dynamic";
 const getCachedPostBySlug = cache(getPostBySlug);
 const getCachedRelatedPosts = cache(getRelatedPosts);
 
+const BLOG_CANONICAL_OVERRIDES = {
+  "agv-guide": "/blog/agv-guide",
+  "agv-what-is-automated-guided-vehicle": "/blog/agv-guide"
+};
+
 function resolveSlugParam(value) {
   try {
     return decodeURIComponent(value);
@@ -33,7 +38,7 @@ export async function generateMetadata({ params }) {
     return {};
   }
 
-  const canonical = `/blog/${post.slug}`;
+  const canonical = BLOG_CANONICAL_OVERRIDES[slug] || `/blog/${post.slug}`;
   const description = post.seo?.description || post.excerpt || "Warehouse automation article from coolyne.";
   const titleSource = post.seo?.title || post.title;
   const ogTitle = resolveSeoTitle(post.seo?.ogTitle || titleSource);
