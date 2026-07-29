@@ -128,6 +128,7 @@ export const postListQuery = `*[_type == "post" && defined(slug.current)] | orde
   "slug": slug.current,
   excerpt,
   publishedAt,
+  _updatedAt,
   heroImage${imageProjection},
   seo${seoProjection}
 }`;

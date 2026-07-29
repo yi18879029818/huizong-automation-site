@@ -3,6 +3,8 @@ import { getPostList } from "@/lib/sanity/content.mjs";
 import { getAllStructuredRoutes, getStructuredPage } from "@/lib/structured-content";
 import { SITE_URL } from "@/lib/site-config";
 
+export const dynamic = "force-dynamic";
+
 function toSlug(route) {
   return route === "/" ? [] : route.slice(1).split("/");
 }
@@ -77,7 +79,11 @@ export default async function sitemap() {
     const page = pages[index];
     const canonical = toAbsoluteUrl(page?.data?.seo?.canonicalUrl, route);
     const matchedPost = postMap.get(route);
-    const lastModified = matchedPost?.publishedAt ? new Date(matchedPost.publishedAt) : now;
+    const lastModified = matchedPost?._updatedAt
+      ? new Date(matchedPost._updatedAt)
+      : matchedPost?.publishedAt
+        ? new Date(matchedPost.publishedAt)
+        : now;
 
     return {
       url: canonical,
