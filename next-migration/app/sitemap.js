@@ -1,5 +1,5 @@
 import { mergeBlogPosts } from "@/lib/local-blog-posts.mjs";
-import { getPostList } from "@/lib/sanity/content.mjs";
+import { getCaseStudyList, getPostList } from "@/lib/sanity/content.mjs";
 import { getAllStructuredRoutes, getStructuredPage } from "@/lib/structured-content";
 import { SITE_URL } from "@/lib/site-config";
 
@@ -63,13 +63,15 @@ function resolveChangeFrequency(kind, route) {
 
 export default async function sitemap() {
   const now = new Date();
-  const posts = mergeBlogPosts(await getPostList());
+  const [postList, caseStudies] = await Promise.all([getPostList(), getCaseStudyList()]);
+  const posts = mergeBlogPosts(postList);
   const routes = [
     ...new Set([
       ...getAllStructuredRoutes(),
       "/faq",
       "/blog",
-      ...posts.map((post) => `/blog/${post.slug}`)
+      ...posts.map((post) => `/blog/${post.slug}`),
+      ...caseStudies.map((study) => `/case-studies/projects/${study.slug}`)
     ])
   ];
   const pages = await Promise.all(routes.map((route) => getStructuredPage(toSlug(route))));

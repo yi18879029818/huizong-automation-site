@@ -7,6 +7,7 @@ const __dirname = path.dirname(__filename);
 
 const sourceDir = path.resolve(__dirname, "../../public");
 const destinationDir = path.resolve(__dirname, "../public");
+const caseStudyAssetsDir = path.resolve(__dirname, "../case-study-assets");
 
 const CONFLICTING_HTML_PATHS = new Set(
   [
@@ -49,5 +50,12 @@ fs.cpSync(sourceDir, destinationDir, {
   force: true,
   filter: shouldCopyEntry
 });
+
+if (fs.existsSync(caseStudyAssetsDir)) {
+  fs.cpSync(caseStudyAssetsDir, path.join(destinationDir, "images", "case-studies"), {
+    recursive: true,
+    force: true
+  });
+}
 
 console.log(`Synced legacy public assets from ${sourceDir} to ${destinationDir}`);

@@ -1,5 +1,6 @@
 import "@/app/globals.css";
 import "@/app/structured-content.css";
+import "@/app/case-studies.css";
 import { cache } from "react";
 import Script from "next/script";
 import { COMPANY, SITE_URL } from "@/lib/site-config";

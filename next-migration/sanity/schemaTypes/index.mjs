@@ -5,5 +5,6 @@ import { imageWithAlt } from "./image.mjs";
 import { portableText } from "./portableText.mjs";
 import { post } from "./post.mjs";
 import { seo } from "./seo.mjs";
+import { staticImage } from "./staticImage.mjs";
 
-export const schemaTypes = [imageWithAlt, comparisonTable, portableText, seo, post, caseStudy, faq];
+export const schemaTypes = [imageWithAlt, staticImage, comparisonTable, portableText, seo, post, caseStudy, faq];
