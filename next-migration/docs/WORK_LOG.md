@@ -20,4 +20,5 @@
 
 - Standardized every case-study listing cover frame to the first card's `630:418` horizontal ratio.
 - Applied `object-fit: cover` so source images fill the common frame without distortion, including the mobile layout.
-- Verified with `npm run build` before release.
+- Verified with `npm run build` and `200` from the production `/case-studies` route.
+- Published Cloudflare Worker version `032738dd-5a21-4b5d-b179-93d464be18a8` after pushing `main`.

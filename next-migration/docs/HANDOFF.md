@@ -30,4 +30,4 @@ The electronics manufacturer case-study cover now uses the localized real produc
 
 ## 2026-07-30 Card Cover Frames
 
-Every card on `/case-studies` now uses a `630:418` cover frame with `object-fit: cover`. This keeps the current card design while preventing source-image proportions from changing card height.
+Every card on `/case-studies` now uses a `630:418` cover frame with `object-fit: cover`. This keeps the current card design while preventing source-image proportions from changing card height. Cloudflare Worker version `032738dd-5a21-4b5d-b179-93d464be18a8` is live and `/case-studies` returns `200`.
