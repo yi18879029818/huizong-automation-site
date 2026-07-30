@@ -39,3 +39,7 @@ Every card on `/case-studies` now uses a `630:418` cover frame with `object-fit:
 ## 2026-07-30 All Case Detail Layouts
 
 All six real case-study detail routes now share the same project-narrative layout. Multi-image projects retain a visual equipment grid; single-image projects use existing specification rows as visual capability cards. This is presentation-only: Sanity documents, URLs, SEO metadata, and case-study cards remain unchanged. Cloudflare Worker version `947dd14f-137c-4710-81f8-73581dac3384` is live; all six detail pages return `200` with the unified modules and without the legacy metric strip.
+
+## 2026-07-30 Mini Load Case Video
+
+The Mini Load ASRS case now embeds the user-provided YouTube video in the challenge media slot, starting at 91 seconds. The change is slug-scoped and does not alter media on the other case-study details. `npm run build` passes; record the production version after release.

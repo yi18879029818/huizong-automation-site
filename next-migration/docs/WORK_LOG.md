@@ -39,3 +39,9 @@
 - Cases with multiple project images retain the equipment gallery; single-image cases use capability cards sourced from their existing specifications instead of repeated imagery.
 - Verified `npm run build` for all 50 static routes.
 - Published Cloudflare Worker version `947dd14f-137c-4710-81f8-73581dac3384`; all six production case-study detail pages return `200` with the unified modules and without the legacy metric strip.
+
+## 2026-07-30 - Mini Load Case Video Embed
+
+- Replaced the Mini Load ASRS case study's challenge-section image with the user-provided YouTube video, starting at 91 seconds.
+- Scoped the embedded video to `/case-studies/projects/mini-load-asrs-bin-storage`; the remaining five case-study detail pages keep their existing media.
+- Verified `npm run build` successfully.

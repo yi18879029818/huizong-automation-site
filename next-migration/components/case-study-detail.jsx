@@ -119,7 +119,11 @@ const narrativeCaseConfigs = {
   "mini-load-asrs-bin-storage": {
     challengeTitle: "Small-parts storage and production-line supply",
     approachTitle: "A controlled small-parts storage and retrieval flow",
-    resultTitle: "A stable foundation for connected small-parts supply"
+    resultTitle: "A stable foundation for connected small-parts supply",
+    challengeVideo: {
+      src: "https://www.youtube-nocookie.com/embed/7Ca3GWa7XoI?start=91&rel=0",
+      title: "Mini load ASRS operation"
+    }
   },
   "unit-load-asrs-pallet-handling": {
     challengeTitle: "Finished-goods pallet storage without more floor space",
@@ -185,7 +189,20 @@ function NarrativeCaseStudy({ caseStudy, nextStudy, previousStudy }) {
           <h2 id="project-challenge">{config.challengeTitle}</h2>
           <div className="mdx-prose case-study-prose"><SanityPortableText value={caseStudy.background || caseStudy.challenge} /></div>
         </div>
-        <LocalImage image={challengeImage || coverImage} />
+        {config.challengeVideo ? (
+          <div className="case-study-video-embed">
+            <iframe
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              src={config.challengeVideo.src}
+              title={config.challengeVideo.title}
+            />
+          </div>
+        ) : (
+          <LocalImage image={challengeImage || coverImage} />
+        )}
       </section>
 
       <section aria-labelledby="project-approach-title" className="case-study-electronics-approach" id="project-approach">
