@@ -14,3 +14,4 @@
 - Replaced the electronics manufacturer case-study card cover with the verified original production-floor image from the legacy case-study listing.
 - Localized the source as `electronics-manufacturer-cover.webp`, updated the Sanity `coverImage`, and kept the existing detail-page gallery unchanged.
 - Verified the updated Sanity document and `npm run build`.
+- Published Cloudflare Worker version `68165525-e194-456c-ab3a-275f68d07702`; the production case-study listing now returns the new local WebP cover with `200`.

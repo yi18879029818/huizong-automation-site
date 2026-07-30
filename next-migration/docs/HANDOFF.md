@@ -26,4 +26,4 @@ Do not replace the Sanity case-study flow with local JSON or reintroduce legacy 
 
 ## 2026-07-30 Cover Update
 
-The electronics manufacturer case-study cover now uses the localized real production-floor image at `/images/case-studies/electronics-manufacturer-warehouse-automation/electronics-manufacturer-cover.webp`. The Sanity document has been updated; push and production deployment are the remaining release steps.
+The electronics manufacturer case-study cover now uses the localized real production-floor image at `/images/case-studies/electronics-manufacturer-warehouse-automation/electronics-manufacturer-cover.webp`. Sanity, `main`, and Cloudflare Worker version `68165525-e194-456c-ab3a-275f68d07702` have been updated; production returns the asset with `200 image/webp`.
