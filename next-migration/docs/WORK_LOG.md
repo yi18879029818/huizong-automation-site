@@ -46,3 +46,9 @@
 - Scoped the embedded video to `/case-studies/projects/mini-load-asrs-bin-storage`; the remaining five case-study detail pages keep their existing media.
 - Verified `npm run build` successfully.
 - Published Cloudflare Worker version `7c5e290b-d04b-461a-8a54-2092b464587e`; the target page returns `200` and contains the 91-second YouTube embed.
+
+## 2026-07-30 - Unit Load ASRS Case Video Embed
+
+- Replaced the Unit Load ASRS case study's challenge-section image with the user-provided YouTube video.
+- Scoped the embed to `/case-studies/projects/unit-load-asrs-pallet-handling`; the other five case-study detail pages remain unchanged.
+- Verified `npm run build` successfully.

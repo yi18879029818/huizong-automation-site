@@ -128,7 +128,11 @@ const narrativeCaseConfigs = {
   "unit-load-asrs-pallet-handling": {
     challengeTitle: "Finished-goods pallet storage without more floor space",
     approachTitle: "Pallet storage, retrieval, and warehouse control in one system",
-    resultTitle: "A safer, denser finished-goods storage model"
+    resultTitle: "A safer, denser finished-goods storage model",
+    challengeVideo: {
+      src: "https://www.youtube-nocookie.com/embed/QVyJqnM42VY?rel=0",
+      title: "Unit load ASRS pallet handling"
+    }
   },
   "workshop-intralogistics-automation": {
     challengeTitle: "Autonomous material flow between workshop and warehouse",
