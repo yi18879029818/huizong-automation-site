@@ -14,8 +14,8 @@
 .case-study-filter:hover { background: #062550; border-color: #062550; color: #fff; }
 .case-study-grid { display: grid; gap: 28px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .case-study-card { background: #fff; border: 1px solid #dde5ee; border-radius: 20px; display: flex; flex-direction: column; overflow: hidden; }
-.case-study-card-media { background: #eaf0f6; display: block; overflow: hidden; }
-.case-study-card-image { display: block; height: auto; object-fit: cover; transition: transform 260ms ease; width: 100%; }
+.case-study-card-media { aspect-ratio: 630 / 418; background: #eaf0f6; display: block; overflow: hidden; }
+.case-study-card-image { display: block; height: 100%; object-fit: cover; transition: transform 260ms ease; width: 100%; }
 .case-study-card-media:hover .case-study-card-image { transform: scale(1.025); }
 .case-study-card-image--fallback { aspect-ratio: 16 / 10; background: linear-gradient(135deg, #dce7f2, #f5f7f9); }
 .case-study-card-body { display: flex; flex: 1; flex-direction: column; padding: 22px; }

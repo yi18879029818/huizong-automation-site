@@ -15,3 +15,9 @@
 - Localized the source as `electronics-manufacturer-cover.webp`, updated the Sanity `coverImage`, and kept the existing detail-page gallery unchanged.
 - Verified the updated Sanity document and `npm run build`.
 - Published Cloudflare Worker version `68165525-e194-456c-ab3a-275f68d07702`; the production case-study listing now returns the new local WebP cover with `200`.
+
+## 2026-07-30 - Case Study Card Cover Normalization
+
+- Standardized every case-study listing cover frame to the first card's `630:418` horizontal ratio.
+- Applied `object-fit: cover` so source images fill the common frame without distortion, including the mobile layout.
+- Verified with `npm run build` before release.
