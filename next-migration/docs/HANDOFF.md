@@ -2,7 +2,7 @@
 
 ## 当前完成状态
 
-Six real case studies are stored in Sanity and render through the new case-study listing and project detail routes.
+Six real case studies are stored in Sanity and live through the new case-study listing and project detail routes.
 
 ## 本次修改的文件
 
@@ -10,7 +10,7 @@ Six real case studies are stored in Sanity and render through the new case-study
 
 ## 已验证的结果
 
-Sanity returns all six slugs; local project page and WebP image return `200`; sitemap includes all six project URLs; `npm run build` passes.
+Sanity returns all six slugs; `npm run build` passes; all six production pages and their local image paths return `200`; sitemap includes all six project URLs.
 
 ## 未解决的问题
 
@@ -18,9 +18,8 @@ Sanity returns all six slugs; local project page and WebP image return `200`; si
 
 ## 下一步建议
 
-Push `main`, execute `npm run release:production`, then verify the six production URLs and `/sitemap.xml`.
+If a hosted Studio is required, select an approved existing hostname or create one through the Sanity project owner; do not create a hostname automatically.
 
 ## 不要碰的风险区域
 
 Do not replace the Sanity case-study flow with local JSON or reintroduce legacy external image URLs.
-
