@@ -47,3 +47,7 @@ The Mini Load ASRS case now embeds the user-provided YouTube video in the challe
 ## 2026-07-30 Unit Load ASRS Case Video
 
 The Unit Load ASRS case now embeds the user-provided YouTube video in the challenge media slot. The change is slug-scoped and leaves other case-study media untouched. `npm run build` passes; record the production version after release.
+
+## 2026-07-30 Case Study Hero Title Scale
+
+All six case-study detail hero titles now use the smaller shared responsive scale, capped at `3.75rem` instead of `5.1rem`. This is a CSS-only presentation change; the pending Unit Load video and this title adjustment should be released together once network connectivity permits.

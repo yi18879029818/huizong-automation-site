@@ -52,3 +52,9 @@
 - Replaced the Unit Load ASRS case study's challenge-section image with the user-provided YouTube video.
 - Scoped the embed to `/case-studies/projects/unit-load-asrs-pallet-handling`; the other five case-study detail pages remain unchanged.
 - Verified `npm run build` successfully.
+
+## 2026-07-30 - Case Study Hero Title Scale
+
+- Reduced the shared case-study detail hero title scale from a maximum of `5.1rem` to `3.75rem`.
+- The responsive rule applies to all six project detail pages while preserving readable mobile sizing.
+- Verified `npm run build` successfully.
