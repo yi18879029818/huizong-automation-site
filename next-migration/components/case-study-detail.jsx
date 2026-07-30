@@ -80,7 +80,135 @@ function MetricStrip({ metrics }) {
   );
 }
 
+const electronicsApproach = [
+  {
+    title: "AGV Fleet Configuration & Analysis",
+    description: "Material-flow and payload analysis guide the vehicle mix, route logic, and handoff points needed for the factory workflow."
+  },
+  {
+    title: "Bespoke Logistics Automation",
+    description: "The delivery model aligns raw material, work-in-process, and finished-goods movement with the actual production cadence."
+  },
+  {
+    title: "Line-side Storage Optimization",
+    description: "Point-of-use storage and replenishment logic improve material access while keeping production areas organized."
+  },
+  {
+    title: "Integrated Software Ecosystem",
+    description: "WES, WMS, RCS, and digital-twin capabilities provide one coordinated layer for visibility, monitoring, and control."
+  }
+];
+
+const electronicsEquipment = [
+  "Stacker",
+  "Forklift AGV",
+  "Lifting AGV",
+  "Line-side Warehouse",
+  "AGV Charging Station",
+  "Logistics Control System"
+];
+
+function ElectronicsCaseStudy({ caseStudy, nextStudy, previousStudy }) {
+  const coverImage = caseStudy.coverImage || caseStudy.heroImage;
+  const gallery = caseStudy.gallery || [];
+  const challengeImage = gallery[0];
+  const equipmentImages = gallery.slice(1, 7);
+  const solutionBody = (caseStudy.solution || []).filter(
+    (block) => block._type !== "block" || block.style !== "h2"
+  );
+
+  return (
+    <main className="shell-main case-study-detail-page case-study-electronics-page">
+      <nav aria-label="Breadcrumb" className="case-study-breadcrumb">
+        <Link href="/">Home</Link>
+        <span aria-hidden="true">/</span>
+        <Link href="/case-studies">Case Studies</Link>
+        <span aria-hidden="true">/</span>
+        <span>{caseStudy.title}</span>
+      </nav>
+
+      <header className="case-study-electronics-hero">
+        <LocalImage className="case-study-electronics-hero-media" image={coverImage} priority />
+        <div className="case-study-electronics-hero-copy">
+          <p className="case-study-kicker">{caseStudy.projectDate ? new Date(`${caseStudy.projectDate}T00:00:00`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "Project case study"}</p>
+          <h1>{caseStudy.title}</h1>
+          <p>{caseStudy.summary}</p>
+          <Link className="case-study-electronics-text-link" href="#project-approach">Explore the solution <span aria-hidden="true">&darr;</span></Link>
+        </div>
+      </header>
+
+      <section aria-labelledby="project-challenge" className="case-study-electronics-challenge">
+        <div>
+          <p className="case-study-kicker">Client & Challenge</p>
+          <h2 id="project-challenge">Line-side warehouse and logistics automation</h2>
+          <div className="mdx-prose case-study-prose"><SanityPortableText value={caseStudy.background || caseStudy.challenge} /></div>
+        </div>
+        <LocalImage image={challengeImage} />
+      </section>
+
+      <section aria-labelledby="project-approach-title" className="case-study-electronics-approach" id="project-approach">
+        <div className="case-study-electronics-section-heading">
+          <p className="case-study-kicker">Our Approach</p>
+          <h2 id="project-approach-title">One connected logistics model for production flow</h2>
+          <div className="mdx-prose case-study-prose"><SanityPortableText value={solutionBody} /></div>
+        </div>
+        <div className="case-study-electronics-approach-grid">
+          {electronicsApproach.map((item, index) => (
+            <article className="case-study-electronics-approach-card" key={item.title}>
+              <span>0{index + 1}</span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {equipmentImages.length ? (
+        <section aria-labelledby="project-equipment" className="case-study-electronics-equipment">
+          <div className="case-study-electronics-section-heading">
+            <p className="case-study-kicker">Delivered System</p>
+            <h2 id="project-equipment">Equipment and control capabilities</h2>
+          </div>
+          <div className="case-study-electronics-equipment-grid">
+            {equipmentImages.map((image, index) => (
+              <figure className="case-study-electronics-equipment-card" key={image.src}>
+                <Image alt={image.alt || electronicsEquipment[index] || "Project equipment"} height={image.height || 900} sizes="(max-width: 700px) 100vw, (max-width: 1024px) 50vw, 33vw" src={image.src} width={image.width || 1200} />
+                <figcaption>{electronicsEquipment[index] || "Automation equipment"}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      <section aria-labelledby="project-results" className="case-study-electronics-results">
+        <div>
+          <p className="case-study-kicker">The Results</p>
+          <h2 id="project-results">A connected foundation for autonomous production logistics</h2>
+        </div>
+        <div className="mdx-prose case-study-prose"><SanityPortableText value={caseStudy.result || caseStudy.workflow} /></div>
+      </section>
+
+      <section className="case-study-electronics-cta">
+        <div>
+          <p className="case-study-kicker">Plan a similar project</p>
+          <h2>Request a technical consultation and workflow review.</h2>
+        </div>
+        <Link className="case-study-electronics-cta-link" href="/contact">Speak with an expert <span aria-hidden="true">&rarr;</span></Link>
+      </section>
+
+      <nav aria-label="Case study navigation" className="case-study-project-nav">
+        {previousStudy ? <Link href={`/case-studies/projects/${previousStudy.slug}`}><span>Previous project</span>{previousStudy.title}</Link> : <span />}
+        {nextStudy ? <Link href={`/case-studies/projects/${nextStudy.slug}`}><span>Next project</span>{nextStudy.title}</Link> : <span />}
+      </nav>
+    </main>
+  );
+}
+
 export function CaseStudyDetail({ caseStudy, nextStudy, previousStudy }) {
+  if (caseStudy.slug === "electronics-manufacturer-warehouse-automation") {
+    return <ElectronicsCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
+  }
+
   const coverImage = caseStudy.coverImage || caseStudy.heroImage;
   const gallery = (caseStudy.gallery || []).filter((image) => image.src !== coverImage?.src);
 

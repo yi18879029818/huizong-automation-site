@@ -22,3 +22,11 @@
 - Applied `object-fit: cover` so source images fill the common frame without distortion, including the mobile layout.
 - Verified with `npm run build` and `200` from the production `/case-studies` route.
 - Published Cloudflare Worker version `032738dd-5a21-4b5d-b179-93d464be18a8` after pushing `main`.
+
+## 2026-07-30 - Electronics Manufacturer Case Study Detail Rebuild
+
+- Rebuilt only `/case-studies/projects/electronics-manufacturer-warehouse-automation` into a dedicated project-narrative layout based on the verified legacy case-study sequence.
+- Preserved the current Coolyne visual system and localized real images while reusing the existing Sanity project content.
+- Replaced the generic table and sticky-sidebar presentation for this one route with challenge, approach, equipment, results, consultation CTA, and project navigation sections.
+- Omitted unverified numeric metrics, historical client quotations, and legacy brand references.
+- Verified `npm run build`; the generated route includes the new approach section and excludes the legacy `0 FTEs` metric.
