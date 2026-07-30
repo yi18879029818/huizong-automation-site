@@ -31,3 +31,10 @@
 - Omitted unverified numeric metrics, historical client quotations, and legacy brand references.
 - Verified `npm run build`; the generated route includes the new approach section and excludes the legacy `0 FTEs` metric.
 - Published Cloudflare Worker version `8cd9f1d7-ad56-400c-99b2-7a733aff11e6`; production returns `200` with the new approach and equipment sections.
+
+## 2026-07-30 - Case Study Detail Template Expansion
+
+- Extended the dedicated project-narrative layout from the electronics manufacturer case to the remaining five Sanity case-study detail routes.
+- Preserved each case's own Sanity content, imagery, and SEO metadata while removing generic metric strips and sticky-sidebars from all six real project details.
+- Cases with multiple project images retain the equipment gallery; single-image cases use capability cards sourced from their existing specifications instead of repeated imagery.
+- Verified `npm run build` for all 50 static routes. The release version and production verification will be recorded after deployment.

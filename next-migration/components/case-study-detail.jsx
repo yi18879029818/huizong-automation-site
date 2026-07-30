@@ -108,7 +108,47 @@ const electronicsEquipment = [
   "Logistics Control System"
 ];
 
-function ElectronicsCaseStudy({ caseStudy, nextStudy, previousStudy }) {
+const narrativeCaseConfigs = {
+  "electronics-manufacturer-warehouse-automation": {
+    challengeTitle: "Line-side warehouse and logistics automation",
+    approachTitle: "One connected logistics model for production flow",
+    resultTitle: "A connected foundation for autonomous production logistics",
+    approachCards: electronicsApproach,
+    equipmentLabels: electronicsEquipment
+  },
+  "mini-load-asrs-bin-storage": {
+    challengeTitle: "Small-parts storage and production-line supply",
+    approachTitle: "A controlled small-parts storage and retrieval flow",
+    resultTitle: "A stable foundation for connected small-parts supply"
+  },
+  "unit-load-asrs-pallet-handling": {
+    challengeTitle: "Finished-goods pallet storage without more floor space",
+    approachTitle: "Pallet storage, retrieval, and warehouse control in one system",
+    resultTitle: "A safer, denser finished-goods storage model"
+  },
+  "workshop-intralogistics-automation": {
+    challengeTitle: "Autonomous material flow between workshop and warehouse",
+    approachTitle: "A centrally dispatched model for repeatable factory logistics",
+    resultTitle: "A repeatable foundation for autonomous material handling"
+  },
+  "automated-warehouse-upgrade": {
+    challengeTitle: "A connected ASRS modernization for semi-finished materials",
+    approachTitle: "Storage, control, and production interfaces working together",
+    resultTitle: "A connected foundation for warehouse modernization"
+  },
+  "smart-home-manufacturing-agv": {
+    challengeTitle: "Empty-tray delivery and finished-goods transfer",
+    approachTitle: "A scheduled AGV flow across production stations",
+    resultTitle: "A scalable base for automated factory logistics"
+  }
+};
+
+function tableCards(table, maximum = 4) {
+  return (table?.rows || []).slice(0, maximum).map(([title, description]) => ({ title, description }));
+}
+
+function NarrativeCaseStudy({ caseStudy, nextStudy, previousStudy }) {
+  const config = narrativeCaseConfigs[caseStudy.slug];
   const coverImage = caseStudy.coverImage || caseStudy.heroImage;
   const gallery = caseStudy.gallery || [];
   const challengeImage = gallery[0];
@@ -116,6 +156,8 @@ function ElectronicsCaseStudy({ caseStudy, nextStudy, previousStudy }) {
   const solutionBody = (caseStudy.solution || []).filter(
     (block) => block._type !== "block" || block.style !== "h2"
   );
+  const approachCards = config.approachCards || tableCards(caseStudy.scope);
+  const capabilityCards = tableCards(caseStudy.specifications);
 
   return (
     <main className="shell-main case-study-detail-page case-study-electronics-page">
@@ -140,20 +182,20 @@ function ElectronicsCaseStudy({ caseStudy, nextStudy, previousStudy }) {
       <section aria-labelledby="project-challenge" className="case-study-electronics-challenge">
         <div>
           <p className="case-study-kicker">Client & Challenge</p>
-          <h2 id="project-challenge">Line-side warehouse and logistics automation</h2>
+          <h2 id="project-challenge">{config.challengeTitle}</h2>
           <div className="mdx-prose case-study-prose"><SanityPortableText value={caseStudy.background || caseStudy.challenge} /></div>
         </div>
-        <LocalImage image={challengeImage} />
+        <LocalImage image={challengeImage || coverImage} />
       </section>
 
       <section aria-labelledby="project-approach-title" className="case-study-electronics-approach" id="project-approach">
         <div className="case-study-electronics-section-heading">
           <p className="case-study-kicker">Our Approach</p>
-          <h2 id="project-approach-title">One connected logistics model for production flow</h2>
+          <h2 id="project-approach-title">{config.approachTitle}</h2>
           <div className="mdx-prose case-study-prose"><SanityPortableText value={solutionBody} /></div>
         </div>
         <div className="case-study-electronics-approach-grid">
-          {electronicsApproach.map((item, index) => (
+          {approachCards.map((item, index) => (
             <article className="case-study-electronics-approach-card" key={item.title}>
               <span>0{index + 1}</span>
               <h3>{item.title}</h3>
@@ -163,27 +205,38 @@ function ElectronicsCaseStudy({ caseStudy, nextStudy, previousStudy }) {
         </div>
       </section>
 
-      {equipmentImages.length ? (
+      {equipmentImages.length || capabilityCards.length ? (
         <section aria-labelledby="project-equipment" className="case-study-electronics-equipment">
           <div className="case-study-electronics-section-heading">
             <p className="case-study-kicker">Delivered System</p>
             <h2 id="project-equipment">Equipment and control capabilities</h2>
           </div>
-          <div className="case-study-electronics-equipment-grid">
-            {equipmentImages.map((image, index) => (
+          {equipmentImages.length ? (
+            <div className="case-study-electronics-equipment-grid">
+              {equipmentImages.map((image, index) => (
               <figure className="case-study-electronics-equipment-card" key={image.src}>
-                <Image alt={image.alt || electronicsEquipment[index] || "Project equipment"} height={image.height || 900} sizes="(max-width: 700px) 100vw, (max-width: 1024px) 50vw, 33vw" src={image.src} width={image.width || 1200} />
-                <figcaption>{electronicsEquipment[index] || "Automation equipment"}</figcaption>
+                <Image alt={image.alt || config.equipmentLabels?.[index] || "Project equipment"} height={image.height || 900} sizes="(max-width: 700px) 100vw, (max-width: 1024px) 50vw, 33vw" src={image.src} width={image.width || 1200} />
+                <figcaption>{config.equipmentLabels?.[index] || "Automation equipment"}</figcaption>
               </figure>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <div className="case-study-electronics-capability-grid">
+              {capabilityCards.map((item) => (
+                <article className="case-study-electronics-capability-card" key={item.title}>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </article>
+              ))}
+            </div>
+          )}
         </section>
       ) : null}
 
       <section aria-labelledby="project-results" className="case-study-electronics-results">
         <div>
           <p className="case-study-kicker">The Results</p>
-          <h2 id="project-results">A connected foundation for autonomous production logistics</h2>
+          <h2 id="project-results">{config.resultTitle}</h2>
         </div>
         <div className="mdx-prose case-study-prose"><SanityPortableText value={caseStudy.result || caseStudy.workflow} /></div>
       </section>
@@ -205,8 +258,8 @@ function ElectronicsCaseStudy({ caseStudy, nextStudy, previousStudy }) {
 }
 
 export function CaseStudyDetail({ caseStudy, nextStudy, previousStudy }) {
-  if (caseStudy.slug === "electronics-manufacturer-warehouse-automation") {
-    return <ElectronicsCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
+  if (narrativeCaseConfigs[caseStudy.slug]) {
+    return <NarrativeCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
   }
 
   const coverImage = caseStudy.coverImage || caseStudy.heroImage;
