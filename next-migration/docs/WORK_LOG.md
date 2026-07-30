@@ -8,3 +8,9 @@
 - Added local-image metadata, project metrics, sections, specifications, scope tables, gallery, canonical metadata, JSON-LD, and sitemap coverage.
 - Verified the Sanity queries, local page and image responses, sitemap coverage, and `npm run build`.
 - Published Cloudflare Worker version `bc04b85c-a14a-4326-b8b6-7f3deb1b52b8` after pushing `main`; all six production routes return `200`.
+
+## 2026-07-30 - Electronics Case Study Cover Correction
+
+- Replaced the electronics manufacturer case-study card cover with the verified original production-floor image from the legacy case-study listing.
+- Localized the source as `electronics-manufacturer-cover.webp`, updated the Sanity `coverImage`, and kept the existing detail-page gallery unchanged.
+- Verified the updated Sanity document and `npm run build`.

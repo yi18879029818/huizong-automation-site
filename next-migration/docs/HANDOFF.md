@@ -23,3 +23,7 @@ If a hosted Studio is required, select an approved existing hostname or create o
 ## 不要碰的风险区域
 
 Do not replace the Sanity case-study flow with local JSON or reintroduce legacy external image URLs.
+
+## 2026-07-30 Cover Update
+
+The electronics manufacturer case-study cover now uses the localized real production-floor image at `/images/case-studies/electronics-manufacturer-warehouse-automation/electronics-manufacturer-cover.webp`. The Sanity document has been updated; push and production deployment are the remaining release steps.

@@ -21,7 +21,7 @@ const bullets = (items) => items.map((text) => block(text, "normal", { listItem:
 const table = (headers, rows) => ({ _type: "comparisonTable", _key: key("table"), headers, rows });
 
 const dimensions = {
-  electronics01: [1294, 646], electronics02: [1294, 646], electronics03: [544, 365], electronics04: [544, 365], electronics05: [544, 365], electronics06: [544, 365], electronics07: [544, 365],
+  electronicsCover: [630, 418], electronics01: [1294, 646], electronics02: [1294, 646], electronics03: [544, 365], electronics04: [544, 365], electronics05: [544, 365], electronics06: [544, 365], electronics07: [544, 365],
   mini: [913, 905], unit: [913, 905], facility: [1076, 611], routes: [1639, 914], workshop: [1296, 1884],
   upgrade01: [1659, 927], upgrade02: [1659, 927], upgrade03: [1659, 927], upgrade04: [1659, 927], upgradeWorkflow: [1659, 927],
   smart01: [1423, 752], smart02: [1659, 927], smart03: [1659, 927], smart04: [1659, 927], smart05: [1659, 927]
@@ -41,6 +41,7 @@ const electronicsImages = [
   image("electronics-manufacturer-warehouse-automation", "electronics-factory-06.webp", "Line-side warehouse automation equipment", "electronics06"),
   image("electronics-manufacturer-warehouse-automation", "electronics-factory-07.webp", "Logistics control system for the electronics manufacturer project", "electronics07")
 ];
+const electronicsCover = image("electronics-manufacturer-warehouse-automation", "electronics-manufacturer-cover.webp", "Electronics manufacturing production floor with automated robotic workcells", "electronicsCover");
 const miniImage = image("mini-load-asrs-bin-storage", "mini-load-asrs.webp", "Mini load ASRS for bin storage and production supply", "mini");
 const unitImage = image("unit-load-asrs-pallet-handling", "unit-load-asrs.webp", "Unit load ASRS for finished goods pallet handling", "unit");
 const workshopImages = [
@@ -71,7 +72,7 @@ const studies = [
   {
     _id: "case-study-electronics-manufacturer-warehouse-automation", _type: "caseStudy", orderRank: 1,
     title: "Warehouse Automation Solutions for an Electronics Manufacturer", slug: { _type: "slug", current: "electronics-manufacturer-warehouse-automation" }, category: "Material Handling", industry: "Electronics Manufacturing", projectDate: "2026-04-06", publishedAt: "2026-04-06T00:00:00.000Z",
-    summary: "Integrated AGV, line-side storage, and software orchestration for raw materials, WIP transfers, finished-goods outbound logistics, and line-side supply.", coverImage: electronicsImages[0], gallery: electronicsImages,
+    summary: "Integrated AGV, line-side storage, and software orchestration for raw materials, WIP transfers, finished-goods outbound logistics, and line-side supply.", coverImage: electronicsCover, gallery: electronicsImages,
     metrics: [{ _key: key(), value: "0 FTEs", label: "Reported labor reduction" }, { _key: key(), value: "1 year", label: "Reported ROI" }],
     background: [block("The electronics manufacturer required a connected approach to raw material handling, work-in-process transfers, finished product outbound logistics, and line-side storage. The project was designed around its production and processing workflows to support a more autonomous smart-factory operation.")],
     objectives: [h2("Project objectives"), ...bullets(["Connect raw material handling, WIP movement, finished goods outbound logistics, and line-side storage.", "Align material delivery with production cadence and assembly responsiveness.", "Provide a shared software layer for visibility, monitoring, and operational coordination."])],
