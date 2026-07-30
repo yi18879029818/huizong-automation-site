@@ -38,4 +38,4 @@ Every card on `/case-studies` now uses a `630:418` cover frame with `object-fit:
 
 ## 2026-07-30 All Case Detail Layouts
 
-All six real case-study detail routes now share the same project-narrative layout. Multi-image projects retain a visual equipment grid; single-image projects use existing specification rows as visual capability cards. This is presentation-only: Sanity documents, URLs, SEO metadata, and case-study cards remain unchanged. Record the production release version after deployment.
+All six real case-study detail routes now share the same project-narrative layout. Multi-image projects retain a visual equipment grid; single-image projects use existing specification rows as visual capability cards. This is presentation-only: Sanity documents, URLs, SEO metadata, and case-study cards remain unchanged. Cloudflare Worker version `947dd14f-137c-4710-81f8-73581dac3384` is live; all six detail pages return `200` with the unified modules and without the legacy metric strip.
