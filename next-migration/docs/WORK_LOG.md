@@ -30,3 +30,4 @@
 - Replaced the generic table and sticky-sidebar presentation for this one route with challenge, approach, equipment, results, consultation CTA, and project navigation sections.
 - Omitted unverified numeric metrics, historical client quotations, and legacy brand references.
 - Verified `npm run build`; the generated route includes the new approach section and excludes the legacy `0 FTEs` metric.
+- Published Cloudflare Worker version `8cd9f1d7-ad56-400c-99b2-7a733aff11e6`; production returns `200` with the new approach and equipment sections.

@@ -34,4 +34,4 @@ Every card on `/case-studies` now uses a `630:418` cover frame with `object-fit:
 
 ## 2026-07-30 Electronics Case Layout
 
-`/case-studies/projects/electronics-manufacturer-warehouse-automation` now uses a dedicated, reference-led narrative layout. It is scoped by slug, so other case-study detail templates remain unchanged. It reuses Sanity content and localized images, and deliberately excludes unverified metrics, historical quotes, and legacy branding. Record the release version here after deployment.
+`/case-studies/projects/electronics-manufacturer-warehouse-automation` now uses a dedicated, reference-led narrative layout. It is scoped by slug, so other case-study detail templates remain unchanged. It reuses Sanity content and localized images, and deliberately excludes unverified metrics, historical quotes, and legacy branding. Cloudflare Worker version `8cd9f1d7-ad56-400c-99b2-7a733aff11e6` is live; the production page returns `200` with the new approach and equipment sections.
