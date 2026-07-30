@@ -55,6 +55,11 @@
     "height": 611
   },
   {
+    "src": "/images/case-studies/workshop-intralogistics-automation/workshop-intralogistics-cover.webp",
+    "width": 1500,
+    "height": 1500
+  },
+  {
     "src": "/images/case-studies/workshop-intralogistics-automation/agv-route-planning-and-traffic-paths.webp",
     "width": 1639,
     "height": 914
@@ -68,6 +73,11 @@
     "src": "/images/case-studies/automated-warehouse-upgrade/warehouse-upgrade-01.webp",
     "width": 1659,
     "height": 927
+  },
+  {
+    "src": "/images/case-studies/automated-warehouse-upgrade/automated-warehouse-upgrade-cover.webp",
+    "width": 746,
+    "height": 735
   },
   {
     "src": "/images/case-studies/automated-warehouse-upgrade/warehouse-upgrade-02.webp",
@@ -93,6 +103,11 @@
     "src": "/images/case-studies/smart-home-manufacturing-agv/smart-home-agv-01.webp",
     "width": 1423,
     "height": 752
+  },
+  {
+    "src": "/images/case-studies/smart-home-manufacturing-agv/smart-home-manufacturing-agv-cover.webp",
+    "width": 1000,
+    "height": 700
   },
   {
     "src": "/images/case-studies/smart-home-manufacturing-agv/smart-home-agv-02.webp",

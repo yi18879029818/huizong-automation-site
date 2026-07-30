@@ -22,9 +22,9 @@ const table = (headers, rows) => ({ _type: "comparisonTable", _key: key("table")
 
 const dimensions = {
   electronicsCover: [630, 418], electronics01: [1294, 646], electronics02: [1294, 646], electronics03: [544, 365], electronics04: [544, 365], electronics05: [544, 365], electronics06: [544, 365], electronics07: [544, 365],
-  mini: [913, 905], unit: [913, 905], facility: [1076, 611], routes: [1639, 914], workshop: [1296, 1884],
-  upgrade01: [1659, 927], upgrade02: [1659, 927], upgrade03: [1659, 927], upgrade04: [1659, 927], upgradeWorkflow: [1659, 927],
-  smart01: [1423, 752], smart02: [1659, 927], smart03: [1659, 927], smart04: [1659, 927], smart05: [1659, 927]
+  mini: [913, 905], unit: [913, 905], workshopCover: [1500, 1500], facility: [1076, 611], routes: [1639, 914], workshop: [1296, 1884],
+  upgradeCover: [746, 735], upgrade01: [1659, 927], upgrade02: [1659, 927], upgrade03: [1659, 927], upgrade04: [1659, 927], upgradeWorkflow: [1659, 927],
+  smartCover: [1000, 700], smart01: [1423, 752], smart02: [1659, 927], smart03: [1659, 927], smart04: [1659, 927], smart05: [1659, 927]
 };
 
 function image(folder, filename, alt, dimensionKey, caption) {
@@ -49,6 +49,7 @@ const workshopImages = [
   image("workshop-intralogistics-automation", "agv-route-planning-and-traffic-paths.webp", "Autonomous forklift route planning and traffic paths", "routes"),
   image("workshop-intralogistics-automation", "workshop-intralogistics-agv.webp", "Autonomous forklift used in workshop intralogistics automation", "workshop")
 ];
+const workshopCover = image("workshop-intralogistics-automation", "workshop-intralogistics-cover.webp", "Autonomous forklift supporting workshop intralogistics automation", "workshopCover");
 const upgradeImages = [
   image("automated-warehouse-upgrade", "warehouse-upgrade-01.webp", "Automated warehouse upgrade with ASRS system", "upgrade01"),
   image("automated-warehouse-upgrade", "warehouse-upgrade-02.webp", "ASRS storage and retrieval equipment", "upgrade02"),
@@ -56,6 +57,7 @@ const upgradeImages = [
   image("automated-warehouse-upgrade", "warehouse-upgrade-04.webp", "Warehouse system control workflow", "upgrade04"),
   image("automated-warehouse-upgrade", "warehouse-upgrade-workflow.webp", "Automated warehouse storage and retrieval workflow", "upgradeWorkflow")
 ];
+const upgradeCover = image("automated-warehouse-upgrade", "automated-warehouse-upgrade-cover.webp", "Pallet racking in the automated warehouse upgrade project", "upgradeCover");
 const smartImages = [
   image("smart-home-manufacturing-agv", "smart-home-agv-01.webp", "Roller AGV supporting smart home manufacturing", "smart01"),
   image("smart-home-manufacturing-agv", "smart-home-agv-02.webp", "Empty tray delivery with roller AGV", "smart02"),
@@ -63,6 +65,7 @@ const smartImages = [
   image("smart-home-manufacturing-agv", "smart-home-agv-04.webp", "AGV digital twin system screen", "smart04"),
   image("smart-home-manufacturing-agv", "smart-home-agv-05.webp", "AGV fleet configuration for the smart home manufacturing project", "smart05")
 ];
+const smartCover = image("smart-home-manufacturing-agv", "smart-home-manufacturing-agv-cover.webp", "AGV material transfer in the smart home manufacturing project", "smartCover");
 
 function seo(title, summary, slug) {
   return { title, description: summary, canonicalUrl: `/case-studies/projects/${slug}`, noindex: false, ogTitle: title, ogDescription: summary, twitterCard: "summary_large_image" };
@@ -116,7 +119,7 @@ const studies = [
   {
     _id: "case-study-workshop-intralogistics-automation", _type: "caseStudy", orderRank: 4,
     title: "Workshop Intralogistics Automation", slug: { _type: "slug", current: "workshop-intralogistics-automation" }, category: "Material Handling", industry: "Packaging Manufacturing", projectDate: "2026-04-06", publishedAt: "2026-04-06T00:00:00.000Z",
-    summary: "Autonomous forklift project for workshop-to-warehouse material flow, production-line supply, and finished-goods handling.", coverImage: workshopImages[0], gallery: workshopImages,
+    summary: "Autonomous forklift project for workshop-to-warehouse material flow, production-line supply, and finished-goods handling.", coverImage: workshopCover, gallery: workshopImages,
     metrics: [{ _key: key(), value: "150,000 m²", label: "Facility area" }, { _key: key(), value: "4", label: "Autonomous forklifts" }, { _key: key(), value: "1.6 t", label: "Rated load" }, { _key: key(), value: "2 years", label: "Reported ROI" }],
     background: [block("A large packaging manufacturer in China operated a 150,000 m² facility with highly automated production lines but manual internal material handling. The project focused on first-floor workshop flow, a secondary warehouse, and finished-goods warehouse movements.")],
     objectives: [h2("Project objectives"), ...bullets(["Support full-process, pull-based logistics across workshop and warehouse operations.", "Automate raw-material delivery and finished-goods storage movement.", "Replace repeatable manual forklift transport with autonomous handling."])],
@@ -131,7 +134,7 @@ const studies = [
   {
     _id: "case-study-automated-warehouse-upgrade", _type: "caseStudy", orderRank: 5,
     title: "Automated Warehouse Upgrade with ASRS System", slug: { _type: "slug", current: "automated-warehouse-upgrade" }, category: "ASRS", industry: "Electronics Manufacturing", projectDate: "2026-04-06", publishedAt: "2026-04-06T00:00:00.000Z",
-    summary: "ASRS warehouse upgrade combining stacker cranes, conveyors, inventory software, and AGV docking for automated storage and retrieval.", coverImage: upgradeImages[0], gallery: upgradeImages,
+    summary: "ASRS warehouse upgrade combining stacker cranes, conveyors, inventory software, and AGV docking for automated storage and retrieval.", coverImage: upgradeCover, gallery: upgradeImages,
     metrics: [{ _key: key(), value: "5", label: "Stacker cranes" }, { _key: key(), value: "2,776", label: "Storage locations" }, { _key: key(), value: "10", label: "Conveyor sets" }, { _key: key(), value: "3 years", label: "Reported payback" }],
     background: [block("After an earlier AGV material-handling project, the manufacturer required a warehouse modernization to improve storage density, inventory control, and handling efficiency for semi-finished materials.")],
     objectives: [h2("Project objectives"), ...bullets(["Automate semi-finished material storage and warehouse logistics.", "Support end-of-line automatic putaway and pull-based inbound supply for downstream processes.", "Replace repeatable manual warehouse transport with driverless material handling."])],
@@ -146,7 +149,7 @@ const studies = [
   {
     _id: "case-study-smart-home-manufacturing-agv", _type: "caseStudy", orderRank: 6,
     title: "Automated Guided Vehicle Project for Smart Home Manufacturing", slug: { _type: "slug", current: "smart-home-manufacturing-agv" }, category: "Material Handling", industry: "Smart Home Manufacturing", projectDate: "2026-04-06", publishedAt: "2026-04-06T00:00:00.000Z",
-    summary: "Roller AGVs for empty-tray delivery and finished-goods transfer in a smart-home manufacturing workflow.", coverImage: smartImages[0], gallery: smartImages,
+    summary: "Roller AGVs for empty-tray delivery and finished-goods transfer in a smart-home manufacturing workflow.", coverImage: smartCover, gallery: smartImages,
     metrics: [{ _key: key(), value: "150 kg", label: "Payload" }, { _key: key(), value: ">8 h", label: "Endurance" }, { _key: key(), value: "1.5 m/s", label: "Maximum speed" }, { _key: key(), value: "11", label: "Recommended AGVs for peak demand" }],
     background: [block("The smart-home manufacturer had automated production lines but relied on manual internal material handling. The project addressed empty-tray delivery and finished-goods transfer so employees could focus more on technical maintenance, monitoring, and adjustment.")],
     objectives: [h2("Project objectives"), ...bullets(["Automate empty-tray delivery and finished-goods transfer.", "Support full-process production logistics.", "Create a demonstrable smart-manufacturing material-handling workflow."])],
