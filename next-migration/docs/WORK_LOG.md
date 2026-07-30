@@ -45,3 +45,4 @@
 - Replaced the Mini Load ASRS case study's challenge-section image with the user-provided YouTube video, starting at 91 seconds.
 - Scoped the embedded video to `/case-studies/projects/mini-load-asrs-bin-storage`; the remaining five case-study detail pages keep their existing media.
 - Verified `npm run build` successfully.
+- Published Cloudflare Worker version `7c5e290b-d04b-461a-8a54-2092b464587e`; the target page returns `200` and contains the 91-second YouTube embed.

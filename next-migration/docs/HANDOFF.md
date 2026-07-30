@@ -42,4 +42,4 @@ All six real case-study detail routes now share the same project-narrative layou
 
 ## 2026-07-30 Mini Load Case Video
 
-The Mini Load ASRS case now embeds the user-provided YouTube video in the challenge media slot, starting at 91 seconds. The change is slug-scoped and does not alter media on the other case-study details. `npm run build` passes; record the production version after release.
+The Mini Load ASRS case now embeds the user-provided YouTube video in the challenge media slot, starting at 91 seconds. The change is slug-scoped and does not alter media on the other case-study details. Cloudflare Worker version `7c5e290b-d04b-461a-8a54-2092b464587e` is live; the target page and an unaffected case page both return `200`.
