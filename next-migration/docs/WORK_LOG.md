@@ -72,3 +72,10 @@
 - Preserved the ASRS upgrade case's own Sanity text, route, and SEO data while using the three locally stored original reference images in the matching report sections.
 - Verified `npm run build` successfully.
 - Published Cloudflare Worker version `79db6028-97d0-422b-9b69-6f1fcb5b1f05`; the production route returns `200` with the new report headings and reference media.
+
+## 2026-07-31 - Sanity Blog Publication and Update
+
+- Published `Reverse Logistics: What It Is and Why It Matters to Your Business` to Sanity at `/blog/reverse-logistics`.
+- Updated `/blog/agv-vs-amr` from the supplied English document, retaining its existing hero image and publishing all nine AGV-versus-AMR comparison tables.
+- Updated article metadata and canonical paths through the standard Sanity post fields; both posts contain English-only body content.
+- Verified both production URLs return `200` and `/sitemap.xml` includes the new reverse-logistics URL.

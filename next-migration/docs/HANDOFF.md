@@ -2,60 +2,24 @@
 
 ## 当前完成状态
 
-Six real case studies are stored in Sanity and live through the new case-study listing and project detail routes.
+Sanity 已发布 `/blog/reverse-logistics`，并已更新 `/blog/agv-vs-amr` 的英文正文、SEO 内容和九张比较表；后者保留原有封面图。
 
 ## 本次修改的文件
 
-`app/case-studies/`, `components/case-study-*.jsx`, `lib/sanity/queries.mjs`, `sanity/schemaTypes/`, `scripts/`, `case-study-assets/`, and `app/sitemap.js`.
+`scripts/import-blog-markdown-to-sanity.mjs`、`docs/WORK_LOG.md`、`docs/HANDOFF.md`。
 
 ## 已验证的结果
 
-Sanity returns all six slugs; `npm run build` passes; all six production pages and their local image paths return `200`; sitemap includes all six project URLs.
+Sanity 中两篇文章均已存在；`agv-vs-amr` 有封面、9 张表格且无中文正文。两篇生产 URL 均返回 `200`，`/sitemap.xml` 已含 `/blog/reverse-logistics`。
 
 ## 未解决的问题
 
-`npx sanity deploy --yes` requires selecting or creating a hosted Studio hostname. No new hostname was created automatically.
+新文章未提供封面，因此未添加任何虚构图片；列表页将使用无封面状态，直到提供真实封面素材。
 
 ## 下一步建议
 
-If a hosted Studio is required, select an approved existing hostname or create one through the Sanity project owner; do not create a hostname automatically.
+如需新文章封面，请提供可用于营销发布的图片；后续博客继续通过 Sanity 发布并验证站点地图。
 
 ## 不要碰的风险区域
 
-Do not replace the Sanity case-study flow with local JSON or reintroduce legacy external image URLs.
-
-## 2026-07-30 Cover Update
-
-The electronics manufacturer case-study cover now uses the localized real production-floor image at `/images/case-studies/electronics-manufacturer-warehouse-automation/electronics-manufacturer-cover.webp`. Sanity, `main`, and Cloudflare Worker version `68165525-e194-456c-ab3a-275f68d07702` have been updated; production returns the asset with `200 image/webp`.
-
-## 2026-07-30 Card Cover Frames
-
-Every card on `/case-studies` now uses a `630:418` cover frame with `object-fit: cover`. This keeps the current card design while preventing source-image proportions from changing card height. Cloudflare Worker version `032738dd-5a21-4b5d-b179-93d464be18a8` is live and `/case-studies` returns `200`.
-
-## 2026-07-30 Electronics Case Layout
-
-`/case-studies/projects/electronics-manufacturer-warehouse-automation` now uses a dedicated, reference-led narrative layout. It is scoped by slug, so other case-study detail templates remain unchanged. It reuses Sanity content and localized images, and deliberately excludes unverified metrics, historical quotes, and legacy branding. Cloudflare Worker version `8cd9f1d7-ad56-400c-99b2-7a733aff11e6` is live; the production page returns `200` with the new approach and equipment sections.
-
-## 2026-07-30 All Case Detail Layouts
-
-All six real case-study detail routes now share the same project-narrative layout. Multi-image projects retain a visual equipment grid; single-image projects use existing specification rows as visual capability cards. This is presentation-only: Sanity documents, URLs, SEO metadata, and case-study cards remain unchanged. Cloudflare Worker version `947dd14f-137c-4710-81f8-73581dac3384` is live; all six detail pages return `200` with the unified modules and without the legacy metric strip.
-
-## 2026-07-30 Mini Load Case Video
-
-The Mini Load ASRS case now embeds the user-provided YouTube video in the challenge media slot, starting at 91 seconds. The change is slug-scoped and does not alter media on the other case-study details. Cloudflare Worker version `7c5e290b-d04b-461a-8a54-2092b464587e` is live; the target page and an unaffected case page both return `200`.
-
-## 2026-07-30 Unit Load ASRS Case Video
-
-The Unit Load ASRS case now embeds the user-provided YouTube video in the challenge media slot. The change is slug-scoped and leaves other case-study media untouched. `npm run build` passes; record the production version after release.
-
-## 2026-07-30 Case Study Hero Title Scale
-
-All six case-study detail hero titles now use the smaller shared responsive scale, capped at `3.75rem` instead of `5.1rem`. The Unit Load ASRS video and title scale are live in Cloudflare Worker version `cb0c7920-8b69-413e-92e1-c8d7dfb9f6e8`; both target case pages return `200`.
-
-## 2026-07-31 Portrait Equipment Image Framing
-
-Portrait equipment images in case-study delivery cards now use full-image framing instead of `cover` cropping. The adjustment is scoped by source dimensions, so landscape images retain their existing layout. Record the production version after release.
-
-## 2026-07-31 ASRS Upgrade Reference Layout
-
-`/case-studies/projects/automated-warehouse-upgrade` now uses the reference-style long-form case layout and the three original locally stored workshop reference images. The change is slug-scoped; other case pages are unchanged. Cloudflare Worker `79db6028-97d0-422b-9b69-6f1fcb5b1f05` is live; the page returns `200` with the new report sections and reference media.
+不要用更新导入覆盖 `heroImage`；导入脚本现在会保留已有文章的 Sanity 封面引用。

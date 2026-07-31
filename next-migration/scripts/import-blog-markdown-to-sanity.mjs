@@ -275,7 +275,7 @@ if (!metaTitle || !metaDescription || !slug) {
 
 const body = parseBody(source);
 const existing = await client.fetch(
-  '*[_type == "post" && slug.current == $slug][0]{_id,publishedAt}',
+  '*[_type == "post" && slug.current == $slug][0]{_id,publishedAt,heroImage}',
   { slug }
 );
 
@@ -292,6 +292,7 @@ const doc = {
   },
   excerpt: metaDescription,
   publishedAt: existing?.publishedAt || nowIso,
+  ...(existing?.heroImage ? { heroImage: existing.heroImage } : {}),
   body,
   seo: {
     title: metaTitle,
