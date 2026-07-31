@@ -58,3 +58,4 @@
 - Reduced the shared case-study detail hero title scale from a maximum of `5.1rem` to `3.75rem`.
 - The responsive rule applies to all six project detail pages while preserving readable mobile sizing.
 - Verified `npm run build` successfully.
+- Published Cloudflare Worker version `cb0c7920-8b69-413e-92e1-c8d7dfb9f6e8`; the Unit Load ASRS page returns `200` with its video and the shared title scale is present in the published CSS.
