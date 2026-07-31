@@ -65,3 +65,9 @@
 - Updated portrait equipment images in case-study delivered-system cards to use complete-image framing rather than horizontal cropping.
 - The workshop intralogistics AGV card now shows the full vehicle; landscape project images retain their existing presentation.
 - Verified `npm run build` successfully.
+
+## 2026-07-31 - ASRS Upgrade Reference Layout
+
+- Rebuilt `/case-studies/projects/automated-warehouse-upgrade` as a long-form project report following the Robotlyne workshop intralogistics reference structure.
+- Preserved the ASRS upgrade case's own Sanity text, route, and SEO data while using the three locally stored original reference images in the matching report sections.
+- Verified `npm run build` successfully.

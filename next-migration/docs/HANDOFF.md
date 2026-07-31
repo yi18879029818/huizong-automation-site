@@ -55,3 +55,7 @@ All six case-study detail hero titles now use the smaller shared responsive scal
 ## 2026-07-31 Portrait Equipment Image Framing
 
 Portrait equipment images in case-study delivery cards now use full-image framing instead of `cover` cropping. The adjustment is scoped by source dimensions, so landscape images retain their existing layout. Record the production version after release.
+
+## 2026-07-31 ASRS Upgrade Reference Layout
+
+`/case-studies/projects/automated-warehouse-upgrade` now uses the reference-style long-form case layout and the three original locally stored workshop reference images. The change is slug-scoped; other case pages are unchanged. Record the production Worker version after release.

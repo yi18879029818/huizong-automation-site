@@ -151,6 +151,130 @@ const narrativeCaseConfigs = {
   }
 };
 
+const workshopReferenceImages = [
+  {
+    src: "/images/case-studies/workshop-intralogistics-automation/facility-layout-and-process-flow.webp",
+    width: 1076,
+    height: 611,
+    alt: "Facility layout and material flow diagram from the workshop intralogistics reference project"
+  },
+  {
+    src: "/images/case-studies/workshop-intralogistics-automation/agv-route-planning-and-traffic-paths.webp",
+    width: 1639,
+    height: 914,
+    alt: "AGV route planning and traffic paths from the workshop intralogistics reference project"
+  },
+  {
+    src: "/images/case-studies/workshop-intralogistics-automation/workshop-intralogistics-agv.webp",
+    width: 1296,
+    height: 1884,
+    alt: "Laser SLAM autonomous transport forklift from the workshop intralogistics reference project"
+  }
+];
+
+function referenceBody(value) {
+  return (value || []).filter((block) => block._type !== "block" || block.style !== "h2");
+}
+
+function ReferenceTextSection({ id, title, value, children }) {
+  return (
+    <section aria-labelledby={id} className="case-study-reference-section">
+      <h2 id={id}>{title}</h2>
+      {value?.length ? <div className="mdx-prose case-study-reference-prose"><SanityPortableText value={referenceBody(value)} /></div> : null}
+      {children}
+    </section>
+  );
+}
+
+function ReferenceTableSection({ id, title, table }) {
+  if (!table?.headers?.length || !table?.rows?.length) {
+    return null;
+  }
+
+  return (
+    <section aria-labelledby={id} className="case-study-reference-section">
+      <h2 id={id}>{title}</h2>
+      <div className="case-study-reference-table-wrap">
+        <table>
+          <thead>
+            <tr>{table.headers.map((header) => <th key={header}>{header}</th>)}</tr>
+          </thead>
+          <tbody>
+            {table.rows.map((row, rowIndex) => (
+              <tr key={`${id}-${rowIndex}`}>
+                {row.map((cell, cellIndex) => <td key={`${id}-${rowIndex}-${cellIndex}`}>{cell}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
+
+function ReferenceImage({ image, portrait = false }) {
+  return (
+    <LocalImage className={`case-study-reference-image${portrait ? " case-study-reference-image--portrait" : ""}`} image={image} />
+  );
+}
+
+function AutomatedWarehouseUpgradeReference({ caseStudy, nextStudy, previousStudy }) {
+  const [facilityImage, routeImage, equipmentImage] = workshopReferenceImages;
+
+  return (
+    <main className="shell-main case-study-detail-page case-study-reference-page">
+      <nav aria-label="Breadcrumb" className="case-study-breadcrumb">
+        <Link href="/">Home</Link>
+        <span aria-hidden="true">/</span>
+        <Link href="/case-studies">Case Studies</Link>
+        <span aria-hidden="true">/</span>
+        <span>{caseStudy.title}</span>
+      </nav>
+
+      <header className="case-study-reference-header">
+        <p className="case-study-kicker">{caseStudy.projectDate ? new Date(`${caseStudy.projectDate}T00:00:00`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "Project case study"}</p>
+        <h1>{caseStudy.title}</h1>
+      </header>
+
+      <article className="case-study-reference-article">
+        <ReferenceTextSection id="project-background" title="Project Background" value={caseStudy.background || caseStudy.challenge} />
+        <ReferenceTextSection id="project-objectives" title="Project Objectives" value={caseStudy.objectives} />
+
+        <ReferenceTextSection id="site-assessment" title="On Site Assessment and Data Analysis" value={caseStudy.assessment}>
+          <h3>Facility Layout</h3>
+          <ReferenceImage image={facilityImage} />
+        </ReferenceTextSection>
+
+        <ReferenceTextSection id="solution-approach" title="Solution Approach" value={caseStudy.solution} />
+
+        <ReferenceTextSection id="warehouse-workflow" title="Warehouse Workflow and Control Logic" value={caseStudy.workflow}>
+          <ReferenceImage image={routeImage} />
+        </ReferenceTextSection>
+
+        <ReferenceTableSection id="equipment-overview" title="Equipment Overview" table={caseStudy.specifications} />
+        <ReferenceImage image={equipmentImage} portrait />
+
+        <ReferenceTableSection id="project-scope" title="Project Scope and ROI Analysis" table={caseStudy.scope} />
+        <ReferenceTextSection id="project-results" title="Project Results" value={caseStudy.result} />
+
+        <section className="case-study-reference-cta">
+          <div>
+            <p className="case-study-kicker">Interested in our solutions?</p>
+            <h2>Discuss an ASRS upgrade for your warehouse workflow.</h2>
+            <p>Share your layout and operating requirements for a clear project scope and engineering review.</p>
+          </div>
+          <Link href="/contact">Speak with an expert <span aria-hidden="true">&rarr;</span></Link>
+        </section>
+      </article>
+
+      <nav aria-label="Case study navigation" className="case-study-project-nav">
+        {previousStudy ? <Link href={`/case-studies/projects/${previousStudy.slug}`}><span>Previous project</span>{previousStudy.title}</Link> : <span />}
+        {nextStudy ? <Link href={`/case-studies/projects/${nextStudy.slug}`}><span>Next project</span>{nextStudy.title}</Link> : <span />}
+      </nav>
+    </main>
+  );
+}
+
 function tableCards(table, maximum = 4) {
   return (table?.rows || []).slice(0, maximum).map(([title, description]) => ({ title, description }));
 }
@@ -282,6 +406,10 @@ function NarrativeCaseStudy({ caseStudy, nextStudy, previousStudy }) {
 }
 
 export function CaseStudyDetail({ caseStudy, nextStudy, previousStudy }) {
+  if (caseStudy.slug === "automated-warehouse-upgrade") {
+    return <AutomatedWarehouseUpgradeReference caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
+  }
+
   if (narrativeCaseConfigs[caseStudy.slug]) {
     return <NarrativeCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
   }
