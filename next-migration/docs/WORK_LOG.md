@@ -86,3 +86,4 @@
 - Set the visible article title from the document H1 and retained the document Meta Title for SEO; preserved the existing hero image and publication date.
 - Imported 171 English-only Portable Text blocks with the revised warehouse automation systems, types, and process content.
 - Verified the production page returns `200`, displays the updated title, and is present in `/sitemap.xml`.
+- Published Cloudflare Worker version `c9a77a77-6639-46fc-a486-e455f812d81b`; the live page and its SEO title both return the updated values.
