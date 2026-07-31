@@ -58,4 +58,4 @@ Portrait equipment images in case-study delivery cards now use full-image framin
 
 ## 2026-07-31 ASRS Upgrade Reference Layout
 
-`/case-studies/projects/automated-warehouse-upgrade` now uses the reference-style long-form case layout and the three original locally stored workshop reference images. The change is slug-scoped; other case pages are unchanged. Record the production Worker version after release.
+`/case-studies/projects/automated-warehouse-upgrade` now uses the reference-style long-form case layout and the three original locally stored workshop reference images. The change is slug-scoped; other case pages are unchanged. Cloudflare Worker `79db6028-97d0-422b-9b69-6f1fcb5b1f05` is live; the page returns `200` with the new report sections and reference media.

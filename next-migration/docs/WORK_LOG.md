@@ -71,3 +71,4 @@
 - Rebuilt `/case-studies/projects/automated-warehouse-upgrade` as a long-form project report following the Robotlyne workshop intralogistics reference structure.
 - Preserved the ASRS upgrade case's own Sanity text, route, and SEO data while using the three locally stored original reference images in the matching report sections.
 - Verified `npm run build` successfully.
+- Published Cloudflare Worker version `79db6028-97d0-422b-9b69-6f1fcb5b1f05`; the production route returns `200` with the new report headings and reference media.
