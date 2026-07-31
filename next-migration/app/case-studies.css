@@ -104,6 +104,7 @@
 .case-study-electronics-equipment-grid { display: grid; gap: 18px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 42px; }
 .case-study-electronics-equipment-card { background: #f3f6f9; border-radius: 16px; margin: 0; overflow: hidden; }
 .case-study-electronics-equipment-card img { aspect-ratio: 1.36 / 1; display: block; object-fit: cover; width: 100%; }
+.case-study-electronics-equipment-card--portrait img { box-sizing: border-box; object-fit: contain; padding: 12px 32px; }
 .case-study-electronics-equipment-card figcaption { color: #062550; font-size: .92rem; font-weight: 800; padding: 17px 18px 19px; }
 .case-study-electronics-capability-grid { display: grid; gap: 18px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 42px; }
 .case-study-electronics-capability-card { background: #f3f6f9; border: 1px solid #dfe6ef; border-radius: 16px; min-height: 156px; padding: 25px; }

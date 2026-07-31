@@ -235,10 +235,13 @@ function NarrativeCaseStudy({ caseStudy, nextStudy, previousStudy }) {
           {equipmentImages.length ? (
             <div className="case-study-electronics-equipment-grid">
               {equipmentImages.map((image, index) => (
-              <figure className="case-study-electronics-equipment-card" key={image.src}>
-                <Image alt={image.alt || config.equipmentLabels?.[index] || "Project equipment"} height={image.height || 900} sizes="(max-width: 700px) 100vw, (max-width: 1024px) 50vw, 33vw" src={image.src} width={image.width || 1200} />
-                <figcaption>{config.equipmentLabels?.[index] || "Automation equipment"}</figcaption>
-              </figure>
+                <figure
+                  className={`case-study-electronics-equipment-card${image.height > image.width ? " case-study-electronics-equipment-card--portrait" : ""}`}
+                  key={image.src}
+                >
+                  <Image alt={image.alt || config.equipmentLabels?.[index] || "Project equipment"} height={image.height || 900} sizes="(max-width: 700px) 100vw, (max-width: 1024px) 50vw, 33vw" src={image.src} width={image.width || 1200} />
+                  <figcaption>{config.equipmentLabels?.[index] || "Automation equipment"}</figcaption>
+                </figure>
               ))}
             </div>
           ) : (

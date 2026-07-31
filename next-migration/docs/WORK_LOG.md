@@ -59,3 +59,9 @@
 - The responsive rule applies to all six project detail pages while preserving readable mobile sizing.
 - Verified `npm run build` successfully.
 - Published Cloudflare Worker version `cb0c7920-8b69-413e-92e1-c8d7dfb9f6e8`; the Unit Load ASRS page returns `200` with its video and the shared title scale is present in the published CSS.
+
+## 2026-07-31 - Portrait Equipment Image Framing
+
+- Updated portrait equipment images in case-study delivered-system cards to use complete-image framing rather than horizontal cropping.
+- The workshop intralogistics AGV card now shows the full vehicle; landscape project images retain their existing presentation.
+- Verified `npm run build` successfully.
