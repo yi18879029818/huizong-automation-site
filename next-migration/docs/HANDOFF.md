@@ -1,25 +1,19 @@
 # Handoff
 
 ## 当前完成状态
-
-Sanity 已发布 `/blog/reverse-logistics`，并已更新 `/blog/agv-vs-amr` 的英文正文、SEO 内容和九张比较表；后者保留原有封面图。
+Sanity 已发布 `/blog/reverse-logistics`，并已更新 `/blog/agv-vs-amr` 和 `/blog/warehouse-automation-guide` 的英文正文与 SEO 内容；后两篇均保留原有封面。
 
 ## 本次修改的文件
-
 `scripts/import-blog-markdown-to-sanity.mjs`、`docs/WORK_LOG.md`、`docs/HANDOFF.md`。
 
 ## 已验证的结果
-
-Sanity 中两篇文章均已存在；`agv-vs-amr` 有封面、9 张表格且无中文正文。两篇生产 URL 均返回 `200`，`/sitemap.xml` 已含 `/blog/reverse-logistics`。
+`warehouse-automation-guide` 已返回 `200`，页面显示新标题，且 `/sitemap.xml` 已包含该 URL。导入器会以正文 H1 作为文章标题、以 Meta Title 作为 SEO 标题，并保留已有 `heroImage`。
 
 ## 未解决的问题
-
-新文章未提供封面，因此未添加任何虚构图片；列表页将使用无封面状态，直到提供真实封面素材。GitHub `443` 当前不可连接，本地提交 `8277aa8` 尚未推送到 `origin/main`，因此未执行 Cloudflare 部署。
+GitHub `443` 当前仍无法连接；本地 `main` 尚有未同步提交，因此尚未执行 Cloudflare 发布。`reverse-logistics` 未提供封面，暂保持无封面状态。
 
 ## 下一步建议
-
-网络恢复后先执行 `git push origin main`，再执行 `npm run release:production`；如需新文章封面，请提供可用于营销发布的图片。
+网络恢复后先执行 `git push origin main`，再执行 `npm run release:production`；如需为 `reverse-logistics` 添加封面，请提供可用于正式发布的图片。
 
 ## 不要碰的风险区域
-
-不要用更新导入覆盖 `heroImage`；导入脚本现在会保留已有文章的 Sanity 封面引用。
+不要用更新导入覆盖 `heroImage`；所有博客仍应通过 Sanity 正式内容流发布，并在发布后验证页面可访问和 sitemap 已更新。

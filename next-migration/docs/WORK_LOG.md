@@ -79,3 +79,10 @@
 - Updated `/blog/agv-vs-amr` from the supplied English document, retaining its existing hero image and publishing all nine AGV-versus-AMR comparison tables.
 - Updated article metadata and canonical paths through the standard Sanity post fields; both posts contain English-only body content.
 - Verified both production URLs return `200` and `/sitemap.xml` includes the new reverse-logistics URL.
+
+## 2026-07-31 - Warehouse Automation Guide Sanity Update
+
+- Updated `/blog/warehouse-automation-guide` from the supplied Word document through the formal Sanity content flow.
+- Set the visible article title from the document H1 and retained the document Meta Title for SEO; preserved the existing hero image and publication date.
+- Imported 171 English-only Portable Text blocks with the revised warehouse automation systems, types, and process content.
+- Verified the production page returns `200`, displays the updated title, and is present in `/sitemap.xml`.

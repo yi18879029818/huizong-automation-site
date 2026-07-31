@@ -273,6 +273,12 @@ if (!metaTitle || !metaDescription || !slug) {
   throw new Error("Failed to extract Meta Title, Meta Description, or URL Slug.");
 }
 
+const articleTitle =
+  source
+    .replace(/\r\n/g, "\n")
+    .split("\n")
+    .map((line) => parseCustomHeading(line.trim()))
+    .find((heading) => heading?.level === 1)?.text || metaTitle;
 const body = parseBody(source);
 const existing = await client.fetch(
   '*[_type == "post" && slug.current == $slug][0]{_id,publishedAt,heroImage}',
@@ -285,7 +291,7 @@ const nowIso = new Date().toISOString();
 const doc = {
   _id: documentId,
   _type: "post",
-  title: metaTitle,
+  title: articleTitle,
   slug: {
     _type: "slug",
     current: slug
@@ -326,7 +332,7 @@ console.log(
       status: "ok",
       documentId,
       slug,
-      title: metaTitle,
+      title: articleTitle,
       bodyBlockCount: body.length,
       englishOnly
     },
