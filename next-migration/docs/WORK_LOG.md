@@ -99,3 +99,8 @@
 - Added five supplied warehouse images to `/blog/reverse-logistics` through Sanity's asset library without changing the article title, publication date, or hero image state.
 - Placed the images after the relevant sections for returnable-container recovery, return registration, restock/repair/disposal classification, conveyor sorting, and AGV/AMR internal transportation.
 - Verified the Sanity document contains five `imageWithAlt` blocks, the production article returns `200` with Sanity image URLs, and `/sitemap.xml` includes the article URL.
+
+## 2026-08-01 - Reverse Logistics Cover Image
+
+- Set the returnable-container image already used in the article body as the Sanity `heroImage` for `/blog/reverse-logistics`.
+- Verified the production article returns `200` and references the selected Sanity cover asset.
