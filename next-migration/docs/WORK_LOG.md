@@ -93,3 +93,9 @@
 - Updated `/blog/goods-to-person-guide` and `/blog/what-is-asrs` from the supplied Word documents through the formal Sanity content flow.
 - Preserved each article's existing hero image and publication date while replacing the English body and SEO metadata; the G2P article contains 151 body blocks and the AS/RS article contains 94.
 - Verified both production URLs return `200`, show their new titles and SEO titles, contain English-only bodies, and are included in `/sitemap.xml`.
+
+## 2026-08-01 - Reverse Logistics Inline Images
+
+- Added five supplied warehouse images to `/blog/reverse-logistics` through Sanity's asset library without changing the article title, publication date, or hero image state.
+- Placed the images after the relevant sections for returnable-container recovery, return registration, restock/repair/disposal classification, conveyor sorting, and AGV/AMR internal transportation.
+- Verified the Sanity document contains five `imageWithAlt` blocks, the production article returns `200` with Sanity image URLs, and `/sitemap.xml` includes the article URL.
