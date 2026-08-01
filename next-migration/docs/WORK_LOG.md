@@ -87,3 +87,9 @@
 - Imported 171 English-only Portable Text blocks with the revised warehouse automation systems, types, and process content.
 - Verified the production page returns `200`, displays the updated title, and is present in `/sitemap.xml`.
 - Published Cloudflare Worker version `c9a77a77-6639-46fc-a486-e455f812d81b`; the live page and its SEO title both return the updated values.
+
+## 2026-08-01 - G2P and AS/RS Sanity Updates
+
+- Updated `/blog/goods-to-person-guide` and `/blog/what-is-asrs` from the supplied Word documents through the formal Sanity content flow.
+- Preserved each article's existing hero image and publication date while replacing the English body and SEO metadata; the G2P article contains 151 body blocks and the AS/RS article contains 94.
+- Verified both production URLs return `200`, show their new titles and SEO titles, contain English-only bodies, and are included in `/sitemap.xml`.
