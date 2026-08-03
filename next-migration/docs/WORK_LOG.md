@@ -130,3 +130,4 @@
 - Rebuilt `/case-studies/projects/workshop-intralogistics-automation` as a long-form project report using the verified Robotlyne Workshop Intralogistics reference structure.
 - Used the locally preserved original reference images for facility layout, AGV route planning, and the autonomous forklift, and aligned the page copy with the reference project's background, objectives, site assessment, solution, equipment, scope, and ROI information.
 - Verified `npm run build` successfully; production publishing remains pending until the current GitHub connectivity issue allows the local `main` commits to be pushed.
+- Published Cloudflare Worker version `e27c275b-774b-4917-8695-cf762edac906`; verified the production route returns `200` and includes the project-background, objectives, site-assessment, route-planning, equipment-overview, scope-and-ROI sections, plus all three reference images.
