@@ -148,6 +148,30 @@
 .case-study-reference-cta a { align-items: center; background: #ff6b00; border-radius: 999px; color: #fff; display: inline-flex; flex: 0 0 auto; font-size: .84rem; font-weight: 800; gap: 14px; padding: 16px 20px; text-decoration: none; }
 .case-study-reference-cta a span { font-size: 1.2rem; }
 
+/* The mini-load ASRS project follows the compact legacy project narrative. */
+.mini-load-reference-page { max-width: 1200px; padding-bottom: 96px; }
+.mini-load-reference-title { color: #062550; font-size: clamp(2.25rem, 4vw, 4rem); letter-spacing: -.05em; line-height: 1; margin: 0 0 38px; }
+.mini-load-reference-intro { align-items: start; display: grid; gap: clamp(32px, 5vw, 64px); grid-template-columns: minmax(0, .98fr) minmax(0, 1.02fr); }
+.mini-load-reference-intro .case-study-video-embed { border-radius: 4px; }
+.mini-load-reference-copy h2,
+.mini-load-reference-section h2 { color: #111; font-size: clamp(1.35rem, 2vw, 1.7rem); letter-spacing: -.03em; line-height: 1.15; margin: 0 0 12px; }
+.mini-load-reference-copy h2 + .mini-load-reference-project-name { color: #626262; font-size: 1rem; line-height: 1.65; margin: 0 0 30px; }
+.mini-load-reference-copy .case-study-prose,
+.mini-load-reference-section .case-study-prose { color: #606060; font-size: .96rem; line-height: 1.6; max-width: none; }
+.mini-load-reference-copy .case-study-prose p:first-child,
+.mini-load-reference-section .case-study-prose p:first-child { margin-top: 0; }
+.mini-load-reference-section { margin-top: 34px; }
+.mini-load-reference-section + .mini-load-reference-section { margin-top: 42px; }
+.mini-load-reference-page .case-study-metrics { border: 0; gap: clamp(56px, 13vw, 180px); grid-template-columns: repeat(2, max-content); margin: 54px 0 60px; }
+.mini-load-reference-page .case-study-metric { border: 0; min-height: 0; padding: 0; }
+.mini-load-reference-page .case-study-metric strong { color: #5f5f5f; font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 700; }
+.mini-load-reference-page .case-study-metric span { color: #6c6c6c; font-size: .95rem; font-weight: 500; margin-top: 18px; }
+.mini-load-reference-cta { align-items: center; background: #f3f6f9; border-top: 1px solid #dfe6ef; display: flex; gap: 32px; justify-content: space-between; margin-top: 10px; padding: 40px; }
+.mini-load-reference-cta h2 { color: #062550; font-size: clamp(1.5rem, 2.5vw, 2.35rem); letter-spacing: -.04em; line-height: 1.08; margin: 0; max-width: 650px; }
+.mini-load-reference-cta p:not(.case-study-kicker) { color: #59697c; line-height: 1.6; margin: 14px 0 0; max-width: 650px; }
+.mini-load-reference-cta a { align-items: center; background: #ff6b00; border-radius: 999px; color: #fff; display: inline-flex; flex: 0 0 auto; font-size: .84rem; font-weight: 800; gap: 14px; padding: 15px 20px; text-decoration: none; }
+.mini-load-reference-cta a span { font-size: 1.2rem; }
+
 @media (max-width: 1024px) {
   .case-study-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .case-study-hero { gap: 30px; }
@@ -194,4 +218,10 @@
   .case-study-reference-image--portrait { max-width: 100%; }
   .case-study-reference-image--portrait img { padding: 20px 40px; }
   .case-study-reference-cta { align-items: flex-start; flex-direction: column; margin-top: 56px; padding: 34px 26px; }
+  .mini-load-reference-page { padding-bottom: 56px; }
+  .mini-load-reference-title { margin-bottom: 30px; }
+  .mini-load-reference-intro { grid-template-columns: 1fr; }
+  .mini-load-reference-section { margin-top: 40px; }
+  .mini-load-reference-page .case-study-metrics { gap: 34px; margin: 46px 0; }
+  .mini-load-reference-cta { align-items: flex-start; flex-direction: column; margin-top: 0; padding: 30px 24px; }
 }

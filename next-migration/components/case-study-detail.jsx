@@ -405,9 +405,78 @@ function NarrativeCaseStudy({ caseStudy, nextStudy, previousStudy }) {
   );
 }
 
+function MiniLoadReferenceCaseStudy({ caseStudy, nextStudy, previousStudy }) {
+  const video = narrativeCaseConfigs[caseStudy.slug].challengeVideo;
+  const projectName = "Mini Load ASRS System for Bin Storage";
+  const metrics = (caseStudy.metrics || []).slice(0, 2);
+
+  return (
+    <main className="shell-main case-study-detail-page mini-load-reference-page">
+      <nav aria-label="Breadcrumb" className="case-study-breadcrumb">
+        <Link href="/">Home</Link>
+        <span aria-hidden="true">/</span>
+        <Link href="/case-studies">Case Studies</Link>
+        <span aria-hidden="true">/</span>
+        <span>{caseStudy.title}</span>
+      </nav>
+
+      <h1 className="mini-load-reference-title">{caseStudy.title}</h1>
+
+      <section className="mini-load-reference-intro">
+        <div className="case-study-video-embed">
+          <iframe
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            loading="eager"
+            referrerPolicy="strict-origin-when-cross-origin"
+            src={video.src}
+            title={video.title}
+          />
+        </div>
+        <div className="mini-load-reference-copy">
+          <h2>Project Name</h2>
+          <p className="mini-load-reference-project-name">{projectName}</p>
+          <h2>Project Background</h2>
+          <div className="mdx-prose case-study-prose"><SanityPortableText value={caseStudy.background || caseStudy.challenge} /></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="solution-technology" className="mini-load-reference-section">
+        <h2 id="solution-technology">Our Solution &amp; Technology</h2>
+        <div className="mdx-prose case-study-prose"><SanityPortableText value={caseStudy.solution} /></div>
+      </section>
+
+      <section aria-labelledby="project-results" className="mini-load-reference-section">
+        <h2 id="project-results">Project Results</h2>
+        <div className="mdx-prose case-study-prose"><SanityPortableText value={caseStudy.result || caseStudy.workflow} /></div>
+      </section>
+
+      <MetricStrip metrics={metrics} />
+
+      <section className="mini-load-reference-cta">
+        <div>
+          <p className="case-study-kicker">Need expert automation guidance?</p>
+          <h2>Request a Technical Consultation and ROI Estimate</h2>
+          <p>Share your bin sizes, storage profile, production interfaces, and layout for an engineering review.</p>
+        </div>
+        <Link href="/contact">Speak with an expert <span aria-hidden="true">&rarr;</span></Link>
+      </section>
+
+      <nav aria-label="Case study navigation" className="case-study-project-nav">
+        {previousStudy ? <Link href={`/case-studies/projects/${previousStudy.slug}`}><span>Previous project</span>{previousStudy.title}</Link> : <span />}
+        {nextStudy ? <Link href={`/case-studies/projects/${nextStudy.slug}`}><span>Next project</span>{nextStudy.title}</Link> : <span />}
+      </nav>
+    </main>
+  );
+}
+
 export function CaseStudyDetail({ caseStudy, nextStudy, previousStudy }) {
   if (caseStudy.slug === "automated-warehouse-upgrade") {
     return <AutomatedWarehouseUpgradeReference caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
+  }
+
+  if (caseStudy.slug === "mini-load-asrs-bin-storage") {
+    return <MiniLoadReferenceCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
   }
 
   if (narrativeCaseConfigs[caseStudy.slug]) {

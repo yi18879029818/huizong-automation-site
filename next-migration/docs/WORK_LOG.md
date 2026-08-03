@@ -1,5 +1,12 @@
 # Work Log
 
+## 2026-08-03 - Mini Load ASRS Case Study Layout Alignment
+
+- Rebuilt only `/case-studies/projects/mini-load-asrs-bin-storage` into the compact project-narrative layout used by the verified legacy Mini Load ASRS reference.
+- Kept the existing YouTube process video, Sanity project content, and route metadata; the page now presents project name and background beside the video, followed by solution, results, reported metrics, and a consultation CTA.
+- Added a responsive mobile stack without changing the other five case-study detail layouts.
+- Verified `npm run build` successfully for all generated routes.
+
 ## 2026-07-30 - Real Case Study Migration
 
 - Migrated six verified legacy projects into Sanity `caseStudy` documents, including the existing `automated-warehouse-upgrade` path.
