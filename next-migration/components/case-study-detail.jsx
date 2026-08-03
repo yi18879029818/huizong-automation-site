@@ -405,9 +405,20 @@ function NarrativeCaseStudy({ caseStudy, nextStudy, previousStudy }) {
   );
 }
 
-function MiniLoadReferenceCaseStudy({ caseStudy, nextStudy, previousStudy }) {
+const compactAsrsCaseConfigs = {
+  "mini-load-asrs-bin-storage": {
+    projectName: "Mini Load ASRS System for Bin Storage",
+    consultationCopy: "Share your bin sizes, storage profile, production interfaces, and layout for an engineering review."
+  },
+  "unit-load-asrs-pallet-handling": {
+    projectName: "Unit Load ASRS for Large Home Appliance Storage",
+    consultationCopy: "Share your pallet dimensions, storage profile, inbound and outbound flow, and layout for an engineering review."
+  }
+};
+
+function CompactAsrsReferenceCaseStudy({ caseStudy, nextStudy, previousStudy }) {
   const video = narrativeCaseConfigs[caseStudy.slug].challengeVideo;
-  const projectName = "Mini Load ASRS System for Bin Storage";
+  const config = compactAsrsCaseConfigs[caseStudy.slug];
   const metrics = (caseStudy.metrics || []).slice(0, 2);
 
   return (
@@ -435,7 +446,7 @@ function MiniLoadReferenceCaseStudy({ caseStudy, nextStudy, previousStudy }) {
         </div>
         <div className="mini-load-reference-copy">
           <h2>Project Name</h2>
-          <p className="mini-load-reference-project-name">{projectName}</p>
+          <p className="mini-load-reference-project-name">{config.projectName}</p>
           <h2>Project Background</h2>
           <div className="mdx-prose case-study-prose"><SanityPortableText value={caseStudy.background || caseStudy.challenge} /></div>
         </div>
@@ -457,7 +468,7 @@ function MiniLoadReferenceCaseStudy({ caseStudy, nextStudy, previousStudy }) {
         <div>
           <p className="case-study-kicker">Need expert automation guidance?</p>
           <h2>Request a Technical Consultation and ROI Estimate</h2>
-          <p>Share your bin sizes, storage profile, production interfaces, and layout for an engineering review.</p>
+          <p>{config.consultationCopy}</p>
         </div>
         <Link href="/contact">Speak with an expert <span aria-hidden="true">&rarr;</span></Link>
       </section>
@@ -475,8 +486,8 @@ export function CaseStudyDetail({ caseStudy, nextStudy, previousStudy }) {
     return <AutomatedWarehouseUpgradeReference caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
   }
 
-  if (caseStudy.slug === "mini-load-asrs-bin-storage") {
-    return <MiniLoadReferenceCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
+  if (compactAsrsCaseConfigs[caseStudy.slug]) {
+    return <CompactAsrsReferenceCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
   }
 
   if (narrativeCaseConfigs[caseStudy.slug]) {

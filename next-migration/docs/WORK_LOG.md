@@ -1,5 +1,11 @@
 # Work Log
 
+## 2026-08-03 - Unit Load ASRS Case Study Layout Alignment
+
+- Applied the verified legacy Unit Load ASRS case-study structure to `/case-studies/projects/unit-load-asrs-pallet-handling`.
+- Reused the compact ASRS template shared with the Mini Load page, preserving the configured YouTube process video, Sanity project content, reported storage and payback metrics, and responsive mobile stack.
+- Verified `npm run build` successfully for all generated routes.
+
 ## 2026-08-03 - Mini Load ASRS Case Study Layout Alignment
 
 - Rebuilt only `/case-studies/projects/mini-load-asrs-bin-storage` into the compact project-narrative layout used by the verified legacy Mini Load ASRS reference.
