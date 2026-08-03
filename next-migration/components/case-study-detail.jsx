@@ -275,6 +275,132 @@ function AutomatedWarehouseUpgradeReference({ caseStudy, nextStudy, previousStud
   );
 }
 
+const workshopReferenceEquipment = {
+  headers: ["Item", "Specification"],
+  rows: [
+    ["Navigation", "Laser SLAM"],
+    ["Rated load", "1,600 kg"],
+    ["Standard lift", "205 +/- 5 mm"],
+    ["Travel speed", "1.5 m/s loaded; 1.8 m/s unloaded"],
+    ["Navigation accuracy", "+/- 10 mm"],
+    ["Battery", "51.2 V / 40 Ah lithium iron phosphate"],
+    ["Operating endurance", "Up to 8 hours"],
+    ["Charging", "Automatic charging support"]
+  ]
+};
+
+const workshopReferenceScope = {
+  headers: ["Project scope", "Delivered capability"],
+  rows: [
+    ["Autonomous transport forklifts", "4 Laser SLAM forklifts with 1.6 t rated load and 200 mm lifting"],
+    ["Charging stations", "2 charging stations"],
+    ["Logistics coverage", "Secondary warehouse, workshop production lines, and finished-goods warehouse"],
+    ["Control and safety", "Central task dispatch, wireless communication, charging logic, and operating safety support"],
+    ["Expected labor replacement", "3-5 manual forklifts and operators"],
+    ["Reported ROI", "Estimated two-year payback period"]
+  ]
+};
+
+function WorkshopReferenceCaseStudy({ caseStudy, nextStudy, previousStudy }) {
+  const [facilityImage, routeImage, equipmentImage] = workshopReferenceImages;
+
+  return (
+    <main className="shell-main case-study-detail-page case-study-reference-page">
+      <nav aria-label="Breadcrumb" className="case-study-breadcrumb">
+        <Link href="/">Home</Link>
+        <span aria-hidden="true">/</span>
+        <Link href="/case-studies">Case Studies</Link>
+        <span aria-hidden="true">/</span>
+        <span>{caseStudy.title}</span>
+      </nav>
+
+      <header className="case-study-reference-header">
+        <p className="case-study-kicker">Packaging Manufacturing</p>
+        <h1>{caseStudy.title}</h1>
+      </header>
+
+      <article className="case-study-reference-article">
+        <section aria-labelledby="workshop-project-background" className="case-study-reference-section">
+          <h2 id="workshop-project-background">Project Background</h2>
+          <div className="case-study-reference-prose">
+            <p>A large packaging manufacturer in China operates a 150,000 square meter facility. While its production lines had already achieved a high level of automation, material handling within the plant still depended on manual labor. To improve overall production efficiency, the company decided to implement an intelligent intralogistics system for its workshop operations.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="workshop-project-objectives" className="case-study-reference-section">
+          <h2 id="workshop-project-objectives">Project Objectives</h2>
+          <div className="case-study-reference-prose">
+            <ul>
+              <li>Achieve full-process automation for workshop logistics and enable pull-based material handling.</li>
+              <li>Automate raw-material delivery to the production line and automate finished-goods storage.</li>
+              <li>Use autonomous forklifts to replace repeatable manual forklift work, reducing labor demand and improving efficiency.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section aria-labelledby="workshop-site-assessment" className="case-study-reference-section">
+          <h2 id="workshop-site-assessment">On-Site Assessment and Data Analysis</h2>
+          <div className="case-study-reference-prose">
+            <h3>Facility Layout</h3>
+            <p>The site includes eight buildings. The assembly workshop uses a two-story layout, while the other areas are single-story. The project scope covers the first-floor workshop, the secondary warehouse, and the finished-goods warehouse.</p>
+            <h3>Material Flow Volume Analysis</h3>
+            <p>The assessment mapped four production lines and their daily movement requirements: 44 pallets from the secondary warehouse to the workshop, 38 pallets from the raw-material warehouse to the workshop, and 162 finished-goods pallets from the workshop to the finished-goods warehouse.</p>
+          </div>
+          <ReferenceImage image={facilityImage} />
+        </section>
+
+        <section aria-labelledby="workshop-solution" className="case-study-reference-section">
+          <h2 id="workshop-solution">Solution Approach</h2>
+          <div className="case-study-reference-prose">
+            <ul>
+              <li>Deploy autonomous forklifts to replace manual handling for repeatable workshop and warehouse routes.</li>
+              <li>Use a central control system for task calling, dispatch, and fleet coordination.</li>
+              <li>Provide wireless communication coverage across the operating area.</li>
+              <li>Coordinate staging, receiving, pickup, and drop-off points across each logistics route.</li>
+              <li>Review floor conditions, safety requirements, and route readiness before commissioning.</li>
+              <li>Keep the final manual handoff where process conditions require the last 10 meters to remain operator-led.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section aria-labelledby="workshop-routes" className="case-study-reference-section">
+          <h2 id="workshop-routes">AGV Route Planning and Traffic Paths</h2>
+          <div className="case-study-reference-prose">
+            <p>The route design connects the secondary warehouse, raw-material warehouse, production lines, and finished-goods warehouse. It includes warehouse staging, line-side receiving, circulation paths, and controlled handoff points so autonomous forklifts can support material delivery and finished-goods return without interrupting production flow.</p>
+          </div>
+          <ReferenceImage image={routeImage} />
+        </section>
+
+        <ReferenceTableSection id="workshop-equipment-overview" title="Autonomous Forklift Overview" table={workshopReferenceEquipment} />
+        <ReferenceImage image={equipmentImage} portrait />
+
+        <ReferenceTableSection id="workshop-project-scope" title="Project Scope and ROI Analysis" table={workshopReferenceScope} />
+
+        <section aria-labelledby="workshop-results" className="case-study-reference-section">
+          <h2 id="workshop-results">Project Results</h2>
+          <div className="case-study-reference-prose">
+            <p>The project created a connected intralogistics model for raw-material supply, workshop transfer, and finished-goods handling. The legacy assessment estimated that the autonomous-forklift fleet could replace three to five manual forklifts and operators, with an estimated two-year payback period.</p>
+          </div>
+        </section>
+
+        <section className="case-study-reference-cta">
+          <div>
+            <p className="case-study-kicker">Interested in our solutions?</p>
+            <h2>Plan an autonomous intralogistics workflow for your workshop.</h2>
+            <p>Share your layout, material flow, payloads, and production interfaces for an engineering review.</p>
+          </div>
+          <Link href="/contact">Speak with an expert <span aria-hidden="true">&rarr;</span></Link>
+        </section>
+      </article>
+
+      <nav aria-label="Case study navigation" className="case-study-project-nav">
+        {previousStudy ? <Link href={`/case-studies/projects/${previousStudy.slug}`}><span>Previous project</span>{previousStudy.title}</Link> : <span />}
+        {nextStudy ? <Link href={`/case-studies/projects/${nextStudy.slug}`}><span>Next project</span>{nextStudy.title}</Link> : <span />}
+      </nav>
+    </main>
+  );
+}
+
 function tableCards(table, maximum = 4) {
   return (table?.rows || []).slice(0, maximum).map(([title, description]) => ({ title, description }));
 }
@@ -484,6 +610,10 @@ function CompactAsrsReferenceCaseStudy({ caseStudy, nextStudy, previousStudy }) 
 export function CaseStudyDetail({ caseStudy, nextStudy, previousStudy }) {
   if (caseStudy.slug === "automated-warehouse-upgrade") {
     return <AutomatedWarehouseUpgradeReference caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
+  }
+
+  if (caseStudy.slug === "workshop-intralogistics-automation") {
+    return <WorkshopReferenceCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
   }
 
   if (compactAsrsCaseConfigs[caseStudy.slug]) {

@@ -124,3 +124,9 @@
 - Preserved the supplied definitions, formulas, calculation example, risk analysis, and maximum/minimum/safety-stock comparison table; added three contextual internal links to related Coolyne guides.
 - Set a selective-pallet-racking Sanity asset as the cover image because the supplied Word document did not include embedded media.
 - Verified the production article returns `200`, includes the cover asset, and is present in `/sitemap.xml`.
+
+## 2026-08-03 - Workshop Intralogistics Reference Case Migration
+
+- Rebuilt `/case-studies/projects/workshop-intralogistics-automation` as a long-form project report using the verified Robotlyne Workshop Intralogistics reference structure.
+- Used the locally preserved original reference images for facility layout, AGV route planning, and the autonomous forklift, and aligned the page copy with the reference project's background, objectives, site assessment, solution, equipment, scope, and ROI information.
+- Verified `npm run build` successfully; production publishing remains pending until the current GitHub connectivity issue allows the local `main` commits to be pushed.
