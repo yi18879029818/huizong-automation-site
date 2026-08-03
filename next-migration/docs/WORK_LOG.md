@@ -125,6 +125,12 @@
 - Set a selective-pallet-racking Sanity asset as the cover image because the supplied Word document did not include embedded media.
 - Verified the production article returns `200`, includes the cover asset, and is present in `/sitemap.xml`.
 
+## 2026-08-03 - Maximum Stock Level Sanity Image Update
+
+- Replaced the `/blog/maximum-stock-level` cover with the supplied blue-tote AS/RS image through Sanity.
+- Added the three supplied supporting visuals after the calculation, calculation-example, and inventory-risk sections, with descriptive alt text and captions.
+- Verified the production article returns `200`, references the new cover and all three inline assets, and remains in `/sitemap.xml`.
+
 ## 2026-08-03 - Workshop Intralogistics Reference Case Migration
 
 - Rebuilt `/case-studies/projects/workshop-intralogistics-automation` as a long-form project report using the verified Robotlyne Workshop Intralogistics reference structure.
