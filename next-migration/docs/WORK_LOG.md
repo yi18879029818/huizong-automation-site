@@ -104,3 +104,10 @@
 
 - Set the returnable-container image already used in the article body as the Sanity `heroImage` for `/blog/reverse-logistics`.
 - Verified the production article returns `200` and references the selected Sanity cover asset.
+
+## 2026-08-03 - Maximum Stock Level Sanity Publication
+
+- Published `What Is the Maximum Stock Level? Definition, Formula, and Calculation Example` through Sanity at `/blog/maximum-stock-level`.
+- Preserved the supplied definitions, formulas, calculation example, risk analysis, and maximum/minimum/safety-stock comparison table; added three contextual internal links to related Coolyne guides.
+- Set a selective-pallet-racking Sanity asset as the cover image because the supplied Word document did not include embedded media.
+- Verified the production article returns `200`, includes the cover asset, and is present in `/sitemap.xml`.
