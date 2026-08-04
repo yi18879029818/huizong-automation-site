@@ -143,4 +143,5 @@
 - Rebuilt `/case-studies/projects/smart-home-manufacturing-agv` as a dedicated project report following the verified Robotlyne Smart Home Manufacturing AGV reference sequence.
 - Added project background, objectives, pickup and drop-off, empty-tray delivery, full-load pickup, AGV selection, fleet planning, digital twin, ROI, CTA, and project navigation sections.
 - Reused the five locally preserved reference workflow and digital-twin images from `public/images/case-studies/smart-home-manufacturing-agv/`.
-- Verified `npm run build` successfully; production publishing is pending the commit, push, and release steps.
+- Verified `npm run build` successfully and published Cloudflare Worker version `4163bcf1-ad65-4822-9a84-e973aff38097`.
+- Verified the production route returns `200` with the new project headings and the first and fifth reference-image URLs.
