@@ -147,6 +147,13 @@
 .case-study-reference-cta p:not(.case-study-kicker) { color: #dce7f2; line-height: 1.65; margin: 16px 0 0; max-width: 620px; }
 .case-study-reference-cta a { align-items: center; background: #ff6b00; border-radius: 999px; color: #fff; display: inline-flex; flex: 0 0 auto; font-size: .84rem; font-weight: 800; gap: 14px; padding: 16px 20px; text-decoration: none; }
 .case-study-reference-cta a span { font-size: 1.2rem; }
+.smart-home-reference-split { column-gap: clamp(34px, 6vw, 88px); display: grid; grid-template-columns: minmax(190px, .42fr) minmax(0, 1fr); }
+.smart-home-reference-split + .smart-home-reference-split { border-top: 1px solid #b9c2cd; padding-top: 42px; }
+.smart-home-reference-split > h2 { color: #ff7800; font-size: clamp(1.25rem, 2vw, 1.5rem); letter-spacing: -.02em; line-height: 1.15; margin: 0; }
+.smart-home-reference-split > :not(h2) { grid-column: 2; }
+.smart-home-reference-split .case-study-reference-prose { max-width: none; }
+.smart-home-reference-split .case-study-reference-prose h3:first-child { margin-top: 0; }
+.smart-home-reference-split .case-study-reference-image { margin-top: 24px; }
 
 /* The mini-load ASRS project follows the compact legacy project narrative. */
 .mini-load-reference-page { max-width: 1200px; padding-bottom: 96px; }
@@ -218,6 +225,9 @@
   .case-study-reference-image--portrait { max-width: 100%; }
   .case-study-reference-image--portrait img { padding: 20px 40px; }
   .case-study-reference-cta { align-items: flex-start; flex-direction: column; margin-top: 56px; padding: 34px 26px; }
+  .smart-home-reference-split { display: block; }
+  .smart-home-reference-split + .smart-home-reference-split { padding-top: 30px; }
+  .smart-home-reference-split > h2 { margin-bottom: 18px; }
   .mini-load-reference-page { padding-bottom: 56px; }
   .mini-load-reference-title { margin-bottom: 30px; }
   .mini-load-reference-intro { grid-template-columns: 1fr; }

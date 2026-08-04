@@ -477,14 +477,14 @@ function SmartHomeManufacturingReferenceCaseStudy({ caseStudy, nextStudy, previo
       </header>
 
       <article className="case-study-reference-article">
-        <section aria-labelledby="smart-home-background" className="case-study-reference-section">
+        <section aria-labelledby="smart-home-background" className="case-study-reference-section smart-home-reference-split">
           <h2 id="smart-home-background">Project Background</h2>
           <div className="case-study-reference-prose">
             <p>The factory had already automated much of its production equipment, while material transfer between stations still relied on manual handling. The project introduced a coordinated AGV system to support repeatable transport and allow operators to focus on maintenance, monitoring, and process improvement.</p>
           </div>
         </section>
 
-        <section aria-labelledby="smart-home-objectives" className="case-study-reference-section">
+        <section aria-labelledby="smart-home-objectives" className="case-study-reference-section smart-home-reference-split">
           <h2 id="smart-home-objectives">Project Objectives</h2>
           <div className="case-study-reference-prose">
             <ul>
@@ -495,8 +495,8 @@ function SmartHomeManufacturingReferenceCaseStudy({ caseStudy, nextStudy, previo
           </div>
         </section>
 
-        <section aria-labelledby="smart-home-workflows" className="case-study-reference-section">
-          <h2 id="smart-home-workflows">Workflow Design</h2>
+        <section aria-labelledby="smart-home-workflows" className="case-study-reference-section smart-home-reference-split">
+          <h2 id="smart-home-workflows">Solutions</h2>
           <div className="case-study-reference-prose">
             <h3>Pickup and Drop-Off Workflow</h3>
             <p>Roller AGVs receive transport requests from defined handoff points, collect materials, and deliver them to the next production or staging position. Task logic keeps pickup, confirmation, and delivery steps connected to the manufacturing rhythm.</p>
