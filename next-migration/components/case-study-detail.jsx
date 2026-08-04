@@ -172,6 +172,63 @@ const workshopReferenceImages = [
   }
 ];
 
+const smartHomeReferenceImages = [
+  {
+    src: "/images/case-studies/smart-home-manufacturing-agv/smart-home-agv-01.webp",
+    width: 1600,
+    height: 900,
+    alt: "Roller AGV pickup and drop-off workflow in a smart home manufacturing project"
+  },
+  {
+    src: "/images/case-studies/smart-home-manufacturing-agv/smart-home-agv-02.webp",
+    width: 1600,
+    height: 900,
+    alt: "Empty blister tray delivery workflow supported by roller AGVs"
+  },
+  {
+    src: "/images/case-studies/smart-home-manufacturing-agv/smart-home-agv-03.webp",
+    width: 1600,
+    height: 900,
+    alt: "Full-load pickup workflow for finished goods in the smart home factory"
+  },
+  {
+    src: "/images/case-studies/smart-home-manufacturing-agv/smart-home-agv-04.webp",
+    width: 1600,
+    height: 900,
+    alt: "Roller AGV selected for tray and finished-goods movement"
+  },
+  {
+    src: "/images/case-studies/smart-home-manufacturing-agv/smart-home-agv-05.webp",
+    width: 1600,
+    height: 900,
+    alt: "Digital twin view of the smart home manufacturing AGV project"
+  }
+];
+
+const smartHomeAgvSpecifications = {
+  headers: ["Item", "Reference configuration"],
+  rows: [
+    ["Navigation", "Laser SLAM"],
+    ["Maximum payload", "150 kg"],
+    ["Operating time", "More than 8 hours"],
+    ["Maximum speed", "1.5 m/s"],
+    ["Positioning accuracy", "+/- 10 mm and +/- 0.5 degrees"],
+    ["Charging", "Manual or automatic charging"],
+    ["Battery", "48 V / 24 Ah lithium iron phosphate"],
+    ["Wireless communication", "2.4 GHz / 5 GHz Wi-Fi"]
+  ]
+};
+
+const smartHomeFleetPlanning = {
+  headers: ["Planning item", "Project reference"],
+  rows: [
+    ["Workflow basis", "Empty-tray delivery, finished-goods pickup, and route return are coordinated as one operating cycle."],
+    ["Calculated fleet", "9 roller AGVs for the baseline flow model."],
+    ["Peak-flow allowance", "11 roller AGVs recommended when higher material demand must be covered."],
+    ["Control layer", "Central task dispatch and traffic coordination across the AGV fleet."]
+  ]
+};
+
 function referenceBody(value) {
   return (value || []).filter((block) => block._type !== "block" || block.style !== "h2");
 }
@@ -401,6 +458,114 @@ function WorkshopReferenceCaseStudy({ caseStudy, nextStudy, previousStudy }) {
   );
 }
 
+function SmartHomeManufacturingReferenceCaseStudy({ caseStudy, nextStudy, previousStudy }) {
+  const [pickupAndDropoff, emptyTray, fullLoad, vehicle, digitalTwin] = smartHomeReferenceImages;
+
+  return (
+    <main className="shell-main case-study-detail-page case-study-reference-page">
+      <nav aria-label="Breadcrumb" className="case-study-breadcrumb">
+        <Link href="/">Home</Link>
+        <span aria-hidden="true">/</span>
+        <Link href="/case-studies">Case Studies</Link>
+        <span aria-hidden="true">/</span>
+        <span>{caseStudy.title}</span>
+      </nav>
+
+      <header className="case-study-reference-header">
+        <p className="case-study-kicker">Smart Home Manufacturing</p>
+        <h1>Automated Guided Vehicle Project for Smart Home Manufacturing</h1>
+      </header>
+
+      <article className="case-study-reference-article">
+        <section aria-labelledby="smart-home-background" className="case-study-reference-section">
+          <h2 id="smart-home-background">Project Background</h2>
+          <div className="case-study-reference-prose">
+            <p>The factory had already automated much of its production equipment, while material transfer between stations still relied on manual handling. The project introduced a coordinated AGV system to support repeatable transport and allow operators to focus on maintenance, monitoring, and process improvement.</p>
+          </div>
+        </section>
+
+        <section aria-labelledby="smart-home-objectives" className="case-study-reference-section">
+          <h2 id="smart-home-objectives">Project Objectives</h2>
+          <div className="case-study-reference-prose">
+            <ul>
+              <li>Automate material transfer across the production workflow.</li>
+              <li>Coordinate finished-goods pickup with empty-tray supply.</li>
+              <li>Create a repeatable intralogistics model for a showcase smart factory.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section aria-labelledby="smart-home-workflows" className="case-study-reference-section">
+          <h2 id="smart-home-workflows">Workflow Design</h2>
+          <div className="case-study-reference-prose">
+            <h3>Pickup and Drop-Off Workflow</h3>
+            <p>Roller AGVs receive transport requests from defined handoff points, collect materials, and deliver them to the next production or staging position. Task logic keeps pickup, confirmation, and delivery steps connected to the manufacturing rhythm.</p>
+          </div>
+          <ReferenceImage image={pickupAndDropoff} />
+
+          <div className="case-study-reference-prose">
+            <h3>Empty Blister Tray Delivery</h3>
+            <p>When a workstation requests empty trays, the control layer assigns an available vehicle and routes it to the appropriate supply point. The process helps keep tray replenishment predictable without adding repeated manual trips.</p>
+          </div>
+          <ReferenceImage image={emptyTray} />
+
+          <div className="case-study-reference-prose">
+            <h3>Full-Load Pickup</h3>
+            <p>After a tray is loaded, the AGV collects the finished load and transfers it to the configured downstream handoff. The return logic then makes the vehicle available for the next transport task.</p>
+          </div>
+          <ReferenceImage image={fullLoad} />
+        </section>
+
+        <ReferenceTableSection id="smart-home-agv-selection" title="AGV Type Selection" table={smartHomeAgvSpecifications} />
+        <ReferenceImage image={vehicle} />
+
+        <ReferenceTableSection id="smart-home-fleet-planning" title="AGV Quantity Calculation" table={smartHomeFleetPlanning} />
+
+        <section aria-labelledby="smart-home-digital-twin" className="case-study-reference-section">
+          <h2 id="smart-home-digital-twin">Digital Twin Scene Configuration</h2>
+          <div className="case-study-reference-prose">
+            <p>The project can be represented in a digital twin that combines the factory layout, AGV routes, task movement, and operating status in one visual scene. This gives project teams a clearer way to review logistics flow before and after deployment.</p>
+            <h3>Standard Visualization Capabilities</h3>
+            <ul>
+              <li>3D model and texture import for the factory environment.</li>
+              <li>Scene setup with real-time vehicle, route, and task animation.</li>
+              <li>Vehicle alarm lighting, roaming views, and theme switching.</li>
+            </ul>
+            <h3>Optional Extensions</h3>
+            <ul>
+              <li>Dashboard views tailored to project monitoring needs.</li>
+              <li>Equipment data collection and real-time visualization.</li>
+              <li>Additional custom views for site-specific workflows.</li>
+            </ul>
+          </div>
+          <ReferenceImage image={digitalTwin} />
+        </section>
+
+        <section aria-labelledby="smart-home-roi" className="case-study-reference-section">
+          <h2 id="smart-home-roi">Project Value and ROI</h2>
+          <div className="case-study-reference-prose">
+            <p>The proposed AGV system is intended to reduce repeated manual transport, improve material-delivery consistency, and establish a more visible, connected production flow. The reference project used an estimated two-year payback period as its planning target.</p>
+          </div>
+        </section>
+
+        <section className="case-study-reference-cta">
+          <div>
+            <p className="case-study-kicker">Interested in our solutions?</p>
+            <h2>Plan an AGV workflow for your production logistics.</h2>
+            <p>Share your material flow, line interfaces, payloads, and layout for an engineering review.</p>
+          </div>
+          <Link href="/contact">Speak with an expert <span aria-hidden="true">&rarr;</span></Link>
+        </section>
+      </article>
+
+      <nav aria-label="Case study navigation" className="case-study-project-nav">
+        {previousStudy ? <Link href={`/case-studies/projects/${previousStudy.slug}`}><span>Previous project</span>{previousStudy.title}</Link> : <span />}
+        {nextStudy ? <Link href={`/case-studies/projects/${nextStudy.slug}`}><span>Next project</span>{nextStudy.title}</Link> : <span />}
+      </nav>
+    </main>
+  );
+}
+
 function tableCards(table, maximum = 4) {
   return (table?.rows || []).slice(0, maximum).map(([title, description]) => ({ title, description }));
 }
@@ -614,6 +779,10 @@ export function CaseStudyDetail({ caseStudy, nextStudy, previousStudy }) {
 
   if (caseStudy.slug === "workshop-intralogistics-automation") {
     return <WorkshopReferenceCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
+  }
+
+  if (caseStudy.slug === "smart-home-manufacturing-agv") {
+    return <SmartHomeManufacturingReferenceCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
   }
 
   if (compactAsrsCaseConfigs[caseStudy.slug]) {

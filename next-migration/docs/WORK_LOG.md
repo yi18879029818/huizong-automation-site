@@ -137,3 +137,10 @@
 - Used the locally preserved original reference images for facility layout, AGV route planning, and the autonomous forklift, and aligned the page copy with the reference project's background, objectives, site assessment, solution, equipment, scope, and ROI information.
 - Verified `npm run build` successfully; production publishing remains pending until the current GitHub connectivity issue allows the local `main` commits to be pushed.
 - Published Cloudflare Worker version `e27c275b-774b-4917-8695-cf762edac906`; verified the production route returns `200` and includes the project-background, objectives, site-assessment, route-planning, equipment-overview, scope-and-ROI sections, plus all three reference images.
+
+## 2026-08-04 - Smart Home Manufacturing AGV Reference Case Migration
+
+- Rebuilt `/case-studies/projects/smart-home-manufacturing-agv` as a dedicated project report following the verified Robotlyne Smart Home Manufacturing AGV reference sequence.
+- Added project background, objectives, pickup and drop-off, empty-tray delivery, full-load pickup, AGV selection, fleet planning, digital twin, ROI, CTA, and project navigation sections.
+- Reused the five locally preserved reference workflow and digital-twin images from `public/images/case-studies/smart-home-manufacturing-agv/`.
+- Verified `npm run build` successfully; production publishing is pending the commit, push, and release steps.
