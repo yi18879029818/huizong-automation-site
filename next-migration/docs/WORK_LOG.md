@@ -149,3 +149,9 @@
 - Verified `npm run build` and published Cloudflare Worker version `1b6cc170-02bf-43a2-ad2c-2980b6825077`; the production page returns `200` and includes all three headings plus the `smart-home-reference-split` layout class.
 - Standardized the lead-title scale across the six migrated case-study detail pages. Desktop titles now use a wider heading area, a maximum 3.6rem scale, tighter line height, and balanced wrapping so long project names prioritize one or two lines instead of three.
 - Published Cloudflare Worker version `2551f1c7-de10-42a3-963b-9a95f86b9e68`; all six migrated case-study detail URLs returned `200` after release.
+
+## 2026-08-04 - Machine Tending Blog Refresh
+
+- Replaced the Sanity body for `/blog/what-is-machine-tending` with the supplied Machine Tending Robots document, preserving the existing article cover and publishing date.
+- Updated the frontend media insertion anchors to match the refreshed copy, preserving two contextual images and the existing machine-tending workflow video.
+- Verified the Sanity document has the updated title, 130 body blocks, and the expected section structure; `npm run build` completed successfully.

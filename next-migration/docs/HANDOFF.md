@@ -1,19 +1,19 @@
 # HANDOFF
 
 ## 当前完成状态
-`/case-studies/projects/smart-home-manufacturing-agv` 已改为参考案例的长篇项目报告版式；Background、Objectives、Solutions 已采用左标题、右内容的参考双栏布局。六个已迁移案例详情页的首屏主标题已统一缩小、加宽并优先平衡为一到两行，已正式发布。
+`/blog/what-is-machine-tending` 已通过 Sanity 更新为新的 Machine Tending Robots 正文；前端媒体锚点已同步到新文案。
 
 ## 本次修改的文件
-`components/case-study-detail.jsx`；`app/case-studies.css`；`public/images/case-studies/smart-home-manufacturing-agv/`；`docs/WORK_LOG.md`；`docs/HANDOFF.md`。
+`app/blog/[slug]/page.js`、`docs/WORK_LOG.md`、`docs/HANDOFF.md`。
 
 ## 已验证的结果
-`npm run build` 通过；Cloudflare Worker `2551f1c7-de10-42a3-963b-9a95f86b9e68` 已发布；六个案例详情页均返回 `200`。Smart Home 页包含三个双栏章节、工作流、数字孪生章节及五张引用图片。
+Sanity 文章记录包含新标题、130 个正文块和完整章节结构；`npm run build` 已通过。
 
 ## 未解决的问题
-暂无。
+尚未推送和发布本次前端媒体锚点更新。
 
 ## 下一步建议
-如需视觉复核，可在桌面和移动端检查五张图片、参数表格和 CTA 的阅读节奏。
+推送至 `main` 后执行 `npm run release:production`，再核对生产文章和 `sitemap.xml`。
 
 ## 不要碰的风险区域
-不要覆盖其他案例的 Sanity 内容、SEO 字段、全站案例模板或已发布的静态媒体。
+不要覆盖其他 Sanity 文章、SEO 字段、全站博客渲染逻辑或既有静态媒体。
