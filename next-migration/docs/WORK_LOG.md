@@ -148,3 +148,4 @@
 - Repositioned `Project Background`, `Project Objectives`, and `Solutions` into the reference page's desktop two-column arrangement: orange title at left, detailed content at right, with section dividers and a mobile single-column fallback.
 - Verified `npm run build` and published Cloudflare Worker version `1b6cc170-02bf-43a2-ad2c-2980b6825077`; the production page returns `200` and includes all three headings plus the `smart-home-reference-split` layout class.
 - Standardized the lead-title scale across the six migrated case-study detail pages. Desktop titles now use a wider heading area, a maximum 3.6rem scale, tighter line height, and balanced wrapping so long project names prioritize one or two lines instead of three.
+- Published Cloudflare Worker version `2551f1c7-de10-42a3-963b-9a95f86b9e68`; all six migrated case-study detail URLs returned `200` after release.
