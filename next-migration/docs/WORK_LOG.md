@@ -155,3 +155,4 @@
 - Replaced the Sanity body for `/blog/what-is-machine-tending` with the supplied Machine Tending Robots document, preserving the existing article cover and publishing date.
 - Updated the frontend media insertion anchors to match the refreshed copy, preserving two contextual images and the existing machine-tending workflow video.
 - Verified the Sanity document has the updated title, 130 body blocks, and the expected section structure; `npm run build` completed successfully.
+- Published Cloudflare Worker version `2e61bdf0-3ae1-44da-8f15-80d2da1d5cbe`; production article and `/sitemap.xml` both return `200`, and the article page includes the refreshed title, both images, and the workflow video.
