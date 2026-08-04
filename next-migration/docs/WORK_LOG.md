@@ -145,3 +145,6 @@
 - Reused the five locally preserved reference workflow and digital-twin images from `public/images/case-studies/smart-home-manufacturing-agv/`.
 - Verified `npm run build` successfully and published Cloudflare Worker version `4163bcf1-ad65-4822-9a84-e973aff38097`.
 - Verified the production route returns `200` with the new project headings and the first and fifth reference-image URLs.
+- Repositioned `Project Background`, `Project Objectives`, and `Solutions` into the reference page's desktop two-column arrangement: orange title at left, detailed content at right, with section dividers and a mobile single-column fallback.
+- Verified `npm run build` and published Cloudflare Worker version `1b6cc170-02bf-43a2-ad2c-2980b6825077`; the production page returns `200` and includes all three headings plus the `smart-home-reference-split` layout class.
+- Standardized the lead-title scale across the six migrated case-study detail pages. Desktop titles now use a wider heading area, a maximum 3.6rem scale, tighter line height, and balanced wrapping so long project names prioritize one or two lines instead of three.
