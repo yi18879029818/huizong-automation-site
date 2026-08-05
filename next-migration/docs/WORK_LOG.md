@@ -156,3 +156,9 @@
 - Updated the frontend media insertion anchors to match the refreshed copy, preserving two contextual images and the existing machine-tending workflow video.
 - Verified the Sanity document has the updated title, 130 body blocks, and the expected section structure; `npm run build` completed successfully.
 - Published Cloudflare Worker version `2e61bdf0-3ae1-44da-8f15-80d2da1d5cbe`; production article and `/sitemap.xml` both return `200`, and the article page includes the refreshed title, both images, and the workflow video.
+
+## 2026-08-05 - Stock Turnover Sanity Publication
+
+- Published `What Is Stock Turnover? How to Calculate, Interpret, and Improve It` through Sanity at `/blog/stock-turnover-guide`.
+- Preserved the supplied formulas, calculation example, interpretation guidance, limitation analysis, and inventory-improvement strategies in 105 Portable Text blocks; the article is English only.
+- Verified the Sanity document, production article response (`200`), and `/sitemap.xml` entry. The source Word document contained no embedded media, so no cover image was assigned.
