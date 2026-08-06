@@ -168,3 +168,11 @@
 - Replaced the English body and SEO metadata for `/blog/autonomous-mobile-manipulator-robots-market` through Sanity using the supplied Mobile Manipulator Robots document.
 - Preserved the existing cover image and the original publication date; the refreshed article contains 87 Portable Text blocks covering operation, applications, advantages, and Coolyne's mobile manipulator solution.
 - Verified the Sanity document, production article response (`200`), updated title, and `/sitemap.xml` entry.
+
+## 2026-08-06 - Stock Turnover Blog Visuals
+
+- Updated the Sanity post for `/blog/stock-turnover-guide` with a warehouse inventory-check hero image and four contextual body visuals.
+- Placed the images after the matching stock-turnover formula, DIO, slow-moving inventory, and RFID inventory-accuracy sections.
+- Excluded supplied graphics with fabricated comparisons, third-party branding, or unreadable dashboard labels.
+- Verified the Sanity CDN returns one hero image and four `imageWithAlt` blocks. The production article and `/sitemap.xml` both return `200`; the article URL is present in the sitemap.
+- The production Worker still returned the previous article markup before release, so `npm run release:production` is required to publish the current dynamic Sanity renderer.

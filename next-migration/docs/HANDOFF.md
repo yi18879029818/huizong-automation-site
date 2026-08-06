@@ -1,19 +1,21 @@
 # HANDOFF
 
 ## 当前完成状态
-`/blog/autonomous-mobile-manipulator-robots-market` 已通过 Sanity 正式内容流完成英文内容更新。
+`/blog/stock-turnover-guide` 已通过 Sanity 更新封面与四张正文配图，待正式发布使公开页面加载新内容。
 
 ## 本次修改的文件
-`docs/WORK_LOG.md`、`docs/HANDOFF.md`。
+- `docs/WORK_LOG.md`
+- `docs/HANDOFF.md`
 
 ## 已验证的结果
-Sanity 记录保留原发布日期和封面图，正文为 87 个内容块；生产文章与 `/sitemap.xml` 均返回 `200`，站点地图包含文章 URL。
+- Sanity CDN 已返回 1 张封面与 4 个 `imageWithAlt` 正文块。
+- 生产文章与 `/sitemap.xml` 返回 `200`，站点地图包含文章 URL。
 
 ## 未解决的问题
-源 Word 文档不含内嵌图片，因此本次未增加正文配图。
+- 生产 Worker 仍返回部署前的文章标记，尚未显示新的 Sanity 图片。
 
 ## 下一步建议
-如需增强文章视觉内容，可提供与机床上下料、仓储拣选或产线配送相关的图片，再补充到现有 Sanity 文章。
+在干净的 `main` 上运行 `npm run release:production`，然后再次检查文章中的 5 张图片。
 
 ## 不要碰的风险区域
-不要覆盖其他 Sanity 文章、现有博客渲染逻辑、SEO 字段或静态媒体资源。
+不要回滚当前 Sanity 文档或替换图片资源 ID；发布脚本必须从干净且已同步的 `main` 运行。
