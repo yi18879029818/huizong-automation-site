@@ -162,3 +162,9 @@
 - Published `What Is Stock Turnover? How to Calculate, Interpret, and Improve It` through Sanity at `/blog/stock-turnover-guide`.
 - Preserved the supplied formulas, calculation example, interpretation guidance, limitation analysis, and inventory-improvement strategies in 105 Portable Text blocks; the article is English only.
 - Verified the Sanity document, production article response (`200`), and `/sitemap.xml` entry. The source Word document contained no embedded media, so no cover image was assigned.
+
+## 2026-08-06 - Mobile Manipulator Robots Blog Refresh
+
+- Replaced the English body and SEO metadata for `/blog/autonomous-mobile-manipulator-robots-market` through Sanity using the supplied Mobile Manipulator Robots document.
+- Preserved the existing cover image and the original publication date; the refreshed article contains 87 Portable Text blocks covering operation, applications, advantages, and Coolyne's mobile manipulator solution.
+- Verified the Sanity document, production article response (`200`), updated title, and `/sitemap.xml` entry.
