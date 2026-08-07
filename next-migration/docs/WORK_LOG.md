@@ -176,3 +176,10 @@
 - Excluded supplied graphics with fabricated comparisons, third-party branding, or unreadable dashboard labels.
 - Verified the Sanity CDN returns one hero image and four `imageWithAlt` blocks. The production article and `/sitemap.xml` both return `200`; the article URL is present in the sitemap.
 - The production Worker still returned the previous article markup before release, so `npm run release:production` is required to publish the current dynamic Sanity renderer.
+
+## 2026-08-07 - Logistics Hubs Sanity Publication
+
+- Published `What Is a Logistics Hub? Types, Operations, Benefits, and Location Factors` through Sanity at `/blog/logistics-hubs` as an English-only article.
+- Preserved the supplied document structure in 133 Portable Text blocks, including 32 headings and 19 list items, and configured the article SEO title and description.
+- The source Word document contained no embedded media, so no hero image or body visuals were added.
+- Verified the production article returns `200`, and `/sitemap.xml` returns `200` and includes the new blog URL. No Cloudflare deployment was required because the blog route and sitemap read the Sanity content dynamically.
