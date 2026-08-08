@@ -190,3 +190,10 @@
 - Preserved the existing publication date, hero image, and social preview image; the refreshed article contains 102 English Portable Text blocks.
 - Updated the Markdown-to-Sanity importer to retain an existing `seo.ogImage` when refreshing an existing post.
 - Verified the Sanity document, production article response (`200`), updated title and selection section, and `/sitemap.xml` entry. No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+
+## 2026-08-08 - Logistics Hubs Blog Visuals
+
+- Added the six supplied logistics-hub visuals to `/blog/logistics-hubs` through Sanity `imageWithAlt` blocks without changing the article title, publication date, SEO fields, or existing English copy.
+- Inserted each visual beside the matching Port Logistics Hubs, Rail Logistics Hubs, Air Logistics Hubs, Regional Distribution Hubs, operating workflow, and location-selection sections.
+- Selected the port, rail, and road multimodal image as the `heroImage` cover, reusing the already-uploaded Sanity asset with its descriptive alt text.
+- Verified Sanity contains the selected hero image and all six image blocks with reachable asset URLs. The production article and `/sitemap.xml` both return `200`, and the article URL remains present in the sitemap. No Cloudflare deployment was required because these Sanity content changes are read dynamically.
