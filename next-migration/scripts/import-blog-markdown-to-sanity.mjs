@@ -281,7 +281,7 @@ const articleTitle =
     .find((heading) => heading?.level === 1)?.text || metaTitle;
 const body = parseBody(source);
 const existing = await client.fetch(
-  '*[_type == "post" && slug.current == $slug][0]{_id,publishedAt,heroImage}',
+  '*[_type == "post" && slug.current == $slug][0]{_id,publishedAt,heroImage,seo}',
   { slug }
 );
 
@@ -315,7 +315,8 @@ const doc = {
     noindex: false,
     ogTitle: metaTitle,
     ogDescription: metaDescription,
-    twitterCard: "summary_large_image"
+    twitterCard: "summary_large_image",
+    ...(existing?.seo?.ogImage ? { ogImage: existing.seo.ogImage } : {})
   }
 };
 

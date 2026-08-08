@@ -1,22 +1,23 @@
 # HANDOFF
 
 ## 当前完成状态
-`/blog/logistics-hubs` is published through Sanity and live.
+`/blog/automated-warehouse-picking-systems` 已通过 Sanity 更新为新的纯英文正文与 SEO 文案；原发布时间、封面图和社交预览图均已保留。
 
 ## 本次修改的文件
+- `scripts/import-blog-markdown-to-sanity.mjs`
 - `docs/WORK_LOG.md`
 - `docs/HANDOFF.md`
 
 ## 已验证的结果
-- The Sanity post `post-logistics-hubs` contains 133 Portable Text blocks.
-- `https://www.coolyne.com/blog/logistics-hubs` returns `200`.
-- `https://www.coolyne.com/sitemap.xml` returns `200` and includes the article URL.
+- Sanity 文章包含 102 个英文 Portable Text block，无中文内容。
+- `https://www.coolyne.com/blog/automated-warehouse-picking-systems` 返回 `200` 并显示新版标题与选型章节。
+- `https://www.coolyne.com/sitemap.xml` 返回 `200` 并包含文章 URL。
 
 ## 未解决的问题
-- The supplied source document has no embedded cover or body images.
+- 无。
 
 ## 下一步建议
-- Add an approved logistics-hub cover image in Sanity if a visual is required.
+- 如需补充新配图，按正文小节语义通过 Sanity 插入，并继续保留现有封面和社交预览图。
 
 ## 不要碰的风险区域
-- Do not replace the existing `post-logistics-hubs` body or SEO fields without preserving the published English content.
+- 更新既有博文时，不要覆盖 `publishedAt`、`heroImage` 或已有的 `seo.ogImage`。

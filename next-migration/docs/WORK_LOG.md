@@ -183,3 +183,10 @@
 - Preserved the supplied document structure in 133 Portable Text blocks, including 32 headings and 19 list items, and configured the article SEO title and description.
 - The source Word document contained no embedded media, so no hero image or body visuals were added.
 - Verified the production article returns `200`, and `/sitemap.xml` returns `200` and includes the new blog URL. No Cloudflare deployment was required because the blog route and sitemap read the Sanity content dynamically.
+
+## 2026-08-08 - Automated Warehouse Picking Systems Refresh
+
+- Replaced the English body and SEO metadata for `/blog/automated-warehouse-picking-systems` through Sanity using the supplied Automated Warehouse Picking Systems document.
+- Preserved the existing publication date, hero image, and social preview image; the refreshed article contains 102 English Portable Text blocks.
+- Updated the Markdown-to-Sanity importer to retain an existing `seo.ogImage` when refreshing an existing post.
+- Verified the Sanity document, production article response (`200`), updated title and selection section, and `/sitemap.xml` entry. No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
