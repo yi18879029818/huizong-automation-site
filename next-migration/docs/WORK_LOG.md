@@ -197,3 +197,10 @@
 - Inserted each visual beside the matching Port Logistics Hubs, Rail Logistics Hubs, Air Logistics Hubs, Regional Distribution Hubs, operating workflow, and location-selection sections.
 - Selected the port, rail, and road multimodal image as the `heroImage` cover, reusing the already-uploaded Sanity asset with its descriptive alt text.
 - Verified Sanity contains the selected hero image and all six image blocks with reachable asset URLs. The production article and `/sitemap.xml` both return `200`, and the article URL remains present in the sitemap. No Cloudflare deployment was required because these Sanity content changes are read dynamically.
+
+## 2026-08-10 - Palletization and Automated Pallet Handling Sanity Publication
+
+- Published `What Is Palletization? How Palletization Improves Transportation and Warehouse Efficiency` through Sanity at `/blog/palletization-automated-pallet-handling` as an English-only article.
+- Preserved the supplied document structure in 79 Portable Text blocks, including the palletization workflow, transport-efficiency benefits, pallet standards, and automated pallet-handling guidance.
+- The source Word document contained no embedded media, so no hero image or body visuals were added.
+- Verified the Sanity document, production article response (`200`), and `/sitemap.xml` entry. No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.

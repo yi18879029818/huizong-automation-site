@@ -1,23 +1,23 @@
 # HANDOFF
 
-## 当前完成状态
-`/blog/logistics-hubs` 已通过 Sanity 保留原有英文文章内容，在六个语义匹配的小节新增六张图片，并使用港口、铁路与公路联运图作为文章封面。
+## Current completion status
+- Published the English-only Sanity post `What Is Palletization? How Palletization Improves Transportation and Warehouse Efficiency` at `/blog/palletization-automated-pallet-handling`.
 
-## 本次修改的文件
-- `scripts/add-logistics-hubs-images.mjs`
+## Files changed this time
+- `docs/palletization-and-automated-pallet-handling.md`
 - `docs/WORK_LOG.md`
 - `docs/HANDOFF.md`
 
-## 已验证的结果
-- Sanity 中存在 6 个 `logistics-hubs-*` 的 `imageWithAlt` 图片块；`heroImage` 与正文首张多式联运图引用同一可访问资源。
-- `https://www.coolyne.com/blog/logistics-hubs` 返回 `200`。
-- `https://www.coolyne.com/sitemap.xml` 返回 `200`，并包含文章 URL。
+## Verified results
+- The Sanity post exists as `post-palletization-automated-pallet-handling` with 79 Portable Text blocks and remains indexable.
+- `https://www.coolyne.com/blog/palletization-automated-pallet-handling` returns `200` and renders the article title.
+- `https://www.coolyne.com/sitemap.xml` returns `200` and includes the new article URL.
 
-## 未解决的问题
-- 无。
+## Unresolved issues
+- The source Word document contains no embedded image, so the article currently has no hero image or inline visuals.
 
-## 下一步建议
-- 如需替换或补充图片，继续按正文小节语义通过 Sanity 插入，并复用本次可重复执行的上传脚本；封面优先选择能完整概括文章主题的横向图。
+## Recommended next step
+- When approved source images are available, add a wide palletizing or AGV forklift image as the hero and place supporting workflow images next to the matching sections through Sanity.
 
-## 不要碰的风险区域
-- 更新既有博文时，不要覆盖 `publishedAt`、`heroImage`、已有 `seo.ogImage` 或不相关的 Portable Text block。
+## Risk areas not to touch
+- For future updates, preserve `publishedAt`, any added `heroImage`, an existing `seo.ogImage`, and unrelated Portable Text blocks.
