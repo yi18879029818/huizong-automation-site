@@ -204,3 +204,9 @@
 - Preserved the supplied document structure in 79 Portable Text blocks, including the palletization workflow, transport-efficiency benefits, pallet standards, and automated pallet-handling guidance.
 - The source Word document contained no embedded media, so no hero image or body visuals were added.
 - Verified the Sanity document, production article response (`200`), and `/sitemap.xml` entry. No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+
+## 2026-08-10 - Palletization Article Visual Assets
+
+- Added `scripts/add-palletization-images.mjs` to place the five supplied visual assets into the Sanity post `palletization-automated-pallet-handling`.
+- Set `2.jpg` as the hero image and placed it after the "What Is Palletization?" section; placed the other four images after their related logistics and automation sections.
+- Verified the Sanity post contains the hero plus five `imageWithAlt` blocks, the live article returns `200`, and `/sitemap.xml` includes the article URL.

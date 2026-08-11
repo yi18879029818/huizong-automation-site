@@ -1,23 +1,23 @@
 # HANDOFF
 
 ## Current completion status
-- Published the English-only Sanity post `What Is Palletization? How Palletization Improves Transportation and Warehouse Efficiency` at `/blog/palletization-automated-pallet-handling`.
+The Palletization article has five supplied images in Sanity. `2.jpg` is the hero and cover, and the other four are placed in their related article sections.
 
 ## Files changed this time
-- `docs/palletization-and-automated-pallet-handling.md`
+- `scripts/add-palletization-images.mjs`
 - `docs/WORK_LOG.md`
 - `docs/HANDOFF.md`
 
 ## Verified results
-- The Sanity post exists as `post-palletization-automated-pallet-handling` with 79 Portable Text blocks and remains indexable.
-- `https://www.coolyne.com/blog/palletization-automated-pallet-handling` returns `200` and renders the article title.
-- `https://www.coolyne.com/sitemap.xml` returns `200` and includes the new article URL.
+- Sanity returns the hero image and five `imageWithAlt` blocks for `palletization-automated-pallet-handling`.
+- `https://www.coolyne.com/blog/palletization-automated-pallet-handling` returns `200`.
+- `https://www.coolyne.com/sitemap.xml` returns `200` and contains the article URL.
 
 ## Unresolved issues
-- The source Word document contains no embedded image, so the article currently has no hero image or inline visuals.
+None for this image update.
 
 ## Recommended next step
-- When approved source images are available, add a wide palletizing or AGV forklift image as the hero and place supporting workflow images next to the matching sections through Sanity.
+- Review the live article visually on desktop and mobile. Use the helper script if the same placement needs to be reapplied.
 
 ## Risk areas not to touch
-- For future updates, preserve `publishedAt`, any added `heroImage`, an existing `seo.ogImage`, and unrelated Portable Text blocks.
+- Do not overwrite the article body through the generic importer without preserving the existing Portable Text blocks and these five image keys.
