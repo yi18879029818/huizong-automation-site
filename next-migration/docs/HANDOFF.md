@@ -1,23 +1,22 @@
 # HANDOFF
 
 ## Current completion status
-The Palletization article has five supplied images in Sanity. `2.jpg` is the hero and cover, and the other four are placed in their related article sections.
+The Warehouse Layout Optimization article is published through Sanity at `/blog/warehouse-layout-optimization` as an English-only post.
 
 ## Files changed this time
-- `scripts/add-palletization-images.mjs`
 - `docs/WORK_LOG.md`
 - `docs/HANDOFF.md`
 
 ## Verified results
-- Sanity returns the hero image and five `imageWithAlt` blocks for `palletization-automated-pallet-handling`.
-- `https://www.coolyne.com/blog/palletization-automated-pallet-handling` returns `200`.
+- The Sanity post contains 191 English Portable Text blocks.
+- `https://www.coolyne.com/blog/warehouse-layout-optimization` returns `200` and includes the article title.
 - `https://www.coolyne.com/sitemap.xml` returns `200` and contains the article URL.
 
 ## Unresolved issues
-None for this image update.
+The source document contains no embedded visuals, so the article currently has no dedicated hero or inline images.
 
 ## Recommended next step
-- Review the live article visually on desktop and mobile. Use the helper script if the same placement needs to be reapplied.
+- Provide approved visuals if a cover image or inline illustrations are required, then add them through Sanity and reverify the live article.
 
 ## Risk areas not to touch
-- Do not overwrite the article body through the generic importer without preserving the existing Portable Text blocks and these five image keys.
+- Do not overwrite the article body through the generic importer unless the supplied Word content is the intended replacement.

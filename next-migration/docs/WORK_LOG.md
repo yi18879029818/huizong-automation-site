@@ -210,3 +210,10 @@
 - Added `scripts/add-palletization-images.mjs` to place the five supplied visual assets into the Sanity post `palletization-automated-pallet-handling`.
 - Set `2.jpg` as the hero image and placed it after the "What Is Palletization?" section; placed the other four images after their related logistics and automation sections.
 - Verified the Sanity post contains the hero plus five `imageWithAlt` blocks, the live article returns `200`, and `/sitemap.xml` includes the article URL.
+
+## 2026-08-12 - Warehouse Layout Optimization Sanity Publication
+
+- Published `Warehouse Layout Optimization: How to Improve Space Utilization and Operational Efficiency` through Sanity at `/blog/warehouse-layout-optimization` as an English-only article.
+- Imported 191 Portable Text blocks from the supplied Word document and configured the article title, slug, and SEO metadata.
+- The source document contained no embedded images, so no hero image or inline visuals were added.
+- Verified the production article returns `200`, and `/sitemap.xml` returns `200` and includes the new blog URL. No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
