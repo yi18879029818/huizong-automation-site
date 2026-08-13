@@ -5,6 +5,8 @@ const BLOG_IMAGE_OVERRIDES = {
   "what-is-intralogistics": "/assets/images/intralogistics-cover.webp",
   "agv-vs-amr": "/assets/images/agv-vs-amr-cover.webp",
   "what-is-machine-tending": "/assets/images/machine-tending-robot-upper.png",
+  "warehouse-layout-optimization":
+    "/assets/images/warehouse-layout-optimization-layout-types-cover.png",
   "automated-guided-vehicle-advantages-disadvantages":
     "/assets/images/blog-agv-advantages-material-flow.png",
   "warehouse-automation-trends-2026": "/assets/images/warehouse-automation-guide-workflow.webp"

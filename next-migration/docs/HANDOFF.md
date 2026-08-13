@@ -1,22 +1,32 @@
 # HANDOFF
 
 ## Current completion status
-The Warehouse Layout Optimization article is published through Sanity at `/blog/warehouse-layout-optimization` as an English-only post.
+The Warehouse Layout Optimization article now has the supplied cover and two inline visuals wired through frontend static overrides. The Sanity post itself was not mutated because the available token lacks create/update permissions.
 
 ## Files changed this time
 - `docs/WORK_LOG.md`
 - `docs/HANDOFF.md`
+- `next-migration/app/blog/[slug]/page.js`
+- `next-migration/app/sitemap.js`
+- `next-migration/lib/blog-image-overrides.mjs`
+- `next-migration/scripts/add-warehouse-layout-optimization-images.mjs`
+- `public/assets/images/warehouse-layout-optimization-layout-types-cover.png`
+- `public/assets/images/warehouse-layout-optimization-zone-based-storage.jpg`
+- `public/assets/images/warehouse-layout-optimization-abc-slotting-layout.png`
 
 ## Verified results
-- The Sanity post contains 191 English Portable Text blocks.
-- `https://www.coolyne.com/blog/warehouse-layout-optimization` returns `200` and includes the article title.
-- `https://www.coolyne.com/sitemap.xml` returns `200` and contains the article URL.
+- Sanity read access confirms the post exists at slug `warehouse-layout-optimization`, but the available token cannot create assets or update documents.
+- `npm run build` passes.
+- Local standalone verification returned `200` for `/blog/warehouse-layout-optimization` and found all three image paths in the HTML.
+- Local standalone `/sitemap.xml` returned `200` and contains `https://www.coolyne.com/blog/warehouse-layout-optimization`.
 
 ## Unresolved issues
-The source document contains no embedded visuals, so the article currently has no dedicated hero or inline images.
+The images are visible through frontend overrides, not through Sanity `imageWithAlt` asset blocks. To make the CMS source canonical, use a Sanity token with create/update permissions and run the prepared script.
 
 ## Recommended next step
-- Provide approved visuals if a cover image or inline illustrations are required, then add them through Sanity and reverify the live article.
+- Deploy the current frontend changes, then verify the production article and production sitemap.
+- If a write-capable Sanity token becomes available, run `node scripts/add-warehouse-layout-optimization-images.mjs` with `SANITY_WRITE_TOKEN` to write the same visuals into Sanity.
 
 ## Risk areas not to touch
 - Do not overwrite the article body through the generic importer unless the supplied Word content is the intended replacement.
+- Do not assume the historical Sanity token is write-capable; it only passed read checks in this task.

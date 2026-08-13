@@ -217,3 +217,11 @@
 - Imported 191 Portable Text blocks from the supplied Word document and configured the article title, slug, and SEO metadata.
 - The source document contained no embedded images, so no hero image or inline visuals were added.
 - Verified the production article returns `200`, and `/sitemap.xml` returns `200` and includes the new blog URL. No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+
+## 2026-08-13 - Warehouse Layout Optimization Visuals
+
+- Added the supplied warehouse-layout visuals for `/blog/warehouse-layout-optimization` using frontend static image overrides because the available Sanity token can read the post but cannot create assets or update documents.
+- Set `warehouse-layout-optimization-layout-types-cover.png` as the article cover through `lib/blog-image-overrides.mjs`.
+- Inserted `warehouse-layout-optimization-zone-based-storage.jpg` after the warehouse functional-area sizing paragraph and `warehouse-layout-optimization-abc-slotting-layout.png` after the ABC analysis paragraph.
+- Added an explicit sitemap route fallback for `/blog/warehouse-layout-optimization` so the URL remains present even if runtime sitemap generation misses the Sanity post.
+- Verified `npm run build` succeeds. Local standalone verification returned `200` for the article, found all three image paths in the article HTML, and confirmed `/sitemap.xml` contains `https://www.coolyne.com/blog/warehouse-layout-optimization`.

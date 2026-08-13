@@ -14,4 +14,5 @@ next-migration/.open-next/
 next-migration/.wrangler/
 next-migration/out/
 next-migration/.vercel/
+next-migration/.tmp/
 next-migration/*.tsbuildinfo
