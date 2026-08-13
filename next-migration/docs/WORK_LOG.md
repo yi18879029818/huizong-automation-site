@@ -227,3 +227,4 @@
 - Verified `npm run build` succeeds. Local standalone verification returned `200` for the article, found all three image paths in the article HTML, and confirmed `/sitemap.xml` contains `https://www.coolyne.com/blog/warehouse-layout-optimization`.
 - Deployed Cloudflare Worker version `9af1ac13-46e3-4363-ab31-f114de6619e8`; deployment uploaded the three new image assets.
 - Verified production article HTML includes the cover and both inline image paths. Verified the new static image URLs return `200`, and production `/sitemap.xml` includes `https://www.coolyne.com/blog/warehouse-layout-optimization`.
+- Re-tested the provided Sanity token after deployment. Sanity accepted it for identification/read context but rejected asset upload with missing `create` permission and rejected document patch dry-runs with missing `update` permission, so the frontend static override remains the active production solution.
