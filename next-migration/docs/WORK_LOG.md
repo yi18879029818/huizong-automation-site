@@ -225,3 +225,5 @@
 - Inserted `warehouse-layout-optimization-zone-based-storage.jpg` after the warehouse functional-area sizing paragraph and `warehouse-layout-optimization-abc-slotting-layout.png` after the ABC analysis paragraph.
 - Added an explicit sitemap route fallback for `/blog/warehouse-layout-optimization` so the URL remains present even if runtime sitemap generation misses the Sanity post.
 - Verified `npm run build` succeeds. Local standalone verification returned `200` for the article, found all three image paths in the article HTML, and confirmed `/sitemap.xml` contains `https://www.coolyne.com/blog/warehouse-layout-optimization`.
+- Deployed Cloudflare Worker version `9af1ac13-46e3-4363-ab31-f114de6619e8`; deployment uploaded the three new image assets.
+- Verified production article HTML includes the cover and both inline image paths. Verified the new static image URLs return `200`, and production `/sitemap.xml` includes `https://www.coolyne.com/blog/warehouse-layout-optimization`.

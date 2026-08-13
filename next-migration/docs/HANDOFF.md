@@ -1,7 +1,7 @@
 # HANDOFF
 
 ## Current completion status
-The Warehouse Layout Optimization article now has the supplied cover and two inline visuals wired through frontend static overrides. The Sanity post itself was not mutated because the available token lacks create/update permissions.
+The Warehouse Layout Optimization article now shows the supplied cover and two inline visuals on production through frontend static overrides. The Sanity post itself was not mutated because the available token lacks create/update permissions.
 
 ## Files changed this time
 - `docs/WORK_LOG.md`
@@ -19,12 +19,13 @@ The Warehouse Layout Optimization article now has the supplied cover and two inl
 - `npm run build` passes.
 - Local standalone verification returned `200` for `/blog/warehouse-layout-optimization` and found all three image paths in the HTML.
 - Local standalone `/sitemap.xml` returned `200` and contains `https://www.coolyne.com/blog/warehouse-layout-optimization`.
+- Deployed Cloudflare Worker version `9af1ac13-46e3-4363-ab31-f114de6619e8`.
+- Production article HTML includes all three image paths, the new static image URLs return `200`, and production `/sitemap.xml` includes the article URL.
 
 ## Unresolved issues
 The images are visible through frontend overrides, not through Sanity `imageWithAlt` asset blocks. To make the CMS source canonical, use a Sanity token with create/update permissions and run the prepared script.
 
 ## Recommended next step
-- Deploy the current frontend changes, then verify the production article and production sitemap.
 - If a write-capable Sanity token becomes available, run `node scripts/add-warehouse-layout-optimization-images.mjs` with `SANITY_WRITE_TOKEN` to write the same visuals into Sanity.
 
 ## Risk areas not to touch
