@@ -231,3 +231,5 @@
 - Tested a second provided Sanity token; read, create dry-run, and update dry-run all passed.
 - Used the write-capable token to upload the cover and two body visuals into Sanity for `/blog/warehouse-layout-optimization`. Public Sanity reads now show one `heroImage` asset and two body `imageWithAlt` blocks.
 - Removed the temporary frontend static image overrides and removed the now-unneeded static image files from the repository so the article renders from Sanity as the canonical source.
+- Deployed cleanup as Cloudflare Worker version `530bd15c-da57-4456-82fe-d2407f9c5346`.
+- Verified production article HTML now contains Sanity CDN image URLs, does not contain the removed static image paths, and production `/sitemap.xml` still contains `https://www.coolyne.com/blog/warehouse-layout-optimization`.

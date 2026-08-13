@@ -1,7 +1,7 @@
 # HANDOFF
 
 ## Current completion status
-The Warehouse Layout Optimization article now has the supplied cover and two inline visuals stored in Sanity as canonical content.
+The Warehouse Layout Optimization article now has the supplied cover and two inline visuals stored in Sanity as canonical content and verified on production.
 
 ## Files changed this time
 - `docs/WORK_LOG.md`
@@ -21,12 +21,14 @@ The Warehouse Layout Optimization article now has the supplied cover and two inl
 - The provided Sanity token was re-tested and still lacks both `create` permission for image assets and `update` permission for the post document.
 - A second provided Sanity token passed read, create dry-run, and update dry-run checks.
 - Sanity now contains the cover `heroImage` and two body `imageWithAlt` blocks for `warehouse-layout-optimization`.
+- Deployed cleanup as Cloudflare Worker version `530bd15c-da57-4456-82fe-d2407f9c5346`.
+- Production article HTML contains Sanity CDN image URLs and no longer contains the removed static image paths. Production `/sitemap.xml` still contains the article URL.
 
 ## Unresolved issues
-The frontend cleanup and production redeploy still need to be completed after removing the temporary static overrides.
+No open issue for this article image update.
 
 ## Recommended next step
-- Build, deploy, and verify production now renders the Sanity-hosted images without duplicate frontend static images.
+- Keep the Sanity image blocks as the source of truth for this article.
 
 ## Risk areas not to touch
 - Do not overwrite the article body through the generic importer unless the supplied Word content is the intended replacement.
