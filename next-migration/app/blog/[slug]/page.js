@@ -487,32 +487,6 @@ const BLOG_BLOCK_INSERTIONS = {
           "Safety-focused warehouse automation example: protected walkways, operator stations, and autonomous transport routes reduce conflict in shared work zones."
       }
     }
-  ],
-  "warehouse-layout-optimization": [
-    {
-      afterTextIncludes:
-        "Functional areas should therefore be sized according to actual throughput and operational frequency rather than simply dividing warehouse space evenly.",
-      block: {
-        _type: "staticImage",
-        _key: "warehouse-layout-optimization-zone-based-storage",
-        src: "/assets/images/warehouse-layout-optimization-zone-based-storage.jpg",
-        alt: "Warehouse layout with reserve storage, bulk storage, picking, packing, receiving, and shipping zones",
-        caption:
-          "A zone-based warehouse layout separates reserve storage, bulk storage, picking, packing, receiving, and shipping areas for cleaner material movement."
-      }
-    },
-    {
-      afterTextIncludes:
-        "One common approach is to classify SKUs according to turnover using ABC analysis.",
-      block: {
-        _type: "staticImage",
-        _key: "warehouse-layout-optimization-abc-slotting-layout",
-        src: "/assets/images/warehouse-layout-optimization-abc-slotting-layout.png",
-        alt: "ABC slotting layout with high, medium, and low velocity inventory zones and a one-way pick path",
-        caption:
-          "ABC slotting places fast-moving items closest to the picking flow while slower items stay farther from the main path."
-      }
-    }
   ]
 };
 

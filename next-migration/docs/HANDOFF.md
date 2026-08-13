@@ -1,7 +1,7 @@
 # HANDOFF
 
 ## Current completion status
-The Warehouse Layout Optimization article now shows the supplied cover and two inline visuals on production through frontend static overrides. The Sanity post itself was not mutated because the available token lacks create/update permissions.
+The Warehouse Layout Optimization article now has the supplied cover and two inline visuals stored in Sanity as canonical content.
 
 ## Files changed this time
 - `docs/WORK_LOG.md`
@@ -10,9 +10,6 @@ The Warehouse Layout Optimization article now shows the supplied cover and two i
 - `next-migration/app/sitemap.js`
 - `next-migration/lib/blog-image-overrides.mjs`
 - `next-migration/scripts/add-warehouse-layout-optimization-images.mjs`
-- `public/assets/images/warehouse-layout-optimization-layout-types-cover.png`
-- `public/assets/images/warehouse-layout-optimization-zone-based-storage.jpg`
-- `public/assets/images/warehouse-layout-optimization-abc-slotting-layout.png`
 
 ## Verified results
 - Sanity read access confirms the post exists at slug `warehouse-layout-optimization`, but the available token cannot create assets or update documents.
@@ -22,13 +19,15 @@ The Warehouse Layout Optimization article now shows the supplied cover and two i
 - Deployed Cloudflare Worker version `9af1ac13-46e3-4363-ab31-f114de6619e8`.
 - Production article HTML includes all three image paths, the new static image URLs return `200`, and production `/sitemap.xml` includes the article URL.
 - The provided Sanity token was re-tested and still lacks both `create` permission for image assets and `update` permission for the post document.
+- A second provided Sanity token passed read, create dry-run, and update dry-run checks.
+- Sanity now contains the cover `heroImage` and two body `imageWithAlt` blocks for `warehouse-layout-optimization`.
 
 ## Unresolved issues
-The images are visible through frontend overrides, not through Sanity `imageWithAlt` asset blocks. To make the CMS source canonical, use a Sanity token that has both asset `create` and document `update` permissions, then run the prepared script.
+The frontend cleanup and production redeploy still need to be completed after removing the temporary static overrides.
 
 ## Recommended next step
-- If a write-capable Sanity token becomes available, run `node scripts/add-warehouse-layout-optimization-images.mjs` with `SANITY_WRITE_TOKEN` to write the same visuals into Sanity.
+- Build, deploy, and verify production now renders the Sanity-hosted images without duplicate frontend static images.
 
 ## Risk areas not to touch
 - Do not overwrite the article body through the generic importer unless the supplied Word content is the intended replacement.
-- Do not assume the tested Sanity token is write-capable; Sanity returned explicit permission errors for both asset creation and document updates.
+- Do not re-add frontend image overrides for this article unless Sanity rendering fails.

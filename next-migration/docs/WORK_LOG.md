@@ -228,3 +228,6 @@
 - Deployed Cloudflare Worker version `9af1ac13-46e3-4363-ab31-f114de6619e8`; deployment uploaded the three new image assets.
 - Verified production article HTML includes the cover and both inline image paths. Verified the new static image URLs return `200`, and production `/sitemap.xml` includes `https://www.coolyne.com/blog/warehouse-layout-optimization`.
 - Re-tested the provided Sanity token after deployment. Sanity accepted it for identification/read context but rejected asset upload with missing `create` permission and rejected document patch dry-runs with missing `update` permission, so the frontend static override remains the active production solution.
+- Tested a second provided Sanity token; read, create dry-run, and update dry-run all passed.
+- Used the write-capable token to upload the cover and two body visuals into Sanity for `/blog/warehouse-layout-optimization`. Public Sanity reads now show one `heroImage` asset and two body `imageWithAlt` blocks.
+- Removed the temporary frontend static image overrides and removed the now-unneeded static image files from the repository so the article renders from Sanity as the canonical source.

@@ -5,8 +5,6 @@ import { SITE_URL } from "@/lib/site-config";
 
 export const dynamic = "force-dynamic";
 
-const REQUIRED_BLOG_ROUTES = ["/blog/warehouse-layout-optimization"];
-
 function toSlug(route) {
   return route === "/" ? [] : route.slice(1).split("/");
 }
@@ -73,7 +71,6 @@ export default async function sitemap() {
       "/faq",
       "/blog",
       ...posts.map((post) => `/blog/${post.slug}`),
-      ...REQUIRED_BLOG_ROUTES,
       ...caseStudies.map((study) => `/case-studies/projects/${study.slug}`)
     ])
   ];
