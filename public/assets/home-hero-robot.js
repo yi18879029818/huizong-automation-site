@@ -72,7 +72,7 @@ if (mount) {
       if (poster) {
         poster.classList.remove('is-hidden');
       }
-      setStatus('3D preview unavailable. Please refresh the page.', 'is-error');
+      setStatus('Static preview shown. 3D view is unavailable in this browser.', 'is-error');
     });
 
     window.setTimeout(() => {

@@ -727,7 +727,7 @@ function HomeBody({ page }) {
                       rotation-per-second="18deg"
                       shadow-intensity="0.22"
                       shadow-softness="0.85"
-                      src="/%E6%A8%A1%E5%9E%8B2/%E5%A4%8D%E5%90%88%E6%9C%BA%E5%99%A8%E4%BA%BA8.glb"
+                      src="/%E6%A8%A1%E5%9E%8B/composite-mobile-robot-web.glb"
                       touch-action="pan-y"
                     />{" "}
                   </div>{" "}
