@@ -8,6 +8,9 @@ if (mount) {
   const scriptSource = '/assets/vendor-model-viewer.min.js';
   let viewerBound = false;
 
+  window.ModelViewerElement = window.ModelViewerElement || {};
+  window.ModelViewerElement.dracoDecoderLocation = '/assets/draco/1.5.6/';
+
   function setStatus(text, state) {
     if (!status) {
       return;
