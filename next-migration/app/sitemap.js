@@ -5,6 +5,8 @@ import { SITE_URL } from "@/lib/site-config";
 
 export const dynamic = "force-dynamic";
 
+const REDIRECTED_ROUTES = new Set(["/blog/autonomous-forklifts"]);
+
 function toSlug(route) {
   return route === "/" ? [] : route.slice(1).split("/");
 }
@@ -73,7 +75,7 @@ export default async function sitemap() {
       ...posts.map((post) => `/blog/${post.slug}`),
       ...caseStudies.map((study) => `/case-studies/projects/${study.slug}`)
     ])
-  ];
+  ].filter((route) => !REDIRECTED_ROUTES.has(route));
   const pages = await Promise.all(routes.map((route) => getStructuredPage(toSlug(route))));
   const postMap = new Map(posts.map((post) => [`/blog/${post.slug}`, post]));
 

@@ -11,6 +11,10 @@ const SECURITY_HEADERS = {
   "X-Frame-Options": "SAMEORIGIN"
 };
 
+const PERMANENT_REDIRECTS = {
+  "/blog/autonomous-forklifts": "/blog/agv-forklift-meaning"
+};
+
 function isLocalHost(hostname = "") {
   return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
 }
@@ -53,6 +57,19 @@ function canonicalHostRedirect(request) {
   redirectUrl.host = SITE_HOST;
 
   return NextResponse.redirect(redirectUrl, 308);
+}
+
+function permanentPathRedirect(request) {
+  const targetPath = PERMANENT_REDIRECTS[request.nextUrl.pathname];
+
+  if (!targetPath) {
+    return null;
+  }
+
+  const redirectUrl = request.nextUrl.clone();
+  redirectUrl.pathname = targetPath;
+
+  return NextResponse.redirect(redirectUrl, 301);
 }
 
 function markdownRewriteUrl(request) {
@@ -119,6 +136,11 @@ export async function middleware(request) {
   const canonicalRedirect = canonicalHostRedirect(request);
   if (canonicalRedirect) {
     return applySecurityHeaders(canonicalRedirect, pathname);
+  }
+
+  const permanentRedirect = permanentPathRedirect(request);
+  if (permanentRedirect) {
+    return applySecurityHeaders(permanentRedirect, pathname);
   }
 
   const policy = getAgentResponsePolicy({
