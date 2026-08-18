@@ -444,7 +444,7 @@ const BLOG_BLOCK_INSERTIONS = {
   "line-side-logistics": [
     {
       afterTextIncludes:
-        "Automation starts to make more sense once the transport task stops being occasional and starts becoming repetitive. When the same loads move between the same kinds of points again and again, automated transport and orchestration software can reduce emergency runs, smooth delivery cadence, and make task status more visible. The useful mindset here is not 'replace a driver.' It is 'remove a recurring source of line-side instability.'",
+        "When transport tasks are linked to replenishment signals and production requirements, automated vehicles become part of a coordinated material-flow system rather than isolated pieces of equipment.",
       block: {
         _type: "videoEmbed",
         _key: "line-side-logistics-factory-demo-video",
