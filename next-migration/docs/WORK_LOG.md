@@ -233,3 +233,168 @@
 - Removed the temporary frontend static image overrides and removed the now-unneeded static image files from the repository so the article renders from Sanity as the canonical source.
 - Deployed cleanup as Cloudflare Worker version `530bd15c-da57-4456-82fe-d2407f9c5346`.
 - Verified production article HTML now contains Sanity CDN image URLs, does not contain the removed static image paths, and production `/sitemap.xml` still contains `https://www.coolyne.com/blog/warehouse-layout-optimization`.
+
+## 2026-08-19 - Five Coolyne Blog Publications
+
+- Published five supplied English Word documents through Sanity as Coolyne blog posts:
+  `/blog/how-we-designed-unmanned-agv-logistics-for-an-injection-molding-workshop`,
+  `/blog/how-we-designed-a-machine-tending-cell-with-a-composite-robot-and-receiving-agv`,
+  `/blog/how-we-designed-agv-based-intralogistics-for-a-multi-floor-electronics-workshop`,
+  `/blog/how-we-designed-an-inline-robotic-screw-fastening-system-for-notebook-keyboards`, and
+  `/blog/automated-sortation-what-is-an-automated-sortation-system`.
+- Converted the source Word structure into Coolyne importer-ready Markdown with title, SEO description, slug, headings, and list blocks, then imported with `--english-only`.
+- Verified DOCX text extraction before publication: all five documents returned `verified_text_covered: true` and `missing_count: 0`.
+- Verified Sanity readback for all five posts, including SEO fields and body block counts of 249, 207, 193, 221, and 106.
+- Verified each production article returns `200`, includes the exact article title and `BlogPosting` structured data, and `/sitemap.xml` returns `200` with all five new blog URLs.
+- No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+
+## 2026-08-20 - Five Coolyne Blog Link Restoration
+
+- Restored the source Word document hyperlinks that were lost during the initial DOCX-to-Sanity import for the five 2026-08-19 Coolyne blog posts.
+- Added 9 Sanity Portable Text link marks across the five posts, preserving the original Word anchor text and target URLs.
+- Restored case-library links for the injection-molding AGV logistics, machine-tending cell, multi-floor electronics intralogistics, and notebook-keyboard screw-fastening articles.
+- Restored Coolyne internal links for `/products/agv-roller`, `/products`, `/solutions`, and `/contact`, plus the original Robotlyne screwdriving URL from the source document.
+- Verified Sanity readback shows the expected link marks in all five posts.
+- Verified all five production article pages return `200`, and every restored link appears in the production HTML. Production `/sitemap.xml` returns `200`.
+- No Cloudflare deployment was required because the blog route reads Sanity content dynamically.
+
+## 2026-08-20 - Notebook Keyboard Screw Fastening Blog Takedown
+
+- Removed the Sanity post `/blog/how-we-designed-an-inline-robotic-screw-fastening-system-for-notebook-keyboards` at the user's request.
+- Saved a local Sanity JSON backup before deletion at `tmp/blog-takedown-20260820/how-we-designed-an-inline-robotic-screw-fastening-system-for-notebook-keyboards.sanity-backup.json`.
+- Verified Sanity no longer returns the post for that slug.
+- Verified production `/blog/how-we-designed-an-inline-robotic-screw-fastening-system-for-notebook-keyboards` returns `404`, and production `/sitemap.xml` returns `200` without that URL.
+
+## 2026-08-20 - SMT Buffer Warehouse Blog Publication
+
+- Published `How We Designed an Automated Buffer Warehouse for an SMT and Insertion Workshop` through Sanity at `/blog/how-we-designed-an-automated-buffer-warehouse-for-an-smt-and-insertion-workshop`.
+- Converted the supplied Word document into Coolyne importer-ready Markdown and imported it as English-only content with 241 Sanity body blocks.
+- Verified DOCX text extraction before publication with `verified_text_covered: true` and `missing_count: 0`.
+- Restored the source Word hyperlink `SMT and insertion workshop automated buffer warehouse case study` to the case-library URL in Sanity Portable Text.
+- Verified Sanity readback shows the post, SEO fields, 241 body blocks, and the expected link mark.
+- Verified the production article returns `200`, contains the exact title, contains the restored link, includes `BlogPosting` structured data, and production `/sitemap.xml` contains the new URL.
+- No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+
+## 2026-08-20 - SMT Buffer Warehouse Blog Visuals
+
+- Prepared three sanitized blog images from the supplied 2026-08-20 source files before upload: cropped the visible bottom brand from the lift-station image, blurred document/screen text, and cropped or blurred visible station labels and stickers.
+- Uploaded the sanitized images to Sanity for `/blog/how-we-designed-an-automated-buffer-warehouse-for-an-smt-and-insertion-workshop`.
+- Set the lift-station image as the Sanity `heroImage` because the post did not yet have a cover image.
+- Inserted three `imageWithAlt` body blocks after the material-flow, material-category, and AGV-to-conveyor interface sections.
+- Verified Sanity readback shows the hero image and all three target image blocks with alt text, captions, dimensions, and Sanity CDN URLs.
+- Verified the production article returns `200`, contains the exact title, includes `BlogPosting` structured data, and includes all three Sanity image asset references and captions. Verified each Sanity CDN image URL returns `200 image/jpeg`.
+- Verified production `/sitemap.xml` returns `200` and still contains the blog URL. No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+
+## 2026-08-20 - Automated Sortation Blog Visuals
+
+- Prepared five supplied automated-sortation visuals as optimized blog JPEGs under `tmp/automated-sortation-images`.
+- Cropped the warehouse conveyor image to remove a visible right-side wall sign; retained the parcel conveyor image naturally because its visible number boards are operational location labels rather than logos.
+- Confirmed the current Sanity token can read the target post and passed asset-create and document-update dry-runs before writing.
+- Uploaded all five images to Sanity for `/blog/automated-sortation-what-is-an-automated-sortation-system`.
+- Set the robotic sortation cell overview as the Sanity `heroImage` because the post did not yet have a cover image.
+- Inserted five `imageWithAlt` body blocks after the article definition, operating workflow, sliding shoe sorter, robotic sortation, and traditional high-throughput sortation sections.
+- Verified Sanity readback shows the hero image and all five target image blocks with alt text, captions, dimensions, and Sanity CDN URLs.
+- Verified the production article returns `200`, contains the exact title, includes `BlogPosting` structured data, and includes all five Sanity image asset references and captions. Verified each Sanity CDN image URL returns `200 image/jpeg`.
+- Verified production `/sitemap.xml` returns `200` and still contains the blog URL. No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+
+## 2026-08-20 - Automated Sortation Cover Image Swap
+
+- Replaced the automated sortation article `heroImage` with the real-scene sliding shoe sorter image already uploaded in Sanity.
+- Kept the previous robotic sortation cell overview image in the article body so no inline visual was removed.
+- Verified Sanity readback now shows `image-0408e9037c8e9779302fec3e61852892aa2a2e63-600x364-jpg` as the cover image.
+- Verified the production article returns `200`, includes the new hero image asset, keeps `BlogPosting` structured data, and production `/sitemap.xml` returns `200` with the article URL.
+
+## 2026-08-20 - Multi-Floor Electronics Workshop Blog Visuals
+
+- Prepared six supplied multi-floor electronics workshop visuals as optimized blog JPEGs under `tmp/multi-floor-electronics-images`.
+- Preserved the real-scene visuals without heavy masking so the case-study imagery remains natural; lightly blurred only the small account area in the dispatch-system screenshot.
+- Confirmed the current Sanity token can read the target post and passed asset-create and document-update dry-runs before writing.
+- Uploaded all six images to Sanity for `/blog/how-we-designed-agv-based-intralogistics-for-a-multi-floor-electronics-workshop`.
+- Set the blue-bin AGV workshop image as the Sanity `heroImage` because the post did not yet have a cover image.
+- Inserted six `imageWithAlt` body blocks after the logistics-volume, unmanned-vehicle, equipment-interface, multi-floor elevator, and central-dispatching sections.
+- Verified Sanity readback shows the hero image and all six target image blocks with alt text, captions, dimensions, and Sanity CDN URLs.
+- Verified the production article returns `200`, contains the exact title, includes `BlogPosting` structured data, and includes all six Sanity image asset references and captions. Verified each Sanity CDN image URL returns `200 image/jpeg`.
+- Verified production `/sitemap.xml` returns `200` and still contains the blog URL. No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+
+## 2026-08-20 - Machine-Tending Cell Image and Video
+
+- Prepared the supplied machine-tending image with mild autocontrast, contrast, sharpness, and unsharp-mask enhancement under `tmp/machine-tending-cell-assets/machine-tending-cell-sharpened.jpg`.
+- Verified the supplied video is H.264 MP4, 1280x720, about 64 seconds, and about 18.8 MB, below the Cloudflare static asset size limit.
+- Copied the video to the source public directory at `../public/videos/machine-tending-cell-receiving-agv.mp4` so the `prebuild` sync step carries it into `next-migration/public/videos`.
+- Confirmed Sanity accepts the `videoEmbed` block shape with a dry-run body update before writing.
+- Uploaded the sharpened image to Sanity for `/blog/how-we-designed-a-machine-tending-cell-with-a-composite-robot-and-receiving-agv`, set it as `heroImage`, and inserted it into the article body.
+- Inserted a Sanity `videoEmbed` body block pointing to `/videos/machine-tending-cell-receiving-agv.mp4`.
+- Verified `npm run build` succeeds and the OpenNext output contains `/videos/machine-tending-cell-receiving-agv.mp4`.
+- The first `npm run deploy` attempt completed the OpenNext build but failed during Wrangler's Cloudflare API request with `fetch failed`; a direct `npx opennextjs-cloudflare deploy` retry succeeded.
+- Deployed Cloudflare Worker version `dbc4c715-11c9-47bb-bd38-b719684a44e3`, uploading `/videos/machine-tending-cell-receiving-agv.mp4`.
+- Verified the production article returns `200`, contains the exact title, includes `BlogPosting` structured data, and includes the new Sanity image asset, video source, image caption, and video caption.
+- Verified the production video URL returns `200 video/mp4`, the Sanity image URL returns `200 image/jpeg`, and production `/sitemap.xml` returns `200` with the article URL.
+
+## 2026-08-20 - Injection Molding Workshop Blog Visuals
+
+- Prepared four supplied injection-molding workshop AGV visuals as optimized blog JPEGs under `tmp/injection-molding-agv-images`.
+- Confirmed the current Sanity token can read the target post and passed asset-create and document-update dry-runs before writing.
+- Uploaded all four images to Sanity for `/blog/how-we-designed-unmanned-agv-logistics-for-an-injection-molding-workshop`.
+- Set the workshop AGV route image as the Sanity `heroImage` because the post did not yet have a cover image.
+- Inserted four `imageWithAlt` body blocks after the empty/full tray cycle, AGV route, roller handoff, and injection-molding workshop transfer sections.
+- Verified Sanity readback shows the hero image and all four target image blocks with alt text, captions, dimensions, and Sanity CDN URLs.
+- Verified the production article returns `200`, contains the exact title, includes `BlogPosting` structured data, and includes all four Sanity image asset references and captions. Verified each Sanity CDN image URL returns `200 image/jpeg`.
+- Verified production `/sitemap.xml` returns `200` and still contains the blog URL. No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+
+## 2026-08-24 - Material Handling Blog Publication
+
+- Converted the supplied `Material_Handling_Blog.docx` into Coolyne importer-ready Markdown at `tmp/blog-import-20260824-material-handling/material-handling-blog.md`.
+- Generated SEO metadata for the source document because it did not include explicit `Meta Title`, `Meta Description`, or `URL Slug` fields.
+- Published `Material Handling: What Is Material Handling?` through Sanity at `/blog/what-is-material-handling` using the write-capable Sanity token after confirming read access, create dry-run, and createOrReplace dry-run.
+- Imported 164 English-only Sanity body blocks with slug `what-is-material-handling`, SEO title `What Is Material Handling? Definition, Types & Automation`, and canonical `/blog/what-is-material-handling`.
+- Verified Sanity readback shows document `post-what-is-material-handling`, body block count `164`, `noindex: false`, and the expected SEO metadata.
+- Verified the production article returns `200`, contains the exact title, includes `BlogPosting` structured data, and production `/sitemap.xml` returns `200` with `https://www.coolyne.com/blog/what-is-material-handling`.
+- No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+
+## 2026-08-24 - Material Handling Blog Visuals
+
+- Optimized the five supplied `D:/推文文件/8.21博文` images as web JPEGs under `tmp/material-handling-images`.
+- Confirmed Sanity read access, asset-create dry-run, and document-update dry-run for `/blog/what-is-material-handling` before uploading.
+- Uploaded all five visuals to Sanity and set the second supplied image, `3.png`, as the Sanity `heroImage`.
+- Inserted five `imageWithAlt` body blocks for the conveyor-system, receiving-dock, manufacturing AGV, automated pallet-truck, and task-traceability dashboard sections.
+- Verified Sanity readback shows `image-51273868590d8617b1a41c3d638ca984bff033cb-1698x926-jpg` as the cover asset and five body image blocks with alt text, captions, dimensions, and CDN URLs.
+- Verified all five Sanity CDN image URLs return `200 image/jpeg`.
+- Verified the production article returns `200`, includes the exact title, `BlogPosting` structured data, all five image asset IDs, and all five captions.
+- Verified production `/sitemap.xml` returns `200` and still contains `https://www.coolyne.com/blog/what-is-material-handling`.
+- No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+
+## 2026-08-26 - Three Coolyne Case Study Blog Publications
+
+- Converted the three supplied DOCX files into importer-ready Markdown under `tmp/blog-import-20260826-three-case-posts`.
+- Generated SEO metadata and URL slugs because the source DOCX files did not include explicit `Meta Title`, `Meta Description`, or `URL Slug` fields.
+- Verified source DOCX text coverage before publishing: heavy-roll AGV logistics `263` paragraphs with `missing_count: 0`, ten-machine automatic test line `250` paragraphs with `missing_count: 0`, and composite robot/AGV docking transfer cell `223` paragraphs with `missing_count: 0`.
+- Confirmed the current Sanity token passed create dry-run and no-op update dry-run before writing.
+- Published `How We Designed Heavy-Roll AGV Logistics for Six Coating Lines` through Sanity at `/blog/how-we-designed-heavy-roll-agv-logistics-for-six-coating-lines` with `262` English-only body blocks.
+- Published `How We Designed AGV Material Handling for a Ten-Machine Automatic Test Line` through Sanity at `/blog/how-we-designed-agv-material-handling-for-a-ten-machine-automatic-test-line` with `249` English-only body blocks.
+- Published `How We Designed a Composite Robot and AGV Docking Transfer Cell` through Sanity at `/blog/how-we-designed-a-composite-robot-and-agv-docking-transfer-cell` with `222` English-only body blocks.
+- Verified Sanity readback for all three posts shows the expected document IDs, titles, slugs, canonical URLs, `publishedAt`, body block counts, and `noindex: false`.
+- Verified all three production article pages return `200`, include the exact article title, and include `BlogPosting` structured data.
+- Verified production `/sitemap.xml` returns `200` and contains all three new blog URLs.
+- No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+
+## 2026-08-26 - Composite Robot and AGV Docking Transfer Cell Visuals
+
+- Prepared the three supplied `D:/推文文件/8.26博文` images under `tmp/composite-robot-docking-images-20260826`.
+- Lightly enhanced the blurriest source image, `2.jpg`, with contrast, sharpness, and unsharp-mask adjustments before upload.
+- Confirmed the current Sanity token passed create dry-run and no-op update dry-run before writing.
+- Uploaded all three visuals to Sanity for `/blog/how-we-designed-a-composite-robot-and-agv-docking-transfer-cell`.
+- Set the second supplied image, `1.jpg`, as both the Sanity `heroImage` and SEO `ogImage`.
+- Inserted three `imageWithAlt` body blocks for the transfer-cell overview, robot tending at the processing equipment interface, and the enhanced machine-side handling close-up.
+- Verified Sanity readback shows body count `225`, the expected hero asset, and all three image blocks with alt text, captions, and asset references.
+- Verified the production article returns `200`, includes the exact title, includes `BlogPosting` structured data, and contains all three image asset references and captions.
+- Verified all three Sanity CDN image URLs return `200 image/jpeg`.
+- Verified production `/sitemap.xml` returns `200` and still contains the article URL.
+- No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+
+## 2026-08-26 - Autonomous Forklifts Malformed URL Redirect Fix
+
+- Reproduced that the canonical old URL `/blog/autonomous-forklifts` already returned `301` to `/blog/agv-forklift-meaning`, and the target page returned `200`.
+- Reproduced that the malformed URL from the chat message, with Chinese prose appended after `/blog/autonomous-forklifts`, returned `404`.
+- Updated `middleware.js` so the permanent redirect also handles `/blog/autonomous-forklifts/` and accidental non-slug suffixes appended by chat/editor surfaces, while avoiding valid slug continuations such as `/blog/autonomous-forklifts-new`.
+- Verified the redirect matching logic locally for the exact path, trailing slash path, malformed encoded Chinese path, and a non-matching slug continuation.
+- Ran `npm run build` successfully after the middleware change.

@@ -60,7 +60,26 @@ function canonicalHostRedirect(request) {
 }
 
 function permanentPathRedirect(request) {
-  const targetPath = PERMANENT_REDIRECTS[request.nextUrl.pathname];
+  const pathname = request.nextUrl.pathname;
+  let decodedPathname = pathname;
+
+  try {
+    decodedPathname = decodeURIComponent(pathname);
+  } catch {
+    decodedPathname = pathname;
+  }
+
+  const targetPath = Object.entries(PERMANENT_REDIRECTS).find(([sourcePath]) => {
+    if (decodedPathname === sourcePath || decodedPathname === `${sourcePath}/`) {
+      return true;
+    }
+
+    const suffix = decodedPathname.slice(sourcePath.length);
+
+    // Some chat/editor surfaces can accidentally append prose to a URL. Redirect
+    // only when the suffix is not shaped like a valid slug continuation.
+    return Boolean(suffix && !suffix.startsWith("/") && !/^[A-Za-z0-9-]/.test(suffix));
+  })?.[1];
 
   if (!targetPath) {
     return null;
