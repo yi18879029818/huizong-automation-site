@@ -1,7 +1,7 @@
 # HANDOFF
 
 ## Current completion status
-The malformed autonomous-forklifts link issue has been diagnosed and fixed in middleware. The canonical old URL already redirects to `/blog/agv-forklift-meaning`; the fix adds coverage for accidental non-slug text appended after `/blog/autonomous-forklifts`, such as the Chinese prose included in the reported Markdown URL.
+The malformed autonomous-forklifts link issue has been fixed, deployed, and verified in production. The canonical old URL redirects to `/blog/agv-forklift-meaning`; the fix also covers accidental non-slug text appended after `/blog/autonomous-forklifts`, such as the Chinese prose included in the reported Markdown URL.
 
 The composite robot and AGV docking transfer cell article has been updated with three Sanity-hosted visuals, including a lightly enhanced version of the blurriest supplied image. The second supplied image, `1.jpg`, is now the Sanity cover image and SEO `ogImage`.
 
@@ -22,9 +22,13 @@ Earlier Material Handling, injection-molding, machine-tending, multi-floor elect
 
 ## Verified results
 - Verified `/blog/autonomous-forklifts` returns `301` to `/blog/agv-forklift-meaning`, and `/blog/agv-forklift-meaning` returns `200`.
-- Verified the malformed encoded Chinese URL currently reproduces as `404` before deployment.
+- Verified the malformed encoded Chinese URL reproduced as `404` before deployment.
 - Verified the new middleware matching redirects exact old slug, trailing slash, and accidental non-slug suffixes, while not redirecting `/blog/autonomous-forklifts-new`.
 - Ran `npm run build` successfully after the middleware fix.
+- Committed and pushed the middleware fix to `main` as `777ce43`.
+- Deployed Cloudflare Worker version `f3cbf063-0dd6-4abf-aac1-b9d13c333a88`.
+- Verified production malformed encoded Chinese URL now returns `301` and follows to `200` at `/blog/agv-forklift-meaning`.
+- Verified production `/sitemap.xml` returns `200`; the target URL is included and the old URL is not included.
 - Prepared and uploaded the three supplied `D:/推文文件/8.26博文` visuals to Sanity for `/blog/how-we-designed-a-composite-robot-and-agv-docking-transfer-cell`.
 - Lightly enhanced the blurriest supplied image, `2.jpg`, before upload.
 - Set the second supplied image, `1.jpg`, as both the article `heroImage` and SEO `ogImage`.
@@ -40,10 +44,9 @@ Earlier Material Handling, injection-molding, machine-tending, multi-floor elect
 - No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
 
 ## Unresolved issues
-The middleware fix still needs production deployment verification after deploy.
+No open issue for the autonomous-forklifts redirect fix, the composite robot visual upload, or the three new blog publications.
 
 ## Recommended next step
-- Deploy the middleware fix, then verify the malformed URL returns `301` and ultimately lands on `/blog/agv-forklift-meaning`.
 - If the user supplies images for the other two new case studies, upload them through Sanity and set appropriate `heroImage` values.
 
 ## Risk areas not to touch

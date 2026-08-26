@@ -398,3 +398,8 @@
 - Updated `middleware.js` so the permanent redirect also handles `/blog/autonomous-forklifts/` and accidental non-slug suffixes appended by chat/editor surfaces, while avoiding valid slug continuations such as `/blog/autonomous-forklifts-new`.
 - Verified the redirect matching logic locally for the exact path, trailing slash path, malformed encoded Chinese path, and a non-matching slug continuation.
 - Ran `npm run build` successfully after the middleware change.
+- Committed and pushed the middleware fix to `main` as `777ce43`.
+- Deployed Cloudflare Worker version `f3cbf063-0dd6-4abf-aac1-b9d13c333a88`.
+- Verified production `/blog/autonomous-forklifts` returns `301 Location: /blog/agv-forklift-meaning`.
+- Verified production malformed encoded Chinese URL now returns `301 Location: /blog/agv-forklift-meaning` and follows to `200` at `/blog/agv-forklift-meaning`.
+- Verified production `/blog/agv-forklift-meaning` returns `200`, production `/sitemap.xml` returns `200`, the target URL is in the sitemap, and the old URL is not in the sitemap.
