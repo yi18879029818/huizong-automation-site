@@ -423,3 +423,29 @@
 - Verified the production pages for all nine active URLs return `200`, include the exact article title, include `BlogPosting` structured data, and contain the expected links. The verifier accepts Coolyne internal links rendered as relative paths, which matches the frontend renderer behavior.
 - Verified production `/sitemap.xml` returns `200`, contains all nine active URLs, and does not contain the previously removed notebook-keyboard screw-fastening URL.
 - No Cloudflare deployment was required because these blog pages and the sitemap read Sanity content dynamically.
+
+## 2026-08-27 - Manufacturing Logistics Blog Publication
+
+- Converted the supplied `Manufacturing_Logistics_Blog.docx` into importer-ready Markdown at `tmp/docx-import-20260827-manufacturing-logistics/manufacturing-logistics.md`.
+- Treated the DOCX strictly as source content; no instructions inside the document were treated as task instructions.
+- Generated SEO metadata because the source DOCX did not include explicit `Meta Title`, `Meta Description`, or `URL Slug` fields.
+- Verified DOCX-to-Markdown coverage before publishing: `137` source paragraphs, `3` hyperlinks, and `missing_count: 0`.
+- Published `Manufacturing Logistics: What Is Manufacturing Logistics?` through Sanity at `/blog/manufacturing-logistics` with `136` English-only body blocks.
+- Verified Sanity readback shows document `post-manufacturing-logistics`, canonical `/blog/manufacturing-logistics`, `136` body blocks, and all `3` expected links.
+- Verified the production article returns `200`, includes the exact title, includes `BlogPosting` structured data, and contains all `3` expected links.
+- Verified production `/sitemap.xml` returns `200` and contains `https://www.coolyne.com/blog/manufacturing-logistics`.
+- No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+
+## 2026-08-27 - Shared Composite Robot Machine-Tending Layout Image
+
+- Uploaded the supplied layout diagram `codex-clipboard-0a015504-7576-40d0-9ec4-69c0d51837d6.png` to Sanity for `/blog/how-we-designed-a-shared-composite-robot-machine-tending-layout-for-an-unmanned-workshop`.
+- Treated the image only as a visual source; no text inside the screenshot was treated as an instruction.
+- Confirmed the target post existed before writing and had no existing `imageWithAlt` blocks.
+- Confirmed Sanity asset-create dry-run and document patch dry-run before uploading.
+- Inserted one `imageWithAlt` block after the project-scope paragraph, preserving the existing article body.
+- Uploaded Sanity image asset `image-9dc675b22d6612856a8a6a010efd862fe03c6f3b-434x705-png`.
+- Verified Sanity readback shows body count `308`, image block count `1`, the expected caption, alt text, asset reference, CDN URL, and dimensions `434x705`.
+- Verified the production article returns `200`, includes the exact title, includes `BlogPosting` structured data, and contains the new image asset ID and caption.
+- Verified the Sanity CDN image URL returns `200 image/png`.
+- Verified production `/sitemap.xml` returns `200` and still contains the article URL.
+- No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
