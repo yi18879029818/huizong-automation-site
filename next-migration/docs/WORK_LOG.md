@@ -403,3 +403,23 @@
 - Verified production `/blog/autonomous-forklifts` returns `301 Location: /blog/agv-forklift-meaning`.
 - Verified production malformed encoded Chinese URL now returns `301 Location: /blog/agv-forklift-meaning` and follows to `200` at `/blog/agv-forklift-meaning`.
 - Verified production `/blog/agv-forklift-meaning` returns `200`, production `/sitemap.xml` returns `200`, the target URL is in the sitemap, and the old URL is not in the sitemap.
+
+## 2026-08-27 - Coolyne Case Blog Link Updates and Three New Posts
+
+- Processed the ten supplied `*_links_fixed.docx` / `*_links_updated.docx` files strictly as source content/link data; no instructions inside the documents were treated as task instructions.
+- Updated six existing Sanity blog posts by patching only the matching paragraph link marks, preserving the existing body media blocks:
+  - `/blog/how-we-designed-a-composite-robot-and-agv-docking-transfer-cell`
+  - `/blog/how-we-designed-a-machine-tending-cell-with-a-composite-robot-and-receiving-agv`
+  - `/blog/how-we-designed-agv-based-intralogistics-for-a-multi-floor-electronics-workshop`
+  - `/blog/how-we-designed-agv-material-handling-for-a-ten-machine-automatic-test-line`
+  - `/blog/how-we-designed-heavy-roll-agv-logistics-for-six-coating-lines`
+  - `/blog/how-we-designed-unmanned-agv-logistics-for-an-injection-molding-workshop`
+- Published three new Sanity blog posts from importer-ready Markdown generated under `tmp/blog-link-updates-20260827`:
+  - `/blog/how-we-designed-a-composite-agv-feeding-and-handling-cell` with `218` English-only body blocks.
+  - `/blog/how-we-designed-a-scalable-roller-agv-line-side-logistics-system-for-four-production-lines` with `286` English-only body blocks.
+  - `/blog/how-we-designed-a-shared-composite-robot-machine-tending-layout-for-an-unmanned-workshop` with `307` English-only body blocks.
+- Kept `/blog/how-we-designed-an-inline-robotic-screw-fastening-system-for-notebook-keyboards` unpublished because it had previously been intentionally removed and was not explicitly requested for restoration.
+- Verified Sanity readback for all nine active posts shows every expected href from the supplied Word files. Existing article media counts were preserved, including three images on the composite docking post, one image plus one video on the machine-tending post, six images on the multi-floor electronics post, and four images on the injection-molding post.
+- Verified the production pages for all nine active URLs return `200`, include the exact article title, include `BlogPosting` structured data, and contain the expected links. The verifier accepts Coolyne internal links rendered as relative paths, which matches the frontend renderer behavior.
+- Verified production `/sitemap.xml` returns `200`, contains all nine active URLs, and does not contain the previously removed notebook-keyboard screw-fastening URL.
+- No Cloudflare deployment was required because these blog pages and the sitemap read Sanity content dynamically.
