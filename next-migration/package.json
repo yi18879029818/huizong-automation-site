@@ -7,6 +7,7 @@
     "dev": "next dev",
     "prebuild": "node ./scripts/sync-legacy-public.mjs && node ./scripts/minify-legacy-assets.mjs",
     "build": "next build",
+    "test": "node --test test/visitor-store.test.mjs",
     "start": "next start",
     "preview": "opennextjs-cloudflare build && wrangler dev",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
