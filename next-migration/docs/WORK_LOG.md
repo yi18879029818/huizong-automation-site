@@ -248,6 +248,16 @@
 - Verified each production article returns `200`, includes the exact article title and `BlogPosting` structured data, and `/sitemap.xml` returns `200` with all five new blog URLs.
 - No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
 
+## 2026-09-03 - Visitor Tracking API Migration
+
+- Root cause: the legacy `site-shell` script sends page-load, conversion, and pageview-completion events to `/api/track/visit`, `/api/track/conversion`, and `/api/track/pageview-complete`, but the Next/OpenNext deployment had no matching route handlers. Google Search Console therefore reported repeated `404` responses for the visit endpoint.
+- Added Next route handlers for all three tracking endpoints and a shared `lib/visitor-store.mjs` implementation that preserves the legacy session, pageview, duration, UTM/referrer attribution, device, and conversion data model.
+- Added `test/visitor-store.test.mjs` plus `npm test`; the three tests cover visit creation, pageview duration completion, and conversion-to-session association.
+- Created the production D1 tracking schema by applying the existing idempotent `database/visitor_tracking.sql` migration to `FORM_DB`. The schema contains `visitor_sessions`, `visitor_pageviews`, and `visitor_conversions` with their required indexes.
+- Committed the tracking migration as `176b53d`, merged the latest remote `main` without conflicts, and pushed the combined production commit `870fc0d` before deploying the Cloudflare OpenNext Worker.
+- Verification: `npm test` passed three tests, `npm run build` completed successfully, and production `POST` requests to all three endpoints returned `{ ok: true }`. A remote D1 readback confirmed the deployment-check session recorded UTM attribution, one pageview, `12` seconds of duration, and the matching conversion event.
+- Search Console retains prior crawl examples until Google recrawls; future browser-generated tracking requests now receive `200` instead of `404`.
+
 ## 2026-08-20 - Five Coolyne Blog Link Restoration
 
 - Restored the source Word document hyperlinks that were lost during the initial DOCX-to-Sanity import for the five 2026-08-19 Coolyne blog posts.
