@@ -11,6 +11,10 @@ const SECURITY_HEADERS = {
   "X-Frame-Options": "SAMEORIGIN"
 };
 
+const PERMANENT_REDIRECTS = {
+  "/blog/autonomous-forklifts": "/blog/agv-forklift-meaning"
+};
+
 function isLocalHost(hostname = "") {
   return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
 }
@@ -53,6 +57,38 @@ function canonicalHostRedirect(request) {
   redirectUrl.host = SITE_HOST;
 
   return NextResponse.redirect(redirectUrl, 308);
+}
+
+function permanentPathRedirect(request) {
+  const pathname = request.nextUrl.pathname;
+  let decodedPathname = pathname;
+
+  try {
+    decodedPathname = decodeURIComponent(pathname);
+  } catch {
+    decodedPathname = pathname;
+  }
+
+  const targetPath = Object.entries(PERMANENT_REDIRECTS).find(([sourcePath]) => {
+    if (decodedPathname === sourcePath || decodedPathname === `${sourcePath}/`) {
+      return true;
+    }
+
+    const suffix = decodedPathname.slice(sourcePath.length);
+
+    // Some chat/editor surfaces can accidentally append prose to a URL. Redirect
+    // only when the suffix is not shaped like a valid slug continuation.
+    return Boolean(suffix && !suffix.startsWith("/") && !/^[A-Za-z0-9-]/.test(suffix));
+  })?.[1];
+
+  if (!targetPath) {
+    return null;
+  }
+
+  const redirectUrl = request.nextUrl.clone();
+  redirectUrl.pathname = targetPath;
+
+  return NextResponse.redirect(redirectUrl, 301);
 }
 
 function markdownRewriteUrl(request) {
@@ -119,6 +155,11 @@ export async function middleware(request) {
   const canonicalRedirect = canonicalHostRedirect(request);
   if (canonicalRedirect) {
     return applySecurityHeaders(canonicalRedirect, pathname);
+  }
+
+  const permanentRedirect = permanentPathRedirect(request);
+  if (permanentRedirect) {
+    return applySecurityHeaders(permanentRedirect, pathname);
   }
 
   const policy = getAgentResponsePolicy({

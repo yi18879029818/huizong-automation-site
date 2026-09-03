@@ -115,6 +115,9 @@ export const detailListItemProjection = `{
 export const portableTextProjection = `[]{
   ...,
   _type == "imageWithAlt" => ${imageProjection},
+  _type == "staticImage" => {
+    ...
+  },
   _type == "comparisonTable" => {
     ...,
     headers,
@@ -128,6 +131,7 @@ export const postListQuery = `*[_type == "post" && defined(slug.current)] | orde
   "slug": slug.current,
   excerpt,
   publishedAt,
+  _updatedAt,
   heroImage${imageProjection},
   seo${seoProjection}
 }`;
@@ -150,13 +154,17 @@ export const relatedPostListQuery = `*[_type == "post" && defined(slug.current) 
   publishedAt
 }`;
 
-export const caseStudyListQuery = `*[_type == "caseStudy" && defined(slug.current)] | order(publishedAt desc, _createdAt desc) {
+export const caseStudyListQuery = `*[_type == "caseStudy" && defined(slug.current)] | order(orderRank asc, publishedAt desc, _createdAt desc) {
   _id,
   title,
   "slug": slug.current,
   summary,
+  category,
+  industry,
+  orderRank,
   publishedAt,
   heroImage${imageProjection},
+  coverImage,
   seo${seoProjection}
 }`;
 
@@ -165,11 +173,24 @@ export const caseStudyQuery = `*[_type == "caseStudy" && slug.current == $slug][
   title,
   "slug": slug.current,
   summary,
+  category,
+  industry,
+  projectDate,
+  orderRank,
   publishedAt,
+  background${portableTextProjection},
+  objectives${portableTextProjection},
+  assessment${portableTextProjection},
   challenge${portableTextProjection},
   solution${portableTextProjection},
+  workflow${portableTextProjection},
+  specifications,
+  scope,
   result${portableTextProjection},
   heroImage${imageProjection},
+  coverImage,
+  gallery,
+  metrics[]{ label, value },
   seo${seoProjection}
 }`;
 

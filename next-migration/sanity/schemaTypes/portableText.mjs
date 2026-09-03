@@ -45,6 +45,9 @@ export const portableText = defineType({
       }
     }),
     defineArrayMember({
+      type: "staticImage"
+    }),
+    defineArrayMember({
       type: "comparisonTable"
     })
   ]

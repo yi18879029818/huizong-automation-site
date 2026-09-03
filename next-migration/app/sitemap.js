@@ -1,7 +1,11 @@
 import { mergeBlogPosts } from "@/lib/local-blog-posts.mjs";
-import { getPostList } from "@/lib/sanity/content.mjs";
+import { getCaseStudyList, getPostList } from "@/lib/sanity/content.mjs";
 import { getAllStructuredRoutes, getStructuredPage } from "@/lib/structured-content";
 import { SITE_URL } from "@/lib/site-config";
+
+export const dynamic = "force-dynamic";
+
+const REDIRECTED_ROUTES = new Set(["/blog/autonomous-forklifts"]);
 
 function toSlug(route) {
   return route === "/" ? [] : route.slice(1).split("/");
@@ -61,15 +65,17 @@ function resolveChangeFrequency(kind, route) {
 
 export default async function sitemap() {
   const now = new Date();
-  const posts = mergeBlogPosts(await getPostList());
+  const [postList, caseStudies] = await Promise.all([getPostList(), getCaseStudyList()]);
+  const posts = mergeBlogPosts(postList);
   const routes = [
     ...new Set([
       ...getAllStructuredRoutes(),
       "/faq",
       "/blog",
-      ...posts.map((post) => `/blog/${post.slug}`)
+      ...posts.map((post) => `/blog/${post.slug}`),
+      ...caseStudies.map((study) => `/case-studies/projects/${study.slug}`)
     ])
-  ];
+  ].filter((route) => !REDIRECTED_ROUTES.has(route));
   const pages = await Promise.all(routes.map((route) => getStructuredPage(toSlug(route))));
   const postMap = new Map(posts.map((post) => [`/blog/${post.slug}`, post]));
 
@@ -77,7 +83,11 @@ export default async function sitemap() {
     const page = pages[index];
     const canonical = toAbsoluteUrl(page?.data?.seo?.canonicalUrl, route);
     const matchedPost = postMap.get(route);
-    const lastModified = matchedPost?.publishedAt ? new Date(matchedPost.publishedAt) : now;
+    const lastModified = matchedPost?._updatedAt
+      ? new Date(matchedPost._updatedAt)
+      : matchedPost?.publishedAt
+        ? new Date(matchedPost.publishedAt)
+        : now;
 
     return {
       url: canonical,

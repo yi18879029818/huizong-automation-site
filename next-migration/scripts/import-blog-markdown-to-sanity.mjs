@@ -273,9 +273,15 @@ if (!metaTitle || !metaDescription || !slug) {
   throw new Error("Failed to extract Meta Title, Meta Description, or URL Slug.");
 }
 
+const articleTitle =
+  source
+    .replace(/\r\n/g, "\n")
+    .split("\n")
+    .map((line) => parseCustomHeading(line.trim()))
+    .find((heading) => heading?.level === 1)?.text || metaTitle;
 const body = parseBody(source);
 const existing = await client.fetch(
-  '*[_type == "post" && slug.current == $slug][0]{_id,publishedAt}',
+  '*[_type == "post" && slug.current == $slug][0]{_id,publishedAt,heroImage,seo}',
   { slug }
 );
 
@@ -285,13 +291,14 @@ const nowIso = new Date().toISOString();
 const doc = {
   _id: documentId,
   _type: "post",
-  title: metaTitle,
+  title: articleTitle,
   slug: {
     _type: "slug",
     current: slug
   },
   excerpt: metaDescription,
   publishedAt: existing?.publishedAt || nowIso,
+  ...(existing?.heroImage ? { heroImage: existing.heroImage } : {}),
   body,
   seo: {
     title: metaTitle,
@@ -308,7 +315,8 @@ const doc = {
     noindex: false,
     ogTitle: metaTitle,
     ogDescription: metaDescription,
-    twitterCard: "summary_large_image"
+    twitterCard: "summary_large_image",
+    ...(existing?.seo?.ogImage ? { ogImage: existing.seo.ogImage } : {})
   }
 };
 
@@ -325,7 +333,7 @@ console.log(
       status: "ok",
       documentId,
       slug,
-      title: metaTitle,
+      title: articleTitle,
       bodyBlockCount: body.length,
       englishOnly
     },

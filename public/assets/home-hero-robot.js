@@ -8,6 +8,9 @@ if (mount) {
   const scriptSource = '/assets/vendor-model-viewer.min.js';
   let viewerBound = false;
 
+  window.ModelViewerElement = window.ModelViewerElement || {};
+  window.ModelViewerElement.dracoDecoderLocation = '/assets/draco/1.5.6/';
+
   function setStatus(text, state) {
     if (!status) {
       return;
@@ -72,7 +75,7 @@ if (mount) {
       if (poster) {
         poster.classList.remove('is-hidden');
       }
-      setStatus('3D preview unavailable. Please refresh the page.', 'is-error');
+      setStatus('Static preview shown. 3D view is unavailable in this browser.', 'is-error');
     });
 
     window.setTimeout(() => {

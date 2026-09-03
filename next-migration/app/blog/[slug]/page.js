@@ -17,6 +17,11 @@ export const dynamic = "force-dynamic";
 const getCachedPostBySlug = cache(getPostBySlug);
 const getCachedRelatedPosts = cache(getRelatedPosts);
 
+const BLOG_CANONICAL_OVERRIDES = {
+  "agv-guide": "/blog/agv-guide",
+  "agv-what-is-automated-guided-vehicle": "/blog/agv-guide"
+};
+
 function resolveSlugParam(value) {
   try {
     return decodeURIComponent(value);
@@ -33,7 +38,7 @@ export async function generateMetadata({ params }) {
     return {};
   }
 
-  const canonical = `/blog/${post.slug}`;
+  const canonical = BLOG_CANONICAL_OVERRIDES[slug] || `/blog/${post.slug}`;
   const description = post.seo?.description || post.excerpt || "Warehouse automation article from coolyne.";
   const titleSource = post.seo?.title || post.title;
   const ogTitle = resolveSeoTitle(post.seo?.ogTitle || titleSource);
@@ -364,7 +369,19 @@ const BLOG_BLOCK_INSERTIONS = {
   "what-is-machine-tending": [
     {
       afterTextIncludes:
-        "CNC machine tending is most common where a part needs to be loaded and unloaded repeatedly with a reasonably stable cycle. Typical examples include CNC lathes, vertical machining centers, horizontal machining centers, grinders, and multi-operation cells where one machine finishes a step and the next station takes over. The more often the same sequence repeats, the more natural machine tending becomes as an improvement target.",
+        "A complete machine tending system generally includes the robot itself, an end-of-arm tool, a material supply system, control equipment, and safety devices. These components must be selected according to the part characteristics and machining process rather than simply combining a standard robot with an existing machine.",
+      block: {
+        _type: "staticImage",
+        _key: "machine-tending-system-basics-image",
+        src: "/assets/images/machine-tending-material-pick-3.png",
+        alt: "Machine tending robot positioned beside a CNC machine with organized part trays for automated loading and unloading",
+        caption:
+          "Machine tending system setup: robot, part presentation, machine interface, and cell integration work together around the CNC process."
+      }
+    },
+    {
+      afterTextIncludes:
+        "For milling, drilling, and combined machining processes, the robot can load workpieces into fixtures or onto machining pallets.",
       block: {
         _type: "staticImage",
         _key: "machine-tending-common-cnc-cell-image",
@@ -376,25 +393,13 @@ const BLOG_BLOCK_INSERTIONS = {
     },
     {
       afterTextIncludes:
-        "The operating cycle often looks straightforward from the outside. A part is picked from a tray, conveyor, feeder, or pallet. The machine is checked for status. A door opens or an access point becomes available. The part is loaded into the fixture or chuck. The machine cycle starts. When the process is complete, the part is removed and either placed in an output location, routed to the next operation, or returned for a secondary step.",
+        "This connects material transport and machine operation into a continuous workflow, reducing manual replenishment, inter-station handling, and machine waiting time.",
       block: {
         _type: "videoEmbed",
         _key: "machine-tending-operating-cycle-video",
         src: "/videos/what-is-machine-tending-guide.mp4",
         caption:
           "Machine tending workflow video: the robot picks, loads, unloads, and hands off parts in a repeatable CNC support cycle."
-      }
-    },
-    {
-      afterTextIncludes:
-        "A machine tending system usually combines four basics: a robot or cobot, a way to present parts, a machine interface, and a safety method that matches the cell design. Around those basics, teams may add conveyors, trays, pallets, vision systems, air blow-off, part verification, or inspection steps. The exact combination depends on the part, the cycle, and how tightly the machine must be integrated with the tending device.",
-      block: {
-        _type: "staticImage",
-        _key: "machine-tending-system-basics-image",
-        src: "/assets/images/machine-tending-material-pick-3.png",
-        alt: "Machine tending robot positioned beside a CNC machine with organized part trays for automated loading and unloading",
-        caption:
-          "Machine tending system setup: robot, part presentation, machine interface, and cell integration work together around the CNC process."
       }
     }
   ],
@@ -439,7 +444,7 @@ const BLOG_BLOCK_INSERTIONS = {
   "line-side-logistics": [
     {
       afterTextIncludes:
-        "Automation starts to make more sense once the transport task stops being occasional and starts becoming repetitive. When the same loads move between the same kinds of points again and again, automated transport and orchestration software can reduce emergency runs, smooth delivery cadence, and make task status more visible. The useful mindset here is not 'replace a driver.' It is 'remove a recurring source of line-side instability.'",
+        "When transport tasks are linked to replenishment signals and production requirements, automated vehicles become part of a coordinated material-flow system rather than isolated pieces of equipment.",
       block: {
         _type: "videoEmbed",
         _key: "line-side-logistics-factory-demo-video",
