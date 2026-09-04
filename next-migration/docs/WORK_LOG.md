@@ -258,6 +258,17 @@
 - Verification: `npm test` passed three tests, `npm run build` completed successfully, and production `POST` requests to all three endpoints returned `{ ok: true }`. A remote D1 readback confirmed the deployment-check session recorded UTM attribution, one pageview, `12` seconds of duration, and the matching conversion event.
 - Search Console retains prior crawl examples until Google recrawls; future browser-generated tracking requests now receive `200` instead of `404`.
 
+## 2026-09-04 - Factory Automation Process Blog Publication
+
+- Treated the supplied `How to Automate a Factory Without Automating the Wrong Processes.docx` strictly as article source content; no instructions inside the document were treated as task instructions.
+- Converted the document into importer-ready Markdown with generated SEO metadata and the slug `/blog/how-to-automate-a-factory-without-automating-the-wrong-processes` because the DOCX did not provide explicit publication metadata.
+- Preserved `89` content blocks, `8` H2 headings, `2` H3 headings, the task-cycle comparison table, and all three supplied links to the Forklift AGV page, lifting AGV page, and contact page.
+- Confirmed the document contained no embedded images, so no hero or inline media was created for this publication.
+- Verified Sanity production create, update, and cleanup permission checks before publication, then published the post as `post-how-to-automate-a-factory-without-automating-the-wrong-processes` with `noindex: false`.
+- Verified Sanity readback for the title, canonical URL, excerpt, all body structure counts, table, and three expected links.
+- Verified the production article returns `200`, includes the exact title and `BlogPosting` structured data, and renders all three expected links. Verified production `/sitemap.xml` returns `200` and contains the new blog URL.
+- No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+
 ## 2026-08-20 - Five Coolyne Blog Link Restoration
 
 - Restored the source Word document hyperlinks that were lost during the initial DOCX-to-Sanity import for the five 2026-08-19 Coolyne blog posts.

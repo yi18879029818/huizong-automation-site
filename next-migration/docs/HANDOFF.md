@@ -5,6 +5,8 @@ The visitor tracking API migration is complete and deployed. The current Next/Op
 
 The latest Coolyne Sanity blog work is also complete.
 
+`/blog/how-to-automate-a-factory-without-automating-the-wrong-processes` has been published from `How to Automate a Factory Without Automating the Wrong Processes.docx`. Its `89` content blocks preserve the source structure, including one task-cycle table and three original links. The DOCX contained no images, so this article currently has no cover or inline media.
+
 `/blog/manufacturing-logistics` has been published from `Manufacturing_Logistics_Blog.docx` and verified on production plus sitemap.
 
 `/blog/how-we-designed-a-shared-composite-robot-machine-tending-layout-for-an-unmanned-workshop` has been updated with the supplied workshop layout diagram as a Sanity-hosted inline `imageWithAlt` body image. The image was inserted after the project-scope paragraph. The image was not set as the hero image because it is a tall portrait layout diagram rather than a wide cover visual.
@@ -28,6 +30,8 @@ Earlier Material Handling, injection-molding, machine-tending, multi-floor elect
 - `docs/WORK_LOG.md`
 - `docs/HANDOFF.md`
 
+The 2026-09-04 factory-automation blog publication updated only Sanity content plus the two documentation files above; no application source or deployment configuration changed.
+
 Temporary artifacts were written under:
 - `tmp/docx-import-20260827-manufacturing-logistics`
 - `tmp/shared-machine-tending-layout-image-20260827`
@@ -47,9 +51,14 @@ Temporary artifacts were written under:
 - Production `/blog/how-we-designed-a-shared-composite-robot-machine-tending-layout-for-an-unmanned-workshop` returns `200`, includes the exact title, includes `BlogPosting`, contains the new image asset ID and caption, and remains present in `/sitemap.xml`.
 - The Sanity CDN image URL returns `200 image/png`.
 - No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+- Published `/blog/how-to-automate-a-factory-without-automating-the-wrong-processes` with `89` body blocks, `8` H2 headings, `2` H3 headings, one comparison table, and all three expected source links.
+- Sanity readback confirms the exact title, canonical URL, SEO metadata, `noindex: false`, preserved table, and expected links.
+- Production `/blog/how-to-automate-a-factory-without-automating-the-wrong-processes` returns `200`, includes the exact title and `BlogPosting`, renders all expected links, and is present in `/sitemap.xml`.
 
 ## Unresolved issues
 No open issue for the Manufacturing Logistics publication or the shared composite robot layout image upload.
+
+No open issue for the 2026-09-04 factory-automation article publication. A wide image can be added later if the user wants a cover image.
 
 Google Search Console may continue showing the historical `/api/track/visit` `404` examples until its next recrawl. The production endpoint has already been verified as successful.
 
