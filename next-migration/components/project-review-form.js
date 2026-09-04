@@ -221,6 +221,7 @@ export function ProjectReviewForm() {
 
   async function onSubmit(event) {
     event.preventDefault();
+    const form = event.currentTarget;
     setPending(true);
     setStatus({ type: "pending", message: "Sending..." });
 
@@ -241,7 +242,7 @@ export function ProjectReviewForm() {
 
       setFormState(INITIAL_FORM);
       setLayoutFile(null);
-      event.currentTarget.reset();
+      form?.reset();
       setStatus({
         type: "success",
         message: "Thanks, your project review request has been emailed to our team.",
