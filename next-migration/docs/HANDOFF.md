@@ -3,6 +3,10 @@
 ## Current completion status
 The visitor tracking API migration is complete and deployed. The current Next/OpenNext Worker now serves the legacy client endpoints for visit starts, conversions, and pageview completion, backed by the existing `FORM_DB` D1 binding.
 
+The Project Review contact form reset error is fixed and deployed. The form now captures its DOM element before awaiting the contact request, then safely clears it after a successful response. Production Worker version `30293f39-fa91-4e9e-a55d-8923cedc8702` serves the fix.
+
+The D1 database does not currently contain the `form_submissions` table. Successful contact submissions can still be emailed through Resend, but they are not persisted for website-side inquiry reporting until `database/form_submissions.sql` is applied to `FORM_DB`.
+
 The latest Coolyne Sanity blog work is also complete.
 
 `/blog/how-to-automate-a-factory-without-automating-the-wrong-processes` has been published from `How to Automate a Factory Without Automating the Wrong Processes.docx`. Its `89` content blocks preserve the source structure, including one task-cycle table and three original links. The DOCX contained no images, so this article currently has no cover or inline media.
@@ -27,6 +31,8 @@ Earlier Material Handling, injection-molding, machine-tending, multi-floor elect
 - `lib/visitor-store.mjs`
 - `test/visitor-store.test.mjs`
 - `package.json`
+- `components/project-review-form.js`
+- `test/project-review-form-reset.test.mjs`
 - `docs/WORK_LOG.md`
 - `docs/HANDOFF.md`
 
@@ -54,11 +60,16 @@ Temporary artifacts were written under:
 - Published `/blog/how-to-automate-a-factory-without-automating-the-wrong-processes` with `89` body blocks, `8` H2 headings, `2` H3 headings, one comparison table, and all three expected source links.
 - Sanity readback confirms the exact title, canonical URL, SEO metadata, `noindex: false`, preserved table, and expected links.
 - Production `/blog/how-to-automate-a-factory-without-automating-the-wrong-processes` returns `200`, includes the exact title and `BlogPosting`, renders all expected links, and is present in `/sitemap.xml`.
+- The Project Review reset regression test passes, `npm test` passes all four tests, and `npm run build` succeeds.
+- Remote `main` includes contact-form fix commit `72619f8`; Cloudflare Worker `30293f39-fa91-4e9e-a55d-8923cedc8702` has 100% traffic.
+- Production `/contact` returns `200` and its deployed JavaScript captures the form before the asynchronous contact request, then safely resets that saved reference.
 
 ## Unresolved issues
 No open issue for the Manufacturing Logistics publication or the shared composite robot layout image upload.
 
 No open issue for the 2026-09-04 factory-automation article publication. A wide image can be added later if the user wants a cover image.
+
+Historical website inquiries cannot currently be counted from D1 because `form_submissions` has not been created. Check the configured inquiry mailbox for historical submissions; apply the existing schema before relying on database reporting for new submissions.
 
 Google Search Console may continue showing the historical `/api/track/visit` `404` examples until its next recrawl. The production endpoint has already been verified as successful.
 
@@ -66,10 +77,12 @@ The only unrelated local git status item is the pre-existing modification to `..
 
 ## Recommended next step
 - Check Search Console Crawl Stats again after one to two weeks. New `/api/track/visit` requests should no longer appear as `404`.
+- Apply `database/form_submissions.sql` to production `FORM_DB`, then validate a real contact submission is both emailed and stored before presenting inquiry statistics.
 - If the user wants the portrait layout diagram to also appear as a blog cover, create or request a wide cover version first; do not use the current portrait image as a wide hero without approval.
 
 ## Risk areas not to touch
 - Do not remove the `visitor_sessions`, `visitor_pageviews`, or `visitor_conversions` D1 tables while the legacy `site-shell` tracking calls remain active.
+- Do not treat an empty or missing `form_submissions` table as zero inquiries; historical submissions may exist only in the configured Resend destination mailbox.
 - Do not recreate `/blog/how-we-designed-an-inline-robotic-screw-fastening-system-for-notebook-keyboards` unless the user explicitly asks to restore it.
 - Do not remove the existing `/blog/autonomous-forklifts` to `/blog/agv-forklift-meaning` redirect from `middleware.js`.
 - Do not re-import the patched existing posts unless the supplied Word content is intended to replace the full Sanity body and existing images/videos are preserved or re-added.

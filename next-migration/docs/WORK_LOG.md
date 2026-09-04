@@ -269,6 +269,16 @@
 - Verified the production article returns `200`, includes the exact title and `BlogPosting` structured data, and renders all three expected links. Verified production `/sitemap.xml` returns `200` and contains the new blog URL.
 - No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
 
+## 2026-09-04 - Project Review Form Reset Fix
+
+- Reproduced the production error `Cannot read properties of null (reading 'reset')` after a successful Project Review submission.
+- Root cause: `onSubmit` accessed `event.currentTarget.reset()` after awaiting the contact API. React no longer guarantees `currentTarget` is present on the event object after the asynchronous boundary.
+- Captured the form element before the first `await` and reset the saved reference safely after a successful response, preventing the post-submission client-side error while preserving file-input clearing.
+- Added a regression test that requires the form to be retained before the contact request and prohibits future direct `event.currentTarget.reset()` calls. Updated `npm test` to run all `test/*.test.mjs` files.
+- Verified the regression test, all four Node tests, and `npm run build` pass.
+- Committed the fix as `72619f8`, pushed `main`, and deployed Cloudflare Worker version `30293f39-fa91-4e9e-a55d-8923cedc8702`.
+- Verified production `/contact` returns `200` and its deployed JavaScript saves the form before awaiting `/api/contact`, then safely resets the saved form reference.
+
 ## 2026-08-20 - Five Coolyne Blog Link Restoration
 
 - Restored the source Word document hyperlinks that were lost during the initial DOCX-to-Sanity import for the five 2026-08-19 Coolyne blog posts.
