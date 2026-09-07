@@ -262,6 +262,12 @@
 
 ## 2026-09-07 - AGV Navigation System Blog Publication
 
+## 2026-09-07 - Factory Automation Process Blog Image Update
+
+- Added `2.jpg` and `28cad584-f19a-466c-b84c-cedac4e4c188.png` as Sanity `imageWithAlt` body blocks to `/blog/how-to-automate-a-factory-without-automating-the-wrong-processes`.
+- Inserted the task-management image after the RCS automatic-task paragraph and the factory AGV scene after the MES/RCS/PLC task-cycle explanation. The existing no-cover decision remains unchanged.
+- Sanity readback confirms 91 body blocks, two images with correct alt text and captions, and no hero image. Production article, both Sanity CDN assets, and sitemap all return `200`.
+
 - Published `AGV_Navigation_System_7_Navigation_Technologies.docx` as `/blog/agv-navigation-system` in Sanity (`post-agv-navigation-system`).
 - Preserved 52 body blocks, 8 headings, one 7-row / 6-column comparison table, and the two supplied product links. The source document contains no embedded images, so no cover or inline media was added.
 - Verified write capability with a target read plus a temporary create/update/readback/cleanup cycle before publication.

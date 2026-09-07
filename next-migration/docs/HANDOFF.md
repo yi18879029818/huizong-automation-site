@@ -13,6 +13,8 @@ The latest Coolyne Sanity blog work is also complete.
 
 `/blog/how-to-automate-a-factory-without-automating-the-wrong-processes` has been published from `How to Automate a Factory Without Automating the Wrong Processes.docx`. Its `89` content blocks preserve the source structure, including one task-cycle table and three original links. The DOCX contained no images, so this article currently has no cover or inline media.
 
+2026-09-07 update: two user-supplied inline images were added to this factory-automation article. The task-management image follows the RCS automatic-task explanation; the factory AGV image follows the MES/RCS/PLC execution-and-feedback explanation. No hero image was set. Production page, both asset CDN URLs, and sitemap return `200`.
+
 `/blog/manufacturing-logistics` has been published from `Manufacturing_Logistics_Blog.docx` and verified on production plus sitemap.
 
 `/blog/how-we-designed-a-shared-composite-robot-machine-tending-layout-for-an-unmanned-workshop` has been updated with the supplied workshop layout diagram as a Sanity-hosted inline `imageWithAlt` body image. The image was inserted after the project-scope paragraph. The image was not set as the hero image because it is a tall portrait layout diagram rather than a wide cover visual.
