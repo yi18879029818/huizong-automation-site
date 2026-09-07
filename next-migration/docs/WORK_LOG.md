@@ -262,6 +262,12 @@
 
 ## 2026-09-07 - AGV Navigation System Blog Publication
 
+## 2026-09-07 - AGV Navigation System Image Update
+
+- Added three user-supplied navigation visuals to `/blog/agv-navigation-system`: a LiDAR SLAM map, a QR-code navigation AGV, and a laser-navigation AGV scene.
+- Each image follows its relevant explanation: natural navigation localization, QR-code position references, and laser-reflector localization respectively.
+- The AVIF source is a static frame and was converted to PNG before upload for reliable asset delivery. Sanity now reports 55 body blocks; production page, all image CDN URLs, and sitemap return `200`.
+
 ## 2026-09-07 - Factory Automation Process Blog Image Update
 
 - Added `2.jpg` and `28cad584-f19a-466c-b84c-cedac4e4c188.png` as Sanity `imageWithAlt` body blocks to `/blog/how-to-automate-a-factory-without-automating-the-wrong-processes`.

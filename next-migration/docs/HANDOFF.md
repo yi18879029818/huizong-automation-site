@@ -11,6 +11,8 @@ The latest Coolyne Sanity blog work is also complete.
 
 `/blog/agv-navigation-system` has been published from `AGV_Navigation_System_7_Navigation_Technologies.docx`. It contains 52 content blocks, 8 headings, a 7-row comparison table, and two original product links. The source DOCX had no embedded images, so this article has no cover or inline media.
 
+2026-09-07 update: three user-supplied visuals were added as inline images for LiDAR SLAM, QR-code, and laser-reflector navigation. The supplied AVIF was a static image and was converted to PNG for asset compatibility. Production page, all image CDN URLs, and sitemap return `200`.
+
 `/blog/how-to-automate-a-factory-without-automating-the-wrong-processes` has been published from `How to Automate a Factory Without Automating the Wrong Processes.docx`. Its `89` content blocks preserve the source structure, including one task-cycle table and three original links. The DOCX contained no images, so this article currently has no cover or inline media.
 
 2026-09-07 update: two user-supplied inline images were added to this factory-automation article. The task-management image follows the RCS automatic-task explanation; the factory AGV image follows the MES/RCS/PLC execution-and-feedback explanation. The factory AGV image is also the hero and SEO Open Graph image. Production page, both asset CDN URLs, and sitemap return `200`.
