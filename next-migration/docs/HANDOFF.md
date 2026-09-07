@@ -9,6 +9,8 @@ The D1 database does not currently contain the `form_submissions` table. Success
 
 The latest Coolyne Sanity blog work is also complete.
 
+`/blog/agv-navigation-system` has been published from `AGV_Navigation_System_7_Navigation_Technologies.docx`. It contains 52 content blocks, 8 headings, a 7-row comparison table, and two original product links. The source DOCX had no embedded images, so this article has no cover or inline media.
+
 `/blog/how-to-automate-a-factory-without-automating-the-wrong-processes` has been published from `How to Automate a Factory Without Automating the Wrong Processes.docx`. Its `89` content blocks preserve the source structure, including one task-cycle table and three original links. The DOCX contained no images, so this article currently has no cover or inline media.
 
 `/blog/manufacturing-logistics` has been published from `Manufacturing_Logistics_Blog.docx` and verified on production plus sitemap.

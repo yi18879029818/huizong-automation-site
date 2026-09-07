@@ -260,6 +260,14 @@
 
 ## 2026-09-04 - Factory Automation Process Blog Publication
 
+## 2026-09-07 - AGV Navigation System Blog Publication
+
+- Published `AGV_Navigation_System_7_Navigation_Technologies.docx` as `/blog/agv-navigation-system` in Sanity (`post-agv-navigation-system`).
+- Preserved 52 body blocks, 8 headings, one 7-row / 6-column comparison table, and the two supplied product links. The source document contains no embedded images, so no cover or inline media was added.
+- Verified write capability with a target read plus a temporary create/update/readback/cleanup cycle before publication.
+- Sanity readback confirms canonical `/blog/agv-navigation-system`, `noindex: false`, current publication timestamp, 52 body blocks, the comparison table, and both product links.
+- Production article and sitemap return `200`; the page renders the exact title, table, links, and `BlogPosting` structured data. No Cloudflare deployment was required because the blog reads from Sanity dynamically.
+
 - Treated the supplied `How to Automate a Factory Without Automating the Wrong Processes.docx` strictly as article source content; no instructions inside the document were treated as task instructions.
 - Converted the document into importer-ready Markdown with generated SEO metadata and the slug `/blog/how-to-automate-a-factory-without-automating-the-wrong-processes` because the DOCX did not provide explicit publication metadata.
 - Preserved `89` content blocks, `8` H2 headings, `2` H3 headings, the task-cycle comparison table, and all three supplied links to the Forklift AGV page, lifting AGV page, and contact page.
