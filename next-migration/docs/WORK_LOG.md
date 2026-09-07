@@ -267,6 +267,7 @@
 - Added three user-supplied navigation visuals to `/blog/agv-navigation-system`: a LiDAR SLAM map, a QR-code navigation AGV, and a laser-navigation AGV scene.
 - Each image follows its relevant explanation: natural navigation localization, QR-code position references, and laser-reflector localization respectively.
 - The AVIF source is a static frame and was converted to PNG before upload for reliable asset delivery. Sanity now reports 55 body blocks; production page, all image CDN URLs, and sitemap return `200`.
+- Follow-up: set the LiDAR SLAM map (`地图规划.jpg`) as both `heroImage` and SEO Open Graph image. Sanity readback and production HTML confirm the cover.
 
 ## 2026-09-07 - Factory Automation Process Blog Image Update
 
