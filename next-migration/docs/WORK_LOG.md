@@ -7,6 +7,12 @@
 - Verified Sanity readback for document `post-robot-control-system-for-agvs`: canonical URL, `84` Portable Text blocks, published timestamp, and `noindex: false`.
 - Verified the production article and `/sitemap.xml` both return `200`, and the sitemap contains the new article URL. No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
 
+## 2026-09-09 - Robot Control System for AGVs Visual Update
+
+- Uploaded the three supplied RCS visuals to Sanity and added each as an `imageWithAlt` block in the matching system-architecture, multi-AGV traffic-control, and fleet-monitoring sections.
+- Set the RCS system-architecture diagram as both the Sanity `heroImage` and SEO Open Graph image.
+- Verified Sanity readback for all three image assets, alt text, captions, and dimensions; the production article renders all three images and captions, and the article remains in `/sitemap.xml`.
+
 ## 2026-08-03 - Unit Load ASRS Case Study Layout Alignment
 
 - Applied the verified legacy Unit Load ASRS case-study structure to `/case-studies/projects/unit-load-asrs-pallet-handling`.

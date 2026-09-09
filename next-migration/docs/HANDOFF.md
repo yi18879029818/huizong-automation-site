@@ -11,6 +11,8 @@ The latest Coolyne Sanity blog work is also complete.
 
 2026-09-09 update: `/blog/robot-control-system-for-agvs` has been published from `Robot Control System for AGVs.docx`. It contains `84` English-only Portable Text blocks covering task management, dispatching, route and traffic control, station handoffs, charging, exceptions, monitoring, integrations, and Coolyne's RCS implementation approach. The source document had no embedded media, so no hero or inline image was added.
 
+2026-09-09 visual update: the three supplied RCS images are now Sanity-hosted in `/blog/robot-control-system-for-agvs`. The system architecture diagram is the article's hero and Open Graph image; the other visuals appear in the multi-AGV traffic-control and fleet-monitoring sections.
+
 `/blog/agv-navigation-system` has been published from `AGV_Navigation_System_7_Navigation_Technologies.docx`. It contains 52 content blocks, 8 headings, a 7-row comparison table, and two original product links. The source DOCX had no embedded images, so this article has no cover or inline media.
 
 2026-09-07 update: three user-supplied visuals were added as inline images for LiDAR SLAM, QR-code, and laser-reflector navigation. The supplied AVIF was a static image and was converted to PNG for asset compatibility. The LiDAR SLAM map is also the hero and SEO Open Graph image. Production page, all image CDN URLs, and sitemap return `200`.
@@ -48,6 +50,8 @@ The 2026-09-04 factory-automation blog publication updated only Sanity content p
 
 The 2026-09-09 RCS blog publication added `content/blog/robot-control-system-for-agvs.md` and corrected `scripts/import-blog-markdown-to-sanity.mjs` so URL Slug values written as `/blog/<slug>/` produce valid Sanity document IDs. It also updated the two documentation files above; no application deployment was required.
 
+The visual update added `scripts/add-robot-control-system-images.mjs` and updated the two documentation files above. No application deployment was required because the live article reads Sanity content dynamically.
+
 Temporary artifacts were written under:
 - `tmp/docx-import-20260827-manufacturing-logistics`
 - `tmp/shared-machine-tending-layout-image-20260827`
@@ -73,11 +77,15 @@ Temporary artifacts were written under:
 - Published `/blog/robot-control-system-for-agvs` with `84` English-only body blocks.
 - Sanity readback confirms document `post-robot-control-system-for-agvs`, the exact title, canonical `/blog/robot-control-system-for-agvs`, publication timestamp, and `noindex: false`.
 - Production `/blog/robot-control-system-for-agvs` returns `200`, and production `/sitemap.xml` returns `200` and contains the article URL.
+- Sanity readback for `/blog/robot-control-system-for-agvs` confirms three `imageWithAlt` blocks with alt text, captions, 1672×941 dimensions, and public Sanity CDN URLs. The architecture image is both the hero and SEO Open Graph asset.
+- Production `/blog/robot-control-system-for-agvs` renders all three uploaded image asset references and captions; each image CDN URL returns `200 image/png` and the article remains in the production sitemap.
 - The Project Review reset regression test passes, `npm test` passes all four tests, and `npm run build` succeeds.
 - Remote `main` includes contact-form fix commit `72619f8`; Cloudflare Worker `30293f39-fa91-4e9e-a55d-8923cedc8702` has 100% traffic.
 - Production `/contact` returns `200` and its deployed JavaScript captures the form before the asynchronous contact request, then safely resets that saved reference.
 
 ## Unresolved issues
+The local RCS visual-update commit is pending a remote push because GitHub returned a connection reset and then an empty reply on 2026-09-09. The Sanity publication, production article, image CDN assets, and sitemap were independently verified and are already live.
+
 No open issue for the Manufacturing Logistics publication or the shared composite robot layout image upload.
 
 No open issue for the 2026-09-04 factory-automation article publication. A wide image can be added later if the user wants a cover image.
