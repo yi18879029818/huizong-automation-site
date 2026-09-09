@@ -267,7 +267,8 @@ const metaDescription = extractField("Meta Description");
 const slug = extractField("URL Slug")
   .replace(/`/g, "")
   .trim()
-  .replace(/^\/+|\/+$/g, "");
+  .replace(/^\/+|\/+$/g, "")
+  .replace(/^blog\//i, "");
 
 if (!metaTitle || !metaDescription || !slug) {
   throw new Error("Failed to extract Meta Title, Meta Description, or URL Slug.");

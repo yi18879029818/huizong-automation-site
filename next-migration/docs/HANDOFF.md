@@ -9,6 +9,8 @@ The D1 database does not currently contain the `form_submissions` table. Success
 
 The latest Coolyne Sanity blog work is also complete.
 
+2026-09-09 update: `/blog/robot-control-system-for-agvs` has been published from `Robot Control System for AGVs.docx`. It contains `84` English-only Portable Text blocks covering task management, dispatching, route and traffic control, station handoffs, charging, exceptions, monitoring, integrations, and Coolyne's RCS implementation approach. The source document had no embedded media, so no hero or inline image was added.
+
 `/blog/agv-navigation-system` has been published from `AGV_Navigation_System_7_Navigation_Technologies.docx`. It contains 52 content blocks, 8 headings, a 7-row comparison table, and two original product links. The source DOCX had no embedded images, so this article has no cover or inline media.
 
 2026-09-07 update: three user-supplied visuals were added as inline images for LiDAR SLAM, QR-code, and laser-reflector navigation. The supplied AVIF was a static image and was converted to PNG for asset compatibility. The LiDAR SLAM map is also the hero and SEO Open Graph image. Production page, all image CDN URLs, and sitemap return `200`.
@@ -44,6 +46,8 @@ Earlier Material Handling, injection-molding, machine-tending, multi-floor elect
 
 The 2026-09-04 factory-automation blog publication updated only Sanity content plus the two documentation files above; no application source or deployment configuration changed.
 
+The 2026-09-09 RCS blog publication added `content/blog/robot-control-system-for-agvs.md` and corrected `scripts/import-blog-markdown-to-sanity.mjs` so URL Slug values written as `/blog/<slug>/` produce valid Sanity document IDs. It also updated the two documentation files above; no application deployment was required.
+
 Temporary artifacts were written under:
 - `tmp/docx-import-20260827-manufacturing-logistics`
 - `tmp/shared-machine-tending-layout-image-20260827`
@@ -66,6 +70,9 @@ Temporary artifacts were written under:
 - Published `/blog/how-to-automate-a-factory-without-automating-the-wrong-processes` with `89` body blocks, `8` H2 headings, `2` H3 headings, one comparison table, and all three expected source links.
 - Sanity readback confirms the exact title, canonical URL, SEO metadata, `noindex: false`, preserved table, and expected links.
 - Production `/blog/how-to-automate-a-factory-without-automating-the-wrong-processes` returns `200`, includes the exact title and `BlogPosting`, renders all expected links, and is present in `/sitemap.xml`.
+- Published `/blog/robot-control-system-for-agvs` with `84` English-only body blocks.
+- Sanity readback confirms document `post-robot-control-system-for-agvs`, the exact title, canonical `/blog/robot-control-system-for-agvs`, publication timestamp, and `noindex: false`.
+- Production `/blog/robot-control-system-for-agvs` returns `200`, and production `/sitemap.xml` returns `200` and contains the article URL.
 - The Project Review reset regression test passes, `npm test` passes all four tests, and `npm run build` succeeds.
 - Remote `main` includes contact-form fix commit `72619f8`; Cloudflare Worker `30293f39-fa91-4e9e-a55d-8923cedc8702` has 100% traffic.
 - Production `/contact` returns `200` and its deployed JavaScript captures the form before the asynchronous contact request, then safely resets that saved reference.
