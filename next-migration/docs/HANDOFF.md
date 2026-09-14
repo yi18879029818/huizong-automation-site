@@ -9,6 +9,8 @@ The D1 database does not currently contain the `form_submissions` table. Success
 
 The latest Coolyne Sanity blog work is also complete.
 
+2026-09-14 update: `/blog/warehouse-management-system-guide` has been published from `Warehouse Management System Guide.docx`. It contains 109 English-only Portable Text blocks covering WMS workflow, inventory and location control, receiving, putaway, picking, replenishment, traceability, deployment choices, and WMS/WES/WCS/RCS integration. Seven contextual Coolyne article links spanning six distinct targets are stored in Sanity, alongside the source contact link. The production page and sitemap return `200`; no deployment was required.
+
 2026-09-09 update: `/blog/robot-control-system-for-agvs` has been published from `Robot Control System for AGVs.docx`. It contains `84` English-only Portable Text blocks covering task management, dispatching, route and traffic control, station handoffs, charging, exceptions, monitoring, integrations, and Coolyne's RCS implementation approach. The source document had no embedded media, so no hero or inline image was added.
 
 2026-09-09 visual update: the three supplied RCS images are now Sanity-hosted in `/blog/robot-control-system-for-agvs`. The system architecture diagram is the article's hero and Open Graph image; the other visuals appear in the multi-AGV traffic-control and fleet-monitoring sections.
@@ -49,6 +51,8 @@ Earlier Material Handling, injection-molding, machine-tending, multi-floor elect
 The 2026-09-04 factory-automation blog publication updated only Sanity content plus the two documentation files above; no application source or deployment configuration changed.
 
 The 2026-09-09 RCS blog publication added `content/blog/robot-control-system-for-agvs.md` and corrected `scripts/import-blog-markdown-to-sanity.mjs` so URL Slug values written as `/blog/<slug>/` produce valid Sanity document IDs. It also updated the two documentation files above; no application deployment was required.
+
+The 2026-09-14 WMS blog publication added `content/blog/warehouse-management-system-guide.md` and updated the two documentation files above. No application deployment was required because the live article reads Sanity content dynamically.
 
 The visual update added `scripts/add-robot-control-system-images.mjs` and updated the two documentation files above. No application deployment was required because the live article reads Sanity content dynamically.
 

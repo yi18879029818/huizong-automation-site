@@ -1,5 +1,12 @@
 # Work Log
 
+## 2026-09-14 - Warehouse Management System Guide Sanity Publication
+
+- Published `Warehouse Management System: How WMS Manages Inventory and Warehouse Operations` from the supplied Word document at `/blog/warehouse-management-system-guide`.
+- Converted 110 source paragraphs into 109 English-only Portable Text body blocks, preserving the WMS process flow, inventory and location management, receiving, putaway, picking, replenishment, traceability, deployment options, and WMS/WES/WCS/RCS integration boundaries.
+- Added seven contextual Coolyne blog link marks across six unique target articles: WCS (in two relevant contexts), Goods-to-Person, AS/RS, automated warehouse picking, warehouse automation, and RCS. Retained the source contact link.
+- Verified Sanity document `post-warehouse-management-system-guide` contains 109 body blocks and eight link marks. The production article and sitemap return `200`; the production HTML contains every expected internal article link and the contact link. No Cloudflare deployment was required because the blog route and sitemap read Sanity dynamically.
+
 ## 2026-09-09 - Robot Control System for AGVs Sanity Publication
 
 - Published `Robot Control System for AGVs: What Is an RCS?` from the supplied Word document at `/blog/robot-control-system-for-agvs`.
