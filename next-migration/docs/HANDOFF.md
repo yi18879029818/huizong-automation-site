@@ -114,3 +114,12 @@ The only unrelated local git status item is the pre-existing modification to `..
 - Do not re-import `/blog/manufacturing-logistics` unless the supplied Word content is intended to replace the already published Sanity body.
 - Do not add frontend static overrides for these posts unless Sanity rendering fails.
 - Do not remove `../public/videos/machine-tending-cell-receiving-agv.mp4` unless the Sanity `videoEmbed` source is changed or removed first.
+
+## 2026-09-16 latest blog completion
+
+- Status: manufacturing digital twin article is live; article and sitemap verified.
+- Changed: `content/blog/3d-digital-twin-system-for-manufacturing.md`, Sanity post, WORK_LOG and HANDOFF.
+- Verified: 67 source-faithful body blocks, five headings, seven added contextual links plus the source contact link; page/sitemap/link targets 200; canonical and BlogPosting present; no noindex.
+- Unresolved: none for this publication. Source contains no images, so no cover was added.
+- Next: add user-supplied visuals if requested.
+- Risk: preserve unrelated `public/assets/site-shell.min.js` changes; retain Portable Text markDefs and span marks when editing.

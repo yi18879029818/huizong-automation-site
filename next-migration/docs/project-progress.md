@@ -139,3 +139,12 @@
 - 是否已上线：
 - 风险备注：
 ```
+
+## 2026-09-16 - Manufacturing digital twin blog published
+
+- Published the supplied `3D Digital Twin System for Manufacturing.docx` through Sanity as `post-3d-digital-twin-system-for-manufacturing`. URL: https://www.coolyne.com/blog/3d-digital-twin-system-for-manufacturing
+- Preserved all 67 body blocks and 5 section headings. Added seven contextual links without changing source paragraph text; preserved the original contact link. No source images or tables were present.
+- Passed authenticated target read and create/update dry-runs; used a create-only publication mutation. No credential was saved.
+- Source Markdown was committed and pushed to main as `cd1aa69` before publication. No frontend deployment was required.
+- Sanity readback matches title, slug, body, excerpt and SEO fields. Public page and sitemap return 200; all source paragraphs and all eight contextual anchors render correctly. Canonical, BlogPosting and indexability checks passed; sitemap includes the article. All eight link targets return 200.
+- Verification artifacts: `ceshistitch/outputs/3d-digital-twin-system-for-manufacturing/verification.json` and `link-target-verification.json`.
