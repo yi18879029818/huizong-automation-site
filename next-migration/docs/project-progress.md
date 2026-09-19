@@ -159,3 +159,11 @@
 - Verified the live image renders at desktop 1440px and mobile 390px widths, with its original aspect ratio and no horizontal overflow; inspected the mobile screenshot.
 - Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/roi-image-20260919` (before.json, verified.json and display screenshots).
 - Content was published through Sanity; no frontend deployment was required. Documentation is based on current remote main and also incorporates the September 18 publication record that previously failed to push.
+
+## 2026-09-19 - ROI Blog Cover Update
+
+- Set `/blog/collaborative-robotics-and-amr-roi` heroImage to the same Sanity asset as the inline CNC/mobile collaborative robot photo: `image-eef4be969100aff67932859547289e28f68ad414-1468x1071-png`.
+- Passed read and create/update dry-runs, then patched only heroImage with a revision precondition. Body, title, slug, SEO settings and publication date are unchanged.
+- Verified public blog-list cover, article hero and generated Open Graph image reference the supplied photo. Cover image and page requests return 200; sitemap still includes the article.
+- Browser verification confirmed the blog-list cover loads successfully; screenshot: `cloudflare-pages-site-ga4-clean/next-migration/tmp/roi-image-20260919/cover-blog-list.png`.
+- No asset re-upload or frontend deployment was required.
