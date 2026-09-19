@@ -1,6 +1,10 @@
 # HANDOFF
 
 ## Current completion status
+2026-09-19 update: `/blog/collaborative-robotics-and-amr-roi` is published with the supplied mobile collaborative robot / CNC image inserted after the AMR material-flow paragraph. All 62 original body blocks remain unchanged; one English-captioned `imageWithAlt` block was added. Article, original and rendered image URLs, and sitemap return 200. Desktop (1440px) and mobile (390px) image loading, aspect ratio and overflow checks passed. No issue remains for this image update; no frontend deployment is required.
+
+The original September 18 publication record and today's image record are in `docs/WORK_LOG.md`; progress is also recorded in `docs/project-progress.md`. Verification files and screenshots are under `cloudflare-pages-site-ga4-clean/next-migration/tmp/roi-image-20260919`. Existing unrelated status and risks below are preserved.
+
 The visitor tracking API migration is complete and deployed. The current Next/OpenNext Worker now serves the legacy client endpoints for visit starts, conversions, and pageview completion, backed by the existing `FORM_DB` D1 binding.
 
 The Project Review contact form reset error is fixed and deployed. The form now captures its DOM element before awaiting the contact request, then safely clears it after a successful response. Production Worker version `30293f39-fa91-4e9e-a55d-8923cedc8702` serves the fix.

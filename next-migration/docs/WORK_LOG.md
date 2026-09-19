@@ -531,3 +531,25 @@
 - Source Markdown was committed and pushed to main as `cd1aa69` before publication. No frontend deployment was required.
 - Sanity readback matches title, slug, body, excerpt and SEO fields. Public page and sitemap return 200; all source paragraphs and all eight contextual anchors render correctly. Canonical, BlogPosting and indexability checks passed; sitemap includes the article. All eight link targets return 200.
 - Verification artifacts: `ceshistitch/outputs/3d-digital-twin-system-for-manufacturing/verification.json` and `link-target-verification.json`.
+
+## 2026-09-18 - Collaborative Robotics and AMR ROI Publication
+
+- Published the supplied `Collaborative Robotics and AMR ROI.docx` through Sanity as `post-collaborative-robotics-and-amr-roi` at `/blog/collaborative-robotics-and-amr-roi`.
+- Treated the Word document as article source data, not as task instructions. Preserved all 63 source paragraphs, including the title, six section headings, five bullet items, and the contact hyperlink; no images or tables were present.
+- Reused the previously supplied credential transiently and verified target read, document create dry-run, and document update dry-run before publishing. No credential was saved in project files or documentation.
+- Verified exact Sanity body readback: 62 body blocks, expected title, canonical, and indexable SEO settings.
+- Production checks at `2026-09-18T08:34:39.905Z`: article, blog list, and sitemap all returned HTTP 200; all 63 source paragraphs were present; contact link, canonical, and BlogPosting structured data were verified.
+- Verified the new article appears in both the public blog list and `/sitemap.xml`.
+- Preparation and verification artifacts: `tmp/docx-import-20260918-collaborative-amr-roi`.
+- No frontend deployment was required because the article and sitemap read Sanity dynamically. The pre-existing untracked video was not changed.
+
+## 2026-09-19 - Collaborative Robotics and AMR ROI Inline Image
+
+- Uploaded the user-supplied PNG unchanged to Sanity asset `image-eef4be969100aff67932859547289e28f68ad414-1468x1071-png` (1468 x 1071). Source and downloaded original SHA-1 hashes match.
+- Inserted one `imageWithAlt` block after the paragraph about AMR raw-material delivery and finished-part transport in the CNC machine-tending example of `/blog/collaborative-robotics-and-amr-roi`.
+- Added descriptive English alt text and caption. Preserved all 62 original body blocks, title, SEO, hero field and publication date; the body now has 63 blocks.
+- Passed authenticated read, image-asset create dry-run and document update dry-run; applied the insertion with a revision precondition. No secret was persisted.
+- Verified production article, original CDN image, rendered image URL and sitemap all return 200. The image appears exactly once, all original text remains present, and the article is included in the sitemap.
+- Verified the live image renders at desktop 1440px and mobile 390px widths, with its original aspect ratio and no horizontal overflow; inspected the mobile screenshot.
+- Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/roi-image-20260919` (before.json, verified.json and display screenshots).
+- Content was published through Sanity; no frontend deployment was required. Documentation is based on current remote main and also incorporates the September 18 publication record that previously failed to push.
