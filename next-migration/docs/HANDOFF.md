@@ -1,6 +1,8 @@
 # HANDOFF
 
 ## Current completion status
+2026-09-19 digital twin images: `/blog/3d-digital-twin-system-for-manufacturing` now contains all four supplied images with English captions and alt text; the warehouse overview is the hero. All 67 original body blocks and 8 links remain intact (71 blocks total). Production article, four image URLs, blog-list cover, Open Graph and sitemap were verified; desktop/mobile image loading, aspect ratio and overflow checks passed. No issue remains for this publication. Artifacts are under `cloudflare-pages-site-ga4-clean/next-migration/tmp/digital-twin-images-20260919`.
+
 2026-09-19 cover update: the ROI article now uses the supplied CNC/mobile collaborative robot photo as heroImage as well as its existing inline image. Blog-list cover, article hero, Open Graph, image loading and sitemap were verified. Only heroImage changed; body and metadata remain intact.
 
 2026-09-19 update: `/blog/collaborative-robotics-and-amr-roi` is published with the supplied mobile collaborative robot / CNC image inserted after the AMR material-flow paragraph. All 62 original body blocks remain unchanged; one English-captioned `imageWithAlt` block was added. Article, original and rendered image URLs, and sitemap return 200. Desktop (1440px) and mobile (390px) image loading, aspect ratio and overflow checks passed. No issue remains for this image update; no frontend deployment is required.

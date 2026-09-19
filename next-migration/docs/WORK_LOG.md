@@ -561,3 +561,15 @@
 - Verified public blog-list cover, article hero and generated Open Graph image reference the supplied photo. Cover image and page requests return 200; sitemap still includes the article.
 - Browser verification confirmed the blog-list cover loads successfully; screenshot: `cloudflare-pages-site-ga4-clean/next-migration/tmp/roi-image-20260919/cover-blog-list.png`.
 - No asset re-upload or frontend deployment was required.
+
+## 2026-09-19 - Digital Twin Article Four-Image Publication
+
+- Added all four supplied JPEGs to `/blog/3d-digital-twin-system-for-manufacturing` as Sanity `imageWithAlt` blocks with descriptive English alt text and captions. The warehouse overview is also the hero image.
+- Placed the factory layout after the introduction, warehouse overview after the integrated intralogistics discussion, dashboard after asset/data integration, and logistics simulation after capacity-expansion planning.
+- Assets: `image-14caab4cc4fb5b36bce2b7905bb4f07e1dd9bc50-1755x1080-jpg`, `image-4c0f9fbbd874e2ee68074b1f34c1c6b7c4b19cf6-611x367-jpg`, `image-cbf49966a48ec7bc20751ee77ec7b4074b71d95e-1690x910-jpg`, `image-bebd646797281d54f803ca388a4677d73f29bc89-1280x720-jpg`.
+- Passed target read and create/update dry-runs. Uploaded source hashes match Sanity asset metadata. Used a revision precondition to preserve concurrent edits; all 67 original blocks and all 8 source links remain intact. Final body count is 71.
+- Corrected a batch-insertion issue found by readback: repeated SDK insert calls retain only the last insert. Rebuilt the body from the saved original plus the four intended blocks, checked it against current content, and applied one revision-guarded update. No duplicate images remain.
+- Live verification at 2026-09-19T02:19:18.341Z: all four inline images, exact captions, alt text, article text and original links present; article, image URLs and sitemap return 200. Blog-list cover and Open Graph use the warehouse overview.
+- Browser checks at 1440px and 390px confirm all four images load at their original aspect ratios without horizontal overflow. Inspected desktop dashboard and mobile factory-layout screenshots.
+- Source image 2 is 611 x 367; its CDN response is re-encoded, while its uploaded hash and dimensions match the supplied source. No source-file modification was performed.
+- Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/digital-twin-images-20260919` (before.json, published.json, verified.json and screenshots). No frontend deployment was required.
