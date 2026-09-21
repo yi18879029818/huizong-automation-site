@@ -199,3 +199,9 @@
 - Live checks at 2026-09-21T06:13:59.791Z: article, blog list and sitemap returned 200; every source paragraph and the contact link are present; canonical and BlogPosting are correct; the URL appears in both blog list and sitemap.
 - Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/docx-import-20260921-smart-factory-iot-solutions` (Markdown, coverage.json, prepared-post.json, published-status.json, verified-live.json).
 - No frontend deployment was required because the article and sitemap read Sanity dynamically.
+
+## 2026-09-21 - Smart Factory IoT Article Images
+
+- Added three supplied visuals as inline images to `/blog/smart-factory-iot-solutions`, preserving all original body text, title, SEO, hero image, publication date, and contact link.
+- Production monitoring, connected-factory material flow, and industrial-data architecture images were placed in their corresponding equipment, intralogistics, and systems-integration sections.
+- Authenticated preflight checks passed. Production page, sitemap, source coverage, image captions, alt text, desktop display, and mobile display were verified. No frontend deployment was required.

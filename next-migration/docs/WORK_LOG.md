@@ -593,3 +593,13 @@
 - Live checks at 2026-09-21T06:13:59.791Z: article, blog list and sitemap returned 200; every source paragraph and the contact link are present; canonical and BlogPosting are correct; the URL appears in both blog list and sitemap.
 - Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/docx-import-20260921-smart-factory-iot-solutions` (Markdown, coverage.json, prepared-post.json, published-status.json, verified-live.json).
 - No frontend deployment was required because the article and sitemap read Sanity dynamically.
+
+## 2026-09-21 - Smart Factory IoT Article Images
+
+- Added the three supplied visuals to `/blog/smart-factory-iot-solutions` as Sanity `imageWithAlt` blocks without changing the 65 original body blocks, title, SEO, hero image, publication date, or contact link. The final body contains 68 blocks.
+- Placed the production monitoring dashboard after the Running, Waiting, and Fault discussion; the connected-factory material-flow visual after the WMS/MES-to-production delivery flow; and the data architecture diagram after the WMS/WCS/RCS integration discussion.
+- Assets: `image-84690280bccd43ce5a1f05c329cbec8c90b3778c-750x412-jpg`, `image-bec1dc9df64810351652f5fdccb6261c468b604c-4118x2238-jpg`, and `image-01b262e3cb1600607a8d2a38fb339588678d5e65-1024x576-png`.
+- Authenticated target read plus image-asset create and document-update dry-runs passed before publishing. All three uploaded source hashes match Sanity asset metadata.
+- Live verification at 2026-09-21T06:36:37.523Z: article and sitemap return 200; all original text and the contact link remain present; three inline images, captions, and alt text render exactly once. Desktop 1440px and mobile 390px checks confirm all three load with their source aspect ratios and without horizontal overflow.
+- Sanity's CDN re-encodes the PNG architecture response by removing non-image metadata; its stored source hash and dimensions remain identical to the uploaded PNG. No source image was modified.
+- Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/smart-factory-iot-images-20260921`.

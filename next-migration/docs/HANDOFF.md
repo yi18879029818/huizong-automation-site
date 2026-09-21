@@ -1,6 +1,8 @@
 # HANDOFF
 
 ## Current completion status
+2026-09-21 IoT article images: `/blog/smart-factory-iot-solutions` now contains the three supplied production-monitoring, connected-factory material-flow, and data-architecture visuals. The article's original 65 blocks and contact link are preserved, with three new English-captioned `imageWithAlt` blocks. Article, sitemap, images, text coverage, and desktop/mobile display checks passed. No frontend deployment was required. Artifacts are under `cloudflare-pages-site-ga4-clean/next-migration/tmp/smart-factory-iot-images-20260921`.
+
 2026-09-21: `/blog/smart-factory-iot-solutions` is published and verified. All 66 source paragraphs, 6 headings, and the contact link are preserved (65 body blocks). Article, blog index and sitemap return 200; source coverage, canonical, BlogPosting and indexability checks passed. The Word source contains no media. No issue remains for this publication.
 
 2026-09-21: the WMS image task is also verified complete. `/blog/warehouse-management-system-guide` contains both cleaned screenshots with English alt/captions, and the location-management image is the hero. Its original 109 blocks and 8 links are intact. Both images, cover and sitemap pass live checks, including desktop/mobile image display. The original screenshots are preserved alongside separately saved edited copies. No frontend deployment was required for either task.
