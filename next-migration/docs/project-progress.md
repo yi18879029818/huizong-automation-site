@@ -179,3 +179,23 @@
 - Browser checks at 1440px and 390px confirm all four images load at their original aspect ratios without horizontal overflow. Inspected desktop dashboard and mobile factory-layout screenshots.
 - Source image 2 is 611 x 367; its CDN response is re-encoded, while its uploaded hash and dimensions match the supplied source. No source-file modification was performed.
 - Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/digital-twin-images-20260919` (before.json, published.json, verified.json and screenshots). No frontend deployment was required.
+
+## 2026-09-21 - WMS Image Publication Verified
+
+- Closed the September 19 image task for `/blog/warehouse-management-system-guide`: two edited WMS screenshots are published after the inventory/location management and order-execution paragraphs. The cell-management screenshot is also the hero.
+- Used the built-in image editing tool to remove the top-left Chinese brand name and DMS emblem, plus the top-right DMS emblem. Original input files were preserved. Outputs are 1758 x 895 and 1760 x 894; these are edited images, not pixel-identical source screenshots.
+- Cleaned copies: `D:/推文文件/博文9.19/WMS_库位管理_去品牌.png` and `D:/推文文件/博文9.19/WMS_出库订单_去品牌.png`.
+- Assets: `image-1fc64824b43d6037b298c2b0648a137ae9eff18e-1758x895-png` and `image-adc629915cf47a89c137e88d472eff2824f2601b-1760x894-png`.
+- Verified all 109 original body blocks and 8 source links remain present; there are now 111 blocks including two images. English alt text and captions match the intended WMS functions.
+- Live checks on September 21 passed for article, two images, blog-list cover, Open Graph, and sitemap. Desktop 1440px and mobile 390px checks confirm both images load with correct aspect ratios and no overflow.
+- Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/wms-images-20260919`. No frontend deployment was required.
+
+## 2026-09-21 - Smart Factory IoT Solutions Published
+
+- Published the supplied `Smart_Factory_IoT_Solutions.docx` through Sanity as `post-smart-factory-iot-solutions` at https://www.coolyne.com/blog/smart-factory-iot-solutions .
+- Treated the document as article content, not task instructions. Preserved all 66 paragraphs including the exact title, 6 section headings, and the contact link. The article has 65 body blocks; Word section Heading 1 styles were mapped to website H2 below the article title.
+- The supplied document contains no images or tables. Added a descriptive SEO title, description, relevant keywords, canonical URL, and indexable settings.
+- Passed authenticated target read plus create/update dry-runs before publication. Sanity readback matched the prepared body and metadata; credentials were transient and not stored.
+- Live checks at 2026-09-21T06:13:59.791Z: article, blog list and sitemap returned 200; every source paragraph and the contact link are present; canonical and BlogPosting are correct; the URL appears in both blog list and sitemap.
+- Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/docx-import-20260921-smart-factory-iot-solutions` (Markdown, coverage.json, prepared-post.json, published-status.json, verified-live.json).
+- No frontend deployment was required because the article and sitemap read Sanity dynamically.

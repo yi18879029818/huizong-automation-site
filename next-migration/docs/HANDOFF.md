@@ -1,6 +1,10 @@
 # HANDOFF
 
 ## Current completion status
+2026-09-21: `/blog/smart-factory-iot-solutions` is published and verified. All 66 source paragraphs, 6 headings, and the contact link are preserved (65 body blocks). Article, blog index and sitemap return 200; source coverage, canonical, BlogPosting and indexability checks passed. The Word source contains no media. No issue remains for this publication.
+
+2026-09-21: the WMS image task is also verified complete. `/blog/warehouse-management-system-guide` contains both cleaned screenshots with English alt/captions, and the location-management image is the hero. Its original 109 blocks and 8 links are intact. Both images, cover and sitemap pass live checks, including desktop/mobile image display. The original screenshots are preserved alongside separately saved edited copies. No frontend deployment was required for either task.
+
 2026-09-19 digital twin images: `/blog/3d-digital-twin-system-for-manufacturing` now contains all four supplied images with English captions and alt text; the warehouse overview is the hero. All 67 original body blocks and 8 links remain intact (71 blocks total). Production article, four image URLs, blog-list cover, Open Graph and sitemap were verified; desktop/mobile image loading, aspect ratio and overflow checks passed. No issue remains for this publication. Artifacts are under `cloudflare-pages-site-ga4-clean/next-migration/tmp/digital-twin-images-20260919`.
 
 2026-09-19 cover update: the ROI article now uses the supplied CNC/mobile collaborative robot photo as heroImage as well as its existing inline image. Blog-list cover, article hero, Open Graph, image loading and sitemap were verified. Only heroImage changed; body and metadata remain intact.
