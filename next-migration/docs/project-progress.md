@@ -205,3 +205,8 @@
 - Added three supplied visuals as inline images to `/blog/smart-factory-iot-solutions`, preserving all original body text, title, SEO, hero image, publication date, and contact link.
 - Production monitoring, connected-factory material flow, and industrial-data architecture images were placed in their corresponding equipment, intralogistics, and systems-integration sections.
 - Authenticated preflight checks passed. Production page, sitemap, source coverage, image captions, alt text, desktop display, and mobile display were verified. No frontend deployment was required.
+
+## 2026-09-22 - Smart Factory IoT Cover Image
+
+- Selected the existing production-line IoT monitoring dashboard as the Smart Factory IoT article cover.
+- Verified the article hero, blog-list card, Open Graph image, sitemap and live browser rendering. No article content or inline media changed, and no frontend deployment was required.

@@ -1,6 +1,8 @@
 # HANDOFF
 
 ## Current completion status
+2026-09-22 IoT cover update: `/blog/smart-factory-iot-solutions` uses the high-resolution production monitoring dashboard as its hero image. The article body and inline images are unchanged. Authenticated preflight checks and live article, blog-list, Open Graph, sitemap, and browser-card checks passed. No frontend deployment was required.
+
 2026-09-21 IoT article images: `/blog/smart-factory-iot-solutions` now contains the three supplied production-monitoring, connected-factory material-flow, and data-architecture visuals. The article's original 65 blocks and contact link are preserved, with three new English-captioned `imageWithAlt` blocks. Article, sitemap, images, text coverage, and desktop/mobile display checks passed. No frontend deployment was required. Artifacts are under `cloudflare-pages-site-ga4-clean/next-migration/tmp/smart-factory-iot-images-20260921`.
 
 2026-09-21: `/blog/smart-factory-iot-solutions` is published and verified. All 66 source paragraphs, 6 headings, and the contact link are preserved (65 body blocks). Article, blog index and sitemap return 200; source coverage, canonical, BlogPosting and indexability checks passed. The Word source contains no media. No issue remains for this publication.

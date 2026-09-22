@@ -603,3 +603,10 @@
 - Live verification at 2026-09-21T06:36:37.523Z: article and sitemap return 200; all original text and the contact link remain present; three inline images, captions, and alt text render exactly once. Desktop 1440px and mobile 390px checks confirm all three load with their source aspect ratios and without horizontal overflow.
 - Sanity's CDN re-encodes the PNG architecture response by removing non-image metadata; its stored source hash and dimensions remain identical to the uploaded PNG. No source image was modified.
 - Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/smart-factory-iot-images-20260921`.
+
+## 2026-09-22 - Smart Factory IoT Cover Image
+
+- Selected the production-line IoT monitoring dashboard as the cover for `/blog/smart-factory-iot-solutions` because it presents equipment status, alarms, operating trends, OEE, and process conditions in one high-resolution visual.
+- Set the existing inline asset `image-bec1dc9df64810351652f5fdccb6261c468b604c-4118x2238-jpg` as `heroImage`; no new asset was uploaded.
+- Passed authenticated target read, asset create dry-run, and document update dry-run before the revision-guarded update. The article body, title, slug, SEO, publication date, and existing inline images are unchanged.
+- Verified the live article hero, blog-list card, Open Graph image, source image, and sitemap all return or render correctly. Browser inspection confirmed the cover loads in the live blog card.
