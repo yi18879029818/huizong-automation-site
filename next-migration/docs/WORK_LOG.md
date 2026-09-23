@@ -610,3 +610,13 @@
 - Set the existing inline asset `image-bec1dc9df64810351652f5fdccb6261c468b604c-4118x2238-jpg` as `heroImage`; no new asset was uploaded.
 - Passed authenticated target read, asset create dry-run, and document update dry-run before the revision-guarded update. The article body, title, slug, SEO, publication date, and existing inline images are unchanged.
 - Verified the live article hero, blog-list card, Open Graph image, source image, and sitemap all return or render correctly. Browser inspection confirmed the cover loads in the live blog card.
+
+## 2026-09-23 - AMR Autonomous Mobile Robot Design Standards Published
+
+- Published `AMR_Autonomous_Mobile_Robot_Design_Standards.docx` through Sanity as `post-amr-autonomous-mobile-robot-design-standards` at https://www.coolyne.com/blog/amr-autonomous-mobile-robot-design-standards .
+- Preserved all 79 source paragraphs, including the exact title, 8 section headings, and the source `contact Coolyne` link. The article has 78 body blocks; Word Heading 1 styles were mapped to website H2 below the article title.
+- The supplied document has no images or tables. Added an SEO title, description, relevant AMR safety keywords, canonical URL, and indexable settings.
+- Passed authenticated target read plus Sanity create/update dry-runs before publication. Readback matched the prepared body and metadata; credentials were transient and not stored.
+- Live checks at 2026-09-23T03:13:55.116Z: article, blog index, and sitemap returned 200; every source paragraph and the contact link are present; canonical and BlogPosting are correct; the URL appears in both blog index and sitemap.
+- Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/docx-import-20260923-amr-autonomous-mobile-robot-design-standards` (Markdown, coverage.json, prepared-post.json, published-status.json, verified-live.json).
+- No frontend deployment was required because the article and sitemap read Sanity dynamically.
