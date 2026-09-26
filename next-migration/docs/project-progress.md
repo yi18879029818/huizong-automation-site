@@ -147,6 +147,13 @@
 - 是否已上线：是；文章页、博客列表和站点地图均已验证返回 200。
 - 风险备注：源 Word 不含图片或表格，因此本次仅发布正文和 SEO 元数据；无需前端部署。
 
+## 2026-09-26
+
+- 完成事项：通过 Sanity 发布 Conveyor AGV / Roller AGV 自动载荷转移博文，保留 89 段原文、7 个章节标题和联系链接。
+- 涉及内容：`/blog/conveyor-agv-roller-agv-automated-load-transfer`。
+- 是否已上线：是；文章页、博客列表和站点地图均已验证返回 200。
+- 风险备注：源 Word 不含图片或表格，因此本次仅发布正文和 SEO 元数据；无需前端部署。GitHub 在记录提交时 443 端口暂不可达，推送需待网络恢复后重试。
+
 ## 2026-09-16 - Manufacturing digital twin blog published
 
 - Published the supplied `3D Digital Twin System for Manufacturing.docx` through Sanity as `post-3d-digital-twin-system-for-manufacturing`. URL: https://www.coolyne.com/blog/3d-digital-twin-system-for-manufacturing

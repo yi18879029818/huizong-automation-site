@@ -620,3 +620,13 @@
 - Live checks at 2026-09-23T03:13:55.116Z: article, blog index, and sitemap returned 200; every source paragraph and the contact link are present; canonical and BlogPosting are correct; the URL appears in both blog index and sitemap.
 - Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/docx-import-20260923-amr-autonomous-mobile-robot-design-standards` (Markdown, coverage.json, prepared-post.json, published-status.json, verified-live.json).
 - No frontend deployment was required because the article and sitemap read Sanity dynamically.
+
+## 2026-09-26 - Conveyor AGV and Roller AGV Automated Load Transfer Published
+
+- Published `Conveyor_AGV_Roller_AGV_Automated_Load_Transfer.docx` through Sanity as `post-conveyor-agv-roller-agv-automated-load-transfer` at https://www.coolyne.com/blog/conveyor-agv-roller-agv-automated-load-transfer .
+- Preserved all 89 source paragraphs, including the exact title, 7 section headings, and the source `contact Coolyne` link. The article has 88 body blocks; the document's title Heading 1 was mapped to the page H1 and its Heading 2 sections to website H2.
+- The supplied document has no images or tables. Added an SEO title, description, relevant Conveyor AGV and Roller AGV keywords, canonical URL, and indexable settings.
+- Passed authenticated target read plus Sanity create/update dry-runs before publication. Readback matched the prepared body and metadata; credentials were transient and not stored.
+- Live checks at 2026-09-26T01:00:15.940Z: article, blog index, and sitemap returned 200; every source paragraph and the contact link are present; canonical and BlogPosting are correct; the URL appears in both blog index and sitemap.
+- Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/docx-import-20260926-conveyor-agv-roller-agv-automated-load-transfer` (Markdown, coverage.json, prepared-post.json, published-status.json, verified-live.json).
+- No frontend deployment was required because the article and sitemap read Sanity dynamically.

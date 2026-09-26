@@ -1,6 +1,8 @@
 # HANDOFF
 
 ## Current completion status
+2026-09-26: `/blog/conveyor-agv-roller-agv-automated-load-transfer` is published and verified. All 89 source paragraphs, 7 headings, and the contact link are preserved in 88 body blocks. The Word source has no media. Article, blog index, and sitemap return 200; source coverage, canonical, BlogPosting, and indexability checks passed. No frontend deployment was required. Artifacts are under `tmp/docx-import-20260926-conveyor-agv-roller-agv-automated-load-transfer`.
+
 2026-09-23: `/blog/amr-autonomous-mobile-robot-design-standards` is published and verified. All 79 source paragraphs, 8 headings, and the contact link are preserved in 78 body blocks. The Word source has no media. Article, blog index, and sitemap return 200; source coverage, canonical, BlogPosting, and indexability checks passed. No frontend deployment was required. Artifacts are under `tmp/docx-import-20260923-amr-autonomous-mobile-robot-design-standards`.
 
 2026-09-22 IoT cover update: `/blog/smart-factory-iot-solutions` uses the high-resolution production monitoring dashboard as its hero image. The article body and inline images are unchanged. Authenticated preflight checks and live article, blog-list, Open Graph, sitemap, and browser-card checks passed. No frontend deployment was required.
