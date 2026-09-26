@@ -640,3 +640,20 @@
 - Live checks at 2026-09-26T01:09:36.832Z: article, blog index, sitemap, original text, contact link, image captions, and alt text are present. Desktop 1440px and mobile 390px checks confirm both images load at their source aspect ratio with no horizontal overflow.
 - Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/amr-design-standards-images-20260926`.
 - No frontend deployment was required because the article reads Sanity content dynamically.
+
+## 2026-09-26 - AMR Design Standards Cover Image
+
+- Set the existing safety-LiDAR inline image `image-ab13462d7a38a25026acdc773d81b961381cee08-1672x941-png` as the `heroImage` for `/blog/amr-autonomous-mobile-robot-design-standards`.
+- Passed target read and create/update dry-runs before the revision-guarded update. The article body, title, slug, SEO, publication date, existing inline images, captions, and links are unchanged.
+- Verified the article hero, blog-list card, Open Graph image, source image, and sitemap. All requests returned 200 and the selected image is used in each cover location.
+- No frontend deployment was required because the article and blog card read Sanity content dynamically.
+
+## 2026-09-26 - Conveyor AGV Article Images
+
+- Added three supplied PNG images to `/blog/conveyor-agv-roller-agv-automated-load-transfer` as Sanity `imageWithAlt` blocks without changing the 88 original body blocks, title, slug, SEO, hero image, publication date, or contact link. The final body contains 91 blocks.
+- Placed the Roller AGV top-module image after the base-and-roller explanation, the pallet-transfer image after the station-handshake sequence, and the material-flow image after the fixed-transfer-interface explanation.
+- Assets: `image-62b699dd301f7edcbd05fc25dfd3aee7cb0ec74f-1448x1086-png`, `image-ae12969c23a8cde0ad8dcb65dd9a42388074b3a7-1448x1086-png`, and `image-0e5c5f65d0cc4f3b495bc41a22be15aee6d0efbe-1448x1086-png`.
+- Authenticated target read plus image-asset create and document-update dry-runs passed before the revision-guarded update. All uploaded source SHA-1 values match the Sanity assets and CDN responses.
+- Live checks at 2026-09-26T01:20:47.732Z: article, blog index, sitemap, original text, contact link, image captions, and alt text are present. Desktop 1440px and mobile 390px checks confirm all images load at their source aspect ratios with no horizontal overflow.
+- Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/conveyor-agv-images-20260926`.
+- No frontend deployment was required because the article reads Sanity content dynamically.

@@ -1,6 +1,10 @@
 # HANDOFF
 
 ## Current completion status
+2026-09-26: `/blog/conveyor-agv-roller-agv-automated-load-transfer` now contains the three supplied Roller AGV images with English alt text and captions. All 88 original blocks and the contact link remain unchanged; three `imageWithAlt` blocks were inserted at the equipment, station-handoff, and material-flow discussions. Article, images, blog index, sitemap, text coverage, and desktop/mobile display checks passed. No frontend deployment was required. Artifacts are under `tmp/conveyor-agv-images-20260926`.
+
+2026-09-26: the guarded-workspace AMR image is now the cover for `/blog/amr-autonomous-mobile-robot-design-standards`. Article hero, blog-list card, Open Graph image, asset, and sitemap all passed live checks. The article body and its two inline images are unchanged. No frontend deployment was required.
+
 2026-09-26: `/blog/amr-autonomous-mobile-robot-design-standards` now contains both supplied AMR images with English alt text and captions. All 78 original blocks and the contact link remain unchanged; two `imageWithAlt` blocks were inserted at the safety-LiDAR and load-condition discussions. Article, images, blog index, sitemap, text coverage, and desktop/mobile display checks passed. No frontend deployment was required. Artifacts are under `tmp/amr-design-standards-images-20260926`.
 
 2026-09-26: `/blog/conveyor-agv-roller-agv-automated-load-transfer` is published and verified. All 89 source paragraphs, 7 headings, and the contact link are preserved in 88 body blocks. The Word source has no media. Article, blog index, and sitemap return 200; source coverage, canonical, BlogPosting, and indexability checks passed. No frontend deployment was required. Artifacts are under `tmp/docx-import-20260926-conveyor-agv-roller-agv-automated-load-transfer`.

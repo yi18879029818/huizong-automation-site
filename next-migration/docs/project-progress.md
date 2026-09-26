@@ -161,6 +161,20 @@
 - 是否已上线：是；文章、两张图片、博客列表和站点地图均已验证。
 - 风险备注：未修改封面或正文；两张图片在桌面和手机端均无横向溢出。
 
+## 2026-09-26 - AMR 博文封面
+
+- 完成事项：将安全防护工作区内的 AMR 图片设为 AMR 设计标准博文封面。
+- 涉及内容：`/blog/amr-autonomous-mobile-robot-design-standards` 的文章首图、博客列表卡片和 Open Graph 图片。
+- 是否已上线：是；文章、博客列表、Open Graph、图片和站点地图均已验证。
+- 风险备注：仅更新封面字段，未改动正文、已有两张内嵌图、SEO 或发布日期。
+
+## 2026-09-26 - Conveyor AGV 博文配图
+
+- 完成事项：在 Conveyor AGV / Roller AGV 自动载荷转移博文中添加三张用户提供的设备、对接和物料流配图，并保留全部既有正文与链接。
+- 涉及内容：`/blog/conveyor-agv-roller-agv-automated-load-transfer`。
+- 是否已上线：是；文章、三张图片、博客列表和站点地图均已验证。
+- 风险备注：未修改封面或正文；三张图片在桌面和手机端均无横向溢出。
+
 ## 2026-09-16 - Manufacturing digital twin blog published
 
 - Published the supplied `3D Digital Twin System for Manufacturing.docx` through Sanity as `post-3d-digital-twin-system-for-manufacturing`. URL: https://www.coolyne.com/blog/3d-digital-twin-system-for-manufacturing
