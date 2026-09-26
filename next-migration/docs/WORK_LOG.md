@@ -630,3 +630,13 @@
 - Live checks at 2026-09-26T01:00:15.940Z: article, blog index, and sitemap returned 200; every source paragraph and the contact link are present; canonical and BlogPosting are correct; the URL appears in both blog index and sitemap.
 - Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/docx-import-20260926-conveyor-agv-roller-agv-automated-load-transfer` (Markdown, coverage.json, prepared-post.json, published-status.json, verified-live.json).
 - No frontend deployment was required because the article and sitemap read Sanity dynamically.
+
+## 2026-09-26 - AMR Design Standards Article Images
+
+- Added two supplied PNG images to `/blog/amr-autonomous-mobile-robot-design-standards` as Sanity `imageWithAlt` blocks, without changing the 78 original body blocks, title, slug, SEO, hero image, publication date, or contact link. The final body contains 80 blocks.
+- Placed the guarded-workspace AMR image after the safety-LiDAR protective-field explanation, and the AMR beside palletized loads image after the payload, vehicle-geometry, braking-performance, and motion-control discussion.
+- Assets: `image-ab13462d7a38a25026acdc773d81b961381cee08-1672x941-png` and `image-3d8114179c915c0dd14b668cf5b889fa6cf43155-1672x941-png`.
+- Authenticated target read plus image-asset create and document-update dry-runs passed before the revision-guarded update. The uploaded source SHA-1 values match the Sanity assets and their CDN responses.
+- Live checks at 2026-09-26T01:09:36.832Z: article, blog index, sitemap, original text, contact link, image captions, and alt text are present. Desktop 1440px and mobile 390px checks confirm both images load at their source aspect ratio with no horizontal overflow.
+- Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/amr-design-standards-images-20260926`.
+- No frontend deployment was required because the article reads Sanity content dynamically.

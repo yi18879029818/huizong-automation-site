@@ -154,6 +154,13 @@
 - 是否已上线：是；文章页、博客列表和站点地图均已验证返回 200。
 - 风险备注：源 Word 不含图片或表格，因此本次仅发布正文和 SEO 元数据；无需前端部署。GitHub 在记录提交时 443 端口暂不可达，推送需待网络恢复后重试。
 
+## 2026-09-26 - AMR 博文配图
+
+- 完成事项：在 AMR 设计标准博文中添加两张用户提供的 AMR 配图，并保留全部既有正文与链接。
+- 涉及内容：`/blog/amr-autonomous-mobile-robot-design-standards`。
+- 是否已上线：是；文章、两张图片、博客列表和站点地图均已验证。
+- 风险备注：未修改封面或正文；两张图片在桌面和手机端均无横向溢出。
+
 ## 2026-09-16 - Manufacturing digital twin blog published
 
 - Published the supplied `3D Digital Twin System for Manufacturing.docx` through Sanity as `post-3d-digital-twin-system-for-manufacturing`. URL: https://www.coolyne.com/blog/3d-digital-twin-system-for-manufacturing
