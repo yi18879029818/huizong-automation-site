@@ -1,5 +1,12 @@
 # Work Log
 
+## 2026-10-07 - Lifting Automated Robot Product Specifications
+
+- Added a responsive product-specification section to `/blog/lifting-automated-robot` immediately after the introductory carrier-handling bottleneck paragraph.
+- The section presents 600kg and 1000kg Lifting AGV cards with rated load, lifting height, no-load speed, navigation mode, positioning accuracy, and battery/charge information.
+- Each product image and the accompanying product action now link to `/products/lifting-agv`.
+- Verified the focused injection tests (6 total test cases), the optimized Next.js production build, the deployed article response, and the Lifting AGV product page response.
+
 ## 2026-09-14 - Warehouse Management System Guide Sanity Publication
 
 - Published `Warehouse Management System: How WMS Manages Inventory and Warehouse Operations` from the supplied Word document at `/blog/warehouse-management-system-guide`.
