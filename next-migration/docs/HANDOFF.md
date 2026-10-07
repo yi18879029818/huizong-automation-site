@@ -1,6 +1,8 @@
 # HANDOFF
 
 ## Current completion status
+2026-10-07: `/blog/agv-forklift-meaning` now presents 1600kg AGV Forklift and 1400kg Stacking AGV Forklift specifications in the supplied dashboard reference layout. Each card includes a linked product image, rated load, aisle width, battery/charge, pallet size, navigation mode, lifting height, no-load speed, and positioning accuracy. The images and product links lead to `/products/agv-forklift`. Production build and live route checks passed.
+
 2026-10-07: `/blog/lifting-automated-robot` now renders two responsive Lifting AGV product cards directly after the carrier-handling bottleneck paragraph: 600kg and 1000kg. Each card lists the requested load, 60mm lifting height, 1.5m/s no-load speed, Laser SLAM + QR Code navigation, ±10mm positioning accuracy, and 8h battery/charge information. Both product images and calls to action link to `/products/lifting-agv`. The release was built and deployed; the live blog route and product route both return `200`, and the live article response contains the two model names, specifications, and product link.
 
 2026-10-07: `/blog/fleet-automation-solutions-cold-chain-logistics-challenges` is published and verified. The supplied AGV-fleet image is its Sanity hero and Open Graph image; two commissioning photos and one 3D digital-twin GIF are placed in their related body sections. Sanity readback, the public article, body-media rendering, the GIF asset, and `/sitemap.xml` were verified. No frontend deployment was required.
@@ -93,6 +95,7 @@ Temporary artifacts were written under:
 - `tmp/shared-machine-tending-layout-image-20260827`
 
 ## Verified results
+- 2026-10-07: AGV Forklift dashboard layout passed the optimized Next.js production build; the live article and product routes return `200`, and the article HTML includes both forklift models, their images, and parameter values.
 - 2026-10-07: Lifting AGV product-specification cards passed six focused injection test cases and an optimized Next.js production build. After deployment, `/blog/lifting-automated-robot` returned `200` with both models and requested parameters, while `/products/lifting-agv` returned `200`.
 - 2026-10-07: Created `post-fleet-automation-solutions-cold-chain-logistics-challenges` with 53 body blocks, including one hero/OG image, two JPEG body images, and one GIF body image with descriptive alt text and captions. Production article, GIF asset, and sitemap return HTTP 200; all three body-media alt texts render in the article HTML.
 - 2026-10-07: Created `post-automated-stacker-crane-automated-warehousing` with 58 body blocks, including a Sanity hero/OG image and four supplied inline images with descriptive alt text and captions. Production article and sitemap return HTTP 200; all four body-image alt texts render in the article HTML.

@@ -79,6 +79,7 @@ const productSpecificationInsertions = {
   "agv-forklift-meaning": {
     afterTextIncludes: FORKLIFT_AGV_ANCHOR,
     key: "forklift-agv-specifications",
+    layout: "forklift-dashboard",
     products: forkliftAgvSpecifications
   }
 };
@@ -101,6 +102,7 @@ export function insertBlogProductSpecificationBlocks(slug, blocks) {
   const productBlock = {
     _type: "productSpecifications",
     _key: `${slug}-${insertion.key}`,
+    layout: insertion.layout,
     products: insertion.products
   };
   const alreadyInserted = blocks.some(

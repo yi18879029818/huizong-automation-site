@@ -1791,6 +1791,202 @@ a {
   line-height: 1.4;
 }
 
+.blog-product-specifications-forklift {
+  padding: clamp(1rem, 2.2vw, 2rem);
+  border: 0;
+  border-radius: 0;
+  background: #f4f4f4;
+}
+
+.blog-product-specifications-forklift .blog-product-specifications-list {
+  gap: clamp(3rem, 6vw, 5rem);
+}
+
+.blog-product-specifications-forklift .blog-product-specification-card {
+  gap: 1rem;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.blog-article-prose .blog-forklift-specification-title {
+  margin: 0;
+  color: #111;
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  font-weight: 700;
+}
+
+.blog-forklift-specification-layout {
+  display: grid;
+  grid-template-columns: minmax(110px, 1.2fr) minmax(92px, 0.8fr) minmax(180px, 1.6fr) repeat(3, minmax(88px, 0.8fr));
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.blog-article-prose .blog-forklift-specification-image-link {
+  display: grid;
+  min-width: 0;
+  min-height: 220px;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 14px;
+  background: transparent;
+}
+
+.blog-forklift-specification-image-link img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 265px;
+  object-fit: contain;
+  transition: transform 180ms ease;
+}
+
+.blog-forklift-specification-image-link:hover img,
+.blog-forklift-specification-image-link:focus-visible img {
+  transform: scale(1.035);
+}
+
+.blog-forklift-specification-tile,
+.blog-forklift-specification-details {
+  min-width: 0;
+  min-height: 220px;
+  margin: 0;
+  padding: 1rem 0.6rem;
+  border: 1px solid #e4e4e4;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.blog-forklift-specification-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  text-align: center;
+}
+
+.blog-forklift-specification-tile > span {
+  color: #111;
+  font-size: clamp(0.7rem, 1vw, 0.85rem);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.blog-forklift-specification-tile > strong {
+  color: #ff7a1a;
+  font-size: clamp(0.82rem, 1.2vw, 1rem);
+  line-height: 1.25;
+}
+
+.blog-forklift-load-ring {
+  display: grid;
+  width: clamp(64px, 6.5vw, 94px);
+  aspect-ratio: 1;
+  place-items: center;
+  border: 8px solid #ff7a1a;
+  border-left-color: #e5e5e5;
+  border-radius: 50%;
+  color: #d3d3d3;
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.blog-forklift-specification-details {
+  display: grid;
+  align-content: center;
+  padding: 1rem;
+}
+
+.blog-forklift-specification-details > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ddd;
+  color: #666;
+  font-size: clamp(0.7rem, 0.9vw, 0.82rem);
+  line-height: 1.35;
+}
+
+.blog-forklift-specification-details > div:last-child {
+  border-bottom: 0;
+}
+
+.blog-forklift-specification-details dt,
+.blog-forklift-specification-details dd {
+  margin: 0;
+}
+
+.blog-forklift-specification-details dt {
+  flex: 0 0 auto;
+}
+
+.blog-forklift-specification-details dd {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.blog-forklift-height-meter {
+  display: flex;
+  width: 4px;
+  height: 88px;
+  justify-content: flex-end;
+  flex-direction: column;
+  background: #e5e5e5;
+}
+
+.blog-forklift-height-meter i {
+  display: block;
+  width: 100%;
+  height: 15%;
+  background: #ff7a1a;
+}
+
+.blog-forklift-speed-icon {
+  width: min(100%, 82px);
+  height: auto;
+}
+
+.blog-forklift-target-icon {
+  width: min(100%, 72px);
+  height: auto;
+}
+
+@media (max-width: 1080px) {
+  .blog-forklift-specification-layout {
+    grid-template-columns: minmax(145px, 1.1fr) minmax(120px, 0.8fr) minmax(200px, 1.6fr);
+  }
+
+  .blog-forklift-specification-image-link { grid-area: 1 / 1; }
+  .blog-forklift-load-tile { grid-area: 1 / 2; }
+  .blog-forklift-specification-details { grid-area: 1 / 3; }
+  .blog-forklift-height-tile { grid-area: 2 / 1; }
+  .blog-forklift-speed-tile { grid-area: 2 / 2; }
+  .blog-forklift-accuracy-tile { grid-area: 2 / 3; }
+
+  .blog-forklift-specification-tile,
+  .blog-forklift-specification-details,
+  .blog-article-prose .blog-forklift-specification-image-link {
+    min-height: 190px;
+  }
+}
+
+@media (max-width: 640px) {
+  .blog-forklift-specification-layout {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .blog-forklift-specification-image-link { grid-area: 1 / 1; }
+  .blog-forklift-load-tile { grid-area: 1 / 2; }
+  .blog-forklift-specification-details { grid-area: 2 / 1 / span 1 / span 2; }
+  .blog-forklift-height-tile { grid-area: 3 / 1; }
+  .blog-forklift-speed-tile { grid-area: 3 / 2; }
+  .blog-forklift-accuracy-tile { grid-area: 4 / 1 / span 1 / span 2; }
+}
+
 .structured-form {
   display: grid;
   gap: 18px;

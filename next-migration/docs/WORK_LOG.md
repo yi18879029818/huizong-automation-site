@@ -1,5 +1,12 @@
 # Work Log
 
+## 2026-10-07 - AGV Forklift Blog Product Specifications
+
+- Added 1600kg AGV Forklift and 1400kg Stacking AGV Forklift specification cards to `/blog/agv-forklift-meaning` after the introductory pallet-flow paragraph.
+- Matched the supplied dashboard reference with a linked product image, rated-load ring, compact operating-specification panel, lifting-height meter, speed gauge, and positioning target. The layout adapts to narrower screens.
+- Product images and links lead to `/products/agv-forklift`.
+- Verified the optimized Next.js production build. Live article and product-page checks confirmed both routes return `200` and the article renders both models and their specification details.
+
 ## 2026-10-07 - Lifting Automated Robot Product Specifications
 
 - Added a responsive product-specification section to `/blog/lifting-automated-robot` immediately after the introductory carrier-handling bottleneck paragraph.
