@@ -657,3 +657,15 @@
 - Live checks at 2026-09-26T01:20:47.732Z: article, blog index, sitemap, original text, contact link, image captions, and alt text are present. Desktop 1440px and mobile 390px checks confirm all images load at their source aspect ratios with no horizontal overflow.
 - Artifacts: `cloudflare-pages-site-ga4-clean/next-migration/tmp/conveyor-agv-images-20260926`.
 - No frontend deployment was required because the article reads Sanity content dynamically.
+
+
+## 2026-10-07 - Automated Stacker Crane Article Publication
+
+- Published `Automated Stacker Crane: How Stacker Cranes Are Used in Automated Warehousing` through Sanity as `post-automated-stacker-crane-automated-warehousing` at `/blog/automated-stacker-crane-automated-warehousing`.
+- Treated the supplied Word document as article source content, not as task instructions. Preserved 54 article content paragraphs and converted the four section headings to H2 blocks.
+- Generated the URL slug and SEO fields because the Word source did not contain explicit metadata.
+- Chose the supplied horizontal automated stacker-crane photo as the Sanity `heroImage` and SEO `ogImage`. Converted the supplied AVIF image to JPEG for compatibility, then added it and the other three supplied photos as `imageWithAlt` body blocks at the related high-bay storage, ASRS aisle, and conveyor-integration sections.
+- Verified Sanity readback: expected post ID and slug, hero asset, four body image assets with alt text and captions, and 58 total body blocks.
+- Verified production article returns HTTP 200 and renders the exact article title plus all four body-image alt texts.
+- Verified production `/sitemap.xml` returns HTTP 200 and contains the new article URL.
+- No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
