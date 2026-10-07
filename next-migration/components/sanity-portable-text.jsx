@@ -109,7 +109,7 @@ const portableTextComponents = {
       }
 
       return (
-        <section className="blog-product-specifications" aria-label="Lifting AGV product specifications">
+        <section className="blog-product-specifications" aria-label="Product specifications">
           <p className="blog-product-specifications-eyebrow">Product Specifications</p>
           <div className="blog-product-specifications-list">
             {value.products.map((product) => (

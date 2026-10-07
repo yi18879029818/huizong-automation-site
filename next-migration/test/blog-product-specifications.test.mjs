@@ -60,3 +60,42 @@ test("leaves unrelated blog bodies unchanged", () => {
     body
   );
 });
+
+test("adds AGV forklift and stacking forklift cards after the requested forklift blog paragraph", () => {
+  const forkliftAnchor =
+    "When these transport routes are relatively fixed, pallet volumes are stable, and the same tasks need to be repeated many times every day, a robotic pallet stacker can turn pallet movements that traditionally depend on manually operated forklifts into logistics processes that are automatically scheduled and executed by the system.";
+
+  const result = insertBlogProductSpecificationBlocks("agv-forklift-meaning", [
+    block("Opening paragraph"),
+    block(forkliftAnchor),
+    block("Following paragraph")
+  ]);
+
+  assert.equal(result.length, 4);
+  assert.equal(result[2]._type, "productSpecifications");
+  assert.deepEqual(
+    result[2].products.map((product) => ({
+      name: product.name,
+      href: product.href,
+      ratedLoad: product.specifications[0].value,
+      liftingHeight: product.specifications[4].value,
+      navigation: product.specifications[3].value
+    })),
+    [
+      {
+        name: "AGV Forklift",
+        href: "/products/agv-forklift",
+        ratedLoad: "1600kg",
+        liftingHeight: "200mm",
+        navigation: "Laser SLAM + 3D Vision"
+      },
+      {
+        name: "Stacking AGV Forklift",
+        href: "/products/agv-forklift",
+        ratedLoad: "1400kg",
+        liftingHeight: "3000mm",
+        navigation: "Laser SLAM + 3D Vision"
+      }
+    ]
+  );
+});
