@@ -1,6 +1,8 @@
 # HANDOFF
 
 ## Current completion status
+2026-10-07: `/blog/fleet-automation-solutions-cold-chain-logistics-challenges` is published and verified. The supplied AGV-fleet image is its Sanity hero and Open Graph image; two commissioning photos and one 3D digital-twin GIF are placed in their related body sections. Sanity readback, the public article, body-media rendering, the GIF asset, and `/sitemap.xml` were verified. No frontend deployment was required.
+
 2026-10-07: `/blog/automated-stacker-crane-automated-warehousing` is published and verified. The horizontal stacker-crane scene is its Sanity hero and Open Graph image; four supplied images appear in the related body sections. Sanity readback, the public article, the four rendered image alt texts, and `/sitemap.xml` were verified. No frontend deployment was required.
 
 2026-09-26: `/blog/conveyor-agv-roller-agv-automated-load-transfer` now contains the three supplied Roller AGV images with English alt text and captions. All 88 original blocks and the contact link remain unchanged; three `imageWithAlt` blocks were inserted at the equipment, station-handoff, and material-flow discussions. Article, images, blog index, sitemap, text coverage, and desktop/mobile display checks passed. No frontend deployment was required. Artifacts are under `tmp/conveyor-agv-images-20260926`.
@@ -89,6 +91,7 @@ Temporary artifacts were written under:
 - `tmp/shared-machine-tending-layout-image-20260827`
 
 ## Verified results
+- 2026-10-07: Created `post-fleet-automation-solutions-cold-chain-logistics-challenges` with 53 body blocks, including one hero/OG image, two JPEG body images, and one GIF body image with descriptive alt text and captions. Production article, GIF asset, and sitemap return HTTP 200; all three body-media alt texts render in the article HTML.
 - 2026-10-07: Created `post-automated-stacker-crane-automated-warehousing` with 58 body blocks, including a Sanity hero/OG image and four supplied inline images with descriptive alt text and captions. Production article and sitemap return HTTP 200; all four body-image alt texts render in the article HTML.
 - `npm test` passes all three visitor-tracking behavior tests.
 - `npm run build` succeeds and includes the three `/api/track/*` dynamic routes.
