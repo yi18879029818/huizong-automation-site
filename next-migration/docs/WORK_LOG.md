@@ -1,5 +1,11 @@
 # Work Log
 
+## 2026-10-07 - Lifting AGV Blog Specification Layout
+
+- Reworked the parameter section on `/blog/lifting-automated-robot` to match the supplied lifting-AGV reference: each model title sits above a linked product image and a three-part dashboard for load/speed, lifting height, and navigation/accuracy/battery.
+- Kept the six values from the reference for both 600kg and 1000kg models, with responsive stacking on narrower screens.
+- Verified the optimized Next.js production build before release.
+
 ## 2026-10-07 - AGV Forklift Blog Product Specifications
 
 - Added 1600kg AGV Forklift and 1400kg Stacking AGV Forklift specification cards to `/blog/agv-forklift-meaning` after the introductory pallet-flow paragraph.

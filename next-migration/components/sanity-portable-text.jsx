@@ -109,13 +109,14 @@ const portableTextComponents = {
       }
 
       const forkliftLayout = value.layout === "forklift-dashboard";
+      const liftingLayout = value.layout === "lifting-dashboard";
 
       return (
         <section
-          className={`blog-product-specifications${forkliftLayout ? " blog-product-specifications-forklift" : ""}`}
+          className={`blog-product-specifications${forkliftLayout ? " blog-product-specifications-forklift" : ""}${liftingLayout ? " blog-product-specifications-lifting" : ""}`}
           aria-label="Product specifications"
         >
-          {!forkliftLayout ? (
+          {!forkliftLayout && !liftingLayout ? (
             <p className="blog-product-specifications-eyebrow">Product Specifications</p>
           ) : null}
           <div className="blog-product-specifications-list">
@@ -174,6 +175,46 @@ const portableTextComponents = {
                           <circle cx="40" cy="40" r="2.5" fill="#ff7a1a" />
                         </svg>
                         <strong>{product.specifications.find((item) => item.label === "Positioning Accuracy")?.value}</strong>
+                      </div>
+                    </div>
+                  </>
+                ) : liftingLayout ? (
+                  <>
+                    <h3 className="blog-lifting-specification-title">{product.name}</h3>
+                    <div className="blog-lifting-specification-layout">
+                      <Link
+                        aria-label={`View ${product.name} product page`}
+                        className="blog-lifting-specification-image-link"
+                        href={product.href}
+                      >
+                        <img alt={product.imageAlt} src={product.image} />
+                      </Link>
+                      <div className="blog-lifting-specification-metrics">
+                        <div className="blog-lifting-specification-stack">
+                          {product.specifications
+                            .filter((item) => ["Rated Load", "Max No-load Speed"].includes(item.label))
+                            .map((item) => (
+                              <div className="blog-lifting-specification-tile" key={item.label}>
+                                <span>{item.label}</span>
+                                <strong>{item.value}</strong>
+                              </div>
+                            ))}
+                        </div>
+                        <div className="blog-lifting-specification-tile blog-lifting-height-tile">
+                          <span>Lifting Height</span>
+                          <div className="blog-lifting-height-meter" aria-hidden="true"><i /></div>
+                          <strong>{product.specifications.find((item) => item.label === "Lifting Height")?.value}</strong>
+                        </div>
+                        <div className="blog-lifting-specification-stack">
+                          {product.specifications
+                            .filter((item) => ["Navigation Mode", "Positioning Accuracy", "Battery Life / Charge"].includes(item.label))
+                            .map((item) => (
+                              <div className="blog-lifting-specification-tile" key={item.label}>
+                                <span>{item.label}</span>
+                                <strong>{item.value}</strong>
+                              </div>
+                            ))}
+                        </div>
                       </div>
                     </div>
                   </>

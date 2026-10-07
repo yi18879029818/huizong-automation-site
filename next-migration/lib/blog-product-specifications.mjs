@@ -74,6 +74,7 @@ const productSpecificationInsertions = {
   "lifting-automated-robot": {
     afterTextIncludes: LIFTING_AGV_ANCHOR,
     key: "lifting-agv-specifications",
+    layout: "lifting-dashboard",
     products: liftingAgvSpecifications
   },
   "agv-forklift-meaning": {

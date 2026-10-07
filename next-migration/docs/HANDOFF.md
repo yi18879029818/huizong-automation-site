@@ -1,6 +1,8 @@
 # HANDOFF
 
 ## Current completion status
+2026-10-07: `/blog/lifting-automated-robot` now uses the supplied lifting-AGV reference layout for its 600kg and 1000kg models: title above a clickable product image, with rated load and speed stacked beside a full-height lifting indicator and navigation, accuracy, and battery tiles. The Next.js production build passed; deployment and live verification are pending.
+
 2026-10-07: `/blog/agv-forklift-meaning` now presents 1600kg AGV Forklift and 1400kg Stacking AGV Forklift specifications in the supplied dashboard reference layout. Each card includes a linked product image, rated load, aisle width, battery/charge, pallet size, navigation mode, lifting height, no-load speed, and positioning accuracy. The images and product links lead to `/products/agv-forklift`. Production build and live route checks passed.
 
 2026-10-07: `/blog/lifting-automated-robot` now renders two responsive Lifting AGV product cards directly after the carrier-handling bottleneck paragraph: 600kg and 1000kg. Each card lists the requested load, 60mm lifting height, 1.5m/s no-load speed, Laser SLAM + QR Code navigation, ±10mm positioning accuracy, and 8h battery/charge information. Both product images and calls to action link to `/products/lifting-agv`. The release was built and deployed; the live blog route and product route both return `200`, and the live article response contains the two model names, specifications, and product link.
@@ -94,7 +96,73 @@ Temporary artifacts were written under:
 - `tmp/docx-import-20260827-manufacturing-logistics`
 - `tmp/shared-machine-tending-layout-image-20260827`
 
-## Verified results
+- 2026-10-07: Lifting AGV reference-layout change passed the optimized Next.js production build; deployment and live page verification remain pending.
+- 2026-10-07: AGV Forklift dashboard layout passed the optimized Next.js production build; the live article and product routes return `200`, and the article HTML includes both forklift models, their images, and parameter values.
+- 2026-10-07: Lifting AGV product-specification cards passed six focused injection test cases and an optimized Next.js production build. After deployment, `/blog/lifting-automated-robot` returned `200` with both models and requested parameters, while `/products/lifting-agv` returned `200`.
+- 2026-10-07: Created `post-fleet-automation-solutions-cold-chain-logistics-challenges` with 53 body blocks, including one hero/OG image, two JPEG body images, and one GIF body image with descriptive alt text and captions. Production article, GIF asset, and sitemap return HTTP 200; all three body-media alt texts render in the article HTML.
+- 2026-10-07: Created `post-automated-stacker-crane-automated-warehousing` with 58 body blocks, including a Sanity hero/OG image and four supplied inline images with descriptive alt text and captions. Production article and sitemap return HTTP 200; all four body-image alt texts render in the article HTML.
+- `npm test` passes all three visitor-tracking behavior tests.
+- `npm run build` succeeds and includes the three `/api/track/*` dynamic routes.
+- Production `POST` requests to `/api/track/visit`, `/api/track/pageview-complete`, and `/api/track/conversion` each return success.
+- Production D1 readback confirms the deployment check recorded source/medium attribution, one pageview, `12` seconds of duration, and the linked conversion event.
+- Remote `main` includes deployment commit `870fc0d`; the Cloudflare OpenNext deployment was run after the remote SHA was confirmed.
+- Manufacturing Logistics DOCX conversion: `137` source paragraphs, `3` hyperlinks, `missing_count: 0`.
+- Published `/blog/manufacturing-logistics` with `136` English-only Sanity body blocks.
+- Sanity readback for `/blog/manufacturing-logistics` verified document `post-manufacturing-logistics`, canonical `/blog/manufacturing-logistics`, `136` body blocks, and all `3` expected links.
+- Production `/blog/manufacturing-logistics` returns `200`, includes the exact title, includes `BlogPosting`, contains all `3` expected links, and appears in `/sitemap.xml`.
+- Uploaded layout diagram asset `image-9dc675b22d6612856a8a6a010efd862fe03c6f3b-434x705-png` to Sanity.
+- Sanity readback for the shared composite robot machine-tending layout post shows body count `308`, image block count `1`, the expected caption, alt text, asset reference, CDN URL, and dimensions `434x705`.
+- Production `/blog/how-we-designed-a-shared-composite-robot-machine-tending-layout-for-an-unmanned-workshop` returns `200`, includes the exact title, includes `BlogPosting`, contains the new image asset ID and caption, and remains present in `/sitemap.xml`.
+- The Sanity CDN image URL returns `200 image/png`.
+- No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+- Published `/blog/how-to-automate-a-factory-without-automating-the-wrong-processes` with `89` body blocks, `8` H2 headings, `2` H3 headings, one comparison table, and all three expected source links.
+- Sanity readback confirms the exact title, canonical URL, SEO metadata, `noindex: false`, preserved table, and expected links.
+- Production `/blog/how-to-automate-a-factory-without-automating-the-wrong-processes` returns `200`, includes the exact title and `BlogPosting`, renders all expected links, and is present in `/sitemap.xml`.
+- Published `/blog/robot-control-system-for-agvs` with `84` English-only body blocks.
+- Sanity readback confirms document `post-robot-control-system-for-agvs`, the exact title, canonical `/blog/robot-control-system-for-agvs`, publication timestamp, and `noindex: false`.
+- Production `/blog/robot-control-system-for-agvs` returns `200`, and production `/sitemap.xml` returns `200` and contains the article URL.
+- Sanity readback for `/blog/robot-control-system-for-agvs` confirms three `imageWithAlt` blocks with alt text, captions, 1672×941 dimensions, and public Sanity CDN URLs. The architecture image is both the hero and SEO Open Graph asset.
+- Production `/blog/robot-control-system-for-agvs` renders all three uploaded image asset references and captions; each image CDN URL returns `200 image/png` and the article remains in the production sitemap.
+- The Project Review reset regression test passes, `npm test` passes all four tests, and `npm run build` succeeds.
+- Remote `main` includes contact-form fix commit `72619f8`; Cloudflare Worker `30293f39-fa91-4e9e-a55d-8923cedc8702` has 100% traffic.
+- Production `/contact` returns `200` and its deployed JavaScript captures the form before the asynchronous contact request, then safely resets that saved reference.
+
+## Unresolved issues
+The local RCS visual-update commit is pending a remote push because GitHub returned a connection reset and then an empty reply on 2026-09-09. The Sanity publication, production article, image CDN assets, and sitemap were independently verified and are already live.
+
+No open issue for the Manufacturing Logistics publication or the shared composite robot layout image upload.
+
+No open issue for the 2026-09-04 factory-automation article publication. A wide image can be added later if the user wants a cover image.
+
+Historical website inquiries cannot currently be counted from D1 because `form_submissions` has not been created. Check the configured inquiry mailbox for historical submissions; apply the existing schema before relying on database reporting for new submissions.
+
+Google Search Console may continue showing the historical `/api/track/visit` `404` examples until its next recrawl. The production endpoint has already been verified as successful.
+
+The only unrelated local git status item is the pre-existing modification to `../public/assets/site-shell.min.js`; it was not committed or changed intentionally during this migration.
+
+## Recommended next step
+- Check Search Console Crawl Stats again after one to two weeks. New `/api/track/visit` requests should no longer appear as `404`.
+- Apply `database/form_submissions.sql` to production `FORM_DB`, then validate a real contact submission is both emailed and stored before presenting inquiry statistics.
+- If the user wants the portrait layout diagram to also appear as a blog cover, create or request a wide cover version first; do not use the current portrait image as a wide hero without approval.
+
+## Risk areas not to touch
+- Do not remove the `visitor_sessions`, `visitor_pageviews`, or `visitor_conversions` D1 tables while the legacy `site-shell` tracking calls remain active.
+- Do not treat an empty or missing `form_submissions` table as zero inquiries; historical submissions may exist only in the configured Resend destination mailbox.
+- Do not recreate `/blog/how-we-designed-an-inline-robotic-screw-fastening-system-for-notebook-keyboards` unless the user explicitly asks to restore it.
+- Do not remove the existing `/blog/autonomous-forklifts` to `/blog/agv-forklift-meaning` redirect from `middleware.js`.
+- Do not re-import the patched existing posts unless the supplied Word content is intended to replace the full Sanity body and existing images/videos are preserved or re-added.
+- Do not re-import `/blog/manufacturing-logistics` unless the supplied Word content is intended to replace the already published Sanity body.
+- Do not add frontend static overrides for these posts unless Sanity rendering fails.
+- Do not remove `../public/videos/machine-tending-cell-receiving-agv.mp4` unless the Sanity `videoEmbed` source is changed or removed first.
+
+## 2026-09-16 latest blog completion
+
+- Status: manufacturing digital twin article is live; article and sitemap verified.
+- Changed: `content/blog/3d-digital-twin-system-for-manufacturing.md`, Sanity post, WORK_LOG and HANDOFF.
+- Verified: 67 source-faithful body blocks, five headings, seven added contextual links plus the source contact link; page/sitemap/link targets 200; canonical and BlogPosting present; no noindex.
+- Unresolved: none for this publication. Source contains no images, so no cover was added.
+- Next: add user-supplied visuals if requested.
+- Risk: preserve unrelated `public/assets/site-shell.min.js` changes; retain Portable Text markDefs and span marks when editing.
 - 2026-10-07: AGV Forklift dashboard layout passed the optimized Next.js production build; the live article and product routes return `200`, and the article HTML includes both forklift models, their images, and parameter values.
 - 2026-10-07: Lifting AGV product-specification cards passed six focused injection test cases and an optimized Next.js production build. After deployment, `/blog/lifting-automated-robot` returned `200` with both models and requested parameters, while `/products/lifting-agv` returned `200`.
 - 2026-10-07: Created `post-fleet-automation-solutions-cold-chain-logistics-challenges` with 53 body blocks, including one hero/OG image, two JPEG body images, and one GIF body image with descriptive alt text and captions. Production article, GIF asset, and sitemap return HTTP 200; all three body-media alt texts render in the article HTML.
