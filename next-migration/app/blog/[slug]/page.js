@@ -5,6 +5,7 @@ import { CmsPageShell } from "@/components/cms-page-shell";
 import { getBlogBodyOverride } from "@/lib/blog-body-overrides.mjs";
 import { injectBlogInternalLinks } from "@/lib/blog-internal-links.mjs";
 import { getBlogImageOverride } from "@/lib/blog-image-overrides.mjs";
+import { insertBlogProductSpecificationBlocks } from "@/lib/blog-product-specifications.mjs";
 import { getLocalPostBySlug } from "@/lib/local-blog-posts.mjs";
 import { SanityPortableText } from "@/components/sanity-portable-text";
 import { COMPANY, SITE_URL } from "@/lib/site-config";
@@ -772,9 +773,12 @@ export default async function BlogDetailPage({ params }) {
     getBlogImageOverride(post) || urlFor(post.heroImage)?.width(1600).height(960).url() || null;
   const resolvedBody = insertBlogVideoBlocks(
     slug,
-    pruneRedundantBlogBlocks(
+    insertBlogProductSpecificationBlocks(
       slug,
-      pruneRemovedBlogBlocks(slug, getBlogBodyOverride(post) || post.body)
+      pruneRedundantBlogBlocks(
+        slug,
+        pruneRemovedBlogBlocks(slug, getBlogBodyOverride(post) || post.body)
+      )
     )
   );
   const articleBody = resolvedBody?.length

@@ -102,6 +102,46 @@ const portableTextComponents = {
           </table>
         </div>
       );
+    },
+    productSpecifications: ({ value }) => {
+      if (!value?.products?.length) {
+        return null;
+      }
+
+      return (
+        <section className="blog-product-specifications" aria-label="Lifting AGV product specifications">
+          <p className="blog-product-specifications-eyebrow">Product Specifications</p>
+          <div className="blog-product-specifications-list">
+            {value.products.map((product) => (
+              <article className="blog-product-specification-card" key={product.name}>
+                <div className="blog-product-specification-product">
+                  <Link
+                    aria-label={`View ${product.name} product page`}
+                    className="blog-product-specification-image-link"
+                    href={product.href}
+                  >
+                    <img alt={product.imageAlt} src={product.image} />
+                  </Link>
+                  <div>
+                    <h3>{product.name}</h3>
+                    <Link className="blog-product-specification-link" href={product.href}>
+                      View product →
+                    </Link>
+                  </div>
+                </div>
+                <dl className="blog-product-specification-grid">
+                  {product.specifications.map((specification) => (
+                    <div key={specification.label}>
+                      <dt>{specification.label}</dt>
+                      <dd>{specification.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </article>
+            ))}
+          </div>
+        </section>
+      );
     }
   }
 };
