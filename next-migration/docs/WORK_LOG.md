@@ -4,7 +4,7 @@
 
 - Reworked the parameter section on `/blog/lifting-automated-robot` to match the supplied lifting-AGV reference: each model title sits above a linked product image and a three-part dashboard for load/speed, lifting height, and navigation/accuracy/battery.
 - Kept the six values from the reference for both 600kg and 1000kg models, with responsive stacking on narrower screens.
-- Verified the optimized Next.js production build before release.
+- Verified the optimized Next.js production build, deployed Worker, article rendering for both models and parameters, linked product page, and sitemap response.
 
 ## 2026-10-07 - AGV Forklift Blog Product Specifications
 

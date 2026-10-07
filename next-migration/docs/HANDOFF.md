@@ -1,7 +1,7 @@
 # HANDOFF
 
 ## Current completion status
-2026-10-07: `/blog/lifting-automated-robot` now uses the supplied lifting-AGV reference layout for its 600kg and 1000kg models: title above a clickable product image, with rated load and speed stacked beside a full-height lifting indicator and navigation, accuracy, and battery tiles. The Next.js production build passed; deployment and live verification are pending.
+2026-10-07: `/blog/lifting-automated-robot` now uses the supplied lifting-AGV reference layout for its 600kg and 1000kg models: title above a clickable product image, with rated load and speed stacked beside a full-height lifting indicator and navigation, accuracy, and battery tiles. The Next.js production build passed. The update is deployed; the public article shows both models and requested values, linked product images resolve to the Lifting AGV page, and the article, product page, and sitemap return `200`.
 
 2026-10-07: `/blog/agv-forklift-meaning` now presents 1600kg AGV Forklift and 1400kg Stacking AGV Forklift specifications in the supplied dashboard reference layout. Each card includes a linked product image, rated load, aisle width, battery/charge, pallet size, navigation mode, lifting height, no-load speed, and positioning accuracy. The images and product links lead to `/products/agv-forklift`. Production build and live route checks passed.
 
@@ -96,7 +96,7 @@ Temporary artifacts were written under:
 - `tmp/docx-import-20260827-manufacturing-logistics`
 - `tmp/shared-machine-tending-layout-image-20260827`
 
-- 2026-10-07: Lifting AGV reference-layout change passed the optimized Next.js production build; deployment and live page verification remain pending.
+- 2026-10-07: Lifting AGV reference-layout change passed the optimized Next.js production build. The deployed article renders both product dashboards and links; article, product page, and sitemap return `200`.
 - 2026-10-07: AGV Forklift dashboard layout passed the optimized Next.js production build; the live article and product routes return `200`, and the article HTML includes both forklift models, their images, and parameter values.
 - 2026-10-07: Lifting AGV product-specification cards passed six focused injection test cases and an optimized Next.js production build. After deployment, `/blog/lifting-automated-robot` returned `200` with both models and requested parameters, while `/products/lifting-agv` returned `200`.
 - 2026-10-07: Created `post-fleet-automation-solutions-cold-chain-logistics-challenges` with 53 body blocks, including one hero/OG image, two JPEG body images, and one GIF body image with descriptive alt text and captions. Production article, GIF asset, and sitemap return HTTP 200; all three body-media alt texts render in the article HTML.
