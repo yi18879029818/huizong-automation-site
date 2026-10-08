@@ -123,7 +123,11 @@ function applySecurityHeaders(response, pathname = "/") {
     response.headers.set(key, value);
   });
 
-  if (pathname === "/api" || pathname.startsWith("/api/")) {
+  if (
+    pathname === "/api" ||
+    pathname.startsWith("/api/") ||
+    pathname.startsWith("/assets/fonts/")
+  ) {
     response.headers.set("X-Robots-Tag", "noindex, nofollow");
   }
 

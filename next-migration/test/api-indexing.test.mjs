@@ -9,12 +9,23 @@ const structuredPageSource = readFileSync(
 );
 const llmsSource = readFileSync(new URL("../lib/llms-view.js", import.meta.url), "utf8");
 const sitemapSource = readFileSync(new URL("../app/sitemap.js", import.meta.url), "utf8");
+const deployConfig = JSON.parse(
+  readFileSync(new URL("../wrangler.deploy.jsonc", import.meta.url), "utf8"),
+);
+const productionConfig = JSON.parse(
+  readFileSync(new URL("../wrangler.jsonc", import.meta.url), "utf8"),
+);
 
-test("middleware marks every API response as non-indexable", () => {
+test("middleware marks API and font responses as non-indexable", () => {
   assert.match(
     source,
-    /pathname === "\/api" \|\| pathname\.startsWith\("\/api\/"\)[\s\S]*?response\.headers\.set\("X-Robots-Tag", "noindex, nofollow"\)/,
+    /pathname === "\/api"\s*\|\|\s*pathname\.startsWith\("\/api\/"\)\s*\|\|\s*pathname\.startsWith\("\/assets\/fonts\/"\)[\s\S]*?response\.headers\.set\("X-Robots-Tag", "noindex, nofollow"\)/,
   );
+});
+
+test("font assets run through the Worker before the asset handler", () => {
+  assert.deepEqual(deployConfig.assets.run_worker_first, ["/assets/fonts/*"]);
+  assert.deepEqual(productionConfig.assets.run_worker_first, ["/assets/fonts/*"]);
 });
 
 test("published crawl resources do not expose internal API URLs", () => {
