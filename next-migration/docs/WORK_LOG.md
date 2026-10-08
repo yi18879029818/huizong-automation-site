@@ -4,7 +4,7 @@
 
 - Added `X-Robots-Tag: noindex, nofollow` to every `/api/*` response through the shared middleware.
 - Removed public `/api/markdown` references from structured-page metadata and the public `llms` index files; the sitemap does not generate API URLs.
-- Added regression coverage for the API header and for excluding internal API URLs from public crawl resources. The full test suite and optimized OpenNext build passed before deployment.
+- Added regression coverage for the API header and for excluding internal API URLs from public crawl resources. The full test suite and optimized OpenNext build passed, and production verifies the header plus the absence of API URLs from the sitemap, `llms` files, and `/solutions/picking` HTML.
 
 ## 2026-10-07 - Lifting AGV Blog Specification Layout
 
