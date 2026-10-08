@@ -1,5 +1,11 @@
 # Work Log
 
+## 2026-10-08 - Internal API Search Indexing Isolation
+
+- Added `X-Robots-Tag: noindex, nofollow` to every `/api/*` response through the shared middleware.
+- Removed public `/api/markdown` references from structured-page metadata and the public `llms` index files; the sitemap does not generate API URLs.
+- Added regression coverage for the API header and for excluding internal API URLs from public crawl resources. The full test suite and optimized OpenNext build passed before deployment.
+
 ## 2026-10-07 - Lifting AGV Blog Specification Layout
 
 - Reworked the parameter section on `/blog/lifting-automated-robot` to match the supplied lifting-AGV reference: each model title sits above a linked product image and a three-part dashboard for load/speed, lifting height, and navigation/accuracy/battery.

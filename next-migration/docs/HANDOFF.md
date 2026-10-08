@@ -1,6 +1,8 @@
 # HANDOFF
 
 ## Current completion status
+2026-10-08: Internal `/api/*` routes are now protected from search indexing through `X-Robots-Tag: noindex, nofollow`. Structured-page metadata and public `llms` files no longer reveal `/api/markdown` URLs, while the sitemap continues to contain only canonical public routes. Regression tests and the optimized OpenNext build passed; deployment and live header verification are the remaining release steps.
+
 2026-10-07: `/blog/lifting-automated-robot` now uses the supplied lifting-AGV reference layout for its 600kg and 1000kg models: title above a clickable product image, with rated load and speed stacked beside a full-height lifting indicator and navigation, accuracy, and battery tiles. The Next.js production build passed. The update is deployed; the public article shows both models and requested values, linked product images resolve to the Lifting AGV page, and the article, product page, and sitemap return `200`.
 
 2026-10-07: `/blog/agv-forklift-meaning` now presents 1600kg AGV Forklift and 1400kg Stacking AGV Forklift specifications in the supplied dashboard reference layout. Each card includes a linked product image, rated load, aisle width, battery/charge, pallet size, navigation mode, lifting height, no-load speed, and positioning accuracy. The images and product links lead to `/products/agv-forklift`. Production build and live route checks passed.

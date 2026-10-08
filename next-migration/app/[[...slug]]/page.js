@@ -80,9 +80,6 @@ function buildStructuredMetadata(page) {
       title: ogTitle,
       description: seo.ogDescription || description,
       images: [image]
-    },
-    other: {
-      "ai-markdown": `/api/markdown?path=${page.currentHref}`
     }
   };
 }

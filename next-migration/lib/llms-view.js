@@ -26,7 +26,6 @@ async function pageEntryForRoute(route) {
     kind: page.kind,
     section: page.section,
     canonical: absoluteUrl(route),
-    markdown: absoluteUrl(`/api/markdown?path=${route}`),
     hasJsonLd: true,
     schemas:
       page.kind === "product-detail"
@@ -62,19 +61,17 @@ export async function getLlmsIndexText() {
     `- Canonical site: ${SITE_URL}`,
     `- Machine-readable index: ${absoluteUrl("/llms.json")}`,
     `- Full markdown corpus: ${absoluteUrl("/llms-full.txt")}`,
-    `- Per-page markdown endpoint: ${absoluteUrl("/api/markdown?path=/products/agv-forklift")}`,
     "",
     "## Structured pages",
     ...pages.map(({ route, page }) => {
       const label = page?.data?.title || route;
-      return `- ${label}: ${absoluteUrl(route)} | markdown: ${absoluteUrl(`/api/markdown?path=${route}`)}`;
+      return `- ${label}: ${absoluteUrl(route)}`;
     }),
     "",
     "## Notes",
     "- JSON-LD is embedded on public pages.",
     "- Product detail pages use neutral webpage schema for B2B inquiry content rather than merchant product rich-result markup.",
-    "- Solution and case-study pages expose structured markdown views for AI crawlers.",
-    "- Prefer canonical HTML URLs for citations and markdown URLs for extraction."
+    "- Prefer canonical HTML URLs for citations and extraction."
   ].join("\n");
 }
 
@@ -125,19 +122,16 @@ export async function getLlmsJsonIndex() {
     generatedAt: new Date().toISOString(),
     endpoints: {
       llmsTxt: absoluteUrl("/llms.txt"),
-      llmsFull: absoluteUrl("/llms-full.txt"),
-      markdownTemplate: absoluteUrl("/api/markdown?path=/products/agv-forklift")
+      llmsFull: absoluteUrl("/llms-full.txt")
     },
     agentStrategies: {
       GPTBot: {
         family: "openai",
-        preferredResponse: "markdown",
-        endpoint: absoluteUrl("/api/markdown?path=/products/agv-forklift")
+        preferredResponse: "html-canonical"
       },
       ClaudeBot: {
         family: "anthropic",
-        preferredResponse: "markdown",
-        endpoint: absoluteUrl("/api/markdown?path=/products/agv-forklift")
+        preferredResponse: "html-canonical"
       },
       "Google-Extended": {
         family: "google",
