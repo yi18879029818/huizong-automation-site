@@ -1,7 +1,7 @@
 # HANDOFF
 
 ## Current completion status
-2026-10-08: Internal `/api/*` routes and static `/assets/fonts/*` files are now protected from search indexing through `X-Robots-Tag: noindex, nofollow`. Font requests are routed through the Worker before static delivery. Structured-page metadata and public `llms` files no longer reveal `/api/markdown` URLs, while the sitemap continues to contain only canonical public routes. The API change is deployed; the font change passed local Worker verification and awaits deployment.
+2026-10-08: Internal `/api/*` routes and static `/assets/fonts/*` files are now protected from search indexing through `X-Robots-Tag: noindex, nofollow`. Font requests are routed through the Worker before static delivery. Structured-page metadata and public `llms` files no longer reveal `/api/markdown` URLs, while the sitemap continues to contain only canonical public routes. The change is deployed and production verifies both headers.
 
 2026-10-07: `/blog/lifting-automated-robot` now uses the supplied lifting-AGV reference layout for its 600kg and 1000kg models: title above a clickable product image, with rated load and speed stacked beside a full-height lifting indicator and navigation, accuracy, and battery tiles. The Next.js production build passed. The update is deployed; the public article shows both models and requested values, linked product images resolve to the Lifting AGV page, and the article, product page, and sitemap return `200`.
 

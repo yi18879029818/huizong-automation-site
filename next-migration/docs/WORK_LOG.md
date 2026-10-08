@@ -5,7 +5,7 @@
 - Added `X-Robots-Tag: noindex, nofollow` to every `/api/*` response through the shared middleware.
 - Added the same header to `/assets/fonts/*`; Cloudflare routes font requests through the Worker before serving the static asset.
 - Removed public `/api/markdown` references from structured-page metadata and the public `llms` index files; the sitemap does not generate API URLs.
-- Added regression coverage for API and font headers and for excluding internal API URLs from public crawl resources. The full test suite and optimized OpenNext build passed, and production verifies the API header plus the absence of API URLs from the sitemap, `llms` files, and `/solutions/picking` HTML. Local Worker verification confirms the font header.
+- Added regression coverage for API and font headers and for excluding internal API URLs from public crawl resources. The full test suite and optimized OpenNext build passed. Production verifies both headers plus the absence of API URLs from the sitemap, `llms` files, and `/solutions/picking` HTML.
 
 ## 2026-10-07 - Lifting AGV Blog Specification Layout
 
