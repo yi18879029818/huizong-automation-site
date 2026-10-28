@@ -1,5 +1,15 @@
 # HANDOFF
 
+## 2026-10-28 - Lifting robot article presentation
+- Status: implemented and locally verified; production deployment pending.
+- Changed file: app/blog/[slug]/page.js.
+- Result: distinct concise hero and sidecard descriptions; two requested labels removed for this article only; rendered body unchanged.
+- Checks: production build and desktop/mobile overflow checks passed.
+- Next: commit, push main, deploy, verify public article and sitemap.
+- Risk: shared template uses a slug-specific mapping; other article behavior is preserved.
+
+
+
 ## Current completion status
 2026-10-08: Internal `/api/*` routes and static `/assets/fonts/*` files are now protected from search indexing through `X-Robots-Tag: noindex, nofollow`. Font requests are routed through the Worker before static delivery. Structured-page metadata and public `llms` files no longer reveal `/api/markdown` URLs, while the sitemap continues to contain only canonical public routes. The change is deployed and production verifies both headers.
 
@@ -231,3 +241,4 @@ The only unrelated local git status item is the pre-existing modification to `..
 - Unresolved: none for this publication. Source contains no images, so no cover was added.
 - Next: add user-supplied visuals if requested.
 - Risk: preserve unrelated `public/assets/site-shell.min.js` changes; retain Portable Text markDefs and span marks when editing.
+

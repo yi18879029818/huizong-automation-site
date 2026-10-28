@@ -81,6 +81,12 @@ function formatPublishedDate(value) {
 }
 
 const BLOG_SIDECARD_COPY = {
+  "lifting-automated-robot": {
+    title: "What This Covers",
+    heroDescription: "Lifting robots travel beneath compatible carriers, lift them, and automate point-to-point material transport.",
+    description: "Carrier compatibility, pickup and drop-off stations, automatic task triggers, and fleet coordination.",
+    hideInquiryLabel: true
+  },
   "agv-guide": {
     eyebrow: "AGV Basics",
     title: "Key Topics",
@@ -798,7 +804,7 @@ export default async function BlogDetailPage({ params }) {
           <div className="blog-detail-hero-grid">
             <div className="blog-detail-copy">
               <h1>{post.title}</h1>
-              <p>{post.excerpt || "Structured editorial content managed in Sanity."}</p>
+              <p>{sidecardCopy.heroDescription || post.excerpt || "Structured editorial content managed in Sanity."}</p>
               <div className="hero-actions">
                 <Link className="hero-button" href="/blog">
                   Back to blog
@@ -814,7 +820,7 @@ export default async function BlogDetailPage({ params }) {
                   <img alt={post.title} src={heroImageUrl} />
                 </div>
               ) : null}
-              <span className="card-label">{sidecardCopy.eyebrow}</span>
+              {sidecardCopy.eyebrow ? <span className="card-label">{sidecardCopy.eyebrow}</span> : null}
               <strong>{sidecardCopy.title}</strong>
               <p>{sidecardCopy.description}</p>
             </div>
@@ -825,7 +831,7 @@ export default async function BlogDetailPage({ params }) {
           <div className="blog-article-layout">
             <aside className="blog-article-aside">
               <div className="blog-article-aside-card">
-                <span className="card-label">Project Inquiry</span>
+                {!sidecardCopy.hideInquiryLabel ? <span className="card-label">Project Inquiry</span> : null}
                 <p>Use the contact page for project-specific consultation tied to this topic.</p>
                 <Link className="link-chip" href="/contact">
                   Contact coolyne

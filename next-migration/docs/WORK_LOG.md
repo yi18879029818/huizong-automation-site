@@ -708,3 +708,11 @@
 - Verified production article returns HTTP 200, renders the article title and all three body-media alt texts, and the GIF asset returns HTTP 200 with `image/gif`.
 - Verified production `/sitemap.xml` returns HTTP 200 and contains the new article URL.
 - No Cloudflare deployment was required because the blog route and sitemap read Sanity content dynamically.
+
+## 2026-10-28 - Lifting robot article summary cleanup
+
+- Scoped the requested presentation changes to `/blog/lifting-automated-robot` in `app/blog/[slug]/page.js`.
+- Removed the Topic Summary and Project Inquiry labels on this article. The hero now describes the lifting workflow; the sidecard summarizes carrier compatibility, stations, task triggers, and fleet coordination using the article body as source.
+- Preserved Sanity data, SEO metadata, article body, product cards, and all other article presentations.
+- Local validation: Next.js production build passed; rendered article body HTML is byte-identical to the production baseline; desktop 1440px and mobile 390px have no horizontal overflow.
+- Release pending: push committed main, build OpenNext, deploy, and verify the public page and sitemap. Reference Worker baseline remains `9ed5e0a8-10ea-4b93-9587-6c5f2e028b8a`; pre-change active production version is `7fc3baee-ff5f-4039-8951-fe8b010db2fc`.
