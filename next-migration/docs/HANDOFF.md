@@ -1,11 +1,11 @@
 # HANDOFF
 
 ## 2026-10-28 - Lifting robot article presentation
-- Status: deployed and verified on production.
+- Status: deployed and verified on production, including removal of the What This Covers heading (follow-up).
 - Changed file: app/blog/[slug]/page.js.
 - Result: distinct concise hero and sidecard descriptions; two requested labels removed for this article only; rendered body unchanged.
 - Checks: production build and desktop/mobile overflow checks passed.
-- Release: commit 9dbc9d4 pushed to main; Worker 9a48631f-e364-4d35-8fa0-914d4e296255 deployed. Article and sitemap return 200; live article body HTML and Sanity body are unchanged. Next: no remaining work for this request.
+- Release: commit 3d13bbd pushed to main; Worker bb2a0c9d-b7a4-49dd-97f2-c27071a07a40 deployed. Article and sitemap return 200; live article body HTML and Sanity body are unchanged. Next: no remaining work for this request.
 - Risk: shared template uses a slug-specific mapping; other article behavior is preserved.
 
 

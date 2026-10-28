@@ -717,3 +717,8 @@
 - Local validation: Next.js production build passed; rendered article body HTML is byte-identical to the production baseline; desktop 1440px and mobile 390px have no horizontal overflow.
 - Release pending: push committed main, build OpenNext, deploy, and verify the public page and sitemap. Reference Worker baseline remains `9ed5e0a8-10ea-4b93-9587-6c5f2e028b8a`; pre-change active production version is `7fc3baee-ff5f-4039-8951-fe8b010db2fc`.
 - Production verified: commit `9dbc9d4` was pushed before deployment; Worker version `9a48631f-e364-4d35-8fa0-914d4e296255` serves the change. Article and sitemap return HTTP 200; sitemap retains the article URL. Both requested labels are absent and the two concise descriptions are distinct. Production article body HTML and Sanity body are unchanged. `/blog/agv-guide` remains accessible and retains its existing inquiry label.
+
+### 2026-10-28 - Remove sidecard heading follow-up
+- Removed the `What This Covers` heading from `/blog/lifting-automated-robot`; retained the image and concise summary.
+- Commit `3d13bbd` pushed to main before deployment. OpenNext build passed; Worker `bb2a0c9d-b7a4-49dd-97f2-c27071a07a40` deployed.
+- Live verification: HTTP 200, heading absent, image and summary present, article body HTML identical to the pre-change baseline.
