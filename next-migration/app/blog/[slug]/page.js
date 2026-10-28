@@ -82,7 +82,7 @@ function formatPublishedDate(value) {
 
 const BLOG_SIDECARD_COPY = {
   "lifting-automated-robot": {
-    title: "What This Covers",
+    title: null,
     heroDescription: "Lifting robots travel beneath compatible carriers, lift them, and automate point-to-point material transport.",
     description: "Carrier compatibility, pickup and drop-off stations, automatic task triggers, and fleet coordination.",
     hideInquiryLabel: true
@@ -821,7 +821,7 @@ export default async function BlogDetailPage({ params }) {
                 </div>
               ) : null}
               {sidecardCopy.eyebrow ? <span className="card-label">{sidecardCopy.eyebrow}</span> : null}
-              <strong>{sidecardCopy.title}</strong>
+              {sidecardCopy.title ? <strong>{sidecardCopy.title}</strong> : null}
               <p>{sidecardCopy.description}</p>
             </div>
           </div>
