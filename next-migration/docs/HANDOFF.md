@@ -1,11 +1,11 @@
 # HANDOFF
 
 ## 2026-10-28 - Lifting robot article presentation
-- Status: implemented and locally verified; production deployment pending.
+- Status: deployed and verified on production.
 - Changed file: app/blog/[slug]/page.js.
 - Result: distinct concise hero and sidecard descriptions; two requested labels removed for this article only; rendered body unchanged.
 - Checks: production build and desktop/mobile overflow checks passed.
-- Next: commit, push main, deploy, verify public article and sitemap.
+- Release: commit 9dbc9d4 pushed to main; Worker 9a48631f-e364-4d35-8fa0-914d4e296255 deployed. Article and sitemap return 200; live article body HTML and Sanity body are unchanged. Next: no remaining work for this request.
 - Risk: shared template uses a slug-specific mapping; other article behavior is preserved.
 
 
@@ -241,4 +241,3 @@ The only unrelated local git status item is the pre-existing modification to `..
 - Unresolved: none for this publication. Source contains no images, so no cover was added.
 - Next: add user-supplied visuals if requested.
 - Risk: preserve unrelated `public/assets/site-shell.min.js` changes; retain Portable Text markDefs and span marks when editing.
-
