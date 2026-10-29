@@ -93,7 +93,6 @@ export default async function BlogIndexPage() {
       <main className="shell-main">
         <section className="section-panel blog-index-hero">
           <div className="blog-index-simple-head">
-            <span className="card-label">Blog</span>
             <h1>All Blog Posts</h1>
             <p>
               Automation notes, warehouse system explainers, and practical engineering articles
