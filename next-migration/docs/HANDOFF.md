@@ -1,5 +1,13 @@
 # HANDOFF
 
+## 2026-10-29 - Blog index hero label
+- Status: deployed and verified on production.
+- Changed file: app/blog/page.js.
+- Result: the small `Blog` label above `All Blog Posts` is removed; the heading, description, and 68 article entries remain.
+- Checks: OpenNext build passed; public `/blog` returned `200` with no hero label.
+- Release: source commit 30705aa pushed to main; Worker cca19eaa-b91e-4d58-9612-3e342cbd5a77. Next: none. Risk: none identified.
+
+
 ## 2026-10-29 - Shared blog detail presentation
 - Status: deployed and verified across all 68 current blog routes.
 - Files: app/blog/[slug]/page.js; lib/blog-detail-copy.mjs; lib/blog-detail-editorial-copy.mjs; test/blog-detail-copy.test.mjs.

@@ -1,5 +1,11 @@
 # Work Log
 
+## 2026-10-29 - Blog Index Hero Label
+
+- Removed the small `Blog` label above `All Blog Posts` on the blog index, without changing the heading, description, or article list.
+- OpenNext production build passed; the live page returned `200`, rendered no hero label, and retained all 68 article entries.
+- Source commit `30705aa` was pushed to `main` before Worker deployment `cca19eaa-b91e-4d58-9612-3e342cbd5a77`.
+
 ## 2026-10-08 - Internal API Search Indexing Isolation
 
 - Added `X-Robots-Tag: noindex, nofollow` to every `/api/*` response through the shared middleware.
