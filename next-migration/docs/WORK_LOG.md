@@ -730,3 +730,5 @@
 - Validation: 8 focused tests passed; production build passed; all 68 local routes returned 200 with distinct copy, no removed labels, byte-identical article-body hashes, and identical hero URLs against the pre-change public snapshot. Desktop/mobile spot checks passed with loaded cover images and no horizontal overflow.
 - A stale local Next.js fetch cache affected one article during verification; moved the cache to an ignored backup and rebuilt. The subsequent complete 68-route comparison passed.
 - Production release pending: commit/push main, OpenNext build, deploy, then repeat the 68-route public comparison and sitemap check.
+- Production completed: source commit `21ee771` was pushed to main before deployment. Worker `73c2063b-da63-4219-8598-90607abb87ca` is live.
+- Public verification: all 68 routes return 200, requested labels/headings are absent, introductory and summary copy are nonempty and distinct, rendered article-body hashes and hero URLs match the saved pre-change production snapshot. Blog index and sitemap return 200. The local Worker runtime also passed the complete 68-route audit.

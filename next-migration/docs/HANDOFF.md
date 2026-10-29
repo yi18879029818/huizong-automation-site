@@ -1,10 +1,10 @@
 # HANDOFF
 
 ## 2026-10-29 - Shared blog detail presentation
-- Status: implemented; local verification complete; deployment pending.
+- Status: deployed and verified across all 68 current blog routes.
 - Files: app/blog/[slug]/page.js; lib/blog-detail-copy.mjs; lib/blog-detail-editorial-copy.mjs; test/blog-detail-copy.test.mjs.
 - Verified: 8 focused tests, production build, all 68 article body hashes and hero URLs unchanged; descriptions distinct; labels absent; desktop/mobile spot checks passed.
-- Next: push main, build OpenNext, deploy, repeat public verification.
+- Release: source commit 21ee771; Worker 73c2063b-da63-4219-8598-90607abb87ca. Public 68-route audit passed; blog index and sitemap return 200. Next: no remaining work for this request.
 - Risks: existing articles use reviewed copy; future articles use extractive fallback and may benefit from editorial refinement. No CMS content was changed.
 
 
