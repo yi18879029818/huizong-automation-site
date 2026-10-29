@@ -1,5 +1,14 @@
 # HANDOFF
 
+## 2026-10-29 - Shared blog detail presentation
+- Status: implemented; local verification complete; deployment pending.
+- Files: app/blog/[slug]/page.js; lib/blog-detail-copy.mjs; lib/blog-detail-editorial-copy.mjs; test/blog-detail-copy.test.mjs.
+- Verified: 8 focused tests, production build, all 68 article body hashes and hero URLs unchanged; descriptions distinct; labels absent; desktop/mobile spot checks passed.
+- Next: push main, build OpenNext, deploy, repeat public verification.
+- Risks: existing articles use reviewed copy; future articles use extractive fallback and may benefit from editorial refinement. No CMS content was changed.
+
+
+
 ## 2026-10-28 - Lifting robot article presentation
 - Status: deployed and verified on production, including removal of the What This Covers heading (follow-up).
 - Changed file: app/blog/[slug]/page.js.

@@ -722,3 +722,11 @@
 - Removed the `What This Covers` heading from `/blog/lifting-automated-robot`; retained the image and concise summary.
 - Commit `3d13bbd` pushed to main before deployment. OpenNext build passed; Worker `bb2a0c9d-b7a4-49dd-97f2-c27071a07a40` deployed.
 - Live verification: HTTP 200, heading absent, image and summary present, article body HTML identical to the pre-change baseline.
+
+## 2026-10-29 - Shared blog detail presentation
+- Removed the sidecard eyebrow/title and Project Inquiry label from the shared blog detail template, including older article-specific heading variants.
+- Added concise, distinct body-derived editorial summaries for all 68 current routes (66 Sanity posts plus 2 local posts), with selected introductory copy refinements. New articles derive an introduction and separate section topics directly from the rendered body.
+- Preserved body rendering, images, SEO metadata, and Sanity documents. No CMS write was performed.
+- Validation: 8 focused tests passed; production build passed; all 68 local routes returned 200 with distinct copy, no removed labels, byte-identical article-body hashes, and identical hero URLs against the pre-change public snapshot. Desktop/mobile spot checks passed with loaded cover images and no horizontal overflow.
+- A stale local Next.js fetch cache affected one article during verification; moved the cache to an ignored backup and rebuilt. The subsequent complete 68-route comparison passed.
+- Production release pending: commit/push main, OpenNext build, deploy, then repeat the 68-route public comparison and sitemap check.

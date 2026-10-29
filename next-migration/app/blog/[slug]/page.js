@@ -2,6 +2,7 @@ import Link from "next/link";
 import { cache } from "react";
 import { notFound } from "next/navigation";
 import { CmsPageShell } from "@/components/cms-page-shell";
+import { getBlogDetailCopy } from "@/lib/blog-detail-copy.mjs";
 import { getBlogBodyOverride } from "@/lib/blog-body-overrides.mjs";
 import { injectBlogInternalLinks } from "@/lib/blog-internal-links.mjs";
 import { getBlogImageOverride } from "@/lib/blog-image-overrides.mjs";
@@ -80,35 +81,6 @@ function formatPublishedDate(value) {
   }).format(new Date(value));
 }
 
-const BLOG_SIDECARD_COPY = {
-  "lifting-automated-robot": {
-    title: null,
-    heroDescription: "Lifting robots travel beneath compatible carriers, lift them, and automate point-to-point material transport.",
-    description: "Carrier compatibility, pickup and drop-off stations, automatic task triggers, and fleet coordination.",
-    hideInquiryLabel: true
-  },
-  "agv-guide": {
-    eyebrow: "AGV Basics",
-    title: "Key Topics",
-    description: "System scope. Navigation methods. Safety logic. Forklift replacement fit."
-  },
-  "agv-vs-amr": {
-    eyebrow: "Transport Strategy",
-    title: "Comparison Focus",
-    description: "Navigation style. Safety trade-offs. Flexibility. Cost fit. Selection logic."
-  },
-  "warehouse-automation-guide": {
-    eyebrow: "Warehouse Automation",
-    title: "What This Covers",
-    description: "Robot workflows. Efficiency gains. Safety value. ROI checks. Deployment fit."
-  },
-  "agv-what-is-automated-guided-vehicle": {
-    eyebrow: "AGV Overview",
-    title: "Core Scope",
-    description: "How AGVs work. Main types. Application fit. Integration logic. Use cases."
-  }
-};
-
 const BLOG_PRODUCT_LIBRARY = {
   forkliftAgv: { href: "/products/agv-forklift", label: "Forklift AGV" },
   groundHandling: {
@@ -138,32 +110,6 @@ const BLOG_SOLUTION_LIBRARY = {
   },
   software: { href: "/solutions/software", label: "Warehouse Software" },
 };
-
-function normalizeTopicDescription(post) {
-  const raw = (post?.excerpt || "").trim();
-  if (!raw) {
-    return "Workflow scope. System logic. Operational fit. Integration priorities.";
-  }
-
-  const compact = raw.replace(/\s+/g, " ").trim();
-  const sentence = compact.split(/(?<=[.!?])\s+/)[0] || compact;
-  return sentence.length > 120 ? `${sentence.slice(0, 117).trim()}...` : sentence;
-}
-
-function getSidecardCopy(post) {
-  const slug = typeof post === "string" ? post : post?.slug;
-  const mapped = BLOG_SIDECARD_COPY[slug];
-
-  if (mapped) {
-    return mapped;
-  }
-
-  return {
-    eyebrow: "Topic Summary",
-    title: "What This Covers",
-    description: normalizeTopicDescription(post)
-  };
-}
 
 function buildFallbackArticleBody(post) {
   const excerpt =
@@ -790,7 +736,7 @@ export default async function BlogDetailPage({ params }) {
   const articleBody = resolvedBody?.length
     ? injectBlogInternalLinks(slug, resolvedBody)
     : buildFallbackArticleBody(post);
-  const sidecardCopy = getSidecardCopy(post);
+  const detailCopy = getBlogDetailCopy(post, articleBody);
   const blogPostingSchema = buildBlogPostingSchema(post, heroImageUrl);
 
   return (
@@ -804,7 +750,7 @@ export default async function BlogDetailPage({ params }) {
           <div className="blog-detail-hero-grid">
             <div className="blog-detail-copy">
               <h1>{post.title}</h1>
-              <p>{sidecardCopy.heroDescription || post.excerpt || "Structured editorial content managed in Sanity."}</p>
+              {detailCopy.intro ? <p>{detailCopy.intro}</p> : null}
               <div className="hero-actions">
                 <Link className="hero-button" href="/blog">
                   Back to blog
@@ -820,9 +766,7 @@ export default async function BlogDetailPage({ params }) {
                   <img alt={post.title} src={heroImageUrl} />
                 </div>
               ) : null}
-              {sidecardCopy.eyebrow ? <span className="card-label">{sidecardCopy.eyebrow}</span> : null}
-              {sidecardCopy.title ? <strong>{sidecardCopy.title}</strong> : null}
-              <p>{sidecardCopy.description}</p>
+              {detailCopy.summary ? <p>{detailCopy.summary}</p> : null}
             </div>
           </div>
         </section>
@@ -831,7 +775,6 @@ export default async function BlogDetailPage({ params }) {
           <div className="blog-article-layout">
             <aside className="blog-article-aside">
               <div className="blog-article-aside-card">
-                {!sidecardCopy.hideInquiryLabel ? <span className="card-label">Project Inquiry</span> : null}
                 <p>Use the contact page for project-specific consultation tied to this topic.</p>
                 <Link className="link-chip" href="/contact">
                   Contact coolyne
