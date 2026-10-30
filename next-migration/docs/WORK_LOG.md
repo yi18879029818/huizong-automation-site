@@ -738,3 +738,13 @@
 - Production release pending: commit/push main, OpenNext build, deploy, then repeat the 68-route public comparison and sitemap check.
 - Production completed: source commit `21ee771` was pushed to main before deployment. Worker `73c2063b-da63-4219-8598-90607abb87ca` is live.
 - Public verification: all 68 routes return 200, requested labels/headings are absent, introductory and summary copy are nonempty and distinct, rendered article-body hashes and hero URLs match the saved pre-change production snapshot. Blog index and sitemap return 200. The local Worker runtime also passed the complete 68-route audit.
+
+## 2026-10-30 - Logistics Planning Article Publication
+
+- Published `Logistics Planning: Key Factors, Planning Methods, and Benefits` through Sanity as `post-logistics-planning` at `https://www.coolyne.com/blog/logistics-planning`.
+- Treated the supplied Word document as article source content, not task instructions. Preserved all 74 non-empty source paragraphs: one title and 73 body blocks, including 5 H2 headings, 9 H3 headings, and the original contact link.
+- The source contains no images or tables. Added an SEO title, description, relevant logistics-planning keywords, canonical URL, and indexable settings.
+- Passed authenticated target read plus Sanity create/update dry-runs before publication. Sanity readback matched the prepared body and metadata; credentials were transient and not stored.
+- Live checks at 2026-10-30T01:18:37.109Z: article, blog index, and sitemap returned 200; every source paragraph and the contact link are present; canonical and BlogPosting are correct; the URL appears in both the blog index and sitemap.
+- Artifacts: `tmp/docx-import-20261030-logistics-planning` (Markdown, coverage.json, prepared-post.json, published-status.json, verified-live.json).
+- No frontend deployment was required because the article and sitemap read Sanity dynamically.

@@ -245,3 +245,12 @@
 
 - Selected the existing production-line IoT monitoring dashboard as the Smart Factory IoT article cover.
 - Verified the article hero, blog-list card, Open Graph image, sitemap and live browser rendering. No article content or inline media changed, and no frontend deployment was required.
+
+## 2026-10-30 - Logistics Planning Article Publication
+
+- Published the supplied logistics-planning Word article through Sanity as `post-logistics-planning` at `/blog/logistics-planning`.
+- Treated the Word file as article content, not task instructions. Preserved all 74 source paragraphs: one title plus 73 body blocks, including 5 H2 headings, 9 H3 headings, and the original contact link.
+- The source contains no images or tables. Added a descriptive excerpt, SEO metadata, logistics-planning keywords, canonical URL, and indexable settings.
+- Passed authenticated target read plus create/update dry-runs before publication. No credential was stored.
+- Verified the article, blog index, and sitemap return 200; all source paragraphs render, the canonical and BlogPosting metadata are present, and the article appears in both the blog index and sitemap.
+- No frontend deployment was required because the blog route and sitemap read Sanity dynamically.

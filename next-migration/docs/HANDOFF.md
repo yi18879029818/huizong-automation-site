@@ -192,6 +192,15 @@ The only unrelated local git status item is the pre-existing modification to `..
 - Unresolved: none for this publication. Source contains no images, so no cover was added.
 - Next: add user-supplied visuals if requested.
 - Risk: preserve unrelated `public/assets/site-shell.min.js` changes; retain Portable Text markDefs and span marks when editing.
+
+## 2026-10-30 latest blog completion
+
+- Status: logistics-planning article is live; article, blog index, and sitemap verified.
+- Changed: Sanity post `post-logistics-planning`, plus `project-progress.md`, `WORK_LOG.md`, and `HANDOFF.md`.
+- Verified: 74 source paragraphs preserved as one title and 73 body blocks, with 5 H2 headings, 9 H3 headings, and one contact link; article/index/sitemap 200; canonical and BlogPosting present; no noindex.
+- Unresolved: none for this publication. The source contains no images, so no cover was added.
+- Next: add a user-supplied logistics-planning image as cover or inline media if requested.
+- Risk: preserve the current Sanity body and contact-link mark definition when adding future media.
 - 2026-10-07: AGV Forklift dashboard layout passed the optimized Next.js production build; the live article and product routes return `200`, and the article HTML includes both forklift models, their images, and parameter values.
 - 2026-10-07: Lifting AGV product-specification cards passed six focused injection test cases and an optimized Next.js production build. After deployment, `/blog/lifting-automated-robot` returned `200` with both models and requested parameters, while `/products/lifting-agv` returned `200`.
 - 2026-10-07: Created `post-fleet-automation-solutions-cold-chain-logistics-challenges` with 53 body blocks, including one hero/OG image, two JPEG body images, and one GIF body image with descriptive alt text and captions. Production article, GIF asset, and sitemap return HTTP 200; all three body-media alt texts render in the article HTML.
