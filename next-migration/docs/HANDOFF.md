@@ -201,6 +201,15 @@ The only unrelated local git status item is the pre-existing modification to `..
 - Unresolved: none for this publication. The source contains no images, so no cover was added.
 - Next: add a user-supplied logistics-planning image as cover or inline media if requested.
 - Risk: preserve the current Sanity body and contact-link mark definition when adding future media.
+
+## 2026-10-30 logistics-planning image completion
+
+- Status: three inline images are live on `/blog/logistics-planning`; article, blog index, sitemap, and desktop/mobile rendering verified.
+- Changed: Sanity post `post-logistics-planning`, plus `project-progress.md`, `WORK_LOG.md`, and `HANDOFF.md`.
+- Verified: 73 original body blocks preserved, 3 new image blocks, asset hashes and dimensions matched, captions and alt text rendered, and the hero field remained unchanged.
+- Unresolved: none for the inline-image update. No cover was selected because the request only asked to upload the images.
+- Next: if requested, use the warehouse-operations image as the most suitable cover candidate.
+- Risk: retain all three image block keys and existing body order when making future content edits.
 - 2026-10-07: AGV Forklift dashboard layout passed the optimized Next.js production build; the live article and product routes return `200`, and the article HTML includes both forklift models, their images, and parameter values.
 - 2026-10-07: Lifting AGV product-specification cards passed six focused injection test cases and an optimized Next.js production build. After deployment, `/blog/lifting-automated-robot` returned `200` with both models and requested parameters, while `/products/lifting-agv` returned `200`.
 - 2026-10-07: Created `post-fleet-automation-solutions-cold-chain-logistics-challenges` with 53 body blocks, including one hero/OG image, two JPEG body images, and one GIF body image with descriptive alt text and captions. Production article, GIF asset, and sitemap return HTTP 200; all three body-media alt texts render in the article HTML.

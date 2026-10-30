@@ -748,3 +748,14 @@
 - Live checks at 2026-10-30T01:18:37.109Z: article, blog index, and sitemap returned 200; every source paragraph and the contact link are present; canonical and BlogPosting are correct; the URL appears in both the blog index and sitemap.
 - Artifacts: `tmp/docx-import-20261030-logistics-planning` (Markdown, coverage.json, prepared-post.json, published-status.json, verified-live.json).
 - No frontend deployment was required because the article and sitemap read Sanity dynamically.
+
+## 2026-10-30 - Logistics Planning Article Images
+
+- Added three supplied JPEG images to `/blog/logistics-planning` as Sanity `imageWithAlt` blocks while preserving all 73 original body blocks, title, slug, excerpt, SEO, publication date, contact link, and current hero state. The final body contains 76 blocks.
+- Placed the warehouse-aisle image after the warehouse-location and distribution-network introduction, the warehouse-operations image after the handling-capacity analysis, and the conveyor image after the first waiting-time and on-time-delivery paragraph.
+- Added descriptive English alt text and captions aligned with logistics planning, warehouse handling capacity, and order-flow coordination.
+- Authenticated target read plus image-asset create and document-update dry-runs passed before the revision-guarded update. Sanity readback confirms all three image blocks, asset references, source SHA-1 values, and dimensions.
+- Live checks at 2026-10-30T06:14:30.177Z: article, blog index, and sitemap return 200; all original text, three images, captions, and alt text are present.
+- Desktop 1440px and mobile 390px browser checks confirm all images decode, preserve their source aspect ratios, and have no horizontal overflow.
+- Artifacts: `tmp/logistics-planning-images-20261030`.
+- No frontend deployment was required because the article reads Sanity content dynamically.

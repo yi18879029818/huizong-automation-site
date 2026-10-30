@@ -254,3 +254,12 @@
 - Passed authenticated target read plus create/update dry-runs before publication. No credential was stored.
 - Verified the article, blog index, and sitemap return 200; all source paragraphs render, the canonical and BlogPosting metadata are present, and the article appears in both the blog index and sitemap.
 - No frontend deployment was required because the blog route and sitemap read Sanity dynamically.
+
+## 2026-10-30 - Logistics Planning Article Images
+
+- Added all three supplied warehouse visuals to `/blog/logistics-planning` as Sanity `imageWithAlt` blocks.
+- Placed the high-bay aisle image in the warehouse-location section, the operations-team image after the handling-capacity discussion, and the conveyor image in the waiting-time and on-time-delivery section.
+- Preserved all 73 original body blocks, title, slug, excerpt, SEO, publication date, and existing hero state; the final body contains 76 blocks.
+- Passed asset-create and document-update dry-runs, verified Sanity readback and asset hashes, then verified article, blog index, and sitemap responses.
+- Desktop 1440px and mobile 390px browser checks confirmed all three images load at their source aspect ratios without horizontal overflow.
+- No frontend deployment was required because the article reads Sanity content dynamically.
