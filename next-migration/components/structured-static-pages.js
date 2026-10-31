@@ -5,6 +5,7 @@ import Script from "next/script";
 import AboutMilestonesTimeline from "@/components/AboutMilestonesTimeline";
 import CountUpValue from "@/components/CountUpValue";
 import { InlineIcon } from "@/components/inline-icon";
+import PopularBlogCarousel from "@/components/PopularBlogCarousel";
 import { ProjectReviewForm } from "@/components/project-review-form";
 import WarehouseFlowSimulation from "@/components/WarehouseFlowSimulation";
 
@@ -355,13 +356,36 @@ const HOME_ARCHITECTURE_OUTCOMES = [
   },
 ];
 
-const HOME_PROJECT_STAGES = [
-  "Share workflow and layout",
-  "Review site constraints",
-  "Recommend solution",
-  "Confirm interface and safety logic",
-  "Manufacture and test",
-  "Install, commission, train, support",
+const HOME_POPULAR_POSTS = [
+  {
+    href: "/blog/lifting-automated-robot",
+    topic: "Lifting Automation",
+    title: "Lifting Automated Robot: How to Automate Material Handling with Lifting Robots",
+    excerpt:
+      "See how lifting robots move compatible racks, carts, and load platforms through repeatable warehouse and manufacturing routes.",
+    image:
+      "https://cdn.sanity.io/images/axzpb83z/production/eb5b15d1cc7560f804695c7ab0f2e396cfa5f7b7-1672x941.png",
+    imageAlt: "Lifting automated robot carrying a compatible mobile rack",
+  },
+  {
+    href: "/blog/agv-forklift-meaning",
+    topic: "Pallet Handling",
+    title: "Robotic Pallet Stacker: Types, Benefits, and Applications",
+    excerpt:
+      "Compare automated pallet-stacking approaches and learn where AGV and AMR forklifts improve material flow.",
+    image: "/assets/images/blog-forklift-transport-scene.webp",
+    imageAlt: "Robotic pallet stacker transporting a pallet in a warehouse",
+  },
+  {
+    href: "/blog/mobile-manipulator-robot",
+    topic: "Flexible Robotics",
+    title: "Mobile Manipulator Robot: What It Is and When It Fits",
+    excerpt:
+      "Learn when a mobile base and robotic arm create a practical alternative to fixed cells and separate transport equipment.",
+    image:
+      "https://cdn.sanity.io/images/axzpb83z/production/2d441d4e906d8ab07ac6e75355052924db93e706-1672x941.png",
+    imageAlt: "Mobile manipulator robot working beside an industrial machine",
+  },
 ];
 
 const HOME_PORTFOLIO_SHOWCASE = [
@@ -1286,32 +1310,19 @@ function HomeBody({ page }) {
             </div>
           </div>
         </section>{" "}
-        <section className="px-8 py-24 max-w-screen-2xl mx-auto bg-surface">
+        <section className="bg-surface px-6 py-24 md:px-8">
           <div className="mx-auto max-w-[1680px]">
-            <div className="mb-14">
-              <span className="hsa-ui-kicker">Project Delivery</span>
-              <h2 className="hsa-ui-title hsa-home-section-title">How a Coolyne Project Moves Forward</h2>
+            <div className="max-w-4xl">
+              <span className="hsa-ui-kicker">Popular Insights</span>
+              <h2 className="hsa-ui-title hsa-home-section-title">
+                Most-Read Automation Guides
+              </h2>
               <p className="hsa-ui-body max-w-3xl">
-                Our first-phase workflow is designed to qualify constraints early, align the
-                interface logic, and move toward manufacture and commissioning with fewer surprises.
+                Explore the warehouse and manufacturing automation topics readers search for most.
               </p>
             </div>
-            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {HOME_PROJECT_STAGES.map((item, index) => (
-                <div className="hsa-ui-card hsa-ui-card--soft p-8" key={item}>
-                  <div className="mb-6 flex items-center justify-between">
-                    <span className="text-[10px] font-black uppercase tracking-[0.24em] text-outline">
-                      Step {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-[12px] font-black text-white">
-                      {index + 1}
-                    </span>
-                  </div>
-                  <h3 className="text-[1.35rem] font-black leading-[1.18] tracking-tight text-secondary">
-                    {item}
-                  </h3>
-                </div>
-              ))}
+            <div className="mt-10">
+              <PopularBlogCarousel posts={HOME_POPULAR_POSTS} />
             </div>
           </div>
         </section>{" "}
