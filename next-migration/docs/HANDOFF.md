@@ -210,6 +210,15 @@ The only unrelated local git status item is the pre-existing modification to `..
 - Unresolved: none for the inline-image update. No cover was selected because the request only asked to upload the images.
 - Next: if requested, use the warehouse-operations image as the most suitable cover candidate.
 - Risk: retain all three image block keys and existing body order when making future content edits.
+
+## 2026-10-31 logistics-planning cover completion
+
+- Status: the warehouse-operations image is live as the article hero, blog-list cover, and Open Graph image for `/blog/logistics-planning`.
+- Changed: Sanity `heroImage` on `post-logistics-planning`; no body or SEO content changed.
+- Verified: article, blog index, and sitemap return 200; selected asset hash appears in the hero, card, and Open Graph metadata.
+- Unresolved: none.
+- Next: no action required unless the user wants a different crop or cover image.
+- Risk: preserve the current hero asset reference when editing article metadata or body images.
 - 2026-10-07: AGV Forklift dashboard layout passed the optimized Next.js production build; the live article and product routes return `200`, and the article HTML includes both forklift models, their images, and parameter values.
 - 2026-10-07: Lifting AGV product-specification cards passed six focused injection test cases and an optimized Next.js production build. After deployment, `/blog/lifting-automated-robot` returned `200` with both models and requested parameters, while `/products/lifting-agv` returned `200`.
 - 2026-10-07: Created `post-fleet-automation-solutions-cold-chain-logistics-challenges` with 53 body blocks, including one hero/OG image, two JPEG body images, and one GIF body image with descriptive alt text and captions. Production article, GIF asset, and sitemap return HTTP 200; all three body-media alt texts render in the article HTML.

@@ -759,3 +759,11 @@
 - Desktop 1440px and mobile 390px browser checks confirm all images decode, preserve their source aspect ratios, and have no horizontal overflow.
 - Artifacts: `tmp/logistics-planning-images-20261030`.
 - No frontend deployment was required because the article reads Sanity content dynamically.
+
+## 2026-10-31 - Logistics Planning Cover Image
+
+- Set the existing warehouse-operations inline image `image-33d019e904518763b6cd394b61a4fc15c116365a-1200x801-jpg` as the `heroImage` for `/blog/logistics-planning`.
+- Selected this image because it represents the article's central planning themes: people, forklifts, inventory, handling operations, and data visibility.
+- Passed authenticated target/asset reads and create/update dry-runs before applying the revision-guarded update. The article body, title, slug, excerpt, SEO fields, publication date, and three inline images remain unchanged.
+- Live checks at 2026-10-31T00:23:07.875Z: article, blog index, and sitemap return 200; the article hero, blog-list cover, and Open Graph image reference the selected asset.
+- No asset upload or frontend deployment was required.

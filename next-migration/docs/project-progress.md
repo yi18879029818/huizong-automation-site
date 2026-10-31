@@ -263,3 +263,10 @@
 - Passed asset-create and document-update dry-runs, verified Sanity readback and asset hashes, then verified article, blog index, and sitemap responses.
 - Desktop 1440px and mobile 390px browser checks confirmed all three images load at their source aspect ratios without horizontal overflow.
 - No frontend deployment was required because the article reads Sanity content dynamically.
+
+## 2026-10-31 - Logistics Planning Cover Image
+
+- Selected the warehouse-operations image with workers, forklift, and tablet dashboard as the cover for `/blog/logistics-planning`.
+- Reused the existing Sanity image asset without re-uploading it. Preserved the article body, SEO fields, excerpt, slug, and publication date.
+- Verified the article hero, blog-list card, Open Graph image, and sitemap all use or retain the expected production state.
+- No frontend deployment was required because cover rendering reads the Sanity `heroImage` field dynamically.
