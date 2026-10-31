@@ -290,7 +290,7 @@ body.antialiased {
 .hsa-popular-carousel-track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(0, 82%);
+  grid-auto-columns: 82%;
   gap: 24px;
   overflow-x: auto;
   padding: 4px 2px 12px;
@@ -313,19 +313,19 @@ body.antialiased {
 
 @media (min-width: 640px) {
   .hsa-popular-carousel-track {
-    grid-auto-columns: minmax(0, 54%);
+    grid-auto-columns: 54%;
   }
 }
 
 @media (min-width: 1024px) {
   .hsa-popular-carousel-track {
-    grid-auto-columns: minmax(0, 42%);
+    grid-auto-columns: 42%;
   }
 }
 
 @media (min-width: 1440px) {
   .hsa-popular-carousel-track {
-    grid-auto-columns: minmax(0, 34%);
+    grid-auto-columns: 34%;
   }
 }
 

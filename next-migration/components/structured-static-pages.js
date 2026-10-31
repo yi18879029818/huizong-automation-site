@@ -364,7 +364,7 @@ const HOME_POPULAR_POSTS = [
     excerpt:
       "See how lifting robots move compatible racks, carts, and load platforms through repeatable warehouse and manufacturing routes.",
     image:
-      "https://cdn.sanity.io/images/axzpb83z/production/eb5b15d1cc7560f804695c7ab0f2e396cfa5f7b7-1672x941.png",
+      "https://cdn.sanity.io/images/axzpb83z/production/eb5b15d1cc7560f804695c7ab0f2e396cfa5f7b7-1672x941.png?w=1200&auto=format",
     imageAlt: "Lifting automated robot carrying a compatible mobile rack",
   },
   {
@@ -383,7 +383,7 @@ const HOME_POPULAR_POSTS = [
     excerpt:
       "Learn when a mobile base and robotic arm create a practical alternative to fixed cells and separate transport equipment.",
     image:
-      "https://cdn.sanity.io/images/axzpb83z/production/2d441d4e906d8ab07ac6e75355052924db93e706-1672x941.png",
+      "https://cdn.sanity.io/images/axzpb83z/production/2d441d4e906d8ab07ac6e75355052924db93e706-1672x941.png?w=1200&auto=format",
     imageAlt: "Mobile manipulator robot working beside an industrial machine",
   },
 ];

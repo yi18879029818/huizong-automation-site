@@ -4,6 +4,7 @@ import test from "node:test";
 
 const staticPagesUrl = new URL("../components/structured-static-pages.js", import.meta.url);
 const carouselUrl = new URL("../components/PopularBlogCarousel.jsx", import.meta.url);
+const globalStylesUrl = new URL("../app/globals.css", import.meta.url);
 
 test("homepage uses the curated popular blog carousel", async () => {
   const [staticPagesSource, carouselSource] = await Promise.all([
@@ -28,4 +29,11 @@ test("homepage uses the curated popular blog carousel", async () => {
   assert.match(carouselSource, /snap-x/);
   assert.match(carouselSource, /scrollBy/);
   assert.doesNotMatch(carouselSource, /setInterval|autoplay/i);
+});
+
+test("carousel columns keep an overflow width so the controls can move the track", async () => {
+  const globalStylesSource = await readFile(globalStylesUrl, "utf8");
+
+  assert.match(globalStylesSource, /grid-auto-columns:\s*82%/);
+  assert.doesNotMatch(globalStylesSource, /grid-auto-columns:\s*minmax\(0,\s*82%\)/);
 });
