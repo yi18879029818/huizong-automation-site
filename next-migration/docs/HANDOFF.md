@@ -1,5 +1,14 @@
 # HANDOFF
 
+## 2026-10-31 - Homepage popular blog carousel
+
+- Status: deployed and verified on production.
+- Changed files: `components/PopularBlogCarousel.jsx`, `components/structured-static-pages.js`, `app/globals.css`, `app/structured-content.css`, `test/home-popular-blog-carousel.test.mjs`, and the related design/implementation records under `docs/superpowers`.
+- Result: the project-delivery steps module is replaced by a responsive, manually controlled carousel for the three unique high-interest article destinations supplied by the user.
+- Verified: 17 tests pass; Next.js and OpenNext builds pass; desktop 1440px and mobile 390px production checks confirm three cards, functional next controls, loaded images, expected links, no page-level horizontal overflow, and no old module heading. The three article routes and sitemap return 200, and the sitemap retains all three URLs.
+- Release: source commit `f855a5d` was pushed to `main` before deployment; Worker `29fe1fee-5afd-4c52-954a-4815ae842d77` is live.
+- Unresolved: none for this request. Next: refresh the curated list when verified traffic priorities change. Risk: the list is intentionally editorial rather than automatically driven by GA/search data, so it will not reorder itself.
+
 ## 2026-10-29 - Blog index hero label
 - Status: deployed and verified on production.
 - Changed file: app/blog/page.js.

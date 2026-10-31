@@ -767,3 +767,13 @@
 - Passed authenticated target/asset reads and create/update dry-runs before applying the revision-guarded update. The article body, title, slug, excerpt, SEO fields, publication date, and three inline images remain unchanged.
 - Live checks at 2026-10-31T00:23:07.875Z: article, blog index, and sitemap return 200; the article hero, blog-list cover, and Open Graph image reference the selected asset.
 - No asset upload or frontend deployment was required.
+
+## 2026-10-31 - Homepage Popular Blog Carousel
+
+- Replaced the homepage `How a Coolyne Project Moves Forward` project-delivery module with a responsive, user-controlled `Most-Read Automation Guides` carousel.
+- Curated the three unique article destinations represented by the supplied high-click search terms: `/blog/lifting-automated-robot`, `/blog/agv-forklift-meaning`, and `/blog/mobile-manipulator-robot`. The two pallet-stacker search terms intentionally share the forklift article instead of duplicating one destination.
+- Added real article imagery, concise editorial summaries, previous/next controls, native horizontal scrolling, scroll snapping, keyboard focus support, and reduced-motion handling. The carousel does not autoplay and does not present search-query clicks as article pageview counts.
+- Optimized the two Sanity-hosted images through CDN width and format parameters. A regression test preserves the percentage column widths required for real horizontal overflow.
+- Verification: `npm test` passed all 17 tests; the optimized Next.js build and OpenNext Cloudflare build passed. Local and production checks at 1440px and 390px confirmed three cards, the expected unique links, functioning controls, loaded cover imagery, no page-level horizontal overflow, and removal of the old module.
+- Release: source commit `f855a5d` and its prerequisite commits were pushed to `main` before deployment. Cloudflare Worker version `29fe1fee-5afd-4c52-954a-4815ae842d77` serves the update.
+- Production: homepage, all three article routes, and `/sitemap.xml` return HTTP 200; the sitemap contains all three article URLs.
