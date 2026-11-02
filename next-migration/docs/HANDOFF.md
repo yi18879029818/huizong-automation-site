@@ -1,5 +1,12 @@
 # HANDOFF
 
+## 2026-11-02 - AGV battery article images
+
+- Status: three supplied images are in the Sanity article, with the automatic charging image selected as cover.
+- Changed files: `docs/WORK_LOG.md`, `docs/HANDOFF.md`; Sanity document `post-automated-guided-vehicle-battery` and three image assets.
+- Verified: preflight create/update dry-runs passed; Sanity readback shows 85 body blocks, exactly three inline images, and the selected `heroImage`. The canonical public article, sitemap, and three CDN image URLs return 200; the article HTML contains all three images, alt text, and the cover in Open Graph metadata.
+- Unresolved: none for this request. Risk: a future source Markdown re-import can replace the inline image blocks.
+
 ## 2026-11-02 - AGV battery article
 
 - Status: published and verified on production at `/blog/automated-guided-vehicle-battery`.

@@ -785,3 +785,11 @@
 - Passed authenticated target read and create/update dry-runs before publication. Sanity readback confirms the title, slug, body count, table, headings, canonical URL, and publication date.
 - Source commit `9fda357` was pushed to `main` before publication. The article, blog index, and sitemap return HTTP 200; the article appears in the index and sitemap. No frontend deployment was required.
 
+## 2026-11-02 - AGV battery article images and cover
+
+- Uploaded the three supplied 11.2 JPEGs to Sanity and added them as `imageWithAlt` blocks in the scheduled charging, opportunity charging, and charging requirements sections of `/blog/automated-guided-vehicle-battery`.
+- Selected the automatic docking and charging station image (`r88SY...jpg`) as `heroImage`. All 82 original body blocks remain in order; the article now has 85 blocks.
+- Authenticated target read and asset-create/document-update dry-runs passed before upload and revision-guarded document patch. Sanity readback confirms three inline images and the selected cover.
+- The canonical public article, sitemap, and all three CDN image URLs return HTTP 200; the page includes all three images and their alt text, and Open Graph metadata uses the selected cover. No frontend deployment was required.
+- Future Markdown re-imports of this article can overwrite inline images because the source Markdown does not contain image references; preserve the Sanity image blocks when re-importing.
+
