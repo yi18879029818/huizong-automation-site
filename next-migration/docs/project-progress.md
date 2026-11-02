@@ -270,3 +270,10 @@
 - Reused the existing Sanity image asset without re-uploading it. Preserved the article body, SEO fields, excerpt, slug, and publication date.
 - Verified the article hero, blog-list card, Open Graph image, and sitemap all use or retain the expected production state.
 - No frontend deployment was required because cover rendering reads the Sanity `heroImage` field dynamically.
+
+## 2026-11-02 - AGV Battery Article
+
+- 完成事项：通过 Sanity 发布 AGV 电池类型、充电方法和选型指南，保留 82 个正文块及电池技术对比表，并修复原稿公式中的乱码符号。
+- 涉及内容：`/blog/automated-guided-vehicle-battery`。
+- 是否已上线：是；文章页、博客列表和站点地图均已验证返回 200。
+- 风险备注：源 Word 没有配图；本次未设置封面，不需要前端部署。

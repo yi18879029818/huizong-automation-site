@@ -777,3 +777,11 @@
 - Verification: `npm test` passed all 17 tests; the optimized Next.js build and OpenNext Cloudflare build passed. Local and production checks at 1440px and 390px confirmed three cards, the expected unique links, functioning controls, loaded cover imagery, no page-level horizontal overflow, and removal of the old module.
 - Release: source commit `f855a5d` and its prerequisite commits were pushed to `main` before deployment. Cloudflare Worker version `29fe1fee-5afd-4c52-954a-4815ae842d77` serves the update.
 - Production: homepage, all three article routes, and `/sitemap.xml` return HTTP 200; the sitemap contains all three article URLs.
+## 2026-11-02 - Automated Guided Vehicle Battery article
+
+- Published the supplied Word article through Sanity as `post-automated-guided-vehicle-battery` at `/blog/automated-guided-vehicle-battery`.
+- Preserved the title, 82 body blocks, 5 H2 headings, 16 H3 headings, and the five-column comparison table. The source contained no inline images or hyperlinks.
+- Corrected two corrupted equation symbols in the Word source to the intended `Battery Energy (Wh) = Nominal Voltage (V) × Rated Capacity (Ah)`.
+- Passed authenticated target read and create/update dry-runs before publication. Sanity readback confirms the title, slug, body count, table, headings, canonical URL, and publication date.
+- Source commit `9fda357` was pushed to `main` before publication. The article, blog index, and sitemap return HTTP 200; the article appears in the index and sitemap. No frontend deployment was required.
+

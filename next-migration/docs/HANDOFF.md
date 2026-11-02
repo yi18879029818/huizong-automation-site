@@ -1,5 +1,13 @@
 # HANDOFF
 
+## 2026-11-02 - AGV battery article
+
+- Status: published and verified on production at `/blog/automated-guided-vehicle-battery`.
+- Changed files: `content/blog/automated-guided-vehicle-battery.md`, `docs/WORK_LOG.md`, `docs/HANDOFF.md`, and `docs/project-progress.md`.
+- Verified: Sanity has 82 body blocks, 5 H2 headings, 16 H3 headings, one comparison table, and the canonical URL. Article, blog index, and sitemap each return 200; the new article is listed in both index and sitemap.
+- Release: source commit `9fda357` was pushed to `main` before Sanity publication. No frontend deployment was required.
+- Unresolved: no cover image was supplied. Next: add a suitable battery/AGV image if requested. Risk: retain the comparison table and corrected formula if editing this post later.
+
 ## 2026-10-31 - Homepage popular blog carousel
 
 - Status: deployed and verified on production.
