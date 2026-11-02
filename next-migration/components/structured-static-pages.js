@@ -377,14 +377,83 @@ const HOME_POPULAR_POSTS = [
     imageAlt: "Robotic pallet stacker transporting a pallet in a warehouse",
   },
   {
-    href: "/blog/mobile-manipulator-robot",
+    href: "/blog/autonomous-mobile-manipulator-robots-market",
     topic: "Flexible Robotics",
-    title: "Mobile Manipulator Robot: What It Is and When It Fits",
+    title: "What Is a Mobile Manipulator Robot? Applications and Advantages",
     excerpt:
-      "Learn when a mobile base and robotic arm create a practical alternative to fixed cells and separate transport equipment.",
+      "Learn how mobile manipulator robots combine autonomous navigation and robotic arms for machine tending, warehouse picking, and flexible material handling.",
     image:
-      "https://cdn.sanity.io/images/axzpb83z/production/2d441d4e906d8ab07ac6e75355052924db93e706-1672x941.png?w=1200&auto=format",
+      "https://cdn.sanity.io/images/axzpb83z/production/499f60b421889b8a29d16defff9fe0d24849f89a-874x549.jpg?rect=0,13,874,524&w=1200&h=720&fit=max&auto=format",
     imageAlt: "Mobile manipulator robot working beside an industrial machine",
+  },
+  {
+    href: "/blog/agv-guide",
+    topic: "AGV Fundamentals",
+    title: "What Is an AGV? Types, Uses, Benefits, and How It Works",
+    excerpt:
+      "Learn what AGVs are, where automated guided vehicles are used, their main types, advantages, disadvantages, and system components.",
+    image:
+      "https://cdn.sanity.io/images/axzpb83z/production/a456624c9d006c2b6eb722129750d06bd4c4611d-1200x630.jpg?rect=75,0,1050,630&w=1200&h=720&fit=max&auto=format",
+    imageAlt: "Automated guided vehicle operating in an industrial facility",
+  },
+  {
+    href: "/blog/what-is-asrs",
+    topic: "Storage Automation",
+    title: "Automated Storage and Retrieval System (AS/RS) Guide",
+    excerpt:
+      "Learn how automated storage and retrieval systems work, including AS/RS types, components, WMS integration, applications, and deployment planning.",
+    image:
+      "https://cdn.sanity.io/images/axzpb83z/production/509ecfcbb17ea0fd3b8dcf88e3b5a6f3789863cc-1448x1086.png?rect=0,109,1448,869&w=1200&h=720&fit=max&auto=format",
+    imageAlt: "Automated storage and retrieval system inside a warehouse",
+  },
+  {
+    href: "/blog/automated-stacker-crane-automated-warehousing",
+    topic: "High-Bay Storage",
+    title: "Automated Stacker Crane for Automated Warehousing",
+    excerpt:
+      "Learn how automated stacker cranes support high-bay storage, AS/RS throughput, and conveyor and AGV integration in modern warehouses.",
+    image:
+      "https://cdn.sanity.io/images/axzpb83z/production/94c0bfe9e6a5609cd04026f315cac446fffde3c4-750x469.jpg?rect=0,10,750,450&w=1200&h=720&fit=max&auto=format",
+    imageAlt: "Automated stacker crane working between high-bay storage racks",
+  },
+  {
+    href: "/blog/amr-autonomous-mobile-robot-design-standards",
+    topic: "AMR Engineering",
+    title: "AMR Autonomous Mobile Robot Design Standards",
+    excerpt:
+      "Learn how AMR design standards shape safety architecture, LiDAR protection fields, load handling, navigation, fleet control, and electrical compliance.",
+    image:
+      "https://cdn.sanity.io/images/axzpb83z/production/ab13462d7a38a25026acdc773d81b961381cee08-1672x941.png?rect=52,0,1568,941&w=1200&h=720&fit=max&auto=format",
+    imageAlt: "Autonomous mobile robot navigating a warehouse safely",
+  },
+  {
+    href: "/blog/agv-safety-standards-iso-eu-us",
+    topic: "Safety Standards",
+    title: "AGV Safety Standards: Key ISO, EU, and US Standards",
+    excerpt:
+      "Understand key AGV safety standards for ISO, EU, and US projects, including ISO 3691-4, EU machinery rules, B56.5, and ANSI/A3 R15.08.",
+    image:
+      "https://cdn.sanity.io/images/axzpb83z/production/77ce8850159797e347de81d5445e1a9bbbbaa331-1920x1080.jpg?rect=60,0,1800,1080&w=1200&h=720&fit=max&auto=format",
+    imageAlt: "AGV operating with safety sensors in an industrial workspace",
+  },
+  {
+    href: "/blog/tugger-agv-types-features-navigation-applications",
+    topic: "Tugger AGVs",
+    title: "Tugger AGV: Types, Features, Navigation, and Applications",
+    excerpt:
+      "Compare tugger AGV vehicle and cart coupling types, navigation methods, line-side uses, and practical selection limits.",
+    image:
+      "https://cdn.sanity.io/images/axzpb83z/production/c489b56a75d98922d08b5a6867eba15d86b5b1b1-1536x1024.png?rect=0,51,1536,922&w=1200&h=720&fit=max&auto=format",
+    imageAlt: "Tugger AGV transporting carts through a manufacturing facility",
+  },
+  {
+    href: "/blog/warehouse-automation-trends-2026",
+    topic: "Industry Trends",
+    title: "Warehouse Automation Trends 2026: 8 Key Technologies",
+    excerpt:
+      "Explore the major warehouse automation trends for 2026, including AI, AMRs, autonomous forklifts, AS/RS, robotic picking, and system integration.",
+    image: "/assets/images/warehouse-automation-guide-workflow.webp",
+    imageAlt: "Integrated warehouse automation workflow with robots and conveyors",
   },
 ];
 
