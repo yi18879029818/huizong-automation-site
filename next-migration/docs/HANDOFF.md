@@ -2,10 +2,10 @@
 
 ## 2026-11-04 - Homepage copy revision
 
-- Status: homepage copy revised and locally verified; production deployment pending.
+- Status: homepage copy deployed and verified on production.
 - Changed files: `components/structured-static-pages.js`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`.
-- Verified: 18 tests pass and the OpenNext Cloudflare build completes. Copy changes are limited to homepage text; structure and links are unchanged.
-- Next: commit, push, deploy, and verify the live homepage. Risk: copy that includes numerical performance claims elsewhere on the site was outside this homepage request.
+- Verified: 18 tests pass and the OpenNext Cloudflare build completes. Commit `9d56c66` was pushed before Worker version `f909fe7c-b865-4dc5-95c5-b02b4f5847a9` was deployed. The live homepage returns 200 and contains the new copy; the old kinetic-ecosystem, 60%, and 99.9% claims are absent.
+- Unresolved: none for this homepage request. Risk: copy that includes numerical performance claims elsewhere on the site was outside this homepage request.
 
 ## 2026-11-04 - AGV diagram article
 

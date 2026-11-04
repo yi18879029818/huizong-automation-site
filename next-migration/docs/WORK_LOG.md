@@ -805,4 +805,5 @@
 - Replaced abstract homepage copy about a "kinetic ecosystem," "dormant capacity," maximum density, fluid transit, and deep expertise with concrete descriptions of AGVs, AS/RS, conveyors, material flow, and site constraints.
 - Removed homepage assertions of 99.9% data accuracy, up to 60% footprint reduction, sub-millimeter picking precision, elimination of human error, minimal disruption, and 24/7 global monitoring where no supporting evidence was provided for these broad claims.
 - Kept the homepage layout, components, links, and interaction behavior intact. `npm test` passed 18 tests; the OpenNext Cloudflare build completed successfully.
+- Commit `9d56c66` was pushed to `main` before deployment. Wrangler deployed Worker version `f909fe7c-b865-4dc5-95c5-b02b4f5847a9`; the public homepage returns 200, includes the new wording, and omits the old kinetic-ecosystem, 60%, and 99.9% claims.
 
