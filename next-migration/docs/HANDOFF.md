@@ -1,5 +1,12 @@
 # HANDOFF
 
+## 2026-11-04 - AGV diagram article
+
+- Status: new article published and publicly verified at `/blog/automated-guided-vehicle-diagram`.
+- Changed files: `content/blog/automated-guided-vehicle-diagram.md`, `content/blog/assets/automated-guided-vehicle-diagram.png`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`; Sanity post `post-automated-guided-vehicle-diagram` and its image asset.
+- Verified: target read and create/update dry-runs passed; Sanity contains 33 body blocks, eight headings, one inline diagram, and a matching cover. Public article, blog index, sitemap, and image CDN URL each return 200. The public page includes its title, diagram, and Open Graph cover.
+- Unresolved: none. Next: add further article images if supplied. Risk: re-importing the Markdown source with the current importer will replace the Sanity inline image block; preserve it on future updates.
+
 ## 2026-11-02 - AGV battery article images
 
 - Status: three supplied images are in the Sanity article, with the automatic charging image selected as cover.

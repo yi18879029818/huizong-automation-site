@@ -793,3 +793,10 @@
 - The canonical public article, sitemap, and all three CDN image URLs return HTTP 200; the page includes all three images and their alt text, and Open Graph metadata uses the selected cover. No frontend deployment was required.
 - Future Markdown re-imports of this article can overwrite inline images because the source Markdown does not contain image references; preserve the Sanity image blocks when re-importing.
 
+## 2026-11-04 - Automated Guided Vehicle Diagram article
+
+- Published the supplied Word document as a new Sanity post at `/blog/automated-guided-vehicle-diagram`.
+- Preserved its title, introduction, component descriptions, bullet list, system workflow, and Coolyne website link. Extracted the embedded 1672 x 941 system diagram, placed it inline after the diagram introduction, and selected it as the cover and social image.
+- Authenticated target read and create/update dry-runs passed before publication. Sanity readback confirms 33 body blocks, eight section headings, and one image block.
+- Source commit `8cddcb2` was pushed to `main` before publication. Public article, blog index, sitemap, and diagram CDN URL return HTTP 200; the article HTML includes the diagram and social image metadata. No frontend deployment was required.
+
