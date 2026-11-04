@@ -571,7 +571,7 @@ function getHomeViewModel(page) {
     industryTitle: data.industryTitle || "Built for Complex Industrial Operations",
     industrySummary:
       data.industrySummary ||
-      "Deep domain expertise across industries with demanding material handling requirements. Solutions designed around your operational constraints.",
+      "We adapt material handling systems to each site's loads, routes, space, and operating schedule.",
     industries:
       Array.isArray(data.industryCards) && data.industryCards.length
         ? data.industryCards
@@ -579,7 +579,7 @@ function getHomeViewModel(page) {
     partnerTitle: data.partnerTitle || "Brand Collaboration",
     partnerSummary:
       data.partnerSummary ||
-      "Selected industrial brands and manufacturing groups that reflect the trust range of our automation delivery work.",
+      "Industrial brands and manufacturing groups featured in our project portfolio.",
     partnerBrands:
       Array.isArray(data.partnerBrands) && data.partnerBrands.length
         ? data.partnerBrands
@@ -847,17 +847,17 @@ function HomeBody({ page }) {
                 [
                   "inventory_2",
                   "ASRS",
-                  "Automated Storage and Retrieval Systems designed for maximum density and ultra-fast accessibility.",
+                  "AS/RS systems increase storage density and provide controlled access to inventory.",
                 ],
                 [
                   "conveyor_belt",
                   "Material Handling",
-                  "High-precision conveyor and transport mechanisms ensuring fluid transit throughout the facility.",
+                  "Conveyors and transfer equipment move materials between storage, workstations, and dispatch areas.",
                 ],
                 [
                   "precision_manufacturing",
                   "Robotic Picking",
-                  "Robotic and voice-directed picking solutions that eliminate human error and accelerate fulfillment.",
+                  "Robotic and voice-directed picking support more consistent order fulfillment.",
                 ],
               ].map(([icon, title, copy]) => (
                 <div
@@ -935,8 +935,7 @@ function HomeBody({ page }) {
                   </div>{" "}
                   <p className="text-[13px] text-on-surface-variant leading-relaxed font-medium">
                     {" "}
-                    Real-time throughput monitoring with 99.9% data accuracy
-                    across all integrated robot fleets.{" "}
+                    Track throughput and robot status across connected equipment.{" "}
                   </p>{" "}
                 </div>{" "}
               </div>{" "}
@@ -948,14 +947,12 @@ function HomeBody({ page }) {
                 </span>{" "}
                 <h2 className="text-4xl md:text-6xl font-black mb-10 tracking-tight leading-none ">
                   {" "}
-                  Smart Logistics: Kinetic Ecosystem{" "}
+                  Connected Warehouse Automation{" "}
                 </h2>{" "}
                 <p className="text-lg text-on-surface-variant mb-12 leading-relaxed font-medium">
                   {" "}
-                  We don't just supply hardware; we engineer a kinetic
-                  ecosystem. By merging modular robot fleets with our
-                  proprietary AI-driven integration software, we unlock dormant
-                  capacity in your existing footprint.{" "}
+                  We connect AGVs, storage systems, conveyors, and warehouse
+                  software to improve material flow in existing facilities.{" "}
                 </p>{" "}
                 <div className="space-y-12">
                   {" "}
@@ -963,12 +960,12 @@ function HomeBody({ page }) {
                     [
                       "01",
                       "Space Utilization",
-                      "Reduce warehouse footprint by up to 60% through high-density vertical storage integration.",
+                      "Use vertical storage to increase capacity within existing floor area.",
                     ],
                     [
                       "02",
                       "Accuracy & Speed",
-                      "Eliminate manual bottlenecks with sub-millimeter precision in picking and material handling.",
+                      "Coordinate picking and material transport to reduce manual handoffs.",
                     ],
                   ].map(([num, title, copy]) => (
                     <div className="flex gap-10 group" key={num}>
@@ -1223,12 +1220,12 @@ function HomeBody({ page }) {
                 [
                   "05",
                   "Deploy",
-                  "Expert deployment with minimal operational disruption.",
+                  "Plan installation and commissioning around site operations.",
                 ],
                 [
                   "06",
                   "Support",
-                  "Staff certification and 24/7 global system monitoring.",
+                  "Staff training and ongoing system support.",
                 ],
               ].map(([num, title, copy]) => (
                 <div
@@ -1260,8 +1257,7 @@ function HomeBody({ page }) {
                 Warehouse Automation for Real Operational Bottlenecks
               </h2>
               <p className="hsa-ui-body max-w-3xl">
-                Start from the constraint that is slowing the operation, then match it to the
-                product or solution layer most likely to create a measurable engineering path.
+                Identify the main bottleneck, then choose equipment that can improve it.
               </p>
             </div>
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">

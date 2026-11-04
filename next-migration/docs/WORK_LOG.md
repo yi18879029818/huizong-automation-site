@@ -800,3 +800,9 @@
 - Authenticated target read and create/update dry-runs passed before publication. Sanity readback confirms 33 body blocks, eight section headings, and one image block.
 - Source commit `8cddcb2` was pushed to `main` before publication. Public article, blog index, sitemap, and diagram CDN URL return HTTP 200; the article HTML includes the diagram and social image metadata. No frontend deployment was required.
 
+## 2026-11-04 - Homepage copy revision
+
+- Replaced abstract homepage copy about a "kinetic ecosystem," "dormant capacity," maximum density, fluid transit, and deep expertise with concrete descriptions of AGVs, AS/RS, conveyors, material flow, and site constraints.
+- Removed homepage assertions of 99.9% data accuracy, up to 60% footprint reduction, sub-millimeter picking precision, elimination of human error, minimal disruption, and 24/7 global monitoring where no supporting evidence was provided for these broad claims.
+- Kept the homepage layout, components, links, and interaction behavior intact. `npm test` passed 18 tests; the OpenNext Cloudflare build completed successfully.
+

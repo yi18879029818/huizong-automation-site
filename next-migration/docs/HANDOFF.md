@@ -1,5 +1,12 @@
 # HANDOFF
 
+## 2026-11-04 - Homepage copy revision
+
+- Status: homepage copy revised and locally verified; production deployment pending.
+- Changed files: `components/structured-static-pages.js`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`.
+- Verified: 18 tests pass and the OpenNext Cloudflare build completes. Copy changes are limited to homepage text; structure and links are unchanged.
+- Next: commit, push, deploy, and verify the live homepage. Risk: copy that includes numerical performance claims elsewhere on the site was outside this homepage request.
+
 ## 2026-11-04 - AGV diagram article
 
 - Status: new article published and publicly verified at `/blog/automated-guided-vehicle-diagram`.
