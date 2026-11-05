@@ -1,16 +1,16 @@
 export const meta = {
   title: "ASRS",
-  label: "Density Engine",
-  kicker: "Redefining Density through Intelligent Retrieval",
+  label: "Automated Storage",
+  kicker: "Storage Capacity and Retrieval",
   summary:
-    "Automated storage and retrieval systems for finished goods, raw materials, and high-density climate-controlled inventory.",
+    "ASRS stores pallets or bins in assigned locations and releases them to connected transfer points when tasks are issued.",
   heroTitle: "ASRS",
   heroSummary:
-    "A storage architecture built for density, speed, and traceability across unit-load, mini-load, and buffer automation environments.",
+    "Configure racks, storage equipment and transfer stations around load formats, available height and retrieval demand.",
   metrics: [
     { value: "Unit Load", label: "Heavy Storage" },
     { value: "Mini Load", label: "Bin Storage" },
-    { value: "99.9%", label: "Retrieval Accuracy" }
+    { value: "Task-based", label: "Retrieval Control" }
   ]
 };
 
@@ -19,25 +19,25 @@ export const features = [
     label: "Architecture",
     title: "Space Efficiency",
     description:
-      "Converts vertical space into productive storage capacity without trading away access speed."
+      "Uses available height for storage; rack dimensions and retrieval demand determine the final layout."
   },
   {
     label: "Architecture",
     title: "Inventory Traceability",
     description:
-      "Tracks every container and pallet through a fully digital location and retrieval model."
+      "Records assigned storage locations and task status for loads handled by the system."
   },
   {
     label: "Scenario",
     title: "Finished Goods Storage",
     description:
-      "Handles palletized finished goods with stable release timing for outbound transport."
+      "Releases palletized finished goods to staging when an outbound task is issued."
   },
   {
     label: "Integration",
     title: "AGV Orchestration",
     description:
-      "Coordinates storage towers, transfer points, and mobile fleets as a single execution fabric."
+      "Transfers loads to connected stations or AGVs through defined task and status signals."
   }
 ];
 

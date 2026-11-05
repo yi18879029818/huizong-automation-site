@@ -3647,6 +3647,19 @@ function SolutionsInquiryForm() {
 }
 function SolutionOverviewBody({ page }) {
   const cards = page.data.cards || [];
+  const capabilityDescriptions = [
+    "Review load types, order volumes, travel routes and available floor space.",
+    "Compare layout options and estimate storage and transfer capacity against the target workload.",
+    "Define task signals, equipment handoffs and the systems that exchange status data.",
+    "Confirm equipment specifications and build the approved system configuration.",
+    "Install equipment and check routes, stations and safety zones on site.",
+    "Test the operating sequence, train users and hand over the agreed performance checks."
+  ];
+  const extraDescriptions = {
+    "Engineering & Build": capabilityDescriptions[3],
+    Installation: capabilityDescriptions[4],
+    "Ongoing Support": "Review faults, maintenance needs and later changes to routes or workloads."
+  };
   const asrs = cards.find((card) => card.slug === "asrs");
   const software = cards.find((card) => card.slug === "software");
   const material = cards.find((card) => card.slug === "material-handling");
@@ -3710,11 +3723,11 @@ function SolutionOverviewBody({ page }) {
           {" "}
           <h2 className="text-xs font-bold text-secondary tracking-[0.3em] mb-3">
             {" "}
-            Core Competencies{" "}
+            Solution Areas{" "}
           </h2>{" "}
           <h3 className="text-4xl md:text-5xl font-extrabold text-primary tracking-tighter">
             {" "}
-            Our Precision Ecosystem{" "}
+            Storage, Transport, Picking and Control{" "}
           </h3>{" "}
         </div>{" "}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
@@ -3919,13 +3932,13 @@ function SolutionOverviewBody({ page }) {
             {" "}
             <h2 className="mb-5 text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
               {" "}
-              Smart Logistics Solutions{" "}
+              How the Systems Work Together{" "}
             </h2>{" "}
             <p className="mx-auto max-w-5xl text-lg leading-relaxed text-on-surface-variant">
               {" "}
-              Our flexible warehouse automation solutions combine versatile
-              robot fleets with proprietary control software to maximize space
-              and improve fulfillment speed, accuracy, and throughput.{" "}
+              Storage equipment, mobile robots, conveyors and software exchange
+              tasks and status at defined handoff points. The design depends on
+              load types, order volume and the existing facility layout.{" "}
             </p>{" "}
           </div>{" "}
           <div className="overflow-hidden border border-outline-variant/15 bg-white">
@@ -3958,8 +3971,9 @@ function SolutionOverviewBody({ page }) {
             </div>{" "}
             <p className="text-on-surface-variant text-base leading-relaxed opacity-80 max-w-xl">
               {" "}
-              Our systematic approach ensures that every solution is optimized
-              for your specific facility constraints and ROI goals.{" "}
+              Each project starts with the current workflow and site constraints,
+              then moves through layout review, interface planning, installation
+              and commissioning.{" "}
             </p>{" "}
           </div>{" "}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-20">
@@ -3977,8 +3991,7 @@ function SolutionOverviewBody({ page }) {
                 </h5>{" "}
                 <p className="text-on-surface-variant text-sm leading-relaxed">
                   {" "}
-                  {capability} delivered through a precise engineering and
-                  commissioning sequence.{" "}
+                  {capabilityDescriptions[index] || capability}{" "}
                 </p>{" "}
               </div>
             ))}{" "}
@@ -4000,8 +4013,7 @@ function SolutionOverviewBody({ page }) {
                       </h5>{" "}
                       <p className="text-on-surface-variant text-sm leading-relaxed">
                         {" "}
-                        Dedicated implementation support keeps facility risk low
-                        and delivery confidence high.{" "}
+                        {extraDescriptions[extra]}{" "}
                       </p>{" "}
                     </div>
                   ))
@@ -4015,7 +4027,7 @@ function SolutionOverviewBody({ page }) {
           {" "}
           <h3 className="text-4xl font-extrabold text-primary tracking-tighter">
             {" "}
-            Global Success Stories{" "}
+            Explore Warehouse Solutions{" "}
           </h3>{" "}
           <Link
             className="text-secondary text-xs font-black tracking-[0.2em] flex items-center gap-3 group border-b border-transparent hover:border-secondary transition-all py-1"
@@ -4033,19 +4045,19 @@ function SolutionOverviewBody({ page }) {
           {" "}
           {[
             {
-              title: "Next-Gen Fulfillment Hub in Berlin",
+              title: "ASRS Storage Projects",
               description:
-                "How a major retailer achieved 40% more storage density using our custom ASRS modules.",
-              tag: "E-Commerce",
+                "See how rack layout, storage equipment and retrieval tasks are planned for warehouse operations.",
+              tag: "ASRS",
               image:
                 "https://lh3.googleusercontent.com/aida-public/AB6AXuCGM3NGDRrnpUdB1XW-vvKNUSg0P3nfUFK6aoOrjkmZxpE-ilzZH1fCrDJyLc93V5V3wYMPiCkllLKzMD2xbIdR9pB6ng6dP3VIXo5e9Gc5w5SDigFu_v4bRlh5-SOKA_pbfp7QmwR1JibwUqDLS1NE6o9ura_cQNIx92h6TwVtQfnzrWOFumkn27HRMZdju5PdE_df_gHn2_zMOOnaNi9nsHlltSukglj6o8v4ssMC2MZHEkQEMxO9pwX1v8hbxWSUadrEVzk1ITT3",
               href: "/case-studies/asrs",
             },
             {
-              title: "Precision Parts Handling for EV Giant",
+              title: "Material Handling Projects",
               description:
-                "Synchronizing material flow across 2 million square feet with intelligent conveyor routing.",
-              tag: "Automotive",
+                "See how transport routes and conveyor handoffs support movement between storage and production areas.",
+              tag: "Material Handling",
               image:
                 "https://lh3.googleusercontent.com/aida-public/AB6AXuCMqFieC7lD79o-98ljVO3R7cpwBa0SY29wUAxBkAo2KGVdaqtAUySrz1u0q41hudFIH7kCuuQFhC_t17gTDl8w1qHj_fB57tyAB9aiz1bP9X8nSYpk6rv-j9Vpxw-bkV24uFSCbuC3izu-EyGtL2mkhSRh8we7_5SbgKUlv5Eyi0ivbxHmJ29ej7QiVsBkeNeCRy_SC5AaFuKTZGPfCOnZyHxWJozJwJLVwVoDA2O33oKG9P9Phuj4n1kWebf1HK1b3Sguw_zrKeOq",
               href: "/case-studies/material-handling",
@@ -4110,6 +4122,16 @@ function SolutionDetailBody({ page }) {
   const features = page.data.features || [];
   const scenarios = page.data.scenarios || [];
   const integrations = page.data.integrations || [];
+  const asrsScenarioDescriptions = [
+    "Retrieves finished goods from assigned locations for transfer to outbound staging.",
+    "Holds components and raw materials until a production or replenishment task is released.",
+    "Uses a storage design selected for the required temperature range and load format."
+  ];
+  const asrsIntegrationDescriptions = [
+    "WMS and WCS exchange inventory locations, storage tasks and retrieval status.",
+    "Control software sends tasks to storage equipment and confirms completion at each transfer point.",
+    "AGV handoffs require matched load carriers, station signals and traffic rules."
+  ];
   return (
     <main>
       {" "}
@@ -4143,7 +4165,7 @@ function SolutionDetailBody({ page }) {
               className={`inline-flex items-center gap-2 px-3 py-1 rounded-md text-[10px] font-bold tracking-widest mb-8 ${isAsrs ? "bg-secondary-container text-on-secondary-container" : "bg-primary text-on-primary"}`}
             >
               {" "}
-              Next-Gen Automation{" "}
+              {isAsrs ? "Automated Storage" : "Next-Gen Automation"}{" "}
             </div>{" "}
             <h1
               className={`text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-8 ${isAsrs ? "text-white" : "text-primary"}`}
@@ -4171,20 +4193,19 @@ function SolutionDetailBody({ page }) {
                 href="/contact"
               >
                 {" "}
-                Request System Audit{" "}
+                {isAsrs ? "Discuss Storage Requirements" : "Request System Audit"}{" "}
                 <span className="material-symbols-outlined">
                   arrow_forward
                 </span>{" "}
               </Link>{" "}
               {slug === "asrs" ? (
-                <a
+                <Link
                   className="border border-white/30 text-white px-8 py-4 rounded-md font-bold text-sm hover:bg-white/10 transition-all"
-              download={"Technical Data Sheet.pdf"}
-                  href="/downloads/lifting-agv-technical-data-sheet.pdf"
+                  href="/contact"
                 >
                   {" "}
-                  View Technical Specs{" "}
-                </a>
+                  Ask for Technical Specs{" "}
+                </Link>
               ) : (
                 <button className="border border-outline-variant text-primary px-8 py-4 rounded-md font-bold text-sm hover:bg-surface-container transition-all">
                   {" "}
@@ -4282,7 +4303,7 @@ function SolutionDetailBody({ page }) {
           </div>{" "}
           <div className="grid md:grid-cols-3 gap-8">
             {" "}
-            {features.slice(0, 3).map((feature) => (
+            {features.slice(0, 3).map((feature, index) => (
               <div
                 className="bg-surface-container-low p-10 rounded-xl border border-outline-variant/20 hover:border-secondary/50 transition-all group"
                 key={feature.title}
@@ -4301,11 +4322,13 @@ function SolutionDetailBody({ page }) {
                 </span>{" "}
                 <div className="text-5xl font-black text-primary mb-4">
                   {" "}
-                  {feature.label === "Scenario"
-                    ? "Use"
-                    : feature.label === "Integration"
-                      ? "Sync"
-                      : "60%"}{" "}
+                  {isAsrs
+                    ? ["Layout", "Tracking", "Release"][index] || "Storage"
+                    : feature.label === "Scenario"
+                      ? "Use"
+                      : feature.label === "Integration"
+                        ? "Sync"
+                        : "60%"}{" "}
                 </div>{" "}
                 <h3 className="text-xl font-bold text-primary mb-4">
                   {feature.title}
@@ -4371,7 +4394,9 @@ function SolutionDetailBody({ page }) {
                 </h3>{" "}
                 <p className="text-white/70 text-sm mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                   {" "}
-                  {features[index]?.description || page.data.summary}{" "}
+                  {isAsrs
+                    ? asrsScenarioDescriptions[index] || page.data.summary
+                    : features[index]?.description || page.data.summary}{" "}
                 </p>{" "}
                 <Link
                   className="inline-flex items-center gap-2 text-secondary font-bold text-xs tracking-widest"
@@ -4398,16 +4423,15 @@ function SolutionDetailBody({ page }) {
               {" "}
               <div className="text-[10px] font-bold tracking-[0.3em] text-secondary mb-4">
                 {" "}
-                Live System Video{" "}
+                Workflow Video{" "}
               </div>{" "}
               <h2 className="text-4xl font-extrabold text-primary tracking-tight mb-5">
                 See the ASRS workflow in motion
               </h2>{" "}
               <p className="text-on-surface-variant text-lg leading-relaxed">
                 {" "}
-                Watch a real automated storage and retrieval workflow to understand
-                how shuttles, racking, controls, and outbound handoff operate as one
-                synchronized warehouse system.{" "}
+                See how storage equipment receives tasks, retrieves a load and
+                hands it over to the next transport point.{" "}
               </p>{" "}
             </div>{" "}
             <div className="relative overflow-hidden rounded-xl border border-outline-variant/20 bg-primary shadow-2xl">
@@ -4434,10 +4458,10 @@ function SolutionDetailBody({ page }) {
               {" "}
               <div className="text-[10px] font-bold tracking-[0.3em] text-secondary-fixed-dim mb-8">
                 {" "}
-                The Automation Ecosystem{" "}
+                {isAsrs ? "Storage Equipment and Software" : "The Automation Ecosystem"}{" "}
               </div>{" "}
               <h2 className="text-5xl font-extrabold tracking-tight mb-12">
-                System Synergy
+                {isAsrs ? "Storage and System Interfaces" : "System Synergy"}
               </h2>{" "}
               <div className="space-y-10">
                 {" "}
@@ -4463,8 +4487,9 @@ function SolutionDetailBody({ page }) {
                         </h4>{" "}
                         <p className="text-white/60 leading-relaxed max-w-md">
                           {" "}
-                          {features[index]?.description ||
-                            page.data.summary}{" "}
+                          {isAsrs
+                            ? asrsIntegrationDescriptions[index] || page.data.summary
+                            : features[index]?.description || page.data.summary}{" "}
                         </p>{" "}
                       </div>{" "}
                     </div>
@@ -4500,10 +4525,10 @@ function SolutionDetailBody({ page }) {
                     {" "}
                     <div className="text-[10px] font-bold text-outline tracking-widest">
                       {" "}
-                      Real-time Latency{" "}
+                      {isAsrs ? "Interface Timing" : "Real-time Latency"}{" "}
                     </div>{" "}
                     <div className="text-2xl font-black text-primary">
-                      &lt; 15ms
+                      {isAsrs ? "Set per site" : "< 15ms"}
                     </div>{" "}
                   </div>{" "}
                 </div>{" "}
@@ -4518,12 +4543,15 @@ function SolutionDetailBody({ page }) {
           {" "}
           <h2 className="text-5xl font-extrabold text-primary tracking-tight mb-8">
             {" "}
-            Ready to Architect Your Storage Future?{" "}
+            {isAsrs
+              ? "Plan Storage for Your Site"
+              : "Ready to Architect Your Storage Future?"}{" "}
           </h2>{" "}
           <p className="text-on-surface-variant text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
             {" "}
-            Collaborate with our engineering team to design a bespoke solution
-            tailored to your facility profile.{" "}
+            {isAsrs
+              ? "Share your load sizes, rack layout, inventory volume and target retrieval rate so the engineering team can review the system design."
+              : "Collaborate with our engineering team to design a bespoke solution tailored to your facility profile."}{" "}
           </p>{" "}
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             {" "}
@@ -5090,9 +5118,8 @@ function MaterialHandlingBody() {
           </h1>{" "}
           <p className="text-xl md:text-2xl text-white max-w-2xl font-light leading-relaxed">
             {" "}
-            Optimizing Intralogistics through Autonomous Transport &amp; Hybrid
-            Automation. Engineering zero-latency movement for the world's most
-            demanding facilities.{" "}
+            Move pallets and materials between receiving, storage and production
+            with AGVs, conveyors and defined transfer stations.{" "}
           </p>{" "}
           <div className="mt-12 flex gap-4">
             {" "}
@@ -5118,30 +5145,25 @@ function MaterialHandlingBody() {
             {" "}
             <span className="label-md tracking-widest text-outline mb-4 block font-semibold">
               {" "}
-              The Future of Internal Flow{" "}
+              Material Flow Design{" "}
             </span>{" "}
             <h2 className="font-headline text-4xl md:text-5xl font-bold text-primary mb-8 tracking-tight">
               {" "}
-              Seamless Orchestration of Physical Assets.{" "}
+              Connecting Vehicles and Conveyors{" "}
             </h2>{" "}
             <div className="space-y-6 text-on-surface-variant leading-relaxed text-lg">
               {" "}
               <p>
                 {" "}
-                Our material handling ecosystem bridges the gap between static
-                storage and dynamic throughput. We integrate advanced{" "}
-                <span className="text-primary font-bold">
-                  AGV technology
-                </span>{" "}
-                with high-speed conveyors to create a living, breathing internal
-                network.{" "}
+                AGVs carry loads between work areas while conveyors move them
+                through fixed transfer points. The equipment and routes are
+                selected for the site's load types and layout.{" "}
               </p>{" "}
               <p>
                 {" "}
-                Through sophisticated pallet movement integration, we ensure
-                that every unit load is tracked, prioritized, and delivered with
-                millimetric precision, eliminating bottlenecks before they
-                manifest.{" "}
+                Pickup, drop-off and conveyor handoffs need matching load
+                carriers and task signals. Dispatch rules can set priorities
+                and record task completion for each connected movement.{" "}
               </p>{" "}
             </div>{" "}
           </div>{" "}
@@ -5157,8 +5179,8 @@ function MaterialHandlingBody() {
                 <h3 className="font-bold text-xl mb-2">AGV Fleets</h3>{" "}
                 <p className="text-sm">
                   {" "}
-                  Autonomous vehicles navigating complex terrains without fixed
-                  infrastructure.{" "}
+                  Vehicles follow mapped routes and configured traffic rules
+                  between pickup and delivery stations.{" "}
                 </p>{" "}
               </div>{" "}
               <div className="bg-primary text-white p-8 rounded-xl">
@@ -5169,8 +5191,8 @@ function MaterialHandlingBody() {
                 <h3 className="font-bold text-xl mb-2">Conveyor Links</h3>{" "}
                 <p className="text-sm opacity-80">
                   {" "}
-                  High-capacity sorting and buffer systems for continuous
-                  flow.{" "}
+                  Fixed conveyors and buffers move loads between connected
+                  stations where the layout supports them.{" "}
                 </p>{" "}
               </div>{" "}
             </div>{" "}
@@ -5183,9 +5205,10 @@ function MaterialHandlingBody() {
                   src="/assets/images/material-handling-pallet-precision-1-2.webp"
                   alt="Pallet transport vehicle"
                 />{" "}
-                <h3 className="font-bold text-xl mb-2">Pallet Precision</h3>{" "}
+                <h3 className="font-bold text-xl mb-2">Pallet Handoffs</h3>{" "}
                 <p className="text-sm">
-                  Unified pallet movement protocols for global standardization.
+                  Fork dimensions, pallet format and station height are checked
+                  before transfer.
                 </p>{" "}
               </div>{" "}
             </div>{" "}
@@ -5202,10 +5225,10 @@ function MaterialHandlingBody() {
               {" "}
               <div className="text-[10px] font-bold tracking-[0.3em] text-secondary mb-4">
                 {" "}
-                Live System Video{" "}
+                Workflow Video{" "}
               </div>{" "}
               <h2 className="text-4xl font-extrabold text-primary tracking-tight mb-5">
-                See material handling in live operation
+                See a material handling workflow
               </h2>{" "}
               <p className="text-on-surface-variant text-lg leading-relaxed">
                 {" "}
@@ -5241,7 +5264,7 @@ function MaterialHandlingBody() {
               </h2>{" "}
               <p className="text-on-surface-variant mt-4 text-lg">
                 {" "}
-                Modular solutions tailored to specific operational nodes.{" "}
+                Common routes between docks, storage and production areas.{" "}
               </p>{" "}
             </div>{" "}
             <div className="hidden md:block">
@@ -5269,18 +5292,18 @@ function MaterialHandlingBody() {
               {
                 image: "/assets/images/material-handling-scenario-1-3.webp",
                 title: "Dock to Rack",
-                copy: "Automated inbound processing that transfers goods from receiving bays directly to high-bay storage with zero manual touchpoints.",
+                copy: "Moves received loads to staging or storage after pickup points, pallet formats and rack handoffs are defined.",
               },
               {
                 image: "/assets/images/material-handling-scenario-1-4.webp",
                 title: "Production Logistics",
-                copy: "Synchronizing raw material supply with line-side demand. Precision timing for Just-In-Time manufacturing environments.",
+                copy: "Replenishes production-side stations from storage or buffer areas using scheduled tasks and station signals.",
               },
               {
                 image:
                   "https://lh3.googleusercontent.com/aida-public/AB6AXuD8ofeyhRvUYv2oL5WiIpaGl6_TZESyBjcYlkVnPIacAdIFaDZgynydTxeCqdqsci8bTCyWcYb9on3ZAqFhVvUvx_tpv9R_rvtVgOypXOEp142ecdcKrrYlVkoBiyVhnrnqBL-zqHeqNEwGlYY8PNjfDGmWJ0JmsiSMzpMXstNCAGgIfjMyNfQOEpVVXz5okahEHkrP0tImX9-8APWozoUScIZZ-KYM2_ePFXLQIU_Req5A7qMVIDIejVAHrjQIqnHTPpHLbGq1_0_U",
                 title: "Hybrid Automation",
-                copy: "Flexible integration of manual operations and autonomous systems, allowing for human-robot collaboration in variable zones.",
+                copy: "Defines transfer points and traffic rules where operators and automated equipment share work areas.",
               },
             ].map((item) => (
               <div
@@ -5332,28 +5355,28 @@ function MaterialHandlingBody() {
           {" "}
           <h2 className="font-headline text-4xl md:text-5xl font-bold mb-20 text-center tracking-tight">
             {" "}
-            Measurable Business Value{" "}
+            Operational Planning Priorities{" "}
           </h2>{" "}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {" "}
             {[
               {
                 icon: "route",
-                value: "40%",
+                value: "Routes",
                 title: "Travel Reduction",
-                copy: "Minimizing dead-head travel and optimizing pathing to reduce energy consumption and cycle times.",
+                copy: "Review empty travel and pickup locations when planning vehicle routes.",
               },
               {
                 icon: "balance",
-                value: "99.8%",
+                value: "Tasks",
                 title: "Route Balance",
-                copy: "Dynamic workload distribution across the fleet to prevent localized congestion and bottlenecking.",
+                copy: "Dispatch rules can spread work across vehicles and manage shared intersections.",
               },
               {
                 icon: "data_exploration",
-                value: "100%",
+                value: "Logs",
                 title: "Mission Traceability",
-                copy: "Complete digital twin auditing for every movement mission, providing ironclad compliance data.",
+                copy: "Configured task and status events can be recorded for later review.",
               },
             ].map((item) => (
               <div className="text-center" key={item.title}>
@@ -5392,7 +5415,7 @@ function MaterialHandlingBody() {
                 <img
                   className="rounded-xl shadow-2xl relative z-10 border border-outline-variant/20"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMUJGkjoqia168F3AwCvF_p5buSwb8fAOQDBlMQJoS8GOjavGnaP6gWzjbGxMEQZk9PsswKdnTO9cL1iQPyK1AYg7HFnejOp24xdiaf_7DiK8qtKtTqaNxWmrXgoEQEDZsAUchiq0VphnmAAzBcbgLFG81Sf4zXDlW8cZr_L4cRYYoXyr5Vi-JjZ4LfPTtk5Wbp7QPYKC4DzYC6HmM8G443MFqY_QbZDDVCTUZvdkSE4yj6FyK8P50HFeihZFarEbpo7O3HpfyfDOP"
-                  alt="Integrated ecosystem"
+                  alt="AGV and conveyor transfer equipment"
                 />{" "}
                 <div className="absolute bottom-6 right-6 bg-white/90 backdrop-blur p-4 rounded-lg shadow-lg z-20 border border-outline-variant/30">
                   {" "}
@@ -5401,7 +5424,7 @@ function MaterialHandlingBody() {
                     <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />{" "}
                     <span className="text-xs font-bold text-primary tracking-widest">
                       {" "}
-                      Ecosystem Active{" "}
+                      Equipment Interface{" "}
                     </span>{" "}
                   </div>{" "}
                 </div>{" "}
@@ -5411,30 +5434,30 @@ function MaterialHandlingBody() {
               {" "}
               <h2 className="font-headline text-4xl md:text-5xl font-bold text-primary mb-8 tracking-tight">
                 {" "}
-                Integrated Ecosystem{" "}
+                Equipment and Control Interfaces{" "}
               </h2>{" "}
               <p className="text-lg text-on-surface-variant mb-12">
                 {" "}
-                One unified architecture. Infinite scalability. Our solutions
-                speak a common digital language.{" "}
+                The integration plan defines how vehicles, conveyors and control
+                software exchange pickup, transfer and completion signals.{" "}
               </p>{" "}
               <div className="space-y-8">
                 {" "}
                 {[
                   [
                     "forklift",
-                    "Forklift Stacker AGVs",
-                    "High-capacity lifting solutions for heavy palletized loads and vertical storage navigation.",
+                    "Forklift AGVs",
+                    "Move compatible pallet loads between defined pickup and drop-off points.",
                   ],
                   [
                     "view_stream",
                     "Roller Systems",
-                    "Intelligent zone-controlled rollers for high-throughput case and parcel sorting.",
+                    "Transfer cartons or bins between fixed conveyor stations.",
                   ],
                   [
                     "developer_board",
-                    "Robot Orchestrator",
-                    "The central brain. AI-driven software that manages multi-vendor hardware coordination.",
+                    "Fleet Control",
+                    "Assigns vehicle tasks and manages route priorities through configured interfaces.",
                   ],
                 ].map(([icon, title, copy]) => (
                   <div className="flex gap-6 group" key={title}>
@@ -5467,12 +5490,12 @@ function MaterialHandlingBody() {
             {" "}
             <h2 className="font-headline text-4xl font-bold text-primary mb-4 tracking-tight">
               {" "}
-              Consult with an Automation Architect{" "}
+              Discuss Your Material Flow{" "}
             </h2>{" "}
             <p className="text-on-surface-variant">
               {" "}
-              Let's engineer a solution specific to your facility's constraints
-              and throughput requirements.{" "}
+              Share load types, travel routes, station locations and daily volume
+              so the team can review suitable equipment and handoffs.{" "}
             </p>{" "}
           </div>{" "}
           <form
@@ -5563,7 +5586,7 @@ function MaterialHandlingBody() {
                 type="submit"
               >
                 {" "}
-                Initialize Consultation{" "}
+                Send Project Details{" "}
                 <span className="material-symbols-outlined">send</span>{" "}
               </button>{" "}
             </div>{" "}
@@ -5595,7 +5618,7 @@ function PickingBody() {
             {" "}
             <span className="inline-block px-4 py-1.5 mb-6 bg-secondary text-on-secondary text-xs font-bold tracking-[0.2em] rounded-full">
               {" "}
-              Industrial Intelligence{" "}
+              Goods-to-Person Picking{" "}
             </span>{" "}
             <h1 className="text-5xl lg:text-7xl font-extrabold text-white leading-tight tracking-tighter mb-8">
               {" "}
@@ -5604,9 +5627,8 @@ function PickingBody() {
             </h1>{" "}
             <p className="text-xl text-white leading-relaxed mb-10 max-w-2xl font-light">
               {" "}
-              Advanced goods-to-person strategies for high-velocity order
-              fulfillment and zero-error accuracy. Engineered for the next
-              generation of global logistics.{" "}
+              Bring items to picking stations and coordinate task release,
+              replenishment and order checks across the fulfillment process.{" "}
             </p>{" "}
             <div className="flex flex-wrap gap-4">
               {" "}
@@ -5631,42 +5653,41 @@ function PickingBody() {
               {" "}
               <h2 className="text-4xl font-bold text-primary tracking-tight">
                 {" "}
-                The Future of <br /> Goods-to-Person (GTP){" "}
+                How <br /> Goods-to-Person Picking Works{" "}
               </h2>{" "}
               <p className="text-lg text-on-surface-variant leading-relaxed font-body">
                 {" "}
-                Our picking solutions eliminate the most time-consuming aspect
-                of manual warehousing: walking. By bringing items directly to
-                ergonomic picking stations, we reduce cycle times by up to
-                60%.{" "}
+                Goods-to-person systems bring inventory to staffed picking
+                stations. This can reduce walking between storage locations;
+                actual cycle times depend on order mix, station layout and
+                replenishment capacity.{" "}
               </p>{" "}
               <p className="text-lg text-on-surface-variant leading-relaxed font-body">
                 {" "}
-                Leveraging intelligent wave control and real-time task batching,
-                our system ensures that high-velocity orders are prioritized
-                without sacrificing the efficiency of complex, high-SKU
-                inventory flows.{" "}
+                WMS or WCS task rules can group orders, assign picking work and
+                trigger replenishment. Priorities and exception handling are
+                configured for the site's fulfillment process.{" "}
               </p>{" "}
               <div className="flex gap-12 pt-4">
                 {" "}
                 <div className="border-l-4 border-secondary pl-6">
                   {" "}
                   <div className="text-3xl font-black text-primary">
-                    99.9%
+                    GTP
                   </div>{" "}
                   <div className="text-sm font-bold text-outline tracking-widest mt-1">
                     {" "}
-                    Order Accuracy{" "}
+                    Station Picking{" "}
                   </div>{" "}
                 </div>{" "}
                 <div className="border-l-4 border-secondary pl-6">
                   {" "}
                   <div className="text-3xl font-black text-primary">
-                    4x
+                    WMS
                   </div>{" "}
                   <div className="text-sm font-bold text-outline tracking-widest mt-1">
                     {" "}
-                    Pick Velocity{" "}
+                    Task Release{" "}
                   </div>{" "}
                 </div>{" "}
               </div>{" "}
@@ -5684,12 +5705,12 @@ function PickingBody() {
               <div className="absolute -bottom-10 -left-10 bg-surface-container-lowest p-8 rounded-xl shadow-xl max-w-xs border border-outline-variant/10">
                 {" "}
                 <h4 className="text-secondary font-bold mb-2">
-                  Adaptive Wave Control
+                  Task Priorities
                 </h4>{" "}
                 <p className="text-sm text-on-surface-variant leading-snug">
                   {" "}
-                  Intelligent software dynamically re-routes high-priority tasks
-                  to the next available station.{" "}
+                  Configured rules can assign priority orders to an available
+                  station and record exceptions.{" "}
                 </p>{" "}
               </div>{" "}
             </div>{" "}
@@ -5726,9 +5747,8 @@ function PickingBody() {
                 </h3>{" "}
                 <p className="text-on-surface-variant max-w-lg mb-6">
                   {" "}
-                  High-velocity picking engineered for the volatility of B2C
-                  demand. Scales instantly during peak seasons with zero-latency
-                  synchronization.{" "}
+                  Picking stations can be added or reassigned for seasonal order
+                  volumes after storage capacity and replenishment are reviewed.{" "}
                 </p>{" "}
                 <span className="text-secondary font-bold flex items-center gap-2 group-hover:gap-4 transition-all">
                   {" "}
@@ -5751,9 +5771,8 @@ function PickingBody() {
                 </h3>{" "}
                 <p className="text-primary-fixed/70 text-sm leading-relaxed">
                   {" "}
-                  Small parts handling with extreme precision. ESD-safe
-                  environments and ultra-fine grip robotics ensure fragile
-                  components are secured.{" "}
+                  Small-part picking can include ESD controls and suitable
+                  handling tools when the product and work area require them.{" "}
                 </p>{" "}
               </div>{" "}
             </div>{" "}
@@ -5769,9 +5788,8 @@ function PickingBody() {
                 </h3>{" "}
                 <p className="text-on-surface-variant text-sm leading-relaxed">
                   {" "}
-                  Managed diversity in complex inventory environments. Our AI
-                  predicts slotting needs based on historical order
-                  frequency.{" "}
+                  Slotting and replenishment rules can use order frequency and
+                  item dimensions to plan locations for mixed inventory.{" "}
                 </p>{" "}
               </div>{" "}
             </div>{" "}
@@ -5786,8 +5804,8 @@ function PickingBody() {
                   </h3>{" "}
                   <p className="text-on-surface-variant text-sm leading-relaxed mb-6">
                     {" "}
-                    Scalable replenishment for physical stores. Optimized for
-                    case-to-piece workflows and store-ready sequencing.{" "}
+                    Picks store orders from shared inventory and releases cases
+                    or individual items in the required dispatch sequence.{" "}
                   </p>{" "}
                   <button className="w-fit border-b-2 border-secondary pb-1 text-sm font-bold text-primary">
                     {" "}
@@ -5814,12 +5832,12 @@ function PickingBody() {
           <div className="text-center max-w-3xl mx-auto mb-20">
             {" "}
             <h2 className="text-4xl font-extrabold text-primary mb-6">
-              Quantifiable Precision
+              Metrics to Check During Design
             </h2>{" "}
             <p className="text-on-surface-variant">
               {" "}
-              We don't just move boxes. We engineer metrics that impact your
-              bottom line directly through technological superioriy.{" "}
+              Compare the current operation with a proposed station layout using
+              pick rate, order accuracy, replenishment time and utilization.{" "}
             </p>{" "}
           </div>{" "}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -5828,22 +5846,22 @@ function PickingBody() {
               [
                 "01",
                 "Pick Rate",
-                "Accelerate throughput with optimized ergonomic workflows and minimal travel time.",
+                "Measure completed picks per hour against the current process and expected order mix.",
               ],
               [
                 "02",
                 "Order Accuracy",
-                "Zero-error fulfillment through integrated digital verification and weight scales.",
+                "Use scanning or weight checks where appropriate and review exceptions against the order record.",
               ],
               [
                 "03",
                 "Replenishment",
-                "Real-time inventory alignment ensuring picking stations never face a stock-out.",
+                "Track station stock and release replenishment tasks before available inventory runs low.",
               ],
               [
                 "04",
                 "Utilization",
-                "Maximum efficiency of labor and hardware through intelligent load balancing.",
+                "Review station demand and equipment availability when assigning picking work.",
               ],
             ].map(([number, title, copy]) => (
               <div
@@ -5881,24 +5899,24 @@ function PickingBody() {
                 {" "}
                 <h2 className="text-4xl font-bold mb-8 tracking-tight text-primary">
                   {" "}
-                  The Software Core: <br /> Wave-Managed Intelligence{" "}
+                  Picking Task and <br /> Station Control{" "}
                 </h2>{" "}
                 <p className="mb-8 text-[17px] leading-relaxed text-on-surface-variant">
                   {" "}
-                  Hardware is only as good as the brain behind it. Our picking
-                  solutions are natively integrated with our proprietary WMS/WCS
-                  stack.{" "}
+                  WMS and WCS interfaces can coordinate order release, picking
+                  stations and replenishment. Required signals are defined for
+                  each installation.{" "}
                 </p>{" "}
                 <ul className="space-y-4">
                   {" "}
                   {[
                     [
                       "Dynamic Task Batching",
-                      "Algorithms group picks by store or delivery route in real-time.",
+                      "Task rules can group picks by store, order or delivery route.",
                     ],
                     [
-                      "Predictive Maintenance",
-                      "Station health monitored by AI to prevent unscheduled downtime.",
+                      "Station Monitoring",
+                      "Equipment status and faults can be displayed for operator review.",
                     ],
                   ].map(([title, copy]) => (
                     <li className="flex items-start gap-4" key={title}>
@@ -5954,16 +5972,16 @@ function PickingBody() {
           {" "}
           <div className="inline-block px-6 py-2 bg-surface-container-high rounded-full text-secondary font-bold text-sm tracking-widest mb-8">
             {" "}
-            Ready to Scale?{" "}
+            Discuss Your Picking Process{" "}
           </div>{" "}
           <h2 className="text-5xl lg:text-6xl font-black text-primary mb-8 tracking-tighter">
             {" "}
-            Let&apos;s Engineer Your <br /> Next fulfillment Breakthrough{" "}
+            Plan a Picking <br /> Workflow for Your Site{" "}
           </h2>{" "}
           <p className="text-xl text-on-surface-variant mb-12 max-w-2xl mx-auto">
             {" "}
-            Consult with our systems architects to design a custom picking
-            solution that matches your unique operational velocity.{" "}
+            Share your order mix, item sizes, daily volume and current picking
+            layout so the team can review station and replenishment needs.{" "}
           </p>{" "}
           <div className="flex flex-col sm:flex-row justify-center gap-6">
             {" "}
@@ -5980,7 +5998,7 @@ function PickingBody() {
               href="/downloads/Smart Logistics Solutions.pptx"
             >
               {" "}
-              Download Whitepaper{" "}
+              Download Solutions Deck{" "}
             </a>{" "}
           </div>{" "}
         </div>{" "}
@@ -6011,15 +6029,15 @@ function SoftwareBody() {
               {" "}
               <h1 className="font-headline text-[3rem] lg:text-[4rem] font-extrabold text-on-primary leading-[1.04] tracking-tighter pr-4 lg:pr-6 max-w-[52rem]">
                 {" "}
-                Software - The Digital Intelligence for{" "}
+                Warehouse Automation {" "}
                 <span className="text-secondary">
-                  Autonomous Logistics
+                  Software
                 </span>{" "}
               </h1>{" "}
               <p className="text-on-primary-container text-[1rem] lg:text-[1.08rem] max-w-[43rem] font-light leading-[1.72] pr-2 lg:pr-4">
                 {" "}
-                A unified software ecosystem orchestrating inventory, hardware,
-                and workflow processes for absolute operational control.{" "}
+                Connect inventory tasks, equipment status and vehicle dispatch
+                through defined warehouse software interfaces.{" "}
               </p>{" "}
             </div>{" "}
             <div className="flex flex-wrap gap-4 mt-10">
@@ -6029,7 +6047,7 @@ function SoftwareBody() {
                 href="/contact"
               >
                 {" "}
-                Explore Ecosystem{" "}
+                Discuss Software Interfaces{" "}
               </Link>{" "}
             </div>{" "}
           </div>{" "}
@@ -6049,7 +6067,7 @@ function SoftwareBody() {
               </h2>{" "}
               <h3 className="font-headline text-4xl font-extrabold text-primary leading-tight">
                 {" "}
-                Orchestrating every touchpoint with surgical precision.{" "}
+                Connect Tasks, Vehicles and Warehouse Systems{" "}
               </h3>{" "}
             </div>{" "}
             <div className="h-px flex-grow bg-outline-variant/20 mx-8 hidden md:block" />{" "}
@@ -6058,38 +6076,38 @@ function SoftwareBody() {
             {" "}
             {[
               {
-                title: "MES",
-                copy: "Manufacturing execution coordination for production visibility, process control, and plant-wide operational synchronization.",
+                title: "MES Integration",
+                copy: "Exchange production orders and completion status with an MES where the project requires it.",
                 visualSrc: "/assets/images/software-card-1.webp",
                 visualAlt: "MES manufacturing execution interface",
               },
               {
                 title: "WCS",
-                copy: "Real-time equipment orchestration and low-latency execution across all hardware.",
+                copy: "Release tasks to connected equipment and receive completion or fault status.",
                 visualSrc: "/assets/images/software-card-2.webp",
                 visualAlt: "Automated execution cell",
               },
               {
                 title: "Fleet Control",
-                copy: "Autonomous navigation and multi-robot coordination for dynamic environments.",
+                copy: "Assign vehicle tasks and apply configured traffic rules on shared routes.",
                 visualSrc: "/assets/images/storage-agv-hero.webp",
                 visualAlt: "Autonomous vehicle fleet control",
               },
               {
-                title: "Analytics & Intelligence",
-                copy: "Deep-data insights, throughput forecasting, and bottleneck detection engines.",
+                title: "Operational Reporting",
+                copy: "Review task history, throughput and equipment alerts from connected systems.",
                 visualSrc: "/assets/images/software-card-4.webp",
                 visualAlt: "Analytics and visibility dashboard",
               },
               {
                 title: "3D Digital Twin",
-                copy: "Immersive 3D facility modeling for real-time asset visualization, process simulation, and operational decision support.",
+                copy: "View a configured facility model and equipment status when a 3D view is included in the project.",
                 visualSrc: "/assets/images/software-card-5.webp",
                 visualAlt: "3D digital twin operations view",
               },
               {
                 title: "Enterprise Integration",
-                copy: "Seamless connectivity with ERP and MES systems for end-to-end data flow.",
+                copy: "Define the data and task interfaces required between warehouse software and ERP or MES.",
                 visualSrc: "/assets/images/software-card-6.webp",
                 visualAlt: "Enterprise systems integration",
               },
@@ -6151,12 +6169,12 @@ function SoftwareBody() {
             {" "}
             <h2 className="font-headline text-4xl font-extrabold text-primary mb-4">
               {" "}
-              Engineering Value Through Software{" "}
+              What Operators Can Monitor and Control{" "}
             </h2>{" "}
             <p className="text-on-surface-variant max-w-2xl mx-auto">
               {" "}
-              Our platform isn't just about efficiency; it's about defining the
-              next era of industrial operational capability.{" "}
+              The available views and controls depend on which equipment and
+              business systems are connected to the project.{" "}
             </p>{" "}
           </div>{" "}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[600px]">
@@ -6172,15 +6190,15 @@ function SoftwareBody() {
                 {" "}
                 <h4 className="text-secondary font-bold tracking-widest text-xs mb-3">
                   {" "}
-                  Core Advantage 01{" "}
+                  Connected Equipment{" "}
                 </h4>{" "}
                 <h3 className="text-white font-headline text-4xl font-extrabold mb-4">
                   Visibility
                 </h3>{" "}
                 <p className="text-on-primary-container text-lg max-w-md">
                   {" "}
-                  Real-time, transparent insights across the entire facility,
-                  from individual sensors to global fleet status.{" "}
+                  View task progress, vehicle status and alerts from connected
+                  equipment in the operating area.{" "}
                 </p>{" "}
               </div>{" "}
             </div>{" "}
@@ -6200,8 +6218,8 @@ function SoftwareBody() {
                 </h4>{" "}
                 <p className="text-on-surface-variant leading-relaxed">
                   {" "}
-                  Centralized management of complex automated workflows,
-                  allowing operators to override or optimize on the fly.{" "}
+                  Review queued tasks and apply operator actions allowed by the
+                  configured access and safety rules.{" "}
                 </p>{" "}
               </div>{" "}
             </div>{" "}
@@ -6217,8 +6235,8 @@ function SoftwareBody() {
                 </h4>{" "}
                 <p className="text-on-surface-variant leading-relaxed">
                   {" "}
-                  Comprehensive logging for every item movement and mission,
-                  ensuring 100% accountability and audit readiness.{" "}
+                  Record configured task events and equipment status for
+                  troubleshooting and operational review.{" "}
                 </p>{" "}
               </div>{" "}
             </div>{" "}
@@ -6234,8 +6252,8 @@ function SoftwareBody() {
                   </h4>{" "}
                   <p className="text-on-secondary/80 text-lg">
                     {" "}
-                    Harmonizing human, robot, and software interactions for peak
-                    throughput and zero-clash operational flow.{" "}
+                    Task priorities and traffic rules coordinate connected
+                    vehicles and workstations. Safety zones are validated on site.{" "}
                   </p>{" "}
                 </div>{" "}
                 <div className="flex justify-center">
@@ -6263,13 +6281,12 @@ function SoftwareBody() {
           {" "}
           <h2 className="font-headline text-4xl md:text-6xl font-extrabold text-white mb-8 tracking-tighter">
             {" "}
-            Ready to Digitally Transform Your Warehouse?{" "}
+            Review Your Warehouse Software Needs{" "}
           </h2>{" "}
           <p className="text-on-primary-container text-xl max-w-3xl mx-auto mb-12">
             {" "}
-            Connect with our engineering team to see how the Precision Architect
-            ecosystem can revolutionize your throughput and reduce operational
-            overhead.{" "}
+            Share your current WMS, ERP or MES interfaces, equipment list and
+            reporting needs so the team can review an integration plan.{" "}
           </p>{" "}
           <div className="flex justify-center items-center">
             {" "}
@@ -6278,7 +6295,7 @@ function SoftwareBody() {
               href="/contact"
             >
               {" "}
-              Contact an Automation Architect{" "}
+              Discuss Software Integration{" "}
             </Link>{" "}
           </div>{" "}
         </div>{" "}

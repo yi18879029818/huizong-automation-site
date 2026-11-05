@@ -1,16 +1,16 @@
 export const meta = {
   title: "Material Handling",
-  label: "Flow Orchestration",
-  kicker: "Seamless Orchestration of Physical Assets",
+  label: "Material Flow",
+  kicker: "AGV and Conveyor Handoffs",
   summary:
-    "Facility-wide material movement across docks, lines, buffers, and automated transfer nodes with intelligent routing.",
+    "Material transport between docks, storage, buffers and production stations using mapped routes and defined transfer points.",
   heroTitle: "Material Handling",
   heroSummary:
-    "The connective tissue of automated logistics: fleets, conveyor links, pallet precision, and routing intelligence working in sync.",
+    "Connect AGV routes and conveyor stations through configured task signals, load formats and traffic rules.",
   metrics: [
-    { value: "-35%", label: "Travel Reduction" },
-    { value: "Balanced", label: "Route Load" },
-    { value: "Traceable", label: "Mission History" }
+    { value: "Mapped", label: "Vehicle Routes" },
+    { value: "Planned", label: "Station Handoffs" },
+    { value: "Logged", label: "Task Status" }
   ]
 };
 
@@ -19,25 +19,25 @@ export const features = [
     label: "Scenario",
     title: "Dock to Rack",
     description:
-      "Moves inbound material from receiving to storage with automated prioritization and staging."
+      "Moves received loads to defined staging or storage points after pallet and rack interfaces are checked."
   },
   {
     label: "Scenario",
     title: "Production Logistics",
     description:
-      "Maintains stable line supply, replenishment, and return loops across manufacturing flows."
+      "Schedules replenishment and return tasks between storage and production-side stations."
   },
   {
     label: "Value",
     title: "Route Balance",
     description:
-      "Distributes work across lanes and fleets to reduce congestion and idle time."
+      "Assigns tasks and vehicle priorities on routes shared by multiple vehicles."
   },
   {
     label: "Integration",
-    title: "Integrated Ecosystem",
+    title: "Equipment Interfaces",
     description:
-      "Combines AGVs, conveyors, sensors, and software into one operating model."
+      "Defines task and status signals between AGVs, conveyors and control software."
   }
 ];
 
