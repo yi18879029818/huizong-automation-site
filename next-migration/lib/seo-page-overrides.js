@@ -52,7 +52,7 @@ export const SEO_PAGE_OVERRIDES = {
   "/products/agv-forklift": {
     title: "Autonomous Forklift AGV",
     description:
-      "Autonomous forklift AGV for high-density warehouses, pallet storage, retrieval, high-rack operation, and 24/7 internal transport.",
+      "Autonomous forklift AGV for pallet transport, rack handling and storage or retrieval tasks. Payload, route and charging plans are set for each site.",
     keywords: [
       "autonomous forklift AGV",
       "forklift AGV",
@@ -64,7 +64,7 @@ export const SEO_PAGE_OVERRIDES = {
   "/products/ground-handling-forklift-agv": {
     title: "Ground Handling Forklift AGV",
     description:
-      "Ground handling forklift AGV for pallet transfer, staging, rack interface movement, and reliable internal logistics across warehouses and factories.",
+      "Ground handling forklift AGV for pallet transfer between storage, staging and production areas, with routes and safety zones planned for the site.",
     keywords: [
       "ground handling forklift AGV",
       "pallet transfer AGV",
@@ -76,7 +76,7 @@ export const SEO_PAGE_OVERRIDES = {
   "/products/lifting-agv": {
     title: "Lifting AGV for Material Handling",
     description:
-      "Lifting AGV for pallet lifting, production-line delivery, workstation supply, and flexible material movement across warehouse and factory operations.",
+      "Lifting AGV transports compatible carts and racks to workstations and replenishment points on planned routes, with station handoffs configured for the site.",
     keywords: [
       "lifting AGV",
       "lift AGV",
@@ -88,7 +88,7 @@ export const SEO_PAGE_OVERRIDES = {
   "/products/storage-agv": {
     title: "Storage AGV for Warehouse Automation",
     description:
-      "Storage AGV for automated pallet buffering, storage movement, inventory flow, and coordinated warehouse automation in high-density operations.",
+      "Storage AGV moves loads between buffer locations, storage transfer points and downstream stations through defined routes and control interfaces.",
     keywords: [
       "storage AGV",
       "automated storage vehicle",
@@ -100,7 +100,7 @@ export const SEO_PAGE_OVERRIDES = {
   "/products/agv-roller": {
     title: "AGV Roller for Conveyor Transfer",
     description:
-      "AGV roller system for conveyor handoffs, pallet transfer, line-side delivery, adaptive routing, and production logistics automation.",
+      "AGV Roller carries cartons or bins between conveyor stations, with transfer height, load size and handoff signals defined during system design.",
     keywords: [
       "AGV roller",
       "roller conveyor AGV",
@@ -112,7 +112,7 @@ export const SEO_PAGE_OVERRIDES = {
   "/products/composite-mobile-robot": {
     title: "Composite Mobile Robot for Machine Tending & Material Handling",
     description:
-      "Composite mobile robot combining an AMR base and robotic arm for machine tending, point-of-use material handling, kitting, inspection, and flexible workstation automation.",
+      "Composite mobile robot combines a mobile base and robotic arm for handling tasks at defined workstations, with tooling and safety zones set for each application.",
     keywords: [
       "composite mobile robot",
       "mobile manipulator robot",
