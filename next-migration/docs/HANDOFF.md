@@ -1,5 +1,12 @@
 # HANDOFF
 
+## 2026-11-05 - Solutions page copy revisions
+
+- Status: deployed and verified on the Solutions overview and four dropdown detail pages.
+- Changed files: `components/structured-catalog-pages.js`, five `content/solutions/*.mdx` files, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`.
+- Verified: 18 tests, `git diff --check`, and OpenNext Cloudflare build passed. Source commit `c5bd87b` was pushed before Worker `bcf33232-4341-4b6d-ae37-67bc82f377d6` deployed. The five live routes return 200, show the revised copy, and the sitemap lists the detail routes.
+- Unresolved: none for the requested copy revision. Risk: future edits to shared solution components should keep ASRS-specific text scoped to the ASRS route.
+
 ## 2026-11-05 - Six product detail page copy revisions
 
 - Status: deployed and verified on all six product detail routes.

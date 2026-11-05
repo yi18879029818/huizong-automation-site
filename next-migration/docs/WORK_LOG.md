@@ -821,3 +821,10 @@
 - `npm test` passed all 18 tests; `git diff --check` and OpenNext Cloudflare builds passed. Source commits `a498ef5` and `c18f660` were pushed to `main` before deployment.
 - Cloudflare Worker version `c06372c0-6cba-4294-a46e-71d0b55a2abd` is live. All six public routes return HTTP 200 and display the revised body and metadata; selected old claims are absent from the responses.
 
+## 2026-11-05 - Solutions page copy revisions
+
+- Revised the Solutions overview and the ASRS, Material Handling, Picking, and Software detail pages. Replaced generic promotional copy and unsupported performance percentages with descriptions of storage layouts, load formats, equipment handoffs, task rules, site constraints, and software interfaces.
+- Gave scenario and integration cards distinct descriptions. Removed invented case-study details from the overview. Corrected the ASRS technical-specification button, which previously downloaded a lifting AGV data sheet; it now opens the contact page to request the relevant specifications. Renamed the Picking download to match its actual PPTX format.
+- `npm test` passed all 18 tests; `git diff --check` and the OpenNext Cloudflare build passed. Source commit `c5bd87b` was pushed to `main` before deployment. Worker version `bcf33232-4341-4b6d-ae37-67bc82f377d6` is live.
+- All five public routes return HTTP 200 and contain the revised copy. The incorrect ASRS download link and checked old claims are absent. The sitemap returns 200 and includes the four detail routes.
+
