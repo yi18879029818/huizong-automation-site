@@ -807,3 +807,10 @@
 - Kept the homepage layout, components, links, and interaction behavior intact. `npm test` passed 18 tests; the OpenNext Cloudflare build completed successfully.
 - Commit `9d56c66` was pushed to `main` before deployment. Wrangler deployed Worker version `f909fe7c-b865-4dc5-95c5-b02b4f5847a9`; the public homepage returns 200, includes the new wording, and omits the old kinetic-ecosystem, 60%, and 99.9% claims.
 
+## 2026-11-05 - Product overview copy revision
+
+- Replaced abstract AGV/AMR claims, the forklift card's 24/7 stability claim, generic safety bullets, the deployment capability claim, and the closing sales copy on `/products` with descriptions of material handling tasks, site planning, and specific safety components.
+- Preserved the product cards, technical data, links, layout, and navigation. The forklift card and deployment capability use display overrides because their source values are supplied by Sanity.
+- `npm test` passed all 18 tests. The OpenNext Cloudflare build completed. Source commits `4ba251b` and `a74eefe` were pushed to `main` before deployment.
+- Cloudflare Worker version `e0aecbdc-a043-4bd0-92b0-590dfbae7b94` is live. The public `/products` route returns HTTP 200, contains all six revised copy groups, and omits the old phrases from the page response.
+

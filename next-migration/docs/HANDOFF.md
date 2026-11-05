@@ -1,5 +1,12 @@
 # HANDOFF
 
+## 2026-11-05 - Product overview copy revision
+
+- Status: deployed and verified on production at `/products`.
+- Changed files: `components/structured-catalog-pages.js`, `content/products/index.mdx`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`.
+- Verified: 18 tests pass and the OpenNext Cloudflare build completes. Commits `4ba251b` and `a74eefe` were pushed before Worker version `e0aecbdc-a043-4bd0-92b0-590dfbae7b94` was deployed. The public page returns 200, displays the revised copy, and omits the old phrases.
+- Unresolved: none for the visible product page. Risk: the forklift card summary and deployment capability originate in Sanity and are overridden at render time; future CMS edits to those fields will need corresponding frontend review.
+
 ## 2026-11-04 - Homepage copy revision
 
 - Status: homepage copy deployed and verified on production.
