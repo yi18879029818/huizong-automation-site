@@ -220,7 +220,7 @@ const PRODUCT_SPEC_LIBRARY = {
     bullets: [
       "Modular design",
       "360 deg obstacle detection",
-      "All-around safety",
+      "3D vision, ultrasonic and bumper feedback",
       "High-rack putaway",
       "Automatic carrier recognition",
     ],
@@ -327,7 +327,7 @@ const PRODUCT_SPEC_LIBRARY = {
       "Shared-aisle flexibility",
       "Auto-charging ready",
       "No magnetic tape",
-      "Mixed-traffic safe",
+      "Obstacle detection for shared-aisle operation",
     ],
     technicalSpecs: [
       { label: "Payload Capacity", value: "Up to 1,000kg" },
@@ -1320,7 +1320,9 @@ function ProductOverviewCard({ card }) {
           {card.title}{" "}
         </h3>{" "}
         <p className="mb-8 text-lg leading-relaxed text-on-surface-variant">
-          {card.summary}
+          {card.slug === "agv-forklift"
+            ? "For warehouses with frequent pallet handling and high-rack storage needs."
+            : card.summary}
         </p>{" "}
         <div className="mb-8 grid grid-cols-3 gap-4 border-y border-outline-variant/20 py-6">
           {" "}
@@ -1612,9 +1614,8 @@ function ProductOverviewBody({ page }) {
               </h2>{" "}
               <p className="text-on-surface-variant text-sm font-medium leading-relaxed border-l-4 border-secondary pl-6 tracking-wider">
                 {" "}
-                Our AGV and AMR systems represent the pinnacle of material
-                handling engineering, designed to operate in dense environments
-                with surgical precision.{" "}
+                Our AGV and AMR systems handle pallet transport, storage
+                transfer, and workstation delivery in busy facilities.{" "}
               </p>{" "}
             </div>{" "}
             <div className="hidden md:block">
@@ -1646,6 +1647,12 @@ function ProductOverviewBody({ page }) {
                 "precision_manufacturing",
                 "verified_user",
               ];
+              const deploymentCapability =
+                item === "Flexible deployment with minimal infrastructure changes" ||
+                item === "Deployment can be planned around existing routes and site infrastructure.";
+              const capabilityCopy = deploymentCapability
+                ? "Deployment can be planned around existing routes and site infrastructure."
+                : item;
               return (
                 <div className="group" key={item}>
                   {" "}
@@ -1661,11 +1668,13 @@ function ProductOverviewBody({ page }) {
                   </div>{" "}
                   <h4 className="font-headline font-bold text-sm text-primary tracking-tight mb-4">
                     {" "}
-                    {item.split(" ").slice(0, 2).join(" ")}{" "}
+                    {deploymentCapability
+                      ? "Deployment planning"
+                      : item.split(" ").slice(0, 2).join(" ")}{" "}
                   </h4>{" "}
                   <p className="text-on-surface-variant text-[10px] tracking-[0.15em] leading-loose">
                     {" "}
-                    {item}{" "}
+                    {capabilityCopy}{" "}
                   </p>{" "}
                 </div>
               );
@@ -1692,12 +1701,12 @@ function ProductOverviewBody({ page }) {
             </div>{" "}
             <h2 className="font-headline text-5xl md:text-7xl font-black text-white mb-8 max-w-4xl leading-[1.1] tracking-tighter text-kern-tight">
               {" "}
-              Ready to optimize your automation flow? <br /> Consult our architects.{" "}
+              Discuss your material handling requirements with our engineering team.{" "}
             </h2>{" "}
             <p className="text-on-primary-container text-lg mb-12 max-w-2xl font-light opacity-80">
               {" "}
-              Join the ranks of global logistics leaders using coolyne to
-              redefine operational efficiency.{" "}
+              Share your load, route, and throughput requirements to explore a
+              suitable automation setup.{" "}
             </p>{" "}
             <Link
               className="bg-secondary text-white px-12 py-5 font-bold tracking-[0.3em] text-[10px] transition-all hover:bg-white hover:text-primary shadow-2xl"
