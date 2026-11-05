@@ -3,16 +3,16 @@ import Link from "next/link";
 const DEFAULT_METRICS = [
   ["2500kg", "Payload"],
   ["10m", "Lift Height"],
-  ["24/7", "Autonomous Operation"],
+  ["Auto", "Charging Option"],
 ];
 
 export default function ForkliftHero({ page }) {
   const title = page?.data?.heroTitle || "Autonomous Forklift AGV";
   const subtitle =
-    page?.data?.heroSubtitle || "High-Density Warehouse Automation Solution";
+    page?.data?.heroSubtitle || "Pallet Transport and Rack Handling";
   const summary =
     page?.data?.heroSummary ||
-    "Automate pallet storage, retrieval and internal transportation with a high-performance autonomous forklift system designed for 24/7 warehouse operations.";
+    "Autonomous pallet transport and rack handoffs on defined warehouse routes. Payload, lift height and charging plans are confirmed for each site.";
 
   return (
     <section className="forklift-hero overflow-hidden bg-primary text-white lg:min-h-0">
@@ -21,7 +21,7 @@ export default function ForkliftHero({ page }) {
           <div className="mb-5 flex items-center gap-3">
             <span className="h-px w-9 bg-secondary" />
             <span className="text-[10px] font-black uppercase tracking-[0.34em] text-white/72">
-              Forklift Stacker AGV / Warehouse Automation
+              Autonomous Forklift AGV / Warehouse Automation
             </span>
           </div>
           <h1 className="forklift-hero-title w-full max-w-[13ch] text-[3.25rem] font-black leading-[0.95] tracking-[-0.06em] md:text-[3.75rem] xl:text-[4rem]">
@@ -61,7 +61,7 @@ export default function ForkliftHero({ page }) {
 
         <div className="relative min-h-[380px] overflow-hidden rounded-[28px] border border-white/20 bg-white/[0.08] p-1.5 shadow-[0_26px_80px_rgba(0,0,0,0.24)] backdrop-blur-sm md:min-h-[500px] lg:h-full lg:min-h-[580px]">
           <img
-            alt="Forklift Stacker AGV moving a pallet inside a high-rack warehouse"
+            alt="Autonomous Forklift AGV moving a pallet inside a high-rack warehouse"
             className="h-full min-h-[368px] w-full rounded-[22px] object-cover object-[86%_center] md:min-h-[488px] lg:min-h-0"
             fetchPriority="high"
             src="/downloads/agv-forklift-hero-wide.png"

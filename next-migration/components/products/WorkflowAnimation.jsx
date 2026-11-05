@@ -13,7 +13,7 @@ export default function WorkflowAnimation() {
       <div className="mx-auto max-w-[1440px] px-6 md:px-12">
         <div className="mb-14 max-w-none">
           <span className="hsa-ui-kicker hsa-ui-kicker--light">How It Works</span>
-          <h2 className="forklift-section-title forklift-section-title--compact forklift-section-title--single-line mt-4 text-4xl font-black tracking-tight md:text-6xl">How Forklift Stacker AGV Works</h2>
+          <h2 className="forklift-section-title forklift-section-title--compact forklift-section-title--single-line mt-4 text-4xl font-black tracking-tight md:text-6xl">How the Autonomous Forklift AGV Works</h2>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-on-primary-container">
             A visible task chain helps warehouse, software and engineering teams align ownership before a technical evaluation.
           </p>

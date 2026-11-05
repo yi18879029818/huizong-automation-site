@@ -12,9 +12,9 @@ const HIGHLIGHTS = [
     icon: "height",
   },
   {
-    metric: "24/7",
-    title: "Continuous Warehouse Operation",
-    copy: "Reduce manual forklift dependency and improve workflow consistency through mission-based transport.",
+    metric: "Auto",
+    title: "Planned Charging",
+    copy: "Opportunity charging can be scheduled around transport demand and available charging stations.",
     icon: "schedule",
   },
 ];
@@ -25,9 +25,9 @@ export default function ProductHighlights() {
       <div className="mx-auto max-w-[1440px] px-6 md:px-12">
         <div className="mb-14 max-w-3xl">
           <span className="hsa-ui-kicker">Automation Value</span>
-          <h2 className="hsa-ui-title forklift-section-title forklift-highlights-title">Why Choose Forklift Stacker AGV?</h2>
+          <h2 className="hsa-ui-title forklift-section-title forklift-highlights-title">Why Choose an Autonomous Forklift AGV?</h2>
           <p className="hsa-ui-body mt-6">
-            Built for the repetitive, high-load movements that make warehouse automation worth engineering carefully.
+            Designed for pallet transport, rack access and repeatable handoffs along planned warehouse routes.
           </p>
         </div>
         <div className="grid gap-5 lg:grid-cols-3">

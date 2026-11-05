@@ -293,25 +293,25 @@ const PRODUCT_SPEC_LIBRARY = {
     introduction: {
       title: "Ground handling architecture for dense internal pallet movement.",
       summary:
-        "The Ground Handling Forklift AGV is an intelligent pallet transport platform engineered for horizontal transfer, short-distance stacking, rack interface movement, and internal factory dispatch. It combines laser SLAM navigation, dynamic obstacle avoidance, and adaptable fork geometry to stay productive in mixed-traffic warehouse and manufacturing environments.",
+        "The Ground Handling Forklift AGV moves pallets between storage, staging and production areas. Laser SLAM navigation, 3D vision and fork geometry are configured for the site's routes, pallet types and traffic rules.",
       imageSrc: "/downloads/ground-handling-forklift-agv.png",
       imageAlt: "Ground Handling Forklift AGV product view",
       highlights: [
         {
-          title: "Strong loading capacity",
-          copy: "Handles heavy palletized materials with 1,600kg rated load and adjustable fork accessibility for varied floor conditions.",
+          title: "1,600kg reference load",
+          copy: "The reference rated load is 1,600kg. Fork dimensions, load distribution and floor conditions are checked for each project.",
         },
         {
           title: "Dynamic obstacle avoidance",
-          copy: "Laser SLAM, 3D vision, and dispatch logic enable smooth multi-vehicle coordination across active aisles.",
+          copy: "Laser SLAM and 3D vision support navigation and obstacle detection. Fleet priorities and shared-aisle rules are set during commissioning.",
         },
         {
-          title: "Multi-carrier recognition",
-          copy: "Recognizes different pallet and rack specifications to support precise pick, place, and rack interface execution.",
+          title: "Carrier compatibility",
+          copy: "Supported pallet and rack formats are checked before pickup and placement. Carrier compatibility is confirmed for each site.",
         },
         {
-          title: "360 deg safety protection",
-          copy: "Multiple sensors, protective edges, and layered safety logic create reliable human-machine interaction coverage.",
+          title: "Safety zones and emergency stops",
+          copy: "Sensors and protective edges support defined detection zones and emergency stops. The final safety layout follows the site assessment.",
         },
       ],
     },
@@ -1968,7 +1968,7 @@ function ProductDetailBody({ page }) {
 function AgvForkliftBody({ page }) {
   const comparisonRows = [
     ["Operator", "Required", "Autonomous"],
-    ["Operation", "Shift-based", "24/7"],
+    ["Operation", "Shift-based", "Scheduled with charging"],
     ["Safety", "Human dependent", "Sensor controlled"],
     ["Tracking", "Limited", "Real-time"],
     ["Repeatability", "Variable", "Stable"],
@@ -1987,7 +1987,7 @@ function AgvForkliftBody({ page }) {
     ["Automated Warehouse Upgrade", "Review a project page focused on throughput, space and safety requirements.", "/case-studies/projects/automated-warehouse-upgrade"],
   ];
   const faqItems = [
-    ["What is a Forklift Stacker AGV?", "A Forklift Stacker AGV is an autonomous warehouse vehicle designed to transport pallets and support storage or retrieval tasks with defined navigation, safety and control-system interfaces."],
+    ["What is an Autonomous Forklift AGV?", "An Autonomous Forklift AGV transports pallets and supports storage or retrieval tasks with defined navigation, safety and control-system interfaces."],
     ["How much weight can an autonomous forklift handle?", "This product page uses a reference payload of up to 2500kg. Final payload capability must be confirmed against the pallet, load distribution, fork configuration and operating conditions."],
     ["Can forklift AGVs work with ASRS?", "They can be evaluated for ASRS handoffs when the rack interface, pallet format, task signals and safety boundaries are defined as part of the warehouse project."],
     ["What warehouse information is required before quotation?", "Share the warehouse layout, pallet and load information, rack details, aisle widths, travel routes, operating hours, throughput expectations and systems that need to exchange tasks or status."],
@@ -2421,7 +2421,6 @@ function AgvForkliftBodyLegacy() {
 }
 
 function GroundHandlingForkliftAgvBody({ page }) {
-  const features = page.data.features || [];
   const scenarios = page.data.scenarios || [];
   const integrations = page.data.integrations || [];
   const quickSpecs = getProductSpecs("ground-handling-forklift-agv").quickSpecs || [];
@@ -2432,6 +2431,24 @@ function GroundHandlingForkliftAgvBody({ page }) {
     page.data.summary ||
     "Laser-guided pallet transfer for horizontal movement, short-distance stacking, and internal logistics dispatch where dense aisles, mixed traffic, and stable floor-level handling all matter.";
   const heroKicker = page.data.kicker || "Ground Handling Series";
+  const scenarioDescriptions = {
+    "Ground-level pallet transfer between staging and storage zones":
+      "Moves pallets between receiving, staging and storage points on mapped routes.",
+    "Short-distance stacking and rack interface handling":
+      "Supports short lifts and rack handoffs after pallet dimensions, lift height and aisle clearance are confirmed.",
+    "Internal logistics dispatch inside manufacturing workshops":
+      "Dispatches pallets to production-side buffers using configured tasks and station signals.",
+    "Automated transport across mixed-traffic warehouse aisles":
+      "Uses configured detection zones and traffic rules for routes shared with people and equipment."
+  };
+  const integrationDescriptions = {
+    "Laser SLAM + 3D vision navigation stack":
+      "Navigation and obstacle sensing are configured against the site map, aisle layout and traffic rules.",
+    "Fleet coordination for multi-vehicle scheduling":
+      "Dispatch software assigns routes and manages vehicle priorities at shared intersections.",
+    "Auto and manual charging support":
+      "Charging method and station placement are planned around the operating schedule."
+  };
 
   return (
     <main>
@@ -2510,11 +2527,7 @@ function GroundHandlingForkliftAgvBody({ page }) {
                 </h3>{" "}
                 <p className="text-sm leading-relaxed text-on-primary-container">
                   {" "}
-                  {(
-                    features.find((item) =>
-                      scenario.toLowerCase().includes(item.label.toLowerCase()),
-                    ) || features[0]
-                  )?.description || page.data.summary}{" "}
+                  {scenarioDescriptions[scenario] || page.data.summary}{" "}
                 </p>{" "}
               </div>
             ))}{" "}
@@ -2533,7 +2546,7 @@ function GroundHandlingForkliftAgvBody({ page }) {
             </span>{" "}
             <h2 className="font-headline text-4xl font-extrabold tracking-tight text-primary md:text-5xl">
               {" "}
-              Coordination-ready from navigation to charging.{" "}
+              Navigation, fleet control and charging.{" "}
             </h2>{" "}
           </div>{" "}
           <div className="grid gap-6 md:grid-cols-3">
@@ -2553,7 +2566,7 @@ function GroundHandlingForkliftAgvBody({ page }) {
                 </h3>{" "}
                 <p className="text-sm leading-relaxed text-on-surface-variant">
                   {" "}
-                  {page.data.summary}{" "}
+                  {integrationDescriptions[item] || page.data.summary}{" "}
                 </p>{" "}
               </div>
             ))}{" "}
@@ -2591,7 +2604,7 @@ function LiftingAgvBody() {
               Lifting AGV
             </h1>
             <p className="text-white text-xl md:text-2xl max-w-xl font-light leading-relaxed mb-10">
-              Precision internal transport for workstation supply and supermarket replenishment. Engineered for high-throughput environments.
+              Scheduled delivery of compatible carts and racks to workstations and replenishment points.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -2617,13 +2630,13 @@ function LiftingAgvBody() {
           <div className="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
             <div className="md:col-span-5">
               <h2 className="font-headline text-4xl font-bold tracking-tight text-primary mb-8">
-                Adaptive Internal Mobility
+                How the Lifting AGV Moves Loads
               </h2>
               <p className="text-on-surface-variant text-lg leading-relaxed mb-6">
-                The Lift-top AGV is the cornerstone of flexible internal movement. Designed to autonomously slide beneath carts and specialized racks, it employs a heavy-duty vertical lift mechanism to mobilize goods without manual intervention.
+                The Lifting AGV drives beneath compatible carts or racks, lifts the carrier and transports it along a planned route.
               </p>
               <p className="text-on-surface-variant text-lg leading-relaxed">
-                By decoupling the transport unit from the load carrier, Huizong Intelligent Automation enables a lean logistics flow that adapts in real time to production shifts and inventory demands.
+                One vehicle can serve several pickup and drop-off stations when carriers, routes and task signals are configured for the site.
               </p>
             </div>
             <div className="md:col-span-7">
@@ -2633,7 +2646,7 @@ function LiftingAgvBody() {
                       { value: "1,000kg", label: "Max Payload" },
                       { value: "1.8m/s", label: "Travel Speed" },
                       { value: "+/-5mm", label: "Stop Accuracy" },
-                      { value: "24/7", label: "Auto-Charging" }
+                      { value: "Auto", label: "Charging Option" }
                   ].map((metric) => (
                     <div
                       className="bg-surface-container-lowest p-6 rounded-lg shadow-sm border border-outline-variant/10"
@@ -2670,7 +2683,7 @@ function LiftingAgvBody() {
                 </span>
                 <h3 className="text-2xl font-bold text-primary mb-3">Workstation Supply</h3>
                 <p className="text-on-surface-variant max-w-md">
-                  Seamless delivery of raw materials and sub-assemblies directly to production lines with precise timing and positioning.
+                  Moves materials from a pickup point to a defined production-side station on scheduled tasks.
                 </p>
               </div>
                 <div className="absolute top-0 right-0 w-1/2 h-full hidden lg:block">
@@ -2688,7 +2701,7 @@ function LiftingAgvBody() {
                 </span>
                 <h3 className="text-2xl font-bold mb-3">Supermarket Replenishment</h3>
                 <p className="text-on-primary-container">
-                  Automated flow from bulk storage to staging zones, ensuring pick-faces are always stocked for rapid fulfillment.
+                  Transfers replenishment carts from storage to staging or picking locations when tasks are released.
                 </p>
               </div>
             </div>
@@ -2699,7 +2712,7 @@ function LiftingAgvBody() {
                 </span>
                 <h3 className="text-2xl font-bold text-primary mb-3">Cart Transfer</h3>
                 <p className="text-on-surface-variant">
-                  Standardized handling of manual carts and trolleys, bridging the gap between human operators and automated zones.
+                  Transports compatible carts between workshop stations after the carrier and lift interface are confirmed.
                 </p>
               </div>
             </div>
@@ -2708,7 +2721,7 @@ function LiftingAgvBody() {
                 <span className="material-symbols-outlined text-secondary text-4xl mb-6">route</span>
                 <h3 className="text-2xl font-bold text-primary mb-3">Flexible Routes</h3>
                 <p className="text-on-surface-variant max-w-lg">
-                  Dynamic pathfinding that bypasses obstacles and reconfigures instantly when warehouse layouts change.
+                  Routes can be updated in software after layout or traffic changes, subject to map and safety review.
                 </p>
               </div>
               <div className="absolute bottom-[-20%] right-[-10%] w-2/3 h-1/2 opacity-20 rotate-[-15deg]">
@@ -2724,10 +2737,10 @@ function LiftingAgvBody() {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
             <div className="lg:col-span-1">
               <h2 className="font-headline text-4xl font-bold text-primary tracking-tight mb-6">
-                Engineered Advantages
+                Operating Considerations
               </h2>
               <p className="text-on-surface-variant">
-                Precision is not an option; it is our standard. Our Lifting AGVs provide the competitive edge required for modern logistics.
+                The carrier interface, shared-aisle rules and station demand determine how the lifting AGV is configured.
               </p>
             </div>
             <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -2735,17 +2748,17 @@ function LiftingAgvBody() {
                 {
                   title: "Shared Aisle Use",
                   copy:
-                    "Advanced LiDAR and sensory arrays allow for safe, collaborative movement alongside human workers and manual forklifts."
+                    "Configured sensors support obstacle detection in shared aisles; traffic rules and safety zones must be validated on site."
                 },
                 {
                   title: "Route Flexibility",
                   copy:
-                    "No physical floor markers or magnetic tape required. SLAM-based navigation enables instant route modification via software."
+                    "SLAM-based routes can be adjusted in software without magnetic tape, subject to map and safety review."
                 },
                 {
                   title: "Station Response Speed",
                   copy:
-                    "Proprietary dispatching logic ensures the nearest available AGV is tasked, reducing latency and idle time by up to 35%."
+                    "Dispatch software can assign available vehicles based on configured priorities and station demand."
                 }
               ].map((item) => (
                 <div className="flex flex-col gap-4" key={item.title}>
@@ -2815,13 +2828,13 @@ function StorageAgvBody() {
         <div className="relative z-10 max-w-screen-2xl mx-auto px-8 w-full grid grid-cols-1 gap-12 items-center">
           <div className="max-w-2xl">
             <span className="inline-block px-3 py-1 bg-white/10 hsa-dark-kicker rounded-full text-xs font-bold tracking-[0.1em] uppercase mb-6 font-label">
-              Precision Logistics
+              Buffer Storage and Transfer
             </span>
             <h1 className="text-white font-headline text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-[1.1]">
               Storage AGV
             </h1>
             <p className="text-white font-body text-xl md:text-2xl leading-relaxed mb-10">
-              Engineered for high-density buffer zones and automated inventory flow control. Precision in every movement.
+              Moves loads between buffer locations, transfer points and downstream stations on planned routes.
             </p>
             <div className="flex flex-wrap gap-4">
               <button className="bg-secondary text-on-secondary px-8 py-4 rounded-md font-headline font-bold text-lg hover:bg-secondary-container transition-all shadow-xl shadow-black/20">
@@ -2840,10 +2853,10 @@ function StorageAgvBody() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
             <div className="lg:col-span-5">
               <h2 className="font-headline text-4xl font-bold text-primary mb-8 leading-tight">
-                The Backbone of Automated Storage
+                Storage and Transfer Within an ASRS
               </h2>
               <p className="font-body text-lg text-on-surface-variant leading-relaxed">
-                Our Storage AGV isn't just a vehicle; it's the critical link in your automated storage structures. Designed with zero-tolerance engineering, it ensures surgical precision and relentless speed in material release, transforming static storage into a dynamic, high-performance ecosystem.
+                The Storage AGV moves loads within a mapped storage area and delivers them to connected transfer stations. Rack layout, load dimensions and control interfaces determine the final configuration.
               </p>
             </div>
             <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -2851,17 +2864,17 @@ function StorageAgvBody() {
                 {
                   icon: "grid_view",
                   title: "Space Efficiency",
-                  copy: "Reduced footprint, maximizing vertical and horizontal density."
+                  copy: "Buffer routes can be planned around the rack layout and available aisle width."
                 },
                 {
                   icon: "speed",
                   title: "Retrieval Speed",
-                  copy: "High-throughput cycles optimized for peak demand periods."
+                  copy: "Release tasks follow configured priorities and downstream equipment availability."
                 },
                 {
                   icon: "account_tree",
                   title: "Expansion Flexibility",
-                  copy: "Scalable modules that evolve alongside your industrial operations."
+                  copy: "Additional vehicles can be considered as storage locations and task volume change."
                 }
               ].map((item) => (
                 <div
@@ -2902,7 +2915,7 @@ function StorageAgvBody() {
                   Dense Buffer Zones
                 </h3>
                 <p className="font-body text-on-surface-variant max-w-lg mb-6">
-                  Maximizing vertical and horizontal space usage through adaptive navigation algorithms that eliminate wasted aisles.
+                  Moves loads within a mapped buffer area; aisle widths and access points follow the storage layout.
                 </p>
                 <div className="h-1 w-12 bg-secondary group-hover:w-24 transition-all" />
               </div>
@@ -2914,7 +2927,7 @@ function StorageAgvBody() {
               <div>
                 <h3 className="font-headline text-2xl font-bold mb-4">Automated Transfer</h3>
                 <p className="text-primary-fixed opacity-80 mb-8 leading-relaxed">
-                  Seamless handovers between long-term storage and high-speed transport zones with millisecond precision.
+                  Transfers loads between storage and connected conveyors or process stations after interface validation.
                 </p>
               </div>
               <span className="material-symbols-outlined text-4xl text-secondary">arrow_forward</span>
@@ -2925,7 +2938,7 @@ function StorageAgvBody() {
                   Storage Release
                 </h3>
                 <p className="font-body text-on-surface-variant text-lg">
-                  Rapid, controlled retrieval for downstream processes. Our system predicts demand spikes to stage inventory for immediate release.
+                  Executes release tasks from the warehouse control system according to inventory and order priorities.
                 </p>
               </div>
               <div className="rounded-lg overflow-hidden h-48 lg:h-64 shadow-lg bg-surface">
@@ -2952,10 +2965,10 @@ function StorageAgvBody() {
                   System Integration
                 </span>
                 <h2 className="font-headline text-4xl md:text-5xl font-extrabold text-white mb-8 leading-tight">
-                  The ASRS Synergy
+                  Connection with ASRS Control
                 </h2>
                 <p className="font-body text-xl hsa-dark-copy leading-relaxed mb-8">
-                  Integration is not an afterthought. The Storage AGV acts as the kinetic extension of your ASRS (Automated Storage and Retrieval Systems). By bridging the gap between static racking and mobile logistics, we create a complete, zero-error high-density storage solution that operates 24/7.
+                  Storage AGVs can link rack or buffer locations with conveyors and workstations. WMS and WCS task signals, handoff geometry and safety zones are defined for each project.
                 </p>
                 <div className="flex items-center space-x-4">
                   <div className="flex -space-x-4">
@@ -2978,7 +2991,7 @@ function StorageAgvBody() {
                     ))}
                   </div>
                   <span className="text-white font-headline font-bold text-sm">
-                    Unified Control Architecture
+                    Shared Task Control
                   </span>
                 </div>
               </div>
@@ -2993,7 +3006,7 @@ function StorageAgvBody() {
                 <div className="absolute -bottom-6 -right-6 bg-white/70 backdrop-blur-[16px] p-6 rounded-lg border border-outline-variant shadow-xl max-w-xs">
                   <p className="text-secondary font-headline font-bold text-sm mb-1">REAL-TIME SYNC</p>
                   <p className="text-on-surface text-xs leading-relaxed">
-                    System-wide synchronization with 99.9% uptime and adaptive pathfinding.
+                    Task and status data can be exchanged with the control layer to monitor movements and exceptions.
                   </p>
                 </div>
               </div>
@@ -3022,13 +3035,13 @@ function AgvRollerBody() {
           <div className="grid items-center gap-12 md:grid-cols-1">
             <div className="max-w-3xl">
               <span className="inline-block py-1 px-3 bg-white/12 text-white text-xs font-bold tracking-widest uppercase mb-6 rounded-sm">
-                High-End Automation
+                Conveyor Transfer
               </span>
               <h1 className="text-6xl md:text-8xl font-headline font-extrabold text-white leading-tight tracking-tighter mb-6">
                 AGV Roller
               </h1>
               <p className="text-2xl md:text-3xl text-white font-light leading-relaxed mb-10 max-w-2xl">
-                Seamless Material Transfer &amp; Conveyor Integration
+                Mobile Transfer Between Conveyor Stations
               </p>
               <div className="flex flex-wrap gap-4">
                 <button className="px-8 py-4 bg-secondary text-white font-bold rounded-md hover:translate-y-[-2px] transition-all shadow-xl shadow-secondary/20">
@@ -3047,13 +3060,13 @@ function AgvRollerBody() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
           <div className="md:col-span-5">
             <h2 className="text-xs font-label uppercase tracking-[0.2em] text-secondary mb-4">
-              Precision Engineering
+              Transfer Interface
             </h2>
             <h3 className="text-4xl font-headline font-bold text-primary mb-6">
-              The Flexible Link in Modern Logistics
+              Connecting Conveyors and Mobile Transport
             </h3>
             <p className="text-on-surface-variant text-lg leading-relaxed">
-              The AGV Roller represents the pinnacle of hybrid automation. By bridging the gap between static conveyor infrastructures and dynamic mobile operation zones, it ensures continuous flow without the need for manual intervention or expensive fixed-path modifications.
+              The AGV Roller carries cartons or bins between fixed conveyor stations. Transfer height, load size, station signals and route layout are checked during system design.
             </p>
           </div>
           <div className="md:col-span-7 bg-surface-container-low p-8 rounded-xl flex items-center justify-center">
@@ -3062,12 +3075,12 @@ function AgvRollerBody() {
                 {
                   icon: "link",
                   title: "Hybrid Integration",
-                  copy: "Connects legacy systems to modern mobile fleets."
+                  copy: "Transfer interfaces can connect existing conveyor stations with mobile transport tasks."
                 },
                 {
                   icon: "bolt",
-                  title: "Zero Downtime",
-                  copy: "Continuous operation with fast-swap battery modules."
+                  title: "Charging Plan",
+                  copy: "Vehicle availability depends on task schedules, battery setup and charging access."
                 }
               ].map((item) => (
                 <div
@@ -3092,7 +3105,7 @@ function AgvRollerBody() {
             <h2 className="text-3xl md:text-5xl font-headline font-bold text-primary mb-4">
               Application Scenarios
             </h2>
-            <p className="text-slate-500">Designed for complex industrial throughput requirements.</p>
+            <p className="text-slate-500">Typical transfer points for cartons, bins and packing flow.</p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="md:col-span-2 relative group overflow-hidden rounded-xl bg-primary h-[400px]">
@@ -3105,7 +3118,7 @@ function AgvRollerBody() {
               <div className="absolute bottom-0 p-8">
                 <h4 className="text-2xl font-bold text-white mb-2">Conveyor Handoff</h4>
                 <p className="text-on-primary-container max-w-md">
-                  Smooth, synchronized transitions from fixed lines to mobile units with millimeter precision.
+                  Transfers loads between a conveyor and the vehicle after height, alignment and signal handoff are confirmed.
                 </p>
               </div>
             </div>
@@ -3117,7 +3130,7 @@ function AgvRollerBody() {
                 <div>
                   <h4 className="text-xl font-bold text-primary mb-2">Carton Transfer</h4>
                   <p className="text-on-surface-variant">
-                    High-speed handling of boxes and small containers with adaptive weight sensing.
+                    Moves compatible cartons and bins between configured pickup and drop-off stations.
                   </p>
                 </div>
               </div>
@@ -3130,7 +3143,7 @@ function AgvRollerBody() {
                 <div>
                   <h4 className="text-xl font-bold text-primary mb-2">Packing Transfer</h4>
                   <p className="text-on-surface-variant">
-                    Moving goods seamlessly between sorting docks and final packing stations.
+                    Moves packed goods from sorting or buffer stations to the next handling point.
                   </p>
                 </div>
               </div>
@@ -3145,7 +3158,7 @@ function AgvRollerBody() {
               <div className="absolute bottom-0 p-8">
                 <h4 className="text-2xl font-bold text-white mb-2">Adaptive Routing</h4>
                 <p className="text-on-primary-container max-w-md">
-                  Real-time reconfiguration of logistics paths without the need for physical track updates.
+                  Routes can be changed in software after the updated path and station handoffs are validated.
                 </p>
               </div>
             </div>
@@ -3188,17 +3201,17 @@ function AgvRollerBody() {
             {
               number: "01",
               title: "Hybrid Automation",
-              copy: "Bridges the critical gap between fixed conveyor belts and flexible mobile zones, creating a unified flow ecosystem."
+              copy: "Connects fixed conveyor handoff points with vehicle routes between stations."
             },
             {
               number: "02",
               title: "Modular Routing",
-              copy: "Easily scalable architecture that allows you to add units and redefine paths via software, not hardware."
+              copy: "Additional vehicles and routes can be planned as station demand changes."
             },
             {
               number: "03",
               title: "Fixed-to-Mobile",
-              copy: "Enhances end-to-end throughput by removing manual touchpoints at transfer interfaces."
+              copy: "Automates a defined load handoff where conveyor and vehicle controls exchange task status."
             }
           ].map((item) => (
             <div className="flex flex-col items-start" key={item.title}>
@@ -3213,15 +3226,15 @@ function AgvRollerBody() {
       <section className="py-24 bg-primary text-white overflow-hidden relative">
         <div className="max-w-7xl mx-auto px-8 md:px-12 flex flex-col md:flex-row items-center gap-16 relative z-10">
           <div className="md:w-1/2">
-            <h2 className="text-4xl font-headline font-bold mb-8">Ecosystem Synergy</h2>
+            <h2 className="text-4xl font-headline font-bold mb-8">WMS and Conveyor Interfaces</h2>
             <p className="text-on-primary-container text-xl leading-relaxed mb-8">
-              The AGV Roller is not an isolated component. It is engineered to perform in perfect concert with 'Material Handling' software and hardware ecosystems.
+              A project integration defines the conveyor handoff, task release and status reporting needed to connect the AGV Roller with warehouse software.
             </p>
             <ul className="space-y-4">
               {[
-                "Real-time API integration with WMS platforms",
-                "Dynamic load balancing across multiple AGV fleets",
-                "Autonomous charging and maintenance scheduling"
+                "WMS or WCS task and status interface",
+                "Traffic rules for multiple vehicles",
+                "Charging schedule based on operating hours"
               ].map((item) => (
                 <li className="flex items-center space-x-3" key={item}>
                   <span className="material-symbols-outlined text-secondary">check_circle</span>
@@ -3232,7 +3245,7 @@ function AgvRollerBody() {
           </div>
           <div className="md:w-1/2 bg-white/5 p-4 rounded-2xl backdrop-blur-xl border border-white/10">
               <img
-                alt="Ecosystem synergy"
+                alt="AGV Roller connected to conveyor and warehouse software interfaces"
                 className="rounded-xl transition-all duration-700"
                 src="/assets/images/agv-roller-ecosystem.webp"
               />
@@ -3260,14 +3273,14 @@ function CompositeMobileRobotBody() {
             <div className="grid items-center gap-12 md:grid-cols-[minmax(0,1.05fr)_minmax(320px,0.95fr)]">
               <div className="max-w-3xl">
                 <span className="inline-block px-3 py-1 mb-6 text-xs font-black tracking-widest uppercase bg-secondary-container text-on-secondary-container rounded-sm">
-                  Industrial Grade Robotics
+                  Mobile Manipulation
                 </span>
                 <h1 className="text-6xl md:text-8xl font-headline font-extrabold text-white tracking-tighter leading-[0.9] mb-8">
                   Composite <br />
                   Mobile Robot
                 </h1>
                 <p className="text-xl md:text-2xl hsa-dark-copy font-light leading-relaxed mb-10 max-w-2xl">
-                  The pinnacle of mobile manipulation. Integrating advanced robotics with autonomous mobility for complex task execution in high-precision environments.
+                  Combines a mobile base and robotic arm for handling tasks at defined workstations.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <button className="px-8 py-4 text-white bg-secondary font-bold rounded-md hover:bg-secondary-container transition-all flex items-center gap-2 group">
@@ -3301,17 +3314,17 @@ function CompositeMobileRobotBody() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div>
               <h2 className="text-4xl md:text-5xl font-headline font-bold text-primary tracking-tight mb-8">
-                Bridging the Gap in <span className="text-secondary">Flexible Automation</span>
+                Mobile Manipulation at <span className="text-secondary">Workstations</span>
               </h2>
               <div className="space-y-6 text-lg text-on-surface-variant leading-relaxed">
                 <p>
-                  Traditional robotics forces a choice between mobility and manipulation. Stationary arms are fixed to work-cells, while mobile platforms are limited to simple logistics.
+                  A fixed robot arm serves one work area. A mobile platform can carry an arm between several defined stations.
                 </p>
                 <p className="font-semibold text-primary">
-                  The Composite Mobile Robot (CMR) eliminates this boundary through advanced 'mobile manipulation'.
+                  The Composite Mobile Robot combines transport and manipulation in one configured system.
                 </p>
                 <p>
-                  By fusing a high-precision robotic arm with an autonomous navigation base, the CMR performs complex, adaptive task execution while in transit. This enables a level of operational fluidity previously impossible in industrial settings.
+                  The base moves between stations; the arm performs its handling task after the robot reaches a validated work position. Task steps, tooling and safety zones are set for the application.
                 </p>
               </div>
               <div className="mt-12 grid grid-cols-2 gap-8">
@@ -3338,9 +3351,9 @@ function CompositeMobileRobotBody() {
                 </div>
               <div className="absolute -bottom-10 -left-10 bg-white/70 backdrop-blur-[20px] p-8 rounded-xl border border-white/20 shadow-xl max-w-xs">
                 <span className="material-symbols-outlined text-secondary text-4xl mb-4">memory</span>
-                <h3 className="font-headline font-bold text-xl mb-2">Adaptive Logic</h3>
+                <h3 className="font-headline font-bold text-xl mb-2">Task Rules</h3>
                 <p className="text-sm text-on-surface-variant">
-                  Embedded AI-driven task management allows the robot to prioritize workflows in real-time based on environment changes.
+                  Configured task rules can set station order, priorities and exception handling after integration with the control system.
                 </p>
               </div>
             </div>
@@ -3355,7 +3368,7 @@ function CompositeMobileRobotBody() {
               Application Scenarios
             </h2>
             <h3 className="text-4xl font-headline font-bold text-primary">
-              Redefining Operational Flux
+              Handling at Defined Workstations
             </h3>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -3370,7 +3383,7 @@ function CompositeMobileRobotBody() {
                   Move-and-Work Automation
                 </h4>
                 <p className="text-white text-lg max-w-md">
-                  CMR units perform assembly, inspection, and maintenance tasks while in transit between stations, maximizing uptime and reducing bottlenecking.
+                  The mobile base carries the arm between stations. Assembly, inspection or handling tasks are performed after the robot is positioned and safe to operate.
                 </p>
               </LiteYouTubeEmbed>
             </div>
@@ -3380,7 +3393,7 @@ function CompositeMobileRobotBody() {
                   Flexible Fulfillment
                 </h4>
                   <p className="text-white text-sm">
-                  Dynamic sorting for high-variability order picking. Perfect for e-commerce hubs requiring rapid layout adaptation without infrastructure changes.
+                  Supports project-defined picking or sorting tasks after item types, gripping tools and workstation layout are assessed.
                 </p>
               </div>
                 <img
@@ -3402,7 +3415,7 @@ function CompositeMobileRobotBody() {
                     Point-of-Use Handling
                   </h4>
                   <p className="text-on-surface-variant text-lg">
-                    Eliminate fixed delivery points. CMRs deliver materials and immediately perform the required operation directly at the assembly point, creating a seamless production loop.
+                    The robot can bring materials to a workstation and perform a configured handling step at that location.
                   </p>
                 </div>
                 <div className="w-full md:w-1/2 overflow-hidden">
@@ -3423,14 +3436,14 @@ function CompositeMobileRobotBody() {
         <div className="relative z-10 px-6 md:px-8 lg:px-12">
           <div className="max-w-2xl mb-20">
             <h2 className="text-4xl md:text-5xl font-headline font-extrabold tracking-tight">
-              Engineering the Zero-Tolerance Advantage
+              Engineering Considerations
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               {
                 title: "Workflow Adaptability",
-                copy: "No two warehouse cycles are identical. Our CMR platform features rapid re-configuration logic, allowing you to switch between tasks like sorting, inspection, and delivery in minutes, not days."
+                copy: "Task sequences can be updated in software once gripper, station and safety requirements are validated."
               },
               {
                 title: "Task Diversity",
@@ -3438,7 +3451,7 @@ function CompositeMobileRobotBody() {
               },
               {
                 title: "Hybrid Execution",
-                copy: "Combines the navigational intelligence of an AMR with the dexterity of a 6-axis cobot. It doesn't just transport value; it creates value at every point in the facility."
+                copy: "Combines a mobile base with a robotic arm so handling tasks can be assigned across defined stations."
               }
             ].map((item) => (
               <div className="space-y-6" key={item.title}>
@@ -3457,7 +3470,7 @@ function CompositeMobileRobotBody() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div>
                 <h2 className="text-4xl font-headline font-bold text-primary mb-8">
-                  Seamless Ecosystem Integration
+                  System Integration
                 </h2>
                 <p className="text-lg text-on-surface-variant mb-10">
                   The CMR can connect with fleet control, workstation signals, and picking workflows through a project-defined integration plan for coordinated task execution.
@@ -3466,9 +3479,9 @@ function CompositeMobileRobotBody() {
                   <li className="flex items-start gap-4">
                     <span className="material-symbols-outlined text-secondary mt-1">hub</span>
                     <div>
-                      <span className="block font-bold text-primary">Fleet Management Synergy</span>
+                      <span className="block font-bold text-primary">Fleet Control Interface</span>
                       <span className="text-sm text-on-surface-variant">
-                        Real-time path optimization and traffic control in mixed operation environments.
+                        Task dispatch and traffic rules are defined for the routes shared with other vehicles.
                       </span>
                     </div>
                   </li>
@@ -3514,11 +3527,11 @@ function CompositeMobileRobotBody() {
             <div className="absolute inset-0 bg-gradient-to-r from-secondary/10 to-transparent" />
             <div className="relative z-10">
               <h2 className="text-4xl md:text-5xl font-headline font-extrabold text-white mb-8">
-                Ready to Architect Your <br />
-                Next-Gen Workflow?
+                Discuss Your Handling <br />
+                Workflow
               </h2>
               <p className="text-xl text-white max-w-2xl mx-auto mb-12">
-                Connect with our engineering specialists to discuss your specific operational challenges and discover how composite mobility can transform your throughput.
+                Share load types, station layout and task steps with our engineering team to assess a suitable configuration.
               </p>
               <div className="flex flex-col md:flex-row justify-center gap-4">
                 <button className="px-10 py-5 text-white bg-secondary font-bold rounded-md hover:bg-secondary-container transition-all">
