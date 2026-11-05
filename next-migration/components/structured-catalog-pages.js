@@ -1654,7 +1654,7 @@ function ProductOverviewBody({ page }) {
                 ? "Deployment can be planned around existing routes and site infrastructure."
                 : item;
               return (
-                <div className="group" key={item}>
+                <div className="group" key={capabilityCopy}>
                   {" "}
                   <div className="w-10 h-10 flex items-center justify-center bg-surface-container mb-6">
                     {" "}
