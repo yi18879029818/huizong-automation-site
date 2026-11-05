@@ -1,5 +1,12 @@
 # HANDOFF
 
+## 2026-11-05 - Six product detail page copy revisions
+
+- Status: deployed and verified on all six product detail routes.
+- Changed files: `components/structured-catalog-pages.js`, three forklift component files, six `content/products/*.mdx` files, `lib/seo-page-overrides.js`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`.
+- Verified: 18 tests and OpenNext Cloudflare builds passed. Source commits `a498ef5` and `c18f660` were pushed before Worker `c06372c0-6cba-4294-a46e-71d0b55a2abd` was deployed. All six routes return 200 with updated body and metadata; the checked old claims are absent.
+- Unresolved: none for the requested copy revision. Next: confirm retained numerical product specifications against approved datasheets when those figures are next reviewed. Risk: some product fields are supplied by Sanity, so later CMS edits may change displayed summaries.
+
 ## 2026-11-05 - Product overview copy revision
 
 - Status: deployed and verified on production at `/products`.

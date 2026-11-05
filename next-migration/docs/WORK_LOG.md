@@ -814,3 +814,10 @@
 - `npm test` passed all 18 tests. The OpenNext Cloudflare build completed. Source commits `4ba251b` and `a74eefe` were pushed to `main` before deployment.
 - Cloudflare Worker version `e0aecbdc-a043-4bd0-92b0-590dfbae7b94` is live. The public `/products` route returns HTTP 200, contains all six revised copy groups, and omits the old phrases from the page response.
 
+## 2026-11-05 - Six product detail page copy revisions
+
+- Revised the six product detail pages for Autonomous Forklift AGV, Ground Handling Forklift AGV, Lifting AGV, Storage AGV, AGV Roller, and Composite Mobile Robot. Replaced abstract marketing language and unsupported absolute claims with descriptions of loads, routes, station handoffs, safety rules, and site-specific configuration. The ground-handling scenario and integration cards now have distinct descriptions.
+- Updated the six product metadata descriptions to match the visible copy; removed the forklift page's remaining `24/7 internal transport` search-summary claim. Preserved the page structure, links, and existing technical specification figures.
+- `npm test` passed all 18 tests; `git diff --check` and OpenNext Cloudflare builds passed. Source commits `a498ef5` and `c18f660` were pushed to `main` before deployment.
+- Cloudflare Worker version `c06372c0-6cba-4294-a46e-71d0b55a2abd` is live. All six public routes return HTTP 200 and display the revised body and metadata; selected old claims are absent from the responses.
+
