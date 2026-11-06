@@ -828,3 +828,9 @@
 - `npm test` passed all 18 tests; `git diff --check` and the OpenNext Cloudflare build passed. Source commit `c5bd87b` was pushed to `main` before deployment. Worker version `bcf33232-4341-4b6d-ae37-67bc82f377d6` is live.
 - All five public routes return HTTP 200 and contain the revised copy. The incorrect ASRS download link and checked old claims are absent. The sitemap returns 200 and includes the four detail routes.
 
+## 2026-11-06 - AGVs for the Food Industry article
+
+- Published the supplied Word document as a new Sanity post at `/blog/agvs-for-the-food-industry`. The source Markdown preserves all 51 non-empty Word paragraphs, including four H2 sections, 11 H3 subsections, and the Coolyne contact link. The Word file contains no embedded images.
+- Confirmed the target slug was unused and the supplied Sanity credential passed authenticated read, create dry-run, and update dry-run checks. Published the article as `post-agvs-for-the-food-industry`; Sanity readback shows 50 body blocks, 15 section headings, one contact link, and the canonical URL.
+- Source commit `b80a39e` was pushed to `main` before Sanity publication. The public article, blog index, and sitemap return HTTP 200; the article body and contact link render correctly. No frontend deployment was required.
+

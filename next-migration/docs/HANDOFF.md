@@ -1,5 +1,12 @@
 # HANDOFF
 
+## 2026-11-06 - AGVs for the Food Industry article
+
+- Status: published and publicly verified at `/blog/agvs-for-the-food-industry`.
+- Changed files: `content/blog/agvs-for-the-food-industry.md`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`; Sanity post `post-agvs-for-the-food-industry`.
+- Verified: Markdown body matches all 51 source Word paragraphs after heading/link conversion. Sanity readback shows 50 body blocks, 15 headings, one contact link, and the canonical URL. The article, blog index, and sitemap return 200. Source commit `b80a39e` was pushed before publication; no frontend deployment was required.
+- Unresolved: none. Risk: the supplied Word file has no embedded cover image; add one later if provided.
+
 ## 2026-11-05 - Solutions page copy revisions
 
 - Status: deployed and verified on the Solutions overview and four dropdown detail pages.
