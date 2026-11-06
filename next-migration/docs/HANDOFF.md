@@ -1,5 +1,12 @@
 # HANDOFF
 
+## 2026-11-06 - Food industry AGV article images
+
+- Status: four supplied images are published in `/blog/agvs-for-the-food-industry`; the packaged food pallet and automated forklift image is the cover.
+- Changed files: `scripts/add-food-industry-agv-images.mjs`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`; Sanity post `post-agvs-for-the-food-industry` and four image assets.
+- Verified: asset and document write dry-runs passed. Sanity has 54 body blocks, four inline images, and matching cover and Open Graph references. The public article, sitemap, and four image CDN URLs return HTTP 200; all four alt texts render in the article HTML. Script commit `d6e010b` was pushed before the Sanity writes.
+- Unresolved: none. Risk: re-importing the original text-only Markdown could replace the inline Sanity image blocks; preserve them in future article revisions.
+
 ## 2026-11-06 - AGVs for the Food Industry article
 
 - Status: published and publicly verified at `/blog/agvs-for-the-food-industry`.

@@ -834,3 +834,9 @@
 - Confirmed the target slug was unused and the supplied Sanity credential passed authenticated read, create dry-run, and update dry-run checks. Published the article as `post-agvs-for-the-food-industry`; Sanity readback shows 50 body blocks, 15 section headings, one contact link, and the canonical URL.
 - Source commit `b80a39e` was pushed to `main` before Sanity publication. The public article, blog index, and sitemap return HTTP 200; the article body and contact link render correctly. No frontend deployment was required.
 
+## 2026-11-06 - Food industry AGV article images
+
+- Uploaded the four supplied warehouse and food pallet handling photographs to Sanity and inserted them into `/blog/agvs-for-the-food-industry` beside the relevant application sections. Selected the packaged food pallet and automated forklift photograph as both the article cover and Open Graph image.
+- Added the reproducible image publishing script `scripts/add-food-industry-agv-images.mjs` without storing the credential. Script commit `d6e010b` was pushed to `main` before Sanity writes; asset and document write dry-runs passed.
+- Sanity readback confirms 54 body blocks, four image blocks, and matching cover and Open Graph references. The public article and sitemap return HTTP 200; all four image CDN URLs return HTTP 200 and their alt text appears in the article HTML. No frontend deployment was needed.
+
