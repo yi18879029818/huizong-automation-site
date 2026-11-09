@@ -1,5 +1,12 @@
 # HANDOFF
 
+## 2026-11-09 - Enable browser translation sitewide
+
+- Status: deployed; shared layout no longer instructs browsers or Google Translate to avoid translation.
+- Changed files: `app/layout.js`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`.
+- Verified: 18 tests and OpenNext Cloudflare build passed. Source commit `03c780e` was pushed before Worker version `b16e0a82-5056-4848-8811-5d27cde0c4bc` deployed. Six public routes return 200, retain `lang="en"`, and omit `translate="no"` and `notranslate`.
+- Unresolved: none. Risk: browser translation quality and whether the user has enabled automatic translation depend on browser settings and the translation service; the site no longer blocks it.
+
 ## 2026-11-09 - AMR supply chain article images
 
 - Status: three supplied images published in `/blog/amr-supply-chain`; the wide factory material flow image is the cover.

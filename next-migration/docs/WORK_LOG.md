@@ -852,3 +852,9 @@
 - Added `scripts/add-amr-supply-chain-images.mjs` with credential-free, repeatable upload logic. Script commit `37b283b` was pushed to `main` before the Sanity write. Asset creation and document update dry-runs passed.
 - Sanity readback shows 78 body blocks, three inline images, and matching hero and Open Graph image references. The public page, all three image CDN URLs, and sitemap return HTTP 200; all three image references and alt texts appear in live HTML. No frontend deployment was needed.
 
+## 2026-11-09 - Enable browser translation sitewide
+
+- Removed the root HTML `translate="no"` attribute and the `<meta name="google" content="notranslate">` directive. Both were present in live `/blog` HTML and blocked browser translation across routes using the shared layout. Retained `lang="en"`.
+- All 18 tests passed and the OpenNext Cloudflare build completed. Source commit `03c780e` was pushed to `main` before Wrangler deployed Worker version `b16e0a82-5056-4848-8811-5d27cde0c4bc`.
+- Public `/`, `/blog`, `/blog/amr-supply-chain`, `/products`, `/solutions`, and `/contact` each return HTTP 200 with `lang="en"` and without either translation-blocking directive.
+
