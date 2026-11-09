@@ -73,9 +73,8 @@ export async function generateMetadata() {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" translate="no" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
-        <meta content="notranslate" name="google" />
         <link
           rel="preload"
           href="/assets/fonts/inter-latin.woff2"
