@@ -1,5 +1,12 @@
 # HANDOFF
 
+## 2026-11-09 - AMR supply chain article images
+
+- Status: three supplied images published in `/blog/amr-supply-chain`; the wide factory material flow image is the cover.
+- Changed files: `scripts/add-amr-supply-chain-images.mjs`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`; Sanity post `post-amr-supply-chain` and three image assets.
+- Verified: asset and document write dry-runs passed. Sanity has 78 body blocks, three inline images, and matching hero and Open Graph references. The public page, sitemap, and three image CDN URLs return HTTP 200; all three image references and alt texts appear in live HTML. Script commit `37b283b` was pushed before Sanity writes.
+- Unresolved: none. Risk: re-importing the original text-only Markdown can replace the inline image blocks; preserve them during future article edits.
+
 ## 2026-11-09 - AMR supply chain article
 
 - Status: new article published and publicly verified at `/blog/amr-supply-chain`.

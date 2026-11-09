@@ -846,3 +846,9 @@
 - Confirmed the slug was unused and Sanity authenticated read, create dry-run, and update dry-run passed before publication. Source commit `d4682b6` was pushed to `main` before the Sanity write.
 - Sanity readback confirms 75 body blocks, four H2 headings, five H3 headings, three links, and the canonical URL. The public article and sitemap return HTTP 200, and the article HTML contains the title, opening text, and all three link targets. No frontend deployment was needed.
 
+## 2026-11-09 - AMR supply chain article images
+
+- Uploaded the three supplied AMR and factory photographs to the Sanity post `/blog/amr-supply-chain`. Placed them alongside the introductory transport, collaborative picking, and production replenishment sections. Selected the wide factory material flow photograph as the hero and Open Graph cover.
+- Added `scripts/add-amr-supply-chain-images.mjs` with credential-free, repeatable upload logic. Script commit `37b283b` was pushed to `main` before the Sanity write. Asset creation and document update dry-runs passed.
+- Sanity readback shows 78 body blocks, three inline images, and matching hero and Open Graph image references. The public page, all three image CDN URLs, and sitemap return HTTP 200; all three image references and alt texts appear in live HTML. No frontend deployment was needed.
+
