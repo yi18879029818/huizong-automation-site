@@ -1,5 +1,12 @@
 # HANDOFF
 
+## 2026-11-09 - AMR supply chain article
+
+- Status: new article published and publicly verified at `/blog/amr-supply-chain`.
+- Changed files: `content/blog/amr-supply-chain.md`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`; Sanity post `post-amr-supply-chain`.
+- Verified: all 76 non-empty Word paragraphs were preserved in the source. Sanity has 75 body blocks, four H2 headings, five H3 headings, three original links, and the canonical URL. Article and sitemap return HTTP 200; live HTML contains the title, introduction, and three link targets. Source commit `d4682b6` was pushed before publication.
+- Unresolved: none. Risk: the supplied Word document has no embedded cover image; add one if provided later.
+
 ## 2026-11-06 - Food industry AGV article images
 
 - Status: four supplied images are published in `/blog/agvs-for-the-food-industry`; the packaged food pallet and automated forklift image is the cover.

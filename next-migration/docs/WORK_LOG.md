@@ -840,3 +840,9 @@
 - Added the reproducible image publishing script `scripts/add-food-industry-agv-images.mjs` without storing the credential. Script commit `d6e010b` was pushed to `main` before Sanity writes; asset and document write dry-runs passed.
 - Sanity readback confirms 54 body blocks, four image blocks, and matching cover and Open Graph references. The public article and sitemap return HTTP 200; all four image CDN URLs return HTTP 200 and their alt text appears in the article HTML. No frontend deployment was needed.
 
+## 2026-11-09 - AMR supply chain article
+
+- Published the supplied `Coolyne_AMR_Supply_Chain.docx` as a new Sanity article at `/blog/amr-supply-chain`. The Markdown source preserves all 76 non-empty Word paragraphs, including the title, four H2 sections, five H3 subsections, and three original hyperlinks. The document contains no embedded images.
+- Confirmed the slug was unused and Sanity authenticated read, create dry-run, and update dry-run passed before publication. Source commit `d4682b6` was pushed to `main` before the Sanity write.
+- Sanity readback confirms 75 body blocks, four H2 headings, five H3 headings, three links, and the canonical URL. The public article and sitemap return HTTP 200, and the article HTML contains the title, opening text, and all three link targets. No frontend deployment was needed.
+
