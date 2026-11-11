@@ -1,5 +1,12 @@
 # HANDOFF
 
+## 2026-11-11 - Rail guided vehicle RGV guide article
+
+- Status: new article published and publicly verified at `/blog/rail-guided-vehicle-rgv-guide`.
+- Changed files: `content/blog/rail-guided-vehicle-rgv-guide.md`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`; Sanity post `post-rail-guided-vehicle-rgv-guide`.
+- Verified: source preserves 89 non-empty Word paragraphs, six H2 headings, ten H3 headings, and three links. Sanity has 88 body blocks and the canonical URL. Public article and sitemap return HTTP 200; live HTML contains the title, introduction, and all three link targets. Source commit `d0a3f92` was pushed before publication.
+- Unresolved: none. Risk: the supplied Word document contains no embedded cover image; one can be added when supplied.
+
 ## 2026-11-09 - Enable browser translation sitewide
 
 - Status: deployed; shared layout no longer instructs browsers or Google Translate to avoid translation.

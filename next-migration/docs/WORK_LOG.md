@@ -858,3 +858,9 @@
 - All 18 tests passed and the OpenNext Cloudflare build completed. Source commit `03c780e` was pushed to `main` before Wrangler deployed Worker version `b16e0a82-5056-4848-8811-5d27cde0c4bc`.
 - Public `/`, `/blog`, `/blog/amr-supply-chain`, `/products`, `/solutions`, and `/contact` each return HTTP 200 with `lang="en"` and without either translation-blocking directive.
 
+## 2026-11-11 - Rail guided vehicle RGV guide article
+
+- Published the supplied `Coolyne_Rail_Guided_Vehicle_RGV_Guide.docx` as a new Sanity post at `/blog/rail-guided-vehicle-rgv-guide`. The Markdown source preserves all 89 non-empty Word paragraphs, six H2 sections, ten H3 subsections (including four custom-styled application labels), and three original links. The Word file has no embedded images.
+- Confirmed the target slug was unused; authenticated target read, create dry-run, and update dry-run succeeded before publication. Source commit `d0a3f92` was pushed to `main` before the Sanity write.
+- Sanity readback confirms 88 body blocks, six H2 headings, ten H3 headings, three links, and the canonical URL. The public article and sitemap return HTTP 200; the article HTML contains the title, introduction, and all three link targets. No frontend deployment was required.
+
