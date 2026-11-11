@@ -1,5 +1,12 @@
 # HANDOFF
 
+## 2026-11-11 - RGV guide article images
+
+- Status: six images are published in `/blog/rail-guided-vehicle-rgv-guide`; the wide curved-track warehouse image is the cover.
+- Changed files: `scripts/add-rgv-guide-images.mjs`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`; Sanity post `post-rail-guided-vehicle-rgv-guide` and six image assets.
+- Verified: write dry-runs passed. Sanity has 94 body blocks, six inline images, and matching hero and Open Graph references. Public article, sitemap, and six image CDN URLs return HTTP 200; all six alt texts appear in live HTML. Script commit `087a3c5` was pushed before writes.
+- Unresolved: none. Risk: re-importing the original text-only Markdown can replace Sanity inline image blocks; preserve them during future edits.
+
 ## 2026-11-11 - Rail guided vehicle RGV guide article
 
 - Status: new article published and publicly verified at `/blog/rail-guided-vehicle-rgv-guide`.

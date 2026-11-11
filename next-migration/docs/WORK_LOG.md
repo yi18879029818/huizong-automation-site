@@ -864,3 +864,9 @@
 - Confirmed the target slug was unused; authenticated target read, create dry-run, and update dry-run succeeded before publication. Source commit `d0a3f92` was pushed to `main` before the Sanity write.
 - Sanity readback confirms 88 body blocks, six H2 headings, ten H3 headings, three links, and the canonical URL. The public article and sitemap return HTTP 200; the article HTML contains the title, introduction, and all three link targets. No frontend deployment was required.
 
+## 2026-11-11 - RGV guide article images
+
+- Uploaded the six supplied RGV photographs and illustration to `/blog/rail-guided-vehicle-rgv-guide`, placing them near the rail layout, AS/RS, and distribution examples. Selected the wide curved-track warehouse photograph as the cover and Open Graph image.
+- Added `scripts/add-rgv-guide-images.mjs` without storing a credential. Script commit `087a3c5` was pushed to `main` before Sanity writes; asset-create and document-update dry-runs passed.
+- Sanity readback confirms 94 body blocks, six inline image blocks, and matching cover and Open Graph references. The public article, sitemap, and all six image CDN URLs return HTTP 200; every image alt text appears in the live article HTML. No frontend deployment was needed.
+
