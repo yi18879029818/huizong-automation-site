@@ -1,5 +1,11 @@
 # Work Log
 
+## 2026-11-13 - Warehouse robots article images
+
+- Uploaded the two user-supplied warehouse robot images to Sanity and inserted them after the goods-to-person and bin-based AS/RS explanations in `/blog/types-of-warehouse-robots`.
+- Set the blue-bin AS/RS photograph as both the article cover and Open Graph image. The post now has 78 body blocks, including two `imageWithAlt` blocks.
+- Passed Sanity create and update dry-runs before writing. Verified both image alt texts and the cover asset in the live article HTML, plus article and sitemap HTTP 200 responses.
+
 ## 2026-11-13 - Types of warehouse robots article
 
 - Published `Coolyne_Types_of_Warehouse_Robots.docx` as a new Sanity post at `/blog/types-of-warehouse-robots`.

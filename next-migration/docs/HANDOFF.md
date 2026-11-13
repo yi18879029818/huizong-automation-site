@@ -1,5 +1,12 @@
 # HANDOFF
 
+## 2026-11-13 - Warehouse robots article images
+
+- Status: two images are published in `/blog/types-of-warehouse-robots`; the wide blue-bin AS/RS image is the cover.
+- Changed files: `scripts/add-warehouse-robot-images.mjs`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`; Sanity post `post-types-of-warehouse-robots` and two image assets.
+- Verified: Sanity has 78 body blocks, two image blocks, and matching hero and Open Graph image references. The public article and sitemap return HTTP 200; both image alt texts and the cover asset appear in live HTML. Script commit `a54a791` was pushed before writes.
+- Unresolved: none. Risk: re-importing the original text-only Markdown can replace the two inline image blocks.
+
 ## 2026-11-13 - Types of warehouse robots article
 
 - Status: new Sanity article published at `/blog/types-of-warehouse-robots`.
