@@ -1,5 +1,12 @@
 # HANDOFF
 
+## 2026-11-13 - Types of warehouse robots article
+
+- Status: new Sanity article published at `/blog/types-of-warehouse-robots`.
+- Changed files: `content/blog/types-of-warehouse-robots.md`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`; Sanity post `post-types-of-warehouse-robots`.
+- Verified: 77 source paragraphs, eight H2 sections, and five original links were preserved in 76 body blocks. Article, blog index, and sitemap return HTTP 200; live page contains every source paragraph, canonical URL, and BlogPosting metadata.
+- Unresolved: none. Risk: the supplied Word document has no embedded images, so the article currently has no cover image.
+
 ## 2026-11-11 - RGV guide article images
 
 - Status: six images are published in `/blog/rail-guided-vehicle-rgv-guide`; the wide curved-track warehouse image is the cover.

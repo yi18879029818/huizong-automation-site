@@ -1,5 +1,12 @@
 # Work Log
 
+## 2026-11-13 - Types of warehouse robots article
+
+- Published `Coolyne_Types_of_Warehouse_Robots.docx` as a new Sanity post at `/blog/types-of-warehouse-robots`.
+- Converted all 77 non-empty Word paragraphs, including eight H2 sections and five original Coolyne links, into importer-ready Markdown and 76 Portable Text body blocks. The source contains no embedded images.
+- Confirmed the slug was absent before creation; the Sanity read, create dry-run, and update dry-run passed before publishing.
+- Verified the live article, blog index, sitemap, complete source text, contact link, canonical URL, and BlogPosting metadata. No frontend deployment was required.
+
 ## 2026-10-29 - Blog Index Hero Label
 
 - Removed the small `Blog` label above `All Blog Posts` on the blog index, without changing the heading, description, or article list.
