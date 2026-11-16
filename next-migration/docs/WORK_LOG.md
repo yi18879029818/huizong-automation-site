@@ -883,3 +883,9 @@
 - Added `scripts/add-rgv-guide-images.mjs` without storing a credential. Script commit `087a3c5` was pushed to `main` before Sanity writes; asset-create and document-update dry-runs passed.
 - Sanity readback confirms 94 body blocks, six inline image blocks, and matching cover and Open Graph references. The public article, sitemap, and all six image CDN URLs return HTTP 200; every image alt text appears in the live article HTML. No frontend deployment was needed.
 
+
+## 2026-11-16 - Vertical lift module article
+
+- Published the supplied `Coolyne_What_Is_a_Vertical_Lift_Module_VLM(1).docx` as a new Sanity post at `/blog/what-is-a-vertical-lift-module`. The Markdown source preserves all 74 non-empty Word paragraphs, including four main sections, nine subsections, four bullet items, and two original internal links. The document has no embedded images.
+- Confirmed the slug was unused; source commit `1637f7d` was pushed to `main` before the Sanity write. Authenticated target read, create dry-run, and update dry-run passed.
+- Sanity readback confirmed 73 body blocks and the canonical URL. The public article, blog index, and sitemap return HTTP 200; the live article includes all 74 source paragraphs, both links, canonical metadata, and BlogPosting structured data. No frontend deployment was required.

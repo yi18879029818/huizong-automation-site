@@ -407,3 +407,12 @@ The only unrelated local git status item is the pre-existing modification to `..
 - Unresolved: none for this publication. Source contains no images, so no cover was added.
 - Next: add user-supplied visuals if requested.
 - Risk: preserve unrelated `public/assets/site-shell.min.js` changes; retain Portable Text markDefs and span marks when editing.
+
+## 2026-11-16 latest blog completion
+
+- Status: `/blog/what-is-a-vertical-lift-module` is live and appears in the blog index and sitemap.
+- Changed files: `content/blog/what-is-a-vertical-lift-module.md`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`; the Sanity post was created.
+- Verified results: 74 source paragraphs rendered; four main headings, nine subheadings, four bullet items, and two source links preserved; article, blog index, and sitemap return HTTP 200; canonical and BlogPosting present.
+- Unresolved issues: none for publication. No image was supplied, so the post has no cover image.
+- Next step: add a cover and inline images if supplied by the user.
+- Risk area: retain the published Sanity body and links when adding media; use Sanity `imageWithAlt` blocks and avoid frontend overrides.
