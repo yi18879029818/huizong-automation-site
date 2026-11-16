@@ -416,3 +416,12 @@ The only unrelated local git status item is the pre-existing modification to `..
 - Unresolved issues: none for publication. No image was supplied, so the post has no cover image.
 - Next step: add a cover and inline images if supplied by the user.
 - Risk area: retain the published Sanity body and links when adding media; use Sanity `imageWithAlt` blocks and avoid frontend overrides.
+
+## 2026-11-16 latest VLM media completion
+
+- Status: five unbranded VLM images and the selected cover are live on `/blog/what-is-a-vertical-lift-module`.
+- Changed files: five `content/blog/assets/vlm-*-unbranded.png` images, `scripts/add-vlm-images.mjs`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`; Sanity body, hero, and SEO Open Graph image updated.
+- Verified results: 78 body blocks including five inline images; cover and Open Graph reference match; article, blog index, sitemap, and all five image CDN URLs return HTTP 200; original 74 Word paragraphs and links remain on the live page.
+- Unresolved issues: none for media publication.
+- Next step: no action required unless the user supplies further images.
+- Risk area: edited images were generated for brand removal and may differ in fine equipment or packaging details; use the preserved originals for technical validation.
