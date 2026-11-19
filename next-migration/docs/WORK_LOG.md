@@ -896,3 +896,9 @@
 - Added `scripts/add-vlm-images.mjs` to upload the five edited images to `/blog/what-is-a-vertical-lift-module` and insert them near the matching work-principle, benefits, picking, cutaway, and control-system paragraphs. Selected the wide two-unit VLM image as both the hero cover and Open Graph image.
 - Source commit `f09db3d` was pushed to `main` before Sanity writes. Authenticated target read, image-asset create dry-run, and document-update dry-run passed before upload and a revision-guarded post update.
 - Sanity readback shows 78 body blocks, five `imageWithAlt` blocks, and matching hero and Open Graph image references. Live article, blog index, and sitemap return HTTP 200; all five alt texts and expected image hashes appear in the article HTML. All five Sanity CDN image URLs return HTTP 200 `image/png` through the configured proxy, and uploaded SHA-1 hashes match the edited local files. No frontend deployment was needed.
+
+## 2026-11-19 - AGV ROI calculation article
+
+- Published the supplied `ROI_for_AGV_Coolyne_English.docx` as a new Sanity post at `/blog/agv-roi-calculation`. The Markdown source preserves the article body, four cost and savings tables, financial formulas, and three original links. The Word file contains no embedded images.
+- Confirmed the slug was unused and authenticated target read, create dry-run, and update dry-run succeeded before publication. Source commit `c3a9ceb` was pushed to `main` before the Sanity write.
+- Sanity readback confirms 80 body blocks, four tables with 18 data rows, three linked blocks, and the canonical URL. The public article, blog index, and sitemap return HTTP 200; live HTML includes four tables, the $70,000 annual net savings, 3.57-year payback, 40% five-year ROI, and all three links. No frontend deployment was required.

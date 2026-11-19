@@ -425,3 +425,12 @@ The only unrelated local git status item is the pre-existing modification to `..
 - Unresolved issues: none for media publication.
 - Next step: no action required unless the user supplies further images.
 - Risk area: edited images were generated for brand removal and may differ in fine equipment or packaging details; use the preserved originals for technical validation.
+
+## 2026-11-19 latest AGV ROI article completion
+
+- Status: `/blog/agv-roi-calculation` is live and appears in the blog index and sitemap.
+- Changed files: `content/blog/agv-roi-calculation.md`, `docs/WORK_LOG.md`, and `docs/HANDOFF.md`; the Sanity post was created.
+- Verified results: 80 Sanity body blocks, four tables with 18 data rows, three source links, correct ROI calculations, canonical URL, and HTTP 200 for the article, index, and sitemap.
+- Unresolved issues: none for publication. The source document contains no images, so no cover image was added.
+- Next step: add a cover or inline images if supplied by the user.
+- Risk area: retain the four tables, formulas, and source links when adding media or editing the post.
