@@ -754,7 +754,7 @@ async function HomeBody({ page }) {
   return (
     <Localized><>
       <Script
-        src="/assets/home-hero-robot.js"
+        src="/assets/home-hero-robot.js?v=20261121-i18n"
         strategy="afterInteractive"
         type="module"
       />

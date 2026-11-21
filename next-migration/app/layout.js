@@ -107,7 +107,7 @@ export default async function RootLayout({ children }) {
             })(window,document,'script','dataLayer','${GTM_ID}');
           `}
         </Script>
-        <Script src="/assets/site-shell.min.js?v=20260608-blog-stability-2" strategy="afterInteractive" />
+        <Script src="/assets/site-shell.min.js?v=20261121-i18n" strategy="afterInteractive" />
         <Script src="/assets/site-motion.js?v=20260608-blog-stability-2" strategy="afterInteractive" />
       </head>
       <body className="antialiased" suppressHydrationWarning>
