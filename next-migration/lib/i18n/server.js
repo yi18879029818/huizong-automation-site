@@ -1,3 +1,4 @@
+import pageKeys from "./page-keys.json";
 import fr from "./fr.json";
 import de from "./de.json";
 import es from "./es.json";
@@ -80,4 +81,12 @@ export function getLocaleDictionary(locale) {
 
 export function translateText(value, locale) {
   return translateDictionaryText(value, locale, getLocaleDictionary(locale));
+}
+
+export function getPageDictionary(locale) {
+  if (locale === "en") return {};
+  const dictionary = getLocaleDictionary(locale);
+  const path = headers().get("x-site-path") || "/";
+  const keys = new Set([...pageKeys.common, ...(pageKeys.pages[path] || [])]);
+  return Object.fromEntries([...keys].filter(key => dictionary[key]).map(key => [key, dictionary[key]]));
 }

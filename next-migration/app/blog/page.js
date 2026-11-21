@@ -91,7 +91,7 @@ export default async function BlogIndexPage() {
         href: `/blog/${post.slug}`,
         image: getBlogImageOverride(post) || getPostImage(post, 1400, 920)
       }))
-    : DEFAULT_BLOG_REFERENCE_POSTS;
+    : getLocale() === "en" ? DEFAULT_BLOG_REFERENCE_POSTS : [];
 
   return (
     <Localized><CmsPageShell currentSection="blog">
@@ -107,6 +107,7 @@ export default async function BlogIndexPage() {
         </section>
 
         <section className="section-panel blog-stream-panel" id="blog-post-stream">
+          {!items.length ? <p>Articles in this language are being prepared.</p> : null}
           <div className="blog-flow-list">
             {items.map((post, index) => {
               const isReversed = index % 2 === 1;

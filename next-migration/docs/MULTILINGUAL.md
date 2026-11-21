@@ -14,3 +14,5 @@ Use --publish when ready for publication. Existing translations require --refres
 Run browser regression checks against a local or deployed build:
 node scripts/check-multilingual.mjs
 Set I18N_TEST_URL to change the base URL. The script verifies rendering, metadata, language links, unsupported routes, request-header isolation and sitemap entries.
+
+Translation payloads are partitioned by page in lib/i18n/page-keys.json. Run node scripts/collect-translation-keys.mjs after changing English copy or dictionaries. I18N_SOURCE_URL can point to a local English build when preparing a frontend copy change. This keeps browser dictionaries small while preserving shared form, navigation and dialog vocabulary.

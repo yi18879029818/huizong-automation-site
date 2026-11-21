@@ -916,3 +916,7 @@
 - Added draft preparation and browser regression scripts plus source-revision and duplicate-pair validation in the Sanity schema. Initial text was machine-translated, then terminology and numeric values were checked. Native-language editorial review remains pending.
 - Verified the Next.js production build, 18 existing tests, eight desktop/mobile browser combinations, all 28 French main-page routes, unavailable-route 404s, header isolation, localized SEO and sitemap paths. Mocked all three localized inquiry submissions and verified original field contracts and localized thank-you redirects. Localized search keyword tests passed.
 - Implementation commit 6a61bb0 was pushed to main before Sanity publication. Production deployment and live verification follow this entry.
+
+### Resource-limit recovery
+
+Production verification exposed intermittent Cloudflare 1102 responses after the initial deployment. Restored Worker b16e0a82-5056-4848-8811-5d27cde0c4bc while optimizing. The initial implementation serialized approximately 720 KB of dictionary content per translated page and repeatedly walked nested localization boundaries. The new page-key collector limits the French home dictionary to 60,834 bytes, skips nested component boundaries and bypasses tree traversal for English. Production build, browser regression and all 28 French main-page translation checks pass locally.

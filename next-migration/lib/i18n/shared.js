@@ -1,4 +1,4 @@
-import { cloneElement, isValidElement } from "react";
+import { cloneElement, isValidElement, Fragment } from "react";
 
 import { LOCALES, LANGUAGE_NAMES, PAGE_ROUTES, parseLocalePath, localizedHref } from "./routing.mjs";
 export { LOCALES, LANGUAGE_NAMES, PAGE_ROUTES, parseLocalePath, localizedHref };
@@ -12,10 +12,12 @@ export function translateText(value, locale, dictionary = {}) {
 }
 
 export function localizeTree(node, locale, routes, dictionary) {
+  if (locale === "en") return node;
   if (typeof node === "string") return translateText(node, locale, dictionary);
   if (Array.isArray(node)) return node.map(child => localizeTree(child, locale, routes, dictionary));
   if (!isValidElement(node)) return node;
   const { type, props } = node;
+  if (typeof type !== "string" && type !== Fragment && !props.href) return node;
   if (["script", "style", "svg", "code", "pre"].includes(type) ||
       /material-(symbols|icons)/.test(props.className || "") || props.translate === "no") return node;
   const next = {};

@@ -1,4 +1,4 @@
-import { getLocale, getLocaleRoutes, getLocaleDictionary } from "@/lib/i18n/server";
+import { getLocale, getLocaleRoutes, getPageDictionary } from "@/lib/i18n/server";
 import { localizedHref } from "@/lib/i18n/shared";
 import { LocaleProvider } from "@/components/localized-client";
 import "@/app/globals.css";
@@ -119,7 +119,7 @@ export default async function RootLayout({ children }) {
             width="0"
           />
         </noscript>
-        <LocaleProvider locale={locale} routes={routes} dictionary={getLocaleDictionary(locale)}>
+        <LocaleProvider locale={locale} routes={routes} dictionary={getPageDictionary(locale)}>
           {children}
           <ChatWidget />
         </LocaleProvider>
