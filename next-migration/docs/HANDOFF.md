@@ -434,3 +434,9 @@ The only unrelated local git status item is the pre-existing modification to `..
 - Unresolved issues: none for publication. The source document contains no images, so no cover image was added.
 - Next step: add a cover or inline images if supplied by the user.
 - Risk area: retain the four tables, formulas, and source links when adding media or editing the post.
+
+## 2026-11-21 - Heavy load AGVs in heavy manufacturing
+
+- Published Sanity post `post-heavy-load-agvs-in-heavy-manufacturing` from the supplied English Word document. Source file: `content/blog/heavy-load-agvs-in-heavy-manufacturing.md`, source commit `117e813`.
+- Verified 66 body blocks, one comparison table and both original internal links. The public article returns HTTP 200 and renders the table and closing paragraph. The blog index and sitemap both include the article URL.
+- No cover image was supplied. No pending release steps.

@@ -902,3 +902,9 @@
 - Published the supplied `ROI_for_AGV_Coolyne_English.docx` as a new Sanity post at `/blog/agv-roi-calculation`. The Markdown source preserves the article body, four cost and savings tables, financial formulas, and three original links. The Word file contains no embedded images.
 - Confirmed the slug was unused and authenticated target read, create dry-run, and update dry-run succeeded before publication. Source commit `c3a9ceb` was pushed to `main` before the Sanity write.
 - Sanity readback confirms 80 body blocks, four tables with 18 data rows, three linked blocks, and the canonical URL. The public article, blog index, and sitemap return HTTP 200; live HTML includes four tables, the $70,000 annual net savings, 3.57-year payback, 40% five-year ROI, and all three links. No frontend deployment was required.
+
+## 2026-11-21 - Heavy load AGVs in heavy manufacturing
+
+- Published Sanity post `post-heavy-load-agvs-in-heavy-manufacturing` from the supplied English Word document. Source file: `content/blog/heavy-load-agvs-in-heavy-manufacturing.md`, source commit `117e813`.
+- Verified 66 body blocks, one comparison table and both original internal links. The public article returns HTTP 200 and renders the table and closing paragraph. The blog index and sitemap both include the article URL.
+- No cover image was supplied. No pending release steps.
