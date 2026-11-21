@@ -440,3 +440,11 @@ The only unrelated local git status item is the pre-existing modification to `..
 - Published Sanity post `post-heavy-load-agvs-in-heavy-manufacturing` from the supplied English Word document. Source file: `content/blog/heavy-load-agvs-in-heavy-manufacturing.md`, source commit `117e813`.
 - Verified 66 body blocks, one comparison table and both original internal links. The public article returns HTTP 200 and renders the table and closing paragraph. The blog index and sitemap both include the article URL.
 - No cover image was supplied. No pending release steps.
+
+## 2026-11-21 - Multilingual release
+
+- Status: implementation and local verification completed; production deployment pending.
+- Changed files: app routes, shared localization components, lib/i18n dictionaries and routing, Sanity translation schema/importer, native shell localization and browser checks. See docs/MULTILINGUAL.md.
+- Verified: production build, 18 existing tests, desktop/mobile locale checks, form contracts with intercepted submissions, localized redirects, three-language search and 30 current Sanity translations.
+- Remaining: production packaging/deployment and live page/sitemap checks. Native-language editorial review of initial machine translations is pending. Other blog articles do not yet have published translations.
+- Risk areas: new English main-page wording needs dictionary updates; a changed English article raises a revision warning on its translation. New published Sanity translations become available after the 60-second availability cache refresh.

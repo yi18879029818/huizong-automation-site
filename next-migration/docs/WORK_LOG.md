@@ -908,3 +908,11 @@
 - Published Sanity post `post-heavy-load-agvs-in-heavy-manufacturing` from the supplied English Word document. Source file: `content/blog/heavy-load-agvs-in-heavy-manufacturing.md`, source commit `117e813`.
 - Verified 66 body blocks, one comparison table and both original internal links. The public article returns HTTP 200 and renders the table and closing paragraph. The blog index and sitemap both include the article URL.
 - No cover image was supplied. No pending release steps.
+
+## 2026-11-21 - Multilingual website implementation
+
+- Added French, German and Spanish locale paths, request-isolated locale headers, shared server-rendered React localization, native language selectors, localized metadata, reciprocal language alternates and sitemap entries.
+- Main-page coverage is 28 routes per language. Published 30 Sanity postTranslation documents for the ten most viewed article paths in the fresh GA4 report for 2026-10-24 through 2026-11-20 on www.coolyne.com. Images remain referenced from their English sources. All 30 source revisions match.
+- Added draft preparation and browser regression scripts plus source-revision and duplicate-pair validation in the Sanity schema. Initial text was machine-translated, then terminology and numeric values were checked. Native-language editorial review remains pending.
+- Verified the Next.js production build, 18 existing tests, eight desktop/mobile browser combinations, all 28 French main-page routes, unavailable-route 404s, header isolation, localized SEO and sitemap paths. Mocked all three localized inquiry submissions and verified original field contracts and localized thank-you redirects. Localized search keyword tests passed.
+- Implementation commit 6a61bb0 was pushed to main before Sanity publication. Production deployment and live verification follow this entry.

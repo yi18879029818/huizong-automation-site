@@ -394,3 +394,9 @@ Long term:
 - evaluate CMS-backed content management
 - connect CRM or lead management system
 - formalize environment and deployment profiles
+
+## Multilingual routing and content, 2026-11-21
+
+The site now supports English at existing URLs and French, German and Spanish at /fr, /de and /es. Middleware sets the request locale and rewrites supported language paths to existing page renderers. Locale data is request-scoped and is also supplied to client components, allowing translated initial HTML and matching hydration. Dictionaries are delivered only for the active language; English receives an empty dictionary.
+
+Published postTranslation documents reference English posts. The frontend uses translated body/SEO fields and inherits original images. Draft translations are excluded from public lists, language alternates and sitemap entries. Revision and duplicate-pair checks are part of the Studio schema. See MULTILINGUAL.md for publishing and verification commands.
