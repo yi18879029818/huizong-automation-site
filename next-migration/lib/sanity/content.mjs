@@ -31,7 +31,7 @@ export async function getPostBySlug(slug) {
     return sanityFetch({
       query: `*[_type=="postTranslation" && source->slug.current==$slug && locale==$locale && status=="published" && !(_id in path("drafts.**"))][0] {
         _id, title, excerpt, "slug":source->slug.current, "publishedAt":source->publishedAt,
-        "heroImage":source->heroImage${imageProjection}, body${portableTextProjection},
+        "heroImage":source->heroImage${imageProjection}, body${portableTextProjection}, "sourceBody":source->body,
         seo${seoProjection}, locale
       }`,
       params: { slug, locale }

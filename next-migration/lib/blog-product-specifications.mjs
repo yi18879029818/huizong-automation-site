@@ -93,7 +93,7 @@ function getBlockText(block) {
   return block.children.map((child) => child?.text || "").join("");
 }
 
-export function insertBlogProductSpecificationBlocks(slug, blocks) {
+export function insertBlogProductSpecificationBlocks(slug, blocks, sourceBlocks = blocks) {
   const insertion = productSpecificationInsertions[slug];
 
   if (!insertion || !Array.isArray(blocks)) {
@@ -114,13 +114,14 @@ export function insertBlogProductSpecificationBlocks(slug, blocks) {
     return blocks;
   }
 
+  const sourceAnchorKeys = new Set((sourceBlocks || []).filter(block => getBlockText(block).includes(insertion.afterTextIncludes)).map(block => block._key));
   const nextBlocks = [];
   let inserted = false;
 
   for (const block of blocks) {
     nextBlocks.push(block);
 
-    if (!inserted && getBlockText(block).includes(insertion.afterTextIncludes)) {
+    if (!inserted && (getBlockText(block).includes(insertion.afterTextIncludes) || sourceAnchorKeys.has(block._key))) {
       nextBlocks.push(productBlock);
       inserted = true;
     }

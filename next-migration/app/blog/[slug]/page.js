@@ -517,7 +517,7 @@ function pruneRemovedBlogBlocks(slug, blocks) {
   return blocks.filter((block) => !blockContainsAssetId(block, assetIds));
 }
 
-function insertBlogVideoBlocks(slug, blocks) {
+function insertBlogVideoBlocks(slug, blocks, sourceBlocks = blocks) {
   if (!Array.isArray(blocks)) {
     return blocks;
   }
@@ -528,6 +528,7 @@ function insertBlogVideoBlocks(slug, blocks) {
     return blocks;
   }
 
+  const sourceTextByKey = new Map((sourceBlocks || []).map(block => [block._key, getBlockText(block)]));
   const pendingInsertions = [...insertions];
   const nextBlocks = [];
 
@@ -539,7 +540,7 @@ function insertBlogVideoBlocks(slug, blocks) {
       continue;
     }
 
-    while (pendingInsertions.length && blockText.includes(pendingInsertions[0].afterTextIncludes)) {
+    while (pendingInsertions.length && (blockText.includes(pendingInsertions[0].afterTextIncludes) || (sourceTextByKey.get(block._key) || "").includes(pendingInsertions[0].afterTextIncludes))) {
       nextBlocks.push(pendingInsertions.shift().block);
     }
   }
@@ -727,15 +728,16 @@ export default async function BlogDetailPage({ params }) {
 
   const heroImageUrl =
     getBlogImageOverride(post) || urlFor(post.heroImage)?.width(1600).height(960).url() || null;
-  const resolvedBody = post.locale ? post.body : insertBlogVideoBlocks(
+  const baseBody = post.locale ? post.body : getBlogBodyOverride(post) || post.body;
+  const sourceBody = post.sourceBody || baseBody;
+  const resolvedBody = insertBlogVideoBlocks(
     slug,
     insertBlogProductSpecificationBlocks(
       slug,
-      pruneRedundantBlogBlocks(
-        slug,
-        pruneRemovedBlogBlocks(slug, getBlogBodyOverride(post) || post.body)
-      )
-    )
+      pruneRedundantBlogBlocks(slug, pruneRemovedBlogBlocks(slug, baseBody)),
+      sourceBody
+    ),
+    sourceBody
   );
   const articleBody = resolvedBody?.length
     ? injectBlogInternalLinks(slug, resolvedBody)

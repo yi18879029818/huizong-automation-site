@@ -99,3 +99,17 @@ test("adds AGV forklift and stacking forklift cards after the requested forklift
     ]
   );
 });
+
+test("translated articles retain product cards at the corresponding source paragraph", () => {
+  const source = [block("Opening paragraph"), block(anchorText), block("Following paragraph")];
+  const translated = source.map((entry, index) => ({
+    ...entry,
+    children: [{ text: ["Introduction", "Les robots transportent les supports.", "Suite de l’article"][index] }]
+  }));
+  const result = insertBlogProductSpecificationBlocks("lifting-automated-robot", translated, source);
+  assert.equal(result.length, 4);
+  assert.equal(result[1].children[0].text, "Les robots transportent les supports.");
+  assert.equal(result[2]._type, "productSpecifications");
+  assert.deepEqual(result[2].products.map(product => product.name), ["600kg Lifting AGV", "1000kg Lifting AGV"]);
+  assert.equal(insertBlogProductSpecificationBlocks("lifting-automated-robot", result, source).length, 4);
+});
