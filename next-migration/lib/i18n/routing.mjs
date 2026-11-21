@@ -17,6 +17,6 @@ export function localizedHref(href, locale, routes = [...PAGE_ROUTES, ...manifes
   const parsed = parseLocalePath(match[1].replace(/\/$/, "") || "/");
   if (!routes.includes(parsed.path)) return href;
   const prefix = locale === "en" ? "" : "/" + locale;
-  return prefix + (parsed.path === "/" ? "/" : parsed.path) + match[2];
+  return prefix + (parsed.path === "/" ? (locale === "en" ? "/" : "") : parsed.path) + match[2];
 }
 

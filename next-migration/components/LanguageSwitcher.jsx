@@ -11,7 +11,7 @@ export async function LanguageSwitcher() {
       <summary aria-label="Language">{LANGUAGE_NAMES[locale]}</summary>
       <nav aria-label="Language">
         {Object.entries(LANGUAGE_NAMES).map(([code, name]) => (
-          <a href={alternates[code] || "https://www.coolyne.com/" + (code === "en" ? "" : code + "/")}
+          <a href={alternates[code] || "https://www.coolyne.com/" + (code === "en" ? "" : code)}
             hrefLang={code} lang={code} key={code} aria-current={locale === code ? "true" : undefined}>
             {name}
           </a>

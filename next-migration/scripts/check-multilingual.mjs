@@ -30,7 +30,14 @@ try {
     for (const path of ["/", "/products", "/solutions", "/about", "/contact", "/blog", manifest.posts[0]]) {
       const response = await fetch(baseUrl + "/" + locale + (path === "/" ? "/" : path));
       assert.equal(response.status, 200, locale + path);
-      assert.match(await response.text(), new RegExp('<html lang="' + locale + '"'));
+      const html = await response.text();
+      assert.match(html, new RegExp('<html lang="' + locale + '"'));
+      if (path === "/") {
+        const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+        assert.equal(canonical, "https://www.coolyne.com/" + locale);
+        const direct = await fetch(baseUrl + "/" + locale, { redirect: "manual" });
+        assert.equal(direct.status, 200);
+      }
     }
     const absent = await fetch(baseUrl + "/" + locale + "/blog/no-such-article");
     assert.equal(absent.status, 404);
