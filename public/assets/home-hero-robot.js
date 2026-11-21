@@ -16,7 +16,7 @@ if (mount) {
       return;
     }
 
-    status.textContent = text;
+    status.textContent = window.__COOLYNE_TRANSLATE__ ? window.__COOLYNE_TRANSLATE__(text) : text;
     status.classList.remove('is-ready', 'is-error');
     if (state) {
       status.classList.add(state);
@@ -67,6 +67,11 @@ if (mount) {
       setStatus('3D model ready', 'is-ready');
       if (hint) {
         hint.innerHTML = '<span>Drag to rotate</span><span>Pinch to zoom</span>';
+        if (window.__COOLYNE_TRANSLATE__) {
+          Array.from(hint.children).forEach(element => {
+            element.textContent = window.__COOLYNE_TRANSLATE__(element.textContent);
+          });
+        }
       }
     });
 

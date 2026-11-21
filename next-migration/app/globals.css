@@ -724,3 +724,11 @@ html:not([lang="en"]) .forklift-hero-inner [class*="text-2xl"] { font-size: clam
   html:not([lang="en"]) .forklift-hero-inner { grid-template-columns: minmax(0, 1fr); }
   html:not([lang="en"]) .hsa-ui-kicker { white-space: normal; overflow-wrap: anywhere; }
 }
+html:not([lang="en"]) .hsa-home-hero-copy { min-width: 0; }
+html:not([lang="en"]) .hsa-home-hero-copy .hsa-ui-hero-title {
+  max-width: 100%;
+  font-size: clamp(2.8rem, 4.5vw, 4.75rem);
+  line-height: 1.04;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}

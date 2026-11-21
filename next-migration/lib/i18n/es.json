@@ -208,7 +208,7 @@
   "Explore Solutions": "Explorar soluciones",
   "360 View": "Vista 360",
   "Loading 3D model...": "Cargando modelo 3D...",
-  "Drag to rotate": "Arrastrar para rotar",
+  "Drag to rotate": "Arrastra para girar",
   "Auto orbit enabled": "Órbita automática habilitada",
   "AS/RS systems increase storage density and provide controlled access to inventory.": "Los sistemas AS/RS aumentan la densidad de almacenamiento y brindan acceso controlado al inventario.",
   "Conveyors and transfer equipment move materials between storage, workstations, and dispatch areas.": "Los transportadores y los equipos de transferencia mueven materiales entre el almacenamiento, las estaciones de trabajo y las áreas de despacho.",
@@ -4562,5 +4562,13 @@
   "Contact support": "Contactar con soporte",
   "Please share your automation target, payload, and workflow goal so we can point you to the right AGV or solution.": "Comparta su objetivo de automatización, carga útil y objetivo de flujo de trabajo para que podamos indicarle el AGV o la solución adecuados.",
   "Thanks. Based on your request, the best next step is to share your payload, operating environment, and target throughput so our engineering team can recommend the right solution.": "Gracias. Según su solicitud, el mejor paso siguiente es compartir su carga útil, entorno operativo y rendimiento objetivo para que nuestro equipo de ingeniería pueda recomendar la solución adecuada.",
-  "Share project details": "Compartir detalles del proyecto"
+  "Share project details": "Compartir detalles del proyecto",
+  "3D model ready": "Modelo 3D listo",
+  "Static preview shown. 3D view is unavailable in this browser.": "Vista previa estática. La vista 3D no está disponible en este navegador.",
+  "3D model is still loading...": "El modelo 3D se está cargando…",
+  "3D viewer element is missing.": "La vista 3D no está disponible.",
+  "Loading 3D viewer...": "Cargando la vista 3D…",
+  "Initializing 3D viewer...": "Iniciando la vista 3D…",
+  "3D viewer failed to load.": "No se pudo cargar la vista 3D.",
+  "Pinch to zoom": "Pellizca para ampliar"
 }

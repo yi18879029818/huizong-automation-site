@@ -4,7 +4,7 @@
   }
 
   window.__COOLYNE_LOCALIZE_NATIVE__ = function () {
-    document.querySelectorAll(".hsa-expert-modal, .hsa-sales-modal, .hsa-cookie-banner").forEach(localizeInsertedContent);
+    document.querySelectorAll(".hsa-expert-modal, .hsa-sales-modal, .hsa-cookie-banner, .hsa-home-robot-status, .hsa-home-robot-hint").forEach(localizeInsertedContent);
   };
 
   function localizeInsertedContent(root) {

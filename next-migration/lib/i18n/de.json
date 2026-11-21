@@ -4562,5 +4562,13 @@
   "Contact support": "Kontaktieren Sie den Support",
   "Please share your automation target, payload, and workflow goal so we can point you to the right AGV or solution.": "Bitte teilen Sie uns Ihr Automatisierungsziel, Ihre Nutzlast und Ihr Workflow-Ziel mit, damit wir Sie auf das richtige AGV oder die richtige Lösung hinweisen können.",
   "Thanks. Based on your request, the best next step is to share your payload, operating environment, and target throughput so our engineering team can recommend the right solution.": "Danke. Basierend auf Ihrer Anfrage besteht der beste nächste Schritt darin, Ihre Nutzlast, Betriebsumgebung und Zieldurchsatz mitzuteilen, damit unser Technikteam die richtige Lösung empfehlen kann.",
-  "Share project details": "Teilen Sie Projektdetails"
+  "Share project details": "Teilen Sie Projektdetails",
+  "3D model ready": "3D-Modell bereit",
+  "Static preview shown. 3D view is unavailable in this browser.": "Statische Vorschau. Die 3D-Ansicht ist in diesem Browser nicht verfügbar.",
+  "3D model is still loading...": "Das 3D-Modell wird geladen…",
+  "3D viewer element is missing.": "Die 3D-Ansicht ist nicht verfügbar.",
+  "Loading 3D viewer...": "3D-Ansicht wird geladen…",
+  "Initializing 3D viewer...": "3D-Ansicht wird initialisiert…",
+  "3D viewer failed to load.": "Die 3D-Ansicht konnte nicht geladen werden.",
+  "Pinch to zoom": "Mit zwei Fingern zoomen"
 }
