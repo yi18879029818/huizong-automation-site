@@ -1,3 +1,7 @@
+import { getLocale } from "@/lib/i18n/server";
+import { localizeMetadata } from "@/lib/i18n/server";
+
+import { Localized } from "@/components/localized";
 import Link from "next/link";
 import { CmsPageShell } from "@/components/cms-page-shell";
 import { getBlogImageOverride } from "@/lib/blog-image-overrides.mjs";
@@ -12,7 +16,7 @@ const BLOG_INDEX_DESCRIPTION =
   "Warehouse automation insights, project notes, and engineering guidance from coolyne.";
 const BLOG_INDEX_OG_TITLE = resolveSeoTitle("Warehouse Automation Blog");
 
-export const metadata = {
+const pageMetadata = {
   title: buildTitleMetadata("Blog"),
   description: BLOG_INDEX_DESCRIPTION,
   alternates: {
@@ -36,7 +40,7 @@ function formatPublishedDate(value) {
     return "Publishing schedule pending";
   }
 
-  return new Intl.DateTimeFormat("en", {
+  return new Intl.DateTimeFormat(getLocale(), {
     year: "numeric",
     month: "long",
     day: "numeric"
@@ -78,7 +82,8 @@ const DEFAULT_BLOG_REFERENCE_POSTS = [
 ];
 
 export default async function BlogIndexPage() {
-  const posts = mergeBlogPosts(await getPostList());
+  const sourcePosts = await getPostList();
+  const posts = getLocale() === "en" ? mergeBlogPosts(sourcePosts) : sourcePosts;
   const items = posts.length
     ? posts.map((post) => ({
         ...post,
@@ -89,7 +94,7 @@ export default async function BlogIndexPage() {
     : DEFAULT_BLOG_REFERENCE_POSTS;
 
   return (
-    <CmsPageShell currentSection="blog">
+    <Localized><CmsPageShell currentSection="blog">
       <main className="shell-main">
         <section className="section-panel blog-index-hero">
           <div className="blog-index-simple-head">
@@ -161,6 +166,10 @@ export default async function BlogIndexPage() {
           </div>
         </section>
       </main>
-    </CmsPageShell>
+    </CmsPageShell></Localized>
   );
+}
+
+export async function generateMetadata() {
+  return localizeMetadata(pageMetadata);
 }

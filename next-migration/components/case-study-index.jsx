@@ -1,4 +1,6 @@
 "use client";
+import { Localized } from "@/components/localized-client";
+
 
 import Image from "next/image";
 import Link from "next/link";
@@ -8,18 +10,18 @@ const filters = ["All Projects", "ASRS", "Material Handling"];
 
 function CaseStudyImage({ image, title }) {
   if (!image?.src) {
-    return <div aria-hidden="true" className="case-study-card-image case-study-card-image--fallback" />;
+    return <Localized><div aria-hidden="true" className="case-study-card-image case-study-card-image--fallback" /></Localized>;
   }
 
   return (
-    <Image
+    <Localized><Image
       alt={image.alt || title}
       className="case-study-card-image"
       height={image.height || 720}
       sizes="(max-width: 700px) 100vw, (max-width: 1024px) 50vw, 33vw"
       src={image.src}
       width={image.width || 1200}
-    />
+    /></Localized>
   );
 }
 
@@ -30,7 +32,7 @@ export function CaseStudyIndex({ caseStudies }) {
   );
 
   return (
-    <>
+    <Localized><>
       <div aria-label="Filter case studies" className="case-study-filters" role="group">
         {filters.map((filter) => (
           <button
@@ -70,6 +72,6 @@ export function CaseStudyIndex({ caseStudies }) {
           </article>
         ))}
       </div>
-    </>
+    </></Localized>
   );
 }

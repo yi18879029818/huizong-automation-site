@@ -1,3 +1,5 @@
+
+import { Localized } from "@/components/localized";
 import { Fragment } from "react";
 import { PublicPageChrome } from "@/components/public-shell";
 import Script from "next/script";
@@ -14,7 +16,7 @@ function LiteYouTubeEmbed({ title, videoId }) {
   const posterUrl = "/downloads/home-video-poster-optimized.jpg";
 
   return (
-    <div
+    <Localized><div
       className="group relative h-full w-full overflow-hidden bg-secondary"
       data-lite-youtube={videoId}
       data-embed-url={embedUrl}
@@ -58,7 +60,7 @@ function LiteYouTubeEmbed({ title, videoId }) {
           />
         </a>
       </noscript>
-    </div>
+    </div></Localized>
   );
 }
 
@@ -729,7 +731,7 @@ function HomeBody({ page }) {
   const vm = getHomeViewModel(page);
 
   return (
-    <>
+    <Localized><>
       <Script
         src="/assets/home-hero-robot.js"
         strategy="afterInteractive"
@@ -1571,7 +1573,7 @@ function HomeBody({ page }) {
           </div>{" "}
         </section>{" "}
       </div>{" "}
-    </>
+    </></Localized>
   );
 }
 function AboutBody() {
@@ -1741,7 +1743,7 @@ function AboutBody() {
     },
   ];
   return (
-    <div className="page-content bg-white">
+    <Localized><div className="page-content bg-white">
       <main className="overflow-hidden bg-white">
         <section className="relative isolate overflow-hidden bg-primary text-white lg:min-h-[44rem] xl:min-h-[46rem]">
           <div className="absolute inset-0">
@@ -2324,7 +2326,7 @@ function AboutBody() {
           </div>
         </section>
       </main>
-    </div>
+    </div></Localized>
   );
 }
 
@@ -2332,7 +2334,7 @@ function ContactBody({ page }) {
   const vm = getContactViewModel(page);
 
   return (
-    <>
+    <Localized><>
       {" "}
       <div className="page-content">
         {" "}
@@ -2488,20 +2490,20 @@ function ContactBody({ page }) {
           </section>}{" "}
         </main>{" "}
       </div>{" "}
-    </>
+    </></Localized>
   );
 }
 export function StructuredStaticPage({ page }) {
   let body = null;
   if (page.kind === "home-page") {
-    body = <HomeBody page={page} />;
+    body = <Localized><HomeBody page={page} /></Localized>;
   } else if (page.kind === "about-page") {
-    body = <AboutBody page={page} />;
+    body = <Localized><AboutBody page={page} /></Localized>;
   } else if (page.kind === "contact-page") {
-    body = <ContactBody page={page} />;
+    body = <Localized><ContactBody page={page} /></Localized>;
   } else if (page.kind === "policy-page") {
     body = (
-      <main className="mx-auto flex w-full max-w-[1100px] flex-col gap-10 px-6 py-16 md:px-10">
+      <Localized><main className="mx-auto flex w-full max-w-[1100px] flex-col gap-10 px-6 py-16 md:px-10">
         <section className="rounded-[28px] border border-[#d9dde5] bg-white px-8 py-10 shadow-[0_24px_80px_rgba(0,23,54,0.06)] md:px-12 md:py-14">
           <div className="max-w-3xl">
             <p className="mb-4 text-[11px] font-black uppercase tracking-[0.28em] text-[#fe6b00]">
@@ -2594,11 +2596,11 @@ export function StructuredStaticPage({ page }) {
             </div>
           </section>
         ) : null}
-      </main>
+      </main></Localized>
     );
   }
   if (!body) {
     return null;
   }
-  return <PublicPageChrome page={page}>{body}</PublicPageChrome>;
+  return <Localized><PublicPageChrome page={page}>{body}</PublicPageChrome></Localized>;
 }

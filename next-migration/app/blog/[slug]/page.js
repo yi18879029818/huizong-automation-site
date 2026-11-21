@@ -1,3 +1,7 @@
+import { getLocale, getLocaleRoutes, localizeSchema } from "@/lib/i18n/server";
+import { localizeMetadata } from "@/lib/i18n/server";
+
+import { Localized } from "@/components/localized";
 import Link from "next/link";
 import { cache } from "react";
 import { notFound } from "next/navigation";
@@ -34,10 +38,10 @@ function resolveSlugParam(value) {
 
 export async function generateMetadata({ params }) {
   const slug = resolveSlugParam(params.slug);
-  const post = (await getCachedPostBySlug(slug)) || getLocalPostBySlug(slug);
+  const post = (await getCachedPostBySlug(slug)) || (getLocale() === "en" ? getLocalPostBySlug(slug) : null);
 
   if (!post) {
-    return {};
+    return localizeMetadata(await ({}));
   }
 
   const canonical = BLOG_CANONICAL_OVERRIDES[slug] || `/blog/${post.slug}`;
@@ -47,7 +51,7 @@ export async function generateMetadata({ params }) {
   const heroImageUrl =
     getBlogImageOverride(post) || urlFor(post.heroImage)?.width(1600).height(960).url() || undefined;
 
-  return {
+  return localizeMetadata(await ({
     title: buildTitleMetadata(titleSource),
     description,
     alternates: {
@@ -66,7 +70,7 @@ export async function generateMetadata({ params }) {
       description,
       images: heroImageUrl ? [heroImageUrl] : undefined
     }
-  };
+  }));
 }
 
 function formatPublishedDate(value) {
@@ -74,7 +78,7 @@ function formatPublishedDate(value) {
     return "Publishing schedule pending";
   }
 
-  return new Intl.DateTimeFormat("en", {
+  return new Intl.DateTimeFormat(getLocale(), {
     year: "numeric",
     month: "long",
     day: "numeric"
@@ -624,7 +628,7 @@ function BlogConversionSection({ post }) {
   const context = getBlogConversionContext(post);
 
   return (
-    <section className="section-panel">
+    <Localized><section className="section-panel">
       <div className="blog-article-panel">
         <div className="rounded-[28px] border border-[#d9dde5] bg-white px-8 py-10 shadow-[0_24px_80px_rgba(0,23,54,0.06)] md:px-10 md:py-12">
           <div className="max-w-3xl">
@@ -705,7 +709,7 @@ function BlogConversionSection({ post }) {
           </div>
         </div>
       </div>
-    </section>
+    </section></Localized>
   );
 }
 
@@ -715,7 +719,7 @@ export default async function BlogDetailPage({ params }) {
     getCachedPostBySlug(slug),
     getCachedRelatedPosts(slug)
   ]);
-  const post = remotePost || getLocalPostBySlug(slug);
+  const post = remotePost || (getLocale() === "en" ? getLocalPostBySlug(slug) : null);
 
   if (!post) {
     notFound();
@@ -723,7 +727,7 @@ export default async function BlogDetailPage({ params }) {
 
   const heroImageUrl =
     getBlogImageOverride(post) || urlFor(post.heroImage)?.width(1600).height(960).url() || null;
-  const resolvedBody = insertBlogVideoBlocks(
+  const resolvedBody = post.locale ? post.body : insertBlogVideoBlocks(
     slug,
     insertBlogProductSpecificationBlocks(
       slug,
@@ -736,11 +740,11 @@ export default async function BlogDetailPage({ params }) {
   const articleBody = resolvedBody?.length
     ? injectBlogInternalLinks(slug, resolvedBody)
     : buildFallbackArticleBody(post);
-  const detailCopy = getBlogDetailCopy(post, articleBody);
-  const blogPostingSchema = buildBlogPostingSchema(post, heroImageUrl);
+  const detailCopy = post.locale ? { intro: post.excerpt, summary: articleBody.filter(block => /^h[23]$/.test(block.style)).slice(0, 3).map(block => (block.children || []).map(span => span.text || "").join("")).join(" · ") } : getBlogDetailCopy(post, articleBody);
+  const blogPostingSchema = localizeSchema(buildBlogPostingSchema(post, heroImageUrl), getLocale(), await getLocaleRoutes(getLocale()));
 
   return (
-    <CmsPageShell currentSection="blog">
+    <Localized><CmsPageShell currentSection="blog">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
@@ -801,6 +805,6 @@ export default async function BlogDetailPage({ params }) {
         </section>
         <BlogConversionSection post={post} />
       </main>
-    </CmsPageShell>
+    </CmsPageShell></Localized>
   );
 }

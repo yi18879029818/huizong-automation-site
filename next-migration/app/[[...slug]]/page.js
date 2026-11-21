@@ -1,3 +1,6 @@
+import { localizeMetadata } from "@/lib/i18n/server";
+
+import { Localized } from "@/components/localized";
 import { cache } from "react";
 import { notFound } from "next/navigation";
 import {
@@ -104,7 +107,7 @@ function renderPureStructuredPage(page) {
     page.kind === "contact-page" ||
     page.kind === "policy-page"
   ) {
-    return <StructuredStaticPage page={page} />;
+    return <Localized><StructuredStaticPage page={page} /></Localized>;
   }
 
   if (
@@ -112,10 +115,10 @@ function renderPureStructuredPage(page) {
     page.kind === "solution-overview" ||
     page.kind === "case-overview"
   ) {
-    return <StructuredCatalogOverviewPage page={page} />;
+    return <Localized><StructuredCatalogOverviewPage page={page} /></Localized>;
   }
 
-  return <StructuredCatalogDetailPage page={page} />;
+  return <Localized><StructuredCatalogDetailPage page={page} /></Localized>;
 }
 
 export async function generateMetadata({ params }) {
@@ -123,10 +126,10 @@ export async function generateMetadata({ params }) {
   const structuredPage = await getCachedStructuredPage(...(resolvedParams.slug || []));
 
   if (structuredPage) {
-    return buildStructuredMetadata(structuredPage);
+    return localizeMetadata(await (buildStructuredMetadata(structuredPage)));
   }
 
-  return {};
+  return localizeMetadata(await ({}));
 }
 
 export default async function StructuredPage({ params }) {
@@ -135,7 +138,7 @@ export default async function StructuredPage({ params }) {
 
   if (structuredPage) {
     return (
-      <>
+      <Localized><>
         <StructuredData page={structuredPage} />
         {shouldRenderPureStructuredPage(structuredPage) ? (
           renderPureStructuredPage(structuredPage)
@@ -151,7 +154,7 @@ export default async function StructuredPage({ params }) {
             )}
           </>
         )}
-      </>
+      </></Localized>
     );
   }
 

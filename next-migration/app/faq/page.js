@@ -1,3 +1,6 @@
+import { localizeMetadata } from "@/lib/i18n/server";
+
+import { Localized } from "@/components/localized";
 import Link from "next/link";
 import { CmsPageShell } from "@/components/cms-page-shell";
 import { SITE_URL } from "@/lib/site-config";
@@ -156,7 +159,7 @@ const FAQ_JSON_LD = {
   )
 };
 
-export const metadata = {
+const pageMetadata = {
   title: FAQ_PAGE_TITLE,
   description:
     "Answers to common buyer questions about AGV selection, ASRS integration, pallet handling, project delivery, customization, and after-sales support.",
@@ -167,7 +170,7 @@ export const metadata = {
 
 export default function FaqPage() {
   return (
-    <CmsPageShell currentSection="faq">
+    <Localized><CmsPageShell currentSection="faq">
       <main className="shell-main">
         <script
           type="application/ld+json"
@@ -287,6 +290,10 @@ export default function FaqPage() {
           </div>
         </section>
       </main>
-    </CmsPageShell>
+    </CmsPageShell></Localized>
   );
+}
+
+export async function generateMetadata() {
+  return localizeMetadata(pageMetadata);
 }

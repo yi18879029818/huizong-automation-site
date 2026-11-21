@@ -1,3 +1,5 @@
+
+import { Localized } from "@/components/localized";
 const APPLICATIONS = [
   {
     title: "High Rack Warehouse",
@@ -21,7 +23,7 @@ const APPLICATIONS = [
 
 export default function ApplicationCards() {
   return (
-    <section className="bg-surface-container-low py-24 md:py-28" id="applications">
+    <Localized><section className="bg-surface-container-low py-24 md:py-28" id="applications">
       <div className="mx-auto max-w-[1440px] px-6 md:px-12">
         <div className="mb-14 flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
@@ -54,6 +56,6 @@ export default function ApplicationCards() {
           ))}
         </div>
       </div>
-    </section>
+    </section></Localized>
   );
 }

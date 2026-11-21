@@ -1,3 +1,5 @@
+
+import { Localized } from "@/components/localized";
 import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { StructuredData } from "@/components/structured-data";
@@ -9,7 +11,7 @@ function Breadcrumbs({ items = [] }) {
   }
 
   return (
-    <div className="hsa-breadcrumb">
+    <Localized><div className="hsa-breadcrumb">
       {items.map((item, index) => {
         const isLast = index === items.length - 1;
 
@@ -24,13 +26,13 @@ function Breadcrumbs({ items = [] }) {
           </span>
         );
       })}
-    </div>
+    </div></Localized>
   );
 }
 
 function Header({ currentSection }) {
   return (
-    <header className="hsa-header">
+    <Localized><header className="hsa-header">
       <div className="hsa-header-inner">
         <Link className="hsa-brand" href="/">
           <span className="hsa-brand-mark">
@@ -93,13 +95,13 @@ function Header({ currentSection }) {
           Speak With An Expert
         </Link>
       </div>
-    </header>
+    </header></Localized>
   );
 }
 
 function Footer() {
   return (
-    <footer className="hsa-footer">
+    <Localized><footer className="hsa-footer">
       <div className="hsa-footer-inner">
         <div>
           <div className="hsa-footer-brand">
@@ -131,13 +133,13 @@ function Footer() {
         <span>Copyright 2026 coolyne</span>
         <span>Integrated AGV, ASRS, and warehouse automation systems</span>
       </div>
-    </footer>
+    </footer></Localized>
   );
 }
 
 function Hero({ kicker, title, summary, metrics = [], image, detail = false }) {
   return (
-    <section className={`hero-panel${detail ? " is-detail" : ""}`}>
+    <Localized><section className={`hero-panel${detail ? " is-detail" : ""}`}>
       <div className="hero-grid">
         <div className="hero-copy">
           <span className="eyebrow">{kicker}</span>
@@ -165,27 +167,27 @@ function Hero({ kicker, title, summary, metrics = [], image, detail = false }) {
           </div>
         </div>
       </div>
-    </section>
+    </section></Localized>
   );
 }
 
 function Section({ title, description, children }) {
   return (
-    <section className="section-panel">
+    <Localized><section className="section-panel">
       <div className="section-heading">
         <h2>{title}</h2>
         {description ? <p>{description}</p> : null}
       </div>
       {children}
-    </section>
+    </section></Localized>
   );
 }
 
 function LinkChip({ href, children }) {
   return (
-    <Link className="link-chip" href={href}>
+    <Localized><Link className="link-chip" href={href}>
       {children}
-    </Link>
+    </Link></Localized>
   );
 }
 
@@ -195,14 +197,14 @@ function ContentSection({ Content }) {
   }
 
   return (
-    <Section
+    <Localized><Section
       description="Supporting guidance, deployment notes, and industry context for the solution set."
       title="Editorial Content"
     >
       <div className="mdx-prose">
         <Content />
       </div>
-    </Section>
+    </Section></Localized>
   );
 }
 
@@ -212,7 +214,7 @@ function Subnav({ currentHref, items = [] }) {
   }
 
   return (
-    <div className="hsa-subnav">
+    <Localized><div className="hsa-subnav">
       {items.map((item) => (
         <Link
           className={`hsa-sub-link${item.href === currentHref ? " hsa-sub-active" : ""}`}
@@ -222,7 +224,7 @@ function Subnav({ currentHref, items = [] }) {
           {item.label}
         </Link>
       ))}
-    </div>
+    </div></Localized>
   );
 }
 
@@ -232,12 +234,12 @@ function SecondaryBar({ page }) {
   }
 
   return (
-    <div className="hsa-secondary">
+    <Localized><div className="hsa-secondary">
       <div className="hsa-secondary-inner">
         <Breadcrumbs items={page.breadcrumbs} />
         <Subnav currentHref={page.currentHref} items={page.subnav} />
       </div>
-    </div>
+    </div></Localized>
   );
 }
 
@@ -247,7 +249,7 @@ function FaqSection({ faqs = [] }) {
   }
 
   return (
-    <Section
+    <Localized><Section
       description="Common engineering, deployment, and operating questions collected for faster buyer review."
       title="Frequently Asked Questions"
     >
@@ -259,18 +261,18 @@ function FaqSection({ faqs = [] }) {
           </article>
         ))}
       </div>
-    </Section>
+    </Section></Localized>
   );
 }
 
 function ContactSection() {
   return (
-    <Section
+    <Localized><Section
       description="Share your site conditions, throughput targets, and project brief with the engineering team."
       title="Project Briefing"
     >
       <ContactForm />
-    </Section>
+    </Section></Localized>
   );
 }
 
@@ -288,7 +290,7 @@ function getCardHref({ card, page }) {
 
 export function StructuredOverviewPage({ page }) {
   return (
-    <div className={`content-shell shell-kind-${page.kind}`}>
+    <Localized><div className={`content-shell shell-kind-${page.kind}`}>
       <StructuredData page={page} />
       <Header currentSection={page.section} />
       <SecondaryBar page={page} />
@@ -364,7 +366,7 @@ export function StructuredOverviewPage({ page }) {
         </section>
       </main>
       <Footer />
-    </div>
+    </div></Localized>
   );
 }
 
@@ -372,7 +374,7 @@ export function StructuredDetailPage({ page }) {
   const item = page.data;
 
   return (
-    <div className={`content-shell shell-kind-${page.kind}`}>
+    <Localized><div className={`content-shell shell-kind-${page.kind}`}>
       <StructuredData page={page} />
       <Header currentSection={page.section} />
       <SecondaryBar page={page} />
@@ -530,6 +532,6 @@ export function StructuredDetailPage({ page }) {
         </section>
       </main>
       <Footer />
-    </div>
+    </div></Localized>
   );
 }

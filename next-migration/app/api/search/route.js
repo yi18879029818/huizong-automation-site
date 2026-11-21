@@ -1,3 +1,5 @@
+import { translateText } from "@/lib/i18n/server";
+import { LOCALES, PAGE_ROUTES, localizedHref } from "@/lib/i18n/routing.mjs";
 import { NextResponse } from "next/server";
 
 const SEARCH_RESPONSES = [
@@ -59,46 +61,63 @@ const SEARCH_RESPONSES = [
   },
 ];
 
+const LOCALE_KEYWORDS = {
+  fr: [["devis", "prix", "coût"], ["visite", "inspection"], ["chariot", "gerbeur", "palette"], ["rouleaux", "convoyeur", "bac"], ["levage", "sous-palette"], ["stockage", "entrepôt"], ["robot", "manipulateur", "bras"], ["assistance", "erreur", "problème"]],
+  de: [["angebot", "preis", "kosten"], ["besuch", "besichtigung"], ["stapler", "palette"], ["rollen", "förderer", "behälter"], ["hubplattform", "unterfahr"], ["lager", "puffer"], ["roboter", "manipulator", "arm"], ["support", "fehler", "störung"]],
+  es: [["presupuesto", "precio", "costo", "coste"], ["visita", "inspección"], ["carretilla", "apilador", "palet"], ["rodillo", "transportador", "contenedor"], ["elevación", "plataforma elevadora"], ["almacenamiento", "almacén"], ["robot", "manipulador", "brazo"], ["soporte", "error", "problema"]]
+};
+
+function localizedResponse(value, locale) {
+  return NextResponse.json({
+    ...value,
+    answer: translateText(value.answer, locale),
+    ...(value.linkLabel ? { linkLabel: translateText(value.linkLabel, locale) } : {}),
+    ...(value.href ? { href: localizedHref(value.href, locale, PAGE_ROUTES) } : {})
+  }, { status: 200 });
+}
+
 export async function POST(request) {
+  let locale = "en";
   try {
     const body = await request.json();
+    locale = LOCALES.includes(body?.locale) ? body.locale : "en";
     const query = typeof body?.query === "string" ? body.query.trim() : "";
 
     if (!query) {
-      return NextResponse.json(
+      return localizedResponse(
         {
           answer:
             "Please share your automation target, payload, and workflow goal so we can point you to the right AGV or solution.",
         },
-        { status: 200 }
+        locale
       );
     }
 
     const normalized = query.toLowerCase();
-    const matchedResponse = SEARCH_RESPONSES.find((item) =>
-      item.match.some((keyword) => normalized.includes(keyword))
+    const matchedResponse = SEARCH_RESPONSES.find((item, index) =>
+      [...item.match, ...(LOCALE_KEYWORDS[locale]?.[index] || [])].some((keyword) => normalized.includes(keyword))
     );
 
     if (matchedResponse) {
-      return NextResponse.json(matchedResponse, { status: 200 });
+      return localizedResponse(matchedResponse, locale);
     }
 
-    return NextResponse.json(
+    return localizedResponse(
       {
         answer:
           "Thanks. Based on your request, the best next step is to share your payload, operating environment, and target throughput so our engineering team can recommend the right solution.",
         href: "/contact",
         linkLabel: "Share project details",
       },
-      { status: 200 }
+      locale
     );
   } catch (_error) {
-    return NextResponse.json(
+    return localizedResponse(
       {
         answer:
           "Thanks. Our engineering team will review your request and contact you soon.",
       },
-      { status: 200 }
+      locale
     );
   }
 }

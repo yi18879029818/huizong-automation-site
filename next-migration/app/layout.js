@@ -1,3 +1,6 @@
+import { getLocale, getLocaleRoutes, getLocaleDictionary } from "@/lib/i18n/server";
+import { localizedHref } from "@/lib/i18n/shared";
+import { LocaleProvider } from "@/components/localized-client";
 import "@/app/globals.css";
 import "@/app/structured-content.css";
 import "@/app/case-studies.css";
@@ -71,9 +74,12 @@ export async function generateMetadata() {
   };
 }
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const locale = getLocale();
+  const routes = await getLocaleRoutes(locale);
+  const siteRoutes = Object.fromEntries(Object.entries(SITE_ROUTES).map(([key, href]) => [key, localizedHref(href, locale, routes)]));
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <link
           rel="preload"
@@ -90,7 +96,7 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
         />
         <Script id="site-routes" strategy="beforeInteractive">
-          {`window.__SITE_ROUTES__ = ${JSON.stringify(SITE_ROUTES)};`}
+          {`window.__SITE_ROUTES__ = ${JSON.stringify(siteRoutes)};`}
         </Script>
         <Script id="google-tag-manager" strategy="beforeInteractive">
           {`
@@ -113,8 +119,10 @@ export default function RootLayout({ children }) {
             width="0"
           />
         </noscript>
-        {children}
-        <ChatWidget />
+        <LocaleProvider locale={locale} routes={routes} dictionary={getLocaleDictionary(locale)}>
+          {children}
+          <ChatWidget />
+        </LocaleProvider>
       </body>
     </html>
   );

@@ -1,9 +1,12 @@
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+
+import { Localized } from "@/components/localized";
 import { StructuredData } from "@/components/structured-data";
 import { BodyPageAttributes } from "@/components/body-page-attributes";
 import { NAV_SECTIONS } from "@/lib/navigation";
 
 function NavLink(props) {
-  return <a {...props} />;
+  return <Localized><a {...props} /></Localized>;
 }
 
 function slugify(value = "") {
@@ -45,7 +48,7 @@ function getPageKey(page) {
 
 function DesktopNavigation({ currentSection }) {
   return (
-    <nav aria-label="Main Navigation" className="hsa-top-nav">
+    <Localized><nav aria-label="Main Navigation" className="hsa-top-nav">
       <NavLink
         className={`hsa-top-link${currentSection === "home" ? " hsa-top-active" : ""}`}
         href="/"
@@ -95,13 +98,13 @@ function DesktopNavigation({ currentSection }) {
       >
         Contact
       </NavLink>
-    </nav>
+    </nav></Localized>
   );
 }
 
 function MobileNavigation() {
   return (
-    <div className="hsa-mobile-menu" id="hsa-mobile-menu">
+    <Localized><div className="hsa-mobile-menu" id="hsa-mobile-menu">
       <NavLink href="/">Home</NavLink>
       {NAV_SECTIONS.map((section) => (
         <details key={section.key}>
@@ -117,13 +120,13 @@ function MobileNavigation() {
       <NavLink href="/blog">Blog</NavLink>
       <NavLink href="/faq">FAQ</NavLink>
       <NavLink href="/contact">Contact</NavLink>
-    </div>
+    </div></Localized>
   );
 }
 
 function Header({ currentSection }) {
   return (
-    <header className="hsa-header">
+    <Localized><header className="hsa-header">
       <div className="hsa-header-inner">
         <NavLink className="hsa-brand" href="/">
           <span className="hsa-brand-mark">
@@ -145,6 +148,7 @@ function Header({ currentSection }) {
         <NavLink className="hsa-cta" href="/contact">
           Speak With An Expert
         </NavLink>
+        <LanguageSwitcher />
         <button
           aria-controls="hsa-mobile-menu"
           aria-expanded="false"
@@ -155,13 +159,13 @@ function Header({ currentSection }) {
         </button>
       </div>
       <MobileNavigation />
-    </header>
+    </header></Localized>
   );
 }
 
 function Footer() {
   return (
-    <footer className="hsa-footer">
+    <Localized><footer className="hsa-footer">
       <div className="hsa-footer-inner">
         <div className="hsa-footer-column hsa-footer-column--brand">
           <div className="hsa-footer-brand">
@@ -312,7 +316,7 @@ function Footer() {
         <span>Copyright 2026 coolyne</span>
         <span>Integrated AGV, ASRS, and warehouse automation systems</span>
       </div>
-    </footer>
+    </footer></Localized>
   );
 }
 
@@ -321,7 +325,7 @@ export function PublicPageChrome({ children, page }) {
   const pageKey = getPageKey(page);
 
   return (
-    <div
+    <Localized><div
       className="content-shell"
       data-hsa-theme={theme}
       data-page-key={pageKey}
@@ -332,6 +336,6 @@ export function PublicPageChrome({ children, page }) {
       <Header currentSection={page.section} />
       {children}
       <Footer />
-    </div>
+    </div></Localized>
   );
 }

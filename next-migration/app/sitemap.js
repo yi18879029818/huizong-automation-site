@@ -1,3 +1,5 @@
+import { getTranslationIndex } from "@/lib/i18n/server";
+import { PAGE_ROUTES, LOCALES, localizedHref } from "@/lib/i18n/routing.mjs";
 import { mergeBlogPosts } from "@/lib/local-blog-posts.mjs";
 import { getCaseStudyList, getPostList } from "@/lib/sanity/content.mjs";
 import { getAllStructuredRoutes, getStructuredPage } from "@/lib/structured-content";
@@ -79,7 +81,12 @@ export default async function sitemap() {
   const pages = await Promise.all(routes.map((route) => getStructuredPage(toSlug(route))));
   const postMap = new Map(posts.map((post) => [`/blog/${post.slug}`, post]));
 
-  return routes.map((route, index) => {
+  const translations = await getTranslationIndex();
+  const languageRoutes = Object.fromEntries(LOCALES.map(locale => [locale, locale === "en" ? routes : [...PAGE_ROUTES, ...translations.filter(item => item.locale === locale).map(item => item.path)]]));
+  function alternates(route) {
+    return { languages: Object.fromEntries(LOCALES.filter(locale => languageRoutes[locale].includes(route)).map(locale => [locale, SITE_URL + localizedHref(route, locale, languageRoutes[locale])])) };
+  }
+  const entries = routes.map((route, index) => {
     const page = pages[index];
     const canonical = toAbsoluteUrl(page?.data?.seo?.canonicalUrl, route);
     const matchedPost = postMap.get(route);
@@ -91,9 +98,23 @@ export default async function sitemap() {
 
     return {
       url: canonical,
+      alternates: alternates(route),
       lastModified,
       changeFrequency: resolveChangeFrequency(page?.kind, route),
       priority: resolvePriority(page?.kind, route)
     };
   });
+  for (const locale of LOCALES.slice(1)) {
+    for (const route of [...new Set(languageRoutes[locale])]) {
+      if (route === "/thanks") continue;
+      entries.push({
+        url: SITE_URL + localizedHref(route, locale, languageRoutes[locale]),
+        lastModified: now,
+        changeFrequency: "monthly",
+        priority: 0.7,
+        alternates: alternates(route)
+      });
+    }
+  }
+  return entries;
 }

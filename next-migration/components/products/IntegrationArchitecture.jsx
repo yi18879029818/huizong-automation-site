@@ -1,3 +1,5 @@
+
+import { Localized } from "@/components/localized";
 const SYSTEM_LAYERS = [
   ["ERP", "Orders and master data"],
   ["WMS", "Inventory, locations and tasks"],
@@ -9,7 +11,7 @@ const SYSTEM_LAYERS = [
 
 export default function IntegrationArchitecture() {
   return (
-    <section className="bg-white py-24 md:py-28" id="warehouse-integration">
+    <Localized><section className="bg-white py-24 md:py-28" id="warehouse-integration">
       <div className="mx-auto max-w-[1440px] px-6 md:px-12">
         <div className="grid gap-14 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-start">
           <div>
@@ -43,6 +45,6 @@ export default function IntegrationArchitecture() {
           ))}
         </div>
       </div>
-    </section>
+    </section></Localized>
   );
 }

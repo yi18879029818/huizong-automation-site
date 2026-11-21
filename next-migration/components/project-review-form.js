@@ -1,4 +1,8 @@
 "use client";
+import { localizedHref } from "@/lib/i18n/shared";
+import { useSiteLocale } from "@/components/localized-client";
+import { Localized } from "@/components/localized-client";
+
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -170,6 +174,7 @@ function buildPayload(formState, attachment) {
 
 export function ProjectReviewForm() {
   const router = useRouter();
+  const { locale, routes } = useSiteLocale();
   const [formState, setFormState] = useState(INITIAL_FORM);
   const [layoutFile, setLayoutFile] = useState(null);
   const [status, setStatus] = useState({ type: "", message: "" });
@@ -256,7 +261,7 @@ export function ProjectReviewForm() {
         });
       }
 
-      router.push(SUCCESS_REDIRECT_PATH);
+      router.push(localizedHref(SUCCESS_REDIRECT_PATH, locale, routes));
     } catch (error) {
       setStatus({
         type: "error",
@@ -271,7 +276,7 @@ export function ProjectReviewForm() {
   }
 
   return (
-    <form className="space-y-8" onSubmit={onSubmit}>
+    <Localized><form className="space-y-8" onSubmit={onSubmit}>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <Field
           label="Name"
@@ -428,13 +433,13 @@ export function ProjectReviewForm() {
           {status.message}
         </p>
       </div>
-    </form>
+    </form></Localized>
   );
 }
 
 function Field({ label, name, onChange, placeholder, required = false, type = "text", value }) {
   return (
-    <label className="space-y-2">
+    <Localized><label className="space-y-2">
       <span className="text-[10px] font-black tracking-[0.15em] text-outline">{label}</span>
       <input
         className="w-full border-2 border-outline-variant/40 bg-surface-container-lowest px-4 py-3 font-medium text-on-surface outline-none transition-all placeholder:text-outline-variant/40 focus:border-secondary focus:ring-0"
@@ -445,13 +450,13 @@ function Field({ label, name, onChange, placeholder, required = false, type = "t
         type={type}
         value={value}
       />
-    </label>
+    </label></Localized>
   );
 }
 
 function SelectField({ label, name, onChange, options, required = false, value }) {
   return (
-    <label className="space-y-2">
+    <Localized><label className="space-y-2">
       <span className="text-[10px] font-black tracking-[0.15em] text-outline">{label}</span>
       <select
         className="w-full border-2 border-outline-variant/40 bg-surface-container-lowest px-4 py-3 font-medium text-on-surface outline-none transition-all focus:border-secondary focus:ring-0"
@@ -467,6 +472,6 @@ function SelectField({ label, name, onChange, options, required = false, value }
           </option>
         ))}
       </select>
-    </label>
+    </label></Localized>
   );
 }

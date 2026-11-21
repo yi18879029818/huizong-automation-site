@@ -1,3 +1,4 @@
+import { getLocale, getLocaleRoutes, localizeSchema } from "@/lib/i18n/server";
 import { COMPANY, SITE_URL } from "@/lib/site-config";
 
 const SCHEMA_CONTEXT = "https://schema.org";
@@ -494,7 +495,7 @@ function entitySchemas(page, url) {
   ].filter(Boolean);
 }
 
-export function StructuredData({ page }) {
+export async function StructuredData({ page }) {
   const url = absoluteUrl(page.currentHref);
   const graph = cleanNode([
     baseOrganization(),
@@ -512,7 +513,7 @@ export function StructuredData({ page }) {
       dangerouslySetInnerHTML={{
         __html: JSON.stringify({
           "@context": SCHEMA_CONTEXT,
-          "@graph": graph
+          "@graph": localizeSchema(graph, getLocale(), await getLocaleRoutes(getLocale()))
         })
       }}
     />

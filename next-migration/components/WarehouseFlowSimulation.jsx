@@ -1,4 +1,6 @@
 "use client";
+import { Localized } from "@/components/localized-client";
+
 
 import { useEffect, useState } from "react";
 
@@ -68,7 +70,7 @@ export default function WarehouseFlowSimulation() {
   }, []);
 
   return (
-    <section
+    <Localized><section
       className="bg-surface-container-lowest py-24 px-8"
     >
       <div className="mx-auto max-w-screen-2xl">
@@ -602,6 +604,6 @@ export default function WarehouseFlowSimulation() {
           }
         }
       `}</style>
-    </section>
+    </section></Localized>
   );
 }

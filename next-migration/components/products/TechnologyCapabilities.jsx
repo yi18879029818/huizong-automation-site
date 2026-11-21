@@ -1,3 +1,5 @@
+
+import { Localized } from "@/components/localized";
 const CAPABILITIES = [
   ["01", "Navigation System", "Laser SLAM, QR or vision-based navigation methods can be evaluated for the site." , "navigation"],
   ["02", "Safety System", "360 degree obstacle detection and emergency protection support controlled movement." , "shield"],
@@ -9,7 +11,7 @@ const CAPABILITIES = [
 
 export default function TechnologyCapabilities() {
   return (
-    <section className="bg-white py-24 md:py-28" id="technology">
+    <Localized><section className="bg-white py-24 md:py-28" id="technology">
       <div className="mx-auto max-w-[1440px] px-6 md:px-12">
         <div className="mb-14 max-w-none">
           <span className="hsa-ui-kicker">Technology Capability</span>
@@ -31,6 +33,6 @@ export default function TechnologyCapabilities() {
           ))}
         </div>
       </div>
-    </section>
+    </section></Localized>
   );
 }

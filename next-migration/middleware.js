@@ -1,3 +1,4 @@
+import { parseLocalePath, PAGE_ROUTES } from "@/lib/i18n/routing.mjs";
 import { NextResponse } from "next/server";
 import { getAgentResponsePolicy } from "@/lib/agent-view";
 import { SITE_HOST, SITE_URL } from "@/lib/site-config";
@@ -177,12 +178,28 @@ export async function middleware(request) {
     method: request.method
   });
 
-  if (policy.response === "markdown") {
+  if (policy.response === "markdown" && parseLocalePath(pathname).locale === "en") {
     const markdownResponse = await markdownProxyResponse(request);
     return attachAgentHeaders(applySecurityHeaders(markdownResponse, pathname), policy.profile);
   }
 
-  const response = NextResponse.next();
+  const { locale, path } = parseLocalePath(pathname);
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set("x-site-locale", locale);
+  requestHeaders.set("x-site-path", path);
+  let response;
+  if (locale !== "en") {
+    if (!PAGE_ROUTES.includes(path) && !/^\/blog\/[^/]+$/.test(path)) {
+      return applySecurityHeaders(new NextResponse("Page not found", { status: 404 }), pathname);
+    }
+    const destination = request.nextUrl.clone();
+    destination.pathname = path;
+    response = NextResponse.rewrite(destination, { request: { headers: requestHeaders } });
+    response.headers.set("Content-Language", locale);
+  } else {
+    response = NextResponse.next({ request: { headers: requestHeaders } });
+    response.headers.set("Content-Language", "en");
+  }
   return attachAgentHeaders(applySecurityHeaders(response, pathname), policy.profile);
 }
 

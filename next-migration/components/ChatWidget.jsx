@@ -1,4 +1,8 @@
 "use client";
+import { localizedHref } from "@/lib/i18n/shared";
+import { useSiteLocale } from "@/components/localized-client";
+import { Localized } from "@/components/localized-client";
+
 
 import { useState } from "react";
 import { usePathname } from "next/navigation";
@@ -69,80 +73,80 @@ function ChatIcon({ name, size = 18, className = "", style }) {
 
   if (name === "close") {
     return (
-      <svg {...sharedProps}>
+      <Localized><svg {...sharedProps}>
         <path d="M6 6 18 18" />
         <path d="m18 6-12 12" />
-      </svg>
+      </svg></Localized>
     );
   }
 
   if (name === "savings") {
     return (
-      <svg {...sharedProps}>
+      <Localized><svg {...sharedProps}>
         <path d="M4.5 7.5h15" />
         <path d="M6.5 7.5V6a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v1.5" />
         <rect x="3.5" y="7.5" width="17" height="12.5" rx="2.5" />
         <path d="M12 10.2v7.6" />
         <path d="M9.4 12.3c0-1.1 1-1.9 2.6-1.9 1.5 0 2.5.7 2.5 1.8 0 2.7-5.1 1.1-5.1 3.6 0 1.1 1 1.8 2.6 1.8 1.5 0 2.6-.7 2.6-1.8" />
-      </svg>
+      </svg></Localized>
     );
   }
 
   if (name === "event") {
     return (
-      <svg {...sharedProps}>
+      <Localized><svg {...sharedProps}>
         <rect x="4" y="5" width="16" height="15" rx="2.5" />
         <path d="M8 3.5v3" />
         <path d="M16 3.5v3" />
         <path d="M4 9.5h16" />
         <path d="m9.5 13 1.8 1.8 3.4-3.8" />
-      </svg>
+      </svg></Localized>
     );
   }
 
   if (name === "download") {
     return (
-      <svg {...sharedProps}>
+      <Localized><svg {...sharedProps}>
         <path d="M12 4.5v10" />
         <path d="m7.8 10.8 4.2 4.2 4.2-4.2" />
         <path d="M5 19.5h14" />
-      </svg>
+      </svg></Localized>
     );
   }
 
   if (name === "build") {
     return (
-      <svg {...sharedProps}>
+      <Localized><svg {...sharedProps}>
         <path d="m14.6 6.2 3.2-3.2a4.1 4.1 0 0 1 2.4 5.6l-7.7 7.7a2.8 2.8 0 0 1-3.9 0L4.5 12.2a2.8 2.8 0 0 1 0-3.9l7.7-7.7A4.1 4.1 0 0 1 17.8 3l-3.2 3.2" />
         <path d="m13.2 7.6 3.2 3.2" />
-      </svg>
+      </svg></Localized>
     );
   }
 
   if (name === "send") {
     return (
-      <svg {...sharedProps}>
+      <Localized><svg {...sharedProps}>
         <path d="M3.5 11.8 20.5 4 14.3 20l-2.7-6.2-8.1-2Z" />
         <path d="M11.5 13.8 20.5 4" />
-      </svg>
+      </svg></Localized>
     );
   }
 
   if (name === "chat") {
     return (
-      <svg {...sharedProps}>
+      <Localized><svg {...sharedProps}>
         <path d="M6.2 17.5H4a1.5 1.5 0 0 1-1.5-1.5V6A1.5 1.5 0 0 1 4 4.5h16A1.5 1.5 0 0 1 21.5 6v10A1.5 1.5 0 0 1 20 17.5H11l-4.8 3Z" />
-      </svg>
+      </svg></Localized>
     );
   }
 
   return (
-    <svg {...sharedProps}>
+    <Localized><svg {...sharedProps}>
       <path d="M7.5 13.5V12a4.5 4.5 0 1 1 9 0v1.5" />
       <rect x="5.5" y="12.5" width="13" height="7" rx="2.5" />
       <path d="M12 16v.1" />
       <path d="M9 9.5a3 3 0 0 1 6 0" />
-    </svg>
+    </svg></Localized>
   );
 }
 
@@ -159,7 +163,7 @@ function MessageBubble({ message, index }) {
   const isAssistant = message.role === "assistant";
 
   return (
-    <div
+    <Localized><div
       className={`hsa-chat-message ${isAssistant ? "hsa-chat-message-assistant" : "hsa-chat-message-user"}`}
       style={{ "--message-delay": `${index * 100}ms` }}
     >
@@ -171,19 +175,20 @@ function MessageBubble({ message, index }) {
       <div
         className={`hsa-chat-bubble ${isAssistant ? "hsa-chat-bubble-assistant" : "hsa-chat-bubble-user"}`}
       >
-        <p>{message.text}</p>
+        <p translate={isAssistant ? undefined : "no"}>{message.text}</p>
         {message.href ? (
           <a className="hsa-chat-inline-link" href={message.href}>
             {message.linkLabel || "Open recommended page"}
           </a>
         ) : null}
       </div>
-    </div>
+    </div></Localized>
   );
 }
 
 export default function ChatWidget() {
   const pathname = usePathname();
+  const { locale, routes } = useSiteLocale();
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -199,7 +204,7 @@ export default function ChatWidget() {
   }
 
   function handleRouteIntent(intent) {
-    router.push(`/contact?intent=${intent}`);
+    router.push(localizedHref(`/contact?intent=${intent}`, locale, routes));
     setIsOpen(false);
   }
 
@@ -262,7 +267,7 @@ export default function ChatWidget() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ query }),
+        body: JSON.stringify({ query, locale }),
       });
 
       if (!response.ok) {
@@ -282,7 +287,7 @@ export default function ChatWidget() {
   }
 
   return (
-    <>
+    <Localized><>
       <div className="hsa-chat-widget" aria-live="polite">
         {isOpen ? (
           <section className="hsa-chat-panel" aria-label="Chat with Us">
@@ -745,6 +750,6 @@ export default function ChatWidget() {
           }
         }
       `}</style>
-    </>
+    </></Localized>
   );
 }

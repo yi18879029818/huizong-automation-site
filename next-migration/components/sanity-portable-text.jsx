@@ -1,3 +1,5 @@
+
+import { Localized } from "@/components/localized";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 import { normalizeInternalHref } from "@/lib/blog-internal-links.mjs";
@@ -5,27 +7,27 @@ import { urlFor } from "@/lib/sanity/image.mjs";
 
 const portableTextComponents = {
   block: {
-    normal: ({ children }) => <p>{children}</p>,
-    h2: ({ children }) => <h2>{children}</h2>,
-    h3: ({ children }) => <h3>{children}</h3>,
-    blockquote: ({ children }) => <blockquote>{children}</blockquote>
+    normal: ({ children }) => <Localized><p>{children}</p></Localized>,
+    h2: ({ children }) => <Localized><h2>{children}</h2></Localized>,
+    h3: ({ children }) => <Localized><h3>{children}</h3></Localized>,
+    blockquote: ({ children }) => <Localized><blockquote>{children}</blockquote></Localized>
   },
   list: {
-    bullet: ({ children }) => <ul>{children}</ul>,
-    number: ({ children }) => <ol>{children}</ol>
+    bullet: ({ children }) => <Localized><ul>{children}</ul></Localized>,
+    number: ({ children }) => <Localized><ol>{children}</ol></Localized>
   },
   marks: {
     link: ({ children, value }) => {
       const internalHref = normalizeInternalHref(value?.href);
 
       if (internalHref) {
-        return <Link href={internalHref}>{children}</Link>;
+        return <Localized><Link href={internalHref}>{children}</Link></Localized>;
       }
 
       return (
-        <a href={value?.href} rel="noreferrer" target="_blank">
+        <Localized><a href={value?.href} rel="noreferrer" target="_blank">
           {children}
-        </a>
+        </a></Localized>
       );
     }
   },
@@ -38,10 +40,10 @@ const portableTextComponents = {
       }
 
       return (
-        <figure className="sanity-inline-image">
+        <Localized><figure className="sanity-inline-image">
           <img alt={value.alt || ""} src={imageUrl} />
           {value.caption ? <figcaption>{value.caption}</figcaption> : null}
-        </figure>
+        </figure></Localized>
       );
     },
     staticImage: ({ value }) => {
@@ -50,7 +52,7 @@ const portableTextComponents = {
       }
 
       return (
-        <figure className="sanity-inline-image">
+        <Localized><figure className="sanity-inline-image">
           <img
             alt={value.alt || ""}
             decoding="async"
@@ -58,7 +60,7 @@ const portableTextComponents = {
             src={value.src}
           />
           {value.caption ? <figcaption>{value.caption}</figcaption> : null}
-        </figure>
+        </figure></Localized>
       );
     },
     videoEmbed: ({ value }) => {
@@ -67,12 +69,12 @@ const portableTextComponents = {
       }
 
       return (
-        <figure className="sanity-inline-video">
+        <Localized><figure className="sanity-inline-video">
           <video controls playsInline preload="metadata">
             <source src={value.src} type="video/mp4" />
           </video>
           {value.caption ? <figcaption>{value.caption}</figcaption> : null}
-        </figure>
+        </figure></Localized>
       );
     },
     comparisonTable: ({ value }) => {
@@ -81,7 +83,7 @@ const portableTextComponents = {
       }
 
       return (
-        <div className="sanity-comparison-table">
+        <Localized><div className="sanity-comparison-table">
           <table>
             <thead>
               <tr>
@@ -100,7 +102,7 @@ const portableTextComponents = {
               ))}
             </tbody>
           </table>
-        </div>
+        </div></Localized>
       );
     },
     productSpecifications: ({ value }) => {
@@ -112,7 +114,7 @@ const portableTextComponents = {
       const liftingLayout = value.layout === "lifting-dashboard";
 
       return (
-        <section
+        <Localized><section
           className={`blog-product-specifications${forkliftLayout ? " blog-product-specifications-forklift" : ""}${liftingLayout ? " blog-product-specifications-lifting" : ""}`}
           aria-label="Product specifications"
         >
@@ -248,7 +250,7 @@ const portableTextComponents = {
               </article>
             ))}
           </div>
-        </section>
+        </section></Localized>
       );
     }
   }
@@ -259,5 +261,5 @@ export function SanityPortableText({ value }) {
     return null;
   }
 
-  return <PortableText value={value} components={portableTextComponents} />;
+  return <Localized><PortableText value={value} components={portableTextComponents} /></Localized>;
 }

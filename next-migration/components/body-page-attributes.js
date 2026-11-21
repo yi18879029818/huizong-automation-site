@@ -1,5 +1,6 @@
 "use client";
 
+import { parseLocalePath } from "@/lib/i18n/shared";
 import { useLayoutEffect } from "react";
 import { usePathname } from "next/navigation";
 
@@ -13,7 +14,7 @@ function toPageKey(pathname) {
 
 export function BodyPageAttributes({ pageKey, theme }) {
   const pathname = usePathname();
-  const resolvedPageKey = toPageKey(pathname) || pageKey || "home";
+  const resolvedPageKey = toPageKey(parseLocalePath(pathname).path) || pageKey || "home";
 
   useLayoutEffect(() => {
     const body = document.body;

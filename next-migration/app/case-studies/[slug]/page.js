@@ -1,3 +1,6 @@
+import { localizeMetadata } from "@/lib/i18n/server";
+
+import { Localized } from "@/components/localized";
 import { cache } from "react";
 import { notFound, redirect } from "next/navigation";
 import { StructuredCatalogDetailPage } from "@/components/structured-catalog-pages";
@@ -18,27 +21,27 @@ export async function generateMetadata({ params }) {
   const caseStudy = await getCachedCaseStudyBySlug(params.slug);
 
   if (caseStudy) {
-    return {
+    return localizeMetadata(await ({
       title: `${caseStudy.title} | coolyne`,
       description: caseStudy.summary || "Warehouse automation case study from coolyne.",
       alternates: {
         canonical: `/case-studies/projects/${caseStudy.slug}`
       }
-    };
+    }));
   }
 
   const fallbackPage = await getCachedStructuredFallback("case-studies", params.slug);
   if (!fallbackPage) {
-    return {};
+    return localizeMetadata(await ({}));
   }
 
-  return {
+  return localizeMetadata(await ({
     title: fallbackPage.title,
     description: fallbackPage.data.summary,
     alternates: {
       canonical: fallbackPage.currentHref
     }
-  };
+  }));
 }
 
 export default async function CaseStudyDetailPage({ params }) {
@@ -53,5 +56,5 @@ export default async function CaseStudyDetailPage({ params }) {
     notFound();
   }
 
-  return <StructuredCatalogDetailPage page={fallbackPage} />;
+  return <Localized><StructuredCatalogDetailPage page={fallbackPage} /></Localized>;
 }

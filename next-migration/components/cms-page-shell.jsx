@@ -1,9 +1,12 @@
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+
+import { Localized } from "@/components/localized";
 import Link from "next/link";
 import { NAV_SECTIONS } from "@/lib/navigation";
 
 function Header({ currentSection }) {
   return (
-    <header className="hsa-header">
+    <Localized><header className="hsa-header">
       <div className="hsa-header-inner">
         <Link className="hsa-brand" href="/">
           <span className="hsa-brand-mark">
@@ -65,14 +68,15 @@ function Header({ currentSection }) {
         <Link className="hsa-cta" href="/contact">
           Speak With An Expert
         </Link>
+        <LanguageSwitcher />
       </div>
-    </header>
+    </header></Localized>
   );
 }
 
 function Footer() {
   return (
-    <footer className="hsa-footer">
+    <Localized><footer className="hsa-footer">
       <div className="hsa-footer-inner">
         <div className="hsa-footer-column hsa-footer-column--brand">
           <div className="hsa-footer-brand">
@@ -219,16 +223,16 @@ function Footer() {
         <span>Copyright 2026 coolyne</span>
         <span>Integrated AGV, ASRS, and warehouse automation systems</span>
       </div>
-    </footer>
+    </footer></Localized>
   );
 }
 
 export function CmsPageShell({ children, currentSection = "" }) {
   return (
-    <div className="content-shell" data-hsa-theme="standard" id="hsa-content-shell">
+    <Localized><div className="content-shell" data-hsa-theme="standard" id="hsa-content-shell">
       <Header currentSection={currentSection} />
       {children}
       <Footer />
-    </div>
+    </div></Localized>
   );
 }

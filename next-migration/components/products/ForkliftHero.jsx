@@ -1,3 +1,5 @@
+
+import { Localized } from "@/components/localized";
 import Link from "next/link";
 
 const DEFAULT_METRICS = [
@@ -15,7 +17,7 @@ export default function ForkliftHero({ page }) {
     "Autonomous pallet transport and rack handoffs on defined warehouse routes. Payload, lift height and charging plans are confirmed for each site.";
 
   return (
-    <section className="forklift-hero overflow-hidden bg-primary text-white lg:min-h-0">
+    <Localized><section className="forklift-hero overflow-hidden bg-primary text-white lg:min-h-0">
       <div className="forklift-hero-inner mx-auto grid max-w-[1440px] gap-8 px-6 py-10 md:px-12 md:py-14 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-stretch lg:gap-10 xl:gap-14">
         <div className="relative z-10">
           <div className="mb-5 flex items-center gap-3">
@@ -87,6 +89,6 @@ export default function ForkliftHero({ page }) {
           </div>
         </div>
       </div>
-    </section>
+    </section></Localized>
   );
 }

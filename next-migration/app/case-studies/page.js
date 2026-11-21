@@ -1,3 +1,6 @@
+import { localizeMetadata } from "@/lib/i18n/server";
+
+import { Localized } from "@/components/localized";
 import { CaseStudyIndex } from "@/components/case-study-index";
 import { CmsPageShell } from "@/components/cms-page-shell";
 import { StructuredCatalogOverviewPage } from "@/components/structured-catalog-pages";
@@ -10,7 +13,7 @@ export const revalidate = 300;
 const description = "Real warehouse automation case studies covering ASRS and material handling projects.";
 const title = resolveSeoTitle("Warehouse Automation Case Studies");
 
-export const metadata = {
+const pageMetadata = {
   title: buildTitleMetadata("Warehouse Automation Case Studies"),
   description,
   alternates: { canonical: "/case-studies" },
@@ -23,11 +26,11 @@ export default async function CaseStudiesPage() {
 
   if (!caseStudies.length) {
     const fallbackPage = await getStructuredPage(["case-studies"]);
-    return <StructuredCatalogOverviewPage page={fallbackPage} />;
+    return <Localized><StructuredCatalogOverviewPage page={fallbackPage} /></Localized>;
   }
 
   return (
-    <CmsPageShell currentSection="case-studies">
+    <Localized><CmsPageShell currentSection="case-studies">
       <main className="shell-main case-study-index-page">
         <section className="case-study-index-hero">
           <p className="case-study-kicker">Project Experience</p>
@@ -38,6 +41,10 @@ export default async function CaseStudiesPage() {
           <CaseStudyIndex caseStudies={caseStudies} />
         </section>
       </main>
-    </CmsPageShell>
+    </CmsPageShell></Localized>
   );
+}
+
+export async function generateMetadata() {
+  return localizeMetadata(pageMetadata);
 }

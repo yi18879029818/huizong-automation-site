@@ -1,4 +1,8 @@
 "use client";
+import { localizedHref } from "@/lib/i18n/shared";
+import { useSiteLocale } from "@/components/localized-client";
+import { Localized } from "@/components/localized-client";
+
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -70,6 +74,7 @@ function buildPayload(formState) {
 
 export function ContactForm() {
   const router = useRouter();
+  const { locale, routes } = useSiteLocale();
   const [formState, setFormState] = useState(INITIAL_FORM);
   const [status, setStatus] = useState({ type: "", message: "" });
   const [pending, setPending] = useState(false);
@@ -114,7 +119,7 @@ export function ContactForm() {
           page_path: window.location.pathname || "/"
         });
       }
-      router.push(SUCCESS_REDIRECT_PATH);
+      router.push(localizedHref(SUCCESS_REDIRECT_PATH, locale, routes));
     } catch (error) {
       setStatus({
         type: "error",
@@ -127,7 +132,7 @@ export function ContactForm() {
   }
 
   return (
-    <form className="structured-form" onSubmit={onSubmit}>
+    <Localized><form className="structured-form" onSubmit={onSubmit}>
       <div className="structured-form-grid">
         <label>
           <span>Full Name</span>
@@ -184,6 +189,6 @@ export function ContactForm() {
         </button>
         <p className={`structured-form-status is-${status.type || "idle"}`}>{status.message}</p>
       </div>
-    </form>
+    </form></Localized>
   );
 }

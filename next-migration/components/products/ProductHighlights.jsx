@@ -1,3 +1,5 @@
+
+import { Localized } from "@/components/localized";
 const HIGHLIGHTS = [
   {
     metric: "2500kg",
@@ -21,7 +23,7 @@ const HIGHLIGHTS = [
 
 export default function ProductHighlights() {
   return (
-    <section className="bg-white py-24 md:py-28">
+    <Localized><section className="bg-white py-24 md:py-28">
       <div className="mx-auto max-w-[1440px] px-6 md:px-12">
         <div className="mb-14 max-w-3xl">
           <span className="hsa-ui-kicker">Automation Value</span>
@@ -54,6 +56,6 @@ export default function ProductHighlights() {
           ))}
         </div>
       </div>
-    </section>
+    </section></Localized>
   );
 }

@@ -1,3 +1,5 @@
+
+import { Localized } from "@/components/localized";
 import Link from "next/link";
 import { PublicPageChrome } from "@/components/public-shell";
 import CountUpValue from "@/components/CountUpValue";
@@ -22,7 +24,7 @@ function LiteYouTubeEmbed({
     customPosterUrl || `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
 
   return (
-    <div
+    <Localized><div
       className="group relative h-full w-full overflow-hidden bg-secondary"
       data-lite-youtube={videoId}
       data-embed-url={embedUrl}
@@ -71,7 +73,7 @@ function LiteYouTubeEmbed({
           {children}
         </div>
       ) : null}
-    </div>
+    </div></Localized>
   );
 }
 const PRODUCT_CARD_IMAGES = {
@@ -651,7 +653,7 @@ function ProductDecisionSupportSection({ page }) {
   const technicalSpecs = (getProductSpecs(slug).technicalSpecs || []).slice(0, 4);
 
   return (
-    <section className="bg-surface py-24">
+    <Localized><section className="bg-surface py-24">
       <div className="mx-auto max-w-screen-2xl px-8">
         <div className="mb-14 max-w-none">
           <span className="hsa-ui-kicker">Project Qualification</span>
@@ -794,7 +796,7 @@ function ProductDecisionSupportSection({ page }) {
           </article>
         </div>
       </div>
-    </section>
+    </section></Localized>
   );
 }
 
@@ -884,7 +886,7 @@ function ContextualPathways({ page }) {
   }
 
   return (
-    <section className="border-y border-outline-variant/15 bg-surface-container-low py-10">
+    <Localized><section className="border-y border-outline-variant/15 bg-surface-container-low py-10">
       <div className="mx-auto flex max-w-screen-2xl flex-col gap-5 px-8 lg:flex-row lg:items-center lg:justify-between">
         <div>
           <span className="hsa-ui-kicker">Related Pathways</span>
@@ -904,13 +906,13 @@ function ContextualPathways({ page }) {
           ))}
         </nav>
       </div>
-    </section>
+    </section></Localized>
   );
 }
 
 function InlineArrow() {
   return (
-    <span className="material-symbols-outlined text-base text-secondary">arrow_forward</span>
+    <Localized><span className="material-symbols-outlined text-base text-secondary">arrow_forward</span></Localized>
   );
 }
 const SOLUTION_DETAIL_VISUALS = {
@@ -1030,7 +1032,7 @@ function productCardHref(card) {
 }
 function sectionIntro(kicker, title, summary) {
   return (
-    <>
+    <Localized><>
       {" "}
       <span className="inline-block text-secondary font-bold tracking-[0.4em] text-[10px] mb-8 border-l-2 border-secondary pl-4">
         {" "}
@@ -1044,18 +1046,18 @@ function sectionIntro(kicker, title, summary) {
         {" "}
         {summary}{" "}
       </p>{" "}
-    </>
+    </></Localized>
   );
 }
 function ProductHeroContactButton({ className = "" }) {
   return (
-    <Link
+    <Localized><Link
       className={`hsa-ui-btn-primary ${className}`.trim()}
       href="/contact"
     >
       {" "}
       Contact Us{" "}
-    </Link>
+    </Link></Localized>
   );
 }
 
@@ -1075,7 +1077,7 @@ function ProductHeroSection({
   hideIllustration = false,
 }) {
   return (
-    <section className="relative min-h-[720px] flex items-center overflow-hidden kinetic-gradient">
+    <Localized><section className="relative min-h-[720px] flex items-center overflow-hidden kinetic-gradient">
       <div className="absolute inset-0">
         <img
           alt="Warehouse environment"
@@ -1130,7 +1132,7 @@ function ProductHeroSection({
           </div>
         ) : null}
       </div>
-    </section>
+    </section></Localized>
   );
 }
 
@@ -1149,7 +1151,7 @@ function ProductPerformanceSection({
   featureCopy,
 }) {
   return (
-    <section className="bg-white py-24">
+    <Localized><section className="bg-white py-24">
       {" "}
       <div className="mx-auto max-w-[1440px] px-6 md:px-12">
         {" "}
@@ -1270,7 +1272,7 @@ function ProductPerformanceSection({
           ) : null}{" "}
         </div>{" "}
       </div>{" "}
-    </section>
+    </section></Localized>
   );
 }
 
@@ -1293,7 +1295,7 @@ function ProductOverviewCard({ card }) {
     PRODUCT_CARD_IMAGE_PRESENTATION[card.slug] ||
     PRODUCT_CARD_IMAGE_PRESENTATION.default;
   return (
-    <Link
+    <Localized><Link
       className="group flex h-full flex-col overflow-hidden border border-outline-variant/30 bg-white shadow-[0_20px_55px_rgba(0,23,54,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_75px_rgba(0,23,54,0.12)]"
       href={productCardHref(card)}
     >
@@ -1364,7 +1366,7 @@ function ProductOverviewCard({ card }) {
           </span>{" "}
         </div>{" "}
       </div>{" "}
-    </Link>
+    </Link></Localized>
   );
 }
 function ProductTechnicalDataSection({ slug }) {
@@ -1376,7 +1378,7 @@ function ProductTechnicalDataSection({ slug }) {
     return null;
   }
   return (
-    <section className="bg-surface-container-low py-28" id="technical-data">
+    <Localized><section className="bg-surface-container-low py-28" id="technical-data">
       {" "}
       <div className="mx-auto max-w-screen-2xl px-8">
         {" "}
@@ -1485,7 +1487,7 @@ function ProductTechnicalDataSection({ slug }) {
           )}{" "}
         </div>{" "}
       </div>{" "}
-    </section>
+    </section></Localized>
   );
 }
 function ProductIntroductionSection({ slug }) {
@@ -1496,7 +1498,7 @@ function ProductIntroductionSection({ slug }) {
     return null;
   }
   return (
-    <section className="bg-white py-24">
+    <Localized><section className="bg-white py-24">
       {" "}
       <div
         className={`mx-auto grid max-w-[1440px] grid-cols-1 gap-16 px-6 md:px-12 ${isFullWidthIntroduction ? "" : "lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.95fr)] lg:items-start"}`}
@@ -1552,13 +1554,13 @@ function ProductIntroductionSection({ slug }) {
           </div>
         )}{" "}
       </div>{" "}
-    </section>
+    </section></Localized>
   );
 }
 function ProductOverviewBody({ page }) {
   const cards = page.data.cards || [];
   return (
-    <main className="ground-handling-forklift-agv-product-page">
+    <Localized><main className="ground-handling-forklift-agv-product-page">
       {" "}
       <section className="relative min-h-[760px] md:min-h-[700px] flex items-center overflow-hidden bg-primary text-white">
         {" "}
@@ -1718,28 +1720,28 @@ function ProductOverviewBody({ page }) {
           </div>{" "}
         </div>{" "}
       </section>{" "}
-    </main>
+    </main></Localized>
   );
 }
 function ProductDetailBody({ page }) {
   const slug = getSlug(page);
   if (slug === "agv-forklift") {
-    return <AgvForkliftBody page={page} />;
+    return <Localized><AgvForkliftBody page={page} /></Localized>;
   }
   if (slug === "ground-handling-forklift-agv") {
-    return <GroundHandlingForkliftAgvBody page={page} />;
+    return <Localized><GroundHandlingForkliftAgvBody page={page} /></Localized>;
   }
   if (slug === "lifting-agv") {
-    return <LiftingAgvBody page={page} />;
+    return <Localized><LiftingAgvBody page={page} /></Localized>;
   }
   if (slug === "storage-agv") {
-    return <StorageAgvBody page={page} />;
+    return <Localized><StorageAgvBody page={page} /></Localized>;
   }
   if (slug === "agv-roller") {
-    return <AgvRollerBody page={page} />;
+    return <Localized><AgvRollerBody page={page} /></Localized>;
   }
   if (slug === "composite-mobile-robot") {
-    return <CompositeMobileRobotBody page={page} />;
+    return <Localized><CompositeMobileRobotBody page={page} /></Localized>;
   }
   const visuals =
     PRODUCT_DETAIL_VISUALS[slug] || PRODUCT_DETAIL_VISUALS.default;
@@ -1763,7 +1765,7 @@ function ProductDetailBody({ page }) {
         label: statLabels[index],
       }));
   return (
-    <main>
+    <Localized><main>
       {" "}
       <ProductHeroSection
         featureTags={[
@@ -1962,7 +1964,7 @@ function ProductDetailBody({ page }) {
           </div>{" "}
         </div>{" "}
       </section>{" "}
-    </main>
+    </main></Localized>
   );
 }
 function AgvForkliftBody({ page }) {
@@ -2000,7 +2002,7 @@ function AgvForkliftBody({ page }) {
   }));
 
   return (
-    <main className="agv-forklift-product-page">
+    <Localized><main className="agv-forklift-product-page">
       <ForkliftHero page={page} />
       <ProductHighlights />
       <ApplicationCards />
@@ -2115,13 +2117,13 @@ function AgvForkliftBody({ page }) {
           </div>
         </div>
       </section>
-    </main>
+    </main></Localized>
   );
 }
 
 function AgvForkliftBodyLegacy() {
   return (
-    <main>
+    <Localized><main>
       <section className="relative min-h-[700px] xl:min-h-[760px] flex items-center overflow-hidden kinetic-gradient">
         <div className="absolute inset-0">
           <img
@@ -2416,7 +2418,7 @@ function AgvForkliftBodyLegacy() {
           </div>
         </div>
       </section>
-    </main>
+    </main></Localized>
   );
 }
 
@@ -2451,7 +2453,7 @@ function GroundHandlingForkliftAgvBody({ page }) {
   };
 
   return (
-    <main>
+    <Localized><main>
       {" "}
       <ProductHeroSection
         backgroundImageSrc="/downloads/ground-handling-forklift-agv-hero-wide.png"
@@ -2573,7 +2575,7 @@ function GroundHandlingForkliftAgvBody({ page }) {
           </div>{" "}
         </div>{" "}
       </section>{" "}
-    </main>
+    </main></Localized>
   );
 }
 function getProductHeroCopy(page, defaults) {
@@ -2585,7 +2587,7 @@ function getProductHeroCopy(page, defaults) {
 }
 function LiftingAgvBody() {
   return (
-    <main>
+    <Localized><main>
       <section className="relative min-h-[700px] xl:min-h-[760px] flex items-center overflow-hidden bg-primary-container">
         <div className="absolute inset-0">
           <img
@@ -2809,13 +2811,13 @@ function LiftingAgvBody() {
         </div>
       </section>
 
-    </main>
+    </main></Localized>
   );
 }
 
 function StorageAgvBody() {
   return (
-    <main>
+    <Localized><main>
       <section className="relative min-h-[700px] xl:min-h-[760px] flex items-center overflow-hidden bg-primary-container">
         <div className="absolute inset-0">
           <img
@@ -3015,13 +3017,13 @@ function StorageAgvBody() {
         </div>
       </section>
 
-    </main>
+    </main></Localized>
   );
 }
 
 function AgvRollerBody() {
   return (
-    <main className="bg-surface">
+    <Localized><main className="bg-surface">
       <section className="relative min-h-[700px] xl:min-h-[760px] flex items-center overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <img
@@ -3254,13 +3256,13 @@ function AgvRollerBody() {
         <div className="absolute -right-24 -bottom-24 w-96 h-96 bg-secondary/10 rounded-full blur-3xl" />
       </section>
 
-    </main>
+    </main></Localized>
   );
 }
 
 function CompositeMobileRobotBody() {
   return (
-      <main>
+      <Localized><main>
         <section className="relative h-[870px] flex items-center overflow-hidden bg-primary">
           <div className="absolute inset-0 z-0">
             <img
@@ -3545,13 +3547,13 @@ function CompositeMobileRobotBody() {
           </div>
         </div>
       </section>
-    </main>
+    </main></Localized>
   );
 }
 
 function SolutionsInquiryForm() {
   return (
-    <form
+    <Localized><form
       className="space-y-8"
       data-form-label="Solutions Page Consultation Form"
       data-form-type="consultation"
@@ -3642,7 +3644,7 @@ function SolutionsInquiryForm() {
         Request Consultation{" "}
         <span className="material-symbols-outlined text-sm">send</span>{" "}
       </button>{" "}
-    </form>
+    </form></Localized>
   );
 }
 function SolutionOverviewBody({ page }) {
@@ -3665,7 +3667,7 @@ function SolutionOverviewBody({ page }) {
   const material = cards.find((card) => card.slug === "material-handling");
   const picking = cards.find((card) => card.slug === "picking");
   return (
-    <main>
+    <Localized><main>
       {" "}
       <section className="relative min-h-[600px] flex items-center overflow-hidden bg-primary">
         {" "}
@@ -4099,23 +4101,23 @@ function SolutionOverviewBody({ page }) {
           ))}{" "}
         </div>{" "}
       </section>{" "}
-    </main>
+    </main></Localized>
   );
 }
 function SolutionDetailBody({ page }) {
   const slug = getSlug(page);
   const isAsrs = slug === "asrs";
   if (slug === "material-handling") {
-    return <MaterialHandlingBody />;
+    return <Localized><MaterialHandlingBody /></Localized>;
   }
   if (slug === "machine-tending-automation") {
-    return <MachineTendingAutomationBody page={page} />;
+    return <Localized><MachineTendingAutomationBody page={page} /></Localized>;
   }
   if (slug === "picking") {
-    return <PickingBody />;
+    return <Localized><PickingBody /></Localized>;
   }
   if (slug === "software") {
-    return <SoftwareBody />;
+    return <Localized><SoftwareBody /></Localized>;
   }
   const visuals =
     SOLUTION_DETAIL_VISUALS[slug] || SOLUTION_DETAIL_VISUALS.default;
@@ -4133,7 +4135,7 @@ function SolutionDetailBody({ page }) {
     "AGV handoffs require matched load carriers, station signals and traffic rules."
   ];
   return (
-    <main>
+    <Localized><main>
       {" "}
       <section
         className={`relative min-h-[800px] flex items-center overflow-hidden ${isAsrs ? "bg-primary text-white isolate" : "px-8 max-w-screen-2xl mx-auto"}`}
@@ -4566,7 +4568,7 @@ function SolutionDetailBody({ page }) {
           </div>{" "}
         </div>{" "}
       </section>{" "}
-    </main>
+    </main></Localized>
   );
 }
 
@@ -4680,7 +4682,7 @@ function MachineTendingAutomationBody({ page }) {
   ];
 
   return (
-    <main className="bg-white text-primary">
+    <Localized><main className="bg-white text-primary">
       <section className="relative kinetic-gradient lg:min-h-[820px] xl:min-h-[860px]">
         <div className="absolute inset-0">
           <img
@@ -5088,12 +5090,12 @@ function MachineTendingAutomationBody({ page }) {
           </div>
         </div>
       </section>
-    </main>
+    </main></Localized>
   );
 }
 function MaterialHandlingBody() {
   return (
-    <main>
+    <Localized><main>
       {" "}
       <section className="relative h-[870px] flex items-center overflow-hidden bg-primary">
         {" "}
@@ -5593,12 +5595,12 @@ function MaterialHandlingBody() {
           </form>{" "}
         </div>{" "}
       </section>{" "}
-    </main>
+    </main></Localized>
   );
 }
 function PickingBody() {
   return (
-    <main>
+    <Localized><main>
       {" "}
       <section className="relative min-h-[870px] flex items-center overflow-hidden bg-primary-container">
         {" "}
@@ -6003,12 +6005,12 @@ function PickingBody() {
           </div>{" "}
         </div>{" "}
       </section>{" "}
-    </main>
+    </main></Localized>
   );
 }
 function SoftwareBody() {
   return (
-    <main>
+    <Localized><main>
       {" "}
       <section className="relative min-h-[870px] flex items-center overflow-hidden bg-primary">
         {" "}
@@ -6300,12 +6302,12 @@ function SoftwareBody() {
           </div>{" "}
         </div>{" "}
       </section>{" "}
-    </main>
+    </main></Localized>
   );
 }
 function NewsletterForm() {
   return (
-    <div className="flex justify-center">
+    <Localized><div className="flex justify-center">
       {" "}
       <button
         className="w-full bg-primary text-on-primary px-10 py-4 font-bold text-[10px] tracking-[0.2em] hover:bg-secondary transition-all sm:w-auto"
@@ -6315,14 +6317,14 @@ function NewsletterForm() {
         {" "}
         Subscribe{" "}
       </button>{" "}
-    </div>
+    </div></Localized>
   );
 }
 function CaseOverviewBody({ page }) {
   const cards = page.data.cards || [];
   const [featured, portrait, cardOne, bottomWide] = cards;
   return (
-    <main>
+    <Localized><main>
       {" "}
       <section className="relative h-[500px] flex items-center overflow-hidden bg-primary">
         {" "}
@@ -6640,21 +6642,21 @@ function CaseOverviewBody({ page }) {
           </div>{" "}
         </div>{" "}
       </section>{" "}
-    </main>
+    </main></Localized>
   );
 }
 function CaseCategoryBody({ page }) {
   const slug = getSlug(page);
   if (slug === "material-handling") {
-    return <CaseMaterialHandlingBody />;
+    return <Localized><CaseMaterialHandlingBody /></Localized>;
   }
   if (slug === "picking") {
-    return <CasePickingBody />;
+    return <Localized><CasePickingBody /></Localized>;
   }
   const visuals = CASE_CATEGORY_VISUALS[slug] || CASE_CATEGORY_VISUALS.default;
   const projects = page.data.projects || [];
   return (
-    <main>
+    <Localized><main>
       {" "}
       <section className="relative bg-primary overflow-hidden min-h-[500px] flex items-center">
         {" "}
@@ -6908,19 +6910,19 @@ function CaseCategoryBody({ page }) {
           </div>{" "}
         </div>{" "}
       </section>{" "}
-    </main>
+    </main></Localized>
   );
 }
 function CaseProjectDetailBody({ page }) {
   const slug = getSlug(page);
   if (slug === "automated-warehouse-upgrade") {
-    return <AutomatedWarehouseUpgradeBody />;
+    return <Localized><AutomatedWarehouseUpgradeBody /></Localized>;
   }
   const bottlenecks = page.data.bottlenecks || [];
   const solutionStack = page.data.solutionStack || [];
   const commissioning = page.data.commissioning || [];
   return (
-    <main>
+    <Localized><main>
       {" "}
       <section className="relative h-[800px] w-full flex items-center bg-primary overflow-hidden">
         {" "}
@@ -7292,12 +7294,12 @@ function CaseProjectDetailBody({ page }) {
           </div>{" "}
         </div>{" "}
       </section>{" "}
-    </main>
+    </main></Localized>
   );
 }
 function CaseMaterialHandlingBody() {
   return (
-    <main>
+    <Localized><main>
       {" "}
       <section className="relative overflow-hidden bg-primary-container min-h-[500px] flex items-center">
         {" "}
@@ -7584,12 +7586,12 @@ function CaseMaterialHandlingBody() {
           </div>{" "}
         </div>{" "}
       </section>{" "}
-    </main>
+    </main></Localized>
   );
 }
 function CasePickingBody() {
   return (
-    <main className="flex-grow">
+    <Localized><main className="flex-grow">
       {" "}
       <section className="relative overflow-hidden bg-primary min-h-[500px] flex items-center">
         {" "}
@@ -7817,12 +7819,12 @@ function CasePickingBody() {
           </div>{" "}
         </div>{" "}
       </section>{" "}
-    </main>
+    </main></Localized>
   );
 }
 function AutomatedWarehouseUpgradeBody() {
   return (
-    <main>
+    <Localized><main>
       {" "}
       <section className="relative h-[800px] w-full flex items-center bg-primary overflow-hidden">
         {" "}
@@ -8277,12 +8279,12 @@ function AutomatedWarehouseUpgradeBody() {
           </div>{" "}
         </div>{" "}
       </section>{" "}
-    </main>
+    </main></Localized>
   );
 }
 export function StructuredCatalogOverviewPage({ page }) {
   return (
-    <PublicPageChrome page={page}>
+    <Localized><PublicPageChrome page={page}>
       {" "}
       <div className="page-content">
         {" "}
@@ -8295,7 +8297,7 @@ export function StructuredCatalogOverviewPage({ page }) {
         )}{" "}
         <ContextualPathways page={page} />
       </div>{" "}
-    </PublicPageChrome>
+    </PublicPageChrome></Localized>
   );
 }
 export function StructuredCatalogDetailPage({ page }) {
@@ -8303,7 +8305,7 @@ export function StructuredCatalogDetailPage({ page }) {
   const productSlug = isProductDetail ? getSlug(page) : "";
 
   return (
-    <PublicPageChrome page={page}>
+    <Localized><PublicPageChrome page={page}>
       {" "}
       <div className="page-content">
         {" "}
@@ -8319,6 +8321,6 @@ export function StructuredCatalogDetailPage({ page }) {
         {isProductDetail && productSlug !== "agv-forklift" ? <ProductDecisionSupportSection page={page} /> : null}{" "}
         <ContextualPathways page={page} />
       </div>{" "}
-    </PublicPageChrome>
+    </PublicPageChrome></Localized>
   );
 }

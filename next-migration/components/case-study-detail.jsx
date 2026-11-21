@@ -1,3 +1,5 @@
+
+import { Localized } from "@/components/localized";
 import Image from "next/image";
 import Link from "next/link";
 import { SanityPortableText } from "@/components/sanity-portable-text";
@@ -8,7 +10,7 @@ function LocalImage({ image, className = "", priority = false }) {
   }
 
   return (
-    <figure className={`case-study-image ${className}`.trim()}>
+    <Localized><figure className={`case-study-image ${className}`.trim()}>
       <Image
         alt={image.alt || ""}
         height={image.height || 900}
@@ -18,7 +20,7 @@ function LocalImage({ image, className = "", priority = false }) {
         width={image.width || 1600}
       />
       {image.caption ? <figcaption>{image.caption}</figcaption> : null}
-    </figure>
+    </figure></Localized>
   );
 }
 
@@ -28,12 +30,12 @@ function TextSection({ id, title, value }) {
   }
 
   return (
-    <section aria-labelledby={id} className="case-study-content-section">
+    <Localized><section aria-labelledby={id} className="case-study-content-section">
       <h2 id={id}>{title}</h2>
       <div className="mdx-prose case-study-prose">
         <SanityPortableText value={value} />
       </div>
-    </section>
+    </section></Localized>
   );
 }
 
@@ -43,7 +45,7 @@ function ProjectTable({ id, title, table }) {
   }
 
   return (
-    <section aria-labelledby={id} className="case-study-content-section">
+    <Localized><section aria-labelledby={id} className="case-study-content-section">
       <h2 id={id}>{title}</h2>
       <div className="case-study-table-wrap">
         <table>
@@ -59,7 +61,7 @@ function ProjectTable({ id, title, table }) {
           </tbody>
         </table>
       </div>
-    </section>
+    </section></Localized>
   );
 }
 
@@ -69,14 +71,14 @@ function MetricStrip({ metrics }) {
   }
 
   return (
-    <section aria-label="Project metrics" className="case-study-metrics">
+    <Localized><section aria-label="Project metrics" className="case-study-metrics">
       {metrics.map((metric) => (
         <div className="case-study-metric" key={`${metric.label}-${metric.value}`}>
           <strong>{metric.value}</strong>
           <span>{metric.label}</span>
         </div>
       ))}
-    </section>
+    </section></Localized>
   );
 }
 
@@ -235,11 +237,11 @@ function referenceBody(value) {
 
 function ReferenceTextSection({ id, title, value, children }) {
   return (
-    <section aria-labelledby={id} className="case-study-reference-section">
+    <Localized><section aria-labelledby={id} className="case-study-reference-section">
       <h2 id={id}>{title}</h2>
       {value?.length ? <div className="mdx-prose case-study-reference-prose"><SanityPortableText value={referenceBody(value)} /></div> : null}
       {children}
-    </section>
+    </section></Localized>
   );
 }
 
@@ -249,7 +251,7 @@ function ReferenceTableSection({ id, title, table }) {
   }
 
   return (
-    <section aria-labelledby={id} className="case-study-reference-section">
+    <Localized><section aria-labelledby={id} className="case-study-reference-section">
       <h2 id={id}>{title}</h2>
       <div className="case-study-reference-table-wrap">
         <table>
@@ -265,13 +267,13 @@ function ReferenceTableSection({ id, title, table }) {
           </tbody>
         </table>
       </div>
-    </section>
+    </section></Localized>
   );
 }
 
 function ReferenceImage({ image, portrait = false }) {
   return (
-    <LocalImage className={`case-study-reference-image${portrait ? " case-study-reference-image--portrait" : ""}`} image={image} />
+    <Localized><LocalImage className={`case-study-reference-image${portrait ? " case-study-reference-image--portrait" : ""}`} image={image} /></Localized>
   );
 }
 
@@ -279,7 +281,7 @@ function AutomatedWarehouseUpgradeReference({ caseStudy, nextStudy, previousStud
   const [facilityImage, routeImage, equipmentImage] = workshopReferenceImages;
 
   return (
-    <main className="shell-main case-study-detail-page case-study-reference-page">
+    <Localized><main className="shell-main case-study-detail-page case-study-reference-page">
       <nav aria-label="Breadcrumb" className="case-study-breadcrumb">
         <Link href="/">Home</Link>
         <span aria-hidden="true">/</span>
@@ -328,7 +330,7 @@ function AutomatedWarehouseUpgradeReference({ caseStudy, nextStudy, previousStud
         {previousStudy ? <Link href={`/case-studies/projects/${previousStudy.slug}`}><span>Previous project</span>{previousStudy.title}</Link> : <span />}
         {nextStudy ? <Link href={`/case-studies/projects/${nextStudy.slug}`}><span>Next project</span>{nextStudy.title}</Link> : <span />}
       </nav>
-    </main>
+    </main></Localized>
   );
 }
 
@@ -362,7 +364,7 @@ function WorkshopReferenceCaseStudy({ caseStudy, nextStudy, previousStudy }) {
   const [facilityImage, routeImage, equipmentImage] = workshopReferenceImages;
 
   return (
-    <main className="shell-main case-study-detail-page case-study-reference-page">
+    <Localized><main className="shell-main case-study-detail-page case-study-reference-page">
       <nav aria-label="Breadcrumb" className="case-study-breadcrumb">
         <Link href="/">Home</Link>
         <span aria-hidden="true">/</span>
@@ -454,7 +456,7 @@ function WorkshopReferenceCaseStudy({ caseStudy, nextStudy, previousStudy }) {
         {previousStudy ? <Link href={`/case-studies/projects/${previousStudy.slug}`}><span>Previous project</span>{previousStudy.title}</Link> : <span />}
         {nextStudy ? <Link href={`/case-studies/projects/${nextStudy.slug}`}><span>Next project</span>{nextStudy.title}</Link> : <span />}
       </nav>
-    </main>
+    </main></Localized>
   );
 }
 
@@ -462,7 +464,7 @@ function SmartHomeManufacturingReferenceCaseStudy({ caseStudy, nextStudy, previo
   const [pickupAndDropoff, emptyTray, fullLoad, vehicle, digitalTwin] = smartHomeReferenceImages;
 
   return (
-    <main className="shell-main case-study-detail-page case-study-reference-page">
+    <Localized><main className="shell-main case-study-detail-page case-study-reference-page">
       <nav aria-label="Breadcrumb" className="case-study-breadcrumb">
         <Link href="/">Home</Link>
         <span aria-hidden="true">/</span>
@@ -562,7 +564,7 @@ function SmartHomeManufacturingReferenceCaseStudy({ caseStudy, nextStudy, previo
         {previousStudy ? <Link href={`/case-studies/projects/${previousStudy.slug}`}><span>Previous project</span>{previousStudy.title}</Link> : <span />}
         {nextStudy ? <Link href={`/case-studies/projects/${nextStudy.slug}`}><span>Next project</span>{nextStudy.title}</Link> : <span />}
       </nav>
-    </main>
+    </main></Localized>
   );
 }
 
@@ -583,7 +585,7 @@ function NarrativeCaseStudy({ caseStudy, nextStudy, previousStudy }) {
   const capabilityCards = tableCards(caseStudy.specifications);
 
   return (
-    <main className="shell-main case-study-detail-page case-study-electronics-page">
+    <Localized><main className="shell-main case-study-detail-page case-study-electronics-page">
       <nav aria-label="Breadcrumb" className="case-study-breadcrumb">
         <Link href="/">Home</Link>
         <span aria-hidden="true">/</span>
@@ -692,7 +694,7 @@ function NarrativeCaseStudy({ caseStudy, nextStudy, previousStudy }) {
         {previousStudy ? <Link href={`/case-studies/projects/${previousStudy.slug}`}><span>Previous project</span>{previousStudy.title}</Link> : <span />}
         {nextStudy ? <Link href={`/case-studies/projects/${nextStudy.slug}`}><span>Next project</span>{nextStudy.title}</Link> : <span />}
       </nav>
-    </main>
+    </main></Localized>
   );
 }
 
@@ -713,7 +715,7 @@ function CompactAsrsReferenceCaseStudy({ caseStudy, nextStudy, previousStudy }) 
   const metrics = (caseStudy.metrics || []).slice(0, 2);
 
   return (
-    <main className="shell-main case-study-detail-page mini-load-reference-page">
+    <Localized><main className="shell-main case-study-detail-page mini-load-reference-page">
       <nav aria-label="Breadcrumb" className="case-study-breadcrumb">
         <Link href="/">Home</Link>
         <span aria-hidden="true">/</span>
@@ -768,36 +770,36 @@ function CompactAsrsReferenceCaseStudy({ caseStudy, nextStudy, previousStudy }) 
         {previousStudy ? <Link href={`/case-studies/projects/${previousStudy.slug}`}><span>Previous project</span>{previousStudy.title}</Link> : <span />}
         {nextStudy ? <Link href={`/case-studies/projects/${nextStudy.slug}`}><span>Next project</span>{nextStudy.title}</Link> : <span />}
       </nav>
-    </main>
+    </main></Localized>
   );
 }
 
 export function CaseStudyDetail({ caseStudy, nextStudy, previousStudy }) {
   if (caseStudy.slug === "automated-warehouse-upgrade") {
-    return <AutomatedWarehouseUpgradeReference caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
+    return <Localized><AutomatedWarehouseUpgradeReference caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} /></Localized>;
   }
 
   if (caseStudy.slug === "workshop-intralogistics-automation") {
-    return <WorkshopReferenceCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
+    return <Localized><WorkshopReferenceCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} /></Localized>;
   }
 
   if (caseStudy.slug === "smart-home-manufacturing-agv") {
-    return <SmartHomeManufacturingReferenceCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
+    return <Localized><SmartHomeManufacturingReferenceCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} /></Localized>;
   }
 
   if (compactAsrsCaseConfigs[caseStudy.slug]) {
-    return <CompactAsrsReferenceCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
+    return <Localized><CompactAsrsReferenceCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} /></Localized>;
   }
 
   if (narrativeCaseConfigs[caseStudy.slug]) {
-    return <NarrativeCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />;
+    return <Localized><NarrativeCaseStudy caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} /></Localized>;
   }
 
   const coverImage = caseStudy.coverImage || caseStudy.heroImage;
   const gallery = (caseStudy.gallery || []).filter((image) => image.src !== coverImage?.src);
 
   return (
-    <main className="shell-main case-study-detail-page">
+    <Localized><main className="shell-main case-study-detail-page">
       <nav aria-label="Breadcrumb" className="case-study-breadcrumb">
         <Link href="/">Home</Link>
         <span aria-hidden="true">/</span>
@@ -849,6 +851,6 @@ export function CaseStudyDetail({ caseStudy, nextStudy, previousStudy }) {
         {previousStudy ? <Link href={`/case-studies/projects/${previousStudy.slug}`}><span>Previous project</span>{previousStudy.title}</Link> : <span />}
         {nextStudy ? <Link href={`/case-studies/projects/${nextStudy.slug}`}><span>Next project</span>{nextStudy.title}</Link> : <span />}
       </nav>
-    </main>
+    </main></Localized>
   );
 }

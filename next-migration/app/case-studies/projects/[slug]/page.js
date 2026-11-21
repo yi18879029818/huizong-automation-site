@@ -1,3 +1,6 @@
+import { localizeMetadata } from "@/lib/i18n/server";
+
+import { Localized } from "@/components/localized";
 import { cache } from "react";
 import { notFound } from "next/navigation";
 import { CaseStudyDetail } from "@/components/case-study-detail";
@@ -17,7 +20,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const caseStudy = await getCachedCaseStudy(params.slug);
-  if (!caseStudy) return {};
+  if (!caseStudy) return localizeMetadata(await ({}));
 
   const seo = caseStudy.seo || {};
   const description = seo.description || caseStudy.summary;
@@ -25,7 +28,7 @@ export async function generateMetadata({ params }) {
   const canonical = seo.canonicalUrl || `/case-studies/projects/${caseStudy.slug}`;
   const image = caseStudy.coverImage?.src || caseStudy.heroImage?.asset?.url;
 
-  return {
+  return localizeMetadata(await ({
     title: buildTitleMetadata(seo.title || caseStudy.title),
     description,
     alternates: { canonical },
@@ -44,7 +47,7 @@ export async function generateMetadata({ params }) {
       description: seo.ogDescription || description,
       images: image ? [image] : undefined
     }
-  };
+  }));
 }
 
 export default async function CaseStudyProjectPage({ params }) {
@@ -85,9 +88,9 @@ export default async function CaseStudyProjectPage({ params }) {
   };
 
   return (
-    <CmsPageShell currentSection="case-studies">
+    <Localized><CmsPageShell currentSection="case-studies">
       <script dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} type="application/ld+json" />
       <CaseStudyDetail caseStudy={caseStudy} nextStudy={nextStudy} previousStudy={previousStudy} />
-    </CmsPageShell>
+    </CmsPageShell></Localized>
   );
 }

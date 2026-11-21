@@ -1,4 +1,6 @@
 "use client";
+import { Localized } from "@/components/localized-client";
+
 
 import { useMemo, useRef, useState } from "react";
 
@@ -32,7 +34,7 @@ export default function AboutMilestonesTimeline({ milestones }) {
   }
 
   return (
-    <div className="mt-12">
+    <Localized><div className="mt-12">
       <div
         className="grid gap-8 lg:grid-cols-[minmax(250px,0.34fr)_minmax(0,1fr)] lg:items-center"
         ref={detailRef}
@@ -106,6 +108,6 @@ export default function AboutMilestonesTimeline({ milestones }) {
           );
         })}
       </div>
-    </div>
+    </div></Localized>
   );
 }

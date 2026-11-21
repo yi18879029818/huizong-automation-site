@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "/",
+    "/about",
+    "/contact",
+    "/privacy-policy",
+    "/terms",
+    "/products",
+    "/products/agv-forklift",
+    "/products/ground-handling-forklift-agv",
+    "/products/lifting-agv",
+    "/products/storage-agv",
+    "/products/agv-roller",
+    "/products/composite-mobile-robot",
+    "/solutions",
+    "/solutions/asrs",
+    "/solutions/material-handling",
+    "/solutions/picking",
+    "/solutions/goods-to-person-picking-system",
+    "/solutions/machine-tending-automation",
+    "/solutions/software",
+    "/industries/food-beverage-fmcg-automation",
+    "/case-studies",
+    "/case-studies/asrs",
+    "/case-studies/material-handling",
+    "/case-studies/picking",
+    "/case-studies/projects/automated-warehouse-upgrade",
+    "/faq",
+    "/blog",
+    "/thanks"
+  ],
+  "posts": [
+    "/blog/lifting-automated-robot",
+    "/blog/agv-forklift-meaning",
+    "/blog/autonomous-mobile-manipulator-robots-market",
+    "/blog/agv-forklift-price",
+    "/blog/agv-guide",
+    "/blog/amr-autonomous-mobile-robot-design-standards",
+    "/blog/what-is-asrs",
+    "/blog/agv-safety-standards-iso-eu-us",
+    "/blog/automated-guided-vehicle-diagram",
+    "/blog/conveyor-agv-roller-agv-automated-load-transfer"
+  ],
+  "ranking": {
+    "metric": "screenPageViews",
+    "startDate": "2026-10-24",
+    "endDate": "2026-11-20",
+    "hostname": "www.coolyne.com"
+  }
+}

@@ -1,4 +1,26 @@
-﻿(function () {
+(function () {
+  function translateUi(value) {
+    return window.__COOLYNE_TRANSLATE__ ? window.__COOLYNE_TRANSLATE__(value) : value;
+  }
+
+  function localizeInsertedContent(root) {
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    var node;
+    while ((node = walker.nextNode())) {
+      if (!node.parentElement.closest("script, style, svg, .material-symbols-outlined")) {
+        node.nodeValue = translateUi(node.nodeValue);
+      }
+    }
+    root.querySelectorAll("[placeholder], [aria-label], [data-success-message], a[href], [data-success-redirect]").forEach(function (element) {
+      ["placeholder", "aria-label", "data-success-message"].forEach(function (name) {
+        if (element.hasAttribute(name)) element.setAttribute(name, translateUi(element.getAttribute(name)));
+      });
+      ["href", "data-success-redirect"].forEach(function (name) {
+        if (element.hasAttribute(name) && window.__COOLYNE_HREF__) element.setAttribute(name, window.__COOLYNE_HREF__(element.getAttribute(name)));
+      });
+    });
+  }
+
   function route(key) {
     return (window.__SITE_ROUTES__ || {})[key] || "#";
   }
@@ -41,7 +63,7 @@
       document.body.appendChild(toast);
     }
 
-    toast.textContent = msg;
+    toast.textContent = translateUi(msg);
     toast.classList.add("show");
     window.clearTimeout(window.__hsaToastTimer);
     window.__hsaToastTimer = window.setTimeout(function () {
@@ -315,7 +337,7 @@
       return;
     }
 
-    status.textContent = message || "";
+    status.textContent = translateUi(message || "");
     status.className = baseClass + (tone ? " is-" + tone : "");
   }
 
@@ -632,7 +654,7 @@
     var pendingLead;
 
     normalizedPathname = (window.location.pathname || "/").replace(/\/+$/, "") || "/";
-    if (normalizedPathname !== "/thanks") {
+    if (normalizedPathname.replace(/^\/(fr|de|es)(?=\/|$)/, "") !== "/thanks") {
       return;
     }
 
@@ -860,7 +882,7 @@
         originalLabel = submitButton.dataset.originalLabel || submitButton.textContent;
         submitButton.dataset.originalLabel = originalLabel;
         submitButton.disabled = true;
-        submitButton.textContent = form.dataset.sendingLabel || "Sending...";
+        submitButton.textContent = translateUi(form.dataset.sendingLabel || "Sending...");
       }
 
       fetch("/api/contact", {
@@ -977,6 +999,7 @@
         "</form>" +
       "</div>";
 
+    localizeInsertedContent(modal);
     document.body.appendChild(modal);
     return modal;
   }
@@ -1003,12 +1026,14 @@
         "</div>" +
       "</div>";
 
+    localizeInsertedContent(modal);
     document.body.appendChild(modal);
     return modal;
   }
 
   function setExpertModal(open) {
     var modal = ensureExpertModal();
+    localizeInsertedContent(modal);
     var panel = modal.querySelector(".hsa-expert-modal__panel");
     var firstInput = modal.querySelector("input, textarea");
 
@@ -1035,6 +1060,7 @@
 
   function setSalesModal(open) {
     var modal = ensureSalesModal();
+    localizeInsertedContent(modal);
 
     if (open) {
       modal.classList.add("is-open");
@@ -1050,6 +1076,7 @@
 
   function bindExpertModal() {
     var modal = ensureExpertModal();
+    localizeInsertedContent(modal);
 
     document.querySelectorAll(".hsa-cta").forEach(function (cta) {
       if (cta.dataset.hsaModalBound) {
@@ -1084,6 +1111,7 @@
 
   function bindSalesModal() {
     var modal = ensureSalesModal();
+    localizeInsertedContent(modal);
 
     document.addEventListener("click", function (ev) {
       if (ev.target.closest("[data-hsa-open-sales-modal]")) {
@@ -1222,17 +1250,17 @@
     intentField.value = preset.fieldValue;
 
     if (heading) {
-      heading.textContent = preset.heading;
+      heading.textContent = translateUi(preset.heading);
     }
 
     if (copy) {
-      copy.textContent = preset.description;
+      copy.textContent = translateUi(preset.description);
       notice = ensureIntentNotice(intro);
       notice.textContent = "Intent detected: " + preset.fieldValue;
     }
 
     if (submitButton) {
-      submitButton.textContent = preset.buttonLabel;
+      submitButton.textContent = translateUi(preset.buttonLabel);
     }
 
     if (messageField && !trimMultilineValue(messageField.value)) {
@@ -1760,6 +1788,7 @@
           "</div>" +
         "</div>";
 
+      localizeInsertedContent(news);
       inner.appendChild(news);
     });
   }
@@ -1803,6 +1832,7 @@
         '<button class="hsa-cookie-banner__close" type="button" aria-label="Close cookie notice" data-hsa-cookie-close>&times;</button>' +
       "</div>";
 
+    localizeInsertedContent(panel);
     banner.appendChild(panel);
     document.body.appendChild(banner);
 

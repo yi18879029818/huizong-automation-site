@@ -702,3 +702,25 @@ body.antialiased {
     animation: none;
   }
 }
+
+.language-switcher { position: relative; flex: 0 0 auto; margin-left: 12px; color: #001736; font-size: 13px; }
+.language-switcher summary { cursor: pointer; list-style: none; padding: 10px 8px; border: 1px solid #d9dde5; border-radius: 10px; white-space: nowrap; }
+.language-switcher summary::after { content: " ▾"; }
+.language-switcher nav { position: absolute; right: 0; top: 100%; z-index: 100; min-width: 150px; padding: 8px; border: 1px solid #d9dde5; border-radius: 12px; background: #fff; box-shadow: 0 10px 30px #00173618; }
+.language-switcher a { display: block; padding: 9px 12px; border-radius: 6px; }
+.language-switcher a:hover, .language-switcher a[aria-current="true"] { background: #eef2f7; }
+html[lang="de"] .hsa-top-nav, html[lang="fr"] .hsa-top-nav, html[lang="es"] .hsa-top-nav { gap: 12px; font-size: 12px; letter-spacing: .02em; }
+@media (max-width: 1279px) { html:not([lang="en"]) .hsa-header .hsa-cta { display: none; } }
+@media (max-width: 767px) { .language-switcher { margin-left: auto; } .language-switcher summary { padding: 8px 6px; font-size: 12px; } }
+
+html:not([lang="en"]) .forklift-hero-inner > *,
+html:not([lang="en"]) .hsa-ui-grid > * { min-width: 0; }
+html:not([lang="en"]) .hsa-ui-btn-primary,
+html:not([lang="en"]) .hsa-ui-btn-secondary { max-width: 100%; white-space: normal; text-align: center; overflow-wrap: anywhere; }
+html:not([lang="en"]) .forklift-highlights-title,
+html:not([lang="en"]) .forklift-section-title--single-line { white-space: normal; }
+html:not([lang="en"]) .forklift-hero-inner [class*="text-2xl"] { font-size: clamp(1.05rem, 2vw, 1.6rem); overflow-wrap: anywhere; }
+@media (max-width: 1023px) {
+  html:not([lang="en"]) .forklift-hero-inner { grid-template-columns: minmax(0, 1fr); }
+  html:not([lang="en"]) .hsa-ui-kicker { white-space: normal; overflow-wrap: anywhere; }
+}

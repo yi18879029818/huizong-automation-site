@@ -1,3 +1,5 @@
+
+import { Localized } from "@/components/localized";
 const WORKFLOW = [
   ["01", "Warehouse System Sends Task", "Order, inventory or replenishment demand becomes a pallet task."],
   ["02", "AGV Receives Mission", "The control layer assigns the mission, destination and operating rules."],
@@ -9,7 +11,7 @@ const WORKFLOW = [
 
 export default function WorkflowAnimation() {
   return (
-    <section className="forklift-workflow-section bg-primary py-24 text-white md:py-28" id="how-it-works">
+    <Localized><section className="forklift-workflow-section bg-primary py-24 text-white md:py-28" id="how-it-works">
       <div className="mx-auto max-w-[1440px] px-6 md:px-12">
         <div className="mb-14 max-w-none">
           <span className="hsa-ui-kicker hsa-ui-kicker--light">How It Works</span>
@@ -37,6 +39,6 @@ export default function WorkflowAnimation() {
           </div>
         </div>
       </div>
-    </section>
+    </section></Localized>
   );
 }

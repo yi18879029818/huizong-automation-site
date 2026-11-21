@@ -1,4 +1,6 @@
 "use client";
+import { Localized } from "@/components/localized-client";
+
 
 import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
 
@@ -15,18 +17,18 @@ const MANUAL_SCROLL_SETTLE_MS = 140;
 function PopularArticleCard({ item, index, setCardRef }) {
   const { isClone, post } = item;
   const media = (
-    <img
+    <Localized><img
       alt={isClone ? "" : post.imageAlt}
       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.025]"
       height="941"
       loading="lazy"
       src={post.image}
       width="1672"
-    />
+    /></Localized>
   );
 
   return (
-    <article
+    <Localized><article
       aria-hidden={isClone ? "true" : undefined}
       className="hsa-ui-card hsa-popular-article-card group snap-start overflow-hidden"
       data-carousel-clone={isClone ? "true" : "false"}
@@ -77,7 +79,7 @@ function PopularArticleCard({ item, index, setCardRef }) {
           </a>
         )}
       </div>
-    </article>
+    </article></Localized>
   );
 }
 
@@ -257,7 +259,7 @@ export default function PopularBlogCarousel({ posts }) {
   }
 
   return (
-    <div className="relative">
+    <Localized><div className="relative">
       <div className="mb-7 flex justify-end gap-3">
         <button
           aria-controls="popular-blog-track"
@@ -299,6 +301,6 @@ export default function PopularBlogCarousel({ posts }) {
           />
         ))}
       </div>
-    </div>
+    </div></Localized>
   );
 }
