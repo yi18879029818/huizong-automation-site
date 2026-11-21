@@ -1,3 +1,8 @@
+import { getLocale } from "@/lib/i18n/server";
+import { getPostList } from "@/lib/sanity/content.mjs";
+import { urlFor } from "@/lib/sanity/image.mjs";
+import { getBlogImageOverride } from "@/lib/blog-image-overrides.mjs";
+import localeManifest from "@/lib/i18n/routes.json";
 
 import { Localized } from "@/components/localized";
 import { Fragment } from "react";
@@ -727,7 +732,23 @@ function getToneClass(tone) {
   return "bg-primary";
 }
 
-function HomeBody({ page }) {
+async function HomeBody({ page }) {
+  let popularPosts = HOME_POPULAR_POSTS;
+  if (getLocale() !== "en") {
+    const translations = await getPostList();
+    popularPosts = localeManifest.posts.map(href => {
+      const post = translations.find(item => "/blog/" + item.slug === href);
+      if (!post) return null;
+      return {
+        href,
+        title: post.title,
+        excerpt: post.excerpt,
+        topic: "Warehouse Automation",
+        image: getBlogImageOverride(post) || urlFor(post.heroImage)?.width(1200).url() || "/assets/images/agv-forklift-original.png",
+        imageAlt: post.heroImage?.alt || post.title
+      };
+    }).filter(Boolean);
+  }
   const vm = getHomeViewModel(page);
 
   return (
@@ -1389,7 +1410,7 @@ function HomeBody({ page }) {
               </p>
             </div>
             <div className="mt-10">
-              <PopularBlogCarousel posts={HOME_POPULAR_POSTS} />
+              <PopularBlogCarousel posts={popularPosts} />
             </div>
           </div>
         </section>{" "}

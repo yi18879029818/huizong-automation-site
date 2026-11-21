@@ -3,6 +3,10 @@
     return window.__COOLYNE_TRANSLATE__ ? window.__COOLYNE_TRANSLATE__(value) : value;
   }
 
+  window.__COOLYNE_LOCALIZE_NATIVE__ = function () {
+    document.querySelectorAll(".hsa-expert-modal, .hsa-sales-modal, .hsa-cookie-banner").forEach(localizeInsertedContent);
+  };
+
   function localizeInsertedContent(root) {
     var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
     var node;

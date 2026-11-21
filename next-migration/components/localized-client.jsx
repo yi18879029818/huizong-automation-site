@@ -11,6 +11,7 @@ export function LocaleProvider({ locale, routes, dictionary, children }) {
     const href = value => localizedHref(value, locale, routes);
     window.__COOLYNE_TRANSLATE__ = translate;
     window.__COOLYNE_HREF__ = href;
+    window.__COOLYNE_LOCALIZE_NATIVE__?.();
     return () => {
       if (window.__COOLYNE_TRANSLATE__ === translate) delete window.__COOLYNE_TRANSLATE__;
       if (window.__COOLYNE_HREF__ === href) delete window.__COOLYNE_HREF__;
