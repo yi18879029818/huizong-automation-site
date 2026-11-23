@@ -448,3 +448,12 @@ The only unrelated local git status item is the pre-existing modification to `..
 - Verified: production build, 18 existing tests, desktop/mobile locale checks, form contracts with intercepted submissions, localized redirects, three-language search and 30 current Sanity translations.
 - Remaining: production packaging/deployment and live page/sitemap checks. Native-language editorial review of initial machine translations is pending. Other blog articles do not yet have published translations.
 - Risk areas: new English main-page wording needs dictionary updates; a changed English article raises a revision warning on its translation. New published Sanity translations become available after the 60-second availability cache refresh.
+
+## 2026-11-23 - AGV ROI media publication
+
+- Status: two inline images and the selected English payback-chart cover are live at `/blog/agv-roi-calculation`.
+- Changed records: Sanity `post-agv-roi-calculation` body, heroImage and SEO ogImage; project work log and this handoff. No frontend code was changed for this request.
+- Verified results: article/index/sitemap HTTP 200, both inline figures present, cover and Open Graph match, both CDN assets byte-identical to the supplied JPEGs, original 80 blocks and four tables retained.
+- Unresolved issues: none for this media request. Previously pending multilingual frontend changes remain separate in the worktree.
+- Next steps: no further publication action required for this request.
+- Risk areas: image figures use different example assumptions; captions explicitly distinguish them from the article's worked calculation.

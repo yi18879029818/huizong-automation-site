@@ -920,3 +920,10 @@
 ### Resource-limit recovery
 
 Production verification exposed intermittent Cloudflare 1102 responses after the initial deployment. Restored Worker b16e0a82-5056-4848-8811-5d27cde0c4bc while optimizing. The initial implementation serialized approximately 720 KB of dictionary content per translated page and repeatedly walked nested localization boundaries. The new page-key collector limits the French home dictionary to 60,834 bytes, skips nested component boundaries and bypasses tree traversal for English. Production build, browser regression and all 28 French main-page translation checks pass locally.
+
+## 2026-11-23 - AGV ROI article images
+
+- Published the two supplied JPEGs to Sanity post `post-agv-roi-calculation`, adding two `imageWithAlt` blocks. Selected the English gross-payback chart as `heroImage` and SEO `ogImage`.
+- Placed the cost-component illustration after the current-cost discussion and the payback chart after the payback calculation. Captions identify both as illustrative examples and distinguish gross payback from the article's net-savings method.
+- Verified authenticated read and document/asset create plus update dry runs before writing. Readback preserves all 80 original body blocks, links, four tables, and publication date. The article, index, sitemap and both original CDN assets return HTTP 200; CDN SHA-1 values match the supplied files. Live HTML renders both inline figures, the selected cover and Open Graph image.
+- Evidence and reversible pre-publication snapshot are in `ceshistitch/outputs/agv-roi-calculation-images`. This CMS-only change requires no frontend deployment.
