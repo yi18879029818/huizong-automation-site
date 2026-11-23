@@ -468,3 +468,12 @@ The only unrelated local git status item is the pre-existing modification to `..
 - Unresolved issues: no blocking publication issues. Roller payload and lift travel remain project-specific as authorized by the user's continuation.
 - Next steps: replace project-specific labels when the actual engineering specification becomes available.
 - Risk areas: the selected mobile-base values are explicitly a reference configuration, not a verified rating of the pictured machine. Initial locale copy has not received native-language editorial review.
+
+## 2026-11-23 - Airfreight AGVs publication
+
+- Status: `/blog/airfreight-agvs` is live and listed in the blog index and sitemap.
+- Changed files: `content/blog/airfreight-agvs.md`, `docs/WORK_LOG.md`, `docs/HANDOFF.md`; Sanity document `post-airfreight-agvs` created.
+- Verified results: 78 body blocks, all 79 source paragraphs preserved, six H2 and thirteen H3 headings, four original links, HTTP 200 for article/index/sitemap, correct canonical and BlogPosting metadata. Desktop/mobile checks passed without overflow or browser errors.
+- Unresolved issues: none for this publication. No images were supplied, so the article has no cover.
+- Next steps: add images or a cover if the user provides them.
+- Risk areas: retain the ULD-specific terminology, named case examples and source links in future edits. This request published the English source; translated article versions were not requested.

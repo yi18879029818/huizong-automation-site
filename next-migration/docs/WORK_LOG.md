@@ -936,3 +936,11 @@ Production verification exposed intermittent Cloudflare 1102 responses after the
 - Added navigation, metadata, reciprocal language links, sitemap entries and a browser check. Refreshed page-specific locale context within actual page modules so Next client navigation updates dictionaries even when the top-level route segment remains unchanged.
 - Verification passed: 19 unit tests, Next/OpenNext builds, eight new-product viewport/language combinations, four catalog-to-detail journeys, existing multilingual regression including blog specification cards, all 117 localized URLs plus English lifting product (118 HTTP 200 responses), 38 sitemap URLs per non-English locale and an exact public WebP SHA-256 match. No 503/1102 responses occurred in that route sweep.
 - Source commits 48a290c and 7ddb65f were pushed to main before deploying Worker 07a505d6-66f9-42ea-984d-2e9aab67fdc4. Logs and screenshots are stored under the Windows TEMP directory with the coolyne-dual-roller prefix.
+
+## 2026-11-23 - Airfreight AGVs article
+
+- Published the supplied `Airfreight_AGVs_Coolyne_English_Blog.docx` as a new Sanity article at `/blog/airfreight-agvs`, document `post-airfreight-agvs`.
+- Preserved all 79 source paragraphs (title plus 78 body blocks), with six H2 headings, thirteen H3 headings, three internal links and the original IATA link. The file contains no images or tables; no cover was assigned.
+- Confirmed the slug was unused and authenticated document create/update dry runs passed. Source Markdown commit `1dcf96f` was pushed to main before the Sanity publication. No frontend deployment was needed.
+- Verified Sanity readback, every source paragraph in live prose, four link destinations, self canonical, indexable robots and BlogPosting metadata. Article, blog index and sitemap return HTTP 200 and include the new article. Desktop 1440px and mobile 390px checks show no horizontal overflow or browser errors.
+- Publishing evidence is in `ceshistitch/outputs/airfreight-agvs`. The blog index refreshed after the CDN propagation interval.
