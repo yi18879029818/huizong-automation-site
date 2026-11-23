@@ -443,10 +443,10 @@ The only unrelated local git status item is the pre-existing modification to `..
 
 ## 2026-11-21 - Multilingual release
 
-- Status: implementation and local verification completed; production deployment pending.
+- Status: multilingual implementation is live. Production verification completed on 2026-11-23; see the latest entry below.
 - Changed files: app routes, shared localization components, lib/i18n dictionaries and routing, Sanity translation schema/importer, native shell localization and browser checks. See docs/MULTILINGUAL.md.
 - Verified: production build, 18 existing tests, desktop/mobile locale checks, form contracts with intercepted submissions, localized redirects, three-language search and 30 current Sanity translations.
-- Remaining: production packaging/deployment and live page/sitemap checks. Native-language editorial review of initial machine translations is pending. Other blog articles do not yet have published translations.
+- Remaining: native-language editorial review of initial machine translations. Other blog articles do not yet have published translations.
 - Risk areas: new English main-page wording needs dictionary updates; a changed English article raises a revision warning on its translation. New published Sanity translations become available after the 60-second availability cache refresh.
 
 ## 2026-11-23 - AGV ROI media publication
@@ -457,3 +457,14 @@ The only unrelated local git status item is the pre-existing modification to `..
 - Unresolved issues: none for this media request. Previously pending multilingual frontend changes remain separate in the worktree.
 - Next steps: no further publication action required for this request.
 - Risk areas: image figures use different example assumptions; captions explicitly distinguish them from the article's worked calculation.
+
+
+## 2026-11-23 - Dual Roller Lift Robot production release
+
+- Status: `/products/dual-roller-lift-robot` and `/fr`, `/de`, `/es` equivalents are live. The product overview, header and footer link to the new detail page.
+- Changed files: `lib/dual-roller-lift-robot.mjs`, `components/products/DualRollerLiftRobot.jsx`, catalog registry/renderer, navigation, locale dictionaries/routes/page keys, `public/products/dual-roller-lift-robot.webp`, browser regression script and design/plan documents.
+- Verified results: 19 unit tests, Next/OpenNext builds, eight product desktop/mobile checks, four overview-to-detail navigations, translated page titles, 13 parameter rows, image loading, canonical/hreflang and sitemap. All 117 localized routes plus the existing English lifting product returned 200, with 38 sitemap URLs per added language. Public image SHA-256 matches the committed WebP. Existing multilingual browser regression also passed, including SPA navigation to translated blog specification cards.
+- Release: source `7ddb65f`, preceded by page-context fix `48a290c`, pushed to main before deployment. Active Cloudflare Worker `07a505d6-66f9-42ea-984d-2e9aab67fdc4`.
+- Unresolved issues: no blocking publication issues. Roller payload and lift travel remain project-specific as authorized by the user's continuation.
+- Next steps: replace project-specific labels when the actual engineering specification becomes available.
+- Risk areas: the selected mobile-base values are explicitly a reference configuration, not a verified rating of the pictured machine. Initial locale copy has not received native-language editorial review.

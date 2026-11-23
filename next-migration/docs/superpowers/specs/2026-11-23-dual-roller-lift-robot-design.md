@@ -50,4 +50,4 @@ The existing worktree contains unfinished multilingual changes from an earlier t
 
 ## Pending decision
 
-User input is pending for roller single-level payload and lift stroke, or acceptance of project-specific labels. The general product-card-plus-detail-page scope was proposed previously and accepted through the supplied product information. No new visual design is requested.
+The user instructed continuation; roller single-level payload and lift stroke use the proposed project-specific labels. The general product-card-plus-detail-page scope was proposed previously and accepted through the supplied product information. No new visual design is requested.

@@ -400,3 +400,8 @@ Long term:
 The site now supports English at existing URLs and French, German and Spanish at /fr, /de and /es. Middleware sets the request locale and rewrites supported language paths to existing page renderers. Locale data is request-scoped and is also supplied to client components, allowing translated initial HTML and matching hydration. Dictionaries are delivered only for the active language; English receives an empty dictionary.
 
 Published postTranslation documents reference English posts. The frontend uses translated body/SEO fields and inherits original images. Draft translations are excluded from public lists, language alternates and sitemap entries. Revision and duplicate-pair checks are part of the Studio schema. See MULTILINGUAL.md for publishing and verification commands.
+
+
+## Product and locale update, 2026-11-23
+
+Dual roller lift robot data is isolated in `lib/dual-roller-lift-robot.mjs`; its detail renderer is `components/products/DualRollerLiftRobot.jsx`. The catalog override fallback ensures a CMS-authored overview cannot omit the newly registered product. Actual page modules use `PageLocaleBoundary` to refresh route-specific dictionaries during client navigation. The persistent root layout supplies only common vocabulary. This avoids stale dictionaries when moving within `/products` or `/blog`.

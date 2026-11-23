@@ -927,3 +927,12 @@ Production verification exposed intermittent Cloudflare 1102 responses after the
 - Placed the cost-component illustration after the current-cost discussion and the payback chart after the payback calculation. Captions identify both as illustrative examples and distinguish gross payback from the article's net-savings method.
 - Verified authenticated read and document/asset create plus update dry runs before writing. Readback preserves all 80 original body blocks, links, four tables, and publication date. The article, index, sitemap and both original CDN assets return HTTP 200; CDN SHA-1 values match the supplied files. Live HTML renders both inline figures, the selected cover and Open Graph image.
 - Evidence and reversible pre-publication snapshot are in `ceshistitch/outputs/agv-roi-calculation-images`. This CMS-only change requires no frontend deployment.
+
+
+## 2026-11-23 - Dual Roller Lift Robot and multilingual navigation
+
+- Added the supplied robot render to the product overview and a standalone detail page in English, French, German and Spanish. The optimized 553,090-byte WebP preserves the complete original image and machine geometry.
+- Reference values were extracted from Corlink's COR-i5M product API. Excluded its chassis dimensions, weight and combined arm/carrier payload because the supplied machine differs. Roller payload and lift travel are project-specific; speed, positioning, battery and charging values are labeled a reference configuration.
+- Added navigation, metadata, reciprocal language links, sitemap entries and a browser check. Refreshed page-specific locale context within actual page modules so Next client navigation updates dictionaries even when the top-level route segment remains unchanged.
+- Verification passed: 19 unit tests, Next/OpenNext builds, eight new-product viewport/language combinations, four catalog-to-detail journeys, existing multilingual regression including blog specification cards, all 117 localized URLs plus English lifting product (118 HTTP 200 responses), 38 sitemap URLs per non-English locale and an exact public WebP SHA-256 match. No 503/1102 responses occurred in that route sweep.
+- Source commits 48a290c and 7ddb65f were pushed to main before deploying Worker 07a505d6-66f9-42ea-984d-2e9aab67fdc4. Logs and screenshots are stored under the Windows TEMP directory with the coolyne-dual-roller prefix.
