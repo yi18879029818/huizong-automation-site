@@ -1,3 +1,4 @@
+import { meta as dualRollerMeta, features as dualRollerFeatures, scenarios as dualRollerScenarios, integrations as dualRollerIntegrations } from "@/lib/dual-roller-lift-robot.mjs";
 import HomePage, {
   capabilities as homeCapabilities,
   cards as homeCards,
@@ -150,6 +151,7 @@ import { NAV_SECTIONS, STRUCTURED_ROUTES } from "@/lib/navigation";
 import { SEO_PAGE_OVERRIDES } from "@/lib/seo-page-overrides";
 
 const PRODUCT_MODULES = [
+  { slug: "dual-roller-lift-robot", meta: dualRollerMeta, features: dualRollerFeatures, scenarios: dualRollerScenarios, integrations: dualRollerIntegrations },
   {
     slug: "agv-forklift",
     Content: ProductAgvForklift,

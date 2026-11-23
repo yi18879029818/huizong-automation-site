@@ -5,6 +5,7 @@ export const NAV_SECTIONS = [
     href: "/products",
     items: [
       { href: "/products", label: "Products Overview" },
+      { href: "/products/dual-roller-lift-robot", label: "Dual Roller Lift Robot" },
       { href: "/products/agv-forklift", label: "Forklift Stacker AGV" },
       { href: "/products/ground-handling-forklift-agv", label: "Ground Handling Forklift AGV" },
       { href: "/products/lifting-agv", label: "Lifting AGV" },
@@ -45,6 +46,7 @@ export const STRUCTURED_ROUTES = [
   "/privacy-policy",
   "/terms",
   "/products",
+  "/products/dual-roller-lift-robot",
   "/products/agv-forklift",
   "/products/ground-handling-forklift-agv",
   "/products/lifting-agv",

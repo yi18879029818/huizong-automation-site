@@ -1,6 +1,7 @@
 
 import { Localized } from "@/components/localized";
 import Link from "next/link";
+import DualRollerLiftRobot from "@/components/products/DualRollerLiftRobot";
 import { PublicPageChrome } from "@/components/public-shell";
 import CountUpValue from "@/components/CountUpValue";
 import WarehouseFlowSimulation from "@/components/WarehouseFlowSimulation";
@@ -77,6 +78,7 @@ function LiteYouTubeEmbed({
   );
 }
 const PRODUCT_CARD_IMAGES = {
+  "dual-roller-lift-robot": "/products/dual-roller-lift-robot.webp",
   "agv-forklift": "/downloads/product-overview/forklift-stacker-agv.webp",
   "ground-handling-forklift-agv":
     "/downloads/product-overview/ground-handling-forklift-agv.webp",
@@ -213,6 +215,7 @@ const PRODUCT_DETAIL_VISUALS = {
   },
 };
 const PRODUCT_SPEC_LIBRARY = {
+  "dual-roller-lift-robot": { quickSpecs: [{ value: "Dual", label: "Roller Transfer" }, { value: "Lift", label: "Height Alignment" }, { value: "AMR", label: "Mobile Base" }], bullets: ["Roller-to-station transfer", "Height alignment", "Onboard part handling"] },
   "agv-forklift": {
     quickSpecs: [
       { value: "2,500kg", label: "Payload" },
@@ -1558,7 +1561,8 @@ function ProductIntroductionSection({ slug }) {
   );
 }
 function ProductOverviewBody({ page }) {
-  const cards = page.data.cards || [];
+  const existingCards = page.data.cards || [];
+  const cards = existingCards.some(card => card.slug === "dual-roller-lift-robot") ? existingCards : [...existingCards, { slug: "dual-roller-lift-robot", title: "Dual Roller Lift Robot", label: "Lift and Transfer", summary: "A mobile robot combining dual roller transfer, vertical positioning and a robotic arm for workstation material handling.", metrics: [] }];
   return (
     <Localized><main className="ground-handling-forklift-agv-product-page">
       {" "}
@@ -1725,6 +1729,7 @@ function ProductOverviewBody({ page }) {
 }
 function ProductDetailBody({ page }) {
   const slug = getSlug(page);
+  if (slug === "dual-roller-lift-robot") return <DualRollerLiftRobot />;
   if (slug === "agv-forklift") {
     return <Localized><AgvForkliftBody page={page} /></Localized>;
   }
