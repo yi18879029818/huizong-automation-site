@@ -1,3 +1,4 @@
+import PageLocaleBoundary from "@/components/page-locale-boundary";
 import { localizeMetadata } from "@/lib/i18n/server";
 
 import { Localized } from "@/components/localized";
@@ -138,7 +139,7 @@ export default async function StructuredPage({ params }) {
 
   if (structuredPage) {
     return (
-      <Localized><>
+      <PageLocaleBoundary><Localized><>
         <StructuredData page={structuredPage} />
         {shouldRenderPureStructuredPage(structuredPage) ? (
           renderPureStructuredPage(structuredPage)
@@ -154,7 +155,7 @@ export default async function StructuredPage({ params }) {
             )}
           </>
         )}
-      </></Localized>
+      </></Localized></PageLocaleBoundary>
     );
   }
 

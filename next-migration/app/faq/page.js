@@ -1,3 +1,4 @@
+import PageLocaleBoundary from "@/components/page-locale-boundary";
 import { localizeMetadata } from "@/lib/i18n/server";
 
 import { Localized } from "@/components/localized";
@@ -170,7 +171,7 @@ const pageMetadata = {
 
 export default function FaqPage() {
   return (
-    <Localized><CmsPageShell currentSection="faq">
+    <PageLocaleBoundary><Localized><CmsPageShell currentSection="faq">
       <main className="shell-main">
         <script
           type="application/ld+json"
@@ -290,7 +291,7 @@ export default function FaqPage() {
           </div>
         </section>
       </main>
-    </CmsPageShell></Localized>
+    </CmsPageShell></Localized></PageLocaleBoundary>
   );
 }
 

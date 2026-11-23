@@ -87,6 +87,13 @@ export function getPageDictionary(locale) {
   if (locale === "en") return {};
   const dictionary = getLocaleDictionary(locale);
   const path = headers().get("x-site-path") || "/";
-  const keys = new Set([...pageKeys.common, ...(pageKeys.pages[path] || [])]);
+  const common = new Set(pageKeys.common);
+  const keys = new Set((pageKeys.pages[path] || []).filter(key => !common.has(key)));
   return Object.fromEntries([...keys].filter(key => dictionary[key]).map(key => [key, dictionary[key]]));
+}
+
+export function getCommonDictionary(locale) {
+  if (locale === "en") return {};
+  const dictionary = getLocaleDictionary(locale);
+  return Object.fromEntries(pageKeys.common.filter(key => dictionary[key]).map(key => [key, dictionary[key]]));
 }

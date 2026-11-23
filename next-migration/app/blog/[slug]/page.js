@@ -1,3 +1,4 @@
+import PageLocaleBoundary from "@/components/page-locale-boundary";
 import { getLocale, getLocaleRoutes, localizeSchema } from "@/lib/i18n/server";
 import { localizeMetadata } from "@/lib/i18n/server";
 
@@ -746,7 +747,7 @@ export default async function BlogDetailPage({ params }) {
   const blogPostingSchema = localizeSchema(buildBlogPostingSchema(post, heroImageUrl), getLocale(), await getLocaleRoutes(getLocale()));
 
   return (
-    <Localized><CmsPageShell currentSection="blog">
+    <PageLocaleBoundary><Localized><CmsPageShell currentSection="blog">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
@@ -807,6 +808,6 @@ export default async function BlogDetailPage({ params }) {
         </section>
         <BlogConversionSection post={post} />
       </main>
-    </CmsPageShell></Localized>
+    </CmsPageShell></Localized></PageLocaleBoundary>
   );
 }

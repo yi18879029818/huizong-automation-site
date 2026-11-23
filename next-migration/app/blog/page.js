@@ -1,3 +1,4 @@
+import PageLocaleBoundary from "@/components/page-locale-boundary";
 import { getLocale } from "@/lib/i18n/server";
 import { localizeMetadata } from "@/lib/i18n/server";
 
@@ -94,7 +95,7 @@ export default async function BlogIndexPage() {
     : getLocale() === "en" ? DEFAULT_BLOG_REFERENCE_POSTS : [];
 
   return (
-    <Localized><CmsPageShell currentSection="blog">
+    <PageLocaleBoundary><Localized><CmsPageShell currentSection="blog">
       <main className="shell-main">
         <section className="section-panel blog-index-hero">
           <div className="blog-index-simple-head">
@@ -167,7 +168,7 @@ export default async function BlogIndexPage() {
           </div>
         </section>
       </main>
-    </CmsPageShell></Localized>
+    </CmsPageShell></Localized></PageLocaleBoundary>
   );
 }
 

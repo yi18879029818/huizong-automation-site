@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import { chromium } from "playwright";
 import manifest from "../lib/i18n/routes.json" with { type: "json" };
 
@@ -43,6 +44,16 @@ try {
     assert.equal(absent.status, 404);
     assert.equal((await fetch(baseUrl + "/" + locale + "/api/contact")).status, 404);
   }
+  const navigationPage = await browser.newPage();
+  await navigationPage.goto(baseUrl + "/fr/blog", { waitUntil: "domcontentloaded" });
+  const consent = navigationPage.locator("[data-hsa-cookie-essential]");
+  if (await consent.isVisible()) await consent.click();
+  await navigationPage.locator('.blog-flow-list a[href="/fr/blog/lifting-automated-robot"]').first().click();
+  await navigationPage.waitForURL("**/fr/blog/lifting-automated-robot");
+  const french = JSON.parse(fs.readFileSync(new URL("../lib/i18n/fr.json", import.meta.url), "utf8"));
+  await navigationPage.locator(".blog-product-specification-card h3").first().waitFor();
+  assert.equal(await navigationPage.locator(".blog-product-specification-card h3").first().innerText(), french["600kg Lifting AGV"]);
+  await navigationPage.close();
   const spoofed = await fetch(baseUrl + "/products", { headers: { "x-site-locale": "fr", "x-site-path": "/fr/products" } });
   assert.match(await spoofed.text(), /<html lang="en"/);
   const sitemap = await (await fetch(baseUrl + "/sitemap.xml")).text();

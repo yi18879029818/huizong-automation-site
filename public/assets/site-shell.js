@@ -1260,7 +1260,7 @@
     if (copy) {
       copy.textContent = translateUi(preset.description);
       notice = ensureIntentNotice(intro);
-      notice.textContent = "Intent detected: " + preset.fieldValue;
+      notice.textContent = translateUi("Intent detected: ") + translateUi(preset.fieldValue);
     }
 
     if (submitButton) {
