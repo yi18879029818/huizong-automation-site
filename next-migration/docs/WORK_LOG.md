@@ -944,3 +944,11 @@ Production verification exposed intermittent Cloudflare 1102 responses after the
 - Confirmed the slug was unused and authenticated document create/update dry runs passed. Source Markdown commit `1dcf96f` was pushed to main before the Sanity publication. No frontend deployment was needed.
 - Verified Sanity readback, every source paragraph in live prose, four link destinations, self canonical, indexable robots and BlogPosting metadata. Article, blog index and sitemap return HTTP 200 and include the new article. Desktop 1440px and mobile 390px checks show no horizontal overflow or browser errors.
 - Publishing evidence is in `ceshistitch/outputs/airfreight-agvs`. The blog index refreshed after the CDN propagation interval.
+
+## 2026-11-24 - Airfreight image cleanup and cover
+
+- Used built-in image_gen to remove commercial logos and identifying labels from the four supplied air cargo photographs. Reviewed the outputs; removed the remaining manufacturer slogan from the first image in a focused second pass. Original files were retained.
+- Saved all four final PNGs, editing instructions and a ZIP under `D:/推文文件/所有博文/博文11.24/已去标识`, with workspace evidence in `ceshistitch/outputs/airfreight-agvs-images`.
+- Selected the third photograph (automated forklifts handling standard pallets) as the cover for `/blog/airfreight-agvs`. Passed current-token authenticated read, document create/update and asset-create dry runs before upload. Set Sanity heroImage and SEO ogImage to the same asset.
+- Verified all 78 original body blocks, title, slug, excerpt and publication date remain unchanged. Public article hero, Open Graph and blog index card show the selected edited image. Article/index/sitemap return HTTP 200 and the CDN SHA-1 matches the edited cover file. No frontend deployment was needed.
+- The other three edited images were delivered as files; this request did not add new inline body images. AI edits may alter fine photographic details; originals remain available for comparison.

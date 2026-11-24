@@ -477,3 +477,12 @@ The only unrelated local git status item is the pre-existing modification to `..
 - Unresolved issues: none for this publication. No images were supplied, so the article has no cover.
 - Next steps: add images or a cover if the user provides them.
 - Risk areas: retain the ULD-specific terminology, named case examples and source links in future edits. This request published the English source; translated article versions were not requested.
+
+## 2026-11-24 - Airfreight edited cover
+
+- Status: four cleaned image files delivered locally; the third image is live as `/blog/airfreight-agvs` cover, share preview and blog-list image.
+- Changed records/files: Sanity `post-airfreight-agvs` heroImage and SEO ogImage; WORK_LOG and HANDOFF. Edited files and ZIP are in `D:/推文文件/所有博文/博文11.24/已去标识`.
+- Verified results: all 78 body blocks and publication fields preserved, article/index/sitemap HTTP 200, selected image confirmed in hero/Open Graph/index, CDN hash matches the local edited file.
+- Unresolved issues: none for image cleanup or cover publication.
+- Next steps: no action required. The three remaining edited files are available if inline placement is requested.
+- Risk areas: image_gen edits can change fine equipment details. The source photographs were not overwritten.
