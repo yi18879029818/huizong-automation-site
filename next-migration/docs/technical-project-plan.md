@@ -405,3 +405,7 @@ Published postTranslation documents reference English posts. The frontend uses t
 ## Product and locale update, 2026-11-23
 
 Dual roller lift robot data is isolated in `lib/dual-roller-lift-robot.mjs`; its detail renderer is `components/products/DualRollerLiftRobot.jsx`. The catalog override fallback ensures a CMS-authored overview cannot omit the newly registered product. Actual page modules use `PageLocaleBoundary` to refresh route-specific dictionaries during client navigation. The persistent root layout supplies only common vocabulary. This avoids stale dictionaries when moving within `/products` or `/blog`.
+
+## 2026-11-24 - Focused product video range delivery
+
+Wrangler now enters through `worker-entry.mjs`, which forwards ordinary requests to the generated `.open-next/worker.js` and reexports its named durableobject exports. Only `/videos/dual-roller-laser-marking-workflow.mp4` receives custom streaming byte-range handling; otherstaticassets retain default delivery. Both Wrangler configs preserve the existing fontpath and add this exactMP4 to `run_worker_first`. `lib/dual-roller-workflow-media.mjs` records the byte length because ASSETS internalresponses omit Content-Length; the unit suite validates that metadata against the committedsource asset. Update this manifest when replacing thatfile.

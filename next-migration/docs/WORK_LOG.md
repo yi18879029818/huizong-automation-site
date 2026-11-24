@@ -959,3 +959,9 @@ Production verification exposed intermittent Cloudflare 1102 responses after the
 - Added the user-supplied English workflow video in full, without cropping or Chinese subtitles. Web derivative is20,467,891bytes,95.32s,1600×900H.264; original source is preserved. Poster and three actual process stills come from the same English source.
 - Described tray receipt, lift and alignment, fixture loading, marking, retrieval and release into a separate collection box. Preserved configurable roller/lift values and reference-only mobile-base specs. Synchronized English/French/German/Spanish.
 - Local validation:19unit tests, production Next build, four languages at1440px/390px, catalog-to-detail navigation, canonical/hreflang/sitemap, native video playback/seeking and complete video decode passed. Existing multilingual regression passed. Source/release evidence will be recorded after production verification.
+
+### Workflow video range handling
+
+- Initial source18bb9bd was pushed and deployed as Workerd6129b6b-abaf-49d7-884f-ada2541cd185. Live multilingual regression passed, but the video seek test exposed Cloudflare Static Assets returning200/fullfile for Range requests. The browser played fromzero after seeking.
+- Added a thin Worker entry wrapper for this exact MP4 path, preserving OpenNext exports and allother routing. It reads from ASSETS and streams only the requested interval as206, using FixedLengthStream. The binding omitsContent-Length internally, so a file-length manifest is checked against the committed file by a unit test. No whole-video array buffer is required.
+- Verified23unit tests, first/middle/tail1024byte intervals with exactcontent, and Chrome seekto70seconds+continuedplay through localWrangler. The affectedvideo alone joins the existing fonts run_worker_first paths. Officialreference:https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/#range-requests.

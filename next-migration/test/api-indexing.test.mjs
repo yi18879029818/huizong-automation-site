@@ -24,8 +24,9 @@ test("middleware marks API and font responses as non-indexable", () => {
 });
 
 test("font assets run through the Worker before the asset handler", () => {
-  assert.deepEqual(deployConfig.assets.run_worker_first, ["/assets/fonts/*"]);
-  assert.deepEqual(productionConfig.assets.run_worker_first, ["/assets/fonts/*"]);
+  const handledAssets = ["/assets/fonts/*", "/videos/dual-roller-laser-marking-workflow.mp4"];
+  assert.deepEqual(deployConfig.assets.run_worker_first, handledAssets);
+  assert.deepEqual(productionConfig.assets.run_worker_first, handledAssets);
 });
 
 test("published crawl resources do not expose internal API URLs", () => {
