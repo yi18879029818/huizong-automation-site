@@ -2,11 +2,12 @@
 
 ## 2026-11-24 - Dual roller robot redesign
 
-- Status: implementation and local checks complete; production release pending.
-- Changed files: focused product component/CSS, product summary, three locale dictionaries/page keys, catalog appendix exclusions, browser check, English workflow MP4/poster/stills and design/media docs.
-- Verified:19tests, Next build, eight viewport/language combinations, four catalog journeys, video playback/seeking/decode, metadata and sitemap; existing multilingual regression passed.
-- Unresolved: production deployment and public media verification. Final roller payload/lift stroke/dimensions remain project-specific; mobile-base numbers remain reference values.
-- Next: commit and push main, OpenNext package, deploy and verify public page/assets.
+- Status: deployed and publicly verified at `/products/dual-roller-lift-robot` and its French, German and Spanish routes.
+- Changed files: focused product component/CSS, product summary, three locale dictionaries/page keys, catalog appendix exclusions, browser check, English MP4/poster/stills, `worker-entry.mjs`, byte-range helper/asset manifest, Wrangler configs, tests and design/media docs.
+- Verified: 23 unit tests, Next/OpenNext builds, eight viewport/language combinations, four catalog journeys, whole-machine framing at 360/390/768/1024/1440/1920px, native video playback/seeking, metadata and four sitemap entries. Existing multilingual regression passed live. Video and four WebP SHA-256 values match committed assets; first/middle/tail byte ranges return exact 206 content; unsatisfiable range returns 416.
+- Release: source commits `18bb9bd` and `7346482` were pushed to main before deployment. Active Worker `7e5dce8e-1d02-4215-8550-f5f03a2907fa` includes the focused video streaming fix.
+- Unresolved: roller payload/lift stroke/dimensions remain project-specific; mobile-base numbers remain reference values. The pre-existing shared mobile footer clips columns on this and other product pages; this redesign does not change that shared footer.
+- Next/risk: update `lib/dual-roller-workflow-media.mjs` byte length if the MP4 is replaced; its test checks the actual file size. No further work remains for this product redesign.
 
 ## 2026-11-13 - Warehouse robots article images
 

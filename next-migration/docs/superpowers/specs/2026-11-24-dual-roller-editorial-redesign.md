@@ -49,4 +49,4 @@ Keep English as the source and synchronize French, German and Spanish. Preserve 
 
 ## Approval state
 
-Approved on 2026-11-24: the user authorized the proposed direction, workflow copy and video screenshots. The user then requested no Chinese subtitles and supplied the English replacement video. Implementation follows that file without cropping. Local verification is complete; production release is the remaining step.
+Approved on 2026-11-24: the user authorized the proposed direction, workflow copy and video screenshots. The user then requested no Chinese subtitles and supplied the English replacement video. Implementation follows that file without cropping. Implemented and publicly verified on 2026-11-24, including the full English video, all four languages and the focused byte-range delivery fix.

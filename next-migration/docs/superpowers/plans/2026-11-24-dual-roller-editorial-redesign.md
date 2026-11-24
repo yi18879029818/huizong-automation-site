@@ -20,4 +20,6 @@
 - [x] Prepare `public/videos/dual-roller-laser-marking-workflow.mp4` from the full replacement English source (95.32 seconds), H.264/yuv420p, 1600×900, 25 fps, faststart, bounded bitrate. Extract a poster and three process stills into `public/products/dual-roller-workflow`. Probe sizes/duration and decode the video fully.
 - [x] Rewrite `components/products/DualRollerLiftRobot.jsx`, add `DualRollerLiftRobot.module.css` and refine `lib/dual-roller-lift-robot.mjs`. Use a wide unframed product hero, one large video followed by a compact process narrative with real stills, and one technical table with an integrated enquiry action. Scope all style changes to this product.
 - [x] Add matching French, German and Spanish copy and page keys. Build, then check all four languages at desktop/mobile widths, playback/seeking, screenshot composition, original parameter values, no overflow, catalog navigation and metadata. Run the existing unit and locale regression checks.
-- [ ] Commit and push the verified source, package and deploy. Verify public page and media independently, including a video byte-range response, then update WORK_LOG, HANDOFF and the project progress.
+- [x] Commit and push the verified source, package and deploy. Verify public page and media independently, including a video byte-range response, then update WORK_LOG, HANDOFF and the project progress.
+
+Completed on 2026-11-24. Final source7346482; Worker7e5dce8e-1d02-4215-8550-f5f03a2907fa. Final checks and the focused byte-range recovery are recorded in WORK_LOG and HANDOFF.

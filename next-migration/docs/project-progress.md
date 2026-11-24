@@ -286,3 +286,10 @@
 ## 2026-11-23 双滚筒升降机器人上线
 
 新增产品列表卡片、独立详情页、导航入口及英文/法语/德语/西班牙语版本。保留用户产品渲染图；滚筒承重与升降行程按项目配置，通用移动底盘参数注明参考配置。已完成生产构建、桌面和手机检查、语言跳转、图片与站点地图验证。117 个多语言页面及英文升降产品页均返回 200，三种新增语言各有 38 个站点地图地址。生产 Worker 为 07a505d6-66f9-42ea-984d-2e9aab67fdc4。
+
+## 2026-11-24 - Dual roller robot detail redesign released
+
+- Replaced fragmented cards and appended generic selection blocks with a large whole-machine hero, a continuous real workflow demonstration and a unified technical table.
+- Published the user's full English workflow video without cropping or Chinese subtitles, plus a poster and three real process stills. Workflow copy matches nameplate laser marking and separate collection-box unloading.
+- Updated English/French/German/Spanish and checked desktop/mobile layouts. Added focused streaming byte-range delivery so video seek works on Cloudflare Static Assets.
+- Source `7346482`, Worker `7e5dce8e-1d02-4215-8550-f5f03a2907fa`; 23 tests, OpenNext build, live product and multilingual browser regressions, exact asset hashes, 206 intervals and sitemap verification passed.
