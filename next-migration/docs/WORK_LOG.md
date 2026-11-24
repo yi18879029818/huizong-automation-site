@@ -952,3 +952,10 @@ Production verification exposed intermittent Cloudflare 1102 responses after the
 - Selected the third photograph (automated forklifts handling standard pallets) as the cover for `/blog/airfreight-agvs`. Passed current-token authenticated read, document create/update and asset-create dry runs before upload. Set Sanity heroImage and SEO ogImage to the same asset.
 - Verified all 78 original body blocks, title, slug, excerpt and publication date remain unchanged. Public article hero, Open Graph and blog index card show the selected edited image. Article/index/sitemap return HTTP 200 and the CDN SHA-1 matches the edited cover file. No frontend deployment was needed.
 - The other three edited images were delivered as files; this request did not add new inline body images. AI edits may alter fine photographic details; originals remain available for comparison.
+
+## 2026-11-24 - Continuous dual roller robot product presentation
+
+- Replaced the fragmented feature cards, paired parameter panels and generic appended recommendations on this product with three continuous sections: large whole-machine hero, real nameplate marking demonstration and one technical table. Other product structures are unchanged.
+- Added the user-supplied English workflow video in full, without cropping or Chinese subtitles. Web derivative is20,467,891bytes,95.32s,1600×900H.264; original source is preserved. Poster and three actual process stills come from the same English source.
+- Described tray receipt, lift and alignment, fixture loading, marking, retrieval and release into a separate collection box. Preserved configurable roller/lift values and reference-only mobile-base specs. Synchronized English/French/German/Spanish.
+- Local validation:19unit tests, production Next build, four languages at1440px/390px, catalog-to-detail navigation, canonical/hreflang/sitemap, native video playback/seeking and complete video decode passed. Existing multilingual regression passed. Source/release evidence will be recorded after production verification.

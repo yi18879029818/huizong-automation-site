@@ -18,7 +18,7 @@ Use a continuous industrial product presentation with three main sections, restr
 
 ### 2. Full-width working demonstration
 
-- Use the user's `D:/展会项目/视频最新.mp4`, from 1:19 through approximately 2:50, as the main evidence.
+- Use the user's replacement `D:/展会项目/英文版.mp4` in full (95.32 seconds). It contains the complete workflow and English captions without Chinese subtitles. Preserve the full 16:9 frame.
 - The video is user-controlled, with a real poster frame, no sound autoplay and a responsive landscape player. Prepare a web derivative below the existing Cloudflare 25 MiB asset limit after approval.
 - Follow the large video with one compact process line and a short explanatory paragraph, not another card grid.
 - Exact sequence supported by the footage: receive a tray from the fixed station, raise the tray, move to and align with the marking machine, visually locate the workstation, place the nameplates in the fixture, let the machine mark them, retrieve the completed nameplates, move to the collection position and release them into a separate collection box.
@@ -49,4 +49,4 @@ Keep English as the source and synchronize French, German and Spanish. Preserve 
 
 ## Approval state
 
-Design prepared for review. The live page is unchanged. The user has authorized a redesign, and approval of this concrete visual direction is requested before implementation under the brainstorming workflow.
+Approved on 2026-11-24: the user authorized the proposed direction, workflow copy and video screenshots. The user then requested no Chinese subtitles and supplied the English replacement video. Implementation follows that file without cropping. Local verification is complete; production release is the remaining step.

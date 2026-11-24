@@ -5,8 +5,8 @@ export const meta = {
   heroTitle: "Dual Roller Lift Robot",
   label: "Lift and Transfer",
   kicker: "Workstation Material Handling",
-  summary: "A mobile robot combining dual roller transfer, vertical positioning and a robotic arm for workstation material handling.",
-  heroSummary: "Move carriers between workstations, align the transfer height and handle parts with an onboard robotic arm. Roller interfaces, lift travel and tooling are configured for the production process.",
+  summary: "Mobile tray handling and robotic loading for nameplate laser marking.",
+  heroSummary: "From the loading station to the marking fixture and collection box. A mobile base, dual roller decks and a lift bring the nameplates to the arm.",
   image,
   metrics: [
     { value: "Dual", label: "Roller Transfer" },

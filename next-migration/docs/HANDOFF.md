@@ -1,5 +1,13 @@
 # HANDOFF
 
+## 2026-11-24 - Dual roller robot redesign
+
+- Status: implementation and local checks complete; production release pending.
+- Changed files: focused product component/CSS, product summary, three locale dictionaries/page keys, catalog appendix exclusions, browser check, English workflow MP4/poster/stills and design/media docs.
+- Verified:19tests, Next build, eight viewport/language combinations, four catalog journeys, video playback/seeking/decode, metadata and sitemap; existing multilingual regression passed.
+- Unresolved: production deployment and public media verification. Final roller payload/lift stroke/dimensions remain project-specific; mobile-base numbers remain reference values.
+- Next: commit and push main, OpenNext package, deploy and verify public page/assets.
+
 ## 2026-11-13 - Warehouse robots article images
 
 - Status: two images are published in `/blog/types-of-warehouse-robots`; the wide blue-bin AS/RS image is the cover.

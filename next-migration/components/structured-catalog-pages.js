@@ -1562,7 +1562,7 @@ function ProductIntroductionSection({ slug }) {
 }
 function ProductOverviewBody({ page }) {
   const existingCards = page.data.cards || [];
-  const cards = existingCards.some(card => card.slug === "dual-roller-lift-robot") ? existingCards : [...existingCards, { slug: "dual-roller-lift-robot", title: "Dual Roller Lift Robot", label: "Lift and Transfer", summary: "A mobile robot combining dual roller transfer, vertical positioning and a robotic arm for workstation material handling.", metrics: [] }];
+  const cards = existingCards.some(card => card.slug === "dual-roller-lift-robot") ? existingCards : [...existingCards, { slug: "dual-roller-lift-robot", title: "Dual Roller Lift Robot", label: "Lift and Transfer", summary: "Mobile tray handling and robotic loading for nameplate laser marking.", metrics: [] }];
   return (
     <Localized><main className="ground-handling-forklift-agv-product-page">
       {" "}
@@ -8323,8 +8323,8 @@ export function StructuredCatalogDetailPage({ page }) {
         ) : (
           <CaseProjectDetailBody page={page} />
         )}{" "}
-        {isProductDetail && productSlug !== "agv-forklift" ? <ProductDecisionSupportSection page={page} /> : null}{" "}
-        <ContextualPathways page={page} />
+        {isProductDetail && !["agv-forklift", "dual-roller-lift-robot"].includes(productSlug) ? <ProductDecisionSupportSection page={page} /> : null}{" "}
+        {productSlug !== "dual-roller-lift-robot" ? <ContextualPathways page={page} /> : null}
       </div>{" "}
     </PublicPageChrome></Localized>
   );
