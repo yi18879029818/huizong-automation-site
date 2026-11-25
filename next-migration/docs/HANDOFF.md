@@ -2,12 +2,12 @@
 
 ## 2026-11-25 - AGV programming article
 
-- Status: source and Sanity document prepared; not published.
-- Changed files: `content/blog/agv-programming.md`, WORK_LOG and HANDOFF. Evidence and publisher: `ceshistitch/outputs/agv-programming`.
-- Verified:69sourceparagraphs, sixH2/sevenH3, one5×3table, threeoriginal links; target slug unused. Permission dry run returned403(create required), with no mutation.
-- Unresolved: current session lacks the previously used Sanity write credential. User was asked to restore SANITY_WRITE_TOKEN.
-- Next: load credentials, rerun authenticated target read and create/update dry runs, publish through prepared helper, verify alltext/table/links on article, blog index and sitemap, and check desktop/mobile.
-- Risk: do not report publication until those public checks pass; do not replace the Sanity path with a static frontend fallback.
+- Status: published in Sanity and publicly verified at `/blog/agv-programming`, document `post-agv-programming`.
+- Changed files: `content/blog/agv-programming.md`, WORK_LOG, HANDOFF and project-progress. Evidence and existing-flow publisher: `ceshistitch/outputs/agv-programming`.
+- Verified: all 69 source paragraphs (title plus 68 body paragraphs), six H2 sections, seven H3 subsections, all 15 comparison-table cells and three original links. Authenticated target read and document create/update dry runs passed before creation. Sanity readback matches the prepared document; article/index/sitemap return 200. Canonical, indexable robots and BlogPosting metadata are present. Desktop 1440px and mobile 390px checks report no page overflow or browser errors.
+- Release: source commit `0b3f0ea` was pushed to main before CMS publication. No frontend deployment was needed.
+- Unresolved: none for this publication. The supplied Word document has no embedded images, so no cover was assigned.
+- Next/risk: add cover/body images by patching the published post if supplied later. The publication helper creates a new document only and will reject a duplicate slug. The supplied credential was used only in the publishing process environment and was not written to repository files or logs.
 
 ## 2026-11-24 - Dual roller robot redesign
 

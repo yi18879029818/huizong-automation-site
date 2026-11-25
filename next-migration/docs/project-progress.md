@@ -293,3 +293,7 @@
 - Published the user's full English workflow video without cropping or Chinese subtitles, plus a poster and three real process stills. Workflow copy matches nameplate laser marking and separate collection-box unloading.
 - Updated English/French/German/Spanish and checked desktop/mobile layouts. Added focused streaming byte-range delivery so video seek works on Cloudflare Static Assets.
 - Source `7346482`, Worker `7e5dce8e-1d02-4215-8550-f5f03a2907fa`; 23 tests, OpenNext build, live product and multilingual browser regressions, exact asset hashes, 206 intervals and sitemap verification passed.
+
+## 2026-11-25 - AGV programming article published
+
+Published `/blog/agv-programming` through Sanity, preserving all 69 source paragraphs, the programming-method comparison table and three original links. Source was committed and pushed before creation. Article, index and sitemap are publicly verified; desktop/mobile text, table, metadata and layout checks passed. No frontend deployment or cover-image assignment was needed.

@@ -979,3 +979,10 @@ Production verification exposed intermittent Cloudflare 1102 responses after the
 - Prepared `content/blog/agv-programming.md` from the supplied `AGV_Programming_Coolyne_English_Blog.docx` using the established Sanity workflow. Preserved69non-empty source paragraphs (title plus68bodyparagraphs), sixH2sections, sevenH3subsections, one5row/3column comparison table and allthree links. No embedded images were present.
 - Prepared the69block Sanity document, reversible source evidence and the existing publish/verification helper under `ceshistitch/outputs/agv-programming`. Target slug `agv-programming` is currently unused.
 - Current session has no SANITY_WRITE_TOKEN/READ_TOKEN/AUTH_TOKEN; the standard Sanity CLI config has no authToken. An unauthenticated document-create/update dry run returned403, missing createpermission. No CMS mutation or publication occurred. Awaiting restored write credentials; do not substitute static fallback.
+
+### AGV programming article published and verified
+
+- The user supplied fresh write credentials. Authenticated target read confirmed no existing article, and document create/update dry runs passed. Created Sanity `post-agv-programming` through the existing publishing flow after source commit `0b3f0ea` reached main. No frontend deployment was necessary.
+- Readback matches the complete prepared document: 69 body blocks, comprising 68 text/heading blocks and one comparison table. All 69 source paragraphs (including the title), 15 table cells, six H2 sections, seven H3 subsections and three original links are preserved.
+- Public article `/blog/agv-programming`, blog index and sitemap return HTTP 200. Verified full text/table/link rendering, title, self canonical, indexable robots and BlogPosting metadata. Native Chrome at 1440px and 390px reports no page overflow or browser errors; screenshots and structured evidence are in `ceshistitch/outputs/agv-programming`.
+- No embedded image was present in the Word document and no cover was assigned. The credential was passed only in the publishing process environment, removed on completion and never written to code, evidence files or work logs.
