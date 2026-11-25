@@ -973,3 +973,9 @@ Production verification exposed intermittent Cloudflare 1102 responses after the
 - Full public MP4 SHA-256 matches `2da60a347650e8fa563bb89c7cf6897033ede119e84c71da2e55d88403939581`; all four public workflow WebP hashes match source files. Valid first/middle/tail ranges return206 with exact1024byte content and correct Content-Range; an out-of-file range returns416. No browser exceptions or page overflow were reported.
 - Read-only review identified a mobile hero crop and missing translations for the technical caveat. Both were corrected and the regression script now checks the machine silhouette and translated caveat. The shared footer's existing mobile clipping was reproduced on an unchanged product and remains outside this redesign.
 - Evidence: Windows TEMP `coolyne-dual-redesign-live.log`, `coolyne-dual-redesign-live-locale.log`, `coolyne-dual-redesign-live-assets.log`, `coolyne-video-range-unit.log`, `coolyne-video-range-opennext.log`, `coolyne-video-range-deploy.log` and `coolyne-dual-roller-*` screenshots.
+
+## 2026-11-25 - AGV programming article prepared
+
+- Prepared `content/blog/agv-programming.md` from the supplied `AGV_Programming_Coolyne_English_Blog.docx` using the established Sanity workflow. Preserved69non-empty source paragraphs (title plus68bodyparagraphs), sixH2sections, sevenH3subsections, one5row/3column comparison table and allthree links. No embedded images were present.
+- Prepared the69block Sanity document, reversible source evidence and the existing publish/verification helper under `ceshistitch/outputs/agv-programming`. Target slug `agv-programming` is currently unused.
+- Current session has no SANITY_WRITE_TOKEN/READ_TOKEN/AUTH_TOKEN; the standard Sanity CLI config has no authToken. An unauthenticated document-create/update dry run returned403, missing createpermission. No CMS mutation or publication occurred. Awaiting restored write credentials; do not substitute static fallback.

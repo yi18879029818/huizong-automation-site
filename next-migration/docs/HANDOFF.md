@@ -1,5 +1,14 @@
 # HANDOFF
 
+## 2026-11-25 - AGV programming article
+
+- Status: source and Sanity document prepared; not published.
+- Changed files: `content/blog/agv-programming.md`, WORK_LOG and HANDOFF. Evidence and publisher: `ceshistitch/outputs/agv-programming`.
+- Verified:69sourceparagraphs, sixH2/sevenH3, one5×3table, threeoriginal links; target slug unused. Permission dry run returned403(create required), with no mutation.
+- Unresolved: current session lacks the previously used Sanity write credential. User was asked to restore SANITY_WRITE_TOKEN.
+- Next: load credentials, rerun authenticated target read and create/update dry runs, publish through prepared helper, verify alltext/table/links on article, blog index and sitemap, and check desktop/mobile.
+- Risk: do not report publication until those public checks pass; do not replace the Sanity path with a static frontend fallback.
+
 ## 2026-11-24 - Dual roller robot redesign
 
 - Status: deployed and publicly verified at `/products/dual-roller-lift-robot` and its French, German and Spanish routes.
