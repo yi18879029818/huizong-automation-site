@@ -986,3 +986,9 @@ Production verification exposed intermittent Cloudflare 1102 responses after the
 - Readback matches the complete prepared document: 69 body blocks, comprising 68 text/heading blocks and one comparison table. All 69 source paragraphs (including the title), 15 table cells, six H2 sections, seven H3 subsections and three original links are preserved.
 - Public article `/blog/agv-programming`, blog index and sitemap return HTTP 200. Verified full text/table/link rendering, title, self canonical, indexable robots and BlogPosting metadata. Native Chrome at 1440px and 390px reports no page overflow or browser errors; screenshots and structured evidence are in `ceshistitch/outputs/agv-programming`.
 - No embedded image was present in the Word document and no cover was assigned. The credential was passed only in the publishing process environment, removed on completion and never written to code, evidence files or work logs.
+
+## 2026-11-25 - AGV programming image cleanup
+
+- Cleaned the four supplied images with built-in image_gen: fleet-management UI, controls architecture diagram, roller AGV photo and warehouse forklift photo. Removed commercial logos and manufacturer/product names; retained generic technical labels. A second pass removed remaining floor lettering from the roller AGV photo.
+- Inspected every generated output. Saved four final PNGs, prompt provenance, a short description and a tested ZIP under `D:/推文文件/所有博文/博文11.25/已去标识`. Workspace evidence and SHA-256 manifests are in `ceshistitch/outputs/agv-programming-images`. Original JPEG hashes are unchanged. AI edits can change fine visual details.
+- This request only cleaned and delivered image files. No Sanity post, cover or website content was changed, and no deployment was required.

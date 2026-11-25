@@ -1,5 +1,14 @@
 # HANDOFF
 
+## 2026-11-25 - AGV programming image cleanup
+
+- Status: four cleaned PNGs delivered; website article is unchanged.
+- Changed files: WORK_LOG and HANDOFF; final image files, ZIP and prompts are in `D:/推文文件/所有博文/博文11.25/已去标识`. Workspace evidence: `ceshistitch/outputs/agv-programming-images`.
+- Verified: reviewed all four outputs; second pass removed the remaining floor label from image3. Four PNGs decode, workspace/delivery hashes match, originals are unchanged and ZIP integrity passes.
+- Unresolved: none for image cleanup.
+- Next: await any separate request to add the images or set an article cover.
+- Risk: AI retouching can alter fine details; originals remain available for comparison.
+
 ## 2026-11-25 - AGV programming article
 
 - Status: published in Sanity and publicly verified at `/blog/agv-programming`, document `post-agv-programming`.
