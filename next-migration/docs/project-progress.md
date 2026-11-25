@@ -297,3 +297,7 @@
 ## 2026-11-25 - AGV programming article published
 
 Published `/blog/agv-programming` through Sanity, preserving all 69 source paragraphs, the programming-method comparison table and three original links. Source was committed and pushed before creation. Article, index and sitemap are publicly verified; desktop/mobile text, table, metadata and layout checks passed. No frontend deployment or cover-image assignment was needed.
+
+## 2026-11-25 - AGV programming article images
+
+Published four cleaned images as contextual inline figures and selected the route/task configuration screenshot as the article and sharing cover. Preserved the original 69 blocks, comparison table and publication date. Article/index/sitemap, actual cover display, four image CDN responses and desktop/mobile layouts are verified. This was a Sanity-only release.

@@ -1,5 +1,14 @@
 # HANDOFF
 
+## 2026-11-25 - AGV programming images and cover
+
+- Status: four cleaned images published in `/blog/agv-programming`; the route/task configuration interface is the cover and share preview.
+- Changed files: `scripts/add-agv-programming-images.py`, WORK_LOG, HANDOFF and project-progress; Sanity post `post-agv-programming` and four image assets. Evidence: `ceshistitch/outputs/agv-programming-images`.
+- Verified: authenticated create/update/asset dry runs; all 69 original blocks and publication date preserved; final body73blocks/fourimages. Article/index/sitemap return200. Actual hero, OG and index cover match image1; all four CDN images match source decoded pixels. Desktop/mobile images load with no overflow or browser errors.
+- Unresolved: none for this request. No frontend deployment was needed.
+- Next: preserve the four image blocks when editing article text.
+- Risk: rerunning the text-only article import can replace inline images; image publisher intentionally rejects a post already containing these image blocks. Source originals and the cleaned image package remain available.
+
 ## 2026-11-25 - AGV programming image cleanup
 
 - Status: four cleaned PNGs delivered; website article is unchanged.
