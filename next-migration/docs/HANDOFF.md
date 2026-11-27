@@ -2,12 +2,12 @@
 
 ## 2026-11-27 - Order fulfillment article images
 
-- Status: final photo cleaned and five image assets prepared; publication pending after the source commit.
-- Changed files: `scripts/add-order-fulfillment-images.py`, WORK_LOG, HANDOFF and project-progress. Evidence: `ceshistitch/outputs/order-fulfillment-images`.
-- Verified: first four image bytes match originals; reviewed the final cleaned image; authenticated target read, document create/update and asset-create dry runs passed against the 145-block post.
-- Unresolved: CMS upload and public article/image checks remain.
-- Next: publish five imageWithAlt blocks and verify desktop/mobile rendering and CDN assets.
-- Risk: AI cleanup can alter fine photo details; originals are retained. Preserve title, SEO, publication date, cover and all existing text blocks.
+- Status: all five supplied illustrations published in `/blog/order-fulfillment`; the last photo uses the cleaned version without visible commercial branding.
+- Changed files: `scripts/add-order-fulfillment-images.py`, WORK_LOG, HANDOFF and project-progress. Evidence/assets/edit prompts: `ceshistitch/outputs/order-fulfillment-images`; cleaned copy: `D:/推文文件/所有博文/博文11.27/05-仓库叉车AGV-去标识.png`.
+- Verified: authenticated target read, document create/update and asset-create dry runs; source commit `1c646db` reached main before CMS writes. All 145 original body blocks, title, date, SEO and cover fields are preserved; final body has 150 blocks and five images. Article/index/sitemap and all five original CDN assets return 200. CDN binaries and decoded pixels match prepared assets. Desktop/mobile load all images without overflow or page errors. All source originals are unchanged.
+- Unresolved: none for this request. No cover was requested or changed, and no frontend deployment was necessary.
+- Next: preserve all five image blocks in future article edits.
+- Risk: AI cleanup can alter fine photo details; original JPEG and cleaned PNG remain available. Text-only re-import can remove inline images.
 
 ## 2026-11-27 - Order fulfillment article
 

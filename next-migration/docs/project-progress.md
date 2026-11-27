@@ -310,4 +310,4 @@ Published four cleaned images as contextual inline figures and selected the rout
 
 ### 2026-11-27 - Order fulfillment images
 
-- Prepared five illustrations and cleaned visible commercial branding from the final forklift image using built-in image_gen. Authenticated asset/document write dry runs passed. Publish five inline images after the source commit, preserving existing text, SEO, date and cover.
+- Published all five illustrations after source commit `1c646db`, using the cleaned final forklift photo. All 145 original blocks, title, SEO, date and cover are preserved; the body now has 150 blocks. Article/index/sitemap and five CDN assets return 200; all images load on desktop/mobile without overflow or page errors. Source originals and edit prompts are retained.
