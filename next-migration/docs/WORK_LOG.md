@@ -1007,3 +1007,9 @@ Production verification exposed intermittent Cloudflare 1102 responses after the
 - Prepared `content/blog/order-fulfillment.md` from the supplied Word document. All 146 non-empty paragraphs, five H2 sections, 21 H3 subsections, four metric bullets and five original hyperlinks are preserved. No embedded images are present.
 - Prepared Sanity document `post-order-fulfillment` through the existing publishing flow. Authenticated target read found no duplicate and create/update dry runs passed before any CMS write. Source/evidence and publisher are in `ceshistitch/outputs/order-fulfillment`.
 - Publication and public article/index/sitemap verification follow the source commit on main. No frontend code or deployment change is required. Credentials are used only in the publishing process environment.
+
+### Order fulfillment article published and verified
+
+- Source commit `248f6bd` was pushed to main before creating Sanity `post-order-fulfillment`. Readback exactly matches title, excerpt, publication date, slug, SEO and all 145 body blocks. The 146 original non-empty paragraphs, including title and document kicker, are preserved with all section headings, metric bullets, emphasis and five original hyperlinks.
+- Article `https://www.coolyne.com/blog/order-fulfillment`, blog index and sitemap return HTTP 200; the index and sitemap contain the new canonical URL. Public full-body text, H2/H3 hierarchy, bullet list, canonical, indexable robots, BlogPosting metadata and all original link destinations passed verification.
+- Native Chrome desktop 1440px and mobile 390px report no horizontal overflow or page errors. Screenshots were inspected. Structured source/public/browser checks and readback are in `ceshistitch/outputs/order-fulfillment`. No frontend deployment or image assignment was needed; no image was embedded in the supplied document.

@@ -305,4 +305,4 @@ Published four cleaned images as contextual inline figures and selected the rout
 
 ### 2026-11-27 - Order fulfillment article
 
-- Prepared the Word article as `content/blog/order-fulfillment.md` for Sanity-first publication, preserving 146 paragraphs, section hierarchy, metric bullets and all five links. Authenticated create/update checks passed. Publication and public verification follow the source commit.
+- Published `post-order-fulfillment` in Sanity after source commit `248f6bd` reached main. All 146 source paragraphs, five H2 headings, 21 H3 headings, four metric bullets and five links are preserved. Article/index/sitemap return 200; complete body, metadata, desktop/mobile layout and browser checks pass. No cover was supplied and no frontend deployment was required.

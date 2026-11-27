@@ -2,12 +2,13 @@
 
 ## 2026-11-27 - Order fulfillment article
 
-- Status: source prepared; CMS publication and public checks pending after the source commit.
+- Status: published in Sanity and publicly verified at `/blog/order-fulfillment`, document `post-order-fulfillment`.
 - Changed files: `content/blog/order-fulfillment.md`, WORK_LOG, HANDOFF and project-progress. Evidence/publisher: `ceshistitch/outputs/order-fulfillment`.
-- Verified: 146 source paragraphs, five H2 headings, 21 H3 headings, four metric bullets and five original links. Authenticated target read and document create/update dry runs passed; no duplicate slug exists.
-- Unresolved: publication and public article/index/sitemap checks remain.
-- Next: create `post-order-fulfillment` in Sanity and verify the public release.
-- Risk: no cover image was supplied; preserve future image blocks when re-importing text.
+- Verified: all 146 non-empty source paragraphs are preserved in the title plus 145 body blocks, including the kicker, five H2 headings, 21 H3 headings, four metric bullets and five original links. Authenticated target read and document create/update dry runs passed. Sanity readback exactly matches the prepared document; public article/index/sitemap return 200; canonical, indexable robots and BlogPosting metadata pass. Chrome desktop 1440px and mobile 390px report no overflow or page errors.
+- Release: source commit `248f6bd` reached main before publication. No frontend deployment was required.
+- Unresolved: none for publication. The Word document has no embedded images, so no cover was assigned.
+- Next: patch hero and body image blocks if images are supplied later.
+- Risk: do not replace a future image-enriched body with the original text-only import. Credentials were used only in the publisher process environment and were not retained in files or logs.
 
 ## 2026-11-25 - AGV programming images and cover
 
