@@ -301,3 +301,8 @@ Published `/blog/agv-programming` through Sanity, preserving all 69 source parag
 ## 2026-11-25 - AGV programming article images
 
 Published four cleaned images as contextual inline figures and selected the route/task configuration screenshot as the article and sharing cover. Preserved the original 69 blocks, comparison table and publication date. Article/index/sitemap, actual cover display, four image CDN responses and desktop/mobile layouts are verified. This was a Sanity-only release.
+
+
+### 2026-11-27 - Order fulfillment article
+
+- Prepared the Word article as `content/blog/order-fulfillment.md` for Sanity-first publication, preserving 146 paragraphs, section hierarchy, metric bullets and all five links. Authenticated create/update checks passed. Publication and public verification follow the source commit.

@@ -1,5 +1,14 @@
 # HANDOFF
 
+## 2026-11-27 - Order fulfillment article
+
+- Status: source prepared; CMS publication and public checks pending after the source commit.
+- Changed files: `content/blog/order-fulfillment.md`, WORK_LOG, HANDOFF and project-progress. Evidence/publisher: `ceshistitch/outputs/order-fulfillment`.
+- Verified: 146 source paragraphs, five H2 headings, 21 H3 headings, four metric bullets and five original links. Authenticated target read and document create/update dry runs passed; no duplicate slug exists.
+- Unresolved: publication and public article/index/sitemap checks remain.
+- Next: create `post-order-fulfillment` in Sanity and verify the public release.
+- Risk: no cover image was supplied; preserve future image blocks when re-importing text.
+
 ## 2026-11-25 - AGV programming images and cover
 
 - Status: four cleaned images published in `/blog/agv-programming`; the route/task configuration interface is the cover and share preview.

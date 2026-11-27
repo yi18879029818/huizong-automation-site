@@ -1000,3 +1000,10 @@ Production verification exposed intermittent Cloudflare 1102 responses after the
 - Conditional-revision patch preserved all 69 original body blocks, the complete comparison table, title, links, excerpt, SEO fields other than ogImage, slug and publication date. Final body has 73 blocks and four inline images. Before/after snapshots and publication evidence are in `ceshistitch/outputs/agv-programming-images`.
 - Verified article/index/sitemap HTTP 200, all four rendered figures, selected article hero, Open Graph image and the actual blog-index cover image. Desktop 1440px and mobile 390px load every inline image without page overflow or browser errors.
 - All four original CDN image URLs return 200 and their decoded pixels exactly match the cleaned source PNGs. The first two CDN PNG binaries differ from upload bytes, while the latter two match byte-for-byte; decoded-pixel comparison passed for all four. No frontend deployment was needed.
+
+
+## 2026-11-27 - Order fulfillment article prepared
+
+- Prepared `content/blog/order-fulfillment.md` from the supplied Word document. All 146 non-empty paragraphs, five H2 sections, 21 H3 subsections, four metric bullets and five original hyperlinks are preserved. No embedded images are present.
+- Prepared Sanity document `post-order-fulfillment` through the existing publishing flow. Authenticated target read found no duplicate and create/update dry runs passed before any CMS write. Source/evidence and publisher are in `ceshistitch/outputs/order-fulfillment`.
+- Publication and public article/index/sitemap verification follow the source commit on main. No frontend code or deployment change is required. Credentials are used only in the publishing process environment.
