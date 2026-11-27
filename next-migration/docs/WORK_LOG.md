@@ -1013,3 +1013,10 @@ Production verification exposed intermittent Cloudflare 1102 responses after the
 - Source commit `248f6bd` was pushed to main before creating Sanity `post-order-fulfillment`. Readback exactly matches title, excerpt, publication date, slug, SEO and all 145 body blocks. The 146 original non-empty paragraphs, including title and document kicker, are preserved with all section headings, metric bullets, emphasis and five original hyperlinks.
 - Article `https://www.coolyne.com/blog/order-fulfillment`, blog index and sitemap return HTTP 200; the index and sitemap contain the new canonical URL. Public full-body text, H2/H3 hierarchy, bullet list, canonical, indexable robots, BlogPosting metadata and all original link destinations passed verification.
 - Native Chrome desktop 1440px and mobile 390px report no horizontal overflow or page errors. Screenshots were inspected. Structured source/public/browser checks and readback are in `ceshistitch/outputs/order-fulfillment`. No frontend deployment or image assignment was needed; no image was embedded in the supplied document.
+
+
+## 2026-11-27 - Order fulfillment images prepared
+
+- Prepared the five supplied images for `/blog/order-fulfillment`. The first four are byte-for-byte copies of the originals; the final warehouse forklift photograph was cleaned with built-in image_gen to remove visible commercial branding. Originals remain unchanged. Prepared assets, hashes and edit provenance are in `ceshistitch/outputs/order-fulfillment-images`; a cleaned copy is in the source image folder.
+- Added `scripts/add-order-fulfillment-images.py`. It checks current source hashes, authenticated target read, document create/update and asset-create dry runs, deduplicates assets and inserts five imageWithAlt blocks beside relevant text using a revision guard. Only the body field is patched; title, text blocks, publication date, SEO and cover fields are preserved.
+- All preflight checks passed. CMS upload and public rendering checks follow this source commit. No frontend code change or deployment is required.

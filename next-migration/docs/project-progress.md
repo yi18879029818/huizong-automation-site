@@ -306,3 +306,8 @@ Published four cleaned images as contextual inline figures and selected the rout
 ### 2026-11-27 - Order fulfillment article
 
 - Published `post-order-fulfillment` in Sanity after source commit `248f6bd` reached main. All 146 source paragraphs, five H2 headings, 21 H3 headings, four metric bullets and five links are preserved. Article/index/sitemap return 200; complete body, metadata, desktop/mobile layout and browser checks pass. No cover was supplied and no frontend deployment was required.
+
+
+### 2026-11-27 - Order fulfillment images
+
+- Prepared five illustrations and cleaned visible commercial branding from the final forklift image using built-in image_gen. Authenticated asset/document write dry runs passed. Publish five inline images after the source commit, preserving existing text, SEO, date and cover.

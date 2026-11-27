@@ -1,5 +1,14 @@
 # HANDOFF
 
+## 2026-11-27 - Order fulfillment article images
+
+- Status: final photo cleaned and five image assets prepared; publication pending after the source commit.
+- Changed files: `scripts/add-order-fulfillment-images.py`, WORK_LOG, HANDOFF and project-progress. Evidence: `ceshistitch/outputs/order-fulfillment-images`.
+- Verified: first four image bytes match originals; reviewed the final cleaned image; authenticated target read, document create/update and asset-create dry runs passed against the 145-block post.
+- Unresolved: CMS upload and public article/image checks remain.
+- Next: publish five imageWithAlt blocks and verify desktop/mobile rendering and CDN assets.
+- Risk: AI cleanup can alter fine photo details; originals are retained. Preserve title, SEO, publication date, cover and all existing text blocks.
+
 ## 2026-11-27 - Order fulfillment article
 
 - Status: published in Sanity and publicly verified at `/blog/order-fulfillment`, document `post-order-fulfillment`.
