@@ -1027,3 +1027,10 @@ Production verification exposed intermittent Cloudflare 1102 responses after the
 - The final photo was cleaned with built-in image_gen to remove Coupang vehicle branding, KPP pallet branding and legible commercial carton names. The first four images are unchanged copies. Source originals, prepared assets and edit prompt provenance are retained. All five original CDN binaries and decoded pixels match prepared assets.
 - Revision-guarded patch changed only the body. All 145 original blocks, title, publication date, SEO and cover fields are unchanged; the final body has 150 blocks and five inline images.
 - Article/index/sitemap and all five CDN assets return 200. Native Chrome desktop 1440px and mobile 390px render all five images with no horizontal overflow or page errors. All figure captions and alt text, original body text, section headings, metric bullets and original links remain intact. Structured checks and screenshots are in `ceshistitch/outputs/order-fulfillment-images`. No frontend deployment was required.
+
+
+## 2026-11-27 - Order fulfillment cover selected
+
+- Selected the third supplied photograph (warehouse racks, conveyor lines and fulfillment workstations) as Sanity heroImage and SEO ogImage, reusing existing asset `image-d04f61db2be51202c999b18cec244217377e7547-1024x1024-jpg`.
+- `scripts/set-order-fulfillment-cover.py` passed authenticated target/asset reads and document create/update dry runs. Source commit `06686d8` reached main before the revision-guarded patch. Readback confirms all 150 body blocks, five inline images, publication date and other content fields are preserved.
+- Native Chrome verified article cover and sharing metadata at 1440px and 390px; all five inline images remain, without overflow or page errors. The actual blog-index card displays the selected asset. Article/index/sitemap return 200 and sitemap contains the article. Evidence: `ceshistitch/outputs/order-fulfillment-images/cover-verification.json` and cover screenshots. No frontend deployment was required.

@@ -1,5 +1,14 @@
 # HANDOFF
 
+## 2026-11-27 - Order fulfillment cover
+
+- Status: third supplied image (warehouse fulfillment workstations) is the article and share cover.
+- Changed files: `scripts/set-order-fulfillment-cover.py`, WORK_LOG, HANDOFF and project-progress; Sanity heroImage and seo.ogImage for `post-order-fulfillment`.
+- Verified: target/asset reads and create/update dry runs; source commit `06686d8` pushed before CMS write. Readback preserves all 150 body blocks, publication date and existing content. Article/index/sitemap return 200; actual blog-index card and desktop/mobile article cover match the chosen asset, sharing metadata matches, and no page overflow or browser errors occur.
+- Unresolved: none. No frontend deployment was necessary.
+- Next: retain the selected hero/share references and five inline figures in later edits.
+- Risk: text-only imports can replace image-enriched content. Evidence remains in `ceshistitch/outputs/order-fulfillment-images`.
+
 ## 2026-11-27 - Order fulfillment article images
 
 - Status: all five supplied illustrations published in `/blog/order-fulfillment`; the last photo uses the cleaned version without visible commercial branding.

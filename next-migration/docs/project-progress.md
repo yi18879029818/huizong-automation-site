@@ -311,3 +311,8 @@ Published four cleaned images as contextual inline figures and selected the rout
 ### 2026-11-27 - Order fulfillment images
 
 - Published all five illustrations after source commit `1c646db`, using the cleaned final forklift photo. All 145 original blocks, title, SEO, date and cover are preserved; the body now has 150 blocks. Article/index/sitemap and five CDN assets return 200; all images load on desktop/mobile without overflow or page errors. Source originals and edit prompts are retained.
+
+
+### 2026-11-27 - Order fulfillment cover
+
+- Selected the third image, showing warehouse racks and fulfillment workstations, as article and sharing cover. Blog-index card, desktop/mobile hero, share metadata and sitemap are verified; all five inline images and original content remain intact. Sanity-only release after source commit `06686d8`.
